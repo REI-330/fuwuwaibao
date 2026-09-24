@@ -1,0 +1,1169 @@
+{
+  "schema": "career-graph-external-library/v1",
+  "generatedAt": "2026-09-15T15:36:54.097Z",
+  "note": "外部职业库（O*NET + 中国职业分类大典）的合并视图。只放索引与计数，全量数据在 knowledge/import/build/*.jsonl。这一层没有 chunk 引文，出处一律是 standardRef。",
+  "layers": {
+    "builtin": {
+      "file": "knowledge/exports/career-graph.json",
+      "nodes": 63,
+      "edges": 226
+    },
+    "external": {
+      "files": [
+        "knowledge/import/build/onet.jsonl",
+        "knowledge/import/build/dadian.jsonl"
+      ],
+      "nodes": 21987,
+      "edges": 108662
+    },
+    "bridge": {
+      "file": "knowledge/import/build/bridge.jsonl",
+      "edges": 9
+    }
+  },
+  "libraries": [
+    {
+      "id": "onet-29.1",
+      "name": "O*NET 29.1",
+      "version": "29.1",
+      "sourceId": "onet-29.1",
+      "nodes": 1254,
+      "edges": 71375
+    },
+    {
+      "id": "cn-dadian",
+      "name": "中华人民共和国职业分类大典",
+      "version": "osta-versionId-2",
+      "sourceId": "cn-dadian",
+      "nodes": 1676,
+      "edges": 0
+    },
+    {
+      "id": "cn-osta-standards",
+      "name": "国家职业技能标准（工作内容 → 技能）",
+      "version": "osta-standards",
+      "sourceId": "cn-osta-standards",
+      "nodes": 19057,
+      "edges": 37738
+    }
+  ],
+  "counts": {
+    "nodes": 21987,
+    "edges": 108662,
+    "bridge": 9,
+    "byKind": {
+      "domain": 4906,
+      "skill": 14219,
+      "standard": 2692,
+      "tool": 170
+    },
+    "byType": {
+      "specifies": 79711,
+      "uses": 11621,
+      "belongs_to": 17330
+    },
+    "byLibraryKind": {
+      "onet-29.1": {
+        "domain": 33,
+        "skill": 35,
+        "standard": 1016,
+        "tool": 170
+      },
+      "cn-dadian": {
+        "standard": 1676
+      },
+      "cn-osta-standards": {
+        "domain": 4873,
+        "skill": 14184
+      }
+    },
+    "bridgeByAlignment": {
+      "partial": 5,
+      "full": 2,
+      "related": 2
+    },
+    "unmatchedStandardEdges": 451
+  },
+  "validation": {
+    "kindVocabulary": [
+      "occupation",
+      "skill",
+      "knowledge",
+      "task",
+      "project",
+      "tool",
+      "trend",
+      "credential",
+      "standard",
+      "domain"
+    ],
+    "edgeVocabulary": [
+      "requires",
+      "specifies",
+      "prerequisite",
+      "belongs_to",
+      "trains",
+      "uses",
+      "learning_unit",
+      "transitions_to",
+      "emerging_in",
+      "certifies",
+      "aligned_with",
+      "practiced_in",
+      "related_to",
+      "evidenced_by"
+    ],
+    "passed": true,
+    "checked": [
+      "每个节点的 kind 在 taxonomy.nodeKinds 里",
+      "每条边的 type 在 taxonomy.edgeTypes 里",
+      "每条边的 from / to 都在合并后的节点表里（「标准编号未进大典」这一类另有记录，见 unmatchedStandards）",
+      "节点 id 跨库不重复",
+      "桥边的 occupationId 在自建层 exports/career-graph.json 里真实存在",
+      "桥边的 targetUri 在外部节点表里真实存在"
+    ],
+    "unmatchedStandards": {
+      "codes": [
+        "2-02-10-12",
+        "3-02-02-00",
+        "4-05-06-02",
+        "4-07-05-06",
+        "4-13-05-03",
+        "4-13-99-01",
+        "4-13-99-02",
+        "4-99-00-00",
+        "6-15-01-15",
+        "6-20-99-00",
+        "6-30-99-00"
+      ],
+      "edges": 451,
+      "note": "国家职业技能标准里出现了、但《职业分类大典》分类树里没有的职业编号。两个系统按各自的批次更新，编号对不齐属正常；这些边被挡在交付物之外并在此计数，不是被静默丢弃。"
+    }
+  },
+  "index": {
+    "domain": {
+      "count": 4906,
+      "sampleSize": 50,
+      "sample": [
+        {
+          "id": "domain:cn-func-艾灸操作",
+          "label": "艾灸操作",
+          "standardRef": "国家职业技能标准 职业功能「艾灸操作」"
+        },
+        {
+          "id": "domain:cn-func-艾灸培训指导与推广",
+          "label": "艾灸培训指导与推广",
+          "standardRef": "国家职业技能标准 职业功能「艾灸培训指导与推广」"
+        },
+        {
+          "id": "domain:cn-func-安保管理",
+          "label": "安保管理",
+          "standardRef": "国家职业技能标准 职业功能「安保管理」"
+        },
+        {
+          "id": "domain:cn-func-安宁服务",
+          "label": "安宁服务",
+          "standardRef": "国家职业技能标准 职业功能「安宁服务」"
+        },
+        {
+          "id": "domain:cn-func-安全、环保和职业健康",
+          "label": "安全、环保和职业健康",
+          "standardRef": "国家职业技能标准 职业功能「安全、环保和职业健康」"
+        },
+        {
+          "id": "domain:cn-func-安全保障",
+          "label": "安全保障",
+          "standardRef": "国家职业技能标准 职业功能「安全保障」"
+        },
+        {
+          "id": "domain:cn-func-安全畅通保障",
+          "label": "安全畅通保障",
+          "standardRef": "国家职业技能标准 职业功能「安全畅通保障」"
+        },
+        {
+          "id": "domain:cn-func-安全防范系统管理与维护",
+          "label": "安全防范系统管理与维护",
+          "standardRef": "国家职业技能标准 职业功能「安全防范系统管理与维护」"
+        },
+        {
+          "id": "domain:cn-func-安全防护",
+          "label": "安全防护",
+          "standardRef": "国家职业技能标准 职业功能「安全防护」"
+        },
+        {
+          "id": "domain:cn-func-安全防护、环境保护和职业健康管理",
+          "label": "安全防护、环境保护和职业健康管理",
+          "standardRef": "国家职业技能标准 职业功能「安全防护、环境保护和职业健康管理」"
+        },
+        {
+          "id": "domain:cn-func-安全防护环境保护和职业健康管理",
+          "label": "安全防护环境保护和职业健康管理",
+          "standardRef": "国家职业技能标准 职业功能「安全防护环境保护和职业健康管理」"
+        },
+        {
+          "id": "domain:cn-func-安全风险辨识与管控",
+          "label": "安全风险辨识与管控",
+          "standardRef": "国家职业技能标准 职业功能「安全风险辨识与管控」"
+        },
+        {
+          "id": "domain:cn-func-安全风险评估",
+          "label": "安全风险评估",
+          "standardRef": "国家职业技能标准 职业功能「安全风险评估」"
+        },
+        {
+          "id": "domain:cn-func-安全管理",
+          "label": "安全管理",
+          "standardRef": "国家职业技能标准 职业功能「安全管理」"
+        },
+        {
+          "id": "domain:cn-func-安全环保",
+          "label": "安全环保",
+          "standardRef": "国家职业技能标准 职业功能「安全环保」"
+        },
+        {
+          "id": "domain:cn-func-安全环保管控",
+          "label": "安全环保管控",
+          "standardRef": "国家职业技能标准 职业功能「安全环保管控」"
+        },
+        {
+          "id": "domain:cn-func-安全技术防范",
+          "label": "安全技术防范",
+          "standardRef": "国家职业技能标准 职业功能「安全技术防范」"
+        },
+        {
+          "id": "domain:cn-func-安全检查",
+          "label": "安全检查",
+          "standardRef": "国家职业技能标准 职业功能「安全检查」"
+        },
+        {
+          "id": "domain:cn-func-安全检查与工艺确认",
+          "label": "安全检查与工艺确认",
+          "standardRef": "国家职业技能标准 职业功能「安全检查与工艺确认」"
+        },
+        {
+          "id": "domain:cn-func-安全看护",
+          "label": "安全看护",
+          "standardRef": "国家职业技能标准 职业功能「安全看护」"
+        },
+        {
+          "id": "domain:cn-func-安全生产",
+          "label": "安全生产",
+          "standardRef": "国家职业技能标准 职业功能「安全生产」"
+        },
+        {
+          "id": "domain:cn-func-安全实验",
+          "label": "安全实验",
+          "standardRef": "国家职业技能标准 职业功能「安全实验」"
+        },
+        {
+          "id": "domain:cn-func-安全提醒与宣传",
+          "label": "安全提醒与宣传",
+          "standardRef": "国家职业技能标准 职业功能「安全提醒与宣传」"
+        },
+        {
+          "id": "domain:cn-func-安全研究",
+          "label": "安全研究",
+          "standardRef": "国家职业技能标准 职业功能「安全研究」"
+        },
+        {
+          "id": "domain:cn-func-安全隐患排查",
+          "label": "安全隐患排查",
+          "standardRef": "国家职业技能标准 职业功能「安全隐患排查」"
+        },
+        {
+          "id": "domain:cn-func-安全应急操作",
+          "label": "安全应急操作",
+          "standardRef": "国家职业技能标准 职业功能「安全应急操作」"
+        },
+        {
+          "id": "domain:cn-func-安全与防护",
+          "label": "安全与防护",
+          "standardRef": "国家职业技能标准 职业功能「安全与防护」"
+        },
+        {
+          "id": "domain:cn-func-安全与风险防控",
+          "label": "安全与风险防控",
+          "standardRef": "国家职业技能标准 职业功能「安全与风险防控」"
+        },
+        {
+          "id": "domain:cn-func-安全与环保管控",
+          "label": "安全与环保管控",
+          "standardRef": "国家职业技能标准 职业功能「安全与环保管控」"
+        },
+        {
+          "id": "domain:cn-func-安全与健康管理",
+          "label": "安全与健康管理",
+          "standardRef": "国家职业技能标准 职业功能「安全与健康管理」"
+        },
+        {
+          "id": "domain:cn-func-安全与维护",
+          "label": "安全与维护",
+          "standardRef": "国家职业技能标准 职业功能「安全与维护」"
+        },
+        {
+          "id": "domain:cn-func-安全与消防",
+          "label": "安全与消防",
+          "standardRef": "国家职业技能标准 职业功能「安全与消防」"
+        },
+        {
+          "id": "domain:cn-func-安全与质量管控",
+          "label": "安全与质量管控",
+          "standardRef": "国家职业技能标准 职业功能「安全与质量管控」"
+        },
+        {
+          "id": "domain:cn-func-安全与质量管理",
+          "label": "安全与质量管理",
+          "standardRef": "国家职业技能标准 职业功能「安全与质量管理」"
+        },
+        {
+          "id": "domain:cn-func-安全指导",
+          "label": "安全指导",
+          "standardRef": "国家职业技能标准 职业功能「安全指导」"
+        },
+        {
+          "id": "domain:cn-func-安全咨询",
+          "label": "安全咨询",
+          "standardRef": "国家职业技能标准 职业功能「安全咨询」"
+        },
+        {
+          "id": "domain:cn-func-安葬服务",
+          "label": "安葬服务",
+          "standardRef": "国家职业技能标准 职业功能「安葬服务」"
+        },
+        {
+          "id": "domain:cn-func-安装调试",
+          "label": "安装调试",
+          "standardRef": "国家职业技能标准 职业功能「安装调试」"
+        },
+        {
+          "id": "domain:cn-func-安装调试抽油机",
+          "label": "安装调试抽油机",
+          "standardRef": "国家职业技能标准 职业功能「安装调试抽油机」"
+        },
+        {
+          "id": "domain:cn-func-安装调试压缩机组",
+          "label": "安装调试压缩机组",
+          "standardRef": "国家职业技能标准 职业功能「安装调试压缩机组」"
+        },
+        {
+          "id": "domain:cn-func-安装调试仪器仪表",
+          "label": "安装调试仪器仪表",
+          "standardRef": "国家职业技能标准 职业功能「安装调试仪器仪表」"
+        },
+        {
+          "id": "domain:cn-func-安装配置",
+          "label": "安装配置",
+          "standardRef": "国家职业技能标准 职业功能「安装配置」"
+        },
+        {
+          "id": "domain:cn-func-安装评估",
+          "label": "安装评估",
+          "standardRef": "国家职业技能标准 职业功能「安装评估」"
+        },
+        {
+          "id": "domain:cn-func-安装维修条件检测",
+          "label": "安装维修条件检测",
+          "standardRef": "国家职业技能标准 职业功能「安装维修条件检测」"
+        },
+        {
+          "id": "domain:cn-func-安装与调试",
+          "label": "安装与调试",
+          "standardRef": "国家职业技能标准 职业功能「安装与调试」"
+        },
+        {
+          "id": "domain:cn-func-按摩",
+          "label": "按摩",
+          "standardRef": "国家职业技能标准 职业功能「按摩」"
+        },
+        {
+          "id": "domain:cn-func-按摩⌒选考⌒",
+          "label": "按摩⌒选考⌒",
+          "standardRef": "国家职业技能标准 职业功能「按摩⌒选考⌒」"
+        },
+        {
+          "id": "domain:cn-func-按摩后工作",
+          "label": "按摩后工作",
+          "standardRef": "国家职业技能标准 职业功能「按摩后工作」"
+        },
+        {
+          "id": "domain:cn-func-按摩机构管理",
+          "label": "按摩机构管理",
+          "standardRef": "国家职业技能标准 职业功能「按摩机构管理」"
+        },
+        {
+          "id": "domain:cn-func-按摩前工作",
+          "label": "按摩前工作",
+          "standardRef": "国家职业技能标准 职业功能「按摩前工作」"
+        }
+      ]
+    },
+    "skill": {
+      "count": 14219,
+      "sampleSize": 50,
+      "sample": [
+        {
+          "id": "skill:cn-(二)孵化操作",
+          "label": "(二)孵化操作",
+          "standardRef": "国家职业技能标准 工作内容「(二)孵化操作」"
+        },
+        {
+          "id": "skill:cn-(二)技术管理",
+          "label": "(二)技术管理",
+          "standardRef": "国家职业技能标准 工作内容「(二)技术管理」"
+        },
+        {
+          "id": "skill:cn-(二)种禽管理",
+          "label": "(二)种禽管理",
+          "standardRef": "国家职业技能标准 工作内容「(二)种禽管理」"
+        },
+        {
+          "id": "skill:cn-(二)种禽选配",
+          "label": "(二)种禽选配",
+          "standardRef": "国家职业技能标准 工作内容「(二)种禽选配」"
+        },
+        {
+          "id": "skill:cn-(三)初生雏管理",
+          "label": "(三)初生雏管理",
+          "standardRef": "国家职业技能标准 工作内容「(三)初生雏管理」"
+        },
+        {
+          "id": "skill:cn-(一)培训指导",
+          "label": "(一)培训指导",
+          "standardRef": "国家职业技能标准 工作内容「(一)培训指导」"
+        },
+        {
+          "id": "skill:cn-(一)设施设备管理",
+          "label": "(一)设施设备管理",
+          "standardRef": "国家职业技能标准 工作内容「(一)设施设备管理」"
+        },
+        {
+          "id": "skill:cn-(一)种蛋管理",
+          "label": "(一)种蛋管理",
+          "standardRef": "国家职业技能标准 工作内容「(一)种蛋管理」"
+        },
+        {
+          "id": "skill:cn-(一)种禽饲养",
+          "label": "(一)种禽饲养",
+          "standardRef": "国家职业技能标准 工作内容「(一)种禽饲养」"
+        },
+        {
+          "id": "skill:cn-(一)种禽选择",
+          "label": "(一)种禽选择",
+          "standardRef": "国家职业技能标准 工作内容「(一)种禽选择」"
+        },
+        {
+          "id": "skill:cn-艾灸知识讲解",
+          "label": "艾灸知识讲解",
+          "standardRef": "国家职业技能标准 工作内容「艾灸知识讲解」"
+        },
+        {
+          "id": "skill:cn-爱国卫生运动",
+          "label": "爱国卫生运动",
+          "standardRef": "国家职业技能标准 工作内容「爱国卫生运动」"
+        },
+        {
+          "id": "skill:cn-安抚",
+          "label": "安抚",
+          "standardRef": "国家职业技能标准 工作内容「安抚」"
+        },
+        {
+          "id": "skill:cn-安检不合格邮件处理",
+          "label": "安检不合格邮件处理",
+          "standardRef": "国家职业技能标准 工作内容「安检不合格邮件处理」"
+        },
+        {
+          "id": "skill:cn-安检设备管理",
+          "label": "安检设备管理",
+          "standardRef": "国家职业技能标准 工作内容「安检设备管理」"
+        },
+        {
+          "id": "skill:cn-安宁服务",
+          "label": "安宁服务",
+          "standardRef": "国家职业技能标准 工作内容「安宁服务」"
+        },
+        {
+          "id": "skill:cn-安全",
+          "label": "安全",
+          "standardRef": "国家职业技能标准 工作内容「安全」"
+        },
+        {
+          "id": "skill:cn-安全、质量和技术管理",
+          "label": "安全、质量和技术管理",
+          "standardRef": "国家职业技能标准 工作内容「安全、质量和技术管理」"
+        },
+        {
+          "id": "skill:cn-安全、质量及技术管理",
+          "label": "安全、质量及技术管理",
+          "standardRef": "国家职业技能标准 工作内容「安全、质量及技术管理」"
+        },
+        {
+          "id": "skill:cn-安全保护",
+          "label": "安全保护",
+          "standardRef": "国家职业技能标准 工作内容「安全保护」"
+        },
+        {
+          "id": "skill:cn-安全保护及环保",
+          "label": "安全保护及环保",
+          "standardRef": "国家职业技能标准 工作内容「安全保护及环保」"
+        },
+        {
+          "id": "skill:cn-安全保障",
+          "label": "安全保障",
+          "standardRef": "国家职业技能标准 工作内容「安全保障」"
+        },
+        {
+          "id": "skill:cn-安全保障与质量控制",
+          "label": "安全保障与质量控制",
+          "standardRef": "国家职业技能标准 工作内容「安全保障与质量控制」"
+        },
+        {
+          "id": "skill:cn-安全变更车道教学",
+          "label": "安全变更车道教学",
+          "standardRef": "国家职业技能标准 工作内容「安全变更车道教学」"
+        },
+        {
+          "id": "skill:cn-安全播出",
+          "label": "安全播出",
+          "standardRef": "国家职业技能标准 工作内容「安全播出」"
+        },
+        {
+          "id": "skill:cn-安全播出管理",
+          "label": "安全播出管理",
+          "standardRef": "国家职业技能标准 工作内容「安全播出管理」"
+        },
+        {
+          "id": "skill:cn-安全操作",
+          "label": "安全操作",
+          "standardRef": "国家职业技能标准 工作内容「安全操作」"
+        },
+        {
+          "id": "skill:cn-安全措施制订",
+          "label": "安全措施制订",
+          "standardRef": "国家职业技能标准 工作内容「安全措施制订」"
+        },
+        {
+          "id": "skill:cn-安全措施制定",
+          "label": "安全措施制定",
+          "standardRef": "国家职业技能标准 工作内容「安全措施制定」"
+        },
+        {
+          "id": "skill:cn-安全掉头与倒车教学",
+          "label": "安全掉头与倒车教学",
+          "standardRef": "国家职业技能标准 工作内容「安全掉头与倒车教学」"
+        },
+        {
+          "id": "skill:cn-安全防范系统集成优化",
+          "label": "安全防范系统集成优化",
+          "standardRef": "国家职业技能标准 工作内容「安全防范系统集成优化」"
+        },
+        {
+          "id": "skill:cn-安全防范系统联动优化",
+          "label": "安全防范系统联动优化",
+          "standardRef": "国家职业技能标准 工作内容「安全防范系统联动优化」"
+        },
+        {
+          "id": "skill:cn-安全防护",
+          "label": "安全防护",
+          "standardRef": "国家职业技能标准 工作内容「安全防护」"
+        },
+        {
+          "id": "skill:cn-安全防护和预警",
+          "label": "安全防护和预警",
+          "standardRef": "国家职业技能标准 工作内容「安全防护和预警」"
+        },
+        {
+          "id": "skill:cn-安全防护及环境保护",
+          "label": "安全防护及环境保护",
+          "standardRef": "国家职业技能标准 工作内容「安全防护及环境保护」"
+        },
+        {
+          "id": "skill:cn-安全防护用品和装配工具使用培训",
+          "label": "安全防护用品和装配工具使用培训",
+          "standardRef": "国家职业技能标准 工作内容「安全防护用品和装配工具使用培训」"
+        },
+        {
+          "id": "skill:cn-安全防护与应急处理",
+          "label": "安全防护与应急处理",
+          "standardRef": "国家职业技能标准 工作内容「安全防护与应急处理」"
+        },
+        {
+          "id": "skill:cn-安全防护与预警",
+          "label": "安全防护与预警",
+          "standardRef": "国家职业技能标准 工作内容「安全防护与预警」"
+        },
+        {
+          "id": "skill:cn-安全防护与作业环境检查",
+          "label": "安全防护与作业环境检查",
+          "standardRef": "国家职业技能标准 工作内容「安全防护与作业环境检查」"
+        },
+        {
+          "id": "skill:cn-安全防护准备",
+          "label": "安全防护准备",
+          "standardRef": "国家职业技能标准 工作内容「安全防护准备」"
+        },
+        {
+          "id": "skill:cn-安全防控",
+          "label": "安全防控",
+          "standardRef": "国家职业技能标准 工作内容「安全防控」"
+        },
+        {
+          "id": "skill:cn-安全风险辨识",
+          "label": "安全风险辨识",
+          "standardRef": "国家职业技能标准 工作内容「安全风险辨识」"
+        },
+        {
+          "id": "skill:cn-安全风险管控",
+          "label": "安全风险管控",
+          "standardRef": "国家职业技能标准 工作内容「安全风险管控」"
+        },
+        {
+          "id": "skill:cn-安全风险管理",
+          "label": "安全风险管理",
+          "standardRef": "国家职业技能标准 工作内容「安全风险管理」"
+        },
+        {
+          "id": "skill:cn-安全风险评估报告编制",
+          "label": "安全风险评估报告编制",
+          "standardRef": "国家职业技能标准 工作内容「安全风险评估报告编制」"
+        },
+        {
+          "id": "skill:cn-安全风险评估管理",
+          "label": "安全风险评估管理",
+          "standardRef": "国家职业技能标准 工作内容「安全风险评估管理」"
+        },
+        {
+          "id": "skill:cn-安全风险评估流程",
+          "label": "安全风险评估流程",
+          "standardRef": "国家职业技能标准 工作内容「安全风险评估流程」"
+        },
+        {
+          "id": "skill:cn-安全风险评估实施",
+          "label": "安全风险评估实施",
+          "standardRef": "国家职业技能标准 工作内容「安全风险评估实施」"
+        },
+        {
+          "id": "skill:cn-安全附件联锁、装置启动前的试验检查",
+          "label": "安全附件联锁、装置启动前的试验检查",
+          "standardRef": "国家职业技能标准 工作内容「安全附件联锁、装置启动前的试验检查」"
+        },
+        {
+          "id": "skill:cn-安全工器具的检查",
+          "label": "安全工器具的检查",
+          "standardRef": "国家职业技能标准 工作内容「安全工器具的检查」"
+        }
+      ]
+    },
+    "standard": {
+      "count": 2692,
+      "sampleSize": 50,
+      "sample": [
+        {
+          "id": "standard:cn-1-01-00-01",
+          "label": "中国共产党机关负责人",
+          "standardRef": "1-01-00-01"
+        },
+        {
+          "id": "standard:cn-1-01-00-02",
+          "label": "中国共产党基层组织负责人",
+          "standardRef": "1-01-00-02"
+        },
+        {
+          "id": "standard:cn-1-02-01-00",
+          "label": "国家权力机关负责人",
+          "standardRef": "1-02-01-00"
+        },
+        {
+          "id": "standard:cn-1-02-02-00",
+          "label": "国家行政机关负责人",
+          "standardRef": "1-02-02-00"
+        },
+        {
+          "id": "standard:cn-1-02-03-00",
+          "label": "人民政协机关负责人",
+          "standardRef": "1-02-03-00"
+        },
+        {
+          "id": "standard:cn-1-02-04-00",
+          "label": "监察机关负责人",
+          "standardRef": "1-02-04-00"
+        },
+        {
+          "id": "standard:cn-1-02-05-01",
+          "label": "人民法院负责人",
+          "standardRef": "1-02-05-01"
+        },
+        {
+          "id": "standard:cn-1-02-05-02",
+          "label": "人民检察院负责人",
+          "standardRef": "1-02-05-02"
+        },
+        {
+          "id": "standard:cn-1-03-00-01",
+          "label": "民主党派负责人",
+          "standardRef": "1-03-00-01"
+        },
+        {
+          "id": "standard:cn-1-03-00-02",
+          "label": "工商联负责人",
+          "standardRef": "1-03-00-02"
+        },
+        {
+          "id": "standard:cn-1-04-01-01",
+          "label": "工会负责人",
+          "standardRef": "1-04-01-01"
+        },
+        {
+          "id": "standard:cn-1-04-01-02",
+          "label": "共青团负责人",
+          "standardRef": "1-04-01-02"
+        },
+        {
+          "id": "standard:cn-1-04-01-03",
+          "label": "妇联负责人",
+          "standardRef": "1-04-01-03"
+        },
+        {
+          "id": "standard:cn-1-04-01-04",
+          "label": "其他人民团体和群众团体负责人",
+          "standardRef": "1-04-01-04"
+        },
+        {
+          "id": "standard:cn-1-04-02-00",
+          "label": "社会团体负责人",
+          "standardRef": "1-04-02-00"
+        },
+        {
+          "id": "standard:cn-1-04-03-00",
+          "label": "社会服务机构负责人",
+          "standardRef": "1-04-03-00"
+        },
+        {
+          "id": "standard:cn-1-04-04-00",
+          "label": "社会中介组织负责人",
+          "standardRef": "1-04-04-00"
+        },
+        {
+          "id": "standard:cn-1-04-05-00",
+          "label": "基金会负责人",
+          "standardRef": "1-04-05-00"
+        },
+        {
+          "id": "standard:cn-1-04-06-00",
+          "label": "宗教组织负责人",
+          "standardRef": "1-04-06-00"
+        },
+        {
+          "id": "standard:cn-1-05-00-01",
+          "label": "居民委员会负责人",
+          "standardRef": "1-05-00-01"
+        },
+        {
+          "id": "standard:cn-1-05-00-02",
+          "label": "村民委员会负责人",
+          "standardRef": "1-05-00-02"
+        },
+        {
+          "id": "standard:cn-1-06-01-01",
+          "label": "企业董事",
+          "standardRef": "1-06-01-01"
+        },
+        {
+          "id": "standard:cn-1-06-01-02",
+          "label": "企业经理",
+          "standardRef": "1-06-01-02"
+        },
+        {
+          "id": "standard:cn-1-06-01-03",
+          "label": "国有企业中国共产党组织负责人",
+          "standardRef": "1-06-01-03"
+        },
+        {
+          "id": "standard:cn-1-06-02-00",
+          "label": "事业单位负责人",
+          "standardRef": "1-06-02-00"
+        },
+        {
+          "id": "standard:cn-2-01-01-00",
+          "label": "哲学研究人员",
+          "standardRef": "2-01-01-00"
+        },
+        {
+          "id": "standard:cn-2-01-02-00",
+          "label": "经济学研究人员",
+          "standardRef": "2-01-02-00"
+        },
+        {
+          "id": "standard:cn-2-01-03-00",
+          "label": "法学研究人员",
+          "standardRef": "2-01-03-00"
+        },
+        {
+          "id": "standard:cn-2-01-04-01",
+          "label": "教育学研究人员",
+          "standardRef": "2-01-04-01"
+        },
+        {
+          "id": "standard:cn-2-01-04-02",
+          "label": "心理学研究人员",
+          "standardRef": "2-01-04-02"
+        },
+        {
+          "id": "standard:cn-2-01-04-03",
+          "label": "体育学研究人员",
+          "standardRef": "2-01-04-03"
+        },
+        {
+          "id": "standard:cn-2-01-05-00",
+          "label": "历史学研究人员",
+          "standardRef": "2-01-05-00"
+        },
+        {
+          "id": "standard:cn-2-01-06-01",
+          "label": "数学研究人员",
+          "standardRef": "2-01-06-01"
+        },
+        {
+          "id": "standard:cn-2-01-06-02",
+          "label": "物理学研究人员",
+          "standardRef": "2-01-06-02"
+        },
+        {
+          "id": "standard:cn-2-01-06-03",
+          "label": "化学研究人员",
+          "standardRef": "2-01-06-03"
+        },
+        {
+          "id": "standard:cn-2-01-06-04",
+          "label": "天文学研究人员",
+          "standardRef": "2-01-06-04"
+        },
+        {
+          "id": "standard:cn-2-01-06-05",
+          "label": "生物学研究人员",
+          "standardRef": "2-01-06-05"
+        },
+        {
+          "id": "standard:cn-2-01-06-06",
+          "label": "地球科学研究人员",
+          "standardRef": "2-01-06-06"
+        },
+        {
+          "id": "standard:cn-2-01-07-00",
+          "label": "农业科学研究人员",
+          "standardRef": "2-01-07-00"
+        },
+        {
+          "id": "standard:cn-2-01-08-00",
+          "label": "医学研究人员",
+          "standardRef": "2-01-08-00"
+        },
+        {
+          "id": "standard:cn-2-01-09-00",
+          "label": "管理学研究人员",
+          "standardRef": "2-01-09-00"
+        },
+        {
+          "id": "standard:cn-2-01-10-00",
+          "label": "文学、艺术学研究人员",
+          "standardRef": "2-01-10-00"
+        },
+        {
+          "id": "standard:cn-2-01-11-00",
+          "label": "军事学研究人员",
+          "standardRef": "2-01-11-00"
+        },
+        {
+          "id": "standard:cn-2-02-01-01",
+          "label": "地质实验测试工程技术人员",
+          "standardRef": "2-02-01-01"
+        },
+        {
+          "id": "standard:cn-2-02-01-02",
+          "label": "地球物理地球化学与遥感勘查工程技术人员",
+          "standardRef": "2-02-01-02"
+        },
+        {
+          "id": "standard:cn-2-02-01-03",
+          "label": "水工环地质工程技术人员",
+          "standardRef": "2-02-01-03"
+        },
+        {
+          "id": "standard:cn-2-02-01-04",
+          "label": "地质矿产调查工程技术人员",
+          "standardRef": "2-02-01-04"
+        },
+        {
+          "id": "standard:cn-2-02-01-05",
+          "label": "钻探工程技术人员",
+          "standardRef": "2-02-01-05"
+        },
+        {
+          "id": "standard:cn-2-02-02-01",
+          "label": "大地测量工程技术人员",
+          "standardRef": "2-02-02-01"
+        },
+        {
+          "id": "standard:cn-2-02-02-02",
+          "label": "工程测量工程技术人员",
+          "standardRef": "2-02-02-02"
+        }
+      ]
+    },
+    "tool": {
+      "count": 170,
+      "sampleSize": 50,
+      "sample": [
+        {
+          "id": "tool:onet-adobe-acrobat",
+          "label": "Adobe Acrobat",
+          "standardRef": "O*NET Hot Technology Adobe Acrobat"
+        },
+        {
+          "id": "tool:onet-adobe-after-effects",
+          "label": "Adobe After Effects",
+          "standardRef": "O*NET Hot Technology Adobe After Effects"
+        },
+        {
+          "id": "tool:onet-adobe-creative-cloud-software",
+          "label": "Adobe Creative Cloud software",
+          "standardRef": "O*NET Hot Technology Adobe Creative Cloud software"
+        },
+        {
+          "id": "tool:onet-adobe-illustrator",
+          "label": "Adobe Illustrator",
+          "standardRef": "O*NET Hot Technology Adobe Illustrator"
+        },
+        {
+          "id": "tool:onet-adobe-indesign",
+          "label": "Adobe InDesign",
+          "standardRef": "O*NET Hot Technology Adobe InDesign"
+        },
+        {
+          "id": "tool:onet-adobe-photoshop",
+          "label": "Adobe Photoshop",
+          "standardRef": "O*NET Hot Technology Adobe Photoshop"
+        },
+        {
+          "id": "tool:onet-ajax",
+          "label": "AJAX",
+          "standardRef": "O*NET Hot Technology AJAX"
+        },
+        {
+          "id": "tool:onet-alteryx-software",
+          "label": "Alteryx software",
+          "standardRef": "O*NET Hot Technology Alteryx software"
+        },
+        {
+          "id": "tool:onet-amazon-dynamodb",
+          "label": "Amazon DynamoDB",
+          "standardRef": "O*NET Hot Technology Amazon DynamoDB"
+        },
+        {
+          "id": "tool:onet-amazon-elastic-compute-cloud-ec2",
+          "label": "Amazon Elastic Compute Cloud EC2",
+          "standardRef": "O*NET Hot Technology Amazon Elastic Compute Cloud EC2"
+        },
+        {
+          "id": "tool:onet-amazon-redshift",
+          "label": "Amazon Redshift",
+          "standardRef": "O*NET Hot Technology Amazon Redshift"
+        },
+        {
+          "id": "tool:onet-amazon-simple-storage-service-s3",
+          "label": "Amazon Simple Storage Service S3",
+          "standardRef": "O*NET Hot Technology Amazon Simple Storage Service S3"
+        },
+        {
+          "id": "tool:onet-amazon-web-services-aws-cloudformation",
+          "label": "Amazon Web Services AWS CloudFormation",
+          "standardRef": "O*NET Hot Technology Amazon Web Services AWS CloudFormation"
+        },
+        {
+          "id": "tool:onet-amazon-web-services-aws-software",
+          "label": "Amazon Web Services AWS software",
+          "standardRef": "O*NET Hot Technology Amazon Web Services AWS software"
+        },
+        {
+          "id": "tool:onet-ansible-software",
+          "label": "Ansible software",
+          "standardRef": "O*NET Hot Technology Ansible software"
+        },
+        {
+          "id": "tool:onet-apache-cassandra",
+          "label": "Apache Cassandra",
+          "standardRef": "O*NET Hot Technology Apache Cassandra"
+        },
+        {
+          "id": "tool:onet-apache-hadoop",
+          "label": "Apache Hadoop",
+          "standardRef": "O*NET Hot Technology Apache Hadoop"
+        },
+        {
+          "id": "tool:onet-apache-hive",
+          "label": "Apache Hive",
+          "standardRef": "O*NET Hot Technology Apache Hive"
+        },
+        {
+          "id": "tool:onet-apache-kafka",
+          "label": "Apache Kafka",
+          "standardRef": "O*NET Hot Technology Apache Kafka"
+        },
+        {
+          "id": "tool:onet-apache-maven",
+          "label": "Apache Maven",
+          "standardRef": "O*NET Hot Technology Apache Maven"
+        },
+        {
+          "id": "tool:onet-apache-spark",
+          "label": "Apache Spark",
+          "standardRef": "O*NET Hot Technology Apache Spark"
+        },
+        {
+          "id": "tool:onet-apache-subversion-svn",
+          "label": "Apache Subversion SVN",
+          "standardRef": "O*NET Hot Technology Apache Subversion SVN"
+        },
+        {
+          "id": "tool:onet-apache-tomcat",
+          "label": "Apache Tomcat",
+          "standardRef": "O*NET Hot Technology Apache Tomcat"
+        },
+        {
+          "id": "tool:onet-apple-ios",
+          "label": "Apple iOS",
+          "standardRef": "O*NET Hot Technology Apple iOS"
+        },
+        {
+          "id": "tool:onet-apple-macos",
+          "label": "Apple macOS",
+          "standardRef": "O*NET Hot Technology Apple macOS"
+        },
+        {
+          "id": "tool:onet-atlassian-bamboo",
+          "label": "Atlassian Bamboo",
+          "standardRef": "O*NET Hot Technology Atlassian Bamboo"
+        },
+        {
+          "id": "tool:onet-atlassian-bitbucket",
+          "label": "Atlassian Bitbucket",
+          "standardRef": "O*NET Hot Technology Atlassian Bitbucket"
+        },
+        {
+          "id": "tool:onet-atlassian-confluence",
+          "label": "Atlassian Confluence",
+          "standardRef": "O*NET Hot Technology Atlassian Confluence"
+        },
+        {
+          "id": "tool:onet-atlassian-jira",
+          "label": "Atlassian JIRA",
+          "standardRef": "O*NET Hot Technology Atlassian JIRA"
+        },
+        {
+          "id": "tool:onet-autodesk-autocad",
+          "label": "Autodesk AutoCAD",
+          "standardRef": "O*NET Hot Technology Autodesk AutoCAD"
+        },
+        {
+          "id": "tool:onet-autodesk-autocad-civil-3d",
+          "label": "Autodesk AutoCAD Civil 3D",
+          "standardRef": "O*NET Hot Technology Autodesk AutoCAD Civil 3D"
+        },
+        {
+          "id": "tool:onet-autodesk-revit",
+          "label": "Autodesk Revit",
+          "standardRef": "O*NET Hot Technology Autodesk Revit"
+        },
+        {
+          "id": "tool:onet-bash",
+          "label": "Bash",
+          "standardRef": "O*NET Hot Technology Bash"
+        },
+        {
+          "id": "tool:onet-bentley-microstation",
+          "label": "Bentley MicroStation",
+          "standardRef": "O*NET Hot Technology Bentley MicroStation"
+        },
+        {
+          "id": "tool:onet-bootstrap",
+          "label": "Bootstrap",
+          "standardRef": "O*NET Hot Technology Bootstrap"
+        },
+        {
+          "id": "tool:onet-border-gateway-protocol-bgp",
+          "label": "Border Gateway Protocol BGP",
+          "standardRef": "O*NET Hot Technology Border Gateway Protocol BGP"
+        },
+        {
+          "id": "tool:onet-c",
+          "label": "C",
+          "standardRef": "O*NET Hot Technology C"
+        },
+        {
+          "id": "tool:onet-c-plus-plus",
+          "label": "C++",
+          "standardRef": "O*NET Hot Technology C++"
+        },
+        {
+          "id": "tool:onet-c-sharp",
+          "label": "C#",
+          "standardRef": "O*NET Hot Technology C#"
+        },
+        {
+          "id": "tool:onet-canva",
+          "label": "Canva",
+          "standardRef": "O*NET Hot Technology Canva"
+        },
+        {
+          "id": "tool:onet-cascading-style-sheets-css",
+          "label": "Cascading style sheets CSS",
+          "standardRef": "O*NET Hot Technology Cascading style sheets CSS"
+        },
+        {
+          "id": "tool:onet-chef",
+          "label": "Chef",
+          "standardRef": "O*NET Hot Technology Chef"
+        },
+        {
+          "id": "tool:onet-cisco-webex",
+          "label": "Cisco Webex",
+          "standardRef": "O*NET Hot Technology Cisco Webex"
+        },
+        {
+          "id": "tool:onet-dassault-systemes-solidworks",
+          "label": "Dassault Systemes SolidWorks",
+          "standardRef": "O*NET Hot Technology Dassault Systemes SolidWorks"
+        },
+        {
+          "id": "tool:onet-django",
+          "label": "Django",
+          "standardRef": "O*NET Hot Technology Django"
+        },
+        {
+          "id": "tool:onet-docker",
+          "label": "Docker",
+          "standardRef": "O*NET Hot Technology Docker"
+        },
+        {
+          "id": "tool:onet-drupal",
+          "label": "Drupal",
+          "standardRef": "O*NET Hot Technology Drupal"
+        },
+        {
+          "id": "tool:onet-eclinicalworks-ehr-software",
+          "label": "eClinicalWorks EHR software",
+          "standardRef": "O*NET Hot Technology eClinicalWorks EHR software"
+        },
+        {
+          "id": "tool:onet-eclipse-ide",
+          "label": "Eclipse IDE",
+          "standardRef": "O*NET Hot Technology Eclipse IDE"
+        },
+        {
+          "id": "tool:onet-eclipse-jersey",
+          "label": "Eclipse Jersey",
+          "standardRef": "O*NET Hot Technology Eclipse Jersey"
+        }
+      ]
+    }
+  }
+}

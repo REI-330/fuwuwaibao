@@ -1,0 +1,145 @@
+{
+  "schema": "career-graph-eval-questions/v2",
+  "generatedAt": "2026-09-16",
+  "kbVersion": "2026.09.16-v2",
+  "split": "dev",
+  "splitNote": "本集自 2026-09-17 起只作 **dev（开发集）** 使用：α 融合权重、重排候选池深度、以及「重排要不要上」都是在它上面选出来的，因此它上面算出的成绩带 selection-on-test 的乐观偏差，**不得作为最终成绩**。划分方案见 knowledge/evaluations/EVAL_SET_DESIGN.md；测试集为独立新写的 questions-test.json，冻结后只跑一次。",
+  "knownDefects": ["14 题中有 10 题的两段参考答案在原文间隔 < 3（其中 7 题直接相邻），会结构性放大邻域/窗口类技术的增益；校验命令：python knowledge/eval/validate_questionset.py --set knowledge/evaluations/questions-v2.json --min-gap 3"],
+  "note": "自行出题：题目由人读原文后手写，参考答案段落按规则机械选取（每个来源取 2 段、且全部未被图谱引用）。与旧题集的两个关键差别：(1) 旧主集的参考答案 100% 落在图谱引用集合内，属同源偏差；本集全部取自未被引用的 440 段，杜绝了「用图」的泄漏增益。(2) 旧留出集每题只期望 1 段、旧主集期望均值 7.4 段，两集不可比；本集统一为每题 2 段参考答案，在 3 段检索预算下可比。",
+  "selectionRule": {
+    "referenceChunksSource": "knowledge/evaluations/_candidate_chunks.jsonl",
+    "criteria": ["未被 graph.json 的 nodes/edges sourceRefs 引用", "文本长度 >= 300 字符", "每个来源取 2 段", "全部含中文（S16/S17 为英文 O*NET 职业数据）"],
+    "chunksPerQuestion": 2,
+    "corpusCitedChunks": 54,
+    "corpusTotalChunks": 494
+  },
+  "counts": { "total": 14, "answerable": 14, "referenceChunksTotal": 28 },
+  "questions": [
+    {
+      "split": "dev",
+      "questionId": "N01",
+      "category": "嵌入式开发",
+      "question": "用 FreeRTOS 开发 IoT 设备时，官方认证过哪些现成开发板可以直接拿来做验证？遇到技术问题该去哪些地方找文档和支持？",
+      "answerable": true,
+      "referenceChunks": ["S01#s5", "S01#s6"],
+      "gradingNotes": "需同时覆盖两块：一是 FreeRTOS-qualified 硬件平台清单（如 Espressif ESP32-DevKitC / ESP32-S2-Saola-1、Cypress CYW943907AEVAL1F、Microchip Curiosity PIC32MZEF、NXP LPC54018 IoT Module 等）；二是支持渠道（freertos.org 文档、FreeRTOS 社区论坛、GitHub 提 issue、AWS IoT Core 开发者指南）。只答其中一块算部分正确。"
+    },
+    {
+      "split": "dev",
+      "questionId": "N02",
+      "category": "嵌入式开发",
+      "question": "ESP32 上要把 SPI 配成四线 I/O 模式该怎么设置，另外命令阶段和地址阶段的长度如果要改，具体动哪些结构体和标志位？",
+      "answerable": true,
+      "referenceChunks": ["S02#s13", "S02#s14"],
+      "gradingNotes": "四线 I/O 模式需同时设置 SPI_TRANS_MODE_QIO 与 SPI_TRANS_MULTILINE_ADDR（总线侧为 SPICOMMON_BUSFLAG_QUAD）；长度修改需声明 spi_transaction_ext_t、在 base 中设置 SPI_TRANS_VARIABLE_CMD / SPI_TRANS_VARIABLE_ADDR，并用 command_bits / address_bits 指定长度。"
+    },
+    {
+      "split": "dev",
+      "questionId": "N03",
+      "category": "嵌入式开发",
+      "question": "ESP-IDF 里 MALLOC_CAP_32BIT 分配的内存能不能拿来存浮点变量？在中断服务程序里调用堆函数有什么限制？",
+      "answerable": true,
+      "referenceChunks": ["S03#32", "S03#s57"],
+      "gradingNotes": "MALLOC_CAP_32BIT 不可用于浮点变量（可能返回指令 RAM，而 ESP32 浮点汇编指令访问不了 IRAM），且该内存只能按 32 位读写，其他访问会触发 LoadStoreError；ISR 中可调用 heap_caps_malloc/free/realloc/calloc 系列（含 _default/_prefer/_aligned 变体），但文档明确说不建议这样用。"
+    },
+    {
+      "split": "dev",
+      "questionId": "N04",
+      "category": "嵌入式开发",
+      "question": "ESP32 的 RTC GPIO 在哪些情况下能用，另外 gpio_config 和 gpio_reset_pin 这两个函数各自负责什么？",
+      "answerable": true,
+      "referenceChunks": ["S04#s73~2", "S04#s78"],
+      "gradingNotes": "RTC GPIO 可用于 Deep-sleep 模式、ULP-FSM 协处理器运行时、以及使用 ADC/DAC 等模拟功能时；另需提到在 ADC 或睡眠模式使用 Wi-Fi/蓝牙时不要用 GPIO36 与 GPIO39 的中断。gpio_config 用于通用配置（模式、上下拉、中断类型，且会覆盖当前全部 IO 配置），gpio_reset_pin 把管脚复位到特定状态（选 GPIO 功能、使能上拉、关闭输入输出）。"
+    },
+    {
+      "split": "dev",
+      "questionId": "N05",
+      "category": "AI框架与推理",
+      "question": "用 MindSpore Lite 的 benchmark 工具测 mobilenetv2 时，输入数据文件要按什么规格准备，跑完输出里那些误差信息该怎么理解？",
+      "answerable": true,
+      "referenceChunks": ["S05#s100~2", "S05#s100~4"],
+      "gradingNotes": "输入文件由 inDataFile 指定，需与模型输入张量一致（float32、1x224x224x3，即 150528 个 float32 按序保存）；可用「保存训练输入」或「随机生成」两种方式产生，文中给了 numpy 随机生成脚本。输出侧：InData 行打印前 20 个输入值，各节点行打印推理结果前 50 个值，Mean bias of node/tensor 给出该张量与标杆数据的平均误差，最后 Mean bias of all nodes/tensors 给出总平均误差。"
+    },
+    {
+      "split": "dev",
+      "questionId": "N06",
+      "category": "AI框架与推理",
+      "question": "用飞桨做手写数字识别，数据集的下载和加载是怎么写的？网络部分用的是哪个模型、怎么构建并打印出结构？",
+      "answerable": true,
+      "referenceChunks": ["S06#3.1", "S06#3.2"],
+      "gradingNotes": "数据集用 paddle.vision.datasets.MNIST(mode=\"train\"/\"test\", transform=...)，配 Normalize(mean=[127.5], std=[127.5], data_format=\"CHW\")；网络用内置的 paddle.vision.models.LeNet(num_classes=10)，用 paddle.summary(lenet, (1,1,28,28)) 打印结构与参数。"
+    },
+    {
+      "split": "dev",
+      "questionId": "N07",
+      "category": "AI框架与推理",
+      "question": "飞桨里从 Python 列表造 Tensor 用哪个接口，如果要造指定形状、内容全是 0 或全是 1 的 Tensor 又该怎么做？",
+      "answerable": true,
+      "referenceChunks": ["S07#2.1", "S07#2.2"],
+      "gradingNotes": "从列表/元组用 paddle.to_tensor(...)；只传单个标量时形状为 [1]（0 维 Tensor）。指定形状用 paddle.zeros([m,n])、paddle.ones([m,n])、paddle.full([m,n], 10)。"
+    },
+    {
+      "split": "dev",
+      "questionId": "N08",
+      "category": "计算机视觉",
+      "question": "YOLO26 能导出成哪些部署格式，它们分别适合什么场景？除 NVIDIA 之外，像 Hailo、Ambarella、华为昇腾这类加速器要怎么接？",
+      "answerable": true,
+      "referenceChunks": ["S08#s147", "S08#s147~2"],
+      "gradingNotes": "需列出主要格式及定位：PyTorch(.pt) 原生最灵活、TorchScript 供无 Python 的 C++ 运行时、ONNX 跨平台交换格式、OpenVINO 面向 Intel CPU/集显/NPU、TensorRT 面向 NVIDIA GPU（FP16/INT8）、CoreML 面向 Apple 设备端、TF SavedModel 等。第三方加速器：Hailo 导出 HEF，Ambarella 走 ONNX 优先 + CVflow 编译为 AmbaPB（CV72 等），华为昇腾用 CANN ATC 把 ONNX 编成 .om 做 FP16 推理。"
+    },
+    {
+      "split": "dev",
+      "questionId": "N09",
+      "category": "计算机视觉",
+      "question": "YOLO26 的检测模型是在什么数据集上预训练的，跑一次预测的典型代码长什么样、结果里能取到哪些框坐标形式？",
+      "answerable": true,
+      "referenceChunks": ["S09#s153", "S09#s157"],
+      "gradingNotes": "Detect/Segment/Pose 在 COCO 预训练（Semantic 用 Cityscapes、Classify 用 ImageNet）；首次使用会自动从最新 Ultralytics 发行版下载。预测代码为 from ultralytics import YOLO; model = YOLO(\"yolo26n.pt\") 或自定义 best.pt; results = model(图片)。结果里可访问 result.boxes.xywh（中心点+宽高）、xywhn（归一化）、xyxy（左上右下）等。"
+    },
+    {
+      "split": "dev",
+      "questionId": "N10",
+      "category": "计算机视觉",
+      "question": "YOLO26 的分割模型精度指标怎么看，用 model.val() 做验证时能拿到哪些指标？",
+      "answerable": true,
+      "referenceChunks": ["S10#s163", "S10#s166"],
+      "gradingNotes": "分割模型表给出 mAP框 50-95(e2e)、mAP掩码 50-95(e2e)、CPU ONNX 与 T4 TensorRT10 速度、参数量、FLOPs 等列。验证用 model.val()（不需传参，模型记得 data 与设置），可拿到 metrics.box.map / map50 / map75 / maps 等指标。"
+    },
+    {
+      "split": "dev",
+      "questionId": "N11",
+      "category": "测试自动化",
+      "question": "pytest 的 fixture 里，用 yield 做清理和用 addfinalizer 挂清理函数有什么差别？各自有什么坑？",
+      "answerable": true,
+      "referenceChunks": ["S14#1", "S14#2"],
+      "gradingNotes": "yield 装置：把 return 换成 yield，yield 之后的代码是 teardown；pytest 会按装置线性顺序逐个执行，测试结束后按相反顺序回来执行 yield 之后的代码。addfinalizer：请求 request-context 对象后把清理可调用对象传给 addfinalizer；更冗长，且要注意「即使 fixture 在添加终结器后抛异常，终结器仍会运行」，所以应尽量在完成需要拆除的操作之后再添加终结器。"
+    },
+    {
+      "split": "dev",
+      "questionId": "N12",
+      "category": "职业能力",
+      "question": "软件质量保证分析师与测试员这个岗位，主要任务和工作活动包括哪些内容？",
+      "answerable": true,
+      "referenceChunks": ["S16#s291~2", "S16#s292"],
+      "gradingNotes": "任务侧需覆盖如：与程序/硬件/操作系统/网络环境做软件兼容性测试、调查技术支持转来的客户问题、审阅软件文档以保证技术准确性/合规性/完整性、识别程序偏离标准并提出修改建议、通过检查配置做初步调试等。工作活动侧需覆盖如：与计算机打交道、获取信息、与主管/同事/下属沟通等。"
+    },
+    {
+      "split": "dev",
+      "questionId": "N13",
+      "category": "职业能力",
+      "question": "计算机硬件工程师日常要完成哪些任务和工作活动？",
+      "answerable": true,
+      "referenceChunks": ["S17#s320~2", "S17#s321"],
+      "gradingNotes": "任务侧需覆盖如：评估上报格式、成本约束与安全限制等因素以确定硬件配置；为系统设计人员和用户提供培训与支持；监控设备运行并在必要时修改以保证符合规格；依据性能预期与设计规格提出供电需求与配置。工作活动侧需覆盖与计算机打交道、决策与解决问题、更新并运用相关知识、分析数据或信息等。"
+    },
+    {
+      "split": "dev",
+      "questionId": "N14",
+      "category": "标准与政策",
+      "question": "全国标准信息公共服务平台目前收录了多少现行有效的强制性国家标准和推荐性国家标准，其中可在线阅读下载的比例是怎样的？",
+      "answerable": true,
+      "referenceChunks": ["S20#s345", "S20#s346"],
+      "gradingNotes": "需给出具体数量：GB 强制性国家标准 2,031 项（其中非采标 1,691 项可在线阅读和下载，采标 340 项只可在线阅读）；GB/T 推荐性国家标准 47,164 项（非采标 31,144 项可在线阅读和下载，采标 16,020 项只提供题录信息）；另有 GB/Z 指导性技术文件。分类统计可举若干类目数量（如环保/保健和安全 4,366、信息技术/办公机械 4,370 等）。"
+    }
+  ]
+}

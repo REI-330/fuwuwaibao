@@ -1,0 +1,252 @@
+{
+  "schema": "weknora-inspired-stack/v1",
+  "note": "按 Tencent/WeKnora docs/CHUNKING.md 的思路（MIT）重建的稀疏检索版：文档画像 → 自适应分块（heading/递归两层）+ 面包屑上下文头 + 父子块 + BM25。未复制其代码，也没有照搬它依赖 embedding 服务与 Neo4j 的部分。",
+  "parameters": {
+    "chunkSize": 512,
+    "chunkOverlap": 80,
+    "parentSize": 4096,
+    "headingTierMinHeadings": 3,
+    "contextDelimiter": " > "
+  },
+  "tokenizer": "segmenter",
+  "profiles": [
+    {
+      "sourceId": "S01",
+      "blocks": 54,
+      "headings": 5,
+      "levels": 2,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S02",
+      "blocks": 930,
+      "headings": 40,
+      "levels": 3,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S03",
+      "blocks": 622,
+      "headings": 31,
+      "levels": 3,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S04",
+      "blocks": 883,
+      "headings": 22,
+      "levels": 3,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S05",
+      "blocks": 438,
+      "headings": 20,
+      "levels": 4,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S06",
+      "blocks": 111,
+      "headings": 13,
+      "levels": 4,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S07",
+      "blocks": 242,
+      "headings": 22,
+      "levels": 3,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S08",
+      "blocks": 253,
+      "headings": 7,
+      "levels": 2,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S09",
+      "blocks": 249,
+      "headings": 10,
+      "levels": 3,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S10",
+      "blocks": 243,
+      "headings": 11,
+      "levels": 3,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S11",
+      "blocks": 31,
+      "headings": 15,
+      "levels": 4,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S12",
+      "blocks": 105,
+      "headings": 25,
+      "levels": 5,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S13",
+      "blocks": 232,
+      "headings": 33,
+      "levels": 4,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S14",
+      "blocks": 436,
+      "headings": 47,
+      "levels": 4,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S15",
+      "blocks": 108,
+      "headings": 1,
+      "levels": 1,
+      "tier": "recursive"
+    },
+    {
+      "sourceId": "S16",
+      "blocks": 607,
+      "headings": 36,
+      "levels": 4,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S17",
+      "blocks": 472,
+      "headings": 37,
+      "levels": 5,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S18",
+      "blocks": 47,
+      "headings": 2,
+      "levels": 1,
+      "tier": "recursive"
+    },
+    {
+      "sourceId": "S19",
+      "blocks": 213,
+      "headings": 0,
+      "levels": 0,
+      "tier": "recursive"
+    },
+    {
+      "sourceId": "S20",
+      "blocks": 113,
+      "headings": 3,
+      "levels": 2,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S21",
+      "blocks": 403,
+      "headings": 0,
+      "levels": 0,
+      "tier": "recursive"
+    },
+    {
+      "sourceId": "S22",
+      "blocks": 92,
+      "headings": 6,
+      "levels": 2,
+      "tier": "heading"
+    }
+  ],
+  "counts": {
+    "documents": 22,
+    "children": 1136,
+    "parents": 114,
+    "headingTier": 18,
+    "recursiveTier": 4
+  },
+  "results": [
+    {
+      "name": "现状（自建栈 494 段）",
+      "note": "返回 3 段",
+      "main": {
+        "exact3": 6,
+        "center3": 6,
+        "center10": 12,
+        "cover3": 6
+      },
+      "held": {
+        "exact3": 3,
+        "center3": 3,
+        "center10": 4,
+        "cover3": 3
+      }
+    },
+    {
+      "name": "① 自适应分块（子块检索）",
+      "note": "返回 3 个子块",
+      "main": {
+        "exact3": 0,
+        "center3": 9,
+        "center10": 13,
+        "cover3": 9,
+        "avgBudget": 3
+      },
+      "held": {
+        "exact3": 0,
+        "center3": 3,
+        "center10": 4,
+        "cover3": 3,
+        "avgBudget": 3
+      }
+    },
+    {
+      "name": "② ① + 父块返回（3 个父块）",
+      "note": "实际返回 ~32 个子块",
+      "main": {
+        "exact3": 0,
+        "center3": 15,
+        "center10": 15,
+        "cover3": 14,
+        "avgBudget": 30.6
+      },
+      "held": {
+        "exact3": 0,
+        "center3": 6,
+        "center10": 6,
+        "cover3": 5,
+        "avgBudget": 32.8
+      }
+    },
+    {
+      "name": "③ 对照：直接多返回同等数量子块",
+      "note": "同样 ~32 个子块，但无父子结构",
+      "main": {
+        "exact3": 0,
+        "center3": 15,
+        "center10": 13,
+        "cover3": 15,
+        "avgBudget": 32
+      },
+      "held": {
+        "exact3": 0,
+        "center3": 7,
+        "center10": 4,
+        "cover3": 7,
+        "avgBudget": 32
+      }
+    }
+  ],
+  "files": {
+    "children": "knowledge/weknora/children.jsonl",
+    "parents": "knowledge/weknora/parents.jsonl",
+    "index": "knowledge/weknora/index.json"
+  }
+}

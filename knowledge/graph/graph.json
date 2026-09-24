@@ -1,0 +1,3803 @@
+{
+  "schema": "career-graph-layout/v1",
+  "step": "10",
+  "generatedAt": "2026-09-15T16:16:11.124Z",
+  "kbVersion": "2026.09.15",
+  "graphVersion": "0.1.0",
+  "note": "第 10 步产物：确定性 x/y + requires.weight。坐标与 weight 都由本文件落盘，第 09 步按 id 覆盖后做硬校验，第 11 步按契约投影成 exports/career-graph.json。",
+  "canvas": {
+    "width": 1050,
+    "height": 820,
+    "padding": 24
+  },
+  "capsule": {
+    "width": 210,
+    "height": 58
+  },
+  "layout": {
+    "rule": "按 taxonomy.nodeKinds 的顺序把各类节点排成横向色带；带内按 id 升序、每行 5 个左对齐；行距取画布容差内的最大值。纯确定性：无随机数、无迭代收敛、与运行时间无关。",
+    "columns": 5,
+    "columnStep": 210,
+    "rowStep": 54,
+    "rows": 15,
+    "origin": {
+      "x": 105,
+      "y": 29
+    },
+    "bands": [
+      {
+        "kind": "occupation",
+        "count": 4,
+        "rows": 1,
+        "startRow": 0
+      },
+      {
+        "kind": "skill",
+        "count": 25,
+        "rows": 5,
+        "startRow": 1
+      },
+      {
+        "kind": "knowledge",
+        "count": 9,
+        "rows": 2,
+        "startRow": 6
+      },
+      {
+        "kind": "task",
+        "count": 6,
+        "rows": 2,
+        "startRow": 8
+      },
+      {
+        "kind": "tool",
+        "count": 8,
+        "rows": 2,
+        "startRow": 10
+      },
+      {
+        "kind": "trend",
+        "count": 4,
+        "rows": 1,
+        "startRow": 12
+      },
+      {
+        "kind": "credential",
+        "count": 3,
+        "rows": 1,
+        "startRow": 13
+      },
+      {
+        "kind": "domain",
+        "count": 4,
+        "rows": 1,
+        "startRow": 14
+      }
+    ],
+    "xRange": [
+      105,
+      945
+    ],
+    "yRange": [
+      29,
+      785
+    ],
+    "note": "63 个节点要铺在 1050×820 内：胶囊 210×58，横向 5 列 = 1050 正好等于画布宽；纵向 15 行只给得起 54px 行距（比胶囊高度少 4px，相邻两行轻微重叠）。前端不得每次渲染重跑力导向布局（§3.1 L110）。"
+  },
+  "counts": {
+    "nodes": 63,
+    "edges": 226,
+    "bands": 8,
+    "rows": 15,
+    "requiresWithWeight": 28,
+    "byKind": {
+      "occupation": 4,
+      "skill": 25,
+      "knowledge": 9,
+      "task": 6,
+      "tool": 8,
+      "trend": 4,
+      "credential": 3,
+      "domain": 4
+    },
+    "byType": {
+      "requires": 28,
+      "prerequisite": 24,
+      "belongs_to": 25,
+      "trains": 12,
+      "uses": 8,
+      "learning_unit": 9,
+      "transitions_to": 3,
+      "emerging_in": 8,
+      "evidenced_by": 109
+    }
+  },
+  "nodes": [
+    {
+      "id": "occupation:AI001",
+      "kind": "occupation",
+      "label": "嵌入式开发工程师",
+      "aliases": [
+        "嵌入式开发",
+        "MCU 开发",
+        "固件工程师",
+        "计算机硬件工程师"
+      ],
+      "description": "面向 MCU / RTOS 的外设驱动与固件开发岗位：在实时内核之上驱动 SPI、GPIO 等外设，并处理堆内存与 DMA 缓冲。来源侧最接近的标准职业是 O*NET 17-2061.00 Computer Hardware Engineers。",
+      "x": 105,
+      "y": 29,
+      "sourceRefs": [
+        "S17#s312",
+        "S04#s73"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "occupation:AI002",
+      "kind": "occupation",
+      "label": "机器视觉工程师",
+      "aliases": [
+        "视觉算法工程师",
+        "CV 工程师",
+        "计算机视觉工程师"
+      ],
+      "description": "负责目标检测 / 实例分割模型的训练、验证、导出与上线：从数据集格式与标注开始，到用验证集确认准确率，再把模型导出成部署格式。",
+      "x": 315,
+      "y": 29,
+      "sourceRefs": [
+        "S09#s152",
+        "S10#s162"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "occupation:AI003",
+      "kind": "occupation",
+      "label": "自动化测试工程师",
+      "aliases": [
+        "测试自动化工程师",
+        "QA 工程师",
+        "软件质量保证分析师"
+      ],
+      "description": "把手工回归变成可重复执行的自动化测试：用测试框架组织夹具、用浏览器驱动跑端到端流程，并专门治理「不稳定测试」。对应 O*NET 15-1253.00 Software Quality Assurance Analysts and Testers。",
+      "x": 525,
+      "y": 29,
+      "sourceRefs": [
+        "S16#s283",
+        "S16#s291"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "occupation:AI004",
+      "kind": "occupation",
+      "label": "边缘 AI 工程师",
+      "aliases": [
+        "边缘智能工程师",
+        "端侧 AI 工程师",
+        "边缘推理工程师"
+      ],
+      "description": "把训练好的模型搬到端侧设备上跑：做模型转换与量化、集成轻量推理库、用基准测试工具量化端侧性能，并按硬件目标选择部署格式。",
+      "x": 735,
+      "y": 29,
+      "sourceRefs": [
+        "S05#s92",
+        "S08#s149"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK090",
+      "kind": "skill",
+      "label": "C 语言与内存模型",
+      "aliases": [
+        "C 语言",
+        "内存模型",
+        "栈与堆"
+      ],
+      "description": "理解程序控制流栈、函数调用堆与编译期静态内存三者的区别，是多线程 RTOS 下每个任务独立栈的前提。",
+      "x": 105,
+      "y": 83,
+      "sourceRefs": [
+        "S03#s46"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK101",
+      "kind": "skill",
+      "label": "微控制器外设驱动",
+      "aliases": [
+        "外设驱动开发",
+        "SPI 主机驱动",
+        "驱动开发"
+      ],
+      "description": "在主机模式下控制片上外设的软件程序：初始化总线、注册设备、发起传输事务。",
+      "x": 315,
+      "y": 83,
+      "sourceRefs": [
+        "S02#s7",
+        "S02#s17"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK102",
+      "kind": "skill",
+      "label": "SPI 总线事务设计",
+      "aliases": [
+        "SPI 传输事务",
+        "SPI 时序"
+      ],
+      "description": "把一次总线交互拆成命令、地址、Dummy、写入、读取五个阶段，并按外设时序要求裁剪。",
+      "x": 525,
+      "y": 83,
+      "sourceRefs": [
+        "S02#s10"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK103",
+      "kind": "skill",
+      "label": "GPIO 与引脚复用",
+      "aliases": [
+        "GPIO 配置",
+        "IO 管脚配置",
+        "引脚复用"
+      ],
+      "description": "把管脚配成简单输入输出或外设信号，并通过 IO MUX 与 GPIO 交换矩阵处理引脚映射。",
+      "x": 735,
+      "y": 83,
+      "sourceRefs": [
+        "S04#s74",
+        "S04#s75"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK104",
+      "kind": "skill",
+      "label": "堆内存属性与 DMA 缓冲",
+      "aliases": [
+        "DMA 存储器",
+        "堆属性分配",
+        "内存属性"
+      ],
+      "description": "按用途选择内存能力（如用 MALLOC_CAP_DMA 拿适合硬件 DMA 引擎的缓冲），而不是只调 malloc。",
+      "x": 945,
+      "y": 83,
+      "sourceRefs": [
+        "S03#s53"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK105",
+      "kind": "skill",
+      "label": "实时操作系统任务调度",
+      "aliases": [
+        "RTOS 任务",
+        "实时内核",
+        "任务调度"
+      ],
+      "description": "在多线程 RTOS 环境中组织任务与各自的栈，用实时内核完成上下文切换。",
+      "x": 105,
+      "y": 137,
+      "sourceRefs": [
+        "S01#s2",
+        "S03#s46"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK106",
+      "kind": "skill",
+      "label": "中断与轮询传输取舍",
+      "aliases": [
+        "中断传输事务",
+        "轮询传输事务",
+        "ISR"
+      ],
+      "description": "在中断传输事务（阻塞任务、CPU 去做别的）与轮询传输事务（占用 CPU、传输更短）之间按场景取舍。",
+      "x": 315,
+      "y": 137,
+      "sourceRefs": [
+        "S02#s11",
+        "S02#s12"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK110",
+      "kind": "skill",
+      "label": "目标检测模型训练",
+      "aliases": [
+        "检测模型训练",
+        "YOLO 训练",
+        "目标检测"
+      ],
+      "description": "用检测数据集训练检测模型，输出包围框、类别标签与置信度分数。",
+      "x": 525,
+      "y": 137,
+      "sourceRefs": [
+        "S09#s154",
+        "S09#s152"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK111",
+      "kind": "skill",
+      "label": "数据集格式与标注",
+      "aliases": [
+        "数据集格式",
+        "数据标注",
+        "COCO 转 YOLO"
+      ],
+      "description": "掌握检测数据集的目录与标注格式，并在不同格式之间转换与标注管理。",
+      "x": 735,
+      "y": 137,
+      "sourceRefs": [
+        "S09#s155"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK112",
+      "kind": "skill",
+      "label": "模型验证与指标",
+      "aliases": [
+        "模型验证",
+        "准确率评估",
+        "评估指标"
+      ],
+      "description": "在留出的验证集上评估训练好的模型准确率，形成可复算的模型质量证据。",
+      "x": 945,
+      "y": 137,
+      "sourceRefs": [
+        "S09#s156"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK113",
+      "kind": "skill",
+      "label": "模型导出与格式转换",
+      "aliases": [
+        "模型导出",
+        "导出格式",
+        "ONNX 导出"
+      ],
+      "description": "把训练产物导出成部署侧需要的格式（ONNX、CoreML 等），为不同运行环境做适配。",
+      "x": 105,
+      "y": 191,
+      "sourceRefs": [
+        "S09#s159",
+        "S08#s146"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK114",
+      "kind": "skill",
+      "label": "实例分割",
+      "aliases": [
+        "分割模型",
+        "掩码分割",
+        "实例分割训练"
+      ],
+      "description": "在检测的基础上输出每个对象的掩码/轮廓，适用于需要精确形状而不仅是位置的场景。",
+      "x": 315,
+      "y": 191,
+      "sourceRefs": [
+        "S10#s162",
+        "S10#s164"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK115",
+      "kind": "skill",
+      "label": "张量与自动微分基础",
+      "aliases": [
+        "Tensor",
+        "张量",
+        "自动微分"
+      ],
+      "description": "用张量表达神经网络中传递的数据，理解形状、数据类型与设备位置三个基础属性。",
+      "x": 525,
+      "y": 191,
+      "sourceRefs": [
+        "S07#s124",
+        "S07#3.1"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK120",
+      "kind": "skill",
+      "label": "轻量级推理引擎集成",
+      "aliases": [
+        "推理库集成",
+        "mindspore-lite 集成",
+        "端侧推理集成"
+      ],
+      "description": "把轻量推理库与头文件接进自己的工程，用 C++ 接口写推理程序，而不是只跑官方工具。",
+      "x": 735,
+      "y": 191,
+      "sourceRefs": [
+        "S05#s98",
+        "S05#s101"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK121",
+      "kind": "skill",
+      "label": "端侧推理性能基准测试",
+      "aliases": [
+        "benchmark 推理测试",
+        "推理基准测试",
+        "端侧性能"
+      ],
+      "description": "用随发布件发布的基准测试工具量化端侧推理耗时与输出，把「能不能跑」变成「跑多快」。",
+      "x": 945,
+      "y": 191,
+      "sourceRefs": [
+        "S05#s100"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK122",
+      "kind": "skill",
+      "label": "模型结构可视化检查",
+      "aliases": [
+        "Netron 可视化",
+        "模型可视化",
+        "拓扑结构检查"
+      ],
+      "description": "用模型可视化工具加载转换后的模型，检查拓扑结构、图与节点信息是否与预期一致。",
+      "x": 105,
+      "y": 245,
+      "sourceRefs": [
+        "S05#s97"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK123",
+      "kind": "skill",
+      "label": "部署格式选型",
+      "aliases": [
+        "部署选项对比",
+        "部署格式选择",
+        "端侧后端选型"
+      ],
+      "description": "在推理速度、硬件限制与集成难度之间取舍，为运行时与硬件目标挑选合适的部署格式。",
+      "x": 315,
+      "y": 245,
+      "sourceRefs": [
+        "S08#s145",
+        "S08#s146"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK130",
+      "kind": "skill",
+      "label": "Python 测试框架 pytest",
+      "aliases": [
+        "pytest",
+        "测试框架",
+        "Python 单元测试"
+      ],
+      "description": "用 pytest 组织测试：测试函数通过声明参数来「请求」它需要的夹具，由框架负责准备与注入。",
+      "x": 525,
+      "y": 245,
+      "sourceRefs": [
+        "S13#s202",
+        "S13#s204"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK131",
+      "kind": "skill",
+      "label": "夹具与测试隔离",
+      "aliases": [
+        "fixture",
+        "夹具设计",
+        "测试隔离"
+      ],
+      "description": "把测试的复杂前置条件收敛成可复用的夹具函数，并在拆卸阶段保证测试自己清理干净。",
+      "x": 735,
+      "y": 245,
+      "sourceRefs": [
+        "S13#s204",
+        "S13#s209"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK132",
+      "kind": "skill",
+      "label": "浏览器自动化 WebDriver",
+      "aliases": [
+        "WebDriver",
+        "Selenium",
+        "浏览器自动化"
+      ],
+      "description": "用语言绑定加各浏览器控制代码，以本地化方式驱动浏览器，模拟真实用户操作。",
+      "x": 945,
+      "y": 245,
+      "sourceRefs": [
+        "S11#s172"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK133",
+      "kind": "skill",
+      "label": "显式等待与隐式等待",
+      "aliases": [
+        "等待策略",
+        "显式等待",
+        "隐式等待"
+      ],
+      "description": "区分全局的隐式等待与按条件轮询的显式等待，为每个需要等待的地方指定确切条件。",
+      "x": 105,
+      "y": 299,
+      "sourceRefs": [
+        "S12#s181",
+        "S12#s187"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK134",
+      "kind": "skill",
+      "label": "端到端测试稳定性治理",
+      "aliases": [
+        "不稳定测试",
+        "flaky test",
+        "竞态条件"
+      ],
+      "description": "识别并消除由「浏览器与脚本谁先到位」的竞态条件造成的偶发失败，是自动化测试能否进 CI 的门槛。",
+      "x": 315,
+      "y": 299,
+      "sourceRefs": [
+        "S12#s180"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK136",
+      "kind": "skill",
+      "label": "分层夹具组织 conftest",
+      "aliases": [
+        "conftest.py",
+        "夹具共享",
+        "分层夹具"
+      ],
+      "description": "用 conftest.py 按目录层级共享夹具，让嵌套测试包各自扩展而无需显式导入。",
+      "x": 525,
+      "y": 299,
+      "sourceRefs": [
+        "S14#s256",
+        "S14#s277"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK137",
+      "kind": "skill",
+      "label": "WebDriver BiDi 双向协议",
+      "aliases": [
+        "WebDriver BiDi",
+        "双向协议",
+        "CDP 替代"
+      ],
+      "description": "用标准双向协议在 WebSocket 上实时接收浏览器事件（网络请求、控制台消息、JS 错误），取代浏览器私有协议。",
+      "x": 735,
+      "y": 299,
+      "sourceRefs": [
+        "S11#s176"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "skill:SK215",
+      "kind": "skill",
+      "label": "模型量化与部署",
+      "aliases": [
+        "模型量化",
+        "INT8 量化",
+        "离线模型转换"
+      ],
+      "description": "把非端侧格式的模型离线转换成端侧格式并做量化，是模型从训练侧走到设备侧的关键一步。",
+      "x": 945,
+      "y": 299,
+      "sourceRefs": [
+        "S05#s96",
+        "S05#s94"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "knowledge:AI001:stage1",
+      "kind": "knowledge",
+      "label": "嵌入式 C 与外设入门",
+      "aliases": [],
+      "description": "学习单元：先建立栈/堆/静态内存的区分，再进入管脚配置与外设信号的连接方式。",
+      "x": 105,
+      "y": 353,
+      "sourceRefs": [
+        "S03#s46",
+        "S04#s74"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "knowledge:AI001:stage2",
+      "kind": "knowledge",
+      "label": "SPI 总线与传输事务",
+      "aliases": [],
+      "description": "学习单元：从总线初始化与设备注册，到五阶段传输事务的阶段裁剪。",
+      "x": 315,
+      "y": 353,
+      "sourceRefs": [
+        "S02#s10",
+        "S02#s17"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "knowledge:AI001:stage3",
+      "kind": "knowledge",
+      "label": "堆内存属性与 DMA 缓冲",
+      "aliases": [],
+      "description": "学习单元：按内存能力选择堆分配方式，为 SPI/I2S 等硬件 DMA 引擎准备缓冲。",
+      "x": 525,
+      "y": 353,
+      "sourceRefs": [
+        "S03#s53",
+        "S03#s51"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "knowledge:AI001:stage4",
+      "kind": "knowledge",
+      "label": "端侧实时性与传输速度调优",
+      "aliases": [],
+      "description": "学习单元：识别限制传输速度的因素（事务间隔、时钟频率、缓存缺失），据此调优驱动行为。",
+      "x": 735,
+      "y": 353,
+      "sourceRefs": [
+        "S02#s23"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "knowledge:AI002:stage1",
+      "kind": "knowledge",
+      "label": "检测模型训练与验证流程",
+      "aliases": [],
+      "description": "学习单元：从数据集格式与标注出发，训练、验证并把模型导出成部署格式。",
+      "x": 945,
+      "y": 353,
+      "sourceRefs": [
+        "S09#s154",
+        "S09#s156"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "knowledge:AI003:stage1",
+      "kind": "knowledge",
+      "label": "等待策略与稳定测试",
+      "aliases": [],
+      "description": "学习单元：先理解竞态条件为何产生不稳定测试，再分别掌握隐式等待与显式等待。",
+      "x": 105,
+      "y": 407,
+      "sourceRefs": [
+        "S12#s180",
+        "S12#s187"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "knowledge:AI003:stage2",
+      "kind": "knowledge",
+      "label": "夹具组织与跨文件共享",
+      "aliases": [],
+      "description": "学习单元：由夹具的可复用性推进到 conftest.py 的分层共享与第三方插件夹具。",
+      "x": 315,
+      "y": 407,
+      "sourceRefs": [
+        "S14#s256",
+        "S13#s233"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "knowledge:AI004:stage1",
+      "kind": "knowledge",
+      "label": "模型转换与 Lite 推理集成",
+      "aliases": [],
+      "description": "学习单元：用转换工具把模型转成端侧格式，再将推理库接进自己的 C++ 工程。",
+      "x": 525,
+      "y": 407,
+      "sourceRefs": [
+        "S05#s96",
+        "S05#s101"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "knowledge:AI004:stage2",
+      "kind": "knowledge",
+      "label": "量化与端侧基准测试",
+      "aliases": [],
+      "description": "学习单元：在转换阶段完成量化，并用基准测试工具给出端侧推理的可复算数字。",
+      "x": 735,
+      "y": 407,
+      "sourceRefs": [
+        "S05#s100",
+        "S05#s97"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "task:T0042",
+      "kind": "task",
+      "label": "用 SPI 主机驱动读取一次传感器数据",
+      "aliases": [],
+      "description": "训练任务：初始化 SPI 总线、注册设备、发起一次完整的传输事务并校验读回的数据。",
+      "x": 105,
+      "y": 461,
+      "sourceRefs": [
+        "S02#s17",
+        "S02#s10"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "task:T0051",
+      "kind": "task",
+      "label": "用 FreeRTOS 搭建多任务采集程序",
+      "aliases": [],
+      "description": "训练任务：在实时内核上拆分采集与处理任务，处理各自的栈与任务间切换。",
+      "x": 315,
+      "y": 461,
+      "sourceRefs": [
+        "S03#s46",
+        "S01#s2"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "task:T0060",
+      "kind": "task",
+      "label": "训练并验证一个目标检测模型",
+      "aliases": [],
+      "description": "训练任务：在检测数据集上训练模型，并用验证集给出准确率结论。",
+      "x": 525,
+      "y": 461,
+      "sourceRefs": [
+        "S09#s154",
+        "S09#s156"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "task:T0061",
+      "kind": "task",
+      "label": "把检测模型导出为端侧格式",
+      "aliases": [],
+      "description": "训练任务：根据目标硬件选择导出格式并完成导出，说明为什么选这个格式。",
+      "x": 735,
+      "y": 461,
+      "sourceRefs": [
+        "S09#s159",
+        "S08#s146"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "task:T0070",
+      "kind": "task",
+      "label": "用显式等待编写稳定的端到端测试",
+      "aliases": [],
+      "description": "训练任务：为每个需要等待的交互指定确切条件，消除偶发失败。",
+      "x": 945,
+      "y": 461,
+      "sourceRefs": [
+        "S12#s187",
+        "S12#s180"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "task:T0080",
+      "kind": "task",
+      "label": "用 pytest 夹具组织可复用测试装置",
+      "aliases": [],
+      "description": "训练任务：把重复的测试前置条件收敛成夹具，并按目录层级共享。",
+      "x": 105,
+      "y": 515,
+      "sourceRefs": [
+        "S13#s202",
+        "S14#s256"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "tool:esp-idf",
+      "kind": "tool",
+      "label": "ESP-IDF",
+      "aliases": [
+        "ESP32 IDF"
+      ],
+      "description": "ESP32 上的官方开发框架：提供多线程 RTOS 运行环境与堆内存分配、外设驱动等组件。",
+      "x": 105,
+      "y": 569,
+      "sourceRefs": [
+        "S03#s46",
+        "S03#s47"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "tool:freertos",
+      "kind": "tool",
+      "label": "FreeRTOS",
+      "aliases": [
+        "FreeRTOS 内核"
+      ],
+      "description": "面向微控制器与小处理器的实时操作系统内核，含连接、安全性与 OTA 更新等库。",
+      "x": 315,
+      "y": 569,
+      "sourceRefs": [
+        "S01#s2",
+        "S01#s4"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "tool:mindspore-lite",
+      "kind": "tool",
+      "label": "MindSpore Lite",
+      "aliases": [
+        "MindSpore Lite 推理引擎"
+      ],
+      "description": "端侧推理框架：提供离线模型转换工具、推理库与基准测试工具。",
+      "x": 525,
+      "y": 569,
+      "sourceRefs": [
+        "S05#s96",
+        "S05#s98"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "tool:netron",
+      "kind": "tool",
+      "label": "Netron",
+      "aliases": [
+        "Netron 可视化工具"
+      ],
+      "description": "神经网络模型可视化工具：展示模型拓扑结构、图与节点信息，支持浏览器在线使用。",
+      "x": 735,
+      "y": 569,
+      "sourceRefs": [
+        "S05#s97"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "tool:paddlepaddle",
+      "kind": "tool",
+      "label": "飞桨（PaddlePaddle）",
+      "aliases": [
+        "PaddlePaddle",
+        "飞桨"
+      ],
+      "description": "深度学习框架：以张量为基础，提供内置经典模型、高层训练/评估/推理 API。",
+      "x": 945,
+      "y": 569,
+      "sourceRefs": [
+        "S06#s113",
+        "S06#s112"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "tool:pytest",
+      "kind": "tool",
+      "label": "pytest",
+      "aliases": [
+        "py.test"
+      ],
+      "description": "Python 测试框架：以夹具系统为核心，支持分层共享、参数化与插件生态。",
+      "x": 105,
+      "y": 623,
+      "sourceRefs": [
+        "S13#s202",
+        "S13#s233"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "tool:selenium",
+      "kind": "tool",
+      "label": "Selenium",
+      "aliases": [
+        "Selenium WebDriver"
+      ],
+      "description": "浏览器自动化工具集：由语言绑定与各浏览器控制代码组成，提供等待类与双向协议。",
+      "x": 315,
+      "y": 623,
+      "sourceRefs": [
+        "S11#s172"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "tool:ultralytics",
+      "kind": "tool",
+      "label": "Ultralytics YOLO",
+      "aliases": [
+        "YOLO",
+        "ultralytics"
+      ],
+      "description": "目标检测与实例分割的统一训练/验证/导出工具链，支持 20 多种部署选项。",
+      "x": 525,
+      "y": 623,
+      "sourceRefs": [
+        "S09#s152",
+        "S08#s145"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "trend:edge-ai-2026",
+      "kind": "trend",
+      "label": "端侧部署目标激增",
+      "aliases": [],
+      "description": "部署目标从云端 GPU 扩散到多类运行时与边缘 NPU 格式，格式选型本身成为一项技能。",
+      "x": 105,
+      "y": 677,
+      "sourceRefs": [
+        "S08#s145",
+        "S08#s149"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "trend:hw-bright-outlook",
+      "kind": "trend",
+      "label": "计算机硬件工程岗位稳定需求",
+      "aliases": [],
+      "description": "O*NET 17-2061.00 标注 Bright Outlook，硬件工程岗位持续存在且要求持续更新技术知识。",
+      "x": 315,
+      "y": 677,
+      "sourceRefs": [
+        "S17#s312",
+        "S17#s320"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "trend:sqa-bright-outlook",
+      "kind": "trend",
+      "label": "软件质量保证岗位需求旺盛",
+      "aliases": [],
+      "description": "O*NET 对软件质量保证分析与测试岗位给出 Bright Outlook 与高于平均的就业增长预测。",
+      "x": 525,
+      "y": 677,
+      "sourceRefs": [
+        "S16#s306",
+        "S16#s283"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "trend:webdriver-bidi",
+      "kind": "trend",
+      "label": "浏览器自动化协议标准化",
+      "aliases": [],
+      "description": "WebDriver BiDi 由浏览器厂商共同制定，用标准双向协议取代浏览器私有调试协议。",
+      "x": 735,
+      "y": 677,
+      "sourceRefs": [
+        "S11#s176"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "credential:abet",
+      "kind": "credential",
+      "label": "ABET 工程与技术认证",
+      "aliases": [
+        "ABET"
+      ],
+      "description": "工程与技术认证委员会的学位认证，是硬件/嵌入式方向学历背景的常见资质参照。",
+      "x": 105,
+      "y": 731,
+      "sourceRefs": [
+        "S17#s340"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "credential:comptia",
+      "kind": "credential",
+      "label": "CompTIA 认证",
+      "aliases": [
+        "CompTIA"
+      ],
+      "description": "计算机行业协会认证，在硬件工程师相关职业页面中与 ABET 并列列出。",
+      "x": 315,
+      "y": 731,
+      "sourceRefs": [
+        "S17#s340"
+      ],
+      "annotatedBy": "llm-draft"
+    },
+    {
+      "id": "credential:osta-skill",
+      "kind": "credential",
+      "label": "职业技能等级证书",
+      "aliases": [
+        "职业资格证书",
+        "技能等级证书"
+      ],
+      "description": "国内技能人员职业资格证书与职业技能等级证书，可在全国联网查询系统核验。",
+      "x": 525,
+      "y": 731,
+      "sourceRefs": [
+        "S18#s343"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "domain:edge-ai",
+      "kind": "domain",
+      "label": "边缘 AI 与模型部署",
+      "aliases": [],
+      "description": "把模型落到设备上跑的工程方向：模型转换、量化、推理集成与性能基准。",
+      "x": 105,
+      "y": 785,
+      "sourceRefs": [
+        "S05#s94",
+        "S08#s146"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "domain:embedded",
+      "kind": "domain",
+      "label": "嵌入式与实时系统",
+      "aliases": [],
+      "description": "以 MCU 为载体的实时系统方向：实时内核、外设驱动、内存属性与 DMA。",
+      "x": 315,
+      "y": 785,
+      "sourceRefs": [
+        "S01#s2",
+        "S03#s47"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "domain:test-automation",
+      "kind": "domain",
+      "label": "测试自动化与质量工程",
+      "aliases": [],
+      "description": "以测试框架与浏览器驱动为核心的自动化验证方向：夹具设计、等待策略与稳定性治理。",
+      "x": 525,
+      "y": 785,
+      "sourceRefs": [
+        "S12#s180",
+        "S13#s202"
+      ],
+      "annotatedBy": "llm-reviewed"
+    },
+    {
+      "id": "domain:vision",
+      "kind": "domain",
+      "label": "机器视觉与深度学习",
+      "aliases": [],
+      "description": "以张量计算为基础的视觉模型方向：数据集、组网、训练、验证、导出。",
+      "x": 735,
+      "y": 785,
+      "sourceRefs": [
+        "S07#s124",
+        "S09#s152"
+      ],
+      "annotatedBy": "llm-draft"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-0001",
+      "type": "requires",
+      "from": "occupation:AI001",
+      "to": "skill:SK090",
+      "weight": 0.95,
+      "targetLevel": 5,
+      "importance": 0.95,
+      "sourceRefs": [
+        "S03#s46"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0002",
+      "type": "requires",
+      "from": "occupation:AI001",
+      "to": "skill:SK101",
+      "weight": 0.9,
+      "targetLevel": 5,
+      "importance": 0.9,
+      "sourceRefs": [
+        "S02#s7"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0003",
+      "type": "requires",
+      "from": "occupation:AI001",
+      "to": "skill:SK102",
+      "weight": 0.8,
+      "targetLevel": 4,
+      "importance": 0.8,
+      "sourceRefs": [
+        "S02#s10"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0004",
+      "type": "requires",
+      "from": "occupation:AI001",
+      "to": "skill:SK103",
+      "weight": 0.75,
+      "targetLevel": 4,
+      "importance": 0.75,
+      "sourceRefs": [
+        "S04#s74"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0005",
+      "type": "requires",
+      "from": "occupation:AI001",
+      "to": "skill:SK104",
+      "weight": 0.6,
+      "targetLevel": 3,
+      "importance": 0.6,
+      "sourceRefs": [
+        "S03#s53"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0006",
+      "type": "requires",
+      "from": "occupation:AI001",
+      "to": "skill:SK105",
+      "weight": 0.8,
+      "targetLevel": 4,
+      "importance": 0.8,
+      "sourceRefs": [
+        "S01#s2"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0007",
+      "type": "requires",
+      "from": "occupation:AI001",
+      "to": "skill:SK106",
+      "weight": 0.65,
+      "targetLevel": 3,
+      "importance": 0.65,
+      "sourceRefs": [
+        "S02#s11"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0008",
+      "type": "requires",
+      "from": "occupation:AI002",
+      "to": "skill:SK110",
+      "weight": 0.9,
+      "targetLevel": 5,
+      "importance": 0.9,
+      "sourceRefs": [
+        "S09#s154"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0009",
+      "type": "requires",
+      "from": "occupation:AI002",
+      "to": "skill:SK111",
+      "weight": 0.6,
+      "targetLevel": 3,
+      "importance": 0.6,
+      "sourceRefs": [
+        "S09#s155"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0010",
+      "type": "requires",
+      "from": "occupation:AI002",
+      "to": "skill:SK112",
+      "weight": 0.8,
+      "targetLevel": 4,
+      "importance": 0.8,
+      "sourceRefs": [
+        "S09#s156"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0011",
+      "type": "requires",
+      "from": "occupation:AI002",
+      "to": "skill:SK113",
+      "weight": 0.75,
+      "targetLevel": 4,
+      "importance": 0.75,
+      "sourceRefs": [
+        "S09#s159"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0012",
+      "type": "requires",
+      "from": "occupation:AI002",
+      "to": "skill:SK114",
+      "weight": 0.7,
+      "targetLevel": 4,
+      "importance": 0.7,
+      "sourceRefs": [
+        "S10#s162"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0013",
+      "type": "requires",
+      "from": "occupation:AI002",
+      "to": "skill:SK115",
+      "weight": 0.7,
+      "targetLevel": 4,
+      "importance": 0.7,
+      "sourceRefs": [
+        "S07#s124"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0014",
+      "type": "requires",
+      "from": "occupation:AI003",
+      "to": "skill:SK130",
+      "weight": 0.9,
+      "targetLevel": 5,
+      "importance": 0.9,
+      "sourceRefs": [
+        "S13#s202"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0015",
+      "type": "requires",
+      "from": "occupation:AI003",
+      "to": "skill:SK131",
+      "weight": 0.85,
+      "targetLevel": 4,
+      "importance": 0.85,
+      "sourceRefs": [
+        "S13#s204"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0016",
+      "type": "requires",
+      "from": "occupation:AI003",
+      "to": "skill:SK132",
+      "weight": 0.9,
+      "targetLevel": 5,
+      "importance": 0.9,
+      "sourceRefs": [
+        "S11#s172"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0017",
+      "type": "requires",
+      "from": "occupation:AI003",
+      "to": "skill:SK133",
+      "weight": 0.85,
+      "targetLevel": 4,
+      "importance": 0.85,
+      "sourceRefs": [
+        "S12#s181"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0018",
+      "type": "requires",
+      "from": "occupation:AI003",
+      "to": "skill:SK134",
+      "weight": 0.8,
+      "targetLevel": 4,
+      "importance": 0.8,
+      "sourceRefs": [
+        "S12#s180"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0019",
+      "type": "requires",
+      "from": "occupation:AI003",
+      "to": "skill:SK136",
+      "weight": 0.6,
+      "targetLevel": 3,
+      "importance": 0.6,
+      "sourceRefs": [
+        "S14#s256"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0020",
+      "type": "requires",
+      "from": "occupation:AI003",
+      "to": "skill:SK137",
+      "weight": 0.45,
+      "targetLevel": 2,
+      "importance": 0.45,
+      "sourceRefs": [
+        "S11#s176"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0021",
+      "type": "requires",
+      "from": "occupation:AI004",
+      "to": "skill:SK090",
+      "weight": 0.7,
+      "targetLevel": 4,
+      "importance": 0.7,
+      "sourceRefs": [
+        "S03#s46"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0022",
+      "type": "requires",
+      "from": "occupation:AI004",
+      "to": "skill:SK101",
+      "weight": 0.6,
+      "targetLevel": 3,
+      "importance": 0.6,
+      "sourceRefs": [
+        "S02#s7"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0023",
+      "type": "requires",
+      "from": "occupation:AI004",
+      "to": "skill:SK113",
+      "weight": 0.7,
+      "targetLevel": 4,
+      "importance": 0.7,
+      "sourceRefs": [
+        "S09#s159"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0025",
+      "type": "requires",
+      "from": "occupation:AI004",
+      "to": "skill:SK120",
+      "weight": 0.9,
+      "targetLevel": 5,
+      "importance": 0.9,
+      "sourceRefs": [
+        "S05#s98"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0026",
+      "type": "requires",
+      "from": "occupation:AI004",
+      "to": "skill:SK121",
+      "weight": 0.75,
+      "targetLevel": 4,
+      "importance": 0.75,
+      "sourceRefs": [
+        "S05#s100"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0027",
+      "type": "requires",
+      "from": "occupation:AI004",
+      "to": "skill:SK122",
+      "weight": 0.5,
+      "targetLevel": 3,
+      "importance": 0.5,
+      "sourceRefs": [
+        "S05#s97"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0028",
+      "type": "requires",
+      "from": "occupation:AI004",
+      "to": "skill:SK123",
+      "weight": 0.7,
+      "targetLevel": 4,
+      "importance": 0.7,
+      "sourceRefs": [
+        "S08#s146"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0024",
+      "type": "requires",
+      "from": "occupation:AI004",
+      "to": "skill:SK215",
+      "weight": 0.95,
+      "targetLevel": 5,
+      "importance": 0.95,
+      "sourceRefs": [
+        "S05#s96"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0029",
+      "type": "prerequisite",
+      "from": "skill:SK090",
+      "to": "skill:SK101",
+      "sourceRefs": [
+        "S02#s7"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0030",
+      "type": "prerequisite",
+      "from": "skill:SK090",
+      "to": "skill:SK103",
+      "sourceRefs": [
+        "S04#s74"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0031",
+      "type": "prerequisite",
+      "from": "skill:SK090",
+      "to": "skill:SK104",
+      "sourceRefs": [
+        "S03#s53"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0032",
+      "type": "prerequisite",
+      "from": "skill:SK090",
+      "to": "skill:SK105",
+      "sourceRefs": [
+        "S03#s46"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0034",
+      "type": "prerequisite",
+      "from": "skill:SK101",
+      "to": "skill:SK102",
+      "sourceRefs": [
+        "S02#s10"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0036",
+      "type": "prerequisite",
+      "from": "skill:SK101",
+      "to": "skill:SK215",
+      "sourceRefs": [
+        "S05#s96"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0035",
+      "type": "prerequisite",
+      "from": "skill:SK102",
+      "to": "skill:SK106",
+      "sourceRefs": [
+        "S02#s12"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0033",
+      "type": "prerequisite",
+      "from": "skill:SK103",
+      "to": "skill:SK102",
+      "sourceRefs": [
+        "S04#s73"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0039",
+      "type": "prerequisite",
+      "from": "skill:SK110",
+      "to": "skill:SK112",
+      "sourceRefs": [
+        "S09#s156"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0040",
+      "type": "prerequisite",
+      "from": "skill:SK110",
+      "to": "skill:SK113",
+      "sourceRefs": [
+        "S09#s159"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0041",
+      "type": "prerequisite",
+      "from": "skill:SK110",
+      "to": "skill:SK114",
+      "sourceRefs": [
+        "S10#s164"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0038",
+      "type": "prerequisite",
+      "from": "skill:SK111",
+      "to": "skill:SK110",
+      "sourceRefs": [
+        "S09#s155"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0043",
+      "type": "prerequisite",
+      "from": "skill:SK113",
+      "to": "skill:SK122",
+      "sourceRefs": [
+        "S05#s97"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0042",
+      "type": "prerequisite",
+      "from": "skill:SK113",
+      "to": "skill:SK123",
+      "sourceRefs": [
+        "S08#s146"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0037",
+      "type": "prerequisite",
+      "from": "skill:SK115",
+      "to": "skill:SK110",
+      "sourceRefs": [
+        "S07#s124"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0045",
+      "type": "prerequisite",
+      "from": "skill:SK120",
+      "to": "skill:SK121",
+      "sourceRefs": [
+        "S05#s100"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0047",
+      "type": "prerequisite",
+      "from": "skill:SK130",
+      "to": "skill:SK131",
+      "sourceRefs": [
+        "S13#s204"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0049",
+      "type": "prerequisite",
+      "from": "skill:SK130",
+      "to": "skill:SK132",
+      "sourceRefs": [
+        "S11#s172"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0048",
+      "type": "prerequisite",
+      "from": "skill:SK131",
+      "to": "skill:SK136",
+      "sourceRefs": [
+        "S14#s256"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0050",
+      "type": "prerequisite",
+      "from": "skill:SK132",
+      "to": "skill:SK133",
+      "sourceRefs": [
+        "S12#s181"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0052",
+      "type": "prerequisite",
+      "from": "skill:SK132",
+      "to": "skill:SK137",
+      "sourceRefs": [
+        "S11#s176"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0051",
+      "type": "prerequisite",
+      "from": "skill:SK133",
+      "to": "skill:SK134",
+      "sourceRefs": [
+        "S12#s180"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0044",
+      "type": "prerequisite",
+      "from": "skill:SK215",
+      "to": "skill:SK120",
+      "sourceRefs": [
+        "S05#s98"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0046",
+      "type": "prerequisite",
+      "from": "skill:SK215",
+      "to": "skill:SK123",
+      "sourceRefs": [
+        "S08#s145"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0053",
+      "type": "belongs_to",
+      "from": "skill:SK090",
+      "to": "domain:embedded",
+      "sourceRefs": [
+        "S03#s46"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0054",
+      "type": "belongs_to",
+      "from": "skill:SK101",
+      "to": "domain:embedded",
+      "sourceRefs": [
+        "S02#s7"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0055",
+      "type": "belongs_to",
+      "from": "skill:SK102",
+      "to": "domain:embedded",
+      "sourceRefs": [
+        "S02#s10"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0056",
+      "type": "belongs_to",
+      "from": "skill:SK103",
+      "to": "domain:embedded",
+      "sourceRefs": [
+        "S04#s74"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0057",
+      "type": "belongs_to",
+      "from": "skill:SK104",
+      "to": "domain:embedded",
+      "sourceRefs": [
+        "S03#s53"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0058",
+      "type": "belongs_to",
+      "from": "skill:SK105",
+      "to": "domain:embedded",
+      "sourceRefs": [
+        "S01#s2"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0059",
+      "type": "belongs_to",
+      "from": "skill:SK106",
+      "to": "domain:embedded",
+      "sourceRefs": [
+        "S02#s12"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0060",
+      "type": "belongs_to",
+      "from": "skill:SK110",
+      "to": "domain:vision",
+      "sourceRefs": [
+        "S09#s154"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0061",
+      "type": "belongs_to",
+      "from": "skill:SK111",
+      "to": "domain:vision",
+      "sourceRefs": [
+        "S09#s155"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0062",
+      "type": "belongs_to",
+      "from": "skill:SK112",
+      "to": "domain:vision",
+      "sourceRefs": [
+        "S09#s156"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0063",
+      "type": "belongs_to",
+      "from": "skill:SK113",
+      "to": "domain:vision",
+      "sourceRefs": [
+        "S09#s159"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0064",
+      "type": "belongs_to",
+      "from": "skill:SK114",
+      "to": "domain:vision",
+      "sourceRefs": [
+        "S10#s162"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0065",
+      "type": "belongs_to",
+      "from": "skill:SK115",
+      "to": "domain:vision",
+      "sourceRefs": [
+        "S07#s124"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0066",
+      "type": "belongs_to",
+      "from": "skill:SK120",
+      "to": "domain:edge-ai",
+      "sourceRefs": [
+        "S05#s98"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0067",
+      "type": "belongs_to",
+      "from": "skill:SK121",
+      "to": "domain:edge-ai",
+      "sourceRefs": [
+        "S05#s100"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0068",
+      "type": "belongs_to",
+      "from": "skill:SK122",
+      "to": "domain:edge-ai",
+      "sourceRefs": [
+        "S05#s97"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0069",
+      "type": "belongs_to",
+      "from": "skill:SK123",
+      "to": "domain:edge-ai",
+      "sourceRefs": [
+        "S08#s146"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0071",
+      "type": "belongs_to",
+      "from": "skill:SK130",
+      "to": "domain:test-automation",
+      "sourceRefs": [
+        "S13#s202"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0072",
+      "type": "belongs_to",
+      "from": "skill:SK131",
+      "to": "domain:test-automation",
+      "sourceRefs": [
+        "S13#s204"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0073",
+      "type": "belongs_to",
+      "from": "skill:SK132",
+      "to": "domain:test-automation",
+      "sourceRefs": [
+        "S11#s172"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0074",
+      "type": "belongs_to",
+      "from": "skill:SK133",
+      "to": "domain:test-automation",
+      "sourceRefs": [
+        "S12#s181"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0075",
+      "type": "belongs_to",
+      "from": "skill:SK134",
+      "to": "domain:test-automation",
+      "sourceRefs": [
+        "S12#s180"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0076",
+      "type": "belongs_to",
+      "from": "skill:SK136",
+      "to": "domain:test-automation",
+      "sourceRefs": [
+        "S14#s256"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0077",
+      "type": "belongs_to",
+      "from": "skill:SK137",
+      "to": "domain:test-automation",
+      "sourceRefs": [
+        "S11#s176"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0070",
+      "type": "belongs_to",
+      "from": "skill:SK215",
+      "to": "domain:edge-ai",
+      "sourceRefs": [
+        "S05#s96"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0097",
+      "type": "trains",
+      "from": "task:T0042",
+      "to": "skill:SK101",
+      "deliverable": "可编译并跑通的 SPI 主机驱动例程",
+      "assessmentPoints": [
+        "总线初始化与设备注册的参数是否完整",
+        "I/O 管脚是否按 spi_bus_config_t 正确填写"
+      ],
+      "sourceRefs": [
+        "S02#s17"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0098",
+      "type": "trains",
+      "from": "task:T0042",
+      "to": "skill:SK102",
+      "deliverable": "一次五阶段传输事务的阶段配置说明",
+      "assessmentPoints": [
+        "能否说明命令/地址/Dummy/写/读各阶段的作用",
+        "是否按外设时序裁剪了阶段"
+      ],
+      "sourceRefs": [
+        "S02#s10"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0099",
+      "type": "trains",
+      "from": "task:T0051",
+      "to": "skill:SK105",
+      "deliverable": "多任务采集程序与其任务划分说明",
+      "assessmentPoints": [
+        "任务划分是否对应真实并发需求",
+        "每个任务的栈是否单独评估"
+      ],
+      "sourceRefs": [
+        "S03#s46"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0100",
+      "type": "trains",
+      "from": "task:T0051",
+      "to": "skill:SK106",
+      "deliverable": "中断/轮询两种传输方式的对比与选择结论",
+      "assessmentPoints": [
+        "是否给出选择依据而不是凭感觉",
+        "是否说明轮询期间 CPU 被占用"
+      ],
+      "sourceRefs": [
+        "S02#s12"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0101",
+      "type": "trains",
+      "from": "task:T0060",
+      "to": "skill:SK110",
+      "deliverable": "训练好的检测模型权重与训练配置",
+      "assessmentPoints": [
+        "数据集与图像尺寸是否记录",
+        "训练轮次与超参是否可复现"
+      ],
+      "sourceRefs": [
+        "S09#s154"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0102",
+      "type": "trains",
+      "from": "task:T0060",
+      "to": "skill:SK112",
+      "deliverable": "验证集准确率报告",
+      "assessmentPoints": [
+        "验证集与训练集是否分离",
+        "指标是否给出可复算数字"
+      ],
+      "sourceRefs": [
+        "S09#s156"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0103",
+      "type": "trains",
+      "from": "task:T0061",
+      "to": "skill:SK113",
+      "deliverable": "导出的端侧模型文件",
+      "assessmentPoints": [
+        "导出格式与目标运行时是否匹配",
+        "导出后模型能否被推理库加载"
+      ],
+      "sourceRefs": [
+        "S09#s159"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0104",
+      "type": "trains",
+      "from": "task:T0061",
+      "to": "skill:SK123",
+      "deliverable": "部署格式选型对比表（含性能与集成难度）",
+      "assessmentPoints": [
+        "是否覆盖推理速度、硬件限制、集成难度三个维度",
+        "是否有明确的取舍结论"
+      ],
+      "sourceRefs": [
+        "S08#s146"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0105",
+      "type": "trains",
+      "from": "task:T0070",
+      "to": "skill:SK132",
+      "deliverable": "可重复执行的端到端测试脚本",
+      "assessmentPoints": [
+        "脚本是否能在无人值守下重复执行",
+        "是否避免依赖固定 sleep"
+      ],
+      "sourceRefs": [
+        "S11#s172"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0106",
+      "type": "trains",
+      "from": "task:T0070",
+      "to": "skill:SK133",
+      "deliverable": "显式等待条件清单",
+      "assessmentPoints": [
+        "每个等待是否绑定到确切条件",
+        "超时值是否有依据"
+      ],
+      "sourceRefs": [
+        "S12#s187"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0107",
+      "type": "trains",
+      "from": "task:T0080",
+      "to": "skill:SK131",
+      "deliverable": "夹具化的测试套件",
+      "assessmentPoints": [
+        "重复前置条件是否已收敛成夹具",
+        "夹具是否保证拆卸清理"
+      ],
+      "sourceRefs": [
+        "S13#s204"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0108",
+      "type": "trains",
+      "from": "task:T0080",
+      "to": "skill:SK136",
+      "deliverable": "分层 conftest.py 目录结构",
+      "assessmentPoints": [
+        "夹具是否放在能被复用的层级",
+        "子目录是否只覆盖必要部分"
+      ],
+      "sourceRefs": [
+        "S14#s256"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0079",
+      "type": "uses",
+      "from": "occupation:AI001",
+      "to": "tool:esp-idf",
+      "sourceRefs": [
+        "S03#s46"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0078",
+      "type": "uses",
+      "from": "occupation:AI001",
+      "to": "tool:freertos",
+      "sourceRefs": [
+        "S01#s2"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0081",
+      "type": "uses",
+      "from": "occupation:AI002",
+      "to": "tool:paddlepaddle",
+      "sourceRefs": [
+        "S07#s124"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0080",
+      "type": "uses",
+      "from": "occupation:AI002",
+      "to": "tool:ultralytics",
+      "sourceRefs": [
+        "S09#s152"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0083",
+      "type": "uses",
+      "from": "occupation:AI003",
+      "to": "tool:pytest",
+      "sourceRefs": [
+        "S13#s202"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0082",
+      "type": "uses",
+      "from": "occupation:AI003",
+      "to": "tool:selenium",
+      "sourceRefs": [
+        "S11#s172"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0084",
+      "type": "uses",
+      "from": "occupation:AI004",
+      "to": "tool:mindspore-lite",
+      "sourceRefs": [
+        "S05#s96"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0085",
+      "type": "uses",
+      "from": "occupation:AI004",
+      "to": "tool:netron",
+      "sourceRefs": [
+        "S05#s97"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0218",
+      "type": "learning_unit",
+      "from": "occupation:AI001",
+      "to": "knowledge:AI001:stage1",
+      "position": 1,
+      "sourceRefs": [
+        "S03#s46",
+        "S04#s74"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0219",
+      "type": "learning_unit",
+      "from": "occupation:AI001",
+      "to": "knowledge:AI001:stage2",
+      "position": 2,
+      "sourceRefs": [
+        "S02#s10",
+        "S02#s17"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0220",
+      "type": "learning_unit",
+      "from": "occupation:AI001",
+      "to": "knowledge:AI001:stage3",
+      "position": 3,
+      "sourceRefs": [
+        "S03#s53",
+        "S03#s51"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0221",
+      "type": "learning_unit",
+      "from": "occupation:AI001",
+      "to": "knowledge:AI001:stage4",
+      "position": 4,
+      "sourceRefs": [
+        "S02#s23"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0222",
+      "type": "learning_unit",
+      "from": "occupation:AI002",
+      "to": "knowledge:AI002:stage1",
+      "position": 1,
+      "sourceRefs": [
+        "S09#s154",
+        "S09#s156"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0223",
+      "type": "learning_unit",
+      "from": "occupation:AI003",
+      "to": "knowledge:AI003:stage1",
+      "position": 1,
+      "sourceRefs": [
+        "S12#s180",
+        "S12#s187"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0224",
+      "type": "learning_unit",
+      "from": "occupation:AI003",
+      "to": "knowledge:AI003:stage2",
+      "position": 2,
+      "sourceRefs": [
+        "S14#s256",
+        "S13#s233"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0225",
+      "type": "learning_unit",
+      "from": "occupation:AI004",
+      "to": "knowledge:AI004:stage1",
+      "position": 1,
+      "sourceRefs": [
+        "S05#s96",
+        "S05#s101"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0226",
+      "type": "learning_unit",
+      "from": "occupation:AI004",
+      "to": "knowledge:AI004:stage2",
+      "position": 2,
+      "sourceRefs": [
+        "S05#s100",
+        "S05#s97"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0086",
+      "type": "transitions_to",
+      "from": "occupation:AI001",
+      "to": "occupation:AI002",
+      "horizon": 3,
+      "deltaSkills": [
+        "SK110",
+        "SK115"
+      ],
+      "sourceRefs": [
+        "S09#s152"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0088",
+      "type": "transitions_to",
+      "from": "occupation:AI001",
+      "to": "occupation:AI004",
+      "horizon": 3,
+      "deltaSkills": [
+        "SK215",
+        "SK123"
+      ],
+      "sourceRefs": [
+        "S08#s146"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0087",
+      "type": "transitions_to",
+      "from": "occupation:AI002",
+      "to": "occupation:AI004",
+      "horizon": 2,
+      "deltaSkills": [
+        "SK215",
+        "SK120"
+      ],
+      "sourceRefs": [
+        "S05#s98"
+      ],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0089",
+      "type": "emerging_in",
+      "from": "trend:edge-ai-2026",
+      "to": "skill:SK123",
+      "year": 2026,
+      "direction": "上升",
+      "sourceRefs": [
+        "S08#s145"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0090",
+      "type": "emerging_in",
+      "from": "trend:edge-ai-2026",
+      "to": "skill:SK215",
+      "year": 2026,
+      "direction": "上升",
+      "sourceRefs": [
+        "S08#s149"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0093",
+      "type": "emerging_in",
+      "from": "trend:hw-bright-outlook",
+      "to": "skill:SK101",
+      "year": 2026,
+      "direction": "平稳",
+      "sourceRefs": [
+        "S17#s312"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0094",
+      "type": "emerging_in",
+      "from": "trend:hw-bright-outlook",
+      "to": "skill:SK105",
+      "year": 2026,
+      "direction": "平稳",
+      "sourceRefs": [
+        "S17#s320"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0091",
+      "type": "emerging_in",
+      "from": "trend:sqa-bright-outlook",
+      "to": "skill:SK130",
+      "year": 2026,
+      "direction": "上升",
+      "sourceRefs": [
+        "S16#s306"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0092",
+      "type": "emerging_in",
+      "from": "trend:sqa-bright-outlook",
+      "to": "skill:SK134",
+      "year": 2026,
+      "direction": "上升",
+      "sourceRefs": [
+        "S16#s291"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0096",
+      "type": "emerging_in",
+      "from": "trend:webdriver-bidi",
+      "to": "skill:SK132",
+      "year": 2026,
+      "direction": "上升",
+      "sourceRefs": [
+        "S11#s172"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0095",
+      "type": "emerging_in",
+      "from": "trend:webdriver-bidi",
+      "to": "skill:SK137",
+      "year": 2026,
+      "direction": "上升",
+      "sourceRefs": [
+        "S11#s176"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0215",
+      "type": "evidenced_by",
+      "from": "credential:abet",
+      "to": "chunk:S17#s340",
+      "sourceRefs": [
+        "S17#s340"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0216",
+      "type": "evidenced_by",
+      "from": "credential:comptia",
+      "to": "chunk:S17#s340",
+      "sourceRefs": [
+        "S17#s340"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0217",
+      "type": "evidenced_by",
+      "from": "credential:osta-skill",
+      "to": "chunk:S18#s343",
+      "sourceRefs": [
+        "S18#s343"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0121",
+      "type": "evidenced_by",
+      "from": "domain:edge-ai",
+      "to": "chunk:S05#s94",
+      "sourceRefs": [
+        "S05#s94"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0122",
+      "type": "evidenced_by",
+      "from": "domain:edge-ai",
+      "to": "chunk:S08#s146",
+      "sourceRefs": [
+        "S08#s146"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0117",
+      "type": "evidenced_by",
+      "from": "domain:embedded",
+      "to": "chunk:S01#s2",
+      "sourceRefs": [
+        "S01#s2"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0118",
+      "type": "evidenced_by",
+      "from": "domain:embedded",
+      "to": "chunk:S03#s47",
+      "sourceRefs": [
+        "S03#s47"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0123",
+      "type": "evidenced_by",
+      "from": "domain:test-automation",
+      "to": "chunk:S12#s180",
+      "sourceRefs": [
+        "S12#s180"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0124",
+      "type": "evidenced_by",
+      "from": "domain:test-automation",
+      "to": "chunk:S13#s202",
+      "sourceRefs": [
+        "S13#s202"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0119",
+      "type": "evidenced_by",
+      "from": "domain:vision",
+      "to": "chunk:S07#s124",
+      "sourceRefs": [
+        "S07#s124"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0120",
+      "type": "evidenced_by",
+      "from": "domain:vision",
+      "to": "chunk:S09#s152",
+      "sourceRefs": [
+        "S09#s152"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0165",
+      "type": "evidenced_by",
+      "from": "knowledge:AI001:stage1",
+      "to": "chunk:S03#s46",
+      "sourceRefs": [
+        "S03#s46"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0166",
+      "type": "evidenced_by",
+      "from": "knowledge:AI001:stage1",
+      "to": "chunk:S04#s74",
+      "sourceRefs": [
+        "S04#s74"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0167",
+      "type": "evidenced_by",
+      "from": "knowledge:AI001:stage2",
+      "to": "chunk:S02#s10",
+      "sourceRefs": [
+        "S02#s10"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0168",
+      "type": "evidenced_by",
+      "from": "knowledge:AI001:stage2",
+      "to": "chunk:S02#s17",
+      "sourceRefs": [
+        "S02#s17"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0170",
+      "type": "evidenced_by",
+      "from": "knowledge:AI001:stage3",
+      "to": "chunk:S03#s51",
+      "sourceRefs": [
+        "S03#s51"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0169",
+      "type": "evidenced_by",
+      "from": "knowledge:AI001:stage3",
+      "to": "chunk:S03#s53",
+      "sourceRefs": [
+        "S03#s53"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0171",
+      "type": "evidenced_by",
+      "from": "knowledge:AI001:stage4",
+      "to": "chunk:S02#s23",
+      "sourceRefs": [
+        "S02#s23"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0172",
+      "type": "evidenced_by",
+      "from": "knowledge:AI002:stage1",
+      "to": "chunk:S09#s154",
+      "sourceRefs": [
+        "S09#s154"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0173",
+      "type": "evidenced_by",
+      "from": "knowledge:AI002:stage1",
+      "to": "chunk:S09#s156",
+      "sourceRefs": [
+        "S09#s156"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0174",
+      "type": "evidenced_by",
+      "from": "knowledge:AI003:stage1",
+      "to": "chunk:S12#s180",
+      "sourceRefs": [
+        "S12#s180"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0175",
+      "type": "evidenced_by",
+      "from": "knowledge:AI003:stage1",
+      "to": "chunk:S12#s187",
+      "sourceRefs": [
+        "S12#s187"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0177",
+      "type": "evidenced_by",
+      "from": "knowledge:AI003:stage2",
+      "to": "chunk:S13#s233",
+      "sourceRefs": [
+        "S13#s233"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0176",
+      "type": "evidenced_by",
+      "from": "knowledge:AI003:stage2",
+      "to": "chunk:S14#s256",
+      "sourceRefs": [
+        "S14#s256"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0179",
+      "type": "evidenced_by",
+      "from": "knowledge:AI004:stage1",
+      "to": "chunk:S05#s101",
+      "sourceRefs": [
+        "S05#s101"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0178",
+      "type": "evidenced_by",
+      "from": "knowledge:AI004:stage1",
+      "to": "chunk:S05#s96",
+      "sourceRefs": [
+        "S05#s96"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0180",
+      "type": "evidenced_by",
+      "from": "knowledge:AI004:stage2",
+      "to": "chunk:S05#s100",
+      "sourceRefs": [
+        "S05#s100"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0181",
+      "type": "evidenced_by",
+      "from": "knowledge:AI004:stage2",
+      "to": "chunk:S05#s97",
+      "sourceRefs": [
+        "S05#s97"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0110",
+      "type": "evidenced_by",
+      "from": "occupation:AI001",
+      "to": "chunk:S04#s73",
+      "sourceRefs": [
+        "S04#s73"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0109",
+      "type": "evidenced_by",
+      "from": "occupation:AI001",
+      "to": "chunk:S17#s312",
+      "sourceRefs": [
+        "S17#s312"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0111",
+      "type": "evidenced_by",
+      "from": "occupation:AI002",
+      "to": "chunk:S09#s152",
+      "sourceRefs": [
+        "S09#s152"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0112",
+      "type": "evidenced_by",
+      "from": "occupation:AI002",
+      "to": "chunk:S10#s162",
+      "sourceRefs": [
+        "S10#s162"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0113",
+      "type": "evidenced_by",
+      "from": "occupation:AI003",
+      "to": "chunk:S16#s283",
+      "sourceRefs": [
+        "S16#s283"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0114",
+      "type": "evidenced_by",
+      "from": "occupation:AI003",
+      "to": "chunk:S16#s291",
+      "sourceRefs": [
+        "S16#s291"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0115",
+      "type": "evidenced_by",
+      "from": "occupation:AI004",
+      "to": "chunk:S05#s92",
+      "sourceRefs": [
+        "S05#s92"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0116",
+      "type": "evidenced_by",
+      "from": "occupation:AI004",
+      "to": "chunk:S08#s149",
+      "sourceRefs": [
+        "S08#s149"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0125",
+      "type": "evidenced_by",
+      "from": "skill:SK090",
+      "to": "chunk:S03#s46",
+      "sourceRefs": [
+        "S03#s46"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0127",
+      "type": "evidenced_by",
+      "from": "skill:SK101",
+      "to": "chunk:S02#s17",
+      "sourceRefs": [
+        "S02#s17"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0126",
+      "type": "evidenced_by",
+      "from": "skill:SK101",
+      "to": "chunk:S02#s7",
+      "sourceRefs": [
+        "S02#s7"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0128",
+      "type": "evidenced_by",
+      "from": "skill:SK102",
+      "to": "chunk:S02#s10",
+      "sourceRefs": [
+        "S02#s10"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0129",
+      "type": "evidenced_by",
+      "from": "skill:SK103",
+      "to": "chunk:S04#s74",
+      "sourceRefs": [
+        "S04#s74"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0130",
+      "type": "evidenced_by",
+      "from": "skill:SK103",
+      "to": "chunk:S04#s75",
+      "sourceRefs": [
+        "S04#s75"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0131",
+      "type": "evidenced_by",
+      "from": "skill:SK104",
+      "to": "chunk:S03#s53",
+      "sourceRefs": [
+        "S03#s53"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0132",
+      "type": "evidenced_by",
+      "from": "skill:SK105",
+      "to": "chunk:S01#s2",
+      "sourceRefs": [
+        "S01#s2"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0133",
+      "type": "evidenced_by",
+      "from": "skill:SK105",
+      "to": "chunk:S03#s46",
+      "sourceRefs": [
+        "S03#s46"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0134",
+      "type": "evidenced_by",
+      "from": "skill:SK106",
+      "to": "chunk:S02#s11",
+      "sourceRefs": [
+        "S02#s11"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0135",
+      "type": "evidenced_by",
+      "from": "skill:SK106",
+      "to": "chunk:S02#s12",
+      "sourceRefs": [
+        "S02#s12"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0137",
+      "type": "evidenced_by",
+      "from": "skill:SK110",
+      "to": "chunk:S09#s152",
+      "sourceRefs": [
+        "S09#s152"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0136",
+      "type": "evidenced_by",
+      "from": "skill:SK110",
+      "to": "chunk:S09#s154",
+      "sourceRefs": [
+        "S09#s154"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0138",
+      "type": "evidenced_by",
+      "from": "skill:SK111",
+      "to": "chunk:S09#s155",
+      "sourceRefs": [
+        "S09#s155"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0139",
+      "type": "evidenced_by",
+      "from": "skill:SK112",
+      "to": "chunk:S09#s156",
+      "sourceRefs": [
+        "S09#s156"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0141",
+      "type": "evidenced_by",
+      "from": "skill:SK113",
+      "to": "chunk:S08#s146",
+      "sourceRefs": [
+        "S08#s146"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0140",
+      "type": "evidenced_by",
+      "from": "skill:SK113",
+      "to": "chunk:S09#s159",
+      "sourceRefs": [
+        "S09#s159"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0142",
+      "type": "evidenced_by",
+      "from": "skill:SK114",
+      "to": "chunk:S10#s162",
+      "sourceRefs": [
+        "S10#s162"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0143",
+      "type": "evidenced_by",
+      "from": "skill:SK114",
+      "to": "chunk:S10#s164",
+      "sourceRefs": [
+        "S10#s164"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0145",
+      "type": "evidenced_by",
+      "from": "skill:SK115",
+      "to": "chunk:S07#3.1",
+      "sourceRefs": [
+        "S07#3.1"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0144",
+      "type": "evidenced_by",
+      "from": "skill:SK115",
+      "to": "chunk:S07#s124",
+      "sourceRefs": [
+        "S07#s124"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0147",
+      "type": "evidenced_by",
+      "from": "skill:SK120",
+      "to": "chunk:S05#s101",
+      "sourceRefs": [
+        "S05#s101"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0146",
+      "type": "evidenced_by",
+      "from": "skill:SK120",
+      "to": "chunk:S05#s98",
+      "sourceRefs": [
+        "S05#s98"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0148",
+      "type": "evidenced_by",
+      "from": "skill:SK121",
+      "to": "chunk:S05#s100",
+      "sourceRefs": [
+        "S05#s100"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0149",
+      "type": "evidenced_by",
+      "from": "skill:SK122",
+      "to": "chunk:S05#s97",
+      "sourceRefs": [
+        "S05#s97"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0150",
+      "type": "evidenced_by",
+      "from": "skill:SK123",
+      "to": "chunk:S08#s145",
+      "sourceRefs": [
+        "S08#s145"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0151",
+      "type": "evidenced_by",
+      "from": "skill:SK123",
+      "to": "chunk:S08#s146",
+      "sourceRefs": [
+        "S08#s146"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0154",
+      "type": "evidenced_by",
+      "from": "skill:SK130",
+      "to": "chunk:S13#s202",
+      "sourceRefs": [
+        "S13#s202"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0155",
+      "type": "evidenced_by",
+      "from": "skill:SK130",
+      "to": "chunk:S13#s204",
+      "sourceRefs": [
+        "S13#s204"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0156",
+      "type": "evidenced_by",
+      "from": "skill:SK131",
+      "to": "chunk:S13#s204",
+      "sourceRefs": [
+        "S13#s204"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0157",
+      "type": "evidenced_by",
+      "from": "skill:SK131",
+      "to": "chunk:S13#s209",
+      "sourceRefs": [
+        "S13#s209"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0158",
+      "type": "evidenced_by",
+      "from": "skill:SK132",
+      "to": "chunk:S11#s172",
+      "sourceRefs": [
+        "S11#s172"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0159",
+      "type": "evidenced_by",
+      "from": "skill:SK133",
+      "to": "chunk:S12#s181",
+      "sourceRefs": [
+        "S12#s181"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0160",
+      "type": "evidenced_by",
+      "from": "skill:SK133",
+      "to": "chunk:S12#s187",
+      "sourceRefs": [
+        "S12#s187"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0161",
+      "type": "evidenced_by",
+      "from": "skill:SK134",
+      "to": "chunk:S12#s180",
+      "sourceRefs": [
+        "S12#s180"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0162",
+      "type": "evidenced_by",
+      "from": "skill:SK136",
+      "to": "chunk:S14#s256",
+      "sourceRefs": [
+        "S14#s256"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0163",
+      "type": "evidenced_by",
+      "from": "skill:SK136",
+      "to": "chunk:S14#s277",
+      "sourceRefs": [
+        "S14#s277"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0164",
+      "type": "evidenced_by",
+      "from": "skill:SK137",
+      "to": "chunk:S11#s176",
+      "sourceRefs": [
+        "S11#s176"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0153",
+      "type": "evidenced_by",
+      "from": "skill:SK215",
+      "to": "chunk:S05#s94",
+      "sourceRefs": [
+        "S05#s94"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0152",
+      "type": "evidenced_by",
+      "from": "skill:SK215",
+      "to": "chunk:S05#s96",
+      "sourceRefs": [
+        "S05#s96"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0183",
+      "type": "evidenced_by",
+      "from": "task:T0042",
+      "to": "chunk:S02#s10",
+      "sourceRefs": [
+        "S02#s10"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0182",
+      "type": "evidenced_by",
+      "from": "task:T0042",
+      "to": "chunk:S02#s17",
+      "sourceRefs": [
+        "S02#s17"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0185",
+      "type": "evidenced_by",
+      "from": "task:T0051",
+      "to": "chunk:S01#s2",
+      "sourceRefs": [
+        "S01#s2"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0184",
+      "type": "evidenced_by",
+      "from": "task:T0051",
+      "to": "chunk:S03#s46",
+      "sourceRefs": [
+        "S03#s46"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0186",
+      "type": "evidenced_by",
+      "from": "task:T0060",
+      "to": "chunk:S09#s154",
+      "sourceRefs": [
+        "S09#s154"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0187",
+      "type": "evidenced_by",
+      "from": "task:T0060",
+      "to": "chunk:S09#s156",
+      "sourceRefs": [
+        "S09#s156"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0189",
+      "type": "evidenced_by",
+      "from": "task:T0061",
+      "to": "chunk:S08#s146",
+      "sourceRefs": [
+        "S08#s146"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0188",
+      "type": "evidenced_by",
+      "from": "task:T0061",
+      "to": "chunk:S09#s159",
+      "sourceRefs": [
+        "S09#s159"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0191",
+      "type": "evidenced_by",
+      "from": "task:T0070",
+      "to": "chunk:S12#s180",
+      "sourceRefs": [
+        "S12#s180"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0190",
+      "type": "evidenced_by",
+      "from": "task:T0070",
+      "to": "chunk:S12#s187",
+      "sourceRefs": [
+        "S12#s187"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0192",
+      "type": "evidenced_by",
+      "from": "task:T0080",
+      "to": "chunk:S13#s202",
+      "sourceRefs": [
+        "S13#s202"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0193",
+      "type": "evidenced_by",
+      "from": "task:T0080",
+      "to": "chunk:S14#s256",
+      "sourceRefs": [
+        "S14#s256"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0196",
+      "type": "evidenced_by",
+      "from": "tool:esp-idf",
+      "to": "chunk:S03#s46",
+      "sourceRefs": [
+        "S03#s46"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0197",
+      "type": "evidenced_by",
+      "from": "tool:esp-idf",
+      "to": "chunk:S03#s47",
+      "sourceRefs": [
+        "S03#s47"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0194",
+      "type": "evidenced_by",
+      "from": "tool:freertos",
+      "to": "chunk:S01#s2",
+      "sourceRefs": [
+        "S01#s2"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0195",
+      "type": "evidenced_by",
+      "from": "tool:freertos",
+      "to": "chunk:S01#s4",
+      "sourceRefs": [
+        "S01#s4"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0198",
+      "type": "evidenced_by",
+      "from": "tool:mindspore-lite",
+      "to": "chunk:S05#s96",
+      "sourceRefs": [
+        "S05#s96"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0199",
+      "type": "evidenced_by",
+      "from": "tool:mindspore-lite",
+      "to": "chunk:S05#s98",
+      "sourceRefs": [
+        "S05#s98"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0207",
+      "type": "evidenced_by",
+      "from": "tool:netron",
+      "to": "chunk:S05#s97",
+      "sourceRefs": [
+        "S05#s97"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0201",
+      "type": "evidenced_by",
+      "from": "tool:paddlepaddle",
+      "to": "chunk:S06#s112",
+      "sourceRefs": [
+        "S06#s112"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0200",
+      "type": "evidenced_by",
+      "from": "tool:paddlepaddle",
+      "to": "chunk:S06#s113",
+      "sourceRefs": [
+        "S06#s113"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0205",
+      "type": "evidenced_by",
+      "from": "tool:pytest",
+      "to": "chunk:S13#s202",
+      "sourceRefs": [
+        "S13#s202"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0206",
+      "type": "evidenced_by",
+      "from": "tool:pytest",
+      "to": "chunk:S13#s233",
+      "sourceRefs": [
+        "S13#s233"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0204",
+      "type": "evidenced_by",
+      "from": "tool:selenium",
+      "to": "chunk:S11#s172",
+      "sourceRefs": [
+        "S11#s172"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0203",
+      "type": "evidenced_by",
+      "from": "tool:ultralytics",
+      "to": "chunk:S08#s145",
+      "sourceRefs": [
+        "S08#s145"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0202",
+      "type": "evidenced_by",
+      "from": "tool:ultralytics",
+      "to": "chunk:S09#s152",
+      "sourceRefs": [
+        "S09#s152"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0208",
+      "type": "evidenced_by",
+      "from": "trend:edge-ai-2026",
+      "to": "chunk:S08#s145",
+      "sourceRefs": [
+        "S08#s145"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0209",
+      "type": "evidenced_by",
+      "from": "trend:edge-ai-2026",
+      "to": "chunk:S08#s149",
+      "sourceRefs": [
+        "S08#s149"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0212",
+      "type": "evidenced_by",
+      "from": "trend:hw-bright-outlook",
+      "to": "chunk:S17#s312",
+      "sourceRefs": [
+        "S17#s312"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0213",
+      "type": "evidenced_by",
+      "from": "trend:hw-bright-outlook",
+      "to": "chunk:S17#s320",
+      "sourceRefs": [
+        "S17#s320"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0211",
+      "type": "evidenced_by",
+      "from": "trend:sqa-bright-outlook",
+      "to": "chunk:S16#s283",
+      "sourceRefs": [
+        "S16#s283"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0210",
+      "type": "evidenced_by",
+      "from": "trend:sqa-bright-outlook",
+      "to": "chunk:S16#s306",
+      "sourceRefs": [
+        "S16#s306"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    },
+    {
+      "id": "e-0214",
+      "type": "evidenced_by",
+      "from": "trend:webdriver-bidi",
+      "to": "chunk:S11#s176",
+      "sourceRefs": [
+        "S11#s176"
+      ],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-09-15"
+    }
+  ]
+}

@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
+	<title>技能人才评价工作网</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<style type="text/css">
+		.card-text {
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			line-height: 1.4;
+			font-size: 16px;
+		}
+
+		.header {
+			overflow: hidden;
+			margin-bottom: 24px;
+		}
+
+		.header h2 {
+			float: left;
+			font-size: 20px;
+			font-weight: 600;
+			color: #333;
+			margin: 0;
+			line-height: 1.4;
+		}
+
+		.header a {
+			float: right;
+			color: #1890ff;
+			text-decoration: none;
+			font-size: 14px;
+			line-height: 28px;
+		}
+
+		.header a:hover {
+			text-decoration: underline;
+		}
+
+		/* 卡片网格 - 使用inline-block替代flex */
+		.card-grid {
+			padding: 16px 25px;
+			font-size: 0;
+			/* 消除inline-block间隙 */
+		}
+
+		.query-card {
+			display: inline-block;
+			vertical-align: top;
+			width: 48%;
+			margin-right: 4%;
+			background-color: #fff;
+			border: 1px solid #e8e8e8;
+			border-radius: 12px;
+			padding: 12px;
+			text-align: center;
+			text-decoration: none;
+			color: #000000;
+			box-sizing: border-box;
+			transition: all 0.3s ease;
+		}
+
+		.query-card:last-child {
+			margin-right: 0;
+		}
+
+		.icon-wrapper {
+			margin: 0 auto 20px;
+			text-align: center;
+		}
+
+		/* 图片垂直居中hack */
+		.icon-wrapper img {
+			vertical-align: middle;
+		}
+
+		.btn-query {
+			display: inline-block;
+			background: #4176EC;
+			color: #fff;
+			padding: 8px 30px;
+			border-radius: 20px;
+			font-size: 18px;
+			font-weight: 600;
+			border: none;
+			cursor: pointer;
+		}
+
+		/* 列表项 - 使用table布局替代flex */
+		.list-section {
+			padding: 0 25px;
+		}
+
+		.list-item {
+			display: block;
+			width: 100%;
+			margin-bottom: 12px;
+			padding: 14px 12px;
+			background-color: #fff;
+			border: 1px solid #e8e8e8;
+			border-radius: 8px;
+			text-decoration: none;
+			color: #333;
+			/* 使用table布局实现垂直居中 */
+			display: table;
+			box-sizing: border-box;
+		}
+
+		.list-icon {
+			display: table-cell;
+			vertical-align: middle;
+			width: 62px;
+			/* 46px图片 + 16px间距 */
+		}
+
+		.list-icon img {
+			vertical-align: middle;
+			border: none;
+			/* IE图片边框 */
+		}
+
+		.list-text {
+			display: table-cell;
+			vertical-align: middle;
+			font-size: 16px;
+			line-height: 1.5;
+			color: #000000;
+		}
+
+		.clearfix:after {
+			content: "";
+			display: block;
+			clear: both;
+			height: 0;
+			overflow: hidden;
+			visibility: hidden;
+		}
+
+		/* 小屏响应式 - 卡片改为单列 */
+		@media screen and (max-width: 640px) {
+			.card-grid {
+				padding: 12px 15px;
+			}
+
+			.query-card {
+				display: block;
+				width: 100%;
+				margin-right: 0;
+				margin-bottom: 16px;
+				padding: 18px 15px;
+			}
+
+			.query-card:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		/* 更小屏幕优化 - 字体和间距调整 */
+		@media screen and (max-width: 480px) {
+			.query-card {
+				padding: 15px 12px;
+				font-size: 13px;
+			}
+
+			/* 列表项小屏优化 */
+			.list-section {
+				padding: 0 15px;
+			}
+
+			.list-item {
+				padding: 12px 15px;
+				margin-bottom: 10px;
+			}
+
+			.list-text {
+				font-size: 14px;
+			}
+
+			.list-icon {
+				width: 50px;
+			}
+
+			.list-icon img {
+				width: 38px;
+				height: 30px;
+			}
+		}
+
+		#ind_cont .con_box .con .col1 {
+			display: block;
+			zoom: 1;
+			text-align: center;
+			overflow: hidden;
+		}
+
+		#ind_cont .con_box .con .col1 .cal {
+			margin-top: 30px;
+			display: block;
+			zoom: 1;
+			text-align: center;
+			font-size: 14px;
+			color: #1768a9;
+			font-weight: bold;
+		}
+
+		#ind_cont .con_box .con .col1 .cal div {
+			display: inline-block;
+			zoom: 1;
+			vertical-align: top;
+		}
+
+		.mt-10 {
+			margin-top: 10px;
+		}
+
+		#ind_cont .xt .con .itemx {
+			display: inline-block;
+			width: 33%;
+			height: 156px;
+			padding-top: 10px;
+			text-align: center;
+			font-size: 16px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		#ind_cont .xt .con .itemx .img_box_2 {
+			width: 50%;
+			height: 80px;
+			background: #e7eef5;
+			border-radius: 10px;
+			text-align: center;
+			margin: 0 auto;
+			line-height: 80px;
+		}
+
+		#ind_cont .xt .con .itemx .img_box_2 img {
+			height: 68%;
+			vertical-align: middle;
+		}
+
+
+
+		#ind_cont .xt .con .item {
+			width: 33%;
+			height: 136px;
+		}
+
+		#ind_cont .xt .con .item a p {
+			padding: 8px 0;
+		}
+
+		#ind_cont .con_box {
+			height: 555px;
+		}
+
+		#ind_cont .zscx .con a {
+			height: 220px;
+		}
+
+		#ind_cont .zscx .con a img {
+			margin-top: 50px;
+			width: 60px;
+		}
+
+		#footer {
+			text-align: center;
+		}
+
+		#footer .foot {
+			margin: 0 auto;
+			text-align: left;
+		}
+
+		#footer .foot p {
+			display: inline-block;
+		}
+
+		#footer .foot a:hover {
+			color: #3891d7;
+			text-decoration: underline;
+		}
+
+		#r-kl {
+			position: fixed;
+			right: 3px;
+			top: 220px
+		}
+
+		#r-kl a {
+			width: 60px;
+			height: 22px;
+			text-align: center;
+			padding-top: 38px;
+			color: #3891d7;
+			display: block;
+			margin: 3px 0;
+			background: #f2f2f2 url("img/2021img1.png") no-repeat;
+			border-radius: 5px;
+			font-size: 12px;
+		}
+
+		#r-kl a.bszn:hover {
+			color: #ffffff;
+			background-color: #3891d7;
+			background-position: -60px 0
+		}
+
+		#r-kl a.lyb {
+			background-position: 0 -60px
+		}
+
+		#r-kl a.lyb:hover {
+			color: #ffffff;
+			background-color: #3891d7;
+			background-position: -60px -60px;
+		}
+
+		#r-kl a:hover {}
+
+		#r-k2 {
+			position: fixed;
+			right: 3px;
+			top: 347px
+		}
+
+		#r-k2 a {
+			width: 60px;
+			height: 22px;
+			text-align: center;
+			padding-top: 38px;
+			color: #3891d7;
+			display: block;
+			margin: 3px 0;
+			background: #f2f2f2 url("img/2021img2.png") no-repeat;
+			border-radius: 10px;
+			font-size: 12px;
+		}
+
+		#r-k2 a.tsjb:hover {
+			color: #ffffff;
+			background-color: #3891d7;
+			background-position: -60px 0
+		}
+
+		#r-k2 a:hover {}
+
+		/* 投诉信箱注意事项弹层样式 */
+		.mydiv {
+			background-color: #ffffff;
+			border: 1px solid #fff;
+			text-align: left;
+			line-height: 40px;
+			font-size: 16px;
+			z-index: 999;
+			width: 900px;
+			height: 700px;
+			left: 40%;
+			top: 10%;
+			margin-left: -150px !important;
+			/*FF IE7 该值为本身宽的一半 */
+			margin-top: -60px !important;
+			/*FF IE7 该值为本身高的一半*/
+			margin-top: 0px;
+			position: fixed !important;
+			/* FF IE7*/
+			position: absolute;
+			/*IE6*/
+			_top: expression(eval(document.compatMode && document.compatMode=='CSS1Compat') ? documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/3 :
+					/*IE6*/
+					document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/3);
+			/*IE5 IE5.5*/
+		}
+
+		.bg,
+		.popIframe {
+			background-color: #666;
+			display: none;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			top: 0;
+			/*FF IE7*/
+			filter: alpha(opacity=50);
+			/*IE*/
+			opacity: 0.5;
+			/*FF*/
+			z-index: 1;
+			position: fixed !important;
+			/*FF IE7*/
+			position: absolute;
+			/*IE6*/
+			_top: expression(eval(document.compatMode && document.compatMode=='CSS1Compat') ? documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/3 :
+					/*IE6*/
+					document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/3);
+		}
+
+		.popIframe {
+			filter: alpha(opacity=0);
+			/*IE*/
+			opacity: 0;
+			/*FF*/
+		}
+
+		/* pdf.js 预览区 */
+		.pdfjs-host {
+			flex: 1;
+			min-height: 0;
+			overflow: auto;
+			background: #525659;
+			padding: 12px 8px;
+			text-align: center;
+		}
+
+		.pdfjs-host canvas {
+			display: block;
+			margin: 0 auto 16px auto;
+			max-width: 100%;
+			height: auto;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+		}
+
+		.pdfjs-host .pdfjs-msg {
+			color: #fff;
+			padding: 24px 16px;
+			line-height: 1.6;
+			text-align: left;
+			max-width: 520px;
+			margin: 0 auto;
+		}
+
+		.pdfjs-host .pdfjs-msg a {
+			color: #9ecbff;
+		}
+	</style>
+	<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/vue.min.js"></script>
+
+	<!-- pdf.js 3.11.174 本地文件：将 pdfjs-dist@3.11.174 的 build/pdf.min.js、build/pdf.worker.min.js 放到 js/pdfjs/（与 CDN 同版本） -->
+	<script src="js/pdf.min.js"></script>
+	<script>
+		(function () {
+			if (typeof pdfjsLib !== 'undefined') {
+				pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('js/pdf.worker.min.js', window.location.href).href;
+			}
+		})();
+
+		var CERT_GUIDE_PDF_URL = 'https://www.osta.org.cn/新版证书查询功能使用指南.pdf';
+
+		var pdfState = {
+			pdfModal: {
+				pdf: null,
+				task: null,
+				url: '',
+				scale: 1.25,
+				hostId: 'pdfViewerHost'
+			},
+			floating: {
+				pdf: null,
+				task: null,
+				url: '',
+				scale: 1.25,
+				hostId: 'floatingPdfViewerHost'
+			}
+		};
+
+		function destroyPdfViewer(kind) {
+			var st = pdfState[kind];
+			if (!st) return;
+			if (st.task) {
+				try {
+					st.task.destroy();
+				} catch (e) { }
+				st.task = null;
+			}
+			if (st.pdf) {
+				try {
+					st.pdf.destroy();
+				} catch (e) { }
+				st.pdf = null;
+			}
+			var host = document.getElementById(st.hostId);
+			if (host) host.innerHTML = '';
+			st.url = '';
+		}
+
+		function renderPdfPages(kind) {
+			var st = pdfState[kind];
+			var host = document.getElementById(st.hostId);
+			if (!host || !st.pdf) return;
+			host.innerHTML = '';
+			var pdf = st.pdf;
+			var scale = st.scale;
+			var total = pdf.numPages;
+			var pageIndex = 1;
+
+			function renderNext() {
+				if (pageIndex > total) return;
+				var n = pageIndex;
+				pdf.getPage(n).then(function (page) {
+					var viewport = page.getViewport({ scale: scale });
+					var canvas = document.createElement('canvas');
+					var ctx = canvas.getContext('2d');
+					canvas.width = viewport.width;
+					canvas.height = viewport.height;
+					host.appendChild(canvas);
+					return page.render({ canvasContext: ctx, viewport: viewport }).promise;
+				}).then(function () {
+					pageIndex++;
+					renderNext();
+				}).catch(function () {
+					pageIndex++;
+					renderNext();
+				});
+			}
+			renderNext();
+		}
+
+		function toFetchablePdfUrl(raw) {
+			var base = raw.indexOf('#') >= 0 ? raw.substring(0, raw.indexOf('#')) : raw;
+			try {
+				return new URL(base).href;
+			} catch (e) {
+				return encodeURI(base);
+			}
+		}
+
+		function toIframePdfSrc(raw) {
+			return toFetchablePdfUrl(raw) + '#toolbar=0&navpanes=0';
+		}
+
+		function resetPdfHostLayout(host) {
+			if (!host) return;
+			host.style.display = '';
+			host.style.flexDirection = '';
+			host.style.position = '';
+		}
+
+		function showPdfIframeFallback(host, url) {
+			if (!host) return;
+			host.innerHTML = '';
+			host.style.position = 'relative';
+			host.style.display = '';
+			host.style.flexDirection = '';
+			var ifr = document.createElement('iframe');
+			ifr.setAttribute('title', 'PDF');
+			ifr.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;border:0;background:#525659;';
+			ifr.src = toIframePdfSrc(url);
+			host.appendChild(ifr);
+		}
+
+		function loadPdfViewer(kind, url) {
+			var st = pdfState[kind];
+			var host = document.getElementById(st.hostId);
+			if (!host || !url) return;
+			destroyPdfViewer(kind);
+			resetPdfHostLayout(host);
+			st.scale = 1.25;
+			st.url = url;
+
+			if (typeof pdfjsLib === 'undefined') {
+				showPdfIframeFallback(host, url);
+				return;
+			}
+
+			host.innerHTML = '<div class="pdfjs-msg">正在加载…</div>';
+			var fetchUrl = toFetchablePdfUrl(url);
+			st.task = pdfjsLib.getDocument({
+				url: fetchUrl,
+				withCredentials: false,
+				disableRange: true,
+				disableStream: true
+			});
+			st.task.promise.then(function (pdf) {
+				st.pdf = pdf;
+				st.task = null;
+				resetPdfHostLayout(host);
+				host.innerHTML = '';
+				renderPdfPages(kind);
+			}).catch(function () {
+				st.task = null;
+				resetPdfHostLayout(host);
+				showPdfIframeFallback(host, url);
+			});
+		}
+
+		function openPdfModal() {
+			document.getElementById('pdfModal').style.display = 'block';
+			document.body.style.overflow = 'hidden';
+			loadPdfViewer('pdfModal', CERT_GUIDE_PDF_URL);
+		}
+
+		function closePdfModal() {
+			destroyPdfViewer('pdfModal');
+			document.getElementById('pdfModal').style.display = 'none';
+			document.body.style.overflow = 'auto';
+		}
+
+		function openFloatingPdfModal(pdfUrl, title) {
+			if (!pdfUrl) return;
+			var base = pdfUrl.indexOf('#') >= 0 ? pdfUrl.substring(0, pdfUrl.indexOf('#')) : pdfUrl;
+			var h5 = document.getElementById('floatingPdfTitle');
+			if (h5) h5.textContent = title || '文档预览';
+			document.getElementById('floatingPdfModal').style.display = 'block';
+			document.body.style.overflow = 'hidden';
+			loadPdfViewer('floating', base);
+		}
+
+		function closeFloatingPdfModal() {
+			destroyPdfViewer('floating');
+			document.getElementById('floatingPdfModal').style.display = 'none';
+			document.body.style.overflow = 'auto';
+		}
+
+		window.onclick = function (event) {
+			var modal = document.getElementById('pdfModal');
+			if (event.target == modal) {
+				closePdfModal();
+			}
+			var fModal = document.getElementById('floatingPdfModal');
+			if (event.target == fModal) {
+				closeFloatingPdfModal();
+			}
+		};
+
+		document.addEventListener('keydown', function (event) {
+			if (event.key === 'Escape') {
+				closePdfModal();
+				closeFloatingPdfModal();
+			}
+		});
+	</script>
+</head>
+
+<body>
+	<div id="top_logo">
+		<img src="img/newosta.gif" />
+		<!--<img src="img/banner1.gif"/>-->
+		<div class="hea_left">
+			<script type="text/javascript">
+				today = new Date();
+				var hours = today.getHours();
+				var minutes = today.getMinutes();
+				var seconds = today.getSeconds();
+				var timeValue = "<FONT COLOR=#ffffff>" + ((hours > 12) ? hours - 12 : hours);
+				timeValue += ((minutes < 10) ? "<BLINK><FONT>:</FONT></BLINK>0" : "<BLINK><FONT COLOR=#ffffff>:</FONT></BLINK>") + minutes + "</FONT></FONT>";
+				timeValue += (hours >= 12) ? " <FONT>PM</FONT> " : " <FONT class='white-12-20'>AM</FONT>";
+				function initArray() {
+					this.length = initArray.arguments.length
+					for (var i = 0; i < this.length; i++) this[i + 1] = initArray.arguments[i]
+				}
+				var d = new initArray("<font color=#ff3300>星期日</font>", "星期一", "星期二", "星期三", "星期四", "星期五", "<font color=#ff3300>星期六</font>");
+				document.write(today.getFullYear(), "年", today.getMonth() + 1, "月", today.getDate(), "日</b></FONT>", "　", d[today.getDay() + 1], " ", "<span id='localTime' ></span>");
+			</script>
+		</div>
+	</div>
+	<div class="nav"></div>
+	<div id="ind_cont">
+		<div class="title">
+			<p>技能人才评价服务窗口</p>
+		</div>
+		<div class="con_box zscx" style="overflow: auto;">
+			<div class="box_title" style="padding: 0 5px 0 30px; box-sizing: border-box; overflow: hidden; zoom: 1;">
+				<p style="margin: 0; float: left; display: inline;">证书查询</p>
+
+				<!-- PDF预览弹窗 -->
+				<a href="javascript:void(0)" onclick="openPdfModal()"
+					style="color: #1768A9; font-size: 16px; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; float: right; display: inline; max-width: calc(100% - 100px);">
+					证书查询功能使用指南.pdf
+				</a>
+				<div id="pdfModal" class="modal"
+					style="display: none; position: fixed; z-index: 99; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+					<div class="modal-content"
+						style="background-color: #fff; margin: 10px auto; padding: 0; border-radius: 10px; width: 90%; max-width: 1200px; height: 90vh; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
+						<div class="modal-header"
+							style="padding: 5px; background-color: #1768a9; color: white; border-radius: 10px 10px 0 0; display: flex; justify-content: space-between; align-items: center;">
+							<h5 style="margin: 0;">证书查询功能使用指南</h5>
+							<span onclick="closePdfModal()" style="cursor: pointer; font-size: 28px; line-height: 1;">&times;</span>
+						</div>
+						<div class="modal-body"
+							style="padding: 0; height: calc(90vh - 60px); display: flex; flex-direction: column;">
+							<div id="pdfViewerHost" class="pdfjs-host"></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 飘窗等通用 PDF 预览弹窗 -->
+				<div id="floatingPdfModal" class="modal"
+					style="display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+					<div class="modal-content"
+						style="background-color: #fff; margin: 10px auto; padding: 0; border-radius: 10px; width: 90%; max-width: 1200px; height: 90vh; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
+						<div class="modal-header"
+							style="padding: 5px; background-color: #1768a9; color: white; border-radius: 10px 10px 0 0; display: flex; justify-content: space-between; align-items: center;">
+							<h5 id="floatingPdfTitle" style="margin: 0;">文档预览</h5>
+							<span onclick="closeFloatingPdfModal()"
+								style="cursor: pointer; font-size: 28px; line-height: 1;">&times;</span>
+						</div>
+						<div class="modal-body"
+							style="padding: 0; height: calc(90vh - 60px); display: flex; flex-direction: column;">
+							<div id="floatingPdfViewerHost" class="pdfjs-host"></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="card-grid">
+				<a href="https://zscx.osta.org.cn/" class="query-card" target="_blank" rel="noopener noreferrer">
+					<p class="card-text">技能人员职业资格证书全国联网查询系统</p>
+					<div class="icon-wrapper" style="width: 56px; height: 50px;margin-top: 8px;">
+						<img src="img/index/enlarging.png" alt="查询" style="width: 56px; height: 50px;" />
+					</div>
+					<img src="img/index/btn.png" alt="查询" style=" height: 44px;" />
+				</a>
+
+				<a href="https://zscx.osta.org.cn/" class="query-card" target="_blank" rel="noopener noreferrer">
+					<p class="card-text">职业技能等级证书全国联网查询系统</p>
+					<div class="icon-wrapper" style="width: 56px; height: 50px;margin-top: 8px;">
+						<img src="img/index/paper.png" alt="证书" style="width: 36px; height: 50px;" />
+					</div>
+					<img src="img/index/btn.png" alt="查询" style=" height: 44px;" />
+				</a>
+			</div>
+
+			<div class="list-section">
+				<a href="https://cx.mem.gov.cn/" class="list-item" target="_blank" rel="noopener noreferrer">
+					<span class="list-icon">
+						<img src="img/index/cap.png" alt="安全帽" style="width: 46px; " />
+					</span>
+					<span class="list-text">应急管理部特种作业人员证书查询链接</span>
+				</a>
+
+				<a href="https://cnse.samr.gov.cn/" class="list-item" target="_blank" rel="noopener noreferrer">
+					<span class="list-icon">
+						<img src="img/index/gear.png" alt="齿轮" style="width: 46px;  " />
+					</span>
+					<span class="list-text">市场监管总局特种设备安全管理和作业人员证书查询链接</span>
+				</a>
+
+				<a href="https://zlaq.mohurd.gov.cn/" class="list-item" target="_blank" rel="noopener noreferrer">
+					<span class="list-icon">
+						<img src="img/index/tower.png" alt="塔吊" style="width: 46px; " />
+					</span>
+					<span class="list-text">住建部建筑施工特种作业人员证书查询链接</span>
+				</a>
+			</div>
+		</div>
+		<div class="con_box xt">
+			<div class="box_title">
+				<p>应用系统</p>
+				<!--<a href="http://old.osta.org.cn/" target="_blank" class="old_index">原工作网首页</a> -->
+			</div>
+			<div class="con">
+
+				<div class="item">
+					<a href="career" target="_blank">
+						<div class="img_box"><img src="img/index/pic6.png" /></div>
+					</a>
+					<a href="career" target="_blank">
+						<p>职业分类系统<br />&nbsp;</p>
+					</a>
+				</div>
+				<div class="item">
+					<a href="skillStandard" target="_blank">
+						<div class="img_box"><img src="img/index/biaozhun.png" /></div>
+					</a>
+					<a href="skillStandard" target="_blank">
+						<p>职业标准系统<br />&nbsp;</p>
+					</a>
+				</div>
+				<div class="item">
+					<a href="http://www.osta.org.cn/xgzcwj.html" target="_blank">
+						<div class="img_box"><img src="img/index/pic7.png" /></div>
+					</a>
+					<a href="http://www.osta.org.cn/xgzcwj.html" target="_blank">
+						<p>相关政策<br />文件系统</p>
+					</a>
+				</div>
+
+				<div class="item">
+					<a href="evaluation" target="_blank">
+						<div class="img_box"><img src="img/index/pic8.png" /></div>
+					</a>
+					<a href="evaluation" target="_blank">
+						<p>国家职业资格<br />目录清单系统</p>
+					</a>
+				</div>
+
+				<div class="item">
+					<a href="http://jigou.osta.org.cn" target="_blank">
+						<div class="img_box"><img src="img/index/pic3.png" /></div>
+					</a>
+					<a href="http://jigou.osta.org.cn" target="_blank">
+						<p>职业资格鉴定<br />机构公示查询系统</p>
+					</a>
+				</div>
+				<div class="item">
+					<a href="http://zssb.osta.org.cn/jiandingApp/command/ecCertHome" target="_blank">
+						<div class="img_box"><img src="img/index/pic4.png" /></div>
+					</a>
+					<a href="http://zssb.osta.org.cn/jiandingApp/command/ecCertHome" target="_blank">
+						<p>技能人员职业资格<br />证书数据交换系统</p>
+					</a>
+				</div>
+
+
+
+				<div class="itemx">
+					<a href="http://pjjg.osta.org.cn/" target="_blank">
+						<div class="img_box_2">
+							<img src="img/index/pic2.png" />
+						</div>
+					</a>
+					<a href="http://pjjg.osta.org.cn/" target="_blank">
+						<p>职业技能等级评价<br />机构公示查询系统</p>
+					</a>
+				</div>
+				<div class="itemx">
+					<a href="http://jineng.osta.org.cn" target="_blank">
+						<div class="img_box_2"><img src="img/index/pic4.png" /></div>
+					</a>
+					<a href="http://jineng.osta.org.cn" target="_blank">
+						<p>职业技能等级<br />证书数据交换系统</p>
+					</a>
+				</div>
+				<div class="itemx">
+					<a href="https://www.osta.org.cn/eduX.html" target="_blank">
+						<div class="img_box_2"><img src="img/index/u10.png" /></div>
+					</a>
+					<a href="https://www.osta.org.cn/eduX.html" target="_blank">
+						<p>"X证书"
+							<br />接收工作专栏
+						</p>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="r-kl">
+		<a href="http://www.osta.org.cn/banshizhinan/index.html" target="_blank" class="bszn">办事指南</a>
+		<a href="http://www.osta.org.cn/liuyanban.html" target="_blank" class="lyb">留言板</a>
+	</div>
+	<div id="r-k2">
+		<a href="javascript:showDiv()" class="tsjb">投诉信箱</a>
+	</div>
+	<!--div id="r-kl1">
+		<a href="http://tsjb.osta.org.cn" target="_blank" class=""></a>
+	</div-->
+	<!-- 投诉信箱注意事项弹层 -->
+	<div id="popDiv" class="mydiv" style="display:none;">
+		<table style="width: 92%;" align="center">
+			<tr style="width: 100%">
+				<td style="text-align: center;font-size: 20px;width: 100%;padding-top: 30px;"><b>投诉信箱</b></td>
+			</tr>
+			<tr>
+				<td style="padding-left: 40px;padding-top: 10px;color:blue;"><b>欢迎您访问投诉信箱:</b></td>
+			</tr>
+			<tr>
+				<td style="padding-left: 40px;padding-top: 0px;line-height: 35px;">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为加强技能人才评价工作的质量监管，方便您反映技能人才评价工作中出现的违规问题，我们特开设了投诉信箱。</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 40px;padding-top: 0px;line-height: 35px;">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本信箱接受反映技能人才评价中,超备案范围开展评价不执行职业技能标准(或规范)开展评价、未评价就发证等违规问题。我们将及时对您反映的问题进行处理，并对实名反映的问题反馈处理结果。
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 40px;padding-top: 0px;line-height: 35px;">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请如实反映问题，如存在蓄意诽谤、歪曲事实造成不良后果的，相关责任由反映人承担。</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 40px;padding-top: 0px;line-height: 35px;">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果您希望保护个人隐私，请在留言中声明，我们将充分尊重您的意愿并妥善处理。</td>
+			</tr>
+
+			<tr>
+				<td style="padding-left: 40px;padding-top: 10px;color:red;"><b>重点提示:</b></td>
+			</tr>
+			<tr>
+				<td style="padding-left: 40px;padding-top: 0px;line-height: 35px;">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果您要反映人力资源和社会保障方面的其他个人诉求，请按信访条例的规定向人社部门信访机构反映。</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 40px;padding-top: 0px;line-height: 35px;">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如您要咨询人力资源和社会保障方面的政策法规，请拨打当地12333咨询服务电话或通过其他渠道咨询。</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 40px;padding-top: 0px;line-height: 35px;">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果您要反映人力资源和社会保障部门相关工作人员的违纪违规问题，请向纪检监察部门反映。</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 40px;padding-top: 0px;line-height: 35px;">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果您要查询评价机构和技能人员证书情况，请您登录技能人才评价工作网(网址:<a
+						href="http://www.osta.org.cn/" target="_blank">http://www.osta.org.cn/</a>)</td>
+			</tr>
+			<tr>
+				<td align="left" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
+						id="checkbox_read">已阅读</td>
+			</tr>
+			<tr>
+				<td align="center" style="padding-top: 20px;">
+					<a href="javascript:tousu()"
+						style="padding:10px 20px;border:1px solid #000;border-radius: 10px;background: #0080FF;text-decoration: none;color: #000000;width:100px;">&nbsp;我要投诉&nbsp;</a>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="javascript:closeDiv()"
+						style="padding:10px 20px;border:1px solid #000;border-radius: 10px;background: #D8D8D8;text-decoration: none;color: #000000;width:100px;">&nbsp;&nbsp;&nbsp;退&nbsp;&nbsp;&nbsp;&nbsp;出&nbsp;&nbsp;&nbsp;</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="bg" class="bg" style="display:none;"></div>
+	<iframe id='popIframe' class='popIframe' frameborder='0'></iframe>
+
+
+	<div id="footer">
+		<table width="0" border="0" align="center" cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="right" valign="middle">
+					<script
+						type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript   src='https://dcs.conac.cn/js/33/000/0000/60498324/CA330000000604983240002.js' type='text/javascript'%3E%3C/script%3E"));</script>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+				<td><span class="foot">
+						<p style="margin-top: 10px;">政策指导单位：人力资源和社会保障部职业能力建设司
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+								href="http://www.osta.org.cn/wangzhanshengming.html">网站声明</a> <br />
+							版权所有：中国就业培训技术指导中心 &nbsp;人力资源和社会保障部职业技能鉴定中心
+							<br />
+							技术支持单位：北京航天情报与信息研究所&nbsp;&nbsp;&nbsp;电话支持：010-84661145&nbsp;&nbsp;&nbsp;网站标识码：bm15000011
+							<br /><a href="https://beian.miit.gov.cn" target="_blank"
+								style="">京ICP备2021025080号-2</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+								href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502045509"
+								target="_blank">京公网安备11010502045509号</a>
+						</p>
+					</span>
+				</td>
+				<td align="left" valign="middle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<script id="_jiucuo_" sitecode='bm15000011' src='https://zfwzgl.www.gov.cn/exposure/jiucuo.js'></script>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!--<div class="rig_btn">
+				<ul>				
+					<li class="ly" onclick="window.open('msg.html?index')"><p>公众留言</p></li>
+					<li class="myd"><p>满意度调查</p></li>
+				</ul>
+			</div>-->
+	<script language="javascript">
+		Date.prototype.getFormattedDate = function (pattern) {
+			function getFullStr(i) {
+				return i > 9 ? "" + i : "0" + i;
+			}
+			pattern = pattern.replace(/yyyy/, this.getFullYear())
+				.replace(/MM/, getFullStr(this.getMonth() + 1))
+				.replace(/dd/, getFullStr(this.getDate()))
+				.replace(/hh/, getFullStr(this.getHours()))
+				.replace(/mm/, getFullStr(this.getMinutes()))
+				.replace(/ss/, getFullStr(this.getSeconds()));
+			return pattern;
+		};
+		var localTimeSpan = document.getElementById("localTime");
+		localTimeSpan.innerHTML = (new Date()).getFormattedDate("hh:mm:ss");
+		setInterval(function () {
+			localTimeSpan.innerHTML = (new Date()).getFormattedDate("hh:mm:ss");
+		}, 1000);
+
+		function showDiv() {
+			document.getElementById('popDiv').style.display = 'block';
+			document.getElementById('popIframe').style.display = 'block';
+			document.getElementById('bg').style.display = 'block';
+		}
+		function closeDiv() {
+			document.getElementById('popDiv').style.display = 'none';
+			document.getElementById('bg').style.display = 'none';
+			document.getElementById('popIframe').style.display = 'none';
+		}
+		function tousu() {
+			if (document.getElementById('checkbox_read').checked) {
+				closeDiv();
+				document.getElementById('checkbox_read').checked = false;
+				window.open("http://tsjb.osta.org.cn");
+			} else {
+				alert("请勾选已阅读！");
+			}
+		}
+	</script>
+	<!-- 左下角公告飘窗：渐变蓝底白字；四条链接（常见问题置顶），与原 tz4/tz1 图片飘窗内容合并，避免重复 -->
+	<div id="tz2"
+		style="position:fixed; left:0px; bottom:0px; z-index:11; width:268px; max-width:calc(100vw - 8px); background:linear-gradient(135deg, #1e4a8f 0%, #2c5aa0 100%); box-sizing:border-box; padding:36px 14px 14px; box-shadow:2px 2px 10px rgba(0,0,0,.18);">
+		<span
+			style="position:absolute; font-size:16px; z-index:12; right:0px; top:0px; cursor:pointer; color:#FFFFFF; padding:3px;"
+			onClick="document.getElementById('tz2').style.display = 'none';">关闭</span>
+		<div>
+			<a href="javascript:void(0)"
+				onclick="openFloatingPdfModal('https://www.osta.org.cn/zcwj/技能人才评价工作网常见问题解答.pdf','技能人才评价工作网常见问题解答'); return false;"
+				style="display:block; color:#ffffff; font-size:16px; line-height:1.45; text-decoration:underline; margin-bottom:12px; cursor:pointer;">技能人才评价工作网常见问题解答</a>
+			<a href="http://www.gov.cn/zhengce/zczhjd/" target="_blank" rel="noopener noreferrer"
+				style="display:block; color:#ffffff; font-size:16px; line-height:1.45; text-decoration:underline; margin-bottom:12px;">重要政策举措及实施效果</a>
+			<a href="javascript:void(0)"
+				onclick="openFloatingPdfModal('https://www.osta.org.cn/zcwj/osta-2025_report.pdf','技能人才评价工作网政府网站工作年度报表（2025年度）'); return false;"
+				style="display:block; color:#ffffff; font-size:16px; line-height:1.45; text-decoration:underline; margin-bottom:12px; cursor:pointer;">技能人才评价工作网政府网站工作年度报表（2025年度）</a>
+			<a href="javascript:void(0)"
+				onclick="openFloatingPdfModal('https://www.osta.org.cn/zcwj/251225-培转贷技能人才评价工作网飘窗公告.pdf','警惕「招转培，培转贷」陷阱！'); return false;"
+				style="display:block; color:#ffffff; font-size:16px; line-height:1.45; text-decoration:underline; margin-bottom:0; cursor:pointer;">警惕「招转培，培转贷」陷阱！</a>
+		</div>
+	</div>
+	<!-- div style=" position:fixed; left:0px; bottom:0px;" id="tz3">
+        <span style="position:absolute; font-size:14px; z-index:10; right:0px; top:0px; cursor:pointer; color:#FFFFFF; 
+padding:3px 3px auto auto;" onClick="document.getElementById('tz3').style.display = 'none';">关闭</span>
+    <img src="img/tongzhi_20240603.png"  width="250" height="150"/>
+</div -->
+	<!--漂浮开始-->
+	<div id="img" style="position:absolute; cursor:pointer;" onMouseOver="clearInterval(interval)"
+		onmouseout="www_wangding_net()">
+		<span style="position:absolute; font-size:14px; z-index:10; right:0px; top:0px; cursor:pointer; color:#FFFFFF; 
+padding:3px 3px auto auto;" onClick="document.getElementById('img').style.display = 'none';">关闭</span>
+		<a href="http://chinajob.mohrss.gov.cn/c/2022-05-07/349459.shtml" target="_blank">
+			<img src="/img/tongzhi/20260116-1.png" border="0" width="250" height="150"> </a>
+	</div>
+	<SCRIPT LANGUAGE="JavaScript">
+		var xPos = 0;
+		var yPos = 0;
+		var step = 1;
+		var delay = 30;
+		var height = 0;
+		var Hoffset = 0;
+		var Woffset = 0;
+		var yon = 0;
+		var xon = 0;
+		var pause = true;
+		var interval;
+		img.style.top = yPos;
+		function changePos() {
+			width = document.body.clientWidth;
+			height = document.body.clientHeight;
+			Hoffset = img.offsetHeight;
+			Woffset = img.offsetWidth;
+			img.style.left = xPos + document.body.scrollLeft + "px";
+			img.style.top = yPos + document.body.scrollTop + "px";
+			if (yon) {
+				yPos = yPos + step;
+			}
+			else {
+				yPos = yPos - step;
+			}
+			if (yPos < 0) {
+				yon = 1;
+				yPos = 0;
+			}
+			if (yPos >= (height - Hoffset)) {
+				yon = 0;
+				yPos = (height - Hoffset);
+			}
+			if (xon) {
+				xPos = xPos + step;
+			}
+			else {
+				xPos = xPos - step;
+			}
+			if (xPos < 0) {
+				xon = 1;
+				xPos = 0;
+			}
+			if (xPos >= (width - Woffset)) {
+				xon = 0;
+				xPos = (width - Woffset);
+			}
+		}
+		function www_wangding_net() {
+			img.visibility = "visible";
+			interval = setInterval('changePos()', delay);
+		}
+		www_wangding_net();  
+	</script>
+
+</body>
+
+</html>

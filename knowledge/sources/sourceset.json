@@ -1,0 +1,140 @@
+{
+  "schema": "career-graph-sourceset/v1",
+  "generatedAt": "2026-09-15T09:56:51.087Z",
+  "note": "内容去重表：同一 sha256 只保留一份 raw 正文，重复来源在 sources.json 里标 duplicate-content。",
+  "bySha256": {
+    "229adcd6fee2c92be8a6758df1ccff83e9e2a2712b804f3d13887b1f6362fe61": {
+      "primary": "S01",
+      "sourceIds": [
+        "S01"
+      ]
+    },
+    "015ef26b4537491e2af310b2e674d92bec62a399d78ba5612d0c5619cc1ca866": {
+      "primary": "S02",
+      "sourceIds": [
+        "S02"
+      ]
+    },
+    "41c6c48200f1b0cfe125141c5fbc833696f0ce5863d9f7666ce9c3109b4cf185": {
+      "primary": "S03",
+      "sourceIds": [
+        "S03"
+      ]
+    },
+    "02e5aab3595646c89500290e6fbe3b306871864cec833e2252bfbfbf0e617584": {
+      "primary": "S04",
+      "sourceIds": [
+        "S04"
+      ]
+    },
+    "cb0953fb1f59a7582ec0e42dce8fc6e1fce487cf1d8f308fe5511dcac6802428": {
+      "primary": "S05",
+      "sourceIds": [
+        "S05"
+      ]
+    },
+    "bc2f8542d40d5293fc5b1f837081b2e1be465e6a36de0dd52b4ff7e39cad3ef3": {
+      "primary": "S06",
+      "sourceIds": [
+        "S06"
+      ]
+    },
+    "bef84f1f99347e2a300941a336fd2c6ac57e5499e8dac385f6a66b99a0d5a5d0": {
+      "primary": "S07",
+      "sourceIds": [
+        "S07"
+      ]
+    },
+    "a49959f2687e0d4e0c53ad98b7d7dece5b43ca2859f0596451ff48cec4b8bb09": {
+      "primary": "S08",
+      "sourceIds": [
+        "S08"
+      ]
+    },
+    "9ef7780cbdf01539c9e9bd05a35163cccc6a1a8a9f475c575a33f615c03360a1": {
+      "primary": "S09",
+      "sourceIds": [
+        "S09"
+      ]
+    },
+    "9466d28ea3a569fd26a4e6e8582baf22670717e42d4b79f886df4de4222119ca": {
+      "primary": "S10",
+      "sourceIds": [
+        "S10"
+      ]
+    },
+    "57c5caaee4c92696e531467b0458098dd3a53cf1d6d54ad756a55a2731d0f953": {
+      "primary": "S11",
+      "sourceIds": [
+        "S11"
+      ]
+    },
+    "e59c2f07d3701786792eb5c011853976166a157603307cf6d64c91abf0c49b6c": {
+      "primary": "S12",
+      "sourceIds": [
+        "S12"
+      ]
+    },
+    "0e0e3afb0d67be54c337e75b673ad9e65fcf5ccc790ad335beb497370871af26": {
+      "primary": "S13",
+      "sourceIds": [
+        "S13"
+      ]
+    },
+    "7621ec04c65179993988431d29f016ccd7c516d873af556e6a6fc4a470a0a54b": {
+      "primary": "S14",
+      "sourceIds": [
+        "S14"
+      ]
+    },
+    "39a859f44190e626718a62c51906088803409a12ed14107e6c6e8e9ffa169156": {
+      "primary": "S15",
+      "sourceIds": [
+        "S15"
+      ]
+    },
+    "0116a596316dd34a8f5e02579097ae3eecf4aa08ce3ac062940fe0f96d6daabf": {
+      "primary": "S16",
+      "sourceIds": [
+        "S16"
+      ]
+    },
+    "d794f16ae87d74c69e5ddfdb49dae51111d5ae43b1e1993773f3c312cfd758f0": {
+      "primary": "S17",
+      "sourceIds": [
+        "S17"
+      ]
+    },
+    "9188f166fe4370bbee95c0c5c39c0ec359a1111b65b2ed03be6e898656d0c20a": {
+      "primary": "S18",
+      "sourceIds": [
+        "S18"
+      ]
+    },
+    "1ea28368a6c6bc320b1c82906441d3220fb8a4239dedd134b0c9602c5d8a75bd": {
+      "primary": "S19",
+      "sourceIds": [
+        "S19"
+      ]
+    },
+    "6a61e3c208f86adec178f19fe1742017435f61c0963122768fba061f808ccff1": {
+      "primary": "S20",
+      "sourceIds": [
+        "S20"
+      ]
+    },
+    "cfbfc44e759ce7f17a1bc704391c7e3477e789fb9fbeb92937dddaaae7bc604c": {
+      "primary": "S21",
+      "sourceIds": [
+        "S21"
+      ]
+    },
+    "559b0c7d5013bbf500cfd339c49fb0b737c9819958fdf7f4706962f11e42e5a3": {
+      "primary": "S22",
+      "sourceIds": [
+        "S22"
+      ]
+    }
+  },
+  "duplicateSources": []
+}

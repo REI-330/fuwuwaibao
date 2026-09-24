@@ -1,0 +1,83 @@
+{
+  "level": "RERANKED",
+  "done": 3,
+  "total": 14,
+  "perQuestion": [
+    {
+      "questionId": "N03",
+      "set": "main",
+      "category": "嵌入式开发",
+      "retrieved_chunk_ids": [
+        "S03#32",
+        "S03#s57",
+        "S03#s56"
+      ],
+      "answer": "## 关于 `MALLOC_CAP_32BIT` 与浮点变量\n\n**不能**用 `MALLOC_CAP_32BIT` 分配的内存来存储浮点变量。\n\n根据片段 [1] 的说明：\n\n> `MALLOC_CAP_32BIT` 可能返回**指令 RAM（IRAM）**，而 ESP32 上的**浮点汇编指令无法访问指令 RAM**，因此会导致运行错误。\n\n此外，还需注意：使用 `MALLOC_CAP_32BIT` 分配的内存**只能通过 32 位读写访问**，其他类型的访问将导致 `LoadStoreError` 异常。\n\n---\n\n## 关于在中断服务程序（ISR）中调用堆函数的限制\n\n根据片段 [2] 和 [3]，总结如下：\n\n### ✅ 技术上允许调用的函数\n以下堆函数**可以**在 ISR 中调用：\n- `heap_caps_malloc()` / `heap_caps_free()`\n- `heap_caps_realloc()` / `heap_caps_calloc()`\n- `heap_caps_malloc_default()` / `heap_caps_realloc_default()`\n- `heap_caps_malloc_prefer()` / `heap_caps_realloc_prefer()` / `heap_caps_calloc_prefer()`\n- `heap_caps_aligned_alloc()` / `heap_caps_aligned_free()`\n\n### ⚠️ 重要限制与警告\n\n| 限制点 | 说明 |\n|--------|------|\n| **不建议使用** | 官方明确标注\"不建议此种方法\" |\n| **可能延迟其他中断** | 在 ISR 中调用堆函数会占用时间，影响中断响应实时性 |\n| **功能可能被移除** | 文档提示\"之后可能会删除从 ISR 调用堆函数的功能\" |\n\n### 💡 官方推荐做法\n> 建议**重构应用程序**，将 ISR 使用的任何 buffer **预先在 ISR 之外分配好**，而不是在中断处理过程中动态申请内存。",
+      "scores": {
+        "contextual_precision": 1.0,
+        "contextual_recall": 1.0,
+        "contextual_relevancy": 0.7
+      },
+      "reasons": {
+        "contextual_precision": "The score is 1.00 because all retrieval context nodes are perfectly relevant and ranked in a logical order. The first node directly addresses the MALLOC_CAP_32BIT and floating-point variable question, explaining that '不可使用 MALLOC_CAP_32BIT 存储浮点变量，因为 MALLOC_CAP_32BIT 可能返回指令 RAM，而 ESP32 上的浮点汇编指令无法访问指令 RAM'. The second and third nodes both address ISR heap function limitations, with the second listin",
+        "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully attributed to nodes in retrieval context. Sentences 1-3 regarding MALLOC_CAP_32BIT usage, floating-point variable restrictions, and LoadStoreError exceptions are all found in node 1, while the ISR-callable function list and the closing 备注 are both found in node 2. Great job — perfect coverage!",
+        "contextual_relevancy": "The score is 0.70 because the retrieval context partially addresses the input. For the question about MALLOC_CAP_32BIT and floating-point variables, there are directly relevant statements, including '在 ESP32 系列芯片上，不可使用 MALLOC_CAP_32BIT 存储浮点变量，因为 MALLOC_CAP_32BIT 可能返回指令 RAM，而 ESP32 上的浮点汇编指令无法访问指令 RAM' and details about 32-bit access restrictions. For the question about calling heap functions in ISR"
+      },
+      "elapsedSec": 50.1
+    },
+    {
+      "questionId": "N04",
+      "set": "main",
+      "category": "嵌入式开发",
+      "retrieved_chunk_ids": [
+        "S04#s73~2",
+        "S04#s74",
+        "S04#s78"
+      ],
+      "answer": "## ESP32 RTC GPIO 的使用场景\n\n根据检索片段 [1]，当 GPIO 连接到 **RTC 低功耗、模拟子系统、低功耗外设**时，ESP32 单独支持 RTC GPIO 功能。这些管脚可在以下三种情况下使用：\n\n1. **处于 Deep-sleep 模式时**\n2. **超低功耗协处理器（ULP-FSM）运行时**\n3. **使用 ADC/DAC 等模拟功能时**\n\n> ⚠️ 附带提醒（片段 [1]）：使用 ADC 或在睡眠模式下使用 Wi-Fi/蓝牙时，**不要使用 GPIO36 和 GPIO39 的中断**。\n\n---\n\n## `gpio_config` 与 `gpio_reset_pin` 的职责对比\n\n| 函数 | 职责说明 |\n|------|----------|\n| **`gpio_config()`** | **综合配置函数**，一次性配置 GPIO 的模式（Mode）、上拉（Pull-up）、下拉（Pull-down）、中断类型（IntrType）等所有参数。⚠️ 它会**覆盖该引脚当前的全部配置**，使用时需注意顺序（如双重用途引脚须先调用它再调用外设驱动 API）。|\n| **`gpio_reset_pin()`** | **复位/还原函数**，将指定 GPIO 重置为默认状态，具体表现为：选择 GPIO 功能、**启用上拉**、**禁用输入和输出**。|\n\n---\n\n**简单记忆：**\n- `gpio_config` → \"按需定制\"，全量写入所需配置；\n- `gpio_reset_pin` → \"恢复出厂\"，将引脚还原为安全的初始默认状态。",
+      "scores": {
+        "contextual_precision": 1.0,
+        "contextual_recall": 1.0,
+        "contextual_relevancy": 0.5
+      },
+      "reasons": {
+        "contextual_precision": "The score is 1.00 because all three nodes in the retrieval contexts are relevant and perfectly ranked! The first node covers RTC GPIO usage scenarios, the second explains gpio_config's configuration capabilities, and the third provides precise API definitions for both functions — a clean sweep!",
+        "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully supported by nodes in retrieval context — sentences 1–6 are attributed to node 1, and sentences 7 onwards, covering GPIO API documentation including gpio_config, gpio_reset_pin, gpio_set_intr_type, gpio_intr_enable, and gpio_intr_disable, are all attributed to node 3. Great retrieval coverage!",
+        "contextual_relevancy": "The score is 0.50 because while the retrieval context contains relevant information about RTC GPIO usage (e.g., 'RTC GPIO 可在处于 Deep-sleep 模式时使用', 'RTC GPIO 可在超低功耗协处理器 (ULP-FSM) 运行时使用', 'RTC GPIO 可在使用 ADC/DAC 等模拟功能时使用') and some details about 'gpio_config()' (e.g., it 'configures GPIO's Mode, pull-up, PullDown, IntrType and always overwrites all the current IO configurations') and 'gpio_reset_pin' "
+      },
+      "elapsedSec": 61.7
+    },
+    {
+      "questionId": "N02",
+      "set": "main",
+      "category": "嵌入式开发",
+      "retrieved_chunk_ids": [
+        "S02#s13",
+        "S02#s14",
+        "S02#s10"
+      ],
+      "answer": "## 一、配置四线 I/O 模式\n\n根据片段 [1]，四线 I/O 模式需要同时设置 **两处 flags**：\n\n### 1. `spi_transaction_t` 中的传输事务标志\n\n```c\n// 同时设置以下两个标志\nSPI_TRANS_MODE_QIO          // 数据阶段使用四线\nSPI_TRANS_MULTILINE_ADDR    // 地址阶段也使用多线（与数据阶段线数一致）\n```\n\n### 2. `spi_bus_config_t` 中的总线 IO 标志\n\n```c\n// 用于检查/声明对应 IO 管脚已配置\nSPICOMMON_BUSFLAG_QUAD\n```\n\n> 📌 对比：四线**输出**模式只需 `SPI_TRANS_MODE_QIO` + `SPICOMMON_BUSFLAG_QUAD`，而四线 **I/O** 模式还需额外加上 `SPI_TRANS_MULTILINE_ADDR`。\n\n---\n\n## 二、修改命令阶段和地址阶段长度\n\n根据片段 [2]，默认长度由 `spi_bus_add_device()` 时传入的 **`spi_device_interface_config_t`** 决定。如需**按事务动态修改**，按以下步骤操作：\n\n### 步骤\n\n1. **声明扩展结构体** `spi_transaction_ext_t`（替代普通的 `spi_transaction_t`）；\n2. 在 `spi_transaction_ext_t::base`（即内嵌的 `spi_transaction_t`）的 **`flags`** 成员中，设置以下标志位：\n   - `SPI_TRANS_VARIABLE_CMD`：允许自定义命令阶段长度\n   - `SPI_TRANS_VARIABLE_ADDR`：允许自定义地址阶段长度\n3. 在 `spi_transaction_ext_t` 中设置具体位数：\n   - `spi_transaction_ext_t::command_bits` → 命令阶段位数\n   - `spi_transaction_ext_t::address_bits` → 地址阶段位数\n\n### 关键点汇总\n\n| 目的 | 结构体 | 成员/标志 |\n|---|---|---|\n| 设置默认命令/地址长度 | `spi_device_interface_config_t` | `command_bits` / `address_bits` |\n| 允许按事务动态修改长度 | `spi_transaction_ext_t::base.flags` | `SPI_TRANS_VARIABLE_CMD` / `SPI_TRANS_VARIABLE_ADDR` |\n| 实际指定动态长度值 | `spi_transaction_ext_t` | `command_bits` / `address_bits` |\n\n> ⚠️ 若未设置 `SPI_TRANS_VARIABLE_CMD/ADDR` 标志，驱动将**忽略**扩展结构体中的长度设置，自动使用设备初始化时的默认值。",
+      "scores": {
+        "contextual_precision": 1.0,
+        "contextual_recall": 1.0,
+        "contextual_relevancy": 0.7619
+      },
+      "reasons": {
+        "contextual_precision": "The score is 1.00 because the retrieval contexts are perfectly ordered! The first node covers four-line I/O mode configuration with flags like 'SPI_TRANS_MODE_QIO', 'SPI_TRANS_MULTILINE_ADDR', and 'SPICOMMON_BUSFLAG_QUAD' in 'spi_transaction_t' and 'spi_bus_config_t', and the second node addresses variable command/address phase lengths using 'spi_transaction_ext_t', 'SPI_TRANS_VARIABLE_CMD', 'SPI_",
+        "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully attributed to nodes in retrieval context. Sentences 1 and the table content are directly found in node 1, while sentences covering the command/address phase behavior, variable length configuration, and multi-line mode settings are all directly found in node 2. Great coverage!",
+        "contextual_relevancy": "The score is 0.76 because the retrieval context partially addresses the input. It provides relevant details on quad I/O mode configuration, such as setting `SPI_TRANS_MODE_QIO` and `SPI_TRANS_MULTILINE_ADDR` in `spi_transaction_t`, and `SPICOMMON_BUSFLAG_QUAD` in `spi_bus_config_t`. It also covers command/address phase length modification via `spi_transaction_ext_t` with `SPI_TRANS_VARIABLE_CMD`/`"
+      },
+      "elapsedSec": 67.4
+    }
+  ],
+  "sums": {
+    "contextual_precision": 3.0,
+    "contextual_recall": 3.0,
+    "contextual_relevancy": 1.9619
+  },
+  "counts": {
+    "contextual_precision": 3,
+    "contextual_recall": 3,
+    "contextual_relevancy": 3
+  }
+}

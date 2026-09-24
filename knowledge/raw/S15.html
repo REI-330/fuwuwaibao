@@ -1,0 +1,1134 @@
+<!--
+   _   _                      _                 _
+  | | | |                    | |               | |
+  | |_| | ___  _ __ ___   ___| | __ _ _ __   __| |
+  |  _  |/ _ \| '_ ` _ \ / _ \ |/ _` | '_ \ / _` |
+  | | | | (_) | | | | | |  __/ | (_| | | | | (_| |
+  \_| |_/\___/|_| |_| |_|\___|_|\__,_|_| |_|\__,_|
+  ------------------------------------------------
+                          https://gethomeland.com
+
+  - Ruby:  2.7.2-p137
+  - Rails: 6.1.3.1
+  - Homeland: 3.8.0.beta
+-->
+<!DOCTYPE html>
+<html>
+ <head>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="theme" content="auto">
+    <title>测试之家</title>
+    <meta name="apple-mobile-web-app-capable" content="no">
+    <link rel="shortcut icon" type="image/x-icon" href="/photo/favicon.png" />
+    <meta content='True' name='HandheldFriendly' />
+    <link rel="alternate" type="application/rss+xml" title="订阅最新帖" href="https://testerhome.com/topics/feed" />
+    <link rel="stylesheet" media="screen" href="/packs/css/front-1063147a.css" data-turbolinks-track="reload" />
+    <link rel="stylesheet" media="screen" href="/packs/css/tailwindcss_compile-bd54f1a0.css" data-turbolinks-track="reload" />
+    
+    
+    <meta name="action-cable-url" content="/cable" />
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="qAIzihTz3adzlnIaJvh+bnhn8aBPy5eIbrTADrlJVwB45Ss6bOVfYnOPhtdfccVVdcnGKP7ztnpGGxzGSYrjKA==" />
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2c94babfa1f440b1bbbd2dac38628bec";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<meta name="baidu_union_verify" content="8c54e7e8a79c88c922a6d9b41349466f">
+    <script src="/packs/js/vendors-a910b79346e780ce8450.chunk.js" data-turbolinks-track="reload"></script>
+<script src="/packs/js/application-18b47cade2506b27bf82.js" data-turbolinks-track="reload"></script>
+    
+  </head>
+  <body class="page-home" data-controller-name="home">
+<body class="page-home" data-controller-name="home">
+    <div class="header navbar navbar-expand-md">
+      <div class="container">
+        <div class="navbar-header" data-turbolinks-permanent>
+          <a href="/" class="navbar-brand"><b>测试之家</b></a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar">
+          <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
+        </button>
+        <div id="main-navbar"  class="collapse navbar-collapse">
+          
+          <ul id="main-nav-menu" class="navbar-nav d-flex">
+  <li class="nav-item"><a class="nav-link" href="/topics">社区</a></li><li class="nav-item"><a class="nav-link" href="/questions">问答</a></li><li class="nav-item"><a class="nav-link" href="/jobs">招聘</a></li><li class="nav-item"><a class="nav-link" href="/training_courses">社区学堂<span class="new-tag badge badge-danger">新</span></a></li><li class="nav-item"><a class="nav-link" href="/opensource_projects">开源项目</a></li><li class="nav-item"><a class="nav-link" href="/events">活动</a></li><li class="nav-item"><a class="nav-link" href="/wiki">Wiki</a></li>
+  
+</ul>
+
+        </div>
+        <div class="ml-auto d-flex navbar-right">
+          <form class="mr-2 navbar-form d-none d-lg-flex form-search active" action="/search" method="GET">
+            <i class="fa btn-search fa-search"></i>
+            <input type="text" name="q" class="form-control" value="" placeholder="搜索"></input>
+        </form>
+        <ul class="nav navbar-nav user-bar align-items-center justify-content-end">
+
+    <li class="nav-item"><a class="nav-link" href="/account/sign_up">注册</a></li>
+
+    <li class="nav-item"><a class="nav-link" href="/account/sign_in">登录</a></li>
+</ul>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  
+
+  <div id="main" class="container main-container">
+    
+    
+    <section class="jumbotron">
+  <div class="container">
+    <h1>测试之家</h1>
+    <p class="lead">
+      测试之家（TesterHome）由一线测试工程师发起和运营，社区的主旨是<u>公益</u>，<u>开源</u>，<u>分享</u>，<u>落地</u>。
+      社区以推进国内软件测试开源为己任，不遗余力的引入和输出国内外测试工具，紧跟流行技术，是软件测试行业的风向标。
+
+    </p>
+    <p class="lead">众人拾柴火焰高，期待更多人加入测试之家，一起为中国软件测试做贡献。</p>
+    <p>
+      <a class="btn btn-success btn-jumbotron btn-lg" href="/account/sign_up">注册</a>
+      <a class="btn btn-primary btn-jumbotron btn-lg" href="/account/sign_in">登录</a>
+    </p>
+  </div>
+</section>
+
+<div class="hide-ios">
+    <style>
+  .carousel-inner img {
+      width: 100%;
+      height: 100%;
+  }
+</style>
+
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+  <!-- 指示符 -->
+  <ul class="carousel-indicators">
+   <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>  
+   <!--  <li data-target="#demo" data-slide-to="2"></li>-->
+  </ul> 
+ 
+  <!-- 轮播图片 -->
+  <div class="carousel-inner">
+<!--
+<div class="carousel-item active">
+       <a href="https://www.biggeryun.com/cid-6768c20b00601"  target="_blank">
+           <img src="https://testerhome.com/uploads/photo/2024/b8b4328f-108c-4048-8ac2-d008cd71ee4c.png">
+       </a>
+    </div> 
+-->
+ <!--
+
+
+   <div class="carousel-item ">
+       <a href="http://www.qacon.net/"  target="_blank">
+           <img src="https://testerhome.com/uploads/photo/2022/e350d062-4e03-43b5-b877-83993fe8d107.png">
+       </a>
+    </div>
+    -->
+
+  </div>
+ 
+  <!-- 左右切换按钮  -->
+   <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a> 
+ 
+</div>
+</div>
+
+<div class="row">
+    <div class="col-md-9 home-main">
+        
+        
+  <div class="home_suggest_topics card">
+    <div class="card-header">最新帖子</div>
+    <div class="card-body topics row">
+        <div class="col-md-6 topics-group">
+          <div class="topic media topic-44831">
+  <div class="avatar media-left">
+    <a title="Fun_Fox" href="/Fun_Fox"><img class="media-object avatar-48" src="/uploads/user/avatar/92982/36a64d.png!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    
+      <a title="做为一个 10 几年的测试，目前已经全职开发 2 年。随便唠唠~" data-original-title="做为一个 10 几年的测试，目前已经全职开发 2 年。随便唠唠~" data-toggle="tooltip" href="/topics/44831">做为一个 10 几年的测试，目前已经全职开发 2 年。随便唠唠~</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="" href="/Fun_Fox">Fun_Fox</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/44831#reply-266623">1</a>
+  </div>
+</div>
+<div class="topic media topic-44816">
+  <div class="avatar media-left">
+    <a title="qingtianwaa (红衣娃娃)" href="/qingtianwaa"><img class="media-object avatar-48" src="/uploads/user/avatar/11673.jpg!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    
+      <a title="作为一个测试，我做了个统一管理面试信息的小程序：Offer 时光机" data-original-title="作为一个测试，我做了个统一管理面试信息的小程序：Offer 时光机" data-toggle="tooltip" href="/topics/44816">作为一个测试，我做了个统一管理面试信息的小程序：Offer 时光机</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="红衣娃娃" href="/qingtianwaa">红衣娃娃</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/44816#reply-266620">3</a>
+  </div>
+</div>
+<div class="topic media topic-44814">
+  <div class="avatar media-left">
+    <a title="suprall (无缺智测)" href="/suprall"><img class="media-object avatar-48" src="/uploads/user/avatar/107321/4f2efb.jpg!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    
+      <a title="iPhone Duo 发布后，折叠态 App 测试矩阵应该怎么设计？" data-original-title="iPhone Duo 发布后，折叠态 App 测试矩阵应该怎么设计？" data-toggle="tooltip" href="/topics/44814">iPhone Duo 发布后，折叠态 App 测试矩阵应该怎么设计？</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="无缺智测" href="/suprall">无缺智测</a>
+    </div>
+  </div>
+</div>
+
+        </div>
+
+        <div class="col-md-6 topics-group">
+          <div class="topic media topic-44826">
+  <div class="avatar media-left">
+    <a title="mikezhou (狂师)" href="/mikezhou"><img class="media-object avatar-48" src="/uploads/user/avatar/7574.jpg!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    
+      <a title="最近火爆出圈的，FDE 到底是个什么岗位？" data-original-title="最近火爆出圈的，FDE 到底是个什么岗位？" data-toggle="tooltip" href="/topics/44826">最近火爆出圈的，FDE 到底是个什么岗位？</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="狂师" href="/mikezhou">狂师</a>
+    </div>
+  </div>
+</div>
+<div class="topic media topic-44815">
+  <div class="avatar media-left">
+    <a title="Fun_Fox" href="/Fun_Fox"><img class="media-object avatar-48" src="/uploads/user/avatar/92982/36a64d.png!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    
+      <a title="【AI 时代下 - 精准测试新范式】用 AI + Git 自动生成提测变更日志" data-original-title="【AI 时代下 - 精准测试新范式】用 AI + Git 自动生成提测变更日志" data-toggle="tooltip" href="/topics/44815">【AI 时代下 - 精准测试新范式】用 AI + Git 自动生成提测变更日志</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="" href="/Fun_Fox">Fun_Fox</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/44815#reply-266616">5</a>
+  </div>
+</div>
+<div class="topic media topic-44813">
+  <div class="avatar media-left">
+    <a title="50000a (逍遥子)" href="/50000a"><img class="media-object avatar-48" src="/uploads/user/avatar/63694/eeb399.png!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    
+      <a title="关于下午茶福利适用范围的调整通知： 经与集团于 9 月 4 日确认，自 2026 年 9 月起，劳务派遣人员不享受我司下午茶福利，相关福利由其签约的第三方公司另行安排。因此，后续的下午茶接龙活动劳务派遣同事请不必再参与接龙,感谢各位的配合！@ 所有人  " data-original-title="关于下午茶福利适用范围的调整通知： 经与集团于 9 月 4 日确认，自 2026 年 9 月起，劳务派遣人员不享受我司下午茶福利，相关福利由其签约的第三方公司另行安排。因此，后续的下午茶接龙活动劳务派遣同事请不必再参与接龙,感谢各位的配合！@ 所有人  " data-toggle="tooltip" href="/topics/44813">关于下午茶福利适用范围的调整通知： 经与集团于 9 月 4 日确认，自 2026 年 9 月起，劳务派遣人员不享受我司下午茶福利，相关福利由其签约的第三方公司另行安排。因此，后续的下午茶接龙活动劳务派遣同事请不必再参与接龙,感谢各位的配合！@ 所有人  </a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="逍遥子" href="/50000a">逍遥子</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/44813#reply-266619">14</a>
+  </div>
+</div>
+
+        </div>
+    </div>
+    <div class="card-footer">
+      <a href="/topics/last">查看更多...</a>
+    </div>
+  </div>
+
+  <div class="home_suggest_topics card">
+    <div class="card-header">精华帖子</div>
+    <div class="card-body topics row">
+        <div class="col-md-6 topics-group">
+          <div class="topic media topic-44576">
+  <div class="avatar media-left">
+    <a title="codeskyblue (codeskyblue)" href="/codeskyblue"><img class="media-object avatar-48" src="/uploads/user/avatar/6853/28cf21.jpeg!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="面向 AI、面向企业级的远程真机平台" data-original-title="面向 AI、面向企业级的远程真机平台" data-toggle="tooltip" href="/topics/44576">面向 AI、面向企业级的远程真机平台</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="codeskyblue" href="/codeskyblue">codeskyblue</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/44576#reply-266296">12</a>
+  </div>
+</div>
+<div class="topic media topic-43703">
+  <div class="avatar media-left">
+    <a title="ycwdaaaa (孙高飞)" href="/ycwdaaaa"><img class="media-object avatar-48" src="/uploads/user/avatar/7606.jpg!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="六万字长文：科普 AI 产品测试人员，都在如何测试全品类 AI 产品" data-original-title="六万字长文：科普 AI 产品测试人员，都在如何测试全品类 AI 产品" data-toggle="tooltip" href="/articles/43703">六万字长文：科普 AI 产品测试人员，都在如何测试全品类 AI 产品</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="孙高飞" href="/ycwdaaaa">孙高飞</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/43703#reply-265057">7</a>
+  </div>
+</div>
+<div class="topic media topic-43475">
+  <div class="avatar media-left">
+    <a title="wjl1109 (小志)" href="/wjl1109"><img class="media-object avatar-48" src="/uploads/user/avatar/41882/e32c16.jpg!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="2025，我们这样评测 AI" data-original-title="2025，我们这样评测 AI" data-toggle="tooltip" href="/topics/43475">2025，我们这样评测 AI</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="小志" href="/wjl1109">小志</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/43475#reply-266385">12</a>
+  </div>
+</div>
+<div class="topic media topic-42087">
+  <div class="avatar media-left">
+    <a title="ae86sen (古一)" href="/ae86sen"><img class="media-object avatar-48" src="/uploads/user/avatar/52996/258163.jpg!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="【开源】全新一代 Aomaker 发布！——重塑接口自动化测试的工程范式" data-original-title="【开源】全新一代 Aomaker 发布！——重塑接口自动化测试的工程范式" data-toggle="tooltip" href="/topics/42087">【开源】全新一代 Aomaker 发布！——重塑接口自动化测试的工程范式</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="古一" href="/ae86sen">古一</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/42087#reply-261404">26</a>
+  </div>
+</div>
+<div class="topic media topic-41867">
+  <div class="avatar media-left">
+    <a title="sugushu (困学)" href="/sugushu"><img class="media-object avatar-48" src="/uploads/user/avatar/8795/4a917f.jpeg!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="专栏文章 质量保障系统的落地实践 (八)-AI 赋能测试岗位" data-original-title="专栏文章 质量保障系统的落地实践 (八)-AI 赋能测试岗位" data-toggle="tooltip" href="/topics/41867">专栏文章 质量保障系统的落地实践 (八)-AI 赋能测试岗位</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="困学" href="/sugushu">困学</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/41867#reply-266086">10</a>
+  </div>
+</div>
+<div class="topic media topic-40667">
+  <div class="avatar media-left">
+    <a title="tobetheender (codematrixer)" href="/tobetheender"><img class="media-object avatar-48" src="/uploads/user/avatar/11122/bac200.png!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="hmdriver2 发布：开启鸿蒙 NEXT 自动化新时代" data-original-title="hmdriver2 发布：开启鸿蒙 NEXT 自动化新时代" data-toggle="tooltip" href="/topics/40667">hmdriver2 发布：开启鸿蒙 NEXT 自动化新时代</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="codematrixer" href="/tobetheender">codematrixer</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/40667#reply-266191">34</a>
+  </div>
+</div>
+<div class="topic media topic-40077">
+  <div class="avatar media-left">
+    <a title="HuolalaQA (货拉拉质量星火)" href="/HuolalaQA"><img class="media-object avatar-48" src="/uploads/user/avatar/92004/6afe35.png!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="故障演练体系建设" data-original-title="故障演练体系建设" data-toggle="tooltip" href="/topics/40077">故障演练体系建设</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="货拉拉质量星火" href="/HuolalaQA">货拉拉质量星火</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/40077#reply-259799">7</a>
+  </div>
+</div>
+<div class="topic media topic-39808">
+  <div class="avatar media-left">
+    <a title="-Serendipity-" href="/-Serendipity-"><img class="media-object avatar-48" src="https://testerhome.com/system/letter_avatars/s.png" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="作为测试新人，期望在自动化测试工程师发展，怎么系统的学习语言及实践" data-original-title="作为测试新人，期望在自动化测试工程师发展，怎么系统的学习语言及实践" data-toggle="tooltip" href="/topics/39808">作为测试新人，期望在自动化测试工程师发展，怎么系统的学习语言及实践</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="-Serendipity-" href="/-Serendipity-">-Serendipity-</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/39808#reply-257416">34</a>
+  </div>
+</div>
+<div class="topic media topic-39597">
+  <div class="avatar media-left">
+    <a title="TH_tester (TesterHome小助手)" href="/TH_tester"><img class="media-object avatar-48" src="/uploads/user/avatar/67389/8250c9.png!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="鸿蒙应用怎么测试？这个工具包请收藏！" data-original-title="鸿蒙应用怎么测试？这个工具包请收藏！" data-toggle="tooltip" href="/topics/39597">鸿蒙应用怎么测试？这个工具包请收藏！</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="TesterHome小助手" href="/TH_tester">TesterHome小助手</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/39597#reply-248127">7</a>
+  </div>
+</div>
+<div class="topic media topic-39080">
+  <div class="avatar media-left">
+    <a title="simonpatrick (simonpatrick)" href="/simonpatrick"><img class="media-object avatar-48" src="/uploads/user/avatar/3721.jpg!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="为什么放弃精准测试平台？" data-original-title="为什么放弃精准测试平台？" data-toggle="tooltip" href="/articles/39080">为什么放弃精准测试平台？</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="simonpatrick" href="/simonpatrick">simonpatrick</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/39080#reply-262678">53</a>
+  </div>
+</div>
+
+        </div>
+
+        <div class="col-md-6 topics-group">
+          <div class="topic media topic-43719">
+  <div class="avatar media-left">
+    <a title="jideluo (啊木森)" href="/jideluo"><img class="media-object avatar-48" src="/uploads/user/avatar/26940/21715f.jpg!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="我的 2025 年总结" data-original-title="我的 2025 年总结" data-toggle="tooltip" href="/topics/43719">我的 2025 年总结</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="啊木森" href="/jideluo">啊木森</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/43719#reply-266240">11</a>
+  </div>
+</div>
+<div class="topic media topic-43544">
+  <div class="avatar media-left">
+    <a title="mikezhou (狂师)" href="/mikezhou"><img class="media-object avatar-48" src="/uploads/user/avatar/7574.jpg!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="火爆全网的 Agent Skills，普通人到底该怎么用？-- 详细教程" data-original-title="火爆全网的 Agent Skills，普通人到底该怎么用？-- 详细教程" data-toggle="tooltip" href="/topics/43544">火爆全网的 Agent Skills，普通人到底该怎么用？-- 详细教程</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="狂师" href="/mikezhou">狂师</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/43544#reply-266404">7</a>
+  </div>
+</div>
+<div class="topic media topic-43001">
+  <div class="avatar media-left">
+    <a title="andyguo (andyguo)" href="/andyguo"><img class="media-object avatar-48" src="/uploads/user/avatar/83.jpg!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="大模型稳定性测评：从理念到实现的完整技术方案" data-original-title="大模型稳定性测评：从理念到实现的完整技术方案" data-toggle="tooltip" href="/topics/43001">大模型稳定性测评：从理念到实现的完整技术方案</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="andyguo" href="/andyguo">andyguo</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/43001#reply-264095">13</a>
+  </div>
+</div>
+<div class="topic media topic-41962">
+  <div class="avatar media-left">
+    <a title="wudiceshidawang (无敌测试大王)" href="/wudiceshidawang"><img class="media-object avatar-48" src="/uploads/user/avatar/98705/1e3e7e.jpg!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="关于一些副业的小小见解" data-original-title="关于一些副业的小小见解" data-toggle="tooltip" href="/topics/41962">关于一些副业的小小见解</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="无敌测试大王" href="/wudiceshidawang">无敌测试大王</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/41962#reply-265855">66</a>
+  </div>
+</div>
+<div class="topic media topic-41761">
+  <div class="avatar media-left">
+    <a title="hzhan11 (张昊翔)" href="/hzhan11"><img class="media-object avatar-48" src="/uploads/user/avatar/64839/77a45e.jpg!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="测试技艺 | 在 AI 极速发展下重塑" data-original-title="测试技艺 | 在 AI 极速发展下重塑" data-toggle="tooltip" href="/topics/41761">测试技艺 | 在 AI 极速发展下重塑</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="张昊翔" href="/hzhan11">张昊翔</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/41761#reply-266386">30</a>
+  </div>
+</div>
+<div class="topic media topic-40190">
+  <div class="avatar media-left">
+    <a title="hank.huang (hank.huang)" href="/hank.huang"><img class="media-object avatar-48" src="/uploads/user/avatar/66947/c5955e.jpg!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="Nico，从零开始干掉 Appium，移动端自动化测试框架实现（一）" data-original-title="Nico，从零开始干掉 Appium，移动端自动化测试框架实现（一）" data-toggle="tooltip" href="/topics/40190">Nico，从零开始干掉 Appium，移动端自动化测试框架实现（一）</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="hank.huang" href="/hank.huang">hank.huang</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/40190#reply-263650">39</a>
+  </div>
+</div>
+<div class="topic media topic-39895">
+  <div class="avatar media-left">
+    <a title="iamhejz (茯苓山楂)" href="/iamhejz"><img class="media-object avatar-48" src="/uploads/user/avatar/86359/856c05.png!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="大家好，希望各位前辈给予新人一些职业发展的建议" data-original-title="大家好，希望各位前辈给予新人一些职业发展的建议" data-toggle="tooltip" href="/topics/39895">大家好，希望各位前辈给予新人一些职业发展的建议</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="茯苓山楂" href="/iamhejz">茯苓山楂</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/39895#reply-266211">41</a>
+  </div>
+</div>
+<div class="topic media topic-39628">
+  <div class="avatar media-left">
+    <a title="AMEAME" href="/AMEAME"><img class="media-object avatar-48" src="/uploads/user/avatar/82577/d5c798.jpg!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="基于 AI 大模型的精准测试分享" data-original-title="基于 AI 大模型的精准测试分享" data-toggle="tooltip" href="/topics/39628">基于 AI 大模型的精准测试分享</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="" href="/AMEAME">AMEAME</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/39628#reply-265760">37</a>
+  </div>
+</div>
+<div class="topic media topic-39437">
+  <div class="avatar media-left">
+    <a title="Aizoujia521 (5t5)" href="/Aizoujia521"><img class="media-object avatar-48" src="/uploads/user/avatar/64182/7503ca.png!md" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="2024 年测试求职手册" data-original-title="2024 年测试求职手册" data-toggle="tooltip" href="/topics/39437">2024 年测试求职手册</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="5t5" href="/Aizoujia521">5t5</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/39437#reply-265181">128</a>
+  </div>
+</div>
+<div class="topic media topic-38560">
+  <div class="avatar media-left">
+    <a title="redspark (陆压)" href="/redspark"><img class="media-object avatar-48" src="https://testerhome.com/system/letter_avatars/r.png" /></a>
+  </div>
+  <div class="infos media-body">
+    <div class="title media-heading">
+    <i title="精华帖" class="fa fa-award" data-toggle="tooltip"></i>
+      <a title="一个基于多接口的业务自动化测试框架" data-original-title="一个基于多接口的业务自动化测试框架" data-toggle="tooltip" href="/topics/38560">一个基于多接口的业务自动化测试框架</a>
+      
+      
+    </div>
+    <div class="info">
+      <a class="user-name" data-name="陆压" href="/redspark">陆压</a>
+    </div>
+  </div>
+  <div class="count media-right">
+      <a class="state-false" href="/topics/38560#reply-245877">14</a>
+  </div>
+</div>
+
+        </div>
+    </div>
+    <div class="card-footer">
+      <a href="/topics/excellent">查看更多精华帖...</a>
+    </div>
+  </div>
+
+            <div class="index-locations card">
+      <div class="card-header">热门节点 <i class="fas fa-dot-circle"></i></div>
+      <div class="card-body location-list" style="text-align:center;">
+            <span class="name"><a title="Appium" data-id="23" href="/topics/node23">Appium</a></span>
+            <span class="name"><a title="招聘" data-id="19" href="/topics/node19">招聘</a></span>
+            <span class="name"><a title="问答" data-id="20" href="/topics/node20">问答</a></span>
+            <span class="name"><a title="AI测试" data-id="134" href="/topics/node134">AI测试</a></span>
+            <span class="name"><a title="测试基础" data-id="33" href="/topics/node33">测试基础</a></span>
+            <span class="name"><a title="接口测试" data-id="62" href="/topics/node62">接口测试</a></span>
+            <span class="name"><a title="匿名职言" data-id="37" href="/topics/node37">匿名职言</a></span>
+            <span class="name"><a title="自动化工具" data-id="2" href="/topics/node2">自动化工具</a></span>
+            <span class="name"><a title="新手区" data-id="36" href="/topics/node36">新手区</a></span>
+            <span class="name"><a title="研发效能" data-id="155" href="/topics/node155">研发效能</a></span>
+            <span class="name"><a title="灌水" data-id="11" href="/topics/node11">灌水</a></span>
+            <span class="name"><a title="Bug 曝光台" data-id="47" href="/topics/node47">Bug 曝光台</a></span>
+            <span class="name"><a title="通用技术" data-id="25" href="/topics/node25">通用技术</a></span>
+            <span class="name"><a title="职业经验" data-id="12" href="/topics/node12">职业经验</a></span>
+            <span class="name"><a title="性能测试工具" data-id="3" href="/topics/node3">性能测试工具</a></span>
+            <span class="name"><a title="Selenium" data-id="73" href="/topics/node73">Selenium</a></span>
+            <span class="name"><a title="Python" data-id="149" href="/topics/node149">Python</a></span>
+            <span class="name"><a title="违规处理区" data-id="55" href="/topics/node55">违规处理区</a></span>
+            <span class="name"><a title="其他测试框架" data-id="31" href="/topics/node31">其他测试框架</a></span>
+            <span class="name"><a title="Macaca" data-id="68" href="/topics/node68">Macaca</a></span>
+            <span class="name"><a title="活动沙龙" data-id="24" href="/topics/node24">活动沙龙</a></span>
+            <span class="name"><a title="测试管理" data-id="44" href="/topics/node44">测试管理</a></span>
+            <span class="name"><a title="持续集成" data-id="46" href="/topics/node46">持续集成</a></span>
+            <span class="name"><a title="iOS 测试" data-id="51" href="/topics/node51">iOS 测试</a></span>
+            <span class="name"><a title="京东质量社区" data-id="120" href="/topics/node120">京东质量社区</a></span>
+            <span class="name"><a title="移动性能测试" data-id="32" href="/topics/node32">移动性能测试</a></span>
+            <span class="name"><a title="STF" data-id="137" href="/topics/node137">STF</a></span>
+            <span class="name"><a title="求职" data-id="95" href="/topics/node95">求职</a></span>
+            <span class="name"><a title="MTSC" data-id="129" href="/topics/node129">MTSC</a></span>
+            <span class="name"><a title="UiAutomator" data-id="53" href="/topics/node53">UiAutomator</a></span>
+            <span class="name"><a title="鸿蒙" data-id="161" href="/topics/node161">鸿蒙</a></span>
+            <span class="name"><a title="WeTest腾讯质量开发平台" data-id="80" href="/topics/node80">WeTest腾讯质量开发平台</a></span>
+            <span class="name"><a title="Java" data-id="148" href="/topics/node148">Java</a></span>
+            <span class="name"><a title="性能常识" data-id="79" href="/topics/node79">性能常识</a></span>
+            <span class="name"><a title="游戏测试" data-id="136" href="/topics/node136">游戏测试</a></span>
+      </div>
+    </div>
+
+            <div class="index-locations card">
+      <div class="card-header">热门城市 <i class="fas fa-map-marker-alt"></i></div>
+      <div class="card-body location-list" style="text-align:center;">
+          <span class="name"><a href="/users/city/%E5%8C%97%E4%BA%AC">北京</a></span>
+          <span class="name"><a href="/users/city/%E4%B8%8A%E6%B5%B7">上海</a></span>
+          <span class="name"><a href="/users/city/%E6%B7%B1%E5%9C%B3">深圳</a></span>
+          <span class="name"><a href="/users/city/%E6%9D%AD%E5%B7%9E">杭州</a></span>
+          <span class="name"><a href="/users/city/%E5%B9%BF%E5%B7%9E">广州</a></span>
+          <span class="name"><a href="/users/city/%E6%88%90%E9%83%BD">成都</a></span>
+          <span class="name"><a href="/users/city/%E5%8D%97%E4%BA%AC">南京</a></span>
+          <span class="name"><a href="/users/city/%E6%AD%A6%E6%B1%89">武汉</a></span>
+          <span class="name"><a href="/users/city/%E8%A5%BF%E5%AE%89">西安</a></span>
+          <span class="name"><a href="/users/city/%E8%8B%8F%E5%B7%9E">苏州</a></span>
+          <span class="name"><a href="/users/city/%E9%87%8D%E5%BA%86">重庆</a></span>
+          <span class="name"><a href="/users/city/%E9%95%BF%E6%B2%99%E5%B8%82">长沙市</a></span>
+      </div>
+    </div>
+
+        <div class="row home-icons hidden-sm hidden-xs">
+    <div class="col-md-6">
+        <div class="item item5">
+            <div class="icon">
+                <img src="/uploads/photo/2023/cd50d650-d73b-4e7e-bb38-de557cb7f97d.jpg" width="100%" height="100%">
+            </div>
+            <div class="text">
+                <a href="/topics/popular">公众号<i class="pull-right fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="item item6">
+            <div class="icon">
+                <img src="/photo/2016/45740b8b1487cc191b585bc2da978f06.jpeg"  width="100%" height="100%">
+            </div>
+            <div class="text">
+                <a href="/topics/popular">个人号助手<i class="pull-right fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+    <div class="col-md-3 home-side-bar">
+        <!-- 
+<div class='card'>
+   <div class="card-header">氛围编程到规格驱动开发</div>
+   <a href="https://mp.weixin.qq.com/s/3sWzEI1V9iCn6ih1E13-dQ" target="_blank">
+      <img src="https://testerhome.com/uploads/photo/2026/1ad1ecfc-bba5-4471-b272-1e635a70f102.png"
+         class="img-responsive" alt="Responsive image" />
+   </a>
+</div>
+
+
+-->
+
+
+<div class='card'>
+   <div class="card-header"><b>Hi-CC精准测试质管平台</b></div>
+   <div id="demo1" class="carousel slide" data-ride="carousel" data-interval="4000">   
+      <div class="carousel-inner">         
+         <div class="carousel-item active">
+            <div>
+               <a href="https://codecaptain.cc/" target="_blank">
+                  <img src="https://testerhome.com/uploads/photo/2024/ee458f33-0f37-45b0-8c6e-1e983a922cc3.gif
+               " class="img-responsive" alt="Responsive image" />
+               </a>
+               <a href="https://codecaptain.cc/">
+                   Hi-CC 前端覆盖率实时展示                 
+                  <p />
+               </a>
+            </div>
+         </div>
+         <div class="carousel-item ">
+            <div>
+               <a href="https://codecaptain.cc/" target="_blank">
+                  <img src="https://testerhome.com/uploads/photo/2025/0a1863e4-89ca-41ba-b552-f1ff01750b57.jpg
+               " class="img-responsive" alt="Responsive image" />
+               </a>
+               <a href="https://codecaptain.cc/">
+                   Hi-CC 精准测试工具
+                  <p />
+               </a>
+            </div>
+         </div>
+              
+         
+         <a class="carousel-control-prev" href="#demo1" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+         </a>
+         <a class="carousel-control-next" href="#demo1" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+         </a>
+      </div>
+   </div>
+</div>
+
+<div class='card'>
+   <div class="card-header">最新招聘</div>
+   <div class="card-body">
+
+     <a href="https://testerhome.com/topics/43915" target="_blank">【杭州】蚂蚁数字科技 - AI 产品质量工程师</a><br />
+     <a href="https://testerhome.com/topics/43767" target="_blank">【北京】乐信圣文 APP测试组长/主测试/AI 测开</a><br />  
+  
+   </div>  
+</div>
+<!--
+<div class='card'>
+   <div class="card-header">龙虾专属codingplan套餐</div>
+   <a href="https://www.compshare.cn/coding-plan?ytag=GPU_YY_JL_testerhome" target="_blank">
+      <img src="https://testerhome.com/uploads/photo/2026/942f3814-47c1-4d28-b6cb-b504839469d9.png"
+         class="img-responsive" alt="Responsive image" />
+   </a>
+</div>
+-->
+
+<div class='card'>
+<div class="_un22wbhhc5"></div>
+    <script type="text/javascript"> 
+        (window.slotbydup = window.slotbydup || []).push({
+            id: "u6999134",
+            container: "_un22wbhhc5",
+            async: true
+        });
+    </script>
+    <!-- 多条广告如下脚本只需引入一次 -->
+    <script type="text/javascript" src="//cpro.baidustatic.com/cpro/ui/cm.js" async="async" defer="defer" >
+    </script>
+</div>
+
+<div class='card'>
+   <a href="https://aidynamic.com/home/product/60" target="_blank">
+      <img src="https://testerhome.com/uploads/photo/2025/e63d538d-0227-45a3-a79f-ab475064ea6b.jpg!large"
+         class="img-responsive" alt="Responsive image" />
+   </a>
+</div>
+
+    <div class="home_suggest_topics card">
+      <div class="card-header">七日最热 Top10</div>
+      <div class="card-body">
+          <div class="sidebar_topic topic-44813">
+  <div class="title">
+            <span class="badge badge-light top3">1</span></a>
+
+    <a title="关于下午茶福利适用范围的调整通知： 经与集团于 9 月 4 日确认，自 2026 年 9 月起，劳务派遣人员不享受我司下午茶福利，相关福利由其签约的第三方公司另行安排。因此，后续的下午茶接龙活动劳务派遣同事请不必再参与接龙,感谢各位的配合！@ 所有人  " href="/topics/44813">
+        关于下午茶福利适用范围的调整通知： 经与集团于 9 月 4 日确认，自 2026 年 9 月起，劳务派遣人员不享受我司下午茶福利，相关福利由其签约的第三方公司另行安排。因此，后续的下午茶接龙活动劳务派遣同事请不必再参与接龙,感谢各位的配合！@ 所有人  
+</a>  </div>
+</div>
+<div class="sidebar_topic topic-44815">
+  <div class="title">
+            <span class="badge badge-light top3">2</span></a>
+
+    <a title="【AI 时代下 - 精准测试新范式】用 AI + Git 自动生成提测变更日志" href="/topics/44815">
+        【AI 时代下 - 精准测试新范式】用 AI + Git 自动生成提测变更日志
+</a>  </div>
+</div>
+<div class="sidebar_topic topic-44816">
+  <div class="title">
+            <span class="badge badge-light top3">3</span></a>
+
+    <a title="作为一个测试，我做了个统一管理面试信息的小程序：Offer 时光机" href="/topics/44816">
+        作为一个测试，我做了个统一管理面试信息的小程序：Offer 时光机
+</a>  </div>
+</div>
+<div class="sidebar_topic topic-44812">
+  <div class="title">
+            <span class="badge badge-light">4</span></a>
+
+    <a title="为什么都说要做自动化测试，落地却这么难！（附自动化测试的四种死法）" href="/topics/44812">
+        为什么都说要做自动化测试，落地却这么难！（附自动化测试的四种死法）
+</a>  </div>
+</div>
+<div class="sidebar_topic topic-44831">
+  <div class="title">
+            <span class="badge badge-light">5</span></a>
+
+    <a title="做为一个 10 几年的测试，目前已经全职开发 2 年。随便唠唠~" href="/topics/44831">
+        做为一个 10 几年的测试，目前已经全职开发 2 年。随便唠唠~
+</a>  </div>
+</div>
+<div class="sidebar_topic topic-44826">
+  <div class="title">
+            <span class="badge badge-light">6</span></a>
+
+    <a title="最近火爆出圈的，FDE 到底是个什么岗位？" href="/topics/44826">
+        最近火爆出圈的，FDE 到底是个什么岗位？
+</a>  </div>
+</div>
+<div class="sidebar_topic topic-44814">
+  <div class="title">
+            <span class="badge badge-light">7</span></a>
+
+    <a title="iPhone Duo 发布后，折叠态 App 测试矩阵应该怎么设计？" href="/topics/44814">
+        iPhone Duo 发布后，折叠态 App 测试矩阵应该怎么设计？
+</a>  </div>
+</div>
+
+      </div>
+    </div>
+
+    <div class="home_suggest_topics card">
+      <div class="card-header">最新 bug <i class="fa fa-bug" aria-hidden="true"></i></div>
+      <div class="card-body">
+        <div class="sidebar_topic topic-44650">
+  <div class="title">
+            <span class="badge badge-light top3">1</span></a>
+
+    <a title="服务器出问题了" href="/topics/44650">
+        服务器出问题了
+</a>  </div>
+</div>
+<div class="sidebar_topic topic-44330">
+  <div class="title">
+            <span class="badge badge-light top3">2</span></a>
+
+    <a title="社区证书到期了 该更换了" href="/topics/44330">
+        社区证书到期了 该更换了
+</a>  </div>
+</div>
+<div class="sidebar_topic topic-43509">
+  <div class="title">
+            <span class="badge badge-light top3">3</span></a>
+
+    <a title="首页 ui bug" href="/topics/43509">
+        首页 ui bug
+</a>  </div>
+</div>
+<div class="sidebar_topic topic-43458">
+  <div class="title">
+            <span class="badge badge-light">4</span></a>
+
+    <a title="版主模块，点击某个版主跳转页面报错 404" href="/topics/43458">
+        版主模块，点击某个版主跳转页面报错 404
+</a>  </div>
+</div>
+<div class="sidebar_topic topic-43391">
+  <div class="title">
+            <span class="badge badge-light">5</span></a>
+
+    <a title="社区最新招聘板块 点击链接报错 404" href="/topics/43391">
+        社区最新招聘板块 点击链接报错 404
+</a>  </div>
+</div>
+
+      </div>
+    </div>
+
+<div class="home_suggest_topics card">
+<div class="card-header">最新收录开源测试项目</div>
+<div class="card-body">
+    <div class="sidebar_topic topic-265">
+  <div class="title">
+        <img class="avatar-small" src="/uploads/opensource_project/2026/aaaa1390-5f95-41bd-83cd-56af8ce371ad.png">
+        <a title="MokaTest：覆盖需求管理、API 测试、UI 自动化的开源测试平台" href="/opensource_projects/265">
+        MokaTest：覆盖需求管理、API 测试、UI 自动化的开源测试平台
+</a>  </div>
+</div>
+<div class="sidebar_topic topic-264">
+  <div class="title">
+        <img class="avatar-small" src="/uploads/opensource_project/2026/3af22715-03b5-48c1-87d8-7eba9350cecb.jpg">
+        <a title="Freemind AI" href="/opensource_projects/264">
+        Freemind AI
+</a>  </div>
+</div>
+<div class="sidebar_topic topic-260">
+  <div class="title">
+        <img class="avatar-small" src="/uploads/opensource_project/2026/7b2b66b3-d80d-4fe8-ab0b-7c2ad8f25b5b.jpg">
+        <a title="基于 AI 技术的 UI 自动化测试工具" href="/opensource_projects/visiobotclient">
+        基于 AI 技术的 UI 自动化测试工具
+</a>  </div>
+</div>
+<div class="sidebar_topic topic-255">
+  <div class="title">
+        <img class="avatar-small" src="/uploads/opensource_project/2025/7d16d1bd-78c6-467a-ac98-f253833c0661.png">
+        <a title="🚀 JokerAIRunner：AI驱动的极简测试框架" href="/opensource_projects/255">
+        🚀 JokerAIRunner：AI驱动的极简测试框架
+</a>  </div>
+</div>
+<div class="sidebar_topic topic-256">
+  <div class="title">
+        <img class="avatar-small" src="/uploads/opensource_project/2025/15f0f2f1-44a0-493b-9a95-5245f992b926.png">
+        <a title="Dingo：面向AI时代的全方位数据质量评估工具" href="/opensource_projects/256">
+        Dingo：面向AI时代的全方位数据质量评估工具
+</a>  </div>
+</div>
+
+</div>
+</div>
+
+
+<div id="hall-of-fames" class="card">
+  <div class="card-header">最新加入 <i class='fa fa-fire'></i>（新同学）</div>
+  <div class="card-body">
+        <div class="users-label">
+              <a class="users-label-item" href="/think-aloud" title="">
+                <img class="avatar-small inline-block" src="/uploads/user/avatar/107561/2c5e6c.jpg!sm">
+                think-aloud
+              </a>
+              <a class="users-label-item" href="/L-zisheng" title="L-zisheng">
+                <img class="avatar-small inline-block" src="/uploads/user/avatar/107554/4e9376.png!sm">
+                L-zisheng
+              </a>
+              <a class="users-label-item" href="/Joel" title="Joel">
+                <img class="avatar-small inline-block" src="/uploads/user/avatar/107553/5bdd49.png!sm">
+                Joel
+              </a>
+              <a class="users-label-item" href="/ldl" title="勿孤行">
+                <img class="avatar-small inline-block" src="/uploads/user/avatar/107552/29d89f.jpg!sm">
+                ldl
+              </a>
+              <a class="users-label-item" href="/Testwww" title="荷包蛋">
+                <img class="avatar-small inline-block" src="/uploads/user/avatar/107540/3320e7.jpg!sm">
+                Testwww
+              </a>
+    </div>
+
+  </div>
+</div>
+
+
+
+    <div class="card">
+      <div class="card-header">统计信息</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">社区会员: 100217 人</li>
+        <li class="list-group-item">帖子数: 42034 个</li>
+        <li class="list-group-item">回帖数: 264406 条</li>
+      </ul>
+    </div>
+
+    </div>
+</div>
+  </div>
+
+  <footer class="footer" id="footer" data-turbolinks-permanent>
+    <div class="container">
+      <div class="row">
+  <div class="col-sm-9">
+    <div class="media">
+
+      <div class="media-left">
+        <img src="https://testerhome.com/uploads/photo/2016/274e7ebc8ad0db0b7e718fceea3628a9.png!large" style="width:48px;">
+      </div>
+
+      <div class="media-body ml-2">
+
+        <div class="links" style="color:black;">
+          <a href="https://testerhome.com/wiki/about">关于</a> /
+          <a href="https://testerhome.com/users">活跃用户</a> /
+          <a href="https://www.bagevent.com/event/7689076?bag_track=sqznpt"  target="_blank">中国移动互联网测试技术大会</a> /
+          <a href="/topics/node13">反馈</a> /
+          <a href="https://github.com/testerhome">Github</a> /
+          <a href="https://testerhome.com//api-doc/">API</a> /
+          <a href="/wiki/spreadtesterhome">帮助推广</a>
+
+        </div>
+        <div class="copyright" style="font-size:14px; color:#9CA4A9;margin-top:0px;margin-bottom:5px">
+          TesterHome社区，测试之家，由众多测试工程师组织和维护的技术社区，致力于帮助新人成长，提高测试地位，推进质量发展。Inspired by RubyChina
+        </div>
+        <div class="links"  data-no-turbolink="">
+          <span style="font-size:14px; color:#666;">友情链接</span><span style="margin-left:5px">
+            <a style="" href="http://wetest.qq.com/?utm_source=testerhome&utm_content=friendslinks" target="_blank">WeTest腾讯质量开放平台</a> /
+            <a style="" href="http://www.infoq.com/cn" target="_blank">InfoQ</a> /
+            <a style="" href="https://juejin.cn/" target="_blank">掘金</a> /
+            <a style="" href="https://segmentfault.com/" target="_blank">SegmentFault</a> /
+            <a style="" href="https://www.testwo.com/" target="_blank">测试窝</a> /
+            <a style="" href="http://tieba.baidu.com/f?ie=utf-8&kw=%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95&fr=search" target="_blank">百度测试吧</a> /
+            <a style="" href="http://www.itdks.com/" target="_blank">IT大咖说</a>
+          </span>
+        </div>
+        <div class="links" style="margin-top:0px" data-no-turbolink="">
+          <a href="?locale=zh-CN" rel="nofollow">简体中文</a> / <a href="?locale=zh-TW" rel="nofollow">正體中文</a> / <a href="?locale=en" rel="nofollow">English</a>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-3 friends">
+    <a href="https://www.biggeryun.com/?f=60067a65600b4"
+       target="_blank" rel="twipsy" style="display:inline-block;margin-right:5px;" data-original-title="本站服务器由比格云赞助"><img src="https://testerhome.com/uploads/photo/2021/685b27cf-3507-44e2-90bf-f3fe5175edd5.jpg" style="height:50px"></a>
+
+    <a href="http://www.sendcloud.net/"
+       target="_blank" rel="twipsy" style="display:inline-block;margin-right:5px;" data-original-title="邮件服务由 SendCloud 赞助"><img src="https://testerhome.com/uploads/photo/2017/0f9fb5db-2472-4430-9f7e-6c051f28c3c9.png" style="height:28px"></a>
+  </div>
+</div>
+<hr />
+<div class="row"  style="text-align:center"  >
+
+
+          <span style="font-size:14px; color:#666;"> ©testerhome.com 测试之家</span>
+          <a href="https://beian.miit.gov.cn/"  target="_blank">&nbsp;&nbsp;渝ICP备2022001292号</a><br />
+
+&nbsp;&nbsp;<img src="/uploads/photo/2024/332408c8-92a7-4591-9335-3efa595a6b2d.png" width="16" height="16">渝公网安备 50022202000435号
+
+<span style="font-size:14px; color:#666;"> &nbsp;&nbsp; 版权所有 © 重庆年云聚力信息技术有限公司</span>
+</div>
+    </div>
+  </footer>
+
+  <script type="text/javascript" data-turbolinks-eval="false">
+    App.root_url = "https://testerhome.com/";
+    App.asset_url = "";
+    App.twemoji_url = "https://twemoji.ruby-china.com/2";
+    App.locale = "zh-CN";
+  </script>
+  
+  <script>
+    ga('create', '', 'auto');
+    ga('require', 'displayfeatures');
+    ga('send', 'pageview');
+  </script>
+  <div class="zoom-overlay"></div>
+</body>
+</html>

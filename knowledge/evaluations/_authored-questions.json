@@ -1,0 +1,99 @@
+{
+  "schema": "career-graph-eval-questions/authored-v1",
+  "note": "人工读原文手写（本文件即题面来源）。规则：每题 2 段参考答案、同来源、原文间隔 >= 3、参考段未落在图谱引用集合内；题面不得含与原文连续相同 12 字以上的片段。",
+  "questions": [
+    {
+      "questionId": "AT01", "category": "嵌入式开发",
+      "referenceChunks": ["S03#s61~2", "S03#s61~6"],
+      "question": "在 ESP-IDF 里要申请一块带对齐要求、并且指定内存能力的内存，对齐参数有什么硬性约束？另外，如果想检查所有堆有没有被写坏、并且希望把具体出错信息打出来，该调哪个接口、返回值怎么读？",
+      "gradingNotes": "对齐：alignment 必须是 2 的幂；分配失败返回 NULL。完整性检查：heap_caps_check_integrity_all(bool print_errors) 等价于 heap_caps_check_integrity(MALLOC_CAP_INVALID, print_errors)；返回 true 表示所有堆有效、false 表示至少有一个堆损坏；开 PSRAM 时用该接口需调大 CONFIG_ESP_INT_WDT_TIMEOUT_MS。"
+    },
+    {
+      "questionId": "AT02", "category": "嵌入式开发",
+      "referenceChunks": ["S03#s61~3", "S03#s61~7"],
+      "question": "用 heap_caps_calloc 拿到的内存初值是什么？它和标准库 calloc 在 IDF 里是什么对应关系？还有，如果已经知道堆损坏发生在某个地址附近、想用开销更小的方式查，应该用哪个接口，什么情况下这种查法会不管用？",
+      "gradingNotes": "calloc 语义：分配后内存被置零；IDF 里 calloc(p) 等价于 heap_caps_calloc(p, MALLOC_CAP_8BIT)。地址检查：heap_caps_check_integrity_addr(addr, print_errors)，它检查该地址所在的整个堆区域（不只是相邻块）、开销低于全量检查；但若损坏地址在不同次运行间漂移（时序等因素），此法失效，应改用 heap_caps_check_integrity 或 heap_caps_check_integrity_all。"
+    },
+    {
+      "questionId": "AT03", "category": "嵌入式开发",
+      "referenceChunks": ["S03#s61~4", "S03#s61~10"],
+      "question": "heap_caps_get_minimum_free_size 返回的数值，和「这块内存历史上最少剩多少」是不是一回事？为什么？另外，如果我想遍历某个能力集合下的所有堆、并在每个块上做点事，用哪个接口、回调要带哪些参数？",
+      "gradingNotes": "minimum_free_size 是把各 region 的低水位线相加；由于低水位线是按 region 分别记录的、各 region 到达低位的时刻不同，所以该结果可能小于「全局历史最低可用堆」。遍历接口：heap_caps_walk(caps, walker_func, user_data) 与 heap_caps_walk_all(walker_func, user_data)；回调参数为 caps / walker_func / user_data（user_data 是用户自定义数据的不透明指针）。"
+    },
+    {
+      "questionId": "AT04", "category": "嵌入式开发",
+      "referenceChunks": ["S04#s78~3", "S04#s78~7"],
+      "question": "在 ESP32 上给某个 IO 配内部上拉或下拉时要注意哪些坑：重复调用会怎样、有没有哪些引脚根本没有内部上下拉电阻？另外 gpio_hold 是做什么用的，开启后引脚还受不受后续配置改动影响？",
+      "gradingNotes": "gpio_set_pull_mode 每次调用都会覆盖当前上下拉配置；ESP32 上只有同时支持输入输出的引脚才有内部上下拉，仅输入的 GPIO34–39 没有。gpio_hold_en 把引脚状态在那一点锁存，此后修改内部信号或 IO MUX/GPIO 配置（输入使能、输出使能、输出值、功能、驱动能力等）都不会改变该状态。"
+    },
+    {
+      "questionId": "AT05", "category": "嵌入式开发",
+      "referenceChunks": ["S04#s78~5", "S04#s78~10"],
+      "question": "要把一个 IO 配成开漏输出，应该用哪个接口？如果还想单独设置它在睡眠期间的上拉下拉，用哪个函数？这个函数和普通模式下的上下拉配置在参数与返回值风格上有什么一致之处？",
+      "gradingNotes": "开漏：gpio_od_enable（关闭用 gpio_od_disable）。睡眠期上下拉：gpio_sleep_set_pull_mode(gpio_num, pull)；两者参数都接受 gpio_num（如 GPIO_NUM_16 写作 16）与 pull 模式，返回值同为 esp_err_t（ESP_OK / ESP_ERR_INVALID_ARG）。"
+    },
+    {
+      "questionId": "AT06", "category": "嵌入式开发",
+      "referenceChunks": ["S02#s41~2", "S02#s41~5"],
+      "question": "SPI 主机驱动里「排队交给中断去执行」和「轮询发送」这两类事务，在接口用法和并发限制上分别有什么讲究？各自有没有明确的使用禁忌？",
+      "gradingNotes": "中断事务：spi_device_queue_trans 入队、结果用 spi_device_get_trans_result 取；同一设备通常不能同时启动（排队）轮询事务与中断事务。轮询事务：spi_device_polling_transmit 等价于依次调用 spi_device_polling_start 与 spi_device_polling_end；在上一个事务尚未 finalize 时不得使用。"
+    },
+    {
+      "questionId": "AT07", "category": "嵌入式开发",
+      "referenceChunks": ["S02#s41~3", "S02#s41~7"],
+      "question": "从 SPI 事务结果接口取回结果时，对事务描述符的使用有什么约束、为什么？另外 SPI 主机频率上限意味着什么：超过上限之后会出现什么现象？",
+      "gradingNotes": "取结果：spi_device_get_trans_result 会等待目标设备的事务完成并返回描述符指针，软件据此检查结果、释放或复用缓冲；在描述符被返回之前不得修改它。频率上限：spi_get_freq_limit 给出当前配置下的频率上限，主机工作在该上限内没问题，超过后全双工模式与 DMA 将不可用，半双工模式下会插入 dummy 位。"
+    },
+
+    {
+      "questionId": "AT08", "category": "测试自动化",
+      "referenceChunks": ["S13#s223", "S13#s223~4"],
+      "question": "pytest 里把 fixture 参数化之后，依赖它的测试会怎么执行？如果我不想用自动生成的用例 ID、而是自己指定名字，有哪几种写法、返回值需要注意什么？",
+      "gradingNotes": "参数化的 fixture 会被多次调用，每次执行依赖它的那组测试；测试函数通常无需感知自己被重复运行。ids 可以传字符串列表，也可以传一个函数：该函数接收 fixture 值、须返回一个字符串，若返回 None 则回退到 pytest 自动生成的 ID。"
+    },
+    {
+      "questionId": "AT09", "category": "测试自动化",
+      "referenceChunks": ["S13#s225", "S13#s231"],
+      "question": "fixture 之间能不能互相引用、这样做的价值是什么？另外，当同一个 fixture 在 conftest 与具体测试文件里都被定义时，哪一层生效、能不能只对个别用例覆盖？",
+      "gradingNotes": "fixture 可以使用其它 fixture，带来模块化设计与跨项目复用。覆盖：测试文件层（或直接用 parametrize 为某个 test 注入同名参数）可覆盖上层 conftest 中定义的 fixture，属于按目录层级与用例级别的覆盖机制。"
+    },
+    {
+      "questionId": "AT10", "category": "测试自动化",
+      "referenceChunks": ["S14#s247", "S14#s266"],
+      "question": "有没有办法不改 fixture 代码、只用命令行选项就改变它的作用范围？如果有，那个 callable 是怎么被调用的？另外，同一个测试里需要多次创建同类数据时，fixture 该怎么写比较合适？",
+      "gradingNotes": "动态 scope：把 scope 传成 callable，它必须返回合法范围字符串，只在 fixture 定义期间执行一次，调用时会传入 fixture_name 与 config 两个关键字参数（例：可用 --keep-containers 决定 session 还是 function），适合 docker 容器这类耗时的 setup。工厂模式：fixture 不直接返回数据而返回一个生成数据的函数，测试里可多次调用，需要管理时可在 fixture 内维护已创建记录列表。"
+    },
+
+    {
+      "questionId": "AT11", "category": "AI框架与推理",
+      "referenceChunks": ["S05#s109", "S05#s109~4"],
+      "question": "用 MindSpore Lite 的 benchmark 工具在 Windows 上做推理测试，运行前要做哪些环境准备、怎么指定要跑的模型？跑完之后输出里的平均误差是什么意思、如果不指定输入数据会怎样？",
+      "gradingNotes": "环境准备：把运行 benchmark 所需的动态链接库目录加入 PATH，并进入发布件下的 tools/benchmark 目录；用 --modelFile=mobilenetv2.ms 指定模型，其它参数用默认值；未指定输入数据时会生成随机数作为输入。输出中 Mean bias of node/tensor 给出该输出张量与标杆数据对比的平均误差（benchmark 自带的比较算法），Mean bias of all nodes/tensors 是所有张量的平均误差。"
+    },
+    {
+      "questionId": "AT12", "category": "AI框架与推理",
+      "referenceChunks": ["S05#s110", "S05#s110~4"],
+      "question": "用 MindSpore Lite 的 C++ 接口自己写推理程序时，编译环境有什么要求？代码里取输入张量、填数据、再执行预测大致是怎样的调用序列、失败时怎么判断？",
+      "gradingNotes": "环境：Windows 7/10 64 位；CMake >= 3.22.3；MinGW-W64（x86_64 或 i686）GCC-7.3.0。调用序列：model->GetInputs() 拿输入张量 → tensor.MutableData() 取可写指针（空指针说明分配失败）→ 写入数据 → model->Predict(inputs, &outputs)，用返回的 status 与 mindspore::kSuccess 比较判断是否推理出错。"
+    },
+    {
+      "questionId": "AT13", "category": "AI框架与推理",
+      "referenceChunks": ["S05#s101~2", "S05#s101~6"],
+      "question": "在 Linux 上把 MindSpore Lite 集成进自己的工程时，如果要链接静态库应该加什么链接选项？程序跑起来后想直观看看输出对不对，一般怎么处理输出张量？",
+      "gradingNotes": "静态库：用 -Wl,--whole-archive libmindspore-lite.a -Wl,--no-whole-archive 替换 mindspore-lite 的链接项。输出：用 tensor.MutableData() 拿到 float 指针后按 tensor.ElementNum() 逐元素打印；示例中输出张量含 1000 个数值，与 Netron 中看到的模型理解一致。"
+    },
+
+    {
+      "questionId": "AT14", "category": "职业能力",
+      "referenceChunks": ["S16#s298~2", "S16#s298~5"],
+      "question": "O*NET 收录的软件质量保证分析师与测试员这个职业，在数据库和操作系统这两类软件上分别常用到哪些工具？能不能举出被标为热门技术的例子？",
+      "gradingNotes": "数据库类：数据库管理系统（如 Amazon DynamoDB、Elasticsearch、MongoDB、Oracle PL/SQL 等被标为 Hot Technology）、数据库报表软件、面向对象数据库管理软件（Hibernate ORM、PostgreSQL 等 Hot Technology）。操作系统类：Google Android、Microsoft Windows Server、Red Hat Enterprise Linux、UNIX Shell 等被标为 Hot Technology。"
+    },
+    {
+      "questionId": "AT15", "category": "职业能力",
+      "referenceChunks": ["S16#s298", "S16#s298~4"],
+      "question": "这个职业在分析与科学计算软件、图形图像软件上分别用到什么？其中哪些被标为热门技术？",
+      "gradingNotes": "分析或科学软件：IBM SPSS Statistics、Minitab、SAS、The MathWorks MATLAB 等，其中 SPSS/SAS/MATLAB 标注为 Hot Technology。图形或照片成像软件：Adobe Creative Cloud、Adobe Illustrator、JamBoard、Trimble SketchUp Pro 等，其中 Adobe Creative Cloud / Illustrator / SketchUp Pro 标注为 Hot Technology。"
+    }
+  ]
+}

@@ -1,0 +1,2309 @@
+{
+  "schema": "career-graph-raw-blocks/v1",
+  "sourceId": "S08",
+  "url": "https://docs.ultralytics.com/zh/guides/model-deployment-options/",
+  "finalUrl": "https://docs.ultralytics.com/zh/guides/model-deployment-options",
+  "fetchedAt": "2026-09-15T09:56:51.087Z",
+  "httpStatus": 200,
+  "contentType": "text/html; charset=utf-8",
+  "charset": "utf-8",
+  "byteSize": 375328,
+  "sha256": "a49959f2687e0d4e0c53ad98b7d7dece5b43ca2859f0596451ff48cec4b8bb09",
+  "title": "YOLO26 部署选项比较 | Ultralytics",
+  "hops": [
+    {
+      "url": "https://docs.ultralytics.com/zh/guides/model-deployment-options/",
+      "finalUrl": "https://docs.ultralytics.com/zh/guides/model-deployment-options",
+      "httpStatus": 200,
+      "bytes": 375328,
+      "charset": "utf-8"
+    }
+  ],
+  "flags": [],
+  "extractionPass": "pruned",
+  "prunedBlockCount": 253,
+  "prunedTextLength": 7337,
+  "blockCount": 253,
+  "textLength": 7337,
+  "ranges": [
+    [
+      0,
+      32
+    ],
+    [
+      34,
+      51
+    ],
+    [
+      53,
+      69
+    ],
+    [
+      71,
+      263
+    ],
+    [
+      265,
+      373
+    ],
+    [
+      375,
+      431
+    ],
+    [
+      433,
+      456
+    ],
+    [
+      458,
+      565
+    ],
+    [
+      567,
+      587
+    ],
+    [
+      589,
+      595
+    ],
+    [
+      597,
+      672
+    ],
+    [
+      674,
+      687
+    ],
+    [
+      689,
+      740
+    ],
+    [
+      742,
+      832
+    ],
+    [
+      834,
+      916
+    ],
+    [
+      918,
+      972
+    ],
+    [
+      974,
+      1053
+    ],
+    [
+      1055,
+      1119
+    ],
+    [
+      1121,
+      1201
+    ],
+    [
+      1203,
+      1284
+    ],
+    [
+      1286,
+      1340
+    ],
+    [
+      1342,
+      1412
+    ],
+    [
+      1414,
+      1538
+    ],
+    [
+      1540,
+      1588
+    ],
+    [
+      1590,
+      1643
+    ],
+    [
+      1645,
+      1687
+    ],
+    [
+      1689,
+      1769
+    ],
+    [
+      1771,
+      1834
+    ],
+    [
+      1836,
+      1916
+    ],
+    [
+      1918,
+      2001
+    ],
+    [
+      2003,
+      2053
+    ],
+    [
+      2055,
+      2144
+    ],
+    [
+      2146,
+      2286
+    ],
+    [
+      2288,
+      2590
+    ],
+    [
+      2592,
+      2599
+    ],
+    [
+      2601,
+      2656
+    ],
+    [
+      2658,
+      2662
+    ],
+    [
+      2664,
+      2670
+    ],
+    [
+      2672,
+      2678
+    ],
+    [
+      2680,
+      2689
+    ],
+    [
+      2691,
+      2695
+    ],
+    [
+      2697,
+      2702
+    ],
+    [
+      2704,
+      2711
+    ],
+    [
+      2713,
+      2717
+    ],
+    [
+      2719,
+      2726
+    ],
+    [
+      2728,
+      2744
+    ],
+    [
+      2746,
+      2762
+    ],
+    [
+      2764,
+      2773
+    ],
+    [
+      2775,
+      2782
+    ],
+    [
+      2784,
+      2790
+    ],
+    [
+      2792,
+      2799
+    ],
+    [
+      2801,
+      2819
+    ],
+    [
+      2821,
+      2832
+    ],
+    [
+      2834,
+      2851
+    ],
+    [
+      2853,
+      2874
+    ],
+    [
+      2876,
+      2898
+    ],
+    [
+      2900,
+      2916
+    ],
+    [
+      2918,
+      2935
+    ],
+    [
+      2937,
+      2957
+    ],
+    [
+      2959,
+      2979
+    ],
+    [
+      2981,
+      2985
+    ],
+    [
+      2987,
+      2993
+    ],
+    [
+      2995,
+      3009
+    ],
+    [
+      3011,
+      3026
+    ],
+    [
+      3028,
+      3039
+    ],
+    [
+      3041,
+      3051
+    ],
+    [
+      3053,
+      3067
+    ],
+    [
+      3069,
+      3077
+    ],
+    [
+      3079,
+      3087
+    ],
+    [
+      3089,
+      3105
+    ],
+    [
+      3107,
+      3124
+    ],
+    [
+      3126,
+      3138
+    ],
+    [
+      3140,
+      3163
+    ],
+    [
+      3165,
+      3181
+    ],
+    [
+      3183,
+      3195
+    ],
+    [
+      3197,
+      3210
+    ],
+    [
+      3212,
+      3220
+    ],
+    [
+      3222,
+      3240
+    ],
+    [
+      3242,
+      3255
+    ],
+    [
+      3257,
+      3276
+    ],
+    [
+      3278,
+      3287
+    ],
+    [
+      3289,
+      3301
+    ],
+    [
+      3303,
+      3308
+    ],
+    [
+      3310,
+      3326
+    ],
+    [
+      3328,
+      3334
+    ],
+    [
+      3336,
+      3355
+    ],
+    [
+      3357,
+      3372
+    ],
+    [
+      3374,
+      3389
+    ],
+    [
+      3391,
+      3408
+    ],
+    [
+      3410,
+      3420
+    ],
+    [
+      3422,
+      3429
+    ],
+    [
+      3431,
+      3456
+    ],
+    [
+      3458,
+      3471
+    ],
+    [
+      3473,
+      3483
+    ],
+    [
+      3485,
+      3508
+    ],
+    [
+      3510,
+      3534
+    ],
+    [
+      3536,
+      3545
+    ],
+    [
+      3547,
+      3561
+    ],
+    [
+      3563,
+      3573
+    ],
+    [
+      3575,
+      3583
+    ],
+    [
+      3585,
+      3596
+    ],
+    [
+      3598,
+      3611
+    ],
+    [
+      3613,
+      3634
+    ],
+    [
+      3636,
+      3646
+    ],
+    [
+      3648,
+      3656
+    ],
+    [
+      3658,
+      3677
+    ],
+    [
+      3679,
+      3698
+    ],
+    [
+      3700,
+      3715
+    ],
+    [
+      3717,
+      3728
+    ],
+    [
+      3730,
+      3757
+    ],
+    [
+      3759,
+      3775
+    ],
+    [
+      3777,
+      3801
+    ],
+    [
+      3803,
+      3817
+    ],
+    [
+      3819,
+      3838
+    ],
+    [
+      3840,
+      3858
+    ],
+    [
+      3860,
+      3878
+    ],
+    [
+      3880,
+      3886
+    ],
+    [
+      3888,
+      3913
+    ],
+    [
+      3915,
+      3936
+    ],
+    [
+      3938,
+      3958
+    ],
+    [
+      3960,
+      3988
+    ],
+    [
+      3990,
+      4001
+    ],
+    [
+      4003,
+      4016
+    ],
+    [
+      4018,
+      4037
+    ],
+    [
+      4039,
+      4051
+    ],
+    [
+      4053,
+      4067
+    ],
+    [
+      4069,
+      4082
+    ],
+    [
+      4084,
+      4095
+    ],
+    [
+      4097,
+      4110
+    ],
+    [
+      4112,
+      4123
+    ],
+    [
+      4125,
+      4134
+    ],
+    [
+      4136,
+      4150
+    ],
+    [
+      4152,
+      4155
+    ],
+    [
+      4157,
+      4167
+    ],
+    [
+      4169,
+      4195
+    ],
+    [
+      4197,
+      4209
+    ],
+    [
+      4211,
+      4217
+    ],
+    [
+      4219,
+      4230
+    ],
+    [
+      4232,
+      4239
+    ],
+    [
+      4241,
+      4261
+    ],
+    [
+      4263,
+      4267
+    ],
+    [
+      4269,
+      4287
+    ],
+    [
+      4289,
+      4302
+    ],
+    [
+      4304,
+      4324
+    ],
+    [
+      4326,
+      4344
+    ],
+    [
+      4346,
+      4358
+    ],
+    [
+      4360,
+      4367
+    ],
+    [
+      4369,
+      4389
+    ],
+    [
+      4391,
+      4402
+    ],
+    [
+      4404,
+      4417
+    ],
+    [
+      4419,
+      4457
+    ],
+    [
+      4459,
+      4476
+    ],
+    [
+      4478,
+      4487
+    ],
+    [
+      4489,
+      4509
+    ],
+    [
+      4511,
+      4520
+    ],
+    [
+      4522,
+      4540
+    ],
+    [
+      4542,
+      4555
+    ],
+    [
+      4557,
+      4577
+    ],
+    [
+      4579,
+      4606
+    ],
+    [
+      4608,
+      4622
+    ],
+    [
+      4624,
+      4637
+    ],
+    [
+      4639,
+      4663
+    ],
+    [
+      4665,
+      4672
+    ],
+    [
+      4674,
+      4686
+    ],
+    [
+      4688,
+      4698
+    ],
+    [
+      4700,
+      4718
+    ],
+    [
+      4720,
+      4752
+    ],
+    [
+      4754,
+      4770
+    ],
+    [
+      4772,
+      4780
+    ],
+    [
+      4782,
+      4796
+    ],
+    [
+      4798,
+      4813
+    ],
+    [
+      4815,
+      4838
+    ],
+    [
+      4840,
+      4850
+    ],
+    [
+      4852,
+      4870
+    ],
+    [
+      4872,
+      4900
+    ],
+    [
+      4902,
+      4921
+    ],
+    [
+      4923,
+      4931
+    ],
+    [
+      4933,
+      4947
+    ],
+    [
+      4949,
+      4958
+    ],
+    [
+      4960,
+      4978
+    ],
+    [
+      4980,
+      4985
+    ],
+    [
+      4987,
+      5005
+    ],
+    [
+      5007,
+      5019
+    ],
+    [
+      5021,
+      5050
+    ],
+    [
+      5052,
+      5059
+    ],
+    [
+      5061,
+      5077
+    ],
+    [
+      5079,
+      5086
+    ],
+    [
+      5088,
+      5097
+    ],
+    [
+      5099,
+      5111
+    ],
+    [
+      5113,
+      5133
+    ],
+    [
+      5135,
+      5172
+    ],
+    [
+      5174,
+      5194
+    ],
+    [
+      5196,
+      5215
+    ],
+    [
+      5217,
+      5241
+    ],
+    [
+      5243,
+      5258
+    ],
+    [
+      5260,
+      5282
+    ],
+    [
+      5284,
+      5289
+    ],
+    [
+      5291,
+      5318
+    ],
+    [
+      5320,
+      5363
+    ],
+    [
+      5365,
+      5398
+    ],
+    [
+      5400,
+      5413
+    ],
+    [
+      5415,
+      5439
+    ],
+    [
+      5441,
+      5448
+    ],
+    [
+      5450,
+      5459
+    ],
+    [
+      5461,
+      5465
+    ],
+    [
+      5467,
+      5492
+    ],
+    [
+      5494,
+      5519
+    ],
+    [
+      5521,
+      5533
+    ],
+    [
+      5535,
+      5555
+    ],
+    [
+      5557,
+      5572
+    ],
+    [
+      5574,
+      5581
+    ],
+    [
+      5583,
+      5597
+    ],
+    [
+      5599,
+      5606
+    ],
+    [
+      5608,
+      5630
+    ],
+    [
+      5632,
+      5664
+    ],
+    [
+      5666,
+      5694
+    ],
+    [
+      5696,
+      5713
+    ],
+    [
+      5715,
+      5735
+    ],
+    [
+      5737,
+      5752
+    ],
+    [
+      5754,
+      5783
+    ],
+    [
+      5785,
+      5840
+    ],
+    [
+      5842,
+      5845
+    ],
+    [
+      5847,
+      5962
+    ],
+    [
+      5964,
+      5969
+    ],
+    [
+      5971,
+      6026
+    ],
+    [
+      6028,
+      6066
+    ],
+    [
+      6068,
+      6101
+    ],
+    [
+      6103,
+      6122
+    ],
+    [
+      6124,
+      6153
+    ],
+    [
+      6155,
+      6187
+    ],
+    [
+      6189,
+      6223
+    ],
+    [
+      6225,
+      6323
+    ],
+    [
+      6325,
+      6372
+    ],
+    [
+      6374,
+      6405
+    ],
+    [
+      6407,
+      6427
+    ],
+    [
+      6429,
+      6605
+    ],
+    [
+      6607,
+      6609
+    ],
+    [
+      6611,
+      6671
+    ],
+    [
+      6673,
+      6711
+    ],
+    [
+      6713,
+      6738
+    ],
+    [
+      6740,
+      6806
+    ],
+    [
+      6808,
+      6833
+    ],
+    [
+      6835,
+      6892
+    ],
+    [
+      6894,
+      6936
+    ],
+    [
+      6938,
+      6960
+    ],
+    [
+      6962,
+      7067
+    ],
+    [
+      7069,
+      7094
+    ],
+    [
+      7096,
+      7129
+    ],
+    [
+      7131,
+      7157
+    ],
+    [
+      7159,
+      7162
+    ],
+    [
+      7164,
+      7308
+    ],
+    [
+      7310,
+      7333
+    ],
+    [
+      7335,
+      7337
+    ]
+  ],
+  "blocks": [
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Ultralytics YOLO27： 即将推出。加入候补名单。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "GitHub repository"
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "text": "YOLO26 部署选项对比分析#"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "YOLO26 支持 20 多种部署选项，每种选项都针对不同的运行时、硬件目标或平台进行了优化——从 PyTorch 和 ONNX 到 TensorRT、OpenVINO、CoreML 以及专用的边缘 NPU 格式。选择合适的选项需要在推理速度、硬件限制和集成难度之间取得平衡。本指南会对每种选项进行比较，帮助你为应用选择最合适的方案，然后继续查看模型部署最佳实践，以便可靠地完成部署。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Watch: How to Choose the Best Ultralytics YOLO26 Deployment Format for Your Project | TensorRT | OpenVINO 🚀"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "部署是计算机视觉项目工作流中让训练好的模型开始执行实际任务的阶段，因此导出的格式会直接影响速度、成本和可移植性。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "如何为 YOLO26 模型选择合适的部署选项#"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "准备部署 YOLO26 模型时，选择合适的导出格式非常重要。正如 Ultralytics YOLO26 导出文档中所述，model.export() 函数可将训练好的模型转换为多种格式，以适应不同的环境和性能要求。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "理想格式取决于模型预期的运行场景和硬件。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跳过手动导出"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果你希望在无需手动导出的情况下进行托管部署，Ultralytics Platform 提供开箱即用的推理端点，并支持在全球 42 个区域自动扩缩容。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "YOLO26 的部署选项#"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "下面简要介绍每种格式及其适用场景。有关完整的导出流程，请参阅导出文档；有关并列比较标准，请查看对比表。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "PyTorch (.pt)：原生训练和推理格式，灵活性最高，并可通过 NVIDIA CUDA 或 AMD ROCm 实现 GPU 加速——非常适合研究和原型开发，无需执行导出步骤。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TorchScript (torchscript)：将模型序列化，使其能够在无需 Python 的 C++ 运行时中运行，适用于无法使用 Python 的生产系统。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ONNX (onnx)：与框架无关的交换格式，可通过 ONNX Runtime 提供广泛的跨平台和硬件支持。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "OpenVINO (openvino)：Intel 提供的工具包，可在 Intel CPU、集成 GPU 和 NPU 上实现优化推理，常用于物联网和边缘计算。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TensorRT (engine)：NVIDIA 的高性能运行时，通过 FP16 和 INT8 优化提供顶级 GPU 推理性能。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "CoreML (coreml)：Apple 面向 iOS、macOS、watchOS 和 tvOS 的设备端格式，使用 Apple Neural Engine。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TF SavedModel (saved_model)：TensorFlow 的标准格式，可通过 TensorFlow Serving 实现可扩展的服务器端服务。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TF GraphDef (pb)：一种冻结的静态图 TensorFlow 格式，适用于需要固定计算图的环境。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TF Edge TPU (edgetpu)：将 .tflite 模型编译为适用于 Google Coral Edge TPU 加速器的格式。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "LiteRT (litert)：Google 的设备端运行时（前身为 TensorFlow Lite），可使用单个 .tflite 模型进行移动端、嵌入式设备和浏览器推理，支持 FP32 和 INT8，并可通过 LiteRT.js 在浏览器中执行。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "PaddlePaddle (paddle)：百度的深度学习框架，在中国广泛使用，并支持多种硬件。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "MNN (mnn)：轻量、高性能的推理引擎，针对移动端和嵌入式 ARM 及 x86-64 系统进行了优化。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "NCNN (ncnn)：高性能、轻量级的推理框架，针对移动 ARM 设备进行了优化。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Sony IMX500 (imx)：用于 Sony IMX500 智能视觉传感器的导出格式，支持芯片上处理，例如 Raspberry Pi AI Camera。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Rockchip RKNN (rknn)：面向嵌入式开发板上的 Rockchip NPU，支持 FP16 和 INT8 量化。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ExecuTorch (executorch)：PyTorch 原生设备端运行时，可通过 XNNPACK 用于移动端（iOS 和 Android）及嵌入式系统。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Axelera AI (axelera)：面向 Axelera 的 Metis AIPU（最高 856 TOPS），通过 PCIe 或 M.2 实现高吞吐量边缘推理。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "DEEPX (deepx)：面向 DEEPX NPU 硬件，使用 INT8 量化进行嵌入式边缘推理。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Qualcomm QNN (qnn)：通过 Qualcomm AI 技术栈，在 Snapdragon Hexagon NPU、Adreno GPU 和 CPU 上执行设备端推理。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Core AI (coreai): 苹果公司针对 iOS 27 和 macOS 27 推出的全新 .aimodel 格式，计划支持 CPU、GPU 和 Apple Neural Engine；导出操作需要在搭载 Apple silicon 的 macOS 26 或更高版本上进行。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Hailo 集成可将 YOLO 检测、分割、语义分割、深度估计、分类、姿态和 OBB 模型直接导出为 Hailo HEF；有关经过验证的模型和目标，请参阅其兼容性表。Ambarella 集成采用 ONNX 优先的工作流，使用 Ambarella 的 CVflow 工具链将 ONNX 导出结果编译为 AmbaPB 格式，用于 CV72 等 CVflow® SoC，并可选择使用 SpongeTorch 进行压缩感知训练。Huawei Ascend 集成使用 CANN ATC 编译器将 ONNX 导出结果编译为 .om 离线格式，以便在 Ascend AI Processors 上进行 FP16 推理。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "部署选项对比#"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "下表根据通常影响选择的标准，总结了 YOLO26 模型的部署选项。有关每种格式的深入介绍，请参阅导出格式文档。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "部署选项"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "性能基准测试"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "兼容性与集成"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "社区支持与生态系统"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "案例研究"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "维护与更新"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "安全性注意事项"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "硬件加速"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "PyTorch"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "灵活性较好；可能需要牺牲原始性能"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "与 Python 库的兼容性出色"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "资源和社区支持丰富"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "研究和原型开发"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "定期积极开发"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "取决于部署环境"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "支持 CUDA，可实现 GPU 加速"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TorchScript"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "比 PyTorch 更适合生产环境"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "可顺畅地从 PyTorch 迁移到 C++"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "专业化程度更高，但范围比 PyTorch 窄"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Python 成为瓶颈的行业场景"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "与 PyTorch 保持一致的更新"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "无需完整 Python 环境，安全性更高"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "继承 PyTorch 的 CUDA 支持"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ONNX"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "因运行时而异"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在不同框架中均具有较高兼容性"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "生态系统广泛，受到众多组织支持"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跨机器学习框架的灵活性"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "定期更新以支持新算子"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "确保采用安全的转换和部署实践"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "提供多种硬件优化"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "OpenVINO"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "针对 Intel 硬件进行了优化"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在 Intel 生态系统中表现最佳"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在计算机视觉领域表现稳健"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "适用于使用 Intel 硬件的物联网和边缘场景"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "定期更新以支持 Intel 硬件"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "为敏感应用提供强大的功能"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "针对 Intel 硬件定制"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TensorRT"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在 NVIDIA GPU 上表现顶级"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "最适合 NVIDIA 硬件"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "依托 NVIDIA，拥有强大的生态网络"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "实时视频和图像推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "频繁更新以支持新 GPU"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "注重安全性"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "专为 NVIDIA GPU 设计"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "CoreML"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "针对 Apple 设备端硬件进行了优化"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "仅适用于 Apple 生态系统"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Apple 和开发者支持力度强"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Apple 产品上的设备端机器学习"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Apple 定期更新"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "注重隐私和安全"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Apple Neural Engine 和 GPU"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TF SavedModel"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "可在服务器环境中扩展"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在 TensorFlow 生态系统中兼容性广泛"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "由于 TensorFlow 的普及，支持资源丰富"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "大规模提供模型服务"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Google 和社区定期更新"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "为企业提供强大的功能"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "支持多种硬件加速"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TF GraphDef"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "适用于静态计算图，稳定性好"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "与 TensorFlow 基础设施集成良好"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "提供优化静态图的资源"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "需要静态图的场景"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "与 TensorFlow 核心同步更新"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "成熟的 TensorFlow 安全实践"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TensorFlow 加速选项"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TF Edge TPU"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "针对 Google 的 Edge TPU 硬件进行优化"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "仅适用于 Edge TPU 设备"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "随着 Google 和第三方资源的发展而不断壮大"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "需要实时处理的 IoT 设备"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "针对新型 Edge TPU 硬件的改进"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Google 强大的 IoT 安全性"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "专为 Google Coral 设计"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "LiteRT"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在移动设备、嵌入式设备和 Web 上实现速度与效率"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "支持移动设备、嵌入式设备、边缘设备和浏览器"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "强大的社区支持以及 Google 的支持"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "适用于 Android、iOS 和 Web 的设备端应用"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "最新的设备端运行时功能"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "安全的设备端和浏览器内推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "GPU、DSP 和 WebGPU 加速"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "PaddlePaddle"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "具有竞争力、易于使用且可扩展"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "百度生态系统，应用支持广泛"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "快速发展，尤其是在中国"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "面向中国市场和中文语言处理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "专注于中国 AI 应用"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "注重数据隐私和安全"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "包括百度 Kunlun 芯片"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "MNN"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "针对移动设备的高性能"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "移动和嵌入式 ARM 系统以及 X86-64 CPU"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "移动和嵌入式 ML 社区"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "移动系统效率"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在移动设备上保持高性能"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "设备端安全优势"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "针对 ARM CPU 和 GPU 的优化"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "NCNN"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "针对基于移动 ARM 的设备进行优化"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "移动和嵌入式 ARM 系统"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "规模较小但活跃的移动和嵌入式 ML 社区"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Android 和 ARM 系统效率"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在 ARM 上保持高性能"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "设备端安全优势"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "针对 ARM CPU 和 GPU 的优化"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Sony IMX500"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "以极低功耗实现传感器上推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Sony IMX500 传感器、Raspberry Pi AI Camera"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Sony AITRIOS 生态系统"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "摄像头端边缘 AI"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Sony SDK 和 MCT 工具链更新"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "数据保留在传感器上"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Sony IMX500 芯片上加速器"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Rockchip RKNN"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "针对 Rockchip NPU 进行优化"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Rockchip SoC 开发板（例如 RK3588）"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Rockchip 开发者社区"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "嵌入式 SBC 和边缘设备"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Rockchip RKNN-Toolkit 更新"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "设备端本地推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Rockchip NPU"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ExecuTorch"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "高效的设备端 PyTorch 运行时"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过 XNNPACK 支持 iOS、Android 和嵌入式设备"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "由 PyTorch 项目提供支持"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "移动和嵌入式应用"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "与 PyTorch 一同维护"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "设备端推理可确保数据保留在本地"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "XNNPACK 以及移动 CPU/GPU 后端"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Axelera AI"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "极高吞吐量（最高 856 TOPS）"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过 PCIe 或 M.2 连接的 Metis AIPU"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Axelera Voyager SDK"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "高吞吐量边缘推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Axelera SDK 更新"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "本地部署的边缘推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Axelera Metis AIPU"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "DEEPX"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "针对 INT8 优化的 NPU 推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "DEEPX NPU 硬件"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "DEEPX 开发者工具（dx_com、dx_engine）"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "嵌入式边缘推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "DEEPX SDK 和运行时更新"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "设备端本地推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "DEEPX NPU"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Qualcomm QNN"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "快速的设备端 Snapdragon 推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Snapdragon Hexagon NPU、Adreno GPU、CPU"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Qualcomm AI Hub 生态系统"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "移动和边缘 Snapdragon 设备"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Qualcomm AI 技术栈（QAIRT）更新"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "设备端推理可确保数据保留在本地"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Snapdragon Hexagon NPU"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Hailo"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在 Hailo NPU 上进行 INT8 HEF 推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Hailo-8/8L/10H/15H/15L、Raspberry Pi AI HAT+"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Hailo Dataflow Compiler 和 HailoRT"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "相机、机器人、工业边缘系统"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Hailo DFC 和 HailoRT 版本发布"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "设备端本地推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Hailo NPU"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "华为昇腾"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在 Ascend AI Core 上实现更高吞吐量"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Atlas 开发板和 OrangePi AIPro"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "华为 CANN 生态系统"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在 Ascend NPU 上进行边缘推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "CANN 和 ATC 版本发布"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "设备端本地推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Ascend AI Core"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Core AI"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "针对 Apple silicon 进行了优化"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "iOS 27 和 macOS 27；导出需要 macOS 26+"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "苹果框架；暂未集成到 iOS/Flutter SDK 中"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在下一代苹果平台上进行端侧机器学习"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "与苹果操作系统发布绑定；当前处于测试阶段"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "设备端推理可确保数据保留在本地"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Apple Neural Engine、GPU 和 CPU"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "此比较为你提供高层次概览。在部署时，请根据每个选项评估项目的具体需求和限制，并参考与你所选格式对应的集成指南。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "结论#"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "YOLO26 支持广泛的导出格式，让你可以针对几乎任何环境定制模型，从云端 GPU 服务器到传感器上的边缘摄像头。选择格式后，请遵循模型部署最佳实践进行优化、故障排除和安全配置，遇到问题时还可以借助 Ultralytics 社区。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "常见问题#"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Ultralytics YOLO26 支持多种部署格式，每种格式都针对特定环境和硬件平台而设计。主要格式包括："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "PyTorch，适用于研究和原型开发，并提供出色的 Python 集成支持。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TorchScript，适用于无法使用 Python 的生产环境。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ONNX，用于跨平台兼容性和硬件加速。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "OpenVINO，用于在 Intel 硬件上实现优化性能。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TensorRT，用于在 NVIDIA GPU 上实现高速推理。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "每种格式都有独特的优势。有关详细操作流程，请参阅我们的导出流程文档。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "要提升 Intel CPU 上的推理速度，你可以使用 Intel 的 OpenVINO 工具包部署 YOLO26 模型。OpenVINO 通过优化模型以高效利用 Intel 硬件，可显著提升性能。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "使用 model.export() 函数将 YOLO26 模型转换为 OpenVINO 格式。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "请参阅Intel OpenVINO 导出文档中的详细设置指南。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如需了解更多信息，请查看我们的博客文章。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "是的，YOLO26 模型可以使用适用于 Android 的 LiteRT（此前称为 TensorFlow Lite）和 NCNN 部署到移动设备，也可以使用适用于 iOS 的 CoreML 或 LiteRT。LiteRT 是 Google 面向移动和嵌入式设备的端侧运行时，可在 Android、iOS 和浏览器上运行同一模型，从而实现高效的端侧推理。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "示例"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# Export command for NCNN format\nmodel.export(format=\"ncnn\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如需详细了解如何将模型部署到移动设备，请参阅我们的 LiteRT 集成指南。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "为 YOLO26 选择部署格式时，请考虑以下因素："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "性能：TensorRT 等格式可在 NVIDIA GPU 上提供卓越的速度，而 OpenVINO 针对 Intel 硬件进行了优化。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "兼容性：ONNX 在不同平台之间具有广泛的兼容性。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "集成便捷性：CoreML 或 LiteRT 等格式分别针对 iOS 和 Android 等特定生态系统进行了适配。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "社区支持：PyTorch 和 TensorFlow 等格式拥有丰富的社区资源和支持。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如需进行比较分析，请参阅我们的导出格式文档。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "要在 Web 应用中部署 YOLO26 模型，你可以使用 LiteRT.js（LiteRT 的 Web 运行时），直接在浏览器和 Node.js 中运行机器学习模型。这种方式无需后端基础设施，并可提供实时性能。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "将 YOLO26 模型导出为 LiteRT 格式。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "使用 LiteRT.js 将导出的模型集成到你的 Web 应用中。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如需分步说明，请参阅我们的 LiteRT 集成指南。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "贡献者"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "GLglenn-jocher23RAraimbekovm3JEJESUSROYETH3AMambitious-octopus2LAlakshanthad1PDpderrenger1RIRizwanMunawar1LEleonnil1WAwangzhaode1MAMatthewNoyce1"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "创建时间 2023年11月12日更新时间 上周"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "评论"
+    }
+  ]
+}

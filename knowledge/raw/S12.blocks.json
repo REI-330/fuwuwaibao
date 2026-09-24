@@ -1,0 +1,977 @@
+{
+  "schema": "career-graph-raw-blocks/v1",
+  "sourceId": "S12",
+  "url": "https://www.selenium.dev/zh-cn/documentation/webdriver/waits/",
+  "finalUrl": "https://www.selenium.dev/zh-cn/documentation/webdriver/waits/",
+  "fetchedAt": "2026-09-15T09:56:51.087Z",
+  "httpStatus": 200,
+  "contentType": "text/html; charset=utf-8",
+  "charset": "utf-8",
+  "byteSize": 503867,
+  "sha256": "e59c2f07d3701786792eb5c011853976166a157603307cf6d64c91abf0c49b6c",
+  "title": "等待策略 | Selenium",
+  "hops": [
+    {
+      "url": "https://www.selenium.dev/zh-cn/documentation/webdriver/waits/",
+      "finalUrl": "https://www.selenium.dev/zh-cn/documentation/webdriver/waits/",
+      "httpStatus": 200,
+      "bytes": 503867,
+      "charset": "utf-8"
+    }
+  ],
+  "flags": [],
+  "extractionPass": "pruned",
+  "prunedBlockCount": 105,
+  "prunedTextLength": 32963,
+  "blockCount": 105,
+  "textLength": 32963,
+  "ranges": [
+    [
+      0,
+      109
+    ],
+    [
+      111,
+      115
+    ],
+    [
+      117,
+      268
+    ],
+    [
+      270,
+      454
+    ],
+    [
+      456,
+      496
+    ],
+    [
+      498,
+      546
+    ],
+    [
+      548,
+      651
+    ],
+    [
+      653,
+      701
+    ],
+    [
+      703,
+      721
+    ],
+    [
+      723,
+      758
+    ],
+    [
+      760,
+      785
+    ],
+    [
+      787,
+      928
+    ],
+    [
+      930,
+      955
+    ],
+    [
+      957,
+      961
+    ],
+    [
+      963,
+      999
+    ],
+    [
+      1001,
+      1059
+    ],
+    [
+      1061,
+      1214
+    ],
+    [
+      1216,
+      1236
+    ],
+    [
+      1238,
+      1284
+    ],
+    [
+      1286,
+      1303
+    ],
+    [
+      1305,
+      1323
+    ],
+    [
+      1325,
+      1390
+    ],
+    [
+      1392,
+      1426
+    ],
+    [
+      1428,
+      1490
+    ],
+    [
+      1492,
+      4165
+    ],
+    [
+      4167,
+      4192
+    ],
+    [
+      4194,
+      4228
+    ],
+    [
+      4230,
+      4272
+    ],
+    [
+      4274,
+      6033
+    ],
+    [
+      6035,
+      6101
+    ],
+    [
+      6103,
+      6137
+    ],
+    [
+      6139,
+      6187
+    ],
+    [
+      6189,
+      8241
+    ],
+    [
+      8243,
+      8283
+    ],
+    [
+      8285,
+      8319
+    ],
+    [
+      8321,
+      8360
+    ],
+    [
+      8362,
+      10014
+    ],
+    [
+      10016,
+      10070
+    ],
+    [
+      10072,
+      10106
+    ],
+    [
+      10108,
+      10153
+    ],
+    [
+      10155,
+      11702
+    ],
+    [
+      11704,
+      11738
+    ],
+    [
+      11740,
+      11803
+    ],
+    [
+      11805,
+      11809
+    ],
+    [
+      11811,
+      11954
+    ],
+    [
+      11956,
+      11999
+    ],
+    [
+      12001,
+      12102
+    ],
+    [
+      12104,
+      12217
+    ],
+    [
+      12219,
+      12253
+    ],
+    [
+      12255,
+      12317
+    ],
+    [
+      12319,
+      14992
+    ],
+    [
+      14994,
+      15097
+    ],
+    [
+      15099,
+      15185
+    ],
+    [
+      15187,
+      15221
+    ],
+    [
+      15223,
+      15265
+    ],
+    [
+      15267,
+      17026
+    ],
+    [
+      17028,
+      17137
+    ],
+    [
+      17139,
+      17173
+    ],
+    [
+      17175,
+      17223
+    ],
+    [
+      17225,
+      19277
+    ],
+    [
+      19279,
+      19350
+    ],
+    [
+      19352,
+      19386
+    ],
+    [
+      19388,
+      19427
+    ],
+    [
+      19429,
+      21081
+    ],
+    [
+      21083,
+      21127
+    ],
+    [
+      21129,
+      21187
+    ],
+    [
+      21189,
+      21223
+    ],
+    [
+      21225,
+      21270
+    ],
+    [
+      21272,
+      22819
+    ],
+    [
+      22821,
+      22855
+    ],
+    [
+      22857,
+      22920
+    ],
+    [
+      22922,
+      22924
+    ],
+    [
+      22926,
+      22962
+    ],
+    [
+      22964,
+      22970
+    ],
+    [
+      22972,
+      22988
+    ],
+    [
+      22990,
+      23001
+    ],
+    [
+      23003,
+      23010
+    ],
+    [
+      23012,
+      23019
+    ],
+    [
+      23021,
+      23102
+    ],
+    [
+      23104,
+      23178
+    ],
+    [
+      23180,
+      23420
+    ],
+    [
+      23422,
+      23456
+    ],
+    [
+      23458,
+      23520
+    ],
+    [
+      23522,
+      26195
+    ],
+    [
+      26197,
+      26412
+    ],
+    [
+      26414,
+      26448
+    ],
+    [
+      26450,
+      26492
+    ],
+    [
+      26494,
+      28253
+    ],
+    [
+      28255,
+      28517
+    ],
+    [
+      28519,
+      28553
+    ],
+    [
+      28555,
+      28603
+    ],
+    [
+      28605,
+      30657
+    ],
+    [
+      30659,
+      30909
+    ],
+    [
+      30911,
+      30945
+    ],
+    [
+      30947,
+      30986
+    ],
+    [
+      30988,
+      32640
+    ],
+    [
+      32642,
+      32653
+    ],
+    [
+      32655,
+      32689
+    ],
+    [
+      32691,
+      32754
+    ],
+    [
+      32756,
+      32827
+    ],
+    [
+      32829,
+      32849
+    ],
+    [
+      32851,
+      32874
+    ],
+    [
+      32876,
+      32904
+    ],
+    [
+      32906,
+      32951
+    ],
+    [
+      32953,
+      32963
+    ]
+  ],
+  "blocks": [
+    {
+      "kind": "heading",
+      "level": 4,
+      "text": "Thank you for joining the Selenium and Appium 2026 Conference. Visit Conference Website for more information!"
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "text": "等待策略"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "或许浏览器自动化面临的最常见挑战在于,\n确保网络应用程序处于能够按预期执行特定 Selenium 命令的状态.\n这些过程常常陷入一种 竞态条件 ,\n有时浏览器会先达到正确状态 (一切按预期运行) ,\n有时 Selenium 代码会先执行 (一切未按预期运行) .\n这是导致 不稳定测试 的主要原因之一."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "所有导航命令都会等待特定基于 页面加载策略 的值 readyState\n(默认等待的值为 \"complete\" ) ,\n然后驱动程序才会将控制权交还给代码.\nreadyState 仅关注 HTML 中定义的资源加载,\n但加载的 JavaScript 资源常常会导致网站发生变化,\n而当代码准备执行下一个 Selenium 命令时,\n需要交互的元素可能尚未出现在页面上."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "同样, 在许多单页应用程序中,\n元素会根据点击操作动态添加到页面上或改变可见性."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "对于 Selenium 能够与之交互,\n该元素必须既存在于页面上又处于displayed 状态."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "以这个页面为例: https://www.selenium.dev/selenium/web/dynamic.html\n当点击 “Add a box!” 按钮时,\n会创建一个原本不存在的 “div” 元素."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "当点击 “Reveal a new input” 按钮时,\n一个隐藏的文本字段元素会被显示出来."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在这两种情况下, 过渡都需要几秒钟."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果 Selenium 代码要点击其中一个按钮并与生成的元素进行交互,"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "它会在该元素准备好之前就执行操作, 从而导致失败."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "许多人首先想到的解决办法是在代码中添加一个睡眠语句,\n让代码暂停执行一段设定的时间.\n由于代码无法确切知道需要等待多久,\n如果设置的睡眠时间不够长,\n这种方法可能会失败.\n相反, 如果睡眠时间设置得过高, 并且在每个需要的地方都添加睡眠语句,\n那么会话的持续时间可能会变得难以接受."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Selenium 提供了更好的两种不同的同步机制,"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "隐式等待"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Selenium 内置了一种自动等待元素出现的方式, 称为 隐式等待 ."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "隐式等待的值可以通过浏览器选项中的 timeouts 设置来设定,\n也可以通过驱动程序的方法来设定 (如下所示) ."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "这是一个全局设置, 适用于整个会话期间的每个元素定位调用.\n默认值为 0 ,\n这意味着如果未找到元素,\n将立即返回错误.\n如果设置了隐式等待,\n驱动程序将在返回错误之前等待所提供的时长.\n请注意, 一旦定位到元素,\n驱动程序将返回元素引用,\n代码将继续执行,\n因此较大的隐式等待值不一定增加会话的持续时间."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "警告:\n请勿混合使用隐式等待和显式等待."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "这样做可能会导致等待时间不可预测.\n例如, 设置 10 秒的隐式等待和 15 秒的显式等待,"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "可能会导致在 20 秒后发生超时."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "使用隐式等待解决我们的示例代码如下:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "/examples/java/src/test/java/dev/selenium/waits/WaitsTest.java"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "package dev.selenium.waits;\n\nimport dev.selenium.BaseTest;\nimport java.time.Duration;\nimport org.junit.jupiter.api.Assertions;\nimport org.junit.jupiter.api.Test;\nimport org.openqa.selenium.By;\nimport org.openqa.selenium.ElementNotInteractableException;\nimport org.openqa.selenium.NoSuchElementException;\nimport org.openqa.selenium.WebDriver;\nimport org.openqa.selenium.WebElement;\nimport org.openqa.selenium.chrome.ChromeOptions;\nimport org.openqa.selenium.support.ui.FluentWait;\nimport org.openqa.selenium.support.ui.Wait;\nimport org.openqa.selenium.support.ui.WebDriverWait;\n\npublic class WaitsTest extends BaseTest {\n@Test\npublic void fails() {\nstartChromeDriver(new ChromeOptions());\n\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\ndriver.findElement(By.id(\"adder\")).click();\n\nAssertions.assertThrows(\nNoSuchElementException.class,\n() -> {\ndriver.findElement(By.id(\"box0\"));\n});\n}\n\n@Test\npublic void sleep() throws InterruptedException {\nstartChromeDriver(new ChromeOptions());\n\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\ndriver.findElement(By.id(\"adder\")).click();\n\nThread.sleep(1000);\n\nWebElement added = driver.findElement(By.id(\"box0\"));\n\nAssertions.assertEquals(\"redbox\", added.getDomAttribute(\"class\"));\n}\n\n@Test\npublic void implicit() {\nstartChromeDriver(new ChromeOptions());\n\ndriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\ndriver.findElement(By.id(\"adder\")).click();\n\nWebElement added = driver.findElement(By.id(\"box0\"));\n\nAssertions.assertEquals(\"redbox\", added.getDomAttribute(\"class\"));\n}\n\n@Test\npublic void explicit() {\nstartChromeDriver(new ChromeOptions());\n\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\nWebElement revealed = driver.findElement(By.id(\"revealed\"));\ndriver.findElement(By.id(\"reveal\")).click();\n\nWait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(2));\nwait.until(d -> revealed.isDisplayed());\n\nrevealed.sendKeys(\"Displayed\");\nAssertions.assertEquals(\"Displayed\", revealed.getDomProperty(\"value\"));\n}\n\n@Test\npublic void explicitWithOptions() {\nstartChromeDriver(new ChromeOptions());\n\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\nWebElement revealed = driver.findElement(By.id(\"revealed\"));\ndriver.findElement(By.id(\"reveal\")).click();\n\nWait<WebDriver> wait =\nnew FluentWait<>(driver)\n.withTimeout(Duration.ofSeconds(2))\n.pollingEvery(Duration.ofMillis(300))\n.ignoring(ElementNotInteractableException.class);\n\nwait.until(\nd -> {\nrevealed.sendKeys(\"Displayed\");\nreturn true;\n});\n\nAssertions.assertEquals(\"Displayed\", revealed.getDomProperty(\"value\"));\n}\n}"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "driver.implicitly_wait(2)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "/examples/python/tests/waits/test_waits.py"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "import pytest\nimport time\nfrom selenium.common import NoSuchElementException, ElementNotInteractableException\nfrom selenium.webdriver.common.by import By\nfrom selenium.webdriver.support.wait import WebDriverWait\n\ndef test_fails(driver):\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\ndriver.find_element(By.ID, \"adder\").click()\n\nwith pytest.raises(NoSuchElementException):\ndriver.find_element(By.ID, 'box0')\n\ndef test_sleep(driver):\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\ndriver.find_element(By.ID, \"adder\").click()\n\ntime.sleep(2)\nadded = driver.find_element(By.ID, \"box0\")\n\nassert added.get_dom_attribute('class') == \"redbox\"\n\ndef test_implicit(driver):\ndriver.implicitly_wait(2)\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\ndriver.find_element(By.ID, \"adder\").click()\n\nadded = driver.find_element(By.ID, \"box0\")\n\nassert added.get_dom_attribute('class') == \"redbox\"\n\ndef test_explicit(driver):\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\nrevealed = driver.find_element(By.ID, \"revealed\")\ndriver.find_element(By.ID, \"reveal\").click()\n\nwait = WebDriverWait(driver, timeout=2)\nwait.until(lambda _ : revealed.is_displayed())\n\nrevealed.send_keys(\"Displayed\")\nassert revealed.get_property(\"value\") == \"Displayed\"\n\ndef test_explicit_options(driver):\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\nrevealed = driver.find_element(By.ID, \"revealed\")\ndriver.find_element(By.ID, \"reveal\").click()\n\nerrors = [NoSuchElementException, ElementNotInteractableException]\nwait = WebDriverWait(driver, timeout=2, poll_frequency=.2, ignored_exceptions=errors)\nwait.until(lambda _ : revealed.send_keys(\"Displayed\") or True)\n\nassert revealed.get_property(\"value\") == \"Displayed\""
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "/examples/dotnet/SeleniumDocs/Waits/WaitsTest.cs"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "using System;\nusing System.Threading;\nusing Microsoft.VisualStudio.TestTools.UnitTesting;\nusing OpenQA.Selenium;\nusing OpenQA.Selenium.Support.UI;\n\nnamespace SeleniumDocs.Waits\n{\n[TestClass]\npublic class WaitsTest : BaseChromeTest\n{\n[TestMethod]\npublic void Fails()\n{\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\ndriver.FindElement(By.Id(\"adder\")).Click();\n\nAssert.ThrowsException<NoSuchElementException>(\n() => driver.FindElement(By.Id(\"box0\"))\n);\n}\n\n[TestMethod]\npublic void Sleep()\n{\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\ndriver.FindElement(By.Id(\"adder\")).Click();\n\nThread.Sleep(1000);\n\nIWebElement added = driver.FindElement(By.Id(\"box0\"));\n\nAssert.AreEqual(\"redbox\", added.GetDomAttribute(\"class\"));\n}\n\n[TestMethod]\npublic void Implicit()\n{\ndriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);\n\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\ndriver.FindElement(By.Id(\"adder\")).Click();\n\nIWebElement added = driver.FindElement(By.Id(\"box0\"));\n\nAssert.AreEqual(\"redbox\", added.GetDomAttribute(\"class\"));\n}\n\n[TestMethod]\npublic void Explicit()\n{\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\nIWebElement revealed = driver.FindElement(By.Id(\"revealed\"));\ndriver.FindElement(By.Id(\"reveal\")).Click();\n\nWebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));\nwait.Until(d => revealed.Displayed);\n\nrevealed.SendKeys(\"Displayed\");\nAssert.AreEqual(\"Displayed\", revealed.GetDomProperty(\"value\"));\n}\n\n[TestMethod]\npublic void ExplicitOptions()\n{\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\nIWebElement revealed = driver.FindElement(By.Id(\"revealed\"));\ndriver.FindElement(By.Id(\"reveal\")).Click();\n\nWebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2))\n{\nPollingInterval = TimeSpan.FromMilliseconds(300),\n};\nwait.IgnoreExceptionTypes(typeof(ElementNotInteractableException));\n\nwait.Until(d => {\nrevealed.SendKeys(\"Displayed\");\nreturn true;\n});\n\nAssert.AreEqual(\"input\", revealed.TagName);\n}\n}\n}"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "driver.manage.timeouts.implicit_wait = 2"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "/examples/ruby/spec/waits/waits_spec.rb"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# frozen_string_literal: true\n\nrequire 'spec_helper'\n\nRSpec.describe 'Waits' do\nlet(:driver) { start_session }\n\nit 'fails' do\ndriver.get 'https://www.selenium.dev/selenium/web/dynamic.html'\ndriver.find_element(id: 'adder').click\n\nexpect {\ndriver.find_element(id: 'box0')\n}.to raise_error(Selenium::WebDriver::Error::NoSuchElementError)\nend\n\nit 'sleeps' do\ndriver.get 'https://www.selenium.dev/selenium/web/dynamic.html'\ndriver.find_element(id: 'adder').click\n\nsleep 1\nadded = driver.find_element(id: 'box0')\n\nexpect(added.dom_attribute(:class)).to eq('redbox')\nend\n\nit 'implicit' do\ndriver.manage.timeouts.implicit_wait = 2\ndriver.get 'https://www.selenium.dev/selenium/web/dynamic.html'\ndriver.find_element(id: 'adder').click\n\nadded = driver.find_element(id: 'box0')\n\nexpect(added.dom_attribute(:class)).to eq('redbox')\nend\n\nit 'explicit' do\ndriver.get 'https://www.selenium.dev/selenium/web/dynamic.html'\nrevealed = driver.find_element(id: 'revealed')\ndriver.find_element(id: 'reveal').click\n\nwait = Selenium::WebDriver::Wait.new\nwait.until { revealed.displayed? }\n\nrevealed.send_keys('Displayed')\nexpect(revealed.property(:value)).to eq('Displayed')\nend\n\nit 'options with explicit' do\ndriver.get 'https://www.selenium.dev/selenium/web/dynamic.html'\nrevealed = driver.find_element(id: 'revealed')\ndriver.find_element(id: 'reveal').click\n\nerrors = [Selenium::WebDriver::Error::NoSuchElementError,\nSelenium::WebDriver::Error::ElementNotInteractableError]\nwait = Selenium::WebDriver::Wait.new(timeout: 2,\ninterval: 0.3,\nignore: errors)\n\nwait.until { revealed.send_keys('Displayed') || true }\n\nexpect(revealed.property(:value)).to eq('Displayed')\nend\nend"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "await driver.manage().setTimeouts({ implicit: 2000 });"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "/examples/javascript/test/waits/waits.spec.js"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "const { By, Browser, until, Builder} = require('selenium-webdriver');\nconst assert = require(\"node:assert\");\n\ndescribe('Waits', function () {\nlet driver;\n\nbefore(async function () {\ndriver = new Builder()\n.forBrowser(Browser.CHROME)\n.build();\n});\n\nafter(async () => await driver.quit());\n\nit('fail', async function () {\nawait driver.get('https://www.selenium.dev/selenium/web/dynamic.html');\nawait driver.findElement(By.id(\"adder\")).click();\n\nawait assert.rejects(async () => {\nawait driver.findElement(By.id(\"box0\"))\n},\nError\n)\n});\n\nit('sleep', async function () {\nawait driver.get('https://www.selenium.dev/selenium/web/dynamic.html');\nawait driver.findElement(By.id(\"adder\")).click();\n\nawait driver.sleep(2000);\nlet added = await driver.findElement(By.id(\"box0\"));\n\nassert.equal(await added.getAttribute('class'), \"redbox\")\n});\n\nit('implicit', async function () {\nawait driver.manage().setTimeouts({ implicit: 2000 });\nawait driver.get('https://www.selenium.dev/selenium/web/dynamic.html');\nawait driver.findElement(By.id(\"adder\")).click();\n\nlet added = await driver.findElement(By.id(\"box0\"));\n\nassert.equal(await added.getAttribute('class'), \"redbox\")\n});\n\nit('explicit', async function () {\nawait driver.get('https://www.selenium.dev/selenium/web/dynamic.html');\nlet revealed = await driver.findElement(By.id(\"revealed\"));\nawait driver.findElement(By.id(\"reveal\")).click();\nawait driver.wait(until.elementIsVisible(revealed), 2000);\nawait revealed.sendKeys(\"Displayed\");\nassert.equal(await revealed.getAttribute(\"value\"), \"Displayed\")\n})\n});"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "examples/kotlin/src/test/kotlin/dev/selenium/waits/WaitsTest.kt"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "显式等待"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "显式等待 是在代码中添加的, 用于轮询应用程序的循环,\n直到特定条件评估为真时, 才退出循环并继续执行代码中的下一个命令.\n如果在指定的超时值之前条件未满足,\n代码将给出超时错误.\n由于应用程序未处于所需状态的方式有很多,\n因此显式等待是为每个需要等待的地方指定确切等待条件的绝佳选择."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "另一个不错的特性是, 默认情况下,\nSelenium 等待类会自动等待指定的元素存在."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "This example shows the condition being waited for as a lambda. Java also supports\nExpected Conditions"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(2));\nwait.until(d -> revealed.isDisplayed());"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "/examples/java/src/test/java/dev/selenium/waits/WaitsTest.java"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "package dev.selenium.waits;\n\nimport dev.selenium.BaseTest;\nimport java.time.Duration;\nimport org.junit.jupiter.api.Assertions;\nimport org.junit.jupiter.api.Test;\nimport org.openqa.selenium.By;\nimport org.openqa.selenium.ElementNotInteractableException;\nimport org.openqa.selenium.NoSuchElementException;\nimport org.openqa.selenium.WebDriver;\nimport org.openqa.selenium.WebElement;\nimport org.openqa.selenium.chrome.ChromeOptions;\nimport org.openqa.selenium.support.ui.FluentWait;\nimport org.openqa.selenium.support.ui.Wait;\nimport org.openqa.selenium.support.ui.WebDriverWait;\n\npublic class WaitsTest extends BaseTest {\n@Test\npublic void fails() {\nstartChromeDriver(new ChromeOptions());\n\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\ndriver.findElement(By.id(\"adder\")).click();\n\nAssertions.assertThrows(\nNoSuchElementException.class,\n() -> {\ndriver.findElement(By.id(\"box0\"));\n});\n}\n\n@Test\npublic void sleep() throws InterruptedException {\nstartChromeDriver(new ChromeOptions());\n\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\ndriver.findElement(By.id(\"adder\")).click();\n\nThread.sleep(1000);\n\nWebElement added = driver.findElement(By.id(\"box0\"));\n\nAssertions.assertEquals(\"redbox\", added.getDomAttribute(\"class\"));\n}\n\n@Test\npublic void implicit() {\nstartChromeDriver(new ChromeOptions());\n\ndriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\ndriver.findElement(By.id(\"adder\")).click();\n\nWebElement added = driver.findElement(By.id(\"box0\"));\n\nAssertions.assertEquals(\"redbox\", added.getDomAttribute(\"class\"));\n}\n\n@Test\npublic void explicit() {\nstartChromeDriver(new ChromeOptions());\n\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\nWebElement revealed = driver.findElement(By.id(\"revealed\"));\ndriver.findElement(By.id(\"reveal\")).click();\n\nWait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(2));\nwait.until(d -> revealed.isDisplayed());\n\nrevealed.sendKeys(\"Displayed\");\nAssertions.assertEquals(\"Displayed\", revealed.getDomProperty(\"value\"));\n}\n\n@Test\npublic void explicitWithOptions() {\nstartChromeDriver(new ChromeOptions());\n\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\nWebElement revealed = driver.findElement(By.id(\"revealed\"));\ndriver.findElement(By.id(\"reveal\")).click();\n\nWait<WebDriver> wait =\nnew FluentWait<>(driver)\n.withTimeout(Duration.ofSeconds(2))\n.pollingEvery(Duration.ofMillis(300))\n.ignoring(ElementNotInteractableException.class);\n\nwait.until(\nd -> {\nrevealed.sendKeys(\"Displayed\");\nreturn true;\n});\n\nAssertions.assertEquals(\"Displayed\", revealed.getDomProperty(\"value\"));\n}\n}"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "This example shows the condition being waited for as a lambda. Python also supports\nExpected Conditions"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "wait = WebDriverWait(driver, timeout=2)\nwait.until(lambda _ : revealed.is_displayed())"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "/examples/python/tests/waits/test_waits.py"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "import pytest\nimport time\nfrom selenium.common import NoSuchElementException, ElementNotInteractableException\nfrom selenium.webdriver.common.by import By\nfrom selenium.webdriver.support.wait import WebDriverWait\n\ndef test_fails(driver):\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\ndriver.find_element(By.ID, \"adder\").click()\n\nwith pytest.raises(NoSuchElementException):\ndriver.find_element(By.ID, 'box0')\n\ndef test_sleep(driver):\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\ndriver.find_element(By.ID, \"adder\").click()\n\ntime.sleep(2)\nadded = driver.find_element(By.ID, \"box0\")\n\nassert added.get_dom_attribute('class') == \"redbox\"\n\ndef test_implicit(driver):\ndriver.implicitly_wait(2)\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\ndriver.find_element(By.ID, \"adder\").click()\n\nadded = driver.find_element(By.ID, \"box0\")\n\nassert added.get_dom_attribute('class') == \"redbox\"\n\ndef test_explicit(driver):\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\nrevealed = driver.find_element(By.ID, \"revealed\")\ndriver.find_element(By.ID, \"reveal\").click()\n\nwait = WebDriverWait(driver, timeout=2)\nwait.until(lambda _ : revealed.is_displayed())\n\nrevealed.send_keys(\"Displayed\")\nassert revealed.get_property(\"value\") == \"Displayed\"\n\ndef test_explicit_options(driver):\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\nrevealed = driver.find_element(By.ID, \"revealed\")\ndriver.find_element(By.ID, \"reveal\").click()\n\nerrors = [NoSuchElementException, ElementNotInteractableException]\nwait = WebDriverWait(driver, timeout=2, poll_frequency=.2, ignored_exceptions=errors)\nwait.until(lambda _ : revealed.send_keys(\"Displayed\") or True)\n\nassert revealed.get_property(\"value\") == \"Displayed\""
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));\nwait.Until(d => revealed.Displayed);"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "/examples/dotnet/SeleniumDocs/Waits/WaitsTest.cs"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "using System;\nusing System.Threading;\nusing Microsoft.VisualStudio.TestTools.UnitTesting;\nusing OpenQA.Selenium;\nusing OpenQA.Selenium.Support.UI;\n\nnamespace SeleniumDocs.Waits\n{\n[TestClass]\npublic class WaitsTest : BaseChromeTest\n{\n[TestMethod]\npublic void Fails()\n{\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\ndriver.FindElement(By.Id(\"adder\")).Click();\n\nAssert.ThrowsException<NoSuchElementException>(\n() => driver.FindElement(By.Id(\"box0\"))\n);\n}\n\n[TestMethod]\npublic void Sleep()\n{\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\ndriver.FindElement(By.Id(\"adder\")).Click();\n\nThread.Sleep(1000);\n\nIWebElement added = driver.FindElement(By.Id(\"box0\"));\n\nAssert.AreEqual(\"redbox\", added.GetDomAttribute(\"class\"));\n}\n\n[TestMethod]\npublic void Implicit()\n{\ndriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);\n\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\ndriver.FindElement(By.Id(\"adder\")).Click();\n\nIWebElement added = driver.FindElement(By.Id(\"box0\"));\n\nAssert.AreEqual(\"redbox\", added.GetDomAttribute(\"class\"));\n}\n\n[TestMethod]\npublic void Explicit()\n{\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\nIWebElement revealed = driver.FindElement(By.Id(\"revealed\"));\ndriver.FindElement(By.Id(\"reveal\")).Click();\n\nWebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));\nwait.Until(d => revealed.Displayed);\n\nrevealed.SendKeys(\"Displayed\");\nAssert.AreEqual(\"Displayed\", revealed.GetDomProperty(\"value\"));\n}\n\n[TestMethod]\npublic void ExplicitOptions()\n{\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\nIWebElement revealed = driver.FindElement(By.Id(\"revealed\"));\ndriver.FindElement(By.Id(\"reveal\")).Click();\n\nWebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2))\n{\nPollingInterval = TimeSpan.FromMilliseconds(300),\n};\nwait.IgnoreExceptionTypes(typeof(ElementNotInteractableException));\n\nwait.Until(d => {\nrevealed.SendKeys(\"Displayed\");\nreturn true;\n});\n\nAssert.AreEqual(\"input\", revealed.TagName);\n}\n}\n}"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "wait = Selenium::WebDriver::Wait.new\nwait.until { revealed.displayed? }"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "/examples/ruby/spec/waits/waits_spec.rb"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# frozen_string_literal: true\n\nrequire 'spec_helper'\n\nRSpec.describe 'Waits' do\nlet(:driver) { start_session }\n\nit 'fails' do\ndriver.get 'https://www.selenium.dev/selenium/web/dynamic.html'\ndriver.find_element(id: 'adder').click\n\nexpect {\ndriver.find_element(id: 'box0')\n}.to raise_error(Selenium::WebDriver::Error::NoSuchElementError)\nend\n\nit 'sleeps' do\ndriver.get 'https://www.selenium.dev/selenium/web/dynamic.html'\ndriver.find_element(id: 'adder').click\n\nsleep 1\nadded = driver.find_element(id: 'box0')\n\nexpect(added.dom_attribute(:class)).to eq('redbox')\nend\n\nit 'implicit' do\ndriver.manage.timeouts.implicit_wait = 2\ndriver.get 'https://www.selenium.dev/selenium/web/dynamic.html'\ndriver.find_element(id: 'adder').click\n\nadded = driver.find_element(id: 'box0')\n\nexpect(added.dom_attribute(:class)).to eq('redbox')\nend\n\nit 'explicit' do\ndriver.get 'https://www.selenium.dev/selenium/web/dynamic.html'\nrevealed = driver.find_element(id: 'revealed')\ndriver.find_element(id: 'reveal').click\n\nwait = Selenium::WebDriver::Wait.new\nwait.until { revealed.displayed? }\n\nrevealed.send_keys('Displayed')\nexpect(revealed.property(:value)).to eq('Displayed')\nend\n\nit 'options with explicit' do\ndriver.get 'https://www.selenium.dev/selenium/web/dynamic.html'\nrevealed = driver.find_element(id: 'revealed')\ndriver.find_element(id: 'reveal').click\n\nerrors = [Selenium::WebDriver::Error::NoSuchElementError,\nSelenium::WebDriver::Error::ElementNotInteractableError]\nwait = Selenium::WebDriver::Wait.new(timeout: 2,\ninterval: 0.3,\nignore: errors)\n\nwait.until { revealed.send_keys('Displayed') || true }\n\nexpect(revealed.property(:value)).to eq('Displayed')\nend\nend"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "JavaScript also supports Expected Conditions"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "await driver.wait(until.elementIsVisible(revealed), 2000);"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "/examples/javascript/test/waits/waits.spec.js"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "const { By, Browser, until, Builder} = require('selenium-webdriver');\nconst assert = require(\"node:assert\");\n\ndescribe('Waits', function () {\nlet driver;\n\nbefore(async function () {\ndriver = new Builder()\n.forBrowser(Browser.CHROME)\n.build();\n});\n\nafter(async () => await driver.quit());\n\nit('fail', async function () {\nawait driver.get('https://www.selenium.dev/selenium/web/dynamic.html');\nawait driver.findElement(By.id(\"adder\")).click();\n\nawait assert.rejects(async () => {\nawait driver.findElement(By.id(\"box0\"))\n},\nError\n)\n});\n\nit('sleep', async function () {\nawait driver.get('https://www.selenium.dev/selenium/web/dynamic.html');\nawait driver.findElement(By.id(\"adder\")).click();\n\nawait driver.sleep(2000);\nlet added = await driver.findElement(By.id(\"box0\"));\n\nassert.equal(await added.getAttribute('class'), \"redbox\")\n});\n\nit('implicit', async function () {\nawait driver.manage().setTimeouts({ implicit: 2000 });\nawait driver.get('https://www.selenium.dev/selenium/web/dynamic.html');\nawait driver.findElement(By.id(\"adder\")).click();\n\nlet added = await driver.findElement(By.id(\"box0\"));\n\nassert.equal(await added.getAttribute('class'), \"redbox\")\n});\n\nit('explicit', async function () {\nawait driver.get('https://www.selenium.dev/selenium/web/dynamic.html');\nlet revealed = await driver.findElement(By.id(\"revealed\"));\nawait driver.findElement(By.id(\"reveal\")).click();\nawait driver.wait(until.elementIsVisible(revealed), 2000);\nawait revealed.sendKeys(\"Displayed\");\nassert.equal(await revealed.getAttribute(\"value\"), \"Displayed\")\n})\n});"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "examples/kotlin/src/test/kotlin/dev/selenium/waits/WaitsTest.kt"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "定制"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Wait 类可以通过各种参数进行实例化,\n这些参数会改变条件的评估方式."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "这可以包括："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "更改代码的评估频率 (轮询间隔)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "指定哪些异常应自动处理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "更改总超时时长"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "自定义超时消息"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "例如, 如果默认情况下对 元素不可交互 错误进行重试,\n那么我们可以在执行中的代码里的某个方法内添加一个操作\n(我们只需要确保代码在成功时返回 true 即可)："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "The easiest way to customize Waits in Java is to use the FluentWait class:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Wait<WebDriver> wait =\nnew FluentWait<>(driver)\n.withTimeout(Duration.ofSeconds(2))\n.pollingEvery(Duration.ofMillis(300))\n.ignoring(ElementNotInteractableException.class);\n\nwait.until(\nd -> {\nrevealed.sendKeys(\"Displayed\");\nreturn true;\n});"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "/examples/java/src/test/java/dev/selenium/waits/WaitsTest.java"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "package dev.selenium.waits;\n\nimport dev.selenium.BaseTest;\nimport java.time.Duration;\nimport org.junit.jupiter.api.Assertions;\nimport org.junit.jupiter.api.Test;\nimport org.openqa.selenium.By;\nimport org.openqa.selenium.ElementNotInteractableException;\nimport org.openqa.selenium.NoSuchElementException;\nimport org.openqa.selenium.WebDriver;\nimport org.openqa.selenium.WebElement;\nimport org.openqa.selenium.chrome.ChromeOptions;\nimport org.openqa.selenium.support.ui.FluentWait;\nimport org.openqa.selenium.support.ui.Wait;\nimport org.openqa.selenium.support.ui.WebDriverWait;\n\npublic class WaitsTest extends BaseTest {\n@Test\npublic void fails() {\nstartChromeDriver(new ChromeOptions());\n\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\ndriver.findElement(By.id(\"adder\")).click();\n\nAssertions.assertThrows(\nNoSuchElementException.class,\n() -> {\ndriver.findElement(By.id(\"box0\"));\n});\n}\n\n@Test\npublic void sleep() throws InterruptedException {\nstartChromeDriver(new ChromeOptions());\n\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\ndriver.findElement(By.id(\"adder\")).click();\n\nThread.sleep(1000);\n\nWebElement added = driver.findElement(By.id(\"box0\"));\n\nAssertions.assertEquals(\"redbox\", added.getDomAttribute(\"class\"));\n}\n\n@Test\npublic void implicit() {\nstartChromeDriver(new ChromeOptions());\n\ndriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\ndriver.findElement(By.id(\"adder\")).click();\n\nWebElement added = driver.findElement(By.id(\"box0\"));\n\nAssertions.assertEquals(\"redbox\", added.getDomAttribute(\"class\"));\n}\n\n@Test\npublic void explicit() {\nstartChromeDriver(new ChromeOptions());\n\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\nWebElement revealed = driver.findElement(By.id(\"revealed\"));\ndriver.findElement(By.id(\"reveal\")).click();\n\nWait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(2));\nwait.until(d -> revealed.isDisplayed());\n\nrevealed.sendKeys(\"Displayed\");\nAssertions.assertEquals(\"Displayed\", revealed.getDomProperty(\"value\"));\n}\n\n@Test\npublic void explicitWithOptions() {\nstartChromeDriver(new ChromeOptions());\n\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\nWebElement revealed = driver.findElement(By.id(\"revealed\"));\ndriver.findElement(By.id(\"reveal\")).click();\n\nWait<WebDriver> wait =\nnew FluentWait<>(driver)\n.withTimeout(Duration.ofSeconds(2))\n.pollingEvery(Duration.ofMillis(300))\n.ignoring(ElementNotInteractableException.class);\n\nwait.until(\nd -> {\nrevealed.sendKeys(\"Displayed\");\nreturn true;\n});\n\nAssertions.assertEquals(\"Displayed\", revealed.getDomProperty(\"value\"));\n}\n}"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "errors = [NoSuchElementException, ElementNotInteractableException]\nwait = WebDriverWait(driver, timeout=2, poll_frequency=.2, ignored_exceptions=errors)\nwait.until(lambda _ : revealed.send_keys(\"Displayed\") or True)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "/examples/python/tests/waits/test_waits.py"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "import pytest\nimport time\nfrom selenium.common import NoSuchElementException, ElementNotInteractableException\nfrom selenium.webdriver.common.by import By\nfrom selenium.webdriver.support.wait import WebDriverWait\n\ndef test_fails(driver):\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\ndriver.find_element(By.ID, \"adder\").click()\n\nwith pytest.raises(NoSuchElementException):\ndriver.find_element(By.ID, 'box0')\n\ndef test_sleep(driver):\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\ndriver.find_element(By.ID, \"adder\").click()\n\ntime.sleep(2)\nadded = driver.find_element(By.ID, \"box0\")\n\nassert added.get_dom_attribute('class') == \"redbox\"\n\ndef test_implicit(driver):\ndriver.implicitly_wait(2)\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\ndriver.find_element(By.ID, \"adder\").click()\n\nadded = driver.find_element(By.ID, \"box0\")\n\nassert added.get_dom_attribute('class') == \"redbox\"\n\ndef test_explicit(driver):\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\nrevealed = driver.find_element(By.ID, \"revealed\")\ndriver.find_element(By.ID, \"reveal\").click()\n\nwait = WebDriverWait(driver, timeout=2)\nwait.until(lambda _ : revealed.is_displayed())\n\nrevealed.send_keys(\"Displayed\")\nassert revealed.get_property(\"value\") == \"Displayed\"\n\ndef test_explicit_options(driver):\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\nrevealed = driver.find_element(By.ID, \"revealed\")\ndriver.find_element(By.ID, \"reveal\").click()\n\nerrors = [NoSuchElementException, ElementNotInteractableException]\nwait = WebDriverWait(driver, timeout=2, poll_frequency=.2, ignored_exceptions=errors)\nwait.until(lambda _ : revealed.send_keys(\"Displayed\") or True)\n\nassert revealed.get_property(\"value\") == \"Displayed\""
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2))\n{\nPollingInterval = TimeSpan.FromMilliseconds(300),\n};\nwait.IgnoreExceptionTypes(typeof(ElementNotInteractableException));\n\nwait.Until(d => {\nrevealed.SendKeys(\"Displayed\");\nreturn true;\n});"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "/examples/dotnet/SeleniumDocs/Waits/WaitsTest.cs"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "using System;\nusing System.Threading;\nusing Microsoft.VisualStudio.TestTools.UnitTesting;\nusing OpenQA.Selenium;\nusing OpenQA.Selenium.Support.UI;\n\nnamespace SeleniumDocs.Waits\n{\n[TestClass]\npublic class WaitsTest : BaseChromeTest\n{\n[TestMethod]\npublic void Fails()\n{\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\ndriver.FindElement(By.Id(\"adder\")).Click();\n\nAssert.ThrowsException<NoSuchElementException>(\n() => driver.FindElement(By.Id(\"box0\"))\n);\n}\n\n[TestMethod]\npublic void Sleep()\n{\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\ndriver.FindElement(By.Id(\"adder\")).Click();\n\nThread.Sleep(1000);\n\nIWebElement added = driver.FindElement(By.Id(\"box0\"));\n\nAssert.AreEqual(\"redbox\", added.GetDomAttribute(\"class\"));\n}\n\n[TestMethod]\npublic void Implicit()\n{\ndriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);\n\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\ndriver.FindElement(By.Id(\"adder\")).Click();\n\nIWebElement added = driver.FindElement(By.Id(\"box0\"));\n\nAssert.AreEqual(\"redbox\", added.GetDomAttribute(\"class\"));\n}\n\n[TestMethod]\npublic void Explicit()\n{\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\nIWebElement revealed = driver.FindElement(By.Id(\"revealed\"));\ndriver.FindElement(By.Id(\"reveal\")).Click();\n\nWebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));\nwait.Until(d => revealed.Displayed);\n\nrevealed.SendKeys(\"Displayed\");\nAssert.AreEqual(\"Displayed\", revealed.GetDomProperty(\"value\"));\n}\n\n[TestMethod]\npublic void ExplicitOptions()\n{\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\nIWebElement revealed = driver.FindElement(By.Id(\"revealed\"));\ndriver.FindElement(By.Id(\"reveal\")).Click();\n\nWebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2))\n{\nPollingInterval = TimeSpan.FromMilliseconds(300),\n};\nwait.IgnoreExceptionTypes(typeof(ElementNotInteractableException));\n\nwait.Until(d => {\nrevealed.SendKeys(\"Displayed\");\nreturn true;\n});\n\nAssert.AreEqual(\"input\", revealed.TagName);\n}\n}\n}"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "errors = [Selenium::WebDriver::Error::NoSuchElementError,\nSelenium::WebDriver::Error::ElementNotInteractableError]\nwait = Selenium::WebDriver::Wait.new(timeout: 2,\ninterval: 0.3,\nignore: errors)\n\nwait.until { revealed.send_keys('Displayed') || true }"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "/examples/ruby/spec/waits/waits_spec.rb"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# frozen_string_literal: true\n\nrequire 'spec_helper'\n\nRSpec.describe 'Waits' do\nlet(:driver) { start_session }\n\nit 'fails' do\ndriver.get 'https://www.selenium.dev/selenium/web/dynamic.html'\ndriver.find_element(id: 'adder').click\n\nexpect {\ndriver.find_element(id: 'box0')\n}.to raise_error(Selenium::WebDriver::Error::NoSuchElementError)\nend\n\nit 'sleeps' do\ndriver.get 'https://www.selenium.dev/selenium/web/dynamic.html'\ndriver.find_element(id: 'adder').click\n\nsleep 1\nadded = driver.find_element(id: 'box0')\n\nexpect(added.dom_attribute(:class)).to eq('redbox')\nend\n\nit 'implicit' do\ndriver.manage.timeouts.implicit_wait = 2\ndriver.get 'https://www.selenium.dev/selenium/web/dynamic.html'\ndriver.find_element(id: 'adder').click\n\nadded = driver.find_element(id: 'box0')\n\nexpect(added.dom_attribute(:class)).to eq('redbox')\nend\n\nit 'explicit' do\ndriver.get 'https://www.selenium.dev/selenium/web/dynamic.html'\nrevealed = driver.find_element(id: 'revealed')\ndriver.find_element(id: 'reveal').click\n\nwait = Selenium::WebDriver::Wait.new\nwait.until { revealed.displayed? }\n\nrevealed.send_keys('Displayed')\nexpect(revealed.property(:value)).to eq('Displayed')\nend\n\nit 'options with explicit' do\ndriver.get 'https://www.selenium.dev/selenium/web/dynamic.html'\nrevealed = driver.find_element(id: 'revealed')\ndriver.find_element(id: 'reveal').click\n\nerrors = [Selenium::WebDriver::Error::NoSuchElementError,\nSelenium::WebDriver::Error::ElementNotInteractableError]\nwait = Selenium::WebDriver::Wait.new(timeout: 2,\ninterval: 0.3,\nignore: errors)\n\nwait.until { revealed.send_keys('Displayed') || true }\n\nexpect(revealed.property(:value)).to eq('Displayed')\nend\nend"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Add Example"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View Complete Code\n\nView on GitHub"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "examples/kotlin/src/test/kotlin/dev/selenium/waits/WaitsTest.kt"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "最后修改 October 31, 2025: Added Kotlin Code Examples (#2499) (e49b07e4f68)"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Development Partners"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Selenium Level Sponsors"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Support the Selenium Project"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Learn more or view the full list of sponsors."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Learn more"
+    }
+  ]
+}

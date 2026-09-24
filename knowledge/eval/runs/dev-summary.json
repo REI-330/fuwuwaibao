@@ -1,0 +1,50 @@
+{
+  "questions": "knowledge\\evaluations\\questions-dev.json",
+  "tag": "dev-",
+  "levels": [
+    {
+      "label": "BM25",
+      "n": 20,
+      "hit": 15,
+      "hitRate": 0.75,
+      "hitAt1": 0.65,
+      "refsInSlots": 21,
+      "slots": 60,
+      "precisionAtK": 0.35,
+      "path": "knowledge\\eval\\runs\\dev-bm25-topk.json"
+    },
+    {
+      "label": "VECTOR",
+      "n": 20,
+      "hit": 16,
+      "hitRate": 0.8,
+      "hitAt1": 0.55,
+      "refsInSlots": 22,
+      "slots": 60,
+      "precisionAtK": 0.3667,
+      "path": "knowledge\\eval\\runs\\dev-vector-topk.json"
+    },
+    {
+      "label": "FUSION α=0.35",
+      "n": 20,
+      "hit": 18,
+      "hitRate": 0.9,
+      "hitAt1": 0.65,
+      "refsInSlots": 25,
+      "slots": 60,
+      "precisionAtK": 0.4167,
+      "path": "knowledge\\eval\\runs\\dev-fusion-a035-topk.json"
+    },
+    {
+      "label": "FUSION+RERANK",
+      "n": 20,
+      "hit": 20,
+      "hitRate": 1.0,
+      "hitAt1": 0.8,
+      "refsInSlots": 35,
+      "slots": 60,
+      "precisionAtK": 0.5833,
+      "path": "knowledge\\eval\\runs\\dev-adopted-a035-topk.json"
+    }
+  ]
+}

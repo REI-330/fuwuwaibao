@@ -1,0 +1,2120 @@
+{
+  "schema": "career-graph-raw-blocks/v1",
+  "sourceId": "S13",
+  "url": "https://docs.pytest.org/en/stable/how-to/fixtures.html",
+  "finalUrl": "https://docs.pytest.org/en/stable/how-to/fixtures.html",
+  "fetchedAt": "2026-09-15T09:56:51.087Z",
+  "httpStatus": 200,
+  "contentType": "text/html; charset=utf-8",
+  "charset": "utf-8",
+  "byteSize": 186622,
+  "sha256": "0e0e3afb0d67be54c337e75b673ad9e65fcf5ccc790ad335beb497370871af26",
+  "title": "How to use fixtures - pytest documentation",
+  "hops": [
+    {
+      "url": "https://docs.pytest.org/en/stable/how-to/fixtures.html",
+      "finalUrl": "https://docs.pytest.org/en/stable/how-to/fixtures.html",
+      "httpStatus": 200,
+      "bytes": 186622,
+      "charset": "utf-8"
+    }
+  ],
+  "flags": [],
+  "extractionPass": "unpruned-fallback",
+  "prunedBlockCount": 2,
+  "prunedTextLength": 37,
+  "blockCount": 232,
+  "textLength": 50777,
+  "ranges": [
+    [
+      0,
+      15
+    ],
+    [
+      17,
+      37
+    ],
+    [
+      39,
+      50
+    ],
+    [
+      52,
+      72
+    ],
+    [
+      74,
+      82
+    ],
+    [
+      84,
+      98
+    ],
+    [
+      100,
+      108
+    ],
+    [
+      110,
+      128
+    ],
+    [
+      130,
+      152
+    ],
+    [
+      154,
+      248
+    ],
+    [
+      250,
+      573
+    ],
+    [
+      575,
+      589
+    ],
+    [
+      591,
+      1102
+    ],
+    [
+      1104,
+      1357
+    ],
+    [
+      1359,
+      1419
+    ],
+    [
+      1421,
+      1688
+    ],
+    [
+      1690,
+      1726
+    ],
+    [
+      1728,
+      2109
+    ],
+    [
+      2111,
+      2368
+    ],
+    [
+      2370,
+      2624
+    ],
+    [
+      2626,
+      2874
+    ],
+    [
+      2876,
+      2898
+    ],
+    [
+      2900,
+      3221
+    ],
+    [
+      3223,
+      3464
+    ],
+    [
+      3466,
+      3514
+    ],
+    [
+      3516,
+      3852
+    ],
+    [
+      3854,
+      4095
+    ],
+    [
+      4097,
+      4508
+    ],
+    [
+      4510,
+      4569
+    ],
+    [
+      4571,
+      4730
+    ],
+    [
+      4732,
+      5160
+    ],
+    [
+      5162,
+      5239
+    ],
+    [
+      5241,
+      5532
+    ],
+    [
+      5534,
+      5873
+    ],
+    [
+      5875,
+      6344
+    ],
+    [
+      6346,
+      6400
+    ],
+    [
+      6402,
+      6715
+    ],
+    [
+      6717,
+      6862
+    ],
+    [
+      6864,
+      7274
+    ],
+    [
+      7276,
+      7524
+    ],
+    [
+      7526,
+      7595
+    ],
+    [
+      7597,
+      8201
+    ],
+    [
+      8203,
+      8369
+    ],
+    [
+      8371,
+      8535
+    ],
+    [
+      8537,
+      8844
+    ],
+    [
+      8846,
+      9031
+    ],
+    [
+      9033,
+      10250
+    ],
+    [
+      10252,
+      10597
+    ],
+    [
+      10599,
+      10711
+    ],
+    [
+      10713,
+      10846
+    ],
+    [
+      10848,
+      10863
+    ],
+    [
+      10865,
+      10957
+    ],
+    [
+      10959,
+      11036
+    ],
+    [
+      11038,
+      11116
+    ],
+    [
+      11118,
+      11198
+    ],
+    [
+      11200,
+      11365
+    ],
+    [
+      11367,
+      11432
+    ],
+    [
+      11434,
+      11438
+    ],
+    [
+      11440,
+      11610
+    ],
+    [
+      11612,
+      11626
+    ],
+    [
+      11628,
+      11649
+    ],
+    [
+      11651,
+      12009
+    ],
+    [
+      12011,
+      12263
+    ],
+    [
+      12265,
+      12478
+    ],
+    [
+      12480,
+      12524
+    ],
+    [
+      12526,
+      12883
+    ],
+    [
+      12885,
+      12926
+    ],
+    [
+      12928,
+      12960
+    ],
+    [
+      12962,
+      13162
+    ],
+    [
+      13164,
+      13196
+    ],
+    [
+      13198,
+      13259
+    ],
+    [
+      13261,
+      13440
+    ],
+    [
+      13442,
+      13638
+    ],
+    [
+      13640,
+      13694
+    ],
+    [
+      13696,
+      14087
+    ],
+    [
+      14089,
+      14488
+    ],
+    [
+      14490,
+      14523
+    ],
+    [
+      14525,
+      15128
+    ],
+    [
+      15130,
+      15232
+    ],
+    [
+      15234,
+      15402
+    ],
+    [
+      15404,
+      15459
+    ],
+    [
+      15461,
+      15495
+    ],
+    [
+      15497,
+      15776
+    ],
+    [
+      15778,
+      15808
+    ],
+    [
+      15810,
+      16090
+    ],
+    [
+      16092,
+      16347
+    ],
+    [
+      16349,
+      16685
+    ],
+    [
+      16687,
+      16760
+    ],
+    [
+      16762,
+      17575
+    ],
+    [
+      17577,
+      17697
+    ],
+    [
+      17699,
+      17754
+    ],
+    [
+      17756,
+      17780
+    ],
+    [
+      17782,
+      17948
+    ],
+    [
+      17950,
+      18188
+    ],
+    [
+      18190,
+      18538
+    ],
+    [
+      18540,
+      18618
+    ],
+    [
+      18620,
+      18898
+    ],
+    [
+      18900,
+      19244
+    ],
+    [
+      19246,
+      19443
+    ],
+    [
+      19445,
+      19460
+    ],
+    [
+      19462,
+      19769
+    ],
+    [
+      19771,
+      19856
+    ],
+    [
+      19858,
+      20425
+    ],
+    [
+      20427,
+      20585
+    ],
+    [
+      20587,
+      20726
+    ],
+    [
+      20728,
+      20907
+    ],
+    [
+      20909,
+      20964
+    ],
+    [
+      20966,
+      20989
+    ],
+    [
+      20991,
+      21200
+    ],
+    [
+      21202,
+      21708
+    ],
+    [
+      21710,
+      21862
+    ],
+    [
+      21864,
+      21900
+    ],
+    [
+      21902,
+      21933
+    ],
+    [
+      21935,
+      21967
+    ],
+    [
+      21969,
+      21998
+    ],
+    [
+      22000,
+      22059
+    ],
+    [
+      22061,
+      22260
+    ],
+    [
+      22262,
+      22295
+    ],
+    [
+      22297,
+      22301
+    ],
+    [
+      22303,
+      22480
+    ],
+    [
+      22482,
+      23440
+    ],
+    [
+      23442,
+      24145
+    ],
+    [
+      24147,
+      24189
+    ],
+    [
+      24191,
+      24462
+    ],
+    [
+      24464,
+      24652
+    ],
+    [
+      24654,
+      24862
+    ],
+    [
+      24864,
+      24989
+    ],
+    [
+      24991,
+      24995
+    ],
+    [
+      24997,
+      25174
+    ],
+    [
+      25176,
+      26590
+    ],
+    [
+      26592,
+      26819
+    ],
+    [
+      26821,
+      27226
+    ],
+    [
+      27228,
+      27614
+    ],
+    [
+      27616,
+      27931
+    ],
+    [
+      27933,
+      27985
+    ],
+    [
+      27987,
+      28248
+    ],
+    [
+      28250,
+      28583
+    ],
+    [
+      28585,
+      28739
+    ],
+    [
+      28741,
+      29032
+    ],
+    [
+      29034,
+      29133
+    ],
+    [
+      29135,
+      29300
+    ],
+    [
+      29302,
+      29313
+    ],
+    [
+      29315,
+      29949
+    ],
+    [
+      29951,
+      30052
+    ],
+    [
+      30054,
+      30093
+    ],
+    [
+      30095,
+      30252
+    ],
+    [
+      30254,
+      30564
+    ],
+    [
+      30566,
+      30588
+    ],
+    [
+      30590,
+      30880
+    ],
+    [
+      30882,
+      30922
+    ],
+    [
+      30924,
+      31246
+    ],
+    [
+      31248,
+      31336
+    ],
+    [
+      31338,
+      31786
+    ],
+    [
+      31788,
+      31811
+    ],
+    [
+      31813,
+      32195
+    ],
+    [
+      32197,
+      32446
+    ],
+    [
+      32448,
+      32758
+    ],
+    [
+      32760,
+      33006
+    ],
+    [
+      33008,
+      35208
+    ],
+    [
+      35210,
+      35461
+    ],
+    [
+      35463,
+      35838
+    ],
+    [
+      35840,
+      36133
+    ],
+    [
+      36135,
+      36465
+    ],
+    [
+      36467,
+      36721
+    ],
+    [
+      36723,
+      36792
+    ],
+    [
+      36794,
+      37607
+    ],
+    [
+      37609,
+      37648
+    ],
+    [
+      37650,
+      37800
+    ],
+    [
+      37802,
+      37810
+    ],
+    [
+      37812,
+      38008
+    ],
+    [
+      38010,
+      38078
+    ],
+    [
+      38080,
+      38615
+    ],
+    [
+      38617,
+      38668
+    ],
+    [
+      38670,
+      39050
+    ],
+    [
+      39052,
+      39337
+    ],
+    [
+      39339,
+      39485
+    ],
+    [
+      39487,
+      39998
+    ],
+    [
+      40000,
+      40284
+    ],
+    [
+      40286,
+      40628
+    ],
+    [
+      40630,
+      40679
+    ],
+    [
+      40681,
+      41012
+    ],
+    [
+      41014,
+      41188
+    ],
+    [
+      41190,
+      41806
+    ],
+    [
+      41808,
+      41881
+    ],
+    [
+      41883,
+      43111
+    ],
+    [
+      43113,
+      43363
+    ],
+    [
+      43365,
+      43553
+    ],
+    [
+      43555,
+      43676
+    ],
+    [
+      43678,
+      43731
+    ],
+    [
+      43733,
+      44105
+    ],
+    [
+      44107,
+      44317
+    ],
+    [
+      44319,
+      44381
+    ],
+    [
+      44383,
+      44711
+    ],
+    [
+      44713,
+      44961
+    ],
+    [
+      44963,
+      45002
+    ],
+    [
+      45004,
+      45048
+    ],
+    [
+      45050,
+      45120
+    ],
+    [
+      45122,
+      45198
+    ],
+    [
+      45200,
+      45248
+    ],
+    [
+      45250,
+      45350
+    ],
+    [
+      45352,
+      45412
+    ],
+    [
+      45414,
+      45421
+    ],
+    [
+      45423,
+      45515
+    ],
+    [
+      45517,
+      45636
+    ],
+    [
+      45638,
+      45676
+    ],
+    [
+      45678,
+      45828
+    ],
+    [
+      45830,
+      45881
+    ],
+    [
+      45883,
+      45917
+    ],
+    [
+      45919,
+      46437
+    ],
+    [
+      46439,
+      46653
+    ],
+    [
+      46655,
+      46697
+    ],
+    [
+      46699,
+      46733
+    ],
+    [
+      46735,
+      47297
+    ],
+    [
+      47299,
+      47394
+    ],
+    [
+      47396,
+      47448
+    ],
+    [
+      47450,
+      47484
+    ],
+    [
+      47486,
+      48082
+    ],
+    [
+      48084,
+      48315
+    ],
+    [
+      48317,
+      48390
+    ],
+    [
+      48392,
+      48426
+    ],
+    [
+      48428,
+      49402
+    ],
+    [
+      49404,
+      49650
+    ],
+    [
+      49652,
+      49687
+    ],
+    [
+      49689,
+      49854
+    ],
+    [
+      49856,
+      50031
+    ],
+    [
+      50033,
+      50143
+    ],
+    [
+      50145,
+      50241
+    ],
+    [
+      50243,
+      50280
+    ],
+    [
+      50282,
+      50407
+    ],
+    [
+      50409,
+      50413
+    ],
+    [
+      50415,
+      50602
+    ],
+    [
+      50604,
+      50777
+    ]
+  ],
+  "blocks": [
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Skip to content"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest documentation"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "text": "How to use fixtures¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "See also"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "About fixtures"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "See also"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Fixtures reference"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "“Requesting” fixtures¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "At a basic level, test functions request fixtures they require by declaring\nthem as arguments."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "When pytest goes to run a test, it looks at the parameters in that test\nfunction’s signature, and then searches for fixtures that have the same names as\nthose parameters. Once pytest finds them, it runs those fixtures, captures what\nthey returned (if anything), and passes those objects into the test function as\narguments."
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Quick example¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "import pytest\n\nclass Fruit:\ndef __init__(self, name):\nself.name = name\nself.cubed = False\n\ndef cube(self):\nself.cubed = True\n\nclass FruitSalad:\ndef __init__(self, *fruit_bowl):\nself.fruit = fruit_bowl\nself._cube_fruit()\n\ndef _cube_fruit(self):\nfor fruit in self.fruit:\nfruit.cube()\n\n# Arrange\n@pytest.fixture\ndef fruit_bowl():\nreturn [Fruit(\"apple\"), Fruit(\"banana\")]\n\ndef test_fruit_salad(fruit_bowl):\n# Act\nfruit_salad = FruitSalad(*fruit_bowl)\n\n# Assert\nassert all(fruit.cubed for fruit in fruit_salad.fruit)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "In this example, test_fruit_salad “requests” fruit_bowl (i.e.\ndef test_fruit_salad(fruit_bowl):), and when pytest sees this, it will\nexecute the fruit_bowl fixture function and pass the object it returns into\ntest_fruit_salad as the fruit_bowl argument."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Here’s roughly\nwhat’s happening if we were to do it by hand:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "def fruit_bowl():\nreturn [Fruit(\"apple\"), Fruit(\"banana\")]\n\ndef test_fruit_salad(fruit_bowl):\n# Act\nfruit_salad = FruitSalad(*fruit_bowl)\n\n# Assert\nassert all(fruit.cubed for fruit in fruit_salad.fruit)\n\n# Arrange\nbowl = fruit_bowl()\ntest_fruit_salad(fruit_bowl=bowl)"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Fixtures can request other fixtures¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "One of pytest’s greatest strengths is its extremely flexible fixture system. It\nallows us to boil down complex requirements for tests into more simple and\norganized functions, where we only need to have each one describe the things\nthey are dependent on. We’ll get more into this further down, but for now,\nhere’s a quick example to demonstrate how fixtures can use other fixtures:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# contents of test_append.py\nimport pytest\n\n# Arrange\n@pytest.fixture\ndef first_entry():\nreturn \"a\"\n\n# Arrange\n@pytest.fixture\ndef order(first_entry):\nreturn [first_entry]\n\ndef test_string(order):\n# Act\norder.append(\"b\")\n\n# Assert\nassert order == [\"a\", \"b\"]"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Notice that this is the same example from above, but very little changed. The\nfixtures in pytest request fixtures just like tests. All the same\nrequesting rules apply to fixtures that do for tests. Here’s how this\nexample would work if we did it by hand:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "def first_entry():\nreturn \"a\"\n\ndef order(first_entry):\nreturn [first_entry]\n\ndef test_string(order):\n# Act\norder.append(\"b\")\n\n# Assert\nassert order == [\"a\", \"b\"]\n\nentry = first_entry()\nthe_list = order(first_entry=entry)\ntest_string(order=the_list)"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Fixtures are reusable¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "One of the things that makes pytest’s fixture system so powerful, is that it\ngives us the ability to define a generic setup step that can be reused over and\nover, just like a normal function would be used. Two different tests can request\nthe same fixture and have pytest give each test their own result from that\nfixture."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "This is extremely useful for making sure tests aren’t affected by each other. We\ncan use this system to make sure each test gets its own fresh batch of data and\nis starting from a clean state so it can provide consistent, repeatable results."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Here’s an example of how this can come in handy:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# contents of test_append.py\nimport pytest\n\n# Arrange\n@pytest.fixture\ndef first_entry():\nreturn \"a\"\n\n# Arrange\n@pytest.fixture\ndef order(first_entry):\nreturn [first_entry]\n\ndef test_string(order):\n# Act\norder.append(\"b\")\n\n# Assert\nassert order == [\"a\", \"b\"]\n\ndef test_int(order):\n# Act\norder.append(2)\n\n# Assert\nassert order == [\"a\", 2]"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Each test here is being given its own copy of that list object,\nwhich means the order fixture is getting executed twice (the same\nis true for the first_entry fixture). If we were to do this by hand as\nwell, it would look something like this:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "def first_entry():\nreturn \"a\"\n\ndef order(first_entry):\nreturn [first_entry]\n\ndef test_string(order):\n# Act\norder.append(\"b\")\n\n# Assert\nassert order == [\"a\", \"b\"]\n\ndef test_int(order):\n# Act\norder.append(2)\n\n# Assert\nassert order == [\"a\", 2]\n\nentry = first_entry()\nthe_list = order(first_entry=entry)\ntest_string(order=the_list)\n\nentry = first_entry()\nthe_list = order(first_entry=entry)\ntest_int(order=the_list)"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "A test/fixture can request more than one fixture at a time¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Tests and fixtures aren’t limited to requesting a single fixture at a time.\nThey can request as many as they like. Here’s another quick example to\ndemonstrate:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# contents of test_append.py\nimport pytest\n\n# Arrange\n@pytest.fixture\ndef first_entry():\nreturn \"a\"\n\n# Arrange\n@pytest.fixture\ndef second_entry():\nreturn 2\n\n# Arrange\n@pytest.fixture\ndef order(first_entry, second_entry):\nreturn [first_entry, second_entry]\n\n# Arrange\n@pytest.fixture\ndef expected_list():\nreturn [\"a\", 2, 3.0]\n\ndef test_string(order, expected_list):\n# Act\norder.append(3.0)\n\n# Assert\nassert order == expected_list"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Fixtures can be requested more than once per test (return values are cached)¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Fixtures can also be requested more than once during the same test, and\npytest won’t execute them again for that test. This means we can request\nfixtures in multiple fixtures that are dependent on them (and even again in the\ntest itself) without those fixtures being executed more than once."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# contents of test_append.py\nimport pytest\n\n# Arrange\n@pytest.fixture\ndef first_entry():\nreturn \"a\"\n\n# Arrange\n@pytest.fixture\ndef order():\nreturn []\n\n# Act\n@pytest.fixture\ndef append_first(order, first_entry):\nreturn order.append(first_entry)\n\ndef test_string_only(append_first, order, first_entry):\n# Assert\nassert order == [first_entry]"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "If a requested fixture was executed once for every time it was requested\nduring a test, then this test would fail because both append_first and\ntest_string_only would see order as an empty list (i.e. []), but\nsince the return value of order was cached (along with any side effects\nexecuting it may have had) after the first time it was called, both the test and\nappend_first were referencing the same object, and the test saw the effect\nappend_first had on that object."
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Autouse fixtures (fixtures you don’t have to request)¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Sometimes you may want to have a fixture (or even several) that you know all\nyour tests will depend on. “Autouse” fixtures are a convenient way to make all\ntests automatically request them. This can cut out a\nlot of redundant requests, and can even provide more advanced fixture usage\n(more on that further down)."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "We can make a fixture an autouse fixture by passing in autouse=True to the\nfixture’s decorator. Here’s a simple example for how they can be used:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# contents of test_append.py\nimport pytest\n\n@pytest.fixture\ndef first_entry():\nreturn \"a\"\n\n@pytest.fixture\ndef order(first_entry):\nreturn []\n\n@pytest.fixture(autouse=True)\ndef append_first(order, first_entry):\nreturn order.append(first_entry)\n\ndef test_string_only(order, first_entry):\nassert order == [first_entry]\n\ndef test_string_and_int(order, first_entry):\norder.append(2)\nassert order == [first_entry, 2]"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "In this example, the append_first fixture is an autouse fixture. Because it\nhappens automatically, both tests are affected by it, even though neither test\nrequested it. That doesn’t mean they can’t be requested though; just\nthat it isn’t necessary."
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Scope: sharing fixtures across classes, modules, packages or session¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Fixtures requiring network access depend on connectivity and are\nusually time-expensive to create. Extending the previous example, we\ncan add a scope=\"module\" parameter to the\n@pytest.fixture invocation\nto cause a smtp_connection fixture function, responsible to create a connection to a preexisting SMTP server, to only be invoked\nonce per test module (the default is to invoke once per test function).\nMultiple test functions in a test module will thus\neach receive the same smtp_connection fixture instance, thus saving time.\nPossible values for scope are: function, class, module, package or session."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "The next example puts the fixture function into a separate conftest.py file\nso that tests from multiple test modules in the directory can\naccess the fixture function:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of conftest.py\nimport smtplib\n\nimport pytest\n\n@pytest.fixture(scope=\"module\")\ndef smtp_connection():\nreturn smtplib.SMTP(\"smtp.gmail.com\", 587, timeout=5)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of test_module.py\n\ndef test_ehlo(smtp_connection):\nresponse, msg = smtp_connection.ehlo()\nassert response == 250\nassert b\"smtp.gmail.com\" in msg\nassert 0 # for demo purposes\n\ndef test_noop(smtp_connection):\nresponse, msg = smtp_connection.noop()\nassert response == 250\nassert 0 # for demo purposes"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Here, the test_ehlo needs the smtp_connection fixture value. pytest\nwill discover and call the @pytest.fixture\nmarked smtp_connection fixture function. Running the test looks like this:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest test_module.py\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-9.x.y, pluggy-1.x.y\nrootdir: /home/sweet/project\ncollected 2 items\n\ntest_module.py FF [100%]\n\n================================= FAILURES =================================\n________________________________ test_ehlo _________________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef0001>\n\ndef test_ehlo(smtp_connection):\nresponse, msg = smtp_connection.ehlo()\nassert response == 250\nassert b\"smtp.gmail.com\" in msg\n> assert 0 # for demo purposes\n^^^^^^^^\nE assert 0\n\ntest_module.py:7: AssertionError\n________________________________ test_noop _________________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef0001>\n\ndef test_noop(smtp_connection):\nresponse, msg = smtp_connection.noop()\nassert response == 250\n> assert 0 # for demo purposes\n^^^^^^^^\nE assert 0\n\ntest_module.py:13: AssertionError\n========================= short test summary info ==========================\nFAILED test_module.py::test_ehlo - assert 0\nFAILED test_module.py::test_noop - assert 0\n============================ 2 failed in 0.12s ============================="
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "You see the two assert 0 failing and more importantly you can also see\nthat the exact same smtp_connection object was passed into the\ntwo test functions because pytest shows the incoming argument values in the\ntraceback. As a result, the two test functions using smtp_connection run\nas quick as a single one because they reuse the same instance."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "If you decide that you rather want to have a session-scoped smtp_connection\ninstance, you can simply declare it:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "@pytest.fixture(scope=\"session\")\ndef smtp_connection():\n# the returned fixture value will be shared for\n# all tests requesting it\n..."
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Fixture scopes¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Fixtures are created when first requested by a test, and are destroyed based on their scope:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "function: the default scope, the fixture is destroyed at the end of the test."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "class: the fixture is destroyed during teardown of the last test in the class."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "module: the fixture is destroyed during teardown of the last test in the module."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "package: the fixture is destroyed during teardown of the last test in the package where the fixture is defined, including sub-packages and sub-directories within it."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "session: the fixture is destroyed at the end of the test session."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Note"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Pytest only caches one instance of a fixture at a time, which\nmeans that when using a parametrized fixture, pytest may invoke a fixture more than once in\nthe given scope."
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Dynamic scope¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Added in version 5.2."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "In some cases, you might want to change the scope of the fixture without changing the code.\nTo do that, pass a callable to scope. The callable must return a string with a valid scope\nand will be executed only once - during the fixture definition. It will be called with two\nkeyword arguments - fixture_name as a string and config with a configuration object."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "This can be especially useful when dealing with fixtures that need time for setup, like spawning\na docker container. You can use the command-line argument to control the scope of the spawned\ncontainers for different environments. See the example below."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "def determine_scope(fixture_name, config):\nif config.getoption(\"--keep-containers\", None):\nreturn \"session\"\nreturn \"function\"\n\n@pytest.fixture(scope=determine_scope)\ndef docker_container():\nyield spawn_container()"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Teardown/Cleanup (AKA Fixture finalization)¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "When we run our tests, we’ll want to make sure they clean up after themselves so\nthey don’t mess with any other tests (and also so that we don’t leave behind a\nmountain of test data to bloat the system). Fixtures in pytest offer a very\nuseful teardown system, which allows us to define the specific steps necessary\nfor each fixture to clean up after itself."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "This system can be leveraged in two ways."
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "1. yield fixtures (recommended)¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "“Yield” fixtures yield instead of return. With these\nfixtures, we can run some code and pass an object back to the requesting\nfixture/test, just like with the other fixtures. The only differences are:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "return is swapped out for yield."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Any teardown code for that fixture is placed after the yield."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Once pytest figures out a linear order for the fixtures, it will run each one up\nuntil it returns or yields, and then move on to the next fixture in the list to\ndo the same thing."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Once the test is finished, pytest will go back down the list of fixtures, but in\nthe reverse order, taking each one that yielded, and running the code inside\nit that was after the yield statement."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "As a simple example, consider this basic email module:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of emaillib.py\nclass MailAdminClient:\ndef create_user(self):\nreturn MailUser()\n\ndef delete_user(self, user):\n# do some cleanup\npass\n\nclass MailUser:\ndef __init__(self):\nself.inbox = []\n\ndef send_email(self, email, other):\nother.inbox.append(email)\n\ndef clear_mailbox(self):\nself.inbox.clear()\n\nclass Email:\ndef __init__(self, subject, body):\nself.subject = subject\nself.body = body"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Let’s say we want to test sending email from one user to another. We’ll have to\nfirst make each user, then send the email from one user to the other, and\nfinally assert that the other user received that message in their inbox. If we\nwant to clean up after the test runs, we’ll likely have to make sure the other\nuser’s mailbox is emptied before deleting that user, otherwise the system may\ncomplain."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Here’s what that might look like:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of test_emaillib.py\nfrom emaillib import Email, MailAdminClient\n\nimport pytest\n\n@pytest.fixture\ndef mail_admin():\nreturn MailAdminClient()\n\n@pytest.fixture\ndef sending_user(mail_admin):\nuser = mail_admin.create_user()\nyield user\nmail_admin.delete_user(user)\n\n@pytest.fixture\ndef receiving_user(mail_admin):\nuser = mail_admin.create_user()\nyield user\nuser.clear_mailbox()\nmail_admin.delete_user(user)\n\ndef test_email_received(sending_user, receiving_user):\nemail = Email(subject=\"Hey!\", body=\"How's it going?\")\nsending_user.send_email(email, receiving_user)\nassert email in receiving_user.inbox"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Because receiving_user is the last fixture to run during setup, it’s the first to run\nduring teardown."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "There is a risk that even having the order right on the teardown side of things\ndoesn’t guarantee a safe cleanup. That’s covered in a bit more detail in\nSafe teardowns."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest -q test_emaillib.py\n. [100%]\n1 passed in 0.12s"
+    },
+    {
+      "kind": "heading",
+      "level": 4,
+      "text": "Handling errors for yield fixture¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "If a yield fixture raises an exception before yielding, pytest won’t try to run\nthe teardown code after that yield fixture’s yield statement. But, for every\nfixture that has already run successfully for that test, pytest will still\nattempt to tear them down as it normally would."
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "2. Adding finalizers directly¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "While yield fixtures are considered to be the cleaner and more straightforward\noption, there is another choice, and that is to add “finalizer” functions\ndirectly to the test’s request-context object. It brings a similar result as\nyield fixtures, but requires a bit more verbosity."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "In order to use this approach, we have to request the request-context object\n(just like we would request another fixture) in the fixture we need to add\nteardown code for, and then pass a callable, containing that teardown code, to\nits addfinalizer method."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "We have to be careful though, because pytest will run that finalizer once it’s\nbeen added, even if that fixture raises an exception after adding the finalizer.\nSo to make sure we don’t run the finalizer code when we wouldn’t need to, we\nwould only add the finalizer once the fixture would have done something that\nwe’d need to teardown."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Here’s how the previous example would look using the addfinalizer method:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of test_emaillib.py\nfrom emaillib import Email, MailAdminClient\n\nimport pytest\n\n@pytest.fixture\ndef mail_admin():\nreturn MailAdminClient()\n\n@pytest.fixture\ndef sending_user(mail_admin):\nuser = mail_admin.create_user()\nyield user\nmail_admin.delete_user(user)\n\n@pytest.fixture\ndef receiving_user(mail_admin, request):\nuser = mail_admin.create_user()\n\ndef delete_user():\nmail_admin.delete_user(user)\n\nrequest.addfinalizer(delete_user)\nreturn user\n\n@pytest.fixture\ndef email(sending_user, receiving_user, request):\n_email = Email(subject=\"Hey!\", body=\"How's it going?\")\nsending_user.send_email(_email, receiving_user)\n\ndef empty_mailbox():\nreceiving_user.clear_mailbox()\n\nrequest.addfinalizer(empty_mailbox)\nreturn _email\n\ndef test_email_received(receiving_user, email):\nassert email in receiving_user.inbox"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "It’s a bit longer than yield fixtures and a bit more complex, but it\ndoes offer some nuances for when you’re in a pinch."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest -q test_emaillib.py\n. [100%]\n1 passed in 0.12s"
+    },
+    {
+      "kind": "heading",
+      "level": 4,
+      "text": "Note on finalizer order¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Finalizers are executed in a first-in-last-out order.\nFor yield fixtures, the first teardown code to run is from the right-most fixture, i.e. the last test parameter."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of test_finalizers.py\nimport pytest\n\ndef test_bar(fix_w_yield1, fix_w_yield2):\nprint(\"test_bar\")\n\n@pytest.fixture\ndef fix_w_yield1():\nyield\nprint(\"after_yield_1\")\n\n@pytest.fixture\ndef fix_w_yield2():\nyield\nprint(\"after_yield_2\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest -s test_finalizers.py\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-9.x.y, pluggy-1.x.y\nrootdir: /home/sweet/project\ncollected 1 item\n\ntest_finalizers.py test_bar\n.after_yield_2\nafter_yield_1\n\n============================ 1 passed in 0.12s ============================="
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "For finalizers, the first fixture to run is last call to request.addfinalizer."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of test_finalizers.py\nfrom functools import partial\nimport pytest\n\n@pytest.fixture\ndef fix_w_finalizers(request):\nrequest.addfinalizer(partial(print, \"finalizer_2\"))\nrequest.addfinalizer(partial(print, \"finalizer_1\"))\n\ndef test_bar(fix_w_finalizers):\nprint(\"test_bar\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest -s test_finalizers.py\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-9.x.y, pluggy-1.x.y\nrootdir: /home/sweet/project\ncollected 1 item\n\ntest_finalizers.py test_bar\n.finalizer_1\nfinalizer_2\n\n============================ 1 passed in 0.12s ============================="
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "This is so because yield fixtures use addfinalizer behind the scenes: when the fixture executes, addfinalizer registers a function that resumes the generator, which in turn calls the teardown code."
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Safe teardowns¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "The fixture system of pytest is very powerful, but it’s still being run by a\ncomputer, so it isn’t able to figure out how to safely teardown everything we\nthrow at it. If we aren’t careful, an error in the wrong spot might leave stuff\nfrom our tests behind, and that can cause further issues pretty quickly."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "For example, consider the following tests (based off of the mail example from\nabove):"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of test_emaillib.py\nfrom emaillib import Email, MailAdminClient\n\nimport pytest\n\n@pytest.fixture\ndef setup():\nmail_admin = MailAdminClient()\nsending_user = mail_admin.create_user()\nreceiving_user = mail_admin.create_user()\nemail = Email(subject=\"Hey!\", body=\"How's it going?\")\nsending_user.send_email(email, receiving_user)\nyield receiving_user, email\nreceiving_user.clear_mailbox()\nmail_admin.delete_user(sending_user)\nmail_admin.delete_user(receiving_user)\n\ndef test_email_received(setup):\nreceiving_user, email = setup\nassert email in receiving_user.inbox"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "This version is a lot more compact, but it’s also harder to read, doesn’t have a\nvery descriptive fixture name, and none of the fixtures can be reused easily."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "There’s also a more serious issue, which is that if any of those steps in the\nsetup raise an exception, none of the teardown code will run."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "One option might be to go with the addfinalizer method instead of yield\nfixtures, but that might get pretty complex and difficult to maintain (and it\nwouldn’t be compact anymore)."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest -q test_emaillib.py\n. [100%]\n1 passed in 0.12s"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Safe fixture structure¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "The safest and simplest fixture structure requires limiting fixtures to only\nmaking one state-changing action each, and then bundling them together with\ntheir teardown code, as the email examples above showed."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "The chance that a state-changing operation can fail but still modify state is\nnegligible, as most of these operations tend to be transaction-based (at least at the\nlevel of testing where state could be left behind). So if we make sure that any\nsuccessful state-changing action gets torn down by moving it to a separate\nfixture function and separating it from other, potentially failing\nstate-changing actions, then our tests will stand the best chance at leaving\nthe test environment the way they found it."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "For an example, let’s say we have a website with a login page, and we have\naccess to an admin API where we can generate users. For our test, we want to:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Create a user through that admin API"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Launch a browser using Selenium"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Go to the login page of our site"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Log in as the user we created"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Assert that their name is in the header of the landing page"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "We wouldn’t want to leave that user in the system, nor would we want to leave\nthat browser session running, so we’ll want to make sure the fixtures that\ncreate those things clean up after themselves."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Here’s what that might look like:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Note"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "For this example, certain fixtures (i.e. base_url and\nadmin_credentials) are implied to exist elsewhere. So for now, let’s\nassume they exist, and we’re just not looking at them."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "from uuid import uuid4\nfrom urllib.parse import urljoin\n\nfrom selenium.webdriver import Chrome\nimport pytest\n\nfrom src.utils.pages import LoginPage, LandingPage\nfrom src.utils import AdminApiClient\nfrom src.utils.data_types import User\n\n@pytest.fixture\ndef admin_client(base_url, admin_credentials):\nreturn AdminApiClient(base_url, **admin_credentials)\n\n@pytest.fixture\ndef user(admin_client):\n_user = User(name=\"Susan\", username=f\"testuser-{uuid4()}\", password=\"P4$$word\")\nadmin_client.create_user(_user)\nyield _user\nadmin_client.delete_user(_user)\n\n@pytest.fixture\ndef driver():\n_driver = Chrome()\nyield _driver\n_driver.quit()\n\n@pytest.fixture\ndef login(driver, base_url, user):\ndriver.get(urljoin(base_url, \"/login\"))\npage = LoginPage(driver)\npage.login(user)\n\n@pytest.fixture\ndef landing_page(driver, login):\nreturn LandingPage(driver)\n\ndef test_name_on_landing_page_after_login(landing_page, user):\nassert landing_page.header == f\"Welcome, {user.name}!\""
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "The way the dependencies are laid out means it’s unclear if the user\nfixture would execute before the driver fixture. But that’s ok, because\nthose are atomic operations, and so it doesn’t matter which one runs first\nbecause the sequence of events for the test is still linearizable. But what does matter is\nthat, no matter which one runs first, if the one raises an exception while the\nother would not have, neither will have left anything behind. If driver\nexecutes before user, and user raises an exception, the driver will\nstill quit, and the user was never made. And if driver was the one to raise\nthe exception, then the driver would never have been started and the user would\nnever have been made."
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Running multiple assert statements safely¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Sometimes you may want to run multiple asserts after doing all that setup, which\nmakes sense as, in more complex systems, a single action can kick off multiple\nbehaviors. pytest has a convenient way of handling this and it combines a bunch\nof what we’ve gone over so far."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "All that’s needed is stepping up to a larger scope, then having the act\nstep defined as an autouse fixture, and finally, making sure all the fixtures\nare targeting that higher level scope."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Let’s pull an example from above, and tweak it a\nbit. Let’s say that in addition to checking for a welcome message in the header,\nwe also want to check for a sign out button, and a link to the user’s profile."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Let’s take a look at how we can structure that so we can run multiple asserts\nwithout having to repeat all those steps again."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Note"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "For this example, certain fixtures (i.e. base_url and\nadmin_credentials) are implied to exist elsewhere. So for now, let’s\nassume they exist, and we’re just not looking at them."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# contents of tests/end_to_end/test_login.py\nfrom uuid import uuid4\nfrom urllib.parse import urljoin\n\nfrom selenium.webdriver import Chrome\nimport pytest\n\nfrom src.utils.pages import LoginPage, LandingPage\nfrom src.utils import AdminApiClient\nfrom src.utils.data_types import User\n\n@pytest.fixture(scope=\"class\")\ndef admin_client(base_url, admin_credentials):\nreturn AdminApiClient(base_url, **admin_credentials)\n\n@pytest.fixture(scope=\"class\")\ndef user(admin_client):\n_user = User(name=\"Susan\", username=f\"testuser-{uuid4()}\", password=\"P4$$word\")\nadmin_client.create_user(_user)\nyield _user\nadmin_client.delete_user(_user)\n\n@pytest.fixture(scope=\"class\")\ndef driver():\n_driver = Chrome()\nyield _driver\n_driver.quit()\n\n@pytest.fixture(scope=\"class\")\ndef landing_page(driver, login):\nreturn LandingPage(driver)\n\nclass TestLandingPageSuccess:\n@pytest.fixture(scope=\"class\", autouse=True)\n@classmethod\ndef login(cls, driver, base_url, user):\ndriver.get(urljoin(base_url, \"/login\"))\npage = LoginPage(driver)\npage.login(user)\n\ndef test_name_in_header(self, landing_page, user):\nassert landing_page.header == f\"Welcome, {user.name}!\"\n\ndef test_sign_out_button(self, landing_page):\nassert landing_page.sign_out_button.is_displayed()\n\ndef test_profile_link(self, landing_page, user):\nprofile_href = urljoin(base_url, f\"/profile?id={user.profile_id}\")\nassert landing_page.profile_link.get_attribute(\"href\") == profile_href"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Notice that the methods are only referencing self in the signature as a\nformality. No state is tied to the actual test class as it might be in the\nunittest.TestCase framework. Everything is managed by the pytest fixture\nsystem."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Each method only has to request the fixtures that it actually needs without\nworrying about order. This is because the act fixture is an autouse fixture,\nand it made sure all the other fixtures executed before it. There’s no more\nchanges of state that need to take place, so the tests are free to make as many\nnon-state-changing queries as they want without risking stepping on the toes of\nthe other tests."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "The login fixture is defined inside the class as well, because not every one\nof the other tests in the module will be expecting a successful login, and the act may need to\nbe handled a little differently for another test class. For example, if we\nwanted to write another test scenario around submitting bad credentials, we\ncould handle it by adding something like this to the test file:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "class TestLandingPageBadCredentials:\n@pytest.fixture(scope=\"class\")\n@classmethod\ndef faux_user(cls, user):\n_user = deepcopy(user)\n_user.password = \"badpass\"\nreturn _user\n\ndef test_raises_bad_credentials_exception(self, login_page, faux_user):\nwith pytest.raises(BadCredentialsException):\nlogin_page.login(faux_user)"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Fixtures can introspect the requesting test context¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Fixture functions can accept the request object\nto introspect the “requesting” test function, class or module context.\nFurther extending the previous smtp_connection fixture example, let’s\nread an optional server URL from the test module which uses our fixture:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of conftest.py\nimport smtplib\n\nimport pytest\n\n@pytest.fixture(scope=\"module\")\ndef smtp_connection(request):\nserver = getattr(request.module, \"smtpserver\", \"smtp.gmail.com\")\nsmtp_connection = smtplib.SMTP(server, 587, timeout=5)\nyield smtp_connection\nprint(f\"finalizing {smtp_connection} ({server})\")\nsmtp_connection.close()"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "We use the request.module attribute to optionally obtain an\nsmtpserver attribute from the test module. If we just execute\nagain, nothing much has changed:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest -s -q --tb=no test_module.py\nFFfinalizing <smtplib.SMTP object at 0xdeadbeef0002> (smtp.gmail.com)\n\n========================= short test summary info ==========================\nFAILED test_module.py::test_ehlo - assert 0\nFAILED test_module.py::test_noop - assert 0\n2 failed in 0.12s"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Let’s quickly create another test module that actually sets the\nserver URL in its module namespace:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of test_anothersmtp.py\n\nsmtpserver = \"mail.python.org\" # will be read by smtp fixture\n\ndef test_showhelo(smtp_connection):\nassert 0, smtp_connection.helo()"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Running it:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest -qq --tb=short test_anothersmtp.py\nF [100%]\n================================= FAILURES =================================\n______________________________ test_showhelo _______________________________\ntest_anothersmtp.py:6: in test_showhelo\nassert 0, smtp_connection.helo()\nE AssertionError: (250, b'mail.python.org')\nE assert 0\n------------------------- Captured stdout teardown -------------------------\nfinalizing <smtplib.SMTP object at 0xdeadbeef0003> (mail.python.org)\n========================= short test summary info ==========================\nFAILED test_anothersmtp.py::test_showhelo - AssertionError: (250, b'mail...."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "voila! The smtp_connection fixture function picked up our mail server name\nfrom the module namespace."
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Using markers to pass data to fixtures¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Using the request object, a fixture can also access\nmarkers which are applied to a test function. This can be useful to pass data\ninto a fixture from a test:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "import pytest\n\n@pytest.fixture\ndef fixt(request):\nmarker = request.node.get_closest_marker(\"fixt_data\")\nif marker is None:\n# Handle missing marker in some way...\ndata = None\nelse:\ndata = marker.args[0]\n\n# Do something with the data\nreturn data\n\n@pytest.mark.fixt_data(42)\ndef test_fixt(fixt):\nassert fixt == 42"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Factories as fixtures¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "The “factory as fixture” pattern can help in situations where the result\nof a fixture is needed multiple times in a single test. Instead of returning\ndata directly, the fixture instead returns a function which generates the data.\nThis function can then be called multiple times in the test."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Factories can have parameters as needed:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "@pytest.fixture\ndef make_customer_record():\ndef _make_customer_record(name):\nreturn {\"name\": name, \"orders\": []}\n\nreturn _make_customer_record\n\ndef test_customer_records(make_customer_record):\ncustomer_1 = make_customer_record(\"Lisa\")\ncustomer_2 = make_customer_record(\"Mike\")\ncustomer_3 = make_customer_record(\"Meredith\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "If the data created by the factory requires managing, the fixture can take care of that:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "@pytest.fixture\ndef make_customer_record():\ncreated_records = []\n\ndef _make_customer_record(name):\nrecord = models.Customer(name=name, orders=[])\ncreated_records.append(record)\nreturn record\n\nyield _make_customer_record\n\nfor record in created_records:\nrecord.destroy()\n\ndef test_customer_records(make_customer_record):\ncustomer_1 = make_customer_record(\"Lisa\")\ncustomer_2 = make_customer_record(\"Mike\")\ncustomer_3 = make_customer_record(\"Meredith\")"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Parametrizing fixtures¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Fixture functions can be parametrized in which case they will be called\nmultiple times, each time executing the set of dependent tests, i.e. the\ntests that depend on this fixture. Test functions usually do not need\nto be aware of their re-running. Fixture parametrization helps to\nwrite exhaustive functional tests for components which themselves can be\nconfigured in multiple ways."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Extending the previous example, we can flag the fixture to create two\nsmtp_connection fixture instances which will cause all tests using the fixture\nto run twice. The fixture function gets access to each parameter\nthrough the special request object:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of conftest.py\nimport smtplib\n\nimport pytest\n\n@pytest.fixture(scope=\"module\", params=[\"smtp.gmail.com\", \"mail.python.org\"])\ndef smtp_connection(request):\nsmtp_connection = smtplib.SMTP(request.param, 587, timeout=5)\nyield smtp_connection\nprint(f\"finalizing {smtp_connection}\")\nsmtp_connection.close()"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "The main change is the declaration of params with\n@pytest.fixture, a list of values\nfor each of which the fixture function will execute and can access\na value via request.param. No test function code needs to change.\nSo let’s just do another run:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest -q test_module.py\nFFFF [100%]\n================================= FAILURES =================================\n________________________ test_ehlo[smtp.gmail.com] _________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef0004>\n\ndef test_ehlo(smtp_connection):\nresponse, msg = smtp_connection.ehlo()\nassert response == 250\nassert b\"smtp.gmail.com\" in msg\n> assert 0 # for demo purposes\n^^^^^^^^\nE assert 0\n\ntest_module.py:7: AssertionError\n________________________ test_noop[smtp.gmail.com] _________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef0004>\n\ndef test_noop(smtp_connection):\nresponse, msg = smtp_connection.noop()\nassert response == 250\n> assert 0 # for demo purposes\n^^^^^^^^\nE assert 0\n\ntest_module.py:13: AssertionError\n________________________ test_ehlo[mail.python.org] ________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef0005>\n\ndef test_ehlo(smtp_connection):\nresponse, msg = smtp_connection.ehlo()\nassert response == 250\n> assert b\"smtp.gmail.com\" in msg\nE AssertionError: assert b'smtp.gmail.com' in b'mail.python.org\\nPIPELINING\\nSIZE 51200000\\nETRN\\nSTARTTLS\\nAUTH DIGEST-MD5 NTLM CRAM-MD5\\nENHANCEDSTATUSCODES\\n8BITMIME\\nDSN\\nSMTPUTF8\\nCHUNKING'\n\ntest_module.py:6: AssertionError\n-------------------------- Captured stdout setup ---------------------------\nfinalizing <smtplib.SMTP object at 0xdeadbeef0004>\n________________________ test_noop[mail.python.org] ________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef0005>\n\ndef test_noop(smtp_connection):\nresponse, msg = smtp_connection.noop()\nassert response == 250\n> assert 0 # for demo purposes\n^^^^^^^^\nE assert 0\n\ntest_module.py:13: AssertionError\n------------------------- Captured stdout teardown -------------------------\nfinalizing <smtplib.SMTP object at 0xdeadbeef0005>\n========================= short test summary info ==========================\nFAILED test_module.py::test_ehlo[smtp.gmail.com] - assert 0\nFAILED test_module.py::test_noop[smtp.gmail.com] - assert 0\nFAILED test_module.py::test_ehlo[mail.python.org] - AssertionError: asser...\nFAILED test_module.py::test_noop[mail.python.org] - assert 0\n4 failed in 0.12s"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "We see that our two test functions each ran twice, against the different\nsmtp_connection instances. Note also, that with the mail.python.org\nconnection the second test fails in test_ehlo because a\ndifferent server string is expected than what arrived."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest will build a string that is the test ID for each fixture value\nin a parametrized fixture, e.g. test_ehlo[smtp.gmail.com] and\ntest_ehlo[mail.python.org] in the above examples. These IDs can\nbe used with -k to select specific cases to run, and they will\nalso identify the specific case when one is failing. Running pytest\nwith --collect-only will show the generated IDs."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Numbers, strings, booleans and None will have their usual string\nrepresentation used in the test ID. For other objects, pytest will\nmake a string based on the argument name. It is possible to customise\nthe string used in a test ID for a certain fixture value by using the\nids keyword argument:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of test_ids.py\nimport pytest\n\n@pytest.fixture(params=[0, 1], ids=[\"spam\", \"ham\"])\ndef a(request):\nreturn request.param\n\ndef test_a(a):\npass\n\ndef idfn(fixture_value):\nif fixture_value == 0:\nreturn \"eggs\"\nelse:\nreturn None\n\n@pytest.fixture(params=[0, 1], ids=idfn)\ndef b(request):\nreturn request.param\n\ndef test_b(b):\npass"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "The above shows how ids can be either a list of strings to use or\na function which will be called with the fixture value and then\nhas to return a string to use. In the latter case if the function\nreturns None then pytest’s auto-generated ID will be used."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Running the above tests results in the following test IDs being used:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest --collect-only\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-9.x.y, pluggy-1.x.y\nrootdir: /home/sweet/project\ncollected 12 items\n\n<Dir fixtures.rst-236>\n<Module test_anothersmtp.py>\n<Function test_showhelo[smtp.gmail.com]>\n<Function test_showhelo[mail.python.org]>\n<Module test_emaillib.py>\n<Function test_email_received>\n<Module test_finalizers.py>\n<Function test_bar>\n<Module test_ids.py>\n<Function test_a[spam]>\n<Function test_a[ham]>\n<Function test_b[eggs]>\n<Function test_b[1]>\n<Module test_module.py>\n<Function test_ehlo[smtp.gmail.com]>\n<Function test_noop[smtp.gmail.com]>\n<Function test_ehlo[mail.python.org]>\n<Function test_noop[mail.python.org]>\n\n======================= 12 tests collected in 0.12s ========================"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Using marks with parametrized fixtures¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest.param() can be used to apply marks in values sets of parametrized fixtures in the same way\nthat they can be used with @pytest.mark.parametrize."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Example:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of test_fixture_marks.py\nimport pytest\n\n@pytest.fixture(params=[0, 1, pytest.param(2, marks=pytest.mark.skip)])\ndef data_set(request):\nreturn request.param\n\ndef test_data(data_set):\npass"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Running this test will skip the invocation of data_set with value 2:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest test_fixture_marks.py -v\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-9.x.y, pluggy-1.x.y -- $PYTHON_PREFIX/bin/python\ncachedir: .pytest_cache\nrootdir: /home/sweet/project\ncollecting ... collected 3 items\n\ntest_fixture_marks.py::test_data[0] PASSED [ 33%]\ntest_fixture_marks.py::test_data[1] PASSED [ 66%]\ntest_fixture_marks.py::test_data[2] SKIPPED (unconditional skip) [100%]\n\n======================= 2 passed, 1 skipped in 0.12s ======================="
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Modularity: using fixtures from a fixture function¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "In addition to using fixtures in test functions, fixture functions\ncan use other fixtures themselves. This contributes to a modular design\nof your fixtures and allows reuse of framework-specific fixtures across\nmany projects. As a simple example, we can extend the previous example\nand instantiate an object app where we stick the already defined\nsmtp_connection resource into it:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of test_appsetup.py\n\nimport pytest\n\nclass App:\ndef __init__(self, smtp_connection):\nself.smtp_connection = smtp_connection\n\n@pytest.fixture(scope=\"module\")\ndef app(smtp_connection):\nreturn App(smtp_connection)\n\ndef test_smtp_connection_exists(app):\nassert app.smtp_connection"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Here we declare an app fixture which receives the previously defined\nsmtp_connection fixture and instantiates an App object with it. Let’s run it:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest -v test_appsetup.py\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-9.x.y, pluggy-1.x.y -- $PYTHON_PREFIX/bin/python\ncachedir: .pytest_cache\nrootdir: /home/sweet/project\ncollecting ... collected 2 items\n\ntest_appsetup.py::test_smtp_connection_exists[smtp.gmail.com] PASSED [ 50%]\ntest_appsetup.py::test_smtp_connection_exists[mail.python.org] PASSED [100%]\n\n============================ 2 passed in 0.12s ============================="
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Due to the parametrization of smtp_connection, the test will run twice with two\ndifferent App instances and respective smtp servers. There is no\nneed for the app fixture to be aware of the smtp_connection\nparametrization because pytest will fully analyse the fixture dependency graph."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Note that the app fixture has a scope of module and uses a\nmodule-scoped smtp_connection fixture. The example would still work if\nsmtp_connection was cached on a session scope: it is fine for fixtures to use\n“broader” scoped fixtures but not the other way round:\nA session-scoped fixture could not use a module-scoped one in a\nmeaningful way."
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Automatic grouping of tests by fixture instances¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest minimizes the number of active fixtures during test runs.\nIf you have a parametrized fixture, then all the tests using it will\nfirst execute with one instance and then finalizers are called\nbefore the next fixture instance is created. Among other things,\nthis eases testing of applications which create and use global state."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "The following example uses two parametrized fixtures, one of which is\nscoped on a per-module basis, and all the functions perform print calls\nto show the setup/teardown flow:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of test_module.py\nimport pytest\n\n@pytest.fixture(scope=\"module\", params=[\"mod1\", \"mod2\"])\ndef modarg(request):\nparam = request.param\nprint(\" SETUP modarg\", param)\nyield param\nprint(\" TEARDOWN modarg\", param)\n\n@pytest.fixture(scope=\"function\", params=[1, 2])\ndef otherarg(request):\nparam = request.param\nprint(\" SETUP otherarg\", param)\nyield param\nprint(\" TEARDOWN otherarg\", param)\n\ndef test_0(otherarg):\nprint(\" RUN test0 with otherarg\", otherarg)\n\ndef test_1(modarg):\nprint(\" RUN test1 with modarg\", modarg)\n\ndef test_2(otherarg, modarg):\nprint(f\" RUN test2 with otherarg {otherarg} and modarg {modarg}\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Let’s run the tests in verbose mode and with looking at the print-output:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest -v -s test_module.py\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-9.x.y, pluggy-1.x.y -- $PYTHON_PREFIX/bin/python\ncachedir: .pytest_cache\nrootdir: /home/sweet/project\ncollecting ... collected 8 items\n\ntest_module.py::test_0[1] SETUP otherarg 1\nRUN test0 with otherarg 1\nPASSED TEARDOWN otherarg 1\n\ntest_module.py::test_0[2] SETUP otherarg 2\nRUN test0 with otherarg 2\nPASSED TEARDOWN otherarg 2\n\ntest_module.py::test_1[mod1] SETUP modarg mod1\nRUN test1 with modarg mod1\nPASSED\ntest_module.py::test_2[mod1-1] SETUP otherarg 1\nRUN test2 with otherarg 1 and modarg mod1\nPASSED TEARDOWN otherarg 1\n\ntest_module.py::test_2[mod1-2] SETUP otherarg 2\nRUN test2 with otherarg 2 and modarg mod1\nPASSED TEARDOWN otherarg 2\n\ntest_module.py::test_1[mod2] TEARDOWN modarg mod1\nSETUP modarg mod2\nRUN test1 with modarg mod2\nPASSED\ntest_module.py::test_2[mod2-1] SETUP otherarg 1\nRUN test2 with otherarg 1 and modarg mod2\nPASSED TEARDOWN otherarg 1\n\ntest_module.py::test_2[mod2-2] SETUP otherarg 2\nRUN test2 with otherarg 2 and modarg mod2\nPASSED TEARDOWN otherarg 2\nTEARDOWN modarg mod2\n\n============================ 8 passed in 0.12s ============================="
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "You can see that the parametrized module-scoped modarg resource caused an\nordering of test execution that led to the fewest possible “active” resources.\nThe finalizer for the mod1 parametrized resource was executed before the\nmod2 resource was setup."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "In particular notice that test_0 is completely independent and finishes first.\nThen test_1 is executed with mod1, then test_2 with mod1, then test_1\nwith mod2 and finally test_2 with mod2."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "The otherarg parametrized resource (having function scope) was set up before\nand torn down after every test that used it."
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Use fixtures in classes and modules with usefixtures¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Sometimes test functions do not directly need access to a fixture object.\nFor example, tests may require to operate with an empty directory as the\ncurrent working directory but otherwise do not care for the concrete\ndirectory. Here is how you can use the standard tempfile\nand pytest fixtures to\nachieve it. We separate the creation of the fixture into a conftest.py\nfile:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of conftest.py\n\nimport os\nimport tempfile\n\nimport pytest\n\n@pytest.fixture\ndef cleandir():\nwith tempfile.TemporaryDirectory() as newpath:\nold_cwd = os.getcwd()\nos.chdir(newpath)\nyield\nos.chdir(old_cwd)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "and declare its use in a test module via a usefixtures marker:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of test_setenv.py\nimport os\n\nimport pytest\n\n@pytest.mark.usefixtures(\"cleandir\")\nclass TestDirectoryInit:\ndef test_cwd_starts_empty(self):\nassert os.listdir(os.getcwd()) == []\nwith open(\"myfile\", \"w\", encoding=\"utf-8\") as f:\nf.write(\"hello\")\n\ndef test_cwd_again_starts_empty(self):\nassert os.listdir(os.getcwd()) == []"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Due to the usefixtures marker, the cleandir fixture\nwill be required for the execution of each test method, just as if\nyou specified a “cleandir” function argument to each of them. Let’s run it\nto verify our fixture is activated and the tests pass:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest -q\n.. [100%]\n2 passed in 0.12s"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "You can specify multiple fixtures like this:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "@pytest.mark.usefixtures(\"cleandir\", \"anotherfixture\")\ndef test(): ..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "and you may specify fixture usage at the test module level using pytestmark:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytestmark = pytest.mark.usefixtures(\"cleandir\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "It is also possible to put fixtures required by all tests in your project\ninto a configuration file:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of pytest.toml\n[pytest]\nusefixtures = [\"cleandir\"]"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Warning"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "@pytest.mark.usefixtures cannot be used on fixture functions. For example,\nthis is an error:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "@pytest.mark.usefixtures(\"my_other_fixture\")\n@pytest.fixture\ndef my_fixture_that_sadly_wont_use_my_other_fixture(): ..."
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Overriding fixtures on various levels¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "In a relatively large test suite, you may want to override a fixture, to augment\nor change its behavior inside of certain test modules or directories."
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Override a fixture on a directory (conftest) level¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Given the tests file structure is:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "tests/\nconftest.py\n# content of tests/conftest.py\nimport pytest\n\n@pytest.fixture\ndef username():\nreturn 'username'\n\ntest_something.py\n# content of tests/test_something.py\ndef test_username(username):\nassert username == 'username'\n\nsubdir/\nconftest.py\n# content of tests/subdir/conftest.py\nimport pytest\n\n@pytest.fixture\ndef username(username):\nreturn 'overridden-' + username\n\ntest_something_else.py\n# content of tests/subdir/test_something_else.py\ndef test_username(username):\nassert username == 'overridden-username'"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "As you can see, a fixture with the same name can be overridden for a certain test directory level.\nNote that the base or super fixture can be accessed from the overriding\nfixture easily - used in the example above."
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Override a fixture on a test module level¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Given the tests file structure is:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "tests/\nconftest.py\n# content of tests/conftest.py\nimport pytest\n\n@pytest.fixture\ndef username():\nreturn 'username'\n\ntest_something.py\n# content of tests/test_something.py\nimport pytest\n\n@pytest.fixture\ndef username(username):\nreturn 'overridden-' + username\n\ndef test_username(username):\nassert username == 'overridden-username'\n\ntest_something_else.py\n# content of tests/test_something_else.py\nimport pytest\n\n@pytest.fixture\ndef username(username):\nreturn 'overridden-else-' + username\n\ndef test_username(username):\nassert username == 'overridden-else-username'"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "In the example above, a fixture with the same name can be overridden for a certain test module."
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Override a fixture with direct test parametrization¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Given the tests file structure is:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "tests/\nconftest.py\n# content of tests/conftest.py\nimport pytest\n\n@pytest.fixture\ndef username():\nreturn 'username'\n\n@pytest.fixture\ndef other_username(username):\nreturn 'other-' + username\n\ntest_something.py\n# content of tests/test_something.py\nimport pytest\n\n@pytest.mark.parametrize('username', ['directly-overridden-username'])\ndef test_username(username):\nassert username == 'directly-overridden-username'\n\n@pytest.mark.parametrize('username', ['directly-overridden-username-other'])\ndef test_username_other(other_username):\nassert other_username == 'other-directly-overridden-username-other'"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "In the example above, a fixture value is overridden by the test parameter value. Note that the value of the fixture\ncan be overridden this way even if the test doesn’t use it directly (doesn’t mention it in the function prototype)."
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Override a parametrized fixture with non-parametrized one and vice versa¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Given the tests file structure is:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "tests/\nconftest.py\n# content of tests/conftest.py\nimport pytest\n\n@pytest.fixture(params=['one', 'two', 'three'])\ndef parametrized_username(request):\nreturn request.param\n\n@pytest.fixture\ndef non_parametrized_username(request):\nreturn 'username'\n\ntest_something.py\n# content of tests/test_something.py\nimport pytest\n\n@pytest.fixture\ndef parametrized_username():\nreturn 'overridden-username'\n\n@pytest.fixture(params=['one', 'two', 'three'])\ndef non_parametrized_username(request):\nreturn request.param\n\ndef test_username(parametrized_username):\nassert parametrized_username == 'overridden-username'\n\ndef test_parametrized_username(non_parametrized_username):\nassert non_parametrized_username in ['one', 'two', 'three']\n\ntest_something_else.py\n# content of tests/test_something_else.py\ndef test_username(parametrized_username):\nassert parametrized_username in ['one', 'two', 'three']\n\ndef test_username(non_parametrized_username):\nassert non_parametrized_username == 'username'"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "In the example above, a parametrized fixture is overridden with a non-parametrized version, and\na non-parametrized fixture is overridden with a parametrized version for certain test module.\nThe same applies for the test directory level obviously."
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Using fixtures from other projects¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Usually projects that provide pytest support will use entry points,\nso just installing those projects into an environment will make those fixtures available for use."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "In case you want to use fixtures from a project that does not use entry points, you can\ndefine pytest_plugins in your top conftest.py file to register that module\nas a plugin."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Suppose you have some fixtures in mylibrary.fixtures and you want to reuse them into your\napp/tests directory."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "All you need to do is to define pytest_plugins in app/tests/conftest.py\npointing to that module."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest_plugins = \"mylibrary.fixtures\""
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "This effectively registers mylibrary.fixtures as a plugin, making all its fixtures and\nhooks available to tests in app/tests."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Note"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Sometimes users will import fixtures from other projects for use, however this is not\nrecommended: importing fixtures into a module will register them in pytest\nas defined in that module."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "This has minor consequences, such as appearing multiple times in pytest --help,\nbut it is not recommended because this behavior might change/stop working\nin future versions."
+    }
+  ]
+}

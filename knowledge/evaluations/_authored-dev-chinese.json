@@ -1,0 +1,175 @@
+{
+  "schema": "career-graph-eval-questions/v3",
+  "note": "新写的中文答案层题目（dev 分片）。由 Agent 读候选段原文手写，规则见 knowledge/evaluations/EVAL_SET_DESIGN.md 与 _plan-new.md。",
+  "questions": [
+    {
+      "questionId": "C-D01",
+      "category": "AI框架与推理",
+      "sourceId": "S05",
+      "question": "MindSpore Lite 转出来的 .ms 图片分类模型对输入张量有什么要求？如果手头没有真实图片、只想先用 benchmark 跑通一遍，输入数据文件该怎么准备？",
+      "referenceChunks": [
+        "S05#s97~2",
+        "S05#s109~2"
+      ],
+      "gradingNotes": "该模型的输入张量形状为 float32[1,224,224,3]（1x224x224x3），输出为 1x1000 的分类结果；模型本身不含图片前处理，用户需自行编码完成前处理与后处理。；benchmark 通过 inDataFile 指定输入数据文件 input.bin，默认按二进制格式读取，其中按顺序保存 150528 个 float32 数值；没有真实图片时可直接用 numpy 随机生成 (1,224,224,3) 的 float32 数据写入文件，随机种子可固定以便复现。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-D02",
+      "category": "AI框架与推理",
+      "sourceId": "S05",
+      "question": "MindSpore Lite 的发布件解压以后，模型转换和基准测试这两类工具放在哪一层目录里？在 Windows 上转换一个 Caffe 模型时，模型结构文件和权值文件要分别传给哪个参数？",
+      "referenceChunks": [
+        "S05#s95",
+        "S05#s105"
+      ],
+      "gradingNotes": "Linux 发布件的根目录下并列着 runtime 与 tools 两块：runtime 放推理框架的头文件与各种库（静态库、动态库、JNI 库、jar 包等），tools 下则是 benchmark（基准测试）、benchmark_train、codegen、converter（模型转换）、cropper（库裁剪）等工具目录。；Windows 发布件里转换工具 converter_lite.exe 位于 tools\\converter\\converter 目录；转换 Caffe 模型时用 --modelFile 传模型结构文件（*.prototxt）、--weightFile 传权值文件（*.caffemodel），并用 --outputFile 指定输出模型名，不加后缀也会自动生成 .ms。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-D03",
+      "category": "AI框架与推理",
+      "sourceId": "S05",
+      "question": "用 converter_lite 把模型转成 .ms 时，--fmk 参数可以填哪些原始格式？哪个参数只有转 Caffe 模型时才必须传？命令行里参数名和参数值之间写法有什么硬性要求？",
+      "referenceChunks": [
+        "S05#s96~2",
+        "S05#s105~2"
+      ],
+      "gradingNotes": "Linux 侧的转换命令形如 ./converter_lite --fmk=MINDIR --modelFile=mobilenetv2.mindir --outputFile=mobilenetv2，转换成功后打印 CONVERT RESULT SUCCESS:0 并在当前目录生成同名的 .ms 文件；参数表里 --fmk 的取值范围是 MINDIR、CAFFE、TFLITE、TF、ONNX。；Windows 侧 converter_lite.exe 的参数表取值相同；其中 --weightFile 仅在转换 Caffe 模型时必选，--outputFile 不必带后缀即可自动生成 .ms，且参数名和参数值之间要用等号连接、中间不能有空格。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-D04",
+      "category": "AI框架与推理",
+      "sourceId": "S05",
+      "question": "在 C++ 里集成 MindSpore Lite 做推理：想用 CPU 跑的时候，context 的设备信息要怎么配？调 Build 编译完模型后，之前读进来的模型文件内存还要保留吗？输入数据又是从哪个接口写进张量的？",
+      "referenceChunks": [
+        "S05#s101~5",
+        "S05#s110~5"
+      ],
+      "gradingNotes": "选 CPU 推理时，先通过 Context::MutableDeviceInfo 拿到设备管理列表，再申请一个 CPUDeviceInfo 对象（用默认设置即可，无需额外配置）并 push_back 进列表；加载完模型后模型信息已记录在 Model 对象中，原先存放模型文件的 char 数组缓冲区可以释放，且要用 delete[] 释放。；设置输入数据先用 Model.GetInputs 取到输入张量（单个张量格式为 MSTensor），再通过张量的 MutableData 接口取得数据内存指针，并按张量实际的数据类型做指针强转（如 float*）后写入数据。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-D05",
+      "category": "AI框架与推理",
+      "sourceId": "S05",
+      "question": "在 Windows 上编译并运行 MindSpore Lite 的推理 demo：发布件的 runtime\\lib 目录里除了框架自身的库，还必须一起带哪些动态库？demo 跑起来前环境变量要怎么设？推理时输入和输出张量分别怎么传给接口？",
+      "referenceChunks": [
+        "S05#s104",
+        "S05#s110~6"
+      ],
+      "gradingNotes": "Windows 发布件的 runtime\\lib 里除了 libmindspore-lite.a、libmindspore-lite.dll、libmindspore-lite.dll.a，还带 libgcc_s_seh-1.dll、libssp-0.dll、libstdc++-6.dll、libwinpthread-1.dll 等 MinGW 动态库；tools 下只有 benchmark 与 converter 两个工具目录。；运行前要把 runtime\\lib 的地址加入环境变量 PATH（set PATH=..\\runtime\\lib;%PATH%），再执行 demo；推理时先声明一个存放输出张量的 vector<MSTensor>，调用 model->Predict(inputs, &outputs)，从返回的 status 判断是否成功，输出值用 MutableData 取指针后按类型转换打印。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-D06",
+      "category": "AI框架与推理",
+      "sourceId": "S07",
+      "question": "飞桨里手动创建 Tensor 有哪些常见途径？另外，如果某个参数在设计网络时不想让它参与梯度回传、不参与训练更新，应该动 Tensor 的哪个属性？它默认是什么值？",
+      "referenceChunks": [
+        "S07#s125",
+        "S07#3.5"
+      ],
+      "gradingNotes": "手动创建 Tensor 的常见方式包括指定数据创建、指定形状创建、指定区间创建，以及把图片、文本、语音这类原始数据手动创建为 Tensor；此外框架还在一些 API 里封装了自动创建 Tensor 的操作，并把 Numpy 数组与 Tensor 的互转单独成节介绍。；stop_gradient 表示是否停止计算梯度，默认值为 True，也就是梯度不再回传；设计中不需要训练更新的参数保持 True 即可，需要参与训练的可以把它显式设为 False。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-D07",
+      "category": "AI框架与推理",
+      "sourceId": "S07",
+      "question": "把图片样本和文本样本分别转成 Tensor 该用什么办法？另外 Tensor 的逐元素算术既可以用运算符也可以用方法，这两种写法是怎么对应的？",
+      "referenceChunks": [
+        "S07#2.4",
+        "S07#4.2"
+      ],
+      "gradingNotes": "图像场景可以用 paddle.vision.transforms.ToTensor 把 PIL.Image 格式数据直接转成 Tensor，标签（通常是 Python 或 Numpy 格式）用 paddle.to_tensor 转；文本场景需要先把文本解码为数字，再用 paddle.to_tensor 转成 Tensor，标签在不同任务里形式不同但最终同样要转成 Tensor。；逐元素算术既有同名方法（x.abs()、x.ceil()、x.floor()、x.round()、x.exp()、x.log()、x.reciprocal()、x.square()、x.sqrt()、x.sin()、x.cos()、x.add(y)、x.subtract(y)、x.multiply(y)、x.divide(y)、x.mod(y)、x.pow(y)，以及 x.max()、x.min()、x.prod()、x.sum() 这类默认作用在全部维度上的归约），也重写了 Python 魔法函数：x + y 等价于 x.add(y)、x - y 等价于 x.subtract(y)、x * y 等价于 x.multiply(y)、x / y 等价于 x.divide(y)、x % y 等价于 x.mod(y)、x ** y 等价于 x.pow(y)。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-D08",
+      "category": "AI框架与推理",
+      "sourceId": "S07",
+      "question": "不自己写数据转 Tensor 的代码，也能正常把模型训练起来吗？框架是怎么做到的？另外要判断两个 Tensor 的元素是否相等或比较大小，有哪些现成方法？",
+      "referenceChunks": [
+        "S07#2.5",
+        "S07#4.3"
+      ],
+      "gradingNotes": "可以。paddle.io.DataLoader 能基于原始 Dataset 返回一个迭代器，迭代器返回的每个元素本身就是 Tensor；而 paddle.Model.fit、paddle.Model.predict 这类高层 API 若传入 Dataset 会自动用 DataLoader 封装转成 Tensor，若传入 DataLoader 则直接迭代读取 Tensor 送入训练或推理，所以即使没写转换代码也能执行。；比较类操作包括 x.equal_all(y)（判断全部元素是否相等，返回 0-D 布尔 Tensor）、x.equal(y)（逐元素相等）、x.not_equal(y)、x.less_than(y)、x.less_equal(y)、x.greater_than(y)、x.greater_equal(y)，以及判断全部元素是否接近的 x.allclose(y)；逻辑比较的魔法函数同样被重写，x == y 等价于 x.equal(y)、x != y 等价于 x.not_equal(y) 等。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-D09",
+      "category": "测试自动化",
+      "sourceId": "S14",
+      "question": "写测试时如果有一批夹具是几乎每个测试都要用的，怎么才能免去逐个在参数里声明的麻烦？另外要在同一套页面测试里验证登录失败的场景，一般怎么改测试数据才不影响其他测试？",
+      "referenceChunks": [
+        "S14#s244",
+        "S14#s263~2"
+      ],
+      "gradingNotes": "可以把这类夹具声明成自动使用：给夹具装饰器传入 autouse=True（如 @pytest.fixture(autouse=True)），它就会自动对所有测试生效，即使测试并没有在参数里请求它；自动使用并不妨碍它仍可被显式请求。；常见做法是在测试类中各自定义自己的夹具（例如把 login 定义在该类里），每个方法只请求它实际需要的装置而不必操心顺序，因为 act 这类自动选择的装置会保证其他装置在它之前执行；要验证失败场景，可以在新的测试类里定义一个 scope=\"class\" 的夹具，对原始测试数据做 deepcopy 后改掉（例如把密码换成错误密码），再用 pytest.raises 断言会抛出预期的异常类型。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-D10",
+      "category": "测试自动化",
+      "sourceId": "S14",
+      "question": "在同一个测试里，好几个夹具都依赖同一个底层夹具，那这个被依赖的夹具会被执行几次？另外某个自动使用的夹具内部又请求了另一个夹具，那个被请求的夹具是不是在别处也会跟着自动执行？",
+      "referenceChunks": [
+        "S14#s243",
+        "S14#s262~2"
+      ],
+      "gradingNotes": "只执行一次。夹具在同一测试期间可以被多次请求，但 pytest 不会为该测试重复执行它，返回值会被缓存，其他夹具以及测试本身拿到的是同一个对象（示例中 append_first 修改了 order，测试看到的 order 就是改过的结果）；如果每次都重新执行，测试会因为拿到一个新的空列表而失败。；不会。自动使用夹具请求了非自动装置，只是让那个装置在实际自动使用夹具能应用到的上下文里变成自动执行而已；示例中类内 autouse 的 c3 请求了 c2，于是该类里的两个测试都会先执行 c2、c3，期望顺序是 c2、c3、c1，而另一个没有自动使用夹具的类里，只请求了 order 和 c1 的测试看到的顺序是 c1。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-D11",
+      "category": "测试自动化",
+      "sourceId": "S14",
+      "question": "两个不同的测试都请求了同一个夹具，它们会共用同一份数据吗？另外夹具之间能不能靠请求参数来强制执行先后顺序？",
+      "referenceChunks": [
+        "S14#s241",
+        "S14#s261"
+      ],
+      "gradingNotes": "不会共用。夹具系统让可复用的设置步骤像普通函数一样被调用，两个不同测试请求同一个夹具时会各自得到独立的一份实例（示例里两个测试各自拿到自己的 list 副本，order 夹具实际上执行了两次），这样才能保证测试之间互不影响、结果可复现；换成手工写法，就是在每个测试里重新调用一次设置函数。；可以。当一个夹具请求另一个夹具时，被请求的夹具会先执行，因为前者依赖后者；即使前者并不需要后者的返回值，也可以把它写进参数列表来确保自己在其之后执行；示例中七个夹具按依赖关系展开后的执行顺序正好与字母顺序一致。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-D12",
+      "category": "测试自动化",
+      "sourceId": "S14",
+      "question": "pytest 是怎么知道某个测试需要哪些夹具的？如果夹具不是自己写的、而是某个第三方插件提供的，会不会因为目录层级的关系被排除在外？",
+      "referenceChunks": [
+        "S14#s238",
+        "S14#s257"
+      ],
+      "gradingNotes": "靠测试函数的签名。测试通过把夹具名字列在参数里来声明需求，pytest 运行测试时会读取该函数签名中的参数，然后搜索同名夹具，找到后执行这些装置、捕获它们的返回值（如果有），再把这些对象作为参数传给测试函数。；不会。夹具也可以由已安装的第三方插件提供，只要插件装了就能在测试套件中任何位置请求它；但插件是在测试套件结构之外提供夹具的，没法像 conftest.py 那样按目录层级定义作用域，所以 pytest 按作用域逐层搜索时会先在套件内部找到，插件里定义的夹具最后才被搜到。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-D13",
+      "category": "嵌入式开发",
+      "sourceId": "S02",
+      "question": "ESP32 的一条 SPI 总线上，哪些信号线是所有设备共用、哪些是每个设备独占？另外主机设定好的时钟频率和实际跑出来的频率一定一致吗，怎么查实际值？",
+      "referenceChunks": [
+        "S02#s8",
+        "S02#s25"
+      ],
+      "gradingNotes": "MISO、MOSI、SCLK 以及可选的 QUADWP、QUADHD 由连接在同一主机上的所有设备共用，每个设备各有一条专属的 CS 片选线（多个设备也可以菊花链方式共用一条 CS 线）；一条总线可以挂一或多个设备，只有当主机向某个设备的专属 CS 线发出信号时，该设备才会在总线上处于激活状态。另外 MOSI 也写作 D、MISO 写作 Q，在 Octal/OPI 模式下它们分别对应 data0、data1，QUADWP 与 QUADHD 对应 data2、data3。；不一定。驱动会把设定值重新计算成与硬件兼容的最接近的数字，并且不超过所选用时钟源的频率，实际频率可以调用 spi_device_get_actual_freq() 查询；时钟源通过 spi_device_interface_config_t::clock_source 选择，默认是 SPI_CLK_SRC_DEFAULT，它通常代表可选时钟源中的最高频率，不同芯片上数值不同。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-D14",
+      "category": "嵌入式开发",
+      "sourceId": "S02",
+      "question": "ESP32 的 SPI 主机驱动在什么情况下会变得不是线程安全的、有哪些解决办法？另外如果需要连续发送很多个小包，怎样提高整体传输速度？",
+      "referenceChunks": [
+        "S02#s9",
+        "S02#s26"
+      ],
+      "gradingNotes": "当总线上挂多个设备、而每个设备只被一个任务访问时，驱动是线程安全的；如果多个任务同时访问同一个 SPI 设备，驱动就不再线程安全，此时可以重构应用让每个 SPI 外设同一时间只被一个任务访问（并用 spi_bus_config_t::isr_cpu_id 把 SPI 的中断注册到与该外设相关任务同一个内核上），或者用 xSemaphoreCreateMutex 为共享设备加互斥锁。驱动本身支持多线程环境、支持 DMA 透明传输，同一信号总线上不同设备的数据会自动时分复用。；单个中断传输事务传 n 字节的总成本是 20 + 8n/Fspi 微秒，传输速度为 n/(20 + 8n/Fspi)；事务越短，固定 20µs 那部分间隔成本占比越高，所以应尽量把几个短传输事务合并成一个来提升速度。另外默认只有 ISR 放在 IRAM 中，驱动本身与回调仍可能发生缓存缺失、需要等待从 flash 读取，可以用 CONFIG_SPI_MASTER_IN_IRAM 把整个驱动连同回调及其 callee 一起放进 IRAM（此时还必须启用 CONFIG_FREERTOS_IN_IRAM）。",
+      "answerable": true
+    }
+  ],
+  "batchCursor": "END-14"
+}

@@ -1,0 +1,506 @@
+Ultralytics YOLO27： 即将推出。加入候补名单。
+
+GitHub repository
+
+YOLO26 部署选项对比分析#
+
+YOLO26 支持 20 多种部署选项，每种选项都针对不同的运行时、硬件目标或平台进行了优化——从 PyTorch 和 ONNX 到 TensorRT、OpenVINO、CoreML 以及专用的边缘 NPU 格式。选择合适的选项需要在推理速度、硬件限制和集成难度之间取得平衡。本指南会对每种选项进行比较，帮助你为应用选择最合适的方案，然后继续查看模型部署最佳实践，以便可靠地完成部署。
+
+Watch: How to Choose the Best Ultralytics YOLO26 Deployment Format for Your Project | TensorRT | OpenVINO 🚀
+
+部署是计算机视觉项目工作流中让训练好的模型开始执行实际任务的阶段，因此导出的格式会直接影响速度、成本和可移植性。
+
+如何为 YOLO26 模型选择合适的部署选项#
+
+准备部署 YOLO26 模型时，选择合适的导出格式非常重要。正如 Ultralytics YOLO26 导出文档中所述，model.export() 函数可将训练好的模型转换为多种格式，以适应不同的环境和性能要求。
+
+理想格式取决于模型预期的运行场景和硬件。
+
+跳过手动导出
+
+如果你希望在无需手动导出的情况下进行托管部署，Ultralytics Platform 提供开箱即用的推理端点，并支持在全球 42 个区域自动扩缩容。
+
+YOLO26 的部署选项#
+
+下面简要介绍每种格式及其适用场景。有关完整的导出流程，请参阅导出文档；有关并列比较标准，请查看对比表。
+
+PyTorch (.pt)：原生训练和推理格式，灵活性最高，并可通过 NVIDIA CUDA 或 AMD ROCm 实现 GPU 加速——非常适合研究和原型开发，无需执行导出步骤。
+
+TorchScript (torchscript)：将模型序列化，使其能够在无需 Python 的 C++ 运行时中运行，适用于无法使用 Python 的生产系统。
+
+ONNX (onnx)：与框架无关的交换格式，可通过 ONNX Runtime 提供广泛的跨平台和硬件支持。
+
+OpenVINO (openvino)：Intel 提供的工具包，可在 Intel CPU、集成 GPU 和 NPU 上实现优化推理，常用于物联网和边缘计算。
+
+TensorRT (engine)：NVIDIA 的高性能运行时，通过 FP16 和 INT8 优化提供顶级 GPU 推理性能。
+
+CoreML (coreml)：Apple 面向 iOS、macOS、watchOS 和 tvOS 的设备端格式，使用 Apple Neural Engine。
+
+TF SavedModel (saved_model)：TensorFlow 的标准格式，可通过 TensorFlow Serving 实现可扩展的服务器端服务。
+
+TF GraphDef (pb)：一种冻结的静态图 TensorFlow 格式，适用于需要固定计算图的环境。
+
+TF Edge TPU (edgetpu)：将 .tflite 模型编译为适用于 Google Coral Edge TPU 加速器的格式。
+
+LiteRT (litert)：Google 的设备端运行时（前身为 TensorFlow Lite），可使用单个 .tflite 模型进行移动端、嵌入式设备和浏览器推理，支持 FP32 和 INT8，并可通过 LiteRT.js 在浏览器中执行。
+
+PaddlePaddle (paddle)：百度的深度学习框架，在中国广泛使用，并支持多种硬件。
+
+MNN (mnn)：轻量、高性能的推理引擎，针对移动端和嵌入式 ARM 及 x86-64 系统进行了优化。
+
+NCNN (ncnn)：高性能、轻量级的推理框架，针对移动 ARM 设备进行了优化。
+
+Sony IMX500 (imx)：用于 Sony IMX500 智能视觉传感器的导出格式，支持芯片上处理，例如 Raspberry Pi AI Camera。
+
+Rockchip RKNN (rknn)：面向嵌入式开发板上的 Rockchip NPU，支持 FP16 和 INT8 量化。
+
+ExecuTorch (executorch)：PyTorch 原生设备端运行时，可通过 XNNPACK 用于移动端（iOS 和 Android）及嵌入式系统。
+
+Axelera AI (axelera)：面向 Axelera 的 Metis AIPU（最高 856 TOPS），通过 PCIe 或 M.2 实现高吞吐量边缘推理。
+
+DEEPX (deepx)：面向 DEEPX NPU 硬件，使用 INT8 量化进行嵌入式边缘推理。
+
+Qualcomm QNN (qnn)：通过 Qualcomm AI 技术栈，在 Snapdragon Hexagon NPU、Adreno GPU 和 CPU 上执行设备端推理。
+
+Core AI (coreai): 苹果公司针对 iOS 27 和 macOS 27 推出的全新 .aimodel 格式，计划支持 CPU、GPU 和 Apple Neural Engine；导出操作需要在搭载 Apple silicon 的 macOS 26 或更高版本上进行。
+
+Hailo 集成可将 YOLO 检测、分割、语义分割、深度估计、分类、姿态和 OBB 模型直接导出为 Hailo HEF；有关经过验证的模型和目标，请参阅其兼容性表。Ambarella 集成采用 ONNX 优先的工作流，使用 Ambarella 的 CVflow 工具链将 ONNX 导出结果编译为 AmbaPB 格式，用于 CV72 等 CVflow® SoC，并可选择使用 SpongeTorch 进行压缩感知训练。Huawei Ascend 集成使用 CANN ATC 编译器将 ONNX 导出结果编译为 .om 离线格式，以便在 Ascend AI Processors 上进行 FP16 推理。
+
+部署选项对比#
+
+下表根据通常影响选择的标准，总结了 YOLO26 模型的部署选项。有关每种格式的深入介绍，请参阅导出格式文档。
+
+部署选项
+
+性能基准测试
+
+兼容性与集成
+
+社区支持与生态系统
+
+案例研究
+
+维护与更新
+
+安全性注意事项
+
+硬件加速
+
+PyTorch
+
+灵活性较好；可能需要牺牲原始性能
+
+与 Python 库的兼容性出色
+
+资源和社区支持丰富
+
+研究和原型开发
+
+定期积极开发
+
+取决于部署环境
+
+支持 CUDA，可实现 GPU 加速
+
+TorchScript
+
+比 PyTorch 更适合生产环境
+
+可顺畅地从 PyTorch 迁移到 C++
+
+专业化程度更高，但范围比 PyTorch 窄
+
+Python 成为瓶颈的行业场景
+
+与 PyTorch 保持一致的更新
+
+无需完整 Python 环境，安全性更高
+
+继承 PyTorch 的 CUDA 支持
+
+ONNX
+
+因运行时而异
+
+在不同框架中均具有较高兼容性
+
+生态系统广泛，受到众多组织支持
+
+跨机器学习框架的灵活性
+
+定期更新以支持新算子
+
+确保采用安全的转换和部署实践
+
+提供多种硬件优化
+
+OpenVINO
+
+针对 Intel 硬件进行了优化
+
+在 Intel 生态系统中表现最佳
+
+在计算机视觉领域表现稳健
+
+适用于使用 Intel 硬件的物联网和边缘场景
+
+定期更新以支持 Intel 硬件
+
+为敏感应用提供强大的功能
+
+针对 Intel 硬件定制
+
+TensorRT
+
+在 NVIDIA GPU 上表现顶级
+
+最适合 NVIDIA 硬件
+
+依托 NVIDIA，拥有强大的生态网络
+
+实时视频和图像推理
+
+频繁更新以支持新 GPU
+
+注重安全性
+
+专为 NVIDIA GPU 设计
+
+CoreML
+
+针对 Apple 设备端硬件进行了优化
+
+仅适用于 Apple 生态系统
+
+Apple 和开发者支持力度强
+
+Apple 产品上的设备端机器学习
+
+Apple 定期更新
+
+注重隐私和安全
+
+Apple Neural Engine 和 GPU
+
+TF SavedModel
+
+可在服务器环境中扩展
+
+在 TensorFlow 生态系统中兼容性广泛
+
+由于 TensorFlow 的普及，支持资源丰富
+
+大规模提供模型服务
+
+Google 和社区定期更新
+
+为企业提供强大的功能
+
+支持多种硬件加速
+
+TF GraphDef
+
+适用于静态计算图，稳定性好
+
+与 TensorFlow 基础设施集成良好
+
+提供优化静态图的资源
+
+需要静态图的场景
+
+与 TensorFlow 核心同步更新
+
+成熟的 TensorFlow 安全实践
+
+TensorFlow 加速选项
+
+TF Edge TPU
+
+针对 Google 的 Edge TPU 硬件进行优化
+
+仅适用于 Edge TPU 设备
+
+随着 Google 和第三方资源的发展而不断壮大
+
+需要实时处理的 IoT 设备
+
+针对新型 Edge TPU 硬件的改进
+
+Google 强大的 IoT 安全性
+
+专为 Google Coral 设计
+
+LiteRT
+
+在移动设备、嵌入式设备和 Web 上实现速度与效率
+
+支持移动设备、嵌入式设备、边缘设备和浏览器
+
+强大的社区支持以及 Google 的支持
+
+适用于 Android、iOS 和 Web 的设备端应用
+
+最新的设备端运行时功能
+
+安全的设备端和浏览器内推理
+
+GPU、DSP 和 WebGPU 加速
+
+PaddlePaddle
+
+具有竞争力、易于使用且可扩展
+
+百度生态系统，应用支持广泛
+
+快速发展，尤其是在中国
+
+面向中国市场和中文语言处理
+
+专注于中国 AI 应用
+
+注重数据隐私和安全
+
+包括百度 Kunlun 芯片
+
+MNN
+
+针对移动设备的高性能
+
+移动和嵌入式 ARM 系统以及 X86-64 CPU
+
+移动和嵌入式 ML 社区
+
+移动系统效率
+
+在移动设备上保持高性能
+
+设备端安全优势
+
+针对 ARM CPU 和 GPU 的优化
+
+NCNN
+
+针对基于移动 ARM 的设备进行优化
+
+移动和嵌入式 ARM 系统
+
+规模较小但活跃的移动和嵌入式 ML 社区
+
+Android 和 ARM 系统效率
+
+在 ARM 上保持高性能
+
+设备端安全优势
+
+针对 ARM CPU 和 GPU 的优化
+
+Sony IMX500
+
+以极低功耗实现传感器上推理
+
+Sony IMX500 传感器、Raspberry Pi AI Camera
+
+Sony AITRIOS 生态系统
+
+摄像头端边缘 AI
+
+Sony SDK 和 MCT 工具链更新
+
+数据保留在传感器上
+
+Sony IMX500 芯片上加速器
+
+Rockchip RKNN
+
+针对 Rockchip NPU 进行优化
+
+Rockchip SoC 开发板（例如 RK3588）
+
+Rockchip 开发者社区
+
+嵌入式 SBC 和边缘设备
+
+Rockchip RKNN-Toolkit 更新
+
+设备端本地推理
+
+Rockchip NPU
+
+ExecuTorch
+
+高效的设备端 PyTorch 运行时
+
+通过 XNNPACK 支持 iOS、Android 和嵌入式设备
+
+由 PyTorch 项目提供支持
+
+移动和嵌入式应用
+
+与 PyTorch 一同维护
+
+设备端推理可确保数据保留在本地
+
+XNNPACK 以及移动 CPU/GPU 后端
+
+Axelera AI
+
+极高吞吐量（最高 856 TOPS）
+
+通过 PCIe 或 M.2 连接的 Metis AIPU
+
+Axelera Voyager SDK
+
+高吞吐量边缘推理
+
+Axelera SDK 更新
+
+本地部署的边缘推理
+
+Axelera Metis AIPU
+
+DEEPX
+
+针对 INT8 优化的 NPU 推理
+
+DEEPX NPU 硬件
+
+DEEPX 开发者工具（dx_com、dx_engine）
+
+嵌入式边缘推理
+
+DEEPX SDK 和运行时更新
+
+设备端本地推理
+
+DEEPX NPU
+
+Qualcomm QNN
+
+快速的设备端 Snapdragon 推理
+
+Snapdragon Hexagon NPU、Adreno GPU、CPU
+
+Qualcomm AI Hub 生态系统
+
+移动和边缘 Snapdragon 设备
+
+Qualcomm AI 技术栈（QAIRT）更新
+
+设备端推理可确保数据保留在本地
+
+Snapdragon Hexagon NPU
+
+Hailo
+
+在 Hailo NPU 上进行 INT8 HEF 推理
+
+Hailo-8/8L/10H/15H/15L、Raspberry Pi AI HAT+
+
+Hailo Dataflow Compiler 和 HailoRT
+
+相机、机器人、工业边缘系统
+
+Hailo DFC 和 HailoRT 版本发布
+
+设备端本地推理
+
+Hailo NPU
+
+华为昇腾
+
+在 Ascend AI Core 上实现更高吞吐量
+
+Atlas 开发板和 OrangePi AIPro
+
+华为 CANN 生态系统
+
+在 Ascend NPU 上进行边缘推理
+
+CANN 和 ATC 版本发布
+
+设备端本地推理
+
+Ascend AI Core
+
+Core AI
+
+针对 Apple silicon 进行了优化
+
+iOS 27 和 macOS 27；导出需要 macOS 26+
+
+苹果框架；暂未集成到 iOS/Flutter SDK 中
+
+在下一代苹果平台上进行端侧机器学习
+
+与苹果操作系统发布绑定；当前处于测试阶段
+
+设备端推理可确保数据保留在本地
+
+Apple Neural Engine、GPU 和 CPU
+
+此比较为你提供高层次概览。在部署时，请根据每个选项评估项目的具体需求和限制，并参考与你所选格式对应的集成指南。
+
+结论#
+
+YOLO26 支持广泛的导出格式，让你可以针对几乎任何环境定制模型，从云端 GPU 服务器到传感器上的边缘摄像头。选择格式后，请遵循模型部署最佳实践进行优化、故障排除和安全配置，遇到问题时还可以借助 Ultralytics 社区。
+
+常见问题#
+
+Ultralytics YOLO26 支持多种部署格式，每种格式都针对特定环境和硬件平台而设计。主要格式包括：
+
+PyTorch，适用于研究和原型开发，并提供出色的 Python 集成支持。
+
+TorchScript，适用于无法使用 Python 的生产环境。
+
+ONNX，用于跨平台兼容性和硬件加速。
+
+OpenVINO，用于在 Intel 硬件上实现优化性能。
+
+TensorRT，用于在 NVIDIA GPU 上实现高速推理。
+
+每种格式都有独特的优势。有关详细操作流程，请参阅我们的导出流程文档。
+
+要提升 Intel CPU 上的推理速度，你可以使用 Intel 的 OpenVINO 工具包部署 YOLO26 模型。OpenVINO 通过优化模型以高效利用 Intel 硬件，可显著提升性能。
+
+使用 model.export() 函数将 YOLO26 模型转换为 OpenVINO 格式。
+
+请参阅Intel OpenVINO 导出文档中的详细设置指南。
+
+如需了解更多信息，请查看我们的博客文章。
+
+是的，YOLO26 模型可以使用适用于 Android 的 LiteRT（此前称为 TensorFlow Lite）和 NCNN 部署到移动设备，也可以使用适用于 iOS 的 CoreML 或 LiteRT。LiteRT 是 Google 面向移动和嵌入式设备的端侧运行时，可在 Android、iOS 和浏览器上运行同一模型，从而实现高效的端侧推理。
+
+示例
+
+# Export command for NCNN format
+model.export(format="ncnn")
+
+如需详细了解如何将模型部署到移动设备，请参阅我们的 LiteRT 集成指南。
+
+为 YOLO26 选择部署格式时，请考虑以下因素：
+
+性能：TensorRT 等格式可在 NVIDIA GPU 上提供卓越的速度，而 OpenVINO 针对 Intel 硬件进行了优化。
+
+兼容性：ONNX 在不同平台之间具有广泛的兼容性。
+
+集成便捷性：CoreML 或 LiteRT 等格式分别针对 iOS 和 Android 等特定生态系统进行了适配。
+
+社区支持：PyTorch 和 TensorFlow 等格式拥有丰富的社区资源和支持。
+
+如需进行比较分析，请参阅我们的导出格式文档。
+
+要在 Web 应用中部署 YOLO26 模型，你可以使用 LiteRT.js（LiteRT 的 Web 运行时），直接在浏览器和 Node.js 中运行机器学习模型。这种方式无需后端基础设施，并可提供实时性能。
+
+将 YOLO26 模型导出为 LiteRT 格式。
+
+使用 LiteRT.js 将导出的模型集成到你的 Web 应用中。
+
+如需分步说明，请参阅我们的 LiteRT 集成指南。
+
+贡献者
+
+GLglenn-jocher23RAraimbekovm3JEJESUSROYETH3AMambitious-octopus2LAlakshanthad1PDpderrenger1RIRizwanMunawar1LEleonnil1WAwangzhaode1MAMatthewNoyce1
+
+创建时间 2023年11月12日更新时间 上周
+
+评论

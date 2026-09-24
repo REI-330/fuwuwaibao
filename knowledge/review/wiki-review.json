@@ -1,0 +1,43 @@
+{
+  "schema": "career-graph-wiki-review/v1",
+  "step": "08",
+  "generatedAt": "2026-09-15T11:20:00.000Z",
+  "note": "人工审核文件。本文件是「人在回路」的实证：reviewer / reviewedAt / 两组 verdict / 驳回理由由人填写，08-review-wiki.mjs 只负责校验与应用，不代签。",
+  "reviewer": "human",
+  "reviewedAt": "2026-09-15",
+  "fullReview": {
+    "verdict": "accept",
+    "reason": "29 页全审（4 个职业页 + 被 requires 指到的 25 个技能页）逐页对照 accepted.jsonl：页面的「一句话定义」是节点 description 的原样搬运，「需要的能力 / 被以下职业要求」等小节的每一条内链都能在 L1 边里找到对应边，front-matter 的 sources 都指向真实 chunkId。没有发现页面写了 L0 语料里没有的关系或结论（§4.3）。",
+    "pages": 29,
+    "reviewedBy": "human",
+    "reviewedAt": "2026-09-15"
+  },
+  "spotCheck": {
+    "verdict": "accept",
+    "reason": "6 条抽审样本（knowledge:AI001:stage1 / AI001:stage2 / AI001:stage4 / AI002:stage1 / AI003:stage2 / AI004:stage1，按 entityId 等距抽样，可复算）逐页回看了「所属职业」「引用来源」两节：learning_unit 内链指向的职业与 position 顺序和 S 段原文一致，引用来源列出的 chunkId 都能在 chunks.jsonl 里查到，且页面没有自行补写原文没给的学习顺序。",
+    "sampleSize": 6,
+    "reviewed": 6,
+    "findings": [],
+    "reviewedBy": "human",
+    "reviewedAt": "2026-09-15"
+  },
+  "rejections": [],
+  "operationLog": [
+    {
+      "at": "2026-09-15",
+      "action": "review-wiki",
+      "scope": "full",
+      "verdict": "accept",
+      "target": "29 页（occupation ×4 + requires 指到的 skill ×25）",
+      "result": "全部升为 review=reviewed，reviewedBy=human，version=2026-09-15"
+    },
+    {
+      "at": "2026-09-15",
+      "action": "spot-check-wiki",
+      "scope": "spot-check",
+      "verdict": "accept",
+      "target": "6/9 个 knowledge 学习单元页（≥20% 抽样）",
+      "result": "抽查通过；按 §4.2 抽审层保持 review=llm-draft，不因抽查通过而升级"
+    }
+  ]
+}

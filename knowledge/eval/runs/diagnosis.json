@@ -1,0 +1,863 @@
+{
+  "schema": "career-graph-retrieval-diagnosis/v1",
+  "generatedAt": "2026-09-17T01:33:10+0800",
+  "alpha_bm25": 0.35,
+  "topk": 3,
+  "pool": 50,
+  "counts": {
+    "total": 14,
+    "hit": 13,
+    "near": 1,
+    "far": 0,
+    "noRecall": 0
+  },
+  "perQuestion": [
+    {
+      "questionId": "N01",
+      "category": "嵌入式开发",
+      "question": "用 FreeRTOS 开发 IoT 设备时，官方认证过哪些现成开发板可以直接拿来做验证？遇到技术问题该去哪些地方找文档和支持？",
+      "referenceChunks": [
+        "S01#s5",
+        "S01#s6"
+      ],
+      "perRef": [
+        {
+          "chunkId": "S01#s5",
+          "bm25Rank": 2,
+          "vectorRank": 2,
+          "hybridRank": 2,
+          "sourceId": "S01"
+        },
+        {
+          "chunkId": "S01#s6",
+          "bm25Rank": 1,
+          "vectorRank": 1,
+          "hybridRank": 1,
+          "sourceId": "S01"
+        }
+      ],
+      "bestHybridRank": 1,
+      "class": "命中",
+      "hybridTopK": [
+        "S01#s6",
+        "S01#s5",
+        "S01#s2"
+      ],
+      "neighborInPool": [
+        {
+          "ref": "S01#s5",
+          "side": "prev",
+          "neighbor": "S01#s4",
+          "bm25Rank": 24,
+          "vectorRank": 4
+        },
+        {
+          "ref": "S01#s5",
+          "side": "next",
+          "neighbor": "S01#s6",
+          "bm25Rank": 1,
+          "vectorRank": 1
+        },
+        {
+          "ref": "S01#s6",
+          "side": "prev",
+          "neighbor": "S01#s5",
+          "bm25Rank": 2,
+          "vectorRank": 2
+        }
+      ]
+    },
+    {
+      "questionId": "N02",
+      "category": "嵌入式开发",
+      "question": "ESP32 上要把 SPI 配成四线 I/O 模式该怎么设置，另外命令阶段和地址阶段的长度如果要改，具体动哪些结构体和标志位？",
+      "referenceChunks": [
+        "S02#s13",
+        "S02#s14"
+      ],
+      "perRef": [
+        {
+          "chunkId": "S02#s13",
+          "bm25Rank": 2,
+          "vectorRank": 1,
+          "hybridRank": 1,
+          "sourceId": "S02"
+        },
+        {
+          "chunkId": "S02#s14",
+          "bm25Rank": 1,
+          "vectorRank": 2,
+          "hybridRank": 2,
+          "sourceId": "S02"
+        }
+      ],
+      "bestHybridRank": 1,
+      "class": "命中",
+      "hybridTopK": [
+        "S02#s13",
+        "S02#s14",
+        "S02#s10"
+      ],
+      "neighborInPool": [
+        {
+          "ref": "S02#s13",
+          "side": "next",
+          "neighbor": "S02#s14",
+          "bm25Rank": 1,
+          "vectorRank": 2
+        },
+        {
+          "ref": "S02#s14",
+          "side": "prev",
+          "neighbor": "S02#s13",
+          "bm25Rank": 2,
+          "vectorRank": 1
+        },
+        {
+          "ref": "S02#s14",
+          "side": "next",
+          "neighbor": "S02#s15",
+          "bm25Rank": 4,
+          "vectorRank": 27
+        }
+      ]
+    },
+    {
+      "questionId": "N03",
+      "category": "嵌入式开发",
+      "question": "ESP-IDF 里 MALLOC_CAP_32BIT 分配的内存能不能拿来存浮点变量？在中断服务程序里调用堆函数有什么限制？",
+      "referenceChunks": [
+        "S03#32",
+        "S03#s57"
+      ],
+      "perRef": [
+        {
+          "chunkId": "S03#32",
+          "bm25Rank": 1,
+          "vectorRank": 1,
+          "hybridRank": 1,
+          "sourceId": "S03"
+        },
+        {
+          "chunkId": "S03#s57",
+          "bm25Rank": 4,
+          "vectorRank": 2,
+          "hybridRank": 4,
+          "sourceId": "S03"
+        }
+      ],
+      "bestHybridRank": 1,
+      "class": "命中",
+      "hybridTopK": [
+        "S03#32",
+        "S03#s56",
+        "S03#s46"
+      ],
+      "neighborInPool": [
+        {
+          "ref": "S03#32",
+          "side": "prev",
+          "neighbor": "S03#s53",
+          "bm25Rank": 36,
+          "vectorRank": 9
+        },
+        {
+          "ref": "S03#32",
+          "side": "next",
+          "neighbor": "S03#s55",
+          "bm25Rank": 10,
+          "vectorRank": 6
+        },
+        {
+          "ref": "S03#s57",
+          "side": "prev",
+          "neighbor": "S03#s56",
+          "bm25Rank": 2,
+          "vectorRank": 4
+        },
+        {
+          "ref": "S03#s57",
+          "side": "next",
+          "neighbor": "S03#s58",
+          "bm25Rank": 14,
+          "vectorRank": 26
+        }
+      ]
+    },
+    {
+      "questionId": "N04",
+      "category": "嵌入式开发",
+      "question": "ESP32 的 RTC GPIO 在哪些情况下能用，另外 gpio_config 和 gpio_reset_pin 这两个函数各自负责什么？",
+      "referenceChunks": [
+        "S04#s73~2",
+        "S04#s78"
+      ],
+      "perRef": [
+        {
+          "chunkId": "S04#s73~2",
+          "bm25Rank": 2,
+          "vectorRank": 1,
+          "hybridRank": 1,
+          "sourceId": "S04"
+        },
+        {
+          "chunkId": "S04#s78",
+          "bm25Rank": 1,
+          "vectorRank": 8,
+          "hybridRank": 2,
+          "sourceId": "S04"
+        }
+      ],
+      "bestHybridRank": 1,
+      "class": "命中",
+      "hybridTopK": [
+        "S04#s73~2",
+        "S04#s78",
+        "S04#s74"
+      ],
+      "neighborInPool": [
+        {
+          "ref": "S04#s73~2",
+          "side": "prev",
+          "neighbor": "S04#s73",
+          "bm25Rank": 6,
+          "vectorRank": 3
+        },
+        {
+          "ref": "S04#s73~2",
+          "side": "next",
+          "neighbor": "S04#s74",
+          "bm25Rank": 3,
+          "vectorRank": 21
+        },
+        {
+          "ref": "S04#s78",
+          "side": "prev",
+          "neighbor": "S04#s77",
+          "bm25Rank": 31,
+          "vectorRank": 34
+        },
+        {
+          "ref": "S04#s78",
+          "side": "next",
+          "neighbor": "S04#s78~2",
+          "bm25Rank": 46,
+          "vectorRank": 19
+        }
+      ]
+    },
+    {
+      "questionId": "N05",
+      "category": "AI框架与推理",
+      "question": "用 MindSpore Lite 的 benchmark 工具测 mobilenetv2 时，输入数据文件要按什么规格准备，跑完输出里那些误差信息该怎么理解？",
+      "referenceChunks": [
+        "S05#s100~2",
+        "S05#s100~4"
+      ],
+      "perRef": [
+        {
+          "chunkId": "S05#s100~2",
+          "bm25Rank": 3,
+          "vectorRank": 7,
+          "hybridRank": 4,
+          "sourceId": "S05"
+        },
+        {
+          "chunkId": "S05#s100~4",
+          "bm25Rank": 1,
+          "vectorRank": 2,
+          "hybridRank": 1,
+          "sourceId": "S05"
+        }
+      ],
+      "bestHybridRank": 1,
+      "class": "命中",
+      "hybridTopK": [
+        "S05#s100~4",
+        "S05#s109~4",
+        "S05#s109~2"
+      ],
+      "neighborInPool": [
+        {
+          "ref": "S05#s100~2",
+          "side": "prev",
+          "neighbor": "S05#s100",
+          "bm25Rank": 5,
+          "vectorRank": 3
+        },
+        {
+          "ref": "S05#s100~2",
+          "side": "next",
+          "neighbor": "S05#s100~3",
+          "bm25Rank": null,
+          "vectorRank": 6
+        },
+        {
+          "ref": "S05#s100~4",
+          "side": "prev",
+          "neighbor": "S05#s100~3",
+          "bm25Rank": null,
+          "vectorRank": 6
+        },
+        {
+          "ref": "S05#s100~4",
+          "side": "next",
+          "neighbor": "S05#s101",
+          "bm25Rank": 20,
+          "vectorRank": 19
+        }
+      ]
+    },
+    {
+      "questionId": "N06",
+      "category": "AI框架与推理",
+      "question": "用飞桨做手写数字识别，数据集的下载和加载是怎么写的？网络部分用的是哪个模型、怎么构建并打印出结构？",
+      "referenceChunks": [
+        "S06#3.1",
+        "S06#3.2"
+      ],
+      "perRef": [
+        {
+          "chunkId": "S06#3.1",
+          "bm25Rank": 5,
+          "vectorRank": 4,
+          "hybridRank": 3,
+          "sourceId": "S06"
+        },
+        {
+          "chunkId": "S06#3.2",
+          "bm25Rank": 3,
+          "vectorRank": 3,
+          "hybridRank": 2,
+          "sourceId": "S06"
+        }
+      ],
+      "bestHybridRank": 2,
+      "class": "命中",
+      "hybridTopK": [
+        "S06#s115",
+        "S06#3.2",
+        "S06#3.1"
+      ],
+      "neighborInPool": [
+        {
+          "ref": "S06#3.1",
+          "side": "prev",
+          "neighbor": "S06#s115~2",
+          "bm25Rank": 4,
+          "vectorRank": 9
+        },
+        {
+          "ref": "S06#3.1",
+          "side": "next",
+          "neighbor": "S06#3.2",
+          "bm25Rank": 3,
+          "vectorRank": 3
+        },
+        {
+          "ref": "S06#3.2",
+          "side": "prev",
+          "neighbor": "S06#3.1",
+          "bm25Rank": 5,
+          "vectorRank": 4
+        },
+        {
+          "ref": "S06#3.2",
+          "side": "next",
+          "neighbor": "S06#3.3.1",
+          "bm25Rank": 6,
+          "vectorRank": 6
+        }
+      ]
+    },
+    {
+      "questionId": "N07",
+      "category": "AI框架与推理",
+      "question": "飞桨里从 Python 列表造 Tensor 用哪个接口，如果要造指定形状、内容全是 0 或全是 1 的 Tensor 又该怎么做？",
+      "referenceChunks": [
+        "S07#2.1",
+        "S07#2.2"
+      ],
+      "perRef": [
+        {
+          "chunkId": "S07#2.1",
+          "bm25Rank": 1,
+          "vectorRank": 4,
+          "hybridRank": 2,
+          "sourceId": "S07"
+        },
+        {
+          "chunkId": "S07#2.2",
+          "bm25Rank": 3,
+          "vectorRank": 1,
+          "hybridRank": 1,
+          "sourceId": "S07"
+        }
+      ],
+      "bestHybridRank": 1,
+      "class": "命中",
+      "hybridTopK": [
+        "S07#2.2",
+        "S07#2.1",
+        "S07#2.3"
+      ],
+      "neighborInPool": [
+        {
+          "ref": "S07#2.1",
+          "side": "prev",
+          "neighbor": "S07#s125",
+          "bm25Rank": 9,
+          "vectorRank": 2
+        },
+        {
+          "ref": "S07#2.1",
+          "side": "next",
+          "neighbor": "S07#2.2",
+          "bm25Rank": 3,
+          "vectorRank": 1
+        },
+        {
+          "ref": "S07#2.2",
+          "side": "prev",
+          "neighbor": "S07#2.1",
+          "bm25Rank": 1,
+          "vectorRank": 4
+        },
+        {
+          "ref": "S07#2.2",
+          "side": "next",
+          "neighbor": "S07#2.3",
+          "bm25Rank": 5,
+          "vectorRank": 3
+        }
+      ]
+    },
+    {
+      "questionId": "N08",
+      "category": "计算机视觉",
+      "question": "YOLO26 能导出成哪些部署格式，它们分别适合什么场景？除 NVIDIA 之外，像 Hailo、Ambarella、华为昇腾这类加速器要怎么接？",
+      "referenceChunks": [
+        "S08#s147",
+        "S08#s147~2"
+      ],
+      "perRef": [
+        {
+          "chunkId": "S08#s147",
+          "bm25Rank": 2,
+          "vectorRank": 17,
+          "hybridRank": 7,
+          "sourceId": "S08"
+        },
+        {
+          "chunkId": "S08#s147~2",
+          "bm25Rank": 1,
+          "vectorRank": 10,
+          "hybridRank": 1,
+          "sourceId": "S08"
+        }
+      ],
+      "bestHybridRank": 1,
+      "class": "命中",
+      "hybridTopK": [
+        "S08#s147~2",
+        "S08#s150",
+        "S08#s149"
+      ],
+      "neighborInPool": [
+        {
+          "ref": "S08#s147",
+          "side": "prev",
+          "neighbor": "S08#s146",
+          "bm25Rank": 4,
+          "vectorRank": 6
+        },
+        {
+          "ref": "S08#s147",
+          "side": "next",
+          "neighbor": "S08#s147~2",
+          "bm25Rank": 1,
+          "vectorRank": 10
+        },
+        {
+          "ref": "S08#s147~2",
+          "side": "prev",
+          "neighbor": "S08#s147",
+          "bm25Rank": 2,
+          "vectorRank": 17
+        },
+        {
+          "ref": "S08#s147~2",
+          "side": "next",
+          "neighbor": "S08#s148",
+          "bm25Rank": 5,
+          "vectorRank": 4
+        }
+      ]
+    },
+    {
+      "questionId": "N09",
+      "category": "计算机视觉",
+      "question": "YOLO26 的检测模型是在什么数据集上预训练的，跑一次预测的典型代码长什么样、结果里能取到哪些框坐标形式？",
+      "referenceChunks": [
+        "S09#s153",
+        "S09#s157"
+      ],
+      "perRef": [
+        {
+          "chunkId": "S09#s153",
+          "bm25Rank": 1,
+          "vectorRank": 2,
+          "hybridRank": 1,
+          "sourceId": "S09"
+        },
+        {
+          "chunkId": "S09#s157",
+          "bm25Rank": 13,
+          "vectorRank": 8,
+          "hybridRank": 6,
+          "sourceId": "S09"
+        }
+      ],
+      "bestHybridRank": 1,
+      "class": "命中",
+      "hybridTopK": [
+        "S09#s153",
+        "S10#s163",
+        "S09#s160"
+      ],
+      "neighborInPool": [
+        {
+          "ref": "S09#s153",
+          "side": "prev",
+          "neighbor": "S09#s152",
+          "bm25Rank": 10,
+          "vectorRank": 17
+        },
+        {
+          "ref": "S09#s153",
+          "side": "next",
+          "neighbor": "S09#s154",
+          "bm25Rank": 15,
+          "vectorRank": 7
+        },
+        {
+          "ref": "S09#s157",
+          "side": "prev",
+          "neighbor": "S09#s156",
+          "bm25Rank": 20,
+          "vectorRank": 16
+        },
+        {
+          "ref": "S09#s157",
+          "side": "next",
+          "neighbor": "S09#s158",
+          "bm25Rank": 2,
+          "vectorRank": 27
+        }
+      ]
+    },
+    {
+      "questionId": "N10",
+      "category": "计算机视觉",
+      "question": "YOLO26 的分割模型精度指标怎么看，用 model.val() 做验证时能拿到哪些指标？",
+      "referenceChunks": [
+        "S10#s163",
+        "S10#s166"
+      ],
+      "perRef": [
+        {
+          "chunkId": "S10#s163",
+          "bm25Rank": 10,
+          "vectorRank": 2,
+          "hybridRank": 5,
+          "sourceId": "S10"
+        },
+        {
+          "chunkId": "S10#s166",
+          "bm25Rank": 5,
+          "vectorRank": 1,
+          "hybridRank": 3,
+          "sourceId": "S10"
+        }
+      ],
+      "bestHybridRank": 3,
+      "class": "命中",
+      "hybridTopK": [
+        "S10#s171",
+        "S09#s160",
+        "S10#s166"
+      ],
+      "neighborInPool": [
+        {
+          "ref": "S10#s163",
+          "side": "prev",
+          "neighbor": "S10#s162",
+          "bm25Rank": 9,
+          "vectorRank": 7
+        },
+        {
+          "ref": "S10#s163",
+          "side": "next",
+          "neighbor": "S10#s164",
+          "bm25Rank": 20,
+          "vectorRank": 11
+        },
+        {
+          "ref": "S10#s166",
+          "side": "prev",
+          "neighbor": "S10#s165",
+          "bm25Rank": 27,
+          "vectorRank": 26
+        },
+        {
+          "ref": "S10#s166",
+          "side": "next",
+          "neighbor": "S10#s167",
+          "bm25Rank": 24,
+          "vectorRank": 13
+        }
+      ]
+    },
+    {
+      "questionId": "N11",
+      "category": "测试自动化",
+      "question": "pytest 的 fixture 里，用 yield 做清理和用 addfinalizer 挂清理函数有什么差别？各自有什么坑？",
+      "referenceChunks": [
+        "S14#1",
+        "S14#2"
+      ],
+      "perRef": [
+        {
+          "chunkId": "S14#1",
+          "bm25Rank": 5,
+          "vectorRank": 5,
+          "hybridRank": 2,
+          "sourceId": "S14"
+        },
+        {
+          "chunkId": "S14#2",
+          "bm25Rank": 1,
+          "vectorRank": 4,
+          "hybridRank": 1,
+          "sourceId": "S14"
+        }
+      ],
+      "bestHybridRank": 1,
+      "class": "命中",
+      "hybridTopK": [
+        "S14#2",
+        "S14#1",
+        "S13#s216~2"
+      ],
+      "neighborInPool": [
+        {
+          "ref": "S14#1",
+          "side": "prev",
+          "neighbor": "S14#s249",
+          "bm25Rank": 7,
+          "vectorRank": 11
+        },
+        {
+          "ref": "S14#1",
+          "side": "next",
+          "neighbor": "S14#s251",
+          "bm25Rank": 4,
+          "vectorRank": 9
+        },
+        {
+          "ref": "S14#2",
+          "side": "prev",
+          "neighbor": "S14#s251",
+          "bm25Rank": 4,
+          "vectorRank": 9
+        },
+        {
+          "ref": "S14#2",
+          "side": "next",
+          "neighbor": "S14#s253",
+          "bm25Rank": 19,
+          "vectorRank": 8
+        }
+      ]
+    },
+    {
+      "questionId": "N12",
+      "category": "职业能力",
+      "question": "软件质量保证分析师与测试员这个岗位，主要任务和工作活动包括哪些内容？",
+      "referenceChunks": [
+        "S16#s291~2",
+        "S16#s292"
+      ],
+      "perRef": [
+        {
+          "chunkId": "S16#s291~2",
+          "bm25Rank": null,
+          "vectorRank": 8,
+          "hybridRank": 9,
+          "sourceId": "S16"
+        },
+        {
+          "chunkId": "S16#s292",
+          "bm25Rank": null,
+          "vectorRank": 20,
+          "hybridRank": 22,
+          "sourceId": "S16"
+        }
+      ],
+      "bestHybridRank": 9,
+      "class": "召回但差一点",
+      "hybridTopK": [
+        "S15#s282",
+        "S16#s283",
+        "S16#s300"
+      ],
+      "neighborInPool": [
+        {
+          "ref": "S16#s291~2",
+          "side": "prev",
+          "neighbor": "S16#s291",
+          "bm25Rank": null,
+          "vectorRank": 4
+        },
+        {
+          "ref": "S16#s291~2",
+          "side": "next",
+          "neighbor": "S16#s291~3",
+          "bm25Rank": null,
+          "vectorRank": 25
+        },
+        {
+          "ref": "S16#s292",
+          "side": "prev",
+          "neighbor": "S16#s291~3",
+          "bm25Rank": null,
+          "vectorRank": 25
+        },
+        {
+          "ref": "S16#s292",
+          "side": "next",
+          "neighbor": "S16#s292~2",
+          "bm25Rank": null,
+          "vectorRank": 11
+        }
+      ]
+    },
+    {
+      "questionId": "N13",
+      "category": "职业能力",
+      "question": "计算机硬件工程师日常要完成哪些任务和工作活动？",
+      "referenceChunks": [
+        "S17#s320~2",
+        "S17#s321"
+      ],
+      "perRef": [
+        {
+          "chunkId": "S17#s320~2",
+          "bm25Rank": null,
+          "vectorRank": 3,
+          "hybridRank": 3,
+          "sourceId": "S17"
+        },
+        {
+          "chunkId": "S17#s321",
+          "bm25Rank": null,
+          "vectorRank": 5,
+          "hybridRank": 5,
+          "sourceId": "S17"
+        }
+      ],
+      "bestHybridRank": 3,
+      "class": "命中",
+      "hybridTopK": [
+        "S17#s320",
+        "S17#s312",
+        "S17#s320~2"
+      ],
+      "neighborInPool": [
+        {
+          "ref": "S17#s320~2",
+          "side": "prev",
+          "neighbor": "S17#s320",
+          "bm25Rank": null,
+          "vectorRank": 1
+        },
+        {
+          "ref": "S17#s320~2",
+          "side": "next",
+          "neighbor": "S17#s321",
+          "bm25Rank": null,
+          "vectorRank": 5
+        },
+        {
+          "ref": "S17#s321",
+          "side": "prev",
+          "neighbor": "S17#s320~2",
+          "bm25Rank": null,
+          "vectorRank": 3
+        },
+        {
+          "ref": "S17#s321",
+          "side": "next",
+          "neighbor": "S17#s321~2",
+          "bm25Rank": null,
+          "vectorRank": 28
+        }
+      ]
+    },
+    {
+      "questionId": "N14",
+      "category": "标准与政策",
+      "question": "全国标准信息公共服务平台目前收录了多少现行有效的强制性国家标准和推荐性国家标准，其中可在线阅读下载的比例是怎样的？",
+      "referenceChunks": [
+        "S20#s345",
+        "S20#s346"
+      ],
+      "perRef": [
+        {
+          "chunkId": "S20#s345",
+          "bm25Rank": 1,
+          "vectorRank": 1,
+          "hybridRank": 1,
+          "sourceId": "S20"
+        },
+        {
+          "chunkId": "S20#s346",
+          "bm25Rank": 8,
+          "vectorRank": 6,
+          "hybridRank": 6,
+          "sourceId": "S20"
+        }
+      ],
+      "bestHybridRank": 1,
+      "class": "命中",
+      "hybridTopK": [
+        "S20#s345",
+        "S20#s348",
+        "S20#s347"
+      ],
+      "neighborInPool": [
+        {
+          "ref": "S20#s345",
+          "side": "next",
+          "neighbor": "S20#s346",
+          "bm25Rank": 8,
+          "vectorRank": 6
+        },
+        {
+          "ref": "S20#s346",
+          "side": "prev",
+          "neighbor": "S20#s345",
+          "bm25Rank": 1,
+          "vectorRank": 1
+        },
+        {
+          "ref": "S20#s346",
+          "side": "next",
+          "neighbor": "S20#s347",
+          "bm25Rank": 5,
+          "vectorRank": 3
+        }
+      ]
+    }
+  ]
+}

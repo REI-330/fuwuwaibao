@@ -1,0 +1,176 @@
+{
+  "schema": "career-graph-integrity/v1",
+  "step": "09",
+  "generatedAt": "2026-09-15T17:02:24.849Z",
+  "note": "第 09 步产物：设计文档 §3.3 三条硬约束 + 页面契约的机器校验结果。硬约束失败即构建失败（退出码 1）。",
+  "inputs": [
+    "knowledge/extract/accepted.jsonl",
+    "knowledge/chunks/chunks.jsonl",
+    "knowledge/wiki/index.json",
+    "knowledge/pipeline/taxonomy.json"
+  ],
+  "counts": {
+    "nodes": 63,
+    "edges": 226,
+    "chunks": 494,
+    "wikiPages": 38,
+    "wikiReviewed": 29,
+    "sources": 22,
+    "byKind": {
+      "occupation": 4,
+      "skill": 25,
+      "knowledge": 9,
+      "task": 6,
+      "tool": 8,
+      "trend": 4,
+      "credential": 3,
+      "domain": 4
+    },
+    "byType": {
+      "requires": 28,
+      "prerequisite": 24,
+      "belongs_to": 25,
+      "trains": 12,
+      "uses": 8,
+      "learning_unit": 9,
+      "transitions_to": 3,
+      "emerging_in": 8,
+      "evidenced_by": 109
+    },
+    "annotatedBy": {
+      "llm-reviewed": 115,
+      "llm-draft": 174
+    }
+  },
+  "summary": {
+    "checks": 13,
+    "hardChecks": 12,
+    "hardFailed": 0,
+    "pending": 0,
+    "warned": 0,
+    "verdict": "pass"
+  },
+  "checks": [
+    {
+      "id": "09-01",
+      "title": "每条边都有 sourceRefs 且指向真实 chunkId",
+      "level": "hard",
+      "status": "pass",
+      "observed": "0 处",
+      "detail": [],
+      "note": ""
+    },
+    {
+      "id": "09-02",
+      "title": "每个节点都有 sourceRefs 且指向真实 chunkId",
+      "level": "hard",
+      "status": "pass",
+      "observed": "0 处",
+      "detail": [],
+      "note": ""
+    },
+    {
+      "id": "09-03",
+      "title": "annotatedBy 全部合法（human / llm-reviewed / llm-draft）",
+      "level": "hard",
+      "status": "pass",
+      "observed": "0 处",
+      "detail": [],
+      "note": ""
+    },
+    {
+      "id": "09-04",
+      "title": "prerequisite / transitions_to 子图无环",
+      "level": "hard",
+      "status": "pass",
+      "observed": "0 处",
+      "detail": [],
+      "note": "prerequisite：24 条边 / 25 个节点全部出拓扑序；transitions_to：3 条边 / 3 个节点全部出拓扑序。方向即「先…再…」的学习顺序。"
+    },
+    {
+      "id": "09-05",
+      "title": "边端点类型匹配且节点真实存在",
+      "level": "hard",
+      "status": "pass",
+      "observed": "0 处",
+      "detail": [],
+      "note": "本轮没用到的边类型：specifies、certifies、aligned_with、practiced_in、related_to"
+    },
+    {
+      "id": "09-06",
+      "title": "evidenced_by 的 to 是 chunk:<真实 chunkId> 且写进 sourceRefs",
+      "level": "hard",
+      "status": "pass",
+      "observed": "0 处",
+      "detail": [],
+      "note": "覆盖 54 段原文；这类目标不是图节点，没有 x/y，前端必须过滤（§3.2 L144-146）。"
+    },
+    {
+      "id": "09-07",
+      "title": "节点 id / 边 id / edgeKey 唯一",
+      "level": "hard",
+      "status": "pass",
+      "observed": "0 处",
+      "detail": [],
+      "note": "63 个节点 id / 226 个边 id / 226 个 edgeKey。"
+    },
+    {
+      "id": "09-08",
+      "title": "Wiki 内链与图谱边双向对应",
+      "level": "hard",
+      "status": "pass",
+      "observed": "0 处",
+      "detail": [],
+      "note": "38 页，正文内链 178 条；「图谱里的边都应能在页面上体现」（§4.3 L187）。"
+    },
+    {
+      "id": "09-09",
+      "title": "Wiki front-matter 8 键齐全且 review/reviewedBy/sources 自洽",
+      "level": "hard",
+      "status": "pass",
+      "observed": "0 处",
+      "detail": [],
+      "note": "29 页 reviewed / 9 页 llm-draft；未审核内容按 §5 降权（×0.6）。"
+    },
+    {
+      "id": "09-10",
+      "title": "x/y 是有限数字且全量一致",
+      "level": "hard",
+      "status": "pass",
+      "observed": "0 处",
+      "detail": [],
+      "note": "63 个节点都有坐标；x ∈ [105, 945]，y ∈ [29, 785]，画布 1050×820。"
+    },
+    {
+      "id": "09-11",
+      "title": "weight 只出现在 requires 上且等于 importance",
+      "level": "hard",
+      "status": "pass",
+      "observed": "0 处",
+      "detail": [],
+      "note": "requires.weight = importance（同一份数字）；其余边类型没有量化来源，不写 weight。 覆盖率 28/28 条 requires，占全部 226 条边的 12.389%。"
+    },
+    {
+      "id": "09-12",
+      "title": "别名冲突都在 06 的人工裁定里处理过",
+      "level": "hard",
+      "status": "pass",
+      "observed": "0 处",
+      "detail": [
+        "堆内存属性与dma缓冲 → keep-separate（skill:SK104 / knowledge:AI001:stage3）",
+        "pytest → tool:pytest（skill:SK130 / tool:pytest）",
+        "selenium → tool:selenium（skill:SK132 / tool:selenium）"
+      ],
+      "note": "保留同名实体是有意的：查询时靠 kind 过滤区分（见 adjudication.json 的 aliasDecisions）。"
+    },
+    {
+      "id": "09-13",
+      "title": "规模落在 taxonomy.scaleTargets 区间内",
+      "level": "warn",
+      "status": "pass",
+      "observed": "0 处",
+      "detail": [],
+      "note": "职业节点 4（目标 4）；技能节点 25（目标 [20,40]）；Wiki 页 38（目标 [30,40]）；来源 22（目标 [15,25]）"
+    }
+  ]
+}

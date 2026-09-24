@@ -1,0 +1,1687 @@
+{
+  "schema": "career-graph-wiki-draft/v1",
+  "generatedAt": "2026-09-15T13:36:03.104Z",
+  "step": "07",
+  "note": "Wiki 页目录，已经过第 08 步人工审核（2026-09-15，human）。",
+  "counts": {
+    "pages": 38,
+    "internalLinks": 178,
+    "citedChunks": 48,
+    "sourcesUsed": 15,
+    "byKind": {
+      "occupation": 4,
+      "skill": 25,
+      "knowledge": 9
+    },
+    "reviewed": 29
+  },
+  "pages": [
+    {
+      "entityId": "occupation:AI001",
+      "entityType": "occupation",
+      "title": "嵌入式开发工程师",
+      "path": "wiki/occupation/AI001.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "嵌入式开发",
+        "MCU 开发",
+        "固件工程师",
+        "计算机硬件工程师"
+      ],
+      "sources": [
+        "S01#s2",
+        "S02#s10",
+        "S02#s11",
+        "S02#s17",
+        "S02#s23",
+        "S02#s7",
+        "S03#s46",
+        "S03#s51",
+        "S03#s53",
+        "S04#s73",
+        "S04#s74",
+        "S08#s146",
+        "S09#s152",
+        "S17#s312"
+      ],
+      "internalLinks": [
+        "knowledge:AI001:stage1",
+        "knowledge:AI001:stage2",
+        "knowledge:AI001:stage3",
+        "knowledge:AI001:stage4",
+        "occupation:AI002",
+        "occupation:AI004",
+        "skill:SK090",
+        "skill:SK101",
+        "skill:SK102",
+        "skill:SK103",
+        "skill:SK104",
+        "skill:SK105",
+        "skill:SK106",
+        "tool:esp-idf",
+        "tool:freertos"
+      ],
+      "sections": [
+        "一句话定义",
+        "需要的能力",
+        "学习单元",
+        "常用工具",
+        "相邻职业",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "learning_unit|occupation:AI001|knowledge:AI001:stage1",
+        "learning_unit|occupation:AI001|knowledge:AI001:stage2",
+        "learning_unit|occupation:AI001|knowledge:AI001:stage3",
+        "learning_unit|occupation:AI001|knowledge:AI001:stage4",
+        "requires|occupation:AI001|skill:SK090",
+        "requires|occupation:AI001|skill:SK101",
+        "requires|occupation:AI001|skill:SK102",
+        "requires|occupation:AI001|skill:SK103",
+        "requires|occupation:AI001|skill:SK104",
+        "requires|occupation:AI001|skill:SK105",
+        "requires|occupation:AI001|skill:SK106",
+        "transitions_to|occupation:AI001|occupation:AI002",
+        "transitions_to|occupation:AI001|occupation:AI004",
+        "uses|occupation:AI001|tool:esp-idf",
+        "uses|occupation:AI001|tool:freertos"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "occupation:AI002",
+      "entityType": "occupation",
+      "title": "机器视觉工程师",
+      "path": "wiki/occupation/AI002.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "视觉算法工程师",
+        "CV 工程师",
+        "计算机视觉工程师"
+      ],
+      "sources": [
+        "S05#s98",
+        "S07#s124",
+        "S09#s152",
+        "S09#s154",
+        "S09#s155",
+        "S09#s156",
+        "S09#s159",
+        "S10#s162"
+      ],
+      "internalLinks": [
+        "knowledge:AI002:stage1",
+        "occupation:AI004",
+        "skill:SK110",
+        "skill:SK111",
+        "skill:SK112",
+        "skill:SK113",
+        "skill:SK114",
+        "skill:SK115",
+        "tool:paddlepaddle",
+        "tool:ultralytics"
+      ],
+      "sections": [
+        "一句话定义",
+        "需要的能力",
+        "学习单元",
+        "常用工具",
+        "相邻职业",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "learning_unit|occupation:AI002|knowledge:AI002:stage1",
+        "requires|occupation:AI002|skill:SK110",
+        "requires|occupation:AI002|skill:SK111",
+        "requires|occupation:AI002|skill:SK112",
+        "requires|occupation:AI002|skill:SK113",
+        "requires|occupation:AI002|skill:SK114",
+        "requires|occupation:AI002|skill:SK115",
+        "transitions_to|occupation:AI001|occupation:AI002",
+        "transitions_to|occupation:AI002|occupation:AI004",
+        "uses|occupation:AI002|tool:paddlepaddle",
+        "uses|occupation:AI002|tool:ultralytics"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "occupation:AI003",
+      "entityType": "occupation",
+      "title": "自动化测试工程师",
+      "path": "wiki/occupation/AI003.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "测试自动化工程师",
+        "QA 工程师",
+        "软件质量保证分析师"
+      ],
+      "sources": [
+        "S11#s172",
+        "S11#s176",
+        "S12#s180",
+        "S12#s181",
+        "S12#s187",
+        "S13#s202",
+        "S13#s204",
+        "S13#s233",
+        "S14#s256",
+        "S16#s283",
+        "S16#s291"
+      ],
+      "internalLinks": [
+        "knowledge:AI003:stage1",
+        "knowledge:AI003:stage2",
+        "skill:SK130",
+        "skill:SK131",
+        "skill:SK132",
+        "skill:SK133",
+        "skill:SK134",
+        "skill:SK136",
+        "skill:SK137",
+        "tool:pytest",
+        "tool:selenium"
+      ],
+      "sections": [
+        "一句话定义",
+        "需要的能力",
+        "学习单元",
+        "常用工具",
+        "相邻职业",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "learning_unit|occupation:AI003|knowledge:AI003:stage1",
+        "learning_unit|occupation:AI003|knowledge:AI003:stage2",
+        "requires|occupation:AI003|skill:SK130",
+        "requires|occupation:AI003|skill:SK131",
+        "requires|occupation:AI003|skill:SK132",
+        "requires|occupation:AI003|skill:SK133",
+        "requires|occupation:AI003|skill:SK134",
+        "requires|occupation:AI003|skill:SK136",
+        "requires|occupation:AI003|skill:SK137",
+        "uses|occupation:AI003|tool:pytest",
+        "uses|occupation:AI003|tool:selenium"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "occupation:AI004",
+      "entityType": "occupation",
+      "title": "边缘 AI 工程师",
+      "path": "wiki/occupation/AI004.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "边缘智能工程师",
+        "端侧 AI 工程师",
+        "边缘推理工程师"
+      ],
+      "sources": [
+        "S02#s7",
+        "S03#s46",
+        "S05#s100",
+        "S05#s101",
+        "S05#s92",
+        "S05#s96",
+        "S05#s97",
+        "S05#s98",
+        "S08#s146",
+        "S08#s149",
+        "S09#s159"
+      ],
+      "internalLinks": [
+        "knowledge:AI004:stage1",
+        "knowledge:AI004:stage2",
+        "skill:SK090",
+        "skill:SK101",
+        "skill:SK113",
+        "skill:SK120",
+        "skill:SK121",
+        "skill:SK122",
+        "skill:SK123",
+        "skill:SK215",
+        "tool:mindspore-lite",
+        "tool:netron"
+      ],
+      "sections": [
+        "一句话定义",
+        "需要的能力",
+        "学习单元",
+        "常用工具",
+        "相邻职业",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "learning_unit|occupation:AI004|knowledge:AI004:stage1",
+        "learning_unit|occupation:AI004|knowledge:AI004:stage2",
+        "requires|occupation:AI004|skill:SK090",
+        "requires|occupation:AI004|skill:SK101",
+        "requires|occupation:AI004|skill:SK113",
+        "requires|occupation:AI004|skill:SK120",
+        "requires|occupation:AI004|skill:SK121",
+        "requires|occupation:AI004|skill:SK122",
+        "requires|occupation:AI004|skill:SK123",
+        "requires|occupation:AI004|skill:SK215",
+        "transitions_to|occupation:AI001|occupation:AI004",
+        "transitions_to|occupation:AI002|occupation:AI004",
+        "uses|occupation:AI004|tool:mindspore-lite",
+        "uses|occupation:AI004|tool:netron"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK090",
+      "entityType": "skill",
+      "title": "C 语言与内存模型",
+      "path": "wiki/skill/SK090.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "C 语言",
+        "内存模型",
+        "栈与堆"
+      ],
+      "sources": [
+        "S02#s7",
+        "S03#s46",
+        "S03#s53",
+        "S04#s74"
+      ],
+      "internalLinks": [
+        "domain:embedded",
+        "occupation:AI001",
+        "occupation:AI004",
+        "skill:SK101",
+        "skill:SK103",
+        "skill:SK104",
+        "skill:SK105"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK090|domain:embedded",
+        "prerequisite|skill:SK090|skill:SK101",
+        "prerequisite|skill:SK090|skill:SK103",
+        "prerequisite|skill:SK090|skill:SK104",
+        "prerequisite|skill:SK090|skill:SK105",
+        "requires|occupation:AI001|skill:SK090",
+        "requires|occupation:AI004|skill:SK090"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK101",
+      "entityType": "skill",
+      "title": "微控制器外设驱动",
+      "path": "wiki/skill/SK101.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "外设驱动开发",
+        "SPI 主机驱动",
+        "驱动开发"
+      ],
+      "sources": [
+        "S02#s10",
+        "S02#s17",
+        "S02#s7",
+        "S05#s96",
+        "S17#s312"
+      ],
+      "internalLinks": [
+        "domain:embedded",
+        "occupation:AI001",
+        "occupation:AI004",
+        "skill:SK090",
+        "skill:SK102",
+        "skill:SK215",
+        "task:T0042",
+        "trend:hw-bright-outlook"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK101|domain:embedded",
+        "emerging_in|trend:hw-bright-outlook|skill:SK101",
+        "prerequisite|skill:SK090|skill:SK101",
+        "prerequisite|skill:SK101|skill:SK102",
+        "prerequisite|skill:SK101|skill:SK215",
+        "requires|occupation:AI001|skill:SK101",
+        "requires|occupation:AI004|skill:SK101",
+        "trains|task:T0042|skill:SK101"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK102",
+      "entityType": "skill",
+      "title": "SPI 总线事务设计",
+      "path": "wiki/skill/SK102.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "SPI 传输事务",
+        "SPI 时序"
+      ],
+      "sources": [
+        "S02#s10",
+        "S02#s12",
+        "S04#s73"
+      ],
+      "internalLinks": [
+        "domain:embedded",
+        "occupation:AI001",
+        "skill:SK101",
+        "skill:SK103",
+        "skill:SK106",
+        "task:T0042"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK102|domain:embedded",
+        "prerequisite|skill:SK101|skill:SK102",
+        "prerequisite|skill:SK102|skill:SK106",
+        "prerequisite|skill:SK103|skill:SK102",
+        "requires|occupation:AI001|skill:SK102",
+        "trains|task:T0042|skill:SK102"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK103",
+      "entityType": "skill",
+      "title": "GPIO 与引脚复用",
+      "path": "wiki/skill/SK103.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "GPIO 配置",
+        "IO 管脚配置",
+        "引脚复用"
+      ],
+      "sources": [
+        "S04#s73",
+        "S04#s74",
+        "S04#s75"
+      ],
+      "internalLinks": [
+        "domain:embedded",
+        "occupation:AI001",
+        "skill:SK090",
+        "skill:SK102"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK103|domain:embedded",
+        "prerequisite|skill:SK090|skill:SK103",
+        "prerequisite|skill:SK103|skill:SK102",
+        "requires|occupation:AI001|skill:SK103"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK104",
+      "entityType": "skill",
+      "title": "堆内存属性与 DMA 缓冲",
+      "path": "wiki/skill/SK104.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "DMA 存储器",
+        "堆属性分配",
+        "内存属性"
+      ],
+      "sources": [
+        "S03#s53"
+      ],
+      "internalLinks": [
+        "domain:embedded",
+        "occupation:AI001",
+        "skill:SK090"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK104|domain:embedded",
+        "prerequisite|skill:SK090|skill:SK104",
+        "requires|occupation:AI001|skill:SK104"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK105",
+      "entityType": "skill",
+      "title": "实时操作系统任务调度",
+      "path": "wiki/skill/SK105.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "RTOS 任务",
+        "实时内核",
+        "任务调度"
+      ],
+      "sources": [
+        "S01#s2",
+        "S03#s46",
+        "S17#s320"
+      ],
+      "internalLinks": [
+        "domain:embedded",
+        "occupation:AI001",
+        "skill:SK090",
+        "task:T0051",
+        "trend:hw-bright-outlook"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK105|domain:embedded",
+        "emerging_in|trend:hw-bright-outlook|skill:SK105",
+        "prerequisite|skill:SK090|skill:SK105",
+        "requires|occupation:AI001|skill:SK105",
+        "trains|task:T0051|skill:SK105"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK106",
+      "entityType": "skill",
+      "title": "中断与轮询传输取舍",
+      "path": "wiki/skill/SK106.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "中断传输事务",
+        "轮询传输事务",
+        "ISR"
+      ],
+      "sources": [
+        "S02#s11",
+        "S02#s12"
+      ],
+      "internalLinks": [
+        "domain:embedded",
+        "occupation:AI001",
+        "skill:SK102",
+        "task:T0051"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK106|domain:embedded",
+        "prerequisite|skill:SK102|skill:SK106",
+        "requires|occupation:AI001|skill:SK106",
+        "trains|task:T0051|skill:SK106"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK110",
+      "entityType": "skill",
+      "title": "目标检测模型训练",
+      "path": "wiki/skill/SK110.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "检测模型训练",
+        "YOLO 训练",
+        "目标检测"
+      ],
+      "sources": [
+        "S07#s124",
+        "S09#s152",
+        "S09#s154",
+        "S09#s155",
+        "S09#s156",
+        "S09#s159",
+        "S10#s164"
+      ],
+      "internalLinks": [
+        "domain:vision",
+        "occupation:AI002",
+        "skill:SK111",
+        "skill:SK112",
+        "skill:SK113",
+        "skill:SK114",
+        "skill:SK115",
+        "task:T0060"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK110|domain:vision",
+        "prerequisite|skill:SK110|skill:SK112",
+        "prerequisite|skill:SK110|skill:SK113",
+        "prerequisite|skill:SK110|skill:SK114",
+        "prerequisite|skill:SK111|skill:SK110",
+        "prerequisite|skill:SK115|skill:SK110",
+        "requires|occupation:AI002|skill:SK110",
+        "trains|task:T0060|skill:SK110"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK111",
+      "entityType": "skill",
+      "title": "数据集格式与标注",
+      "path": "wiki/skill/SK111.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "数据集格式",
+        "数据标注",
+        "COCO 转 YOLO"
+      ],
+      "sources": [
+        "S09#s155"
+      ],
+      "internalLinks": [
+        "domain:vision",
+        "occupation:AI002",
+        "skill:SK110"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK111|domain:vision",
+        "prerequisite|skill:SK111|skill:SK110",
+        "requires|occupation:AI002|skill:SK111"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK112",
+      "entityType": "skill",
+      "title": "模型验证与指标",
+      "path": "wiki/skill/SK112.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "模型验证",
+        "准确率评估",
+        "评估指标"
+      ],
+      "sources": [
+        "S09#s156"
+      ],
+      "internalLinks": [
+        "domain:vision",
+        "occupation:AI002",
+        "skill:SK110",
+        "task:T0060"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK112|domain:vision",
+        "prerequisite|skill:SK110|skill:SK112",
+        "requires|occupation:AI002|skill:SK112",
+        "trains|task:T0060|skill:SK112"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK113",
+      "entityType": "skill",
+      "title": "模型导出与格式转换",
+      "path": "wiki/skill/SK113.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "模型导出",
+        "导出格式",
+        "ONNX 导出"
+      ],
+      "sources": [
+        "S05#s97",
+        "S08#s146",
+        "S09#s159"
+      ],
+      "internalLinks": [
+        "domain:vision",
+        "occupation:AI002",
+        "occupation:AI004",
+        "skill:SK110",
+        "skill:SK122",
+        "skill:SK123",
+        "task:T0061"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK113|domain:vision",
+        "prerequisite|skill:SK110|skill:SK113",
+        "prerequisite|skill:SK113|skill:SK122",
+        "prerequisite|skill:SK113|skill:SK123",
+        "requires|occupation:AI002|skill:SK113",
+        "requires|occupation:AI004|skill:SK113",
+        "trains|task:T0061|skill:SK113"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK114",
+      "entityType": "skill",
+      "title": "实例分割",
+      "path": "wiki/skill/SK114.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "分割模型",
+        "掩码分割",
+        "实例分割训练"
+      ],
+      "sources": [
+        "S10#s162",
+        "S10#s164"
+      ],
+      "internalLinks": [
+        "domain:vision",
+        "occupation:AI002",
+        "skill:SK110"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK114|domain:vision",
+        "prerequisite|skill:SK110|skill:SK114",
+        "requires|occupation:AI002|skill:SK114"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK115",
+      "entityType": "skill",
+      "title": "张量与自动微分基础",
+      "path": "wiki/skill/SK115.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "Tensor",
+        "张量",
+        "自动微分"
+      ],
+      "sources": [
+        "S07#3.1",
+        "S07#s124"
+      ],
+      "internalLinks": [
+        "domain:vision",
+        "occupation:AI002",
+        "skill:SK110"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK115|domain:vision",
+        "prerequisite|skill:SK115|skill:SK110",
+        "requires|occupation:AI002|skill:SK115"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK120",
+      "entityType": "skill",
+      "title": "轻量级推理引擎集成",
+      "path": "wiki/skill/SK120.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "推理库集成",
+        "mindspore-lite 集成",
+        "端侧推理集成"
+      ],
+      "sources": [
+        "S05#s100",
+        "S05#s101",
+        "S05#s98"
+      ],
+      "internalLinks": [
+        "domain:edge-ai",
+        "occupation:AI004",
+        "skill:SK121",
+        "skill:SK215"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK120|domain:edge-ai",
+        "prerequisite|skill:SK120|skill:SK121",
+        "prerequisite|skill:SK215|skill:SK120",
+        "requires|occupation:AI004|skill:SK120"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK121",
+      "entityType": "skill",
+      "title": "端侧推理性能基准测试",
+      "path": "wiki/skill/SK121.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "benchmark 推理测试",
+        "推理基准测试",
+        "端侧性能"
+      ],
+      "sources": [
+        "S05#s100"
+      ],
+      "internalLinks": [
+        "domain:edge-ai",
+        "occupation:AI004",
+        "skill:SK120"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK121|domain:edge-ai",
+        "prerequisite|skill:SK120|skill:SK121",
+        "requires|occupation:AI004|skill:SK121"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK122",
+      "entityType": "skill",
+      "title": "模型结构可视化检查",
+      "path": "wiki/skill/SK122.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "Netron 可视化",
+        "模型可视化",
+        "拓扑结构检查"
+      ],
+      "sources": [
+        "S05#s97"
+      ],
+      "internalLinks": [
+        "domain:edge-ai",
+        "occupation:AI004",
+        "skill:SK113"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK122|domain:edge-ai",
+        "prerequisite|skill:SK113|skill:SK122",
+        "requires|occupation:AI004|skill:SK122"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK123",
+      "entityType": "skill",
+      "title": "部署格式选型",
+      "path": "wiki/skill/SK123.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "部署选项对比",
+        "部署格式选择",
+        "端侧后端选型"
+      ],
+      "sources": [
+        "S08#s145",
+        "S08#s146"
+      ],
+      "internalLinks": [
+        "domain:edge-ai",
+        "occupation:AI004",
+        "skill:SK113",
+        "skill:SK215",
+        "task:T0061",
+        "trend:edge-ai-2026"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK123|domain:edge-ai",
+        "emerging_in|trend:edge-ai-2026|skill:SK123",
+        "prerequisite|skill:SK113|skill:SK123",
+        "prerequisite|skill:SK215|skill:SK123",
+        "requires|occupation:AI004|skill:SK123",
+        "trains|task:T0061|skill:SK123"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK130",
+      "entityType": "skill",
+      "title": "Python 测试框架 pytest",
+      "path": "wiki/skill/SK130.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "pytest",
+        "测试框架",
+        "Python 单元测试"
+      ],
+      "sources": [
+        "S11#s172",
+        "S13#s202",
+        "S13#s204",
+        "S16#s306"
+      ],
+      "internalLinks": [
+        "domain:test-automation",
+        "occupation:AI003",
+        "skill:SK131",
+        "skill:SK132",
+        "trend:sqa-bright-outlook"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK130|domain:test-automation",
+        "emerging_in|trend:sqa-bright-outlook|skill:SK130",
+        "prerequisite|skill:SK130|skill:SK131",
+        "prerequisite|skill:SK130|skill:SK132",
+        "requires|occupation:AI003|skill:SK130"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK131",
+      "entityType": "skill",
+      "title": "夹具与测试隔离",
+      "path": "wiki/skill/SK131.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "fixture",
+        "夹具设计",
+        "测试隔离"
+      ],
+      "sources": [
+        "S13#s204",
+        "S13#s209",
+        "S14#s256"
+      ],
+      "internalLinks": [
+        "domain:test-automation",
+        "occupation:AI003",
+        "skill:SK130",
+        "skill:SK136",
+        "task:T0080"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK131|domain:test-automation",
+        "prerequisite|skill:SK130|skill:SK131",
+        "prerequisite|skill:SK131|skill:SK136",
+        "requires|occupation:AI003|skill:SK131",
+        "trains|task:T0080|skill:SK131"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK132",
+      "entityType": "skill",
+      "title": "浏览器自动化 WebDriver",
+      "path": "wiki/skill/SK132.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "WebDriver",
+        "Selenium",
+        "浏览器自动化"
+      ],
+      "sources": [
+        "S11#s172",
+        "S11#s176",
+        "S12#s181"
+      ],
+      "internalLinks": [
+        "domain:test-automation",
+        "occupation:AI003",
+        "skill:SK130",
+        "skill:SK133",
+        "skill:SK137",
+        "task:T0070",
+        "trend:webdriver-bidi"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK132|domain:test-automation",
+        "emerging_in|trend:webdriver-bidi|skill:SK132",
+        "prerequisite|skill:SK130|skill:SK132",
+        "prerequisite|skill:SK132|skill:SK133",
+        "prerequisite|skill:SK132|skill:SK137",
+        "requires|occupation:AI003|skill:SK132",
+        "trains|task:T0070|skill:SK132"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK133",
+      "entityType": "skill",
+      "title": "显式等待与隐式等待",
+      "path": "wiki/skill/SK133.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "等待策略",
+        "显式等待",
+        "隐式等待"
+      ],
+      "sources": [
+        "S12#s180",
+        "S12#s181",
+        "S12#s187"
+      ],
+      "internalLinks": [
+        "domain:test-automation",
+        "occupation:AI003",
+        "skill:SK132",
+        "skill:SK134",
+        "task:T0070"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK133|domain:test-automation",
+        "prerequisite|skill:SK132|skill:SK133",
+        "prerequisite|skill:SK133|skill:SK134",
+        "requires|occupation:AI003|skill:SK133",
+        "trains|task:T0070|skill:SK133"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK134",
+      "entityType": "skill",
+      "title": "端到端测试稳定性治理",
+      "path": "wiki/skill/SK134.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "不稳定测试",
+        "flaky test",
+        "竞态条件"
+      ],
+      "sources": [
+        "S12#s180",
+        "S16#s291"
+      ],
+      "internalLinks": [
+        "domain:test-automation",
+        "occupation:AI003",
+        "skill:SK133",
+        "trend:sqa-bright-outlook"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK134|domain:test-automation",
+        "emerging_in|trend:sqa-bright-outlook|skill:SK134",
+        "prerequisite|skill:SK133|skill:SK134",
+        "requires|occupation:AI003|skill:SK134"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK136",
+      "entityType": "skill",
+      "title": "分层夹具组织 conftest",
+      "path": "wiki/skill/SK136.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "conftest.py",
+        "夹具共享",
+        "分层夹具"
+      ],
+      "sources": [
+        "S14#s256",
+        "S14#s277"
+      ],
+      "internalLinks": [
+        "domain:test-automation",
+        "occupation:AI003",
+        "skill:SK131",
+        "task:T0080"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK136|domain:test-automation",
+        "prerequisite|skill:SK131|skill:SK136",
+        "requires|occupation:AI003|skill:SK136",
+        "trains|task:T0080|skill:SK136"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK137",
+      "entityType": "skill",
+      "title": "WebDriver BiDi 双向协议",
+      "path": "wiki/skill/SK137.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "WebDriver BiDi",
+        "双向协议",
+        "CDP 替代"
+      ],
+      "sources": [
+        "S11#s176"
+      ],
+      "internalLinks": [
+        "domain:test-automation",
+        "occupation:AI003",
+        "skill:SK132",
+        "trend:webdriver-bidi"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK137|domain:test-automation",
+        "emerging_in|trend:webdriver-bidi|skill:SK137",
+        "prerequisite|skill:SK132|skill:SK137",
+        "requires|occupation:AI003|skill:SK137"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "skill:SK215",
+      "entityType": "skill",
+      "title": "模型量化与部署",
+      "path": "wiki/skill/SK215.md",
+      "version": "2026-09-15",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "aliases": [
+        "模型量化",
+        "INT8 量化",
+        "离线模型转换"
+      ],
+      "sources": [
+        "S05#s94",
+        "S05#s96",
+        "S05#s98",
+        "S08#s145",
+        "S08#s149"
+      ],
+      "internalLinks": [
+        "domain:edge-ai",
+        "occupation:AI004",
+        "skill:SK101",
+        "skill:SK120",
+        "skill:SK123",
+        "trend:edge-ai-2026"
+      ],
+      "sections": [
+        "一句话定义",
+        "能力域",
+        "先修提示",
+        "被以下职业要求",
+        "相关训练任务",
+        "趋势信号",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "belongs_to|skill:SK215|domain:edge-ai",
+        "emerging_in|trend:edge-ai-2026|skill:SK215",
+        "prerequisite|skill:SK101|skill:SK215",
+        "prerequisite|skill:SK215|skill:SK120",
+        "prerequisite|skill:SK215|skill:SK123",
+        "requires|occupation:AI004|skill:SK215"
+      ],
+      "tier": "full",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "knowledge:AI001:stage1",
+      "entityType": "knowledge",
+      "title": "嵌入式 C 与外设入门",
+      "path": "wiki/knowledge/AI001-stage1.md",
+      "version": "2026-09-15",
+      "review": "llm-draft",
+      "reviewedBy": null,
+      "aliases": [],
+      "sources": [
+        "S03#s46",
+        "S04#s74"
+      ],
+      "internalLinks": [
+        "occupation:AI001"
+      ],
+      "sections": [
+        "一句话定义",
+        "所属职业",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "learning_unit|occupation:AI001|knowledge:AI001:stage1"
+      ],
+      "tier": "spot",
+      "spotChecked": true,
+      "rejection": null
+    },
+    {
+      "entityId": "knowledge:AI001:stage2",
+      "entityType": "knowledge",
+      "title": "SPI 总线与传输事务",
+      "path": "wiki/knowledge/AI001-stage2.md",
+      "version": "2026-09-15",
+      "review": "llm-draft",
+      "reviewedBy": null,
+      "aliases": [],
+      "sources": [
+        "S02#s10",
+        "S02#s17"
+      ],
+      "internalLinks": [
+        "occupation:AI001"
+      ],
+      "sections": [
+        "一句话定义",
+        "所属职业",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "learning_unit|occupation:AI001|knowledge:AI001:stage2"
+      ],
+      "tier": "spot",
+      "spotChecked": true,
+      "rejection": null
+    },
+    {
+      "entityId": "knowledge:AI001:stage3",
+      "entityType": "knowledge",
+      "title": "堆内存属性与 DMA 缓冲",
+      "path": "wiki/knowledge/AI001-stage3.md",
+      "version": "2026-09-15",
+      "review": "llm-draft",
+      "reviewedBy": null,
+      "aliases": [],
+      "sources": [
+        "S03#s51",
+        "S03#s53"
+      ],
+      "internalLinks": [
+        "occupation:AI001"
+      ],
+      "sections": [
+        "一句话定义",
+        "所属职业",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "learning_unit|occupation:AI001|knowledge:AI001:stage3"
+      ],
+      "tier": "spot",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "knowledge:AI001:stage4",
+      "entityType": "knowledge",
+      "title": "端侧实时性与传输速度调优",
+      "path": "wiki/knowledge/AI001-stage4.md",
+      "version": "2026-09-15",
+      "review": "llm-draft",
+      "reviewedBy": null,
+      "aliases": [],
+      "sources": [
+        "S02#s23"
+      ],
+      "internalLinks": [
+        "occupation:AI001"
+      ],
+      "sections": [
+        "一句话定义",
+        "所属职业",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "learning_unit|occupation:AI001|knowledge:AI001:stage4"
+      ],
+      "tier": "spot",
+      "spotChecked": true,
+      "rejection": null
+    },
+    {
+      "entityId": "knowledge:AI002:stage1",
+      "entityType": "knowledge",
+      "title": "检测模型训练与验证流程",
+      "path": "wiki/knowledge/AI002-stage1.md",
+      "version": "2026-09-15",
+      "review": "llm-draft",
+      "reviewedBy": null,
+      "aliases": [],
+      "sources": [
+        "S09#s154",
+        "S09#s156"
+      ],
+      "internalLinks": [
+        "occupation:AI002"
+      ],
+      "sections": [
+        "一句话定义",
+        "所属职业",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "learning_unit|occupation:AI002|knowledge:AI002:stage1"
+      ],
+      "tier": "spot",
+      "spotChecked": true,
+      "rejection": null
+    },
+    {
+      "entityId": "knowledge:AI003:stage1",
+      "entityType": "knowledge",
+      "title": "等待策略与稳定测试",
+      "path": "wiki/knowledge/AI003-stage1.md",
+      "version": "2026-09-15",
+      "review": "llm-draft",
+      "reviewedBy": null,
+      "aliases": [],
+      "sources": [
+        "S12#s180",
+        "S12#s187"
+      ],
+      "internalLinks": [
+        "occupation:AI003"
+      ],
+      "sections": [
+        "一句话定义",
+        "所属职业",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "learning_unit|occupation:AI003|knowledge:AI003:stage1"
+      ],
+      "tier": "spot",
+      "spotChecked": false,
+      "rejection": null
+    },
+    {
+      "entityId": "knowledge:AI003:stage2",
+      "entityType": "knowledge",
+      "title": "夹具组织与跨文件共享",
+      "path": "wiki/knowledge/AI003-stage2.md",
+      "version": "2026-09-15",
+      "review": "llm-draft",
+      "reviewedBy": null,
+      "aliases": [],
+      "sources": [
+        "S13#s233",
+        "S14#s256"
+      ],
+      "internalLinks": [
+        "occupation:AI003"
+      ],
+      "sections": [
+        "一句话定义",
+        "所属职业",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "learning_unit|occupation:AI003|knowledge:AI003:stage2"
+      ],
+      "tier": "spot",
+      "spotChecked": true,
+      "rejection": null
+    },
+    {
+      "entityId": "knowledge:AI004:stage1",
+      "entityType": "knowledge",
+      "title": "模型转换与 Lite 推理集成",
+      "path": "wiki/knowledge/AI004-stage1.md",
+      "version": "2026-09-15",
+      "review": "llm-draft",
+      "reviewedBy": null,
+      "aliases": [],
+      "sources": [
+        "S05#s101",
+        "S05#s96"
+      ],
+      "internalLinks": [
+        "occupation:AI004"
+      ],
+      "sections": [
+        "一句话定义",
+        "所属职业",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "learning_unit|occupation:AI004|knowledge:AI004:stage1"
+      ],
+      "tier": "spot",
+      "spotChecked": true,
+      "rejection": null
+    },
+    {
+      "entityId": "knowledge:AI004:stage2",
+      "entityType": "knowledge",
+      "title": "量化与端侧基准测试",
+      "path": "wiki/knowledge/AI004-stage2.md",
+      "version": "2026-09-15",
+      "review": "llm-draft",
+      "reviewedBy": null,
+      "aliases": [],
+      "sources": [
+        "S05#s100",
+        "S05#s97"
+      ],
+      "internalLinks": [
+        "occupation:AI004"
+      ],
+      "sections": [
+        "一句话定义",
+        "所属职业",
+        "常见误区",
+        "引用来源"
+      ],
+      "edgeKeys": [
+        "learning_unit|occupation:AI004|knowledge:AI004:stage2"
+      ],
+      "tier": "spot",
+      "spotChecked": false,
+      "rejection": null
+    }
+  ],
+  "reviewedAt": "2026-09-15",
+  "reviewer": "human"
+}

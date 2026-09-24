@@ -1,0 +1,3974 @@
+{
+  "schema": "career-graph-raw-blocks/v1",
+  "sourceId": "S05",
+  "url": "https://www.mindspore.cn/lite/docs/zh-CN/master/quick_start/one_hour_introduction.html",
+  "finalUrl": "https://www.mindspore.cn/lite/docs/zh-CN/master/quick_start/one_hour_introduction.html",
+  "fetchedAt": "2026-09-15T09:56:51.087Z",
+  "httpStatus": 200,
+  "contentType": "text/html; charset=utf-8",
+  "charset": "utf-8",
+  "byteSize": 222526,
+  "sha256": "cb0953fb1f59a7582ec0e42dce8fc6e1fce487cf1d8f308fe5511dcac6802428",
+  "title": "端侧推理快速入门 | MindSpore Lite master 文档 | MindSpore",
+  "hops": [
+    {
+      "url": "https://www.mindspore.cn/lite/docs/zh-CN/master/quick_start/one_hour_introduction.html",
+      "finalUrl": "https://www.mindspore.cn/lite/docs/zh-CN/master/quick_start/one_hour_introduction.html",
+      "httpStatus": 200,
+      "bytes": 222526,
+      "charset": "utf-8"
+    }
+  ],
+  "flags": [],
+  "extractionPass": "pruned",
+  "prunedBlockCount": 438,
+  "prunedTextLength": 61110,
+  "blockCount": 438,
+  "textLength": 61110,
+  "ranges": [
+    [
+      0,
+      9
+    ],
+    [
+      11,
+      14
+    ],
+    [
+      16,
+      160
+    ],
+    [
+      162,
+      196
+    ],
+    [
+      198,
+      202
+    ],
+    [
+      204,
+      244
+    ],
+    [
+      246,
+      250
+    ],
+    [
+      252,
+      322
+    ],
+    [
+      324,
+      331
+    ],
+    [
+      333,
+      364
+    ],
+    [
+      366,
+      371
+    ],
+    [
+      373,
+      414
+    ],
+    [
+      416,
+      421
+    ],
+    [
+      423,
+      566
+    ],
+    [
+      568,
+      572
+    ],
+    [
+      574,
+      606
+    ],
+    [
+      608,
+      614
+    ],
+    [
+      616,
+      830
+    ],
+    [
+      832,
+      1452
+    ],
+    [
+      1454,
+      1459
+    ],
+    [
+      1461,
+      1659
+    ],
+    [
+      1661,
+      1665
+    ],
+    [
+      1667,
+      1702
+    ],
+    [
+      1704,
+      1786
+    ],
+    [
+      1788,
+      1819
+    ],
+    [
+      1821,
+      1831
+    ],
+    [
+      1833,
+      1851
+    ],
+    [
+      1853,
+      1902
+    ],
+    [
+      1904,
+      1935
+    ],
+    [
+      1937,
+      1943
+    ],
+    [
+      1945,
+      1995
+    ],
+    [
+      1997,
+      2025
+    ],
+    [
+      2027,
+      2059
+    ],
+    [
+      2061,
+      2165
+    ],
+    [
+      2167,
+      2350
+    ],
+    [
+      2352,
+      2406
+    ],
+    [
+      2408,
+      2432
+    ],
+    [
+      2434,
+      2507
+    ],
+    [
+      2509,
+      2539
+    ],
+    [
+      2541,
+      2614
+    ],
+    [
+      2616,
+      2637
+    ],
+    [
+      2639,
+      2704
+    ],
+    [
+      2706,
+      2723
+    ],
+    [
+      2725,
+      2794
+    ],
+    [
+      2796,
+      2911
+    ],
+    [
+      2913,
+      2917
+    ],
+    [
+      2919,
+      3038
+    ],
+    [
+      3040,
+      3125
+    ],
+    [
+      3127,
+      3177
+    ],
+    [
+      3179,
+      3203
+    ],
+    [
+      3205,
+      3209
+    ],
+    [
+      3211,
+      3234
+    ],
+    [
+      3236,
+      3262
+    ],
+    [
+      3264,
+      3306
+    ],
+    [
+      3308,
+      3329
+    ],
+    [
+      3331,
+      3333
+    ],
+    [
+      3335,
+      3339
+    ],
+    [
+      3341,
+      3345
+    ],
+    [
+      3347,
+      3351
+    ],
+    [
+      3353,
+      3364
+    ],
+    [
+      3366,
+      3377
+    ],
+    [
+      3379,
+      3406
+    ],
+    [
+      3408,
+      3431
+    ],
+    [
+      3433,
+      3442
+    ],
+    [
+      3444,
+      3469
+    ],
+    [
+      3471,
+      3501
+    ],
+    [
+      3503,
+      3528
+    ],
+    [
+      3530,
+      3542
+    ],
+    [
+      3544,
+      3560
+    ],
+    [
+      3562,
+      3585
+    ],
+    [
+      3587,
+      3668
+    ],
+    [
+      3670,
+      3680
+    ],
+    [
+      3682,
+      3917
+    ],
+    [
+      3919,
+      3945
+    ],
+    [
+      3947,
+      3987
+    ],
+    [
+      3989,
+      3994
+    ],
+    [
+      3996,
+      4008
+    ],
+    [
+      4010,
+      4020
+    ],
+    [
+      4022,
+      4073
+    ],
+    [
+      4075,
+      4084
+    ],
+    [
+      4086,
+      4113
+    ],
+    [
+      4115,
+      4127
+    ],
+    [
+      4129,
+      4209
+    ],
+    [
+      4211,
+      4304
+    ],
+    [
+      4306,
+      4339
+    ],
+    [
+      4341,
+      4466
+    ],
+    [
+      4468,
+      4472
+    ],
+    [
+      4474,
+      4503
+    ],
+    [
+      4505,
+      4522
+    ],
+    [
+      4524,
+      4537
+    ],
+    [
+      4539,
+      4545
+    ],
+    [
+      4547,
+      4638
+    ],
+    [
+      4640,
+      4644
+    ],
+    [
+      4646,
+      4803
+    ],
+    [
+      4805,
+      4809
+    ],
+    [
+      4811,
+      4842
+    ],
+    [
+      4844,
+      4848
+    ],
+    [
+      4850,
+      5104
+    ],
+    [
+      5106,
+      5110
+    ],
+    [
+      5112,
+      5266
+    ],
+    [
+      5268,
+      5288
+    ],
+    [
+      5290,
+      5470
+    ],
+    [
+      5472,
+      5673
+    ],
+    [
+      5675,
+      5680
+    ],
+    [
+      5682,
+      5913
+    ],
+    [
+      5915,
+      5921
+    ],
+    [
+      5923,
+      6010
+    ],
+    [
+      6012,
+      6026
+    ],
+    [
+      6028,
+      6032
+    ],
+    [
+      6034,
+      6079
+    ],
+    [
+      6081,
+      6155
+    ],
+    [
+      6157,
+      6190
+    ],
+    [
+      6192,
+      6209
+    ],
+    [
+      6211,
+      6236
+    ],
+    [
+      6238,
+      6277
+    ],
+    [
+      6279,
+      6310
+    ],
+    [
+      6312,
+      6325
+    ],
+    [
+      6327,
+      6372
+    ],
+    [
+      6374,
+      6385
+    ],
+    [
+      6387,
+      6456
+    ],
+    [
+      6458,
+      6496
+    ],
+    [
+      6498,
+      6793
+    ],
+    [
+      6795,
+      7367
+    ],
+    [
+      7369,
+      7380
+    ],
+    [
+      7382,
+      7437
+    ],
+    [
+      7439,
+      7531
+    ],
+    [
+      7533,
+      7558
+    ],
+    [
+      7560,
+      7765
+    ],
+    [
+      7767,
+      7786
+    ],
+    [
+      7788,
+      7824
+    ],
+    [
+      7826,
+      7854
+    ],
+    [
+      7856,
+      7930
+    ],
+    [
+      7932,
+      8041
+    ],
+    [
+      8043,
+      8144
+    ],
+    [
+      8146,
+      8307
+    ],
+    [
+      8309,
+      8326
+    ],
+    [
+      8328,
+      8378
+    ],
+    [
+      8380,
+      8465
+    ],
+    [
+      8467,
+      8534
+    ],
+    [
+      8536,
+      8582
+    ],
+    [
+      8584,
+      8865
+    ],
+    [
+      8867,
+      8963
+    ],
+    [
+      8965,
+      9089
+    ],
+    [
+      9091,
+      10584
+    ],
+    [
+      10586,
+      11077
+    ],
+    [
+      11079,
+      11083
+    ],
+    [
+      11085,
+      11162
+    ],
+    [
+      11164,
+      11180
+    ],
+    [
+      11182,
+      11185
+    ],
+    [
+      11187,
+      11191
+    ],
+    [
+      11193,
+      11197
+    ],
+    [
+      11199,
+      11203
+    ],
+    [
+      11205,
+      11208
+    ],
+    [
+      11210,
+      11233
+    ],
+    [
+      11235,
+      11237
+    ],
+    [
+      11239,
+      11271
+    ],
+    [
+      11273,
+      11279
+    ],
+    [
+      11281,
+      11285
+    ],
+    [
+      11287,
+      11312
+    ],
+    [
+      11314,
+      11316
+    ],
+    [
+      11318,
+      11333
+    ],
+    [
+      11335,
+      11342
+    ],
+    [
+      11344,
+      11369
+    ],
+    [
+      11371,
+      11373
+    ],
+    [
+      11375,
+      11436
+    ],
+    [
+      11438,
+      11444
+    ],
+    [
+      11446,
+      11450
+    ],
+    [
+      11452,
+      11487
+    ],
+    [
+      11489,
+      11491
+    ],
+    [
+      11493,
+      11533
+    ],
+    [
+      11535,
+      11541
+    ],
+    [
+      11543,
+      11547
+    ],
+    [
+      11549,
+      11572
+    ],
+    [
+      11574,
+      11579
+    ],
+    [
+      11581,
+      11688
+    ],
+    [
+      11690,
+      11694
+    ],
+    [
+      11696,
+      11724
+    ],
+    [
+      11726,
+      11733
+    ],
+    [
+      11735,
+      11747
+    ],
+    [
+      11749,
+      11764
+    ],
+    [
+      11766,
+      11773
+    ],
+    [
+      11775,
+      11896
+    ],
+    [
+      11898,
+      12042
+    ],
+    [
+      12044,
+      12050
+    ],
+    [
+      12052,
+      12062
+    ],
+    [
+      12064,
+      12311
+    ],
+    [
+      12313,
+      12481
+    ],
+    [
+      12483,
+      12492
+    ],
+    [
+      12494,
+      12536
+    ],
+    [
+      12538,
+      13135
+    ],
+    [
+      13137,
+      13252
+    ],
+    [
+      13254,
+      13258
+    ],
+    [
+      13260,
+      13282
+    ],
+    [
+      13284,
+      16929
+    ],
+    [
+      16931,
+      16940
+    ],
+    [
+      16942,
+      16956
+    ],
+    [
+      16958,
+      17008
+    ],
+    [
+      17010,
+      17064
+    ],
+    [
+      17066,
+      17082
+    ],
+    [
+      17084,
+      17245
+    ],
+    [
+      17247,
+      17301
+    ],
+    [
+      17303,
+      17356
+    ],
+    [
+      17358,
+      17407
+    ],
+    [
+      17409,
+      17461
+    ],
+    [
+      17463,
+      17527
+    ],
+    [
+      17529,
+      17587
+    ],
+    [
+      17589,
+      17624
+    ],
+    [
+      17626,
+      17634
+    ],
+    [
+      17636,
+      17716
+    ],
+    [
+      17718,
+      17769
+    ],
+    [
+      17771,
+      17903
+    ],
+    [
+      17905,
+      18002
+    ],
+    [
+      18004,
+      18012
+    ],
+    [
+      18014,
+      18125
+    ],
+    [
+      18127,
+      18160
+    ],
+    [
+      18162,
+      18277
+    ],
+    [
+      18279,
+      18345
+    ],
+    [
+      18347,
+      18462
+    ],
+    [
+      18464,
+      18917
+    ],
+    [
+      18919,
+      18927
+    ],
+    [
+      18929,
+      19014
+    ],
+    [
+      19016,
+      19094
+    ],
+    [
+      19096,
+      19106
+    ],
+    [
+      19108,
+      19197
+    ],
+    [
+      19199,
+      19263
+    ],
+    [
+      19265,
+      19290
+    ],
+    [
+      19292,
+      19374
+    ],
+    [
+      19376,
+      19389
+    ],
+    [
+      19391,
+      19404
+    ],
+    [
+      19406,
+      19408
+    ],
+    [
+      19410,
+      19486
+    ],
+    [
+      19488,
+      19494
+    ],
+    [
+      19496,
+      19682
+    ],
+    [
+      19684,
+      31542
+    ],
+    [
+      31544,
+      31552
+    ],
+    [
+      31554,
+      31594
+    ],
+    [
+      31596,
+      31630
+    ],
+    [
+      31632,
+      31697
+    ],
+    [
+      31699,
+      31708
+    ],
+    [
+      31710,
+      31743
+    ],
+    [
+      31745,
+      31750
+    ],
+    [
+      31752,
+      31793
+    ],
+    [
+      31795,
+      31800
+    ],
+    [
+      31802,
+      31945
+    ],
+    [
+      31947,
+      31951
+    ],
+    [
+      31953,
+      31985
+    ],
+    [
+      31987,
+      31993
+    ],
+    [
+      31995,
+      32147
+    ],
+    [
+      32149,
+      32577
+    ],
+    [
+      32579,
+      32584
+    ],
+    [
+      32586,
+      32790
+    ],
+    [
+      32792,
+      32796
+    ],
+    [
+      32798,
+      32822
+    ],
+    [
+      32824,
+      32879
+    ],
+    [
+      32881,
+      32891
+    ],
+    [
+      32893,
+      32911
+    ],
+    [
+      32913,
+      32961
+    ],
+    [
+      32963,
+      32969
+    ],
+    [
+      32971,
+      33025
+    ],
+    [
+      33027,
+      33055
+    ],
+    [
+      33057,
+      33089
+    ],
+    [
+      33091,
+      33202
+    ],
+    [
+      33204,
+      33387
+    ],
+    [
+      33389,
+      33443
+    ],
+    [
+      33445,
+      33469
+    ],
+    [
+      33471,
+      33551
+    ],
+    [
+      33553,
+      33583
+    ],
+    [
+      33585,
+      33665
+    ],
+    [
+      33667,
+      33688
+    ],
+    [
+      33690,
+      33762
+    ],
+    [
+      33764,
+      33781
+    ],
+    [
+      33783,
+      33859
+    ],
+    [
+      33861,
+      33976
+    ],
+    [
+      33978,
+      33982
+    ],
+    [
+      33984,
+      34103
+    ],
+    [
+      34105,
+      34197
+    ],
+    [
+      34199,
+      34249
+    ],
+    [
+      34251,
+      34275
+    ],
+    [
+      34277,
+      34281
+    ],
+    [
+      34283,
+      34306
+    ],
+    [
+      34308,
+      34334
+    ],
+    [
+      34336,
+      34378
+    ],
+    [
+      34380,
+      34405
+    ],
+    [
+      34407,
+      34409
+    ],
+    [
+      34411,
+      34415
+    ],
+    [
+      34417,
+      34421
+    ],
+    [
+      34423,
+      34427
+    ],
+    [
+      34429,
+      34440
+    ],
+    [
+      34442,
+      34453
+    ],
+    [
+      34455,
+      34482
+    ],
+    [
+      34484,
+      34507
+    ],
+    [
+      34509,
+      34518
+    ],
+    [
+      34520,
+      34545
+    ],
+    [
+      34547,
+      34577
+    ],
+    [
+      34579,
+      34604
+    ],
+    [
+      34606,
+      34618
+    ],
+    [
+      34620,
+      34636
+    ],
+    [
+      34638,
+      34661
+    ],
+    [
+      34663,
+      34744
+    ],
+    [
+      34746,
+      34756
+    ],
+    [
+      34758,
+      34777
+    ],
+    [
+      34779,
+      34784
+    ],
+    [
+      34786,
+      35015
+    ],
+    [
+      35017,
+      35023
+    ],
+    [
+      35025,
+      35116
+    ],
+    [
+      35118,
+      35132
+    ],
+    [
+      35134,
+      35138
+    ],
+    [
+      35140,
+      35174
+    ],
+    [
+      35176,
+      35223
+    ],
+    [
+      35225,
+      35257
+    ],
+    [
+      35259,
+      35276
+    ],
+    [
+      35278,
+      35302
+    ],
+    [
+      35304,
+      35342
+    ],
+    [
+      35344,
+      35357
+    ],
+    [
+      35359,
+      35408
+    ],
+    [
+      35410,
+      35421
+    ],
+    [
+      35423,
+      35492
+    ],
+    [
+      35494,
+      35539
+    ],
+    [
+      35541,
+      35836
+    ],
+    [
+      35838,
+      36410
+    ],
+    [
+      36412,
+      36423
+    ],
+    [
+      36425,
+      36484
+    ],
+    [
+      36486,
+      36585
+    ],
+    [
+      36587,
+      36612
+    ],
+    [
+      36614,
+      36819
+    ],
+    [
+      36821,
+      36840
+    ],
+    [
+      36842,
+      36871
+    ],
+    [
+      36873,
+      36896
+    ],
+    [
+      36898,
+      36972
+    ],
+    [
+      36974,
+      37083
+    ],
+    [
+      37085,
+      37186
+    ],
+    [
+      37188,
+      37349
+    ],
+    [
+      37351,
+      37368
+    ],
+    [
+      37370,
+      37420
+    ],
+    [
+      37422,
+      37507
+    ],
+    [
+      37509,
+      37576
+    ],
+    [
+      37578,
+      37624
+    ],
+    [
+      37626,
+      37907
+    ],
+    [
+      37909,
+      38005
+    ],
+    [
+      38007,
+      38131
+    ],
+    [
+      38133,
+      39626
+    ],
+    [
+      39628,
+      40119
+    ],
+    [
+      40121,
+      40125
+    ],
+    [
+      40127,
+      40204
+    ],
+    [
+      40206,
+      40222
+    ],
+    [
+      40224,
+      40227
+    ],
+    [
+      40229,
+      40233
+    ],
+    [
+      40235,
+      40239
+    ],
+    [
+      40241,
+      40245
+    ],
+    [
+      40247,
+      40250
+    ],
+    [
+      40252,
+      40275
+    ],
+    [
+      40277,
+      40279
+    ],
+    [
+      40281,
+      40313
+    ],
+    [
+      40315,
+      40321
+    ],
+    [
+      40323,
+      40327
+    ],
+    [
+      40329,
+      40354
+    ],
+    [
+      40356,
+      40358
+    ],
+    [
+      40360,
+      40375
+    ],
+    [
+      40377,
+      40384
+    ],
+    [
+      40386,
+      40411
+    ],
+    [
+      40413,
+      40415
+    ],
+    [
+      40417,
+      40461
+    ],
+    [
+      40463,
+      40469
+    ],
+    [
+      40471,
+      40475
+    ],
+    [
+      40477,
+      40512
+    ],
+    [
+      40514,
+      40516
+    ],
+    [
+      40518,
+      40558
+    ],
+    [
+      40560,
+      40566
+    ],
+    [
+      40568,
+      40572
+    ],
+    [
+      40574,
+      40597
+    ],
+    [
+      40599,
+      40604
+    ],
+    [
+      40606,
+      40713
+    ],
+    [
+      40715,
+      40719
+    ],
+    [
+      40721,
+      40751
+    ],
+    [
+      40753,
+      40763
+    ],
+    [
+      40765,
+      40780
+    ],
+    [
+      40782,
+      40816
+    ],
+    [
+      40818,
+      40850
+    ],
+    [
+      40852,
+      40859
+    ],
+    [
+      40861,
+      40982
+    ],
+    [
+      40984,
+      41334
+    ],
+    [
+      41336,
+      41342
+    ],
+    [
+      41344,
+      41354
+    ],
+    [
+      41356,
+      41603
+    ],
+    [
+      41605,
+      41773
+    ],
+    [
+      41775,
+      41784
+    ],
+    [
+      41786,
+      41828
+    ],
+    [
+      41830,
+      42428
+    ],
+    [
+      42430,
+      42545
+    ],
+    [
+      42547,
+      42551
+    ],
+    [
+      42553,
+      42575
+    ],
+    [
+      42577,
+      46222
+    ],
+    [
+      46224,
+      46233
+    ],
+    [
+      46235,
+      46249
+    ],
+    [
+      46251,
+      46301
+    ],
+    [
+      46303,
+      46357
+    ],
+    [
+      46359,
+      46375
+    ],
+    [
+      46377,
+      46538
+    ],
+    [
+      46540,
+      46594
+    ],
+    [
+      46596,
+      46649
+    ],
+    [
+      46651,
+      46700
+    ],
+    [
+      46702,
+      46754
+    ],
+    [
+      46756,
+      46820
+    ],
+    [
+      46822,
+      46880
+    ],
+    [
+      46882,
+      46917
+    ],
+    [
+      46919,
+      46927
+    ],
+    [
+      46929,
+      47009
+    ],
+    [
+      47011,
+      47062
+    ],
+    [
+      47064,
+      47196
+    ],
+    [
+      47198,
+      47295
+    ],
+    [
+      47297,
+      47305
+    ],
+    [
+      47307,
+      47418
+    ],
+    [
+      47420,
+      47453
+    ],
+    [
+      47455,
+      47570
+    ],
+    [
+      47572,
+      47638
+    ],
+    [
+      47640,
+      47755
+    ],
+    [
+      47757,
+      48210
+    ],
+    [
+      48212,
+      48220
+    ],
+    [
+      48222,
+      48307
+    ],
+    [
+      48309,
+      48387
+    ],
+    [
+      48389,
+      48399
+    ],
+    [
+      48401,
+      48490
+    ],
+    [
+      48492,
+      48556
+    ],
+    [
+      48558,
+      48583
+    ],
+    [
+      48585,
+      48667
+    ],
+    [
+      48669,
+      48682
+    ],
+    [
+      48684,
+      48697
+    ],
+    [
+      48699,
+      48701
+    ],
+    [
+      48703,
+      48824
+    ],
+    [
+      48826,
+      48832
+    ],
+    [
+      48834,
+      48872
+    ],
+    [
+      48874,
+      48904
+    ],
+    [
+      48906,
+      49095
+    ],
+    [
+      49097,
+      60955
+    ],
+    [
+      60957,
+      60965
+    ],
+    [
+      60967,
+      61007
+    ],
+    [
+      61009,
+      61043
+    ],
+    [
+      61045,
+      61110
+    ]
+  ],
+  "blocks": [
+    {
+      "kind": "heading",
+      "level": 1,
+      "text": "端侧推理快速入门"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "概述"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "本文通过使用MindSpore Lite对一个模型执行推理为例，向大家介绍MindSpore Lite的基础功能和用法。在开始本章的MindSpore Lite使用之旅之前，用户需拥有一个Linux（如Ubuntu/CentOS/EulerOS）或Windows的环境，以便随时操作验证。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过MindSpore Lite对一个模型执行推理主要包括以下步骤："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "转换模型"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在对模型进行推理前，需将用户的模型转换为MindSpore Lite的模型文件。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "集成推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过集成发布件内的libmindspore-lite.so库，调用相关API，将经过前处理之后的数据传递给框架运行，实现ms模型的前向推理。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Linux篇"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "本篇以Linux系统环境为例，演示如何进行转换模型和集成推理。"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "模型转换"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "将用户的模型转换为MindSpore Lite的模型文件。该操作主要包括以下步骤："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "下载发布件"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在Windows和Linux的发布件中，都含有转换工具，用户可根据自己的平台，下载使用任一个发布件。\n通过发布件内的converter_lite工具，将非ms模型转换为MindSpore Lite使用的ms模型。\n该操作与平台无关，无论在哪个平台上执行转换，可得到相同的转换后模型文件。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "转换模型"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "使用发布件内的converter_lite转换工具完成模型转换。"
+    },
+    {
+      "kind": "heading",
+      "level": 4,
+      "text": "下载发布件"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "用户可在MindSpore Lite官网下载页面，得到各版本的MindSpore Lite发布件。\n在本例中，我们选择的是软件系统为Linux、底层架构为x86_64的CPU发布件，以1.6.0版本为例，用户可点击此处直接下载。\n每个发布件的包结构会有不同，本例中，Linux发布件的包结构如下（随着用户对MindSpore Lite各个功能的学习，我们将逐步讲解发布件中文件的作用，在此处，用户对发布件结构有个简略印象即可）："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "mindspore-lite-{version}-linux-x64\n├── runtime\n│ ├── include # MindSpore Lite集成开发的API头文件\n│ ├── lib\n│ │ ├── libmindspore-lite.a # MindSpore Lite推理框架的静态库\n│ │ ├── libmindspore-lite-jni.so # MindSpore Lite推理框架的JNI动态库\n│ │ ├── libmindspore-lite.so # MindSpore Lite推理框架的动态库\n│ │ ├── libmindspore-lite-train.a # MindSpore Lite训练框架的静态库\n│ │ ├── libmindspore-lite-train.so # MindSpore Lite训练框架的动态库\n│ │ └── mindspore-lite-java.jar # MindSpore Lite推理框架jar包\n│ └── third_party\n│ └── libjpeg-turbo\n└── tools\n├── benchmark # 基准测试工具目录\n├── benchmark_train # 训练模型基准测试工具目录\n├── codegen # 代码生成工具目录\n├── converter # 模型转换工具目录\n└── cropper # 库裁剪工具目录"
+    },
+    {
+      "kind": "heading",
+      "level": 4,
+      "text": "转换模型"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "解压刚刚下载的发布件，在位于mindspore-lite-{version}-linux-x64/tools/converter/converter目录，可以找到converter_lite工具。\nconverter_lite模型转换工具提供了离线转换模型功能，支持MindSpore、CAFFE、TensorFlow Lite、TensorFlow、ONNX类型的模型转换。\n模型转换步骤如下："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "环境设置"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "将转换工具需要的动态链接库加入环境变量LD_LIBRARY_PATH。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "export LD_LIBRARY_PATH=${PACKAGE_ROOT_PATH}/tools/converter/lib:${LD_LIBRARY_PATH}"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "${PACKAGE_ROOT_PATH}是发布件解压后的路径。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "进入转换工具所在目录"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "执行如下命令，进入转换工具所在目录。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "cd ${PACKAGE_ROOT_PATH}/tools/converter/converter"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "${PACKAGE_ROOT_PATH}是发布件解压后的路径。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "转换参数说明"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在使用converter_lite执行转换时，需设定相关参数。本例中用到的相关参数定义如下表1所示。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "下面以各种类型模型的转换命令为例，说明各参数的使用方法。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "以Caffe模型lenet.prototxt为例，执行转换命令。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "./converter_lite --fmk=CAFFE --modelFile=lenet.prototxt --weightFile=lenet.caffemodel --outputFile=lenet"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在转换Caffe模型时，将fmk配置为CAFFE（--fmk=CAFFE），同时分别通过modelFile和weightFile参数传入模型结构（lenet.prototxt）、模型权值（lenet.caffemodel）两个文件。\n同时通过outputFile，指定转换后输出的模型名，因未指定路径，生成的模型默认在当前路径，并带有.ms后缀，即lenet.ms。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "以MindSpore、TensorFlow Lite、TensorFlow和ONNX模型为例，执行转换命令。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "MindSpore模型lenet.mindir。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "./converter_lite --fmk=MINDIR --modelFile=lenet.mindir --outputFile=lenet"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TensorFlow Lite模型lenet.tflite。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "./converter_lite --fmk=TFLITE --modelFile=lenet.tflite --outputFile=lenet"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TensorFlow模型lenet.pb。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "./converter_lite --fmk=TF --modelFile=lenet.pb --outputFile=lenet"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ONNX模型lenet.onnx。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "./converter_lite --fmk=ONNX --modelFile=lenet.onnx --outputFile=lenet"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在转换各种模型时，将fmk配置为模型类型对应的标志符号，同时通过modelFile参数传入模型文件。\n通过outputFile，指定转换后输出的模型名，因未指定路径，生成的模型默认在当前路径，并带有.ms后缀，即lenet.ms。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "执行转换"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "用户可使用自己的模型进行测试，也可使用我们提供的MindSpore模型进行测试，下载链接点击此处。\n以下载的模型为例，将模型mobilenetv2.mindir拷贝到转换工具所在目录，根据上述转换参数的说明，可以知道该模型的转换命令如下："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "./converter_lite --fmk=MINDIR --modelFile=mobilenetv2.mindir --outputFile=mobilenetv2"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "执行命令后，若转换成功，结果显示如下，并在当前目录生成名为mobilenetv2.ms的新模型文件。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "CONVERT RESULT SUCCESS:0"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "高级功能"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "关于转换工具的更详细说明，可参考端侧模型转换。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "关于如何使用转换工具实现模型训练后量化，可参考量化。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果用户希望转换后的模型能进行训练，需进行训练模型转换，详细可参考端侧训练模型转换。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "表1：converter_lite参数定义"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "是否必选"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数说明"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "取值范围"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "--fmk=<FMK>"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "待转换模型的原始格式。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "MINDIR、CAFFE、TFLITE、TF、ONNX"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "--modelFile=<MODELFILE>"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "待转换模型的路径。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "--outputFile=<OUTPUTFILE>"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "转换后模型的路径及模型名，不需加后缀，可自动生成.ms后缀。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "--weightFile=<WEIGHTFILE>"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "转换Caffe模型时必选"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "输入模型weight文件的路径。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数名和参数值之间用等号连接，中间不能有空格。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Caffe模型一般分为两个文件：*.prototxt模型结构，对应--modelFile参数；*.caffemodel模型权值，对应--weightFile参数。"
+    },
+    {
+      "kind": "heading",
+      "level": 4,
+      "text": "Netron可视化"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Netron是一个基于Electron平台开发的神经网络模型可视化工具，支持包括MindSpore Lite在内的许多主流AI框架模型的可视化，支持多种平台（Mac、Windows、Linux等）和浏览器在线使用。\n使用Netron加载MindSpore Lite模型后，可以展示模型的拓扑结构及图、节点的信息等。\n本例以浏览器在线使用Netron的方式，对上一节转换的模型mobilenetv2.ms进行可视化，用户也可以用Netron打开自己的模型，对模型进行查看。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "用浏览器打开https://netron.app/。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "等网页打开后，将模型文件mobilenetv2.ms拖到网页内，模型被加载打开。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "查看模型。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "模型被加载后如下图所示："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "图1 模型加载后页面"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "可以观察到，模型由一系列序列连接的算子节点构成，在本模型中，出现最多的为Conv2DFusion算子。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "查看模型输入和输出"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "点击图中的输入节点0或者输出节点0，可以看到下图所示："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "图2 模型输入与输出节点"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "最上栏MODEL PROPERTIES为模型属性栏，可以观察到该模型的格式为MindSpore Lite v1.6.0，表明这是由1.6版本转换工具转换的模型。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在模型输入INPUTS栏，可以看到有一个输入节点，表明模型有一个输入。输入节点名为x，数据类型为float32[1,224,224,3]，即float32的1x224x224x3的张量。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在输入节点前的0，为序号标识，表明该节点为模型输入中的第0个节点。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在模型输出OUTPUTS栏，可以看到有一个输出节点，表明模型有一个输出。输出节点名为Default/head-MobileNetV2Head/Softmax-op204，数据类型为float32[1,1000]，即float32的1x1000的张量。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "查看算子"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "点击图中的Conv2DFusion算子，可以看到下图所示："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "图3 Conv2DFusion算子"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过该图，我们可以观察到："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "节点算子类型"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在最上栏节点属性NODE PROPERTIES中，在type栏，可以观察到，节点的类型为Conv2DFusion，这表明该节点将执行Conv2DFusion算子操作，即二维卷积操作。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "节点名字"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在节点属性NODE PROPERTIES中，在name栏，可以观察到，节点名为Default/backbone-MobileNetV2Backbone/features-SequentialCell/0-ConvBNReLU/features-SequentialCell/0-Conv2d/Conv2D-op0。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "算子属性"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Attributes栏为算子属性，保存算子计算时需要的参数值。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "节点输入"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "INPUTS栏为算子输入，可以观察到该算子有三个输入，即input、weight、bias。\n输入张量input的名字为x，为之前看到的模型输入。\n输入张量weight的名字为Default/backbone-MobileNetV2Backbone/features-SequentialCell/0-ConvBNReLU/features-SequentialCell/0-Conv2d/Conv2D-op0features.0.features.0.weight。\n点击右边的加号，可以看到该张量的数值。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "节点输出"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "OUTPUTS栏为算子输出，可以观察到该算子有一个输出张量，该张量的名为Default/backbone-MobileNetV2Backbone/features-SequentialCell/0-ConvBNReLU/features-SequentialCell/0-Conv2d/Conv2D-op0。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "mobilenetv2.ms模型的理解。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过对模型的查看，可以知道mobilenetv2.ms模型定义了如下计算：\n对格式为float32[1,224,224,3]的输入张量x进行不断卷积，最后通过MatMulFusion全连接层的矩阵乘法操作，并执行Softmax运算，得到1x1000的输出张量，该输出张量名为Default/head-MobileNetV2Head/Softmax-op204。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "本例提供的mobilenetv2.ms模型为1000分类的图片分类模型，具体的分类类别本处不做叙述，但通过对模型的查看，可以知道该模型不包含对图片的前处理操作，接收1x224x224x3的float32数值，并得到1x1000的float32输出。\n故在使用该模型进行推理时，用户需自行编码完成图片的前处理操作，将处理后的数据，传递给推理框架，进行前向推理，并对推理得到的1x1000的输出进行后处理。"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "模型推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "用户需要集成发布件内的mindspore-lite库文件，并通过MindSpore Lite头文件中声明的API接口，来进行模型推理。\n在进行集成前，用户也可以直接使用随发布件发布的benchmark基准测试工具（位于mindspore-lite-{version}-linux-x64/tools/benchmark），来进行推理测试。\nbenchmark工具是已集成mindspore-lite库的可执行程序，通过命令参数的形式，实现包括推理在内的多种功能。"
+    },
+    {
+      "kind": "heading",
+      "level": 4,
+      "text": "下载发布件"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "用户根据模型推理时的系统环境，下载对应的发布件。\n在本例中，选择的是软件系统为Linux、底层架构为x86_64的CPU发布件，以1.6.0版本为例，用户可点击此处直接下载。"
+    },
+    {
+      "kind": "heading",
+      "level": 4,
+      "text": "benchmark推理测试"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "环境设置"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "将运行benchmark推理时需要的动态链接库加入环境变量LD_LIBRARY_PATH。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "export LD_LIBRARY_PATH=${PACKAGE_ROOT_PATH}/runtime/lib:${LD_LIBRARY_PATH}"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "其中${PACKAGE_ROOT_PATH}是发布件解压后的路径。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "进入benchmark工具所在目录"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "执行如下命令，进入benchmark工具所在目录。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "cd ${PACKAGE_ROOT_PATH}/tools/benchmark"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "${PACKAGE_ROOT_PATH}是发布件解压后的路径。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "benchmark参数说明"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在使用benchmark执行推理时，需设定相关参数。本例中用到的相关参数定义如下表2所示。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "执行推理，分析推理性能"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "用户可使用上一节转换后的模型mobilenetv2.ms进行推理测试，将模型拷贝到benchmark工具所在目录后，使用如下命令执行推理："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "./benchmark --modelFile=mobilenetv2.ms"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过modelFile指定要进行推理的模型，其他参数使用默认值。\n本例中，未指定输入数据，将生成随机数值作为输入。\n执行命令后，若推理成功，则会输出类似如下统计信息，该信息显示了推理时的并发线程数（NumThreads = 2），测试模型的单次推理最短耗时（6.677000 ms）、单次推理最长耗时（8.656000 ms）和平均推理耗时（7.291000 ms）等性能指标。性能值随环境不同而不同。\n由于未指定numThreads参数，默认采用2线程推理，用户可通过设置不同的线程数，以测试不同线程下的推理性能（线程数不是越高越好，到了一定程度后，由于线程切换的开销，推理时间将延长）。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ModelPath = mobilenetv2.ms\nModelType = MindIR\nInDataPath =\nConfigFilePath =\nInDataType = bin\nLoopCount = 10\nDeviceType = CPU\nAccuracyThreshold = 0.5\nCosineDistanceThreshold = -1.1\nWarmUpLoopCount = 3\nNumThreads = 2\nFp16Priority = 0\nEnableParallel = 0\ncalibDataPath =\ncpuBindMode = HIGHER_CPU\nCalibDataType = FLOAT\nstart unified benchmark run\nPrepareTime = 30.013 ms\nRunning warm up loops...\nRunning benchmark loops...\nModel = mobilenetv2.ms, NumThreads = 2, MinRunTime = 6.677000 ms, MaxRuntime = 8.656000 ms, AvgRunTime = 7.291000 ms\nRun Benchmark mobilenetv2.ms Success."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "执行推理，分析推理精度"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "用户可以使用benchmark工具测试MindSpore Lite的推理精度，使用如下命令测试模型的推理精度："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "./benchmark --modelFile=mobilenetv2.ms --inDataFile=input.bin --benchmarkDataFile=output.txt"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "本例中通过modelFile指定要进行推理的模型。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过inDataFile指定模型的输入数据文件input.bin。\n在之前的Netron打开模型，我们已经知道mobilenetv2.ms模型接收float32的1x224x224x3张量。\nbenchmark的inDataFile选项默认接收二进制格式数据文件，input.bin文件按顺保存了150528个float32的二进制数值，跟模型要求的1x224x224x3数据量一致，且格式均为float32。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通常输入数据文件可以采用以下方式生成："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "保存训练输入：将模型训练数据集内的数据进行前处理，将前处理后的数据保存。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "随机生成：通过随机生成的方式，生成指定范围内的随机数据。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "本例采用随机生成数作为输入，用户可以通过运行以下Python脚本，或点击此处下载本例中的input.bin文件，并将它放到benchmark目录内。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "import numpy as np\nnp.random.seed(1)\nt = np.random.rand(1,224,224,3)\nt.astype(np.float32).tofile(\"input.bin\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在提供了输入数据之后，用户还需提供用于跟推理结果进行对比的标杆数据，以进行精度误差分析。\n本例通过benchmarkDataFile指定模型的输出标杆文件output.txt。标杆文件的格式需如下所示："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "[输出节点1名称] [输出节点1形状的维度长度] [输出节点1形状的第一维值] ... [输出节点1形状的第n维值]\n[节点1数据1] [节点1数据2] ...\n[输出节点2名称] [输出节点2形状的维度长度] [输出节点2形状的第一维值] ... [输出节点2形状的第n维值]\n[节点2数据1] [节点2数据2] ..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通常标杆文件可以采用以下方式生成："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跟其他框架进行对比：使用其它深度学习模型推理框架，并使用相同输入，将推理结果按照上面的要求格式保存。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跟模型训练时进行对比：在训练框架中，将经过前处理后的数据保存作为inDataFile指定的输入数据。并将模型推理后，还未经过后处理的输出数据按标杆格式进行保存，作为标杆。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跟不同设备或数据类型推理对比：使用不同的数据类型（例如FP16）或者设备（例如GPU/Kirin NPU）进行推理，得到该环境下标杆。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跟理论值进行对比：针对一些简单模型，用户也可以根据对模型的理解，手动构造对应输入的输出标杆。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "提供的标杆数据必须和模型输出拥有相同的数据大小，才能跟模型输出进行对比，以得到推理精度误差量。\n在之前的Netron打开模型章节，我们已经知道mobilenetv2.ms模型，输出的节点名为Default/head-MobileNetV2Head/Softmax-op204，该节点输出的形状为1x1000（如图2中所示），故节点形状的维度长度为2，节点形状的第一维值为1，节点形状的第二维值为1000。\n本例采用跟其他框架进行对比的方式生成标杆，将之前得到的input.bin文件，通过其他框架生成推理后的数据，并按照标杆格式保存文件。\n得到标杆数据如下所示："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Default/head-MobileNetV2Head/Softmax-op204 2 1 1000\n4.75662418466527e-05 0.00044544308912009 ..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "标杆中第二行的数据，就是采用其他框架对相同的输入（input.bin）得到的推理输出，用户可以点击此处下载本例中的output.txt文件，并将它放到benchmark目录内。\n在执行benchmark命令后，若推理成功，则会输出类似如下统计信息："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ModelPath = mobilenetv2.ms\nModelType = MindIR\nInDataPath = input.bin\nConfigFilePath =\nInDataType = bin\nLoopCount = 10\nDeviceType = CPU\nAccuracyThreshold = 0.5\nCosineDistanceThreshold = -1.1\nWarmUpLoopCount = 3\nNumThreads = 2\nFp16Priority = 0\nEnableParallel = 0\ncalibDataPath = output.txt\ncpuBindMode = HIGHER_CPU\nCalibDataType = FLOAT\nstart unified benchmark run\nPrepareTime = 31.709 ms\nMarkAccuracy\nInData 0: 0.417022 0.720325 0.000114375 0.302333 0.146756 0.0923386 0.18626 0.345561 0.396767 0.538817 0.419195 0.68522 0.204452 0.878117 0.0273876 0.670467 0.417305 0.55869 0.140387 0.198101\n================ Comparing Output data ================\nData of node Default/head-MobileNetV2Head/Softmax-op204 : 4.75662e-05 0.000445443 0.000294212 0.000354572 0.000165406 8.36175e-05 0.000198424 0.000329004 0.000288576 0.000203605 0.000962143 0.00421465 0.0019162 0.00129701 0.00260928 0.0012302 0.000879829 0.000609378 0.000691054 0.00119472 0.000516733 0.00160048 0.000959531 0.00176164 0.000365934 0.00013575 0.000245539 0.000414651 0.000165337 0.000480154 0.000216396 0.00101303 0.000105544 0.000475172 0.000761407 0.000305815 0.000294882 0.000307003 0.00188077 0.000454868 0.000897518 0.00051352 0.000595383 0.000644214 0.000513376 0.000343709 0.00103984 0.000197185 7.54722e-05 8.89811e-05\nMean bias of node/tensor Default/head-MobileNetV2Head/Softmax-op204 : 0%\nMean bias of all nodes/tensors: 0%\n=======================================================\n\nRun Benchmark mobilenetv2.ms Success."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在输出信息中，InData 0行打印的是该次推理的输入数据（只打印了前20个），Data of node Default/head-MobileNetV2Head/Softmax-op204行打印的是相关输出节点（Default/head-MobileNetV2Head/Softmax-op204）的推理结果（只打印前50个值），可以直接观察它们跟标杆文件的差异，以获得直观感受。\nMean bias of node/tensor Default/head-MobileNetV2Head/Softmax-op204行，给出了Default/head-MobileNetV2Head/Softmax-op204输出张量与标杆数据对比的平均误差，该误差计算方法为benchmark工具自带的比较算法。\n在最后，Mean bias of all nodes/tensors给出了所有张量与标杆对比的平均误差，在本例中，只有1个输出张量，故总平均误差和Default/head-MobileNetV2Head/Softmax-op204张量误差一致。可以观察到，推理的总平均误差为0%。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "高级功能"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "关于benchmark的更详细说明，以及关于如何使用benchmark来进行基准测试、耗时定量分析、误差分析、Dump数据等，可以参考benchmark。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "表2：benchmark参数定义"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数名"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "是否必选"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数说明"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数类型"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "默认值"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "--modelFile=<MODELPATH>"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "必选"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "指定需要进行基准测试的MindSpore Lite模型文件路径。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "String"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "null"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "--numThreads=<NUMTHREADS>"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "可选"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "指定模型推理程序运行的线程数。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Integer"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "--inDataFile=<INDATAPATH>"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "可选"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "指定测试模型输入数据的文件路径，默认接收二进制格式数据文件。在精度测试中，该输入作为标杆输入。如果未设置，则使用随机输入。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "String"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "null"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "--benchmarkDataFile=<CALIBDATAPATH>"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "可选"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "指定对比标杆数据（用于精度对比的数据）的文件路径，接收按规定格式排列的字符文本。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "String"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "null"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数名和参数值之间用等号连接，中间不能有空格。"
+    },
+    {
+      "kind": "heading",
+      "level": 4,
+      "text": "集成推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在上一节，我们使用了官方推理测试工具进行了模型推理测试。在本节，我们将以使用MindSpore Lite的C++接口进行集成为例，演示如何使用MindSpore Lite的发布件，进行集成开发，编写自己的推理程序。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "环境要求"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "系统环境：Linux x86_64，推荐使用Ubuntu"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "C++编译依赖"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "GCC >= 7.3.0"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "CMake >= 3.22.3"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "获得版本发布件"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "用户可通过MindSpore Lite官网，获得MindSpore Lite发布件，点击此处查看各版本。\n在本例中，仍然采用了和前几节一样的发布件，用于本节集成开发，点击此处可直接下载。\n在本节简单的推理集成例子中，需要用到的发布件内容如下："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "mindspore-lite-{version}-linux-x64\n└── runtime\n│── include # MindSpore Lite集成开发的API头文件\n└── lib\n└── libmindspore-lite.so # MindSpore Lite推理框架的动态库"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "构建工程目录"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "本例的工程目录如下："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "demo\n├── CMakeLists.txt # cmake工程管理文件\n├── main.cc # 用户代码\n├── build # 编译用目录\n├── model\n│ └── mobilenetv2.ms # 模型文件（之前转出的模型）\n└── runtime # 发布件的runtime目录\n├── include # MindSpore Lite集成开发的API头文件\n└── lib\n└── libmindspore-lite.so # MindSpore Lite推理框架的动态库"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "新建一个demo文件夹，新建main.cc和CMakeLists.txt文件。\n新建build和model目录，将mobilenetv2.ms放到model内。\n将发布件中的runtime目录拷贝到demo中，runtime内的文件可以保持不动，也可以删除除libmindspore-lite.so和include文件夹外的其它库文件。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "构建cmake工程"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "打开上一步创建的CMakeLists.txt，粘贴如下内容，其中每句话的含义见注释："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "cmake_minimum_required(VERSION 3.22.3) # cmake版本要求最低3.22.3\nproject(Demo) # 工程名为Demo\n\n# gcc 版本要求大于等于7.3.0\nif(CMAKE_CXX_COMPILER_ID STREQUAL \"GNU\" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 7.3.0)\nmessage(FATAL_ERROR \"GCC version ${CMAKE_CXX_COMPILER_VERSION} must not be less than 7.3.0\")\nendif()\n\ninclude_directories(${CMAKE_CURRENT_SOURCE_DIR}/runtime/) # 添加头文件寻找路径\n\nlink_directories(${CMAKE_CURRENT_SOURCE_DIR}/runtime/lib) # 添加库文件寻找路径\n\nadd_executable(demo main.cc) # 编译生成demo执行程序\n\n# 声明demo执行程序需要链接的库，mindspore-lite为MindSpore Lite推理框架的动态库\ntarget_link_libraries(\ndemo\nmindspore-lite\npthread\ndl\n)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果想要集成libmindspore-lite.a静态库，则使用-Wl,--whole-archive libmindspore-lite.a -Wl,--no-whole-archive的选项来替换mindspore-lite。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "编写代码"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "打开刚才创建的main.cc，粘贴如下内容："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "#include <iostream>\n#include <fstream>\n#include <random>\n#include \"include/api/model.h\"\n#include \"include/api/context.h\"\n#include \"include/api/status.h\"\n#include \"include/api/types.h\"\nusing mindspore::MSTensor;\n\nchar *ReadFile(const char *file, size_t *size) {\nif (file == nullptr) {\nstd::cerr << \"file is nullptr.\" << std::endl;\nreturn nullptr;\n}\n\nstd::ifstream ifs(file, std::ifstream::in | std::ifstream::binary);\nif (!ifs.good()) {\nstd::cerr << \"file: \" << file << \" is not exist.\" << std::endl;\nreturn nullptr;\n}\n\nif (!ifs.is_open()) {\nstd::cerr << \"file: \" << file << \" open failed.\" << std::endl;\nreturn nullptr;\n}\n\nifs.seekg(0, std::ios::end);\n*size = ifs.tellg();\nstd::unique_ptr<char[]> buf(new (std::nothrow) char[*size]);\nif (buf == nullptr) {\nstd::cerr << \"malloc buf failed, file: \" << file << std::endl;\nifs.close();\nreturn nullptr;\n}\n\nifs.seekg(0, std::ios::beg);\nifs.read(buf.get(), *size);\nifs.close();\n\nreturn buf.release();\n}\n\ntemplate <typename T, typename Distribution>\nvoid GenerateRandomData(int size, void *data, Distribution distribution) {\nstd::mt19937 random_engine;\nint elements_num = size / sizeof(T);\n(void)std::generate_n(static_cast<T *>(data), elements_num,\n[&distribution, &random_engine]() { return static_cast<T>(distribution(random_engine)); });\n}\n\nint main(int argc, const char **argv) {\n// Read model file.\nstd::string model_path = \"../model/mobilenetv2.ms\";\nsize_t size = 0;\nchar *model_buf = ReadFile(model_path.c_str(), &size);\nif (model_buf == nullptr) {\nstd::cerr << \"Read model file failed.\" << std::endl;\nreturn -1;\n}\n\n// Create and init context, add CPU device info\nauto context = std::make_shared<mindspore::Context>();\nif (context == nullptr) {\ndelete[](model_buf);\nstd::cerr << \"New context failed.\" << std::endl;\nreturn -1;\n}\nauto &device_list = context->MutableDeviceInfo();\nauto device_info = std::make_shared<mindspore::CPUDeviceInfo>();\nif (device_info == nullptr) {\ndelete[](model_buf);\nstd::cerr << \"New CPUDeviceInfo failed.\" << std::endl;\nreturn -1;\n}\ndevice_list.push_back(device_info);\n\n// Create model\nauto model = new (std::nothrow) mindspore::Model();\nif (model == nullptr) {\ndelete[](model_buf);\nstd::cerr << \"New Model failed.\" << std::endl;\nreturn -1;\n}\n\n// Build model\nauto build_ret = model->Build(model_buf, size, mindspore::kMindIR, context);\ndelete[](model_buf);\nif (build_ret != mindspore::kSuccess) {\ndelete model;\nstd::cerr << \"Build model error \" << std::endl;\nreturn -1;\n}\n\n// Get Input\nauto inputs = model->GetInputs();\nfor (auto tensor : inputs) {\nauto input_data = reinterpret_cast<float *>(tensor.MutableData());\nif (input_data == nullptr) {\nstd::cerr << \"MallocData for inTensor failed.\" << std::endl;\ndelete model;\nreturn -1;\n}\nGenerateRandomData<float>(tensor.DataSize(), input_data, std::uniform_real_distribution<float>(0.1f, 1.0f));\n}\n\n// Predict\nstd::vector<MSTensor> outputs;\nauto status = model->Predict(inputs, &outputs);\nif (status != mindspore::kSuccess) {\nstd::cerr << \"Inference error.\" << std::endl;\ndelete model;\nreturn -1;\n}\n\n// Get Output Tensor Data.\nstd::cout << \"\\n------- print outputs ----------\" << std::endl;\nfor (auto tensor : outputs) {\nstd::cout << \"out tensor name is:\" << tensor.Name() << \"\\nout tensor size is:\" << tensor.DataSize()\n<< \"\\nout tensor elements num is:\" << tensor.ElementNum() << std::endl;\nauto out_data = reinterpret_cast<float *>(tensor.MutableData());\nstd::cout << \"output data is:\";\nfor (int i = 0; i < tensor.ElementNum(); i++) {\nstd::cout << out_data[i] << \" \";\n}\nstd::cout << std::endl;\n}\nstd::cout << \"------- print end ----------\\n\" << std::endl;\n\n// Delete model.\ndelete model;\nreturn mindspore::kSuccess;\n}"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "代码功能解析如下："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(1) 读取模型文件到buf"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过调用ReadFile函数，将模型文件读入到model_buf内存，用size变量保存模型的大小。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "char *model_buf = ReadFile(model_path.c_str(), &size);"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(2) 初始化Context配置"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Context保存了模型推理时所需的相关配置，包括算子偏好、线程数、自动并发以及推理处理器相关的其他配置。\n关于Context的详细说明，请参考Context的API接口说明。\n在MindSpore Lite加载模型时，必须提供一个Context类的对象，所以在本例中，首先申请了一个Context类的对象context。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "auto context = std::make_shared<mindspore::Context>();"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "接着，通过Context::MutableDeviceInfo接口，得到context对象的设备管理列表。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "auto &device_list = context->MutableDeviceInfo();"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在本例中，由于使用CPU进行推理，故需申请一个CPUDeviceInfo类的对象device_info。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "auto device_info = std::make_shared<mindspore::CPUDeviceInfo>();"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "因为采用了CPU的默认设置，所以不需对device_info对象做任何设置，直接添加到context的设备管理列表。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "device_list.push_back(device_info);"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(3) 加载模型"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "首先创建一个Model类对象model，Model类定义了MindSpore Lite中的模型，用于计算图管理。\n关于Model类的详细说明，可参考API文档。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "auto model = new (std::nothrow) mindspore::Model();"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "接着调用Build接口传入模型，将模型编译至可在设备上运行的状态。\n在加载编译完模型之后，被解析的模型信息已记录在model变量中，原先的模型文件内存model_buf可以释放。\n由于model_buf是以char数组的方式申请的，故使用delete[]释放内存。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "auto build_ret = model->Build(model_buf, size, mindspore::kMindIR, context);\ndelete[](model_buf);"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(4) 传入数据"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在执行模型推理前，需要设置推理的输入数据。\n此例，通过Model.GetInputs接口，获取模型的所有输入张量。单个张量的格式为MSTensor。\n关于MSTensor张量的详细说明，请参考MSTensor的API说明。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "auto inputs = model->GetInputs();"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过张量的MutableData接口，可以获取张量的数据内存指针。\n在本例中，模型的输入为浮点数格式，所以此处将指针强转为浮点指针。用户可根据自己模型的数据格式做不同处理，也可通过张量的DataType接口，得到该张量的数据类型。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "auto input_data = reinterpret_cast<float *>(tensor.MutableData());"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "接着，通过数据指针，将我们要推理的数据传入张量内部。\n在本例中我们传入的是随机生成的0.1至1的浮点数据，且数据呈平均分布。\n在实际的推理中，用户在读取图片或音频等实际数据后，需进行算法特定的预处理操作，并将处理后的数据传入模型。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "template <typename T, typename Distribution>\nvoid GenerateRandomData(int size, void *data, Distribution distribution) {\nstd::mt19937 random_engine;\nint elements_num = size / sizeof(T);\n(void)std::generate_n(static_cast<T *>(data), elements_num,\n[&distribution, &random_engine]() { return static_cast<T>(distribution(random_engine)); });\n}\n\n...\n\nGenerateRandomData<float>(tensor.DataSize(), input_data, std::uniform_real_distribution<float>(0.1f, 1.0f));"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(5) 执行推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "首先申请一个放置模型推理输出张量的数组outputs，然后调用模型推理接口Predict，将输入张量和输出张量作为参数。\n在推理成功后，输出张量被保存在outputs内。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "std::vector<MSTensor> outputs;\nauto status = model->Predict(inputs, &outputs);"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(6) 推理结果核验"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过MutableData得到输出张量的数据指针。\n本例中，将它强转为浮点指针，用户可以根据自己模型的数据类型进行对应类型的转换，也可通过张量的DataType接口得到数据类型。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "auto out_data = reinterpret_cast<float *>(tensor.MutableData());"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在本例中，直接通过打印来观察推理输出结果的准确性。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "for (int i = 0; i < tensor.ElementNum(); i++) {\nstd::cout << out_data[i] << \" \";\n}"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(7) 释放model对象"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "delete model;"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "编译"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "进入build目录，输入cmake ..生成makefile文件，然后输入make编译工程。在编译成功后，可以在build目录下得到demo可执行程序。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "运行推理程序"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "输入./demo执行demo程序，根据上文，我们知道demo程序将加载mobilenetv2.ms模型，并将随机生成的输入张量传递给模型进行推理，将推理后的输出张量的值进行打印。\n推理成功，得到如下输出，可以看到输出张量包含1000个数值，这和我们在Netron可视化中得到的模型理解相一致的，由于本例传入的是0.1至1平均分布的数据（可视为噪声），所以输出并无分类特征："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "------- print outputs ----------\nout tensor name is:Default/head-MobileNetV2Head/Softmax-op204\nout tensor size is:4000\nout tensor elements num is:1000\noutput data is:5.26822e-05 0.000497521 0.000296722 0.000377606 0.000177048 8.02106e-05 0.000212863 0.000422287 0.000273189 0.000234106 0.000998072 0.00423312 0.00204994 0.00124968 0.00294459 0.00139796 0.00111545 0.00065636 0.000809462 0.00153732 0.000621052 0.00224638 0.00127046 0.00187558 0.000420145 0.000150638 0.000266477 0.000438629 0.000187774 0.00054668 0.000212853 0.000921661 0.000127179 0.000565873 0.00100395 0.00030016 0.000282677 0.000358068 0.00215288 0.000477846 0.00107597 0.00065134 0.000722135 0.000807503 0.000631416 0.000432471 0.00125898 0.000255094 8.26058e-05 9.91919e-05 0.000794514 0.00031873 0.000525145 0.000564177 0.000390949 0.000239435 0.000769301 0.000522169 0.000489711 0.00106033 0.00188065 0.00162756 0.000154417 0.000423661 0.00114033 0.000521169 0.00104491 0.000394101 0.000574376 0.00103071 0.000328134 0.00220263 0.000588063 0.00114022 0.000639888 0.00160103 0.000883627 0.00168485 0.00749697 0.00378326 0.00049545 0.000697699 0.00094152 0.000694751 0.000361998 0.00249769 0.00224123 0.00144733 0.000867953 0.000409967 0.000414645 0.000921754 0.00362981 0.000598768 0.00939566 0.000354318 0.0011853 0.000582604 0.000977179 0.000363443 0.000252788 0.000161903 0.000498172 0.000835043 0.000125615 0.000150972 0.000271722 0.000391777 8.49806e-05 0.000175627 0.000255629 0.0104205 0.000473356 0.000470714 0.00154926 3.52034e-05 0.00017297 0.000381467 0.000286569 0.00022002 0.000270967 0.00012511 0.000102305 0.000113712 0.000152496 0.00216914 0.000232594 0.00118621 0.00120123 0.000756038 0.000361149 0.000279887 0.00072076 0.0030916 0.000839053 0.000305989 0.000185089 0.00106419 0.00141358 0.000819862 0.000874739 0.00194274 0.000707348 0.00158608 0.000395842 0.000749171 0.00119562 0.000445385 0.000481742 7.57984e-05 0.000101538 0.000709718 0.000151491 0.00051427 0.000212376 0.000216051 9.55411e-05 0.000147092 0.00030403 9.3476e-05 5.85228e-05 0.000247954 0.000708926 0.00022098 0.000342199 0.000117494 0.000191572 3.63169e-05 0.000411851 0.000342481 0.000239097 0.000764161 0.000259073 0.000524563 0.000426145 0.000111397 0.000177984 8.50417e-05 0.000275155 0.000141314 0.000509691 0.000179604 0.000770131 0.000168981 0.000312896 0.000104055 9.1071e-05 0.000408717 8.05139e-05 0.000312057 0.000296877 0.000172418 0.00024341 0.000300782 0.000146993 0.00109211 0.000191816 8.35939e-05 0.000299942 0.000315375 0.000193755 0.000319056 0.000516599 0.000504943 0.000136374 0.000324095 0.000102209 0.000352826 0.000103771 0.000373529 0.000360807 0.000296265 0.000313525 0.000118756 0.000198175 0.000219075 0.000174439 0.000216093 0.000438399 0.000296872 0.000128021 0.00017442 0.000189079 0.000399597 0.000100693 0.000123358 5.15012e-05 0.000218214 0.000222177 0.000299965 0.000147799 0.000234641 0.000149353 4.5897e-05 0.000133614 0.000225688 0.000322703 0.000510069 0.000426839 0.000150078 6.61004e-05 4.68818e-05 0.000280284 0.000124997 0.000113089 0.000687338 0.000183928 0.000232998 0.00018996 0.00016634 9.61161e-05 0.000261457 7.62777e-05 0.000892919 0.00027851 4.25679e-05 0.00012095 0.000143962 0.000543232 0.00019522 0.000152532 8.21291e-05 5.86343e-05 0.000454828 0.000232324 0.000326869 0.00050617 8.3308e-05 8.23556e-05 7.82488e-05 0.000349937 0.000162254 0.000584313 0.000380654 7.41325e-05 0.000328623 0.00052962 0.000750176 0.000374926 0.000511254 0.000546927 0.000420431 0.000673729 0.000211782 0.00163466 0.000524799 0.000383476 0.000244811 7.51562e-05 6.57744e-05 0.000155914 0.000270638 0.000106245 0.000186127 0.000346968 0.000485479 0.000271254 0.00036631 0.000252093 0.000184659 0.000340458 0.00393658 0.00120467 0.00258523 0.000523741 0.00142551 0.00168216 0.00274844 0.00230136 0.000254464 0.000689839 0.00200172 0.000789165 0.00147548 0.00497233 0.00245074 0.00351014 0.000964297 0.0116707 0.00263743 0.000911238 0.000140097 0.000427111 0.000229297 0.000354368 0.000327572 0.000399973 0.000969767 0.000753985 0.000151906 0.000319341 0.00177747 0.00014731 0.000247144 0.00028714 0.000162237 0.000406454 0.000167767 0.000141812 8.20427e-05 0.000140652 0.000154833 0.000414694 0.000191989 0.00028065 0.000298302 0.000326194 0.000358242 0.000218887 0.000214568 0.000456112 0.000153574 5.4711e-05 0.000176373 0.000716305 6.97331e-05 0.000924458 0.00036906 0.000147747 0.000464726 0.000195069 0.000472077 0.000196377 0.000422707 0.000132992 5.76273e-05 0.000180634 0.000355361 0.000247252 0.000157627 0.000537573 0.00020566 0.000577524 0.00019596 0.000227313 0.000237615 0.000251934 0.000581737 0.000156606 0.000377661 0.000534264 9.59369e-05 0.000165362 0.000174582 7.18626e-05 0.000134693 4.02814e-05 0.000179219 0.000100272 9.8463e-05 0.000262976 0.000178799 0.000224355 8.18936e-05 0.000143329 0.000117873 8.40231e-05 0.000588662 0.000158744 0.00069335 0.000287121 0.000151016 0.00152298 0.00024393 0.000737831 0.00115437 5.96499e-05 0.000118379 0.000228003 0.0041712 5.89845e-05 0.00273432 0.00321251 0.00269996 0.000762481 4.82307e-05 0.000160988 0.00115545 0.0155078 0.00138022 0.0025505 0.000223013 0.000251236 0.000123665 5.52253e-05 0.000267688 0.000453393 0.00029877 0.000429822 0.00099786 0.000183652 0.000397013 0.00108393 0.000333911 0.0008731 0.000275806 0.000101959 0.000920896 0.000532173 0.000526293 0.0006834 0.000935434 0.000351484 0.00198101 0.000158832 0.00025276 0.0309715 0.000236896 0.000507701 7.17417e-05 0.000136413 0.00511946 0.001006 0.00030655 0.000170018 0.00102066 0.000676819 0.00111926 0.00101352 0.00122263 0.000436026 0.000709552 0.00280173 0.000343102 0.000684757 0.00250305 8.5246e-05 8.35988e-05 8.50596e-05 0.000745612 0.000384923 0.000115974 0.000104449 0.00142474 0.000464432 0.00013609 4.29949e-05 0.000410546 0.000318726 8.40787e-05 0.00206693 0.00057538 0.000382494 0.000160234 0.000307552 0.000529971 0.000586405 0.00398225 0.00151492 0.00026454 0.000511842 9.7473e-05 0.000163672 0.000160056 0.000816508 3.00784e-05 0.00037759 0.00014328 8.48268e-05 0.00142338 6.22116e-05 0.000788073 0.00155491 0.00121945 0.000680781 0.000758789 0.000459647 0.00708145 0.00120801 7.03766e-05 0.000364867 0.000123017 0.00420891 0.000513928 0.00123761 0.000267312 0.000333363 0.00122328 0.000298812 0.000238888 0.000615765 8.10465e-05 0.000246716 0.00123949 0.000508113 7.77746e-05 0.000487965 0.000462255 0.000310659 0.000585418 0.00176246 0.000181668 0.000288837 0.000232032 0.00549264 0.000113551 0.000251434 0.000276892 0.000604927 0.00410441 0.000628254 0.000532845 0.00177639 0.000769542 0.000172925 0.00065605 0.0015078 4.19799e-05 0.000255064 0.00488681 0.000521465 0.000326431 0.00111252 0.00235686 0.000651842 8.37604e-05 0.00319951 0.000679279 0.00160411 0.000953606 0.00047153 8.01442e-05 0.00192255 0.0110213 0.000130118 0.00018916 0.00082058 0.000194114 0.000183411 0.000152358 0.000211961 5.22587e-05 0.00303399 0.000128953 0.00159357 0.000101542 5.38654e-05 0.000206161 0.000293241 0.000191215 7.02916e-05 0.000230206 0.000109719 0.000682147 0.000378998 0.000515589 0.000204293 0.00115819 0.00252224 0.00132761 4.51228e-05 0.00333054 0.000486169 0.000733327 0.000177619 9.41916e-05 0.00120342 0.00432701 0.000222835 0.000197637 0.00449768 0.00115172 0.000184445 0.000111001 0.00112382 0.0018688 0.00320062 0.000278918 0.000906152 0.000116432 0.00164653 0.000537722 0.000249092 0.00221725 0.000161599 0.000414339 0.00299422 0.000435541 0.00880695 0.00490311 0.00325869 6.05041e-05 0.00458625 0.00517385 0.00024982 0.000220774 0.0032148 0.000275533 0.00222638 0.00206151 0.000420763 0.00028658 0.0149218 0.000693565 6.89355e-05 0.000175107 0.000611934 0.000185402 0.00048781 0.00104491 0.000305031 0.000719747 0.000464874 0.000902618 0.00710998 0.00028243 0.000266798 0.000557195 0.00018203 0.000165886 0.00432344 0.0018616 0.00081676 0.000688068 0.000116212 0.00375912 0.00011202 0.0119426 0.000395667 0.00134768 0.000107723 8.29395e-05 0.00874447 0.000217795 0.00201653 0.000200428 0.000784866 0.000739253 0.000223862 0.000716373 9.37279e-05 1.64484e-05 0.000103597 0.00134084 0.00208305 6.15101e-05 0.000264137 0.00421874 0.000816694 0.019055 0.000882248 0.0265989 0.000885313 0.00189269 0.000819798 0.000479354 0.000194866 4.39721e-05 0.000374197 0.00102411 0.000391648 0.000144945 0.000320067 0.000943551 6.28455e-05 0.000563089 0.00319211 0.000219879 8.42234e-05 0.000555672 0.00231883 0.0037087 0.000302303 0.000149123 0.000789137 7.45903e-05 0.000133478 0.000470522 0.000542576 0.000413181 0.000967243 0.00134348 0.000439858 0.0010091 0.00714279 0.000202303 0.000809548 8.99185e-05 0.000199892 0.00059308 0.00129059 0.00162076 0.00793667 0.000529655 0.000417269 0.00100714 0.000160703 0.00097642 0.000691081 7.56624e-05 0.000217106 0.00290805 0.000661668 0.00104081 0.000133569 0.000945062 0.00132827 0.000932787 0.00482219 3.9986e-05 0.000903322 0.000455647 0.00143754 0.000103266 0.00367346 0.000897197 0.000118318 0.00149419 0.000865034 0.00126782 0.00090065 0.000132982 0.0039552 0.00210961 0.000428278 0.000123607 0.000284831 2.11637e-05 0.000587767 0.000752392 0.00159891 0.00253384 4.46648e-05 0.00597254 0.00373919 0.000849701 4.3499e-05 0.000935258 0.000311729 0.00719802 0.000368296 0.00284921 0.00317468 0.000813635 0.0011214 0.000610401 0.000484875 0.00417738 0.000496244 9.79432e-05 0.000734274 0.000259079 0.00247699 0.00460816 0.00708891 0.000724271 0.00048205 0.000174656 0.000596118 0.000401012 8.25042e-05 0.000161686 0.00197722 0.000806688 0.00684481 0.000596325 0.00131103 0.000204451 0.00100593 0.00151624 8.50725e-05 0.000122174 0.00021799 0.000259111 0.002961 0.000829398 0.000533044 5.0536e-05 0.000946751 6.78423e-05 0.000485367 0.00306399 0.00523905 0.00123471 0.000224707 0.000101096 0.0014873 0.000104553 0.00355624 0.000205465 0.000169472 5.07939e-05 0.000195914 0.000791247 0.000246651 0.000205654 0.000285258 0.000651622 0.00211643 6.79842e-05 0.000138115 0.00103942 0.000187132 0.000409764 0.00214586 0.000292729 0.00031472 0.000691548 0.000382784 0.000125186 0.00233764 0.000536727 0.000502022 4.95937e-05 0.0264263 0.00477407 0.00376776 0.00014371 0.00137865 0.00109858 0.000563498 0.00261839 0.00397829 0.000242258 0.000141749 0.00157776 0.00031561 0.000136863 0.000277254 0.000887197 5.00407e-05 0.0031923 0.000459011 9.37109e-05 0.000129428 9.72145e-05 0.000116087 5.26294e-05 0.000929531 0.00363911 0.000738978 0.000344878 0.00242673 0.000193775 4.87371e-05 0.0010458 0.00015866 0.000108444 7.05613e-05 0.000979656 0.000203967 0.000434424 0.00147155 0.00623083 0.000167943 0.00654287 0.000231375 0.000144977 7.44322e-05 0.000271412 0.000257479 0.000125951 0.0084965 0.00708424 0.000741149 0.000327848 0.00072125 0.00155309 0.000849641 0.000468936 0.000597561 0.000343363 0.0013401 0.000644772 0.00296955 0.00203899 0.000344333 0.000654109 0.000579819 0.000307663 0.00295462 0.00098848 0.000224191 0.000616008 0.000192669 0.000124413 0.000265971 6.58702e-05 0.00031542 0.000253495 0.000276654 0.00289865 0.000574721 0.000131497 0.000204278 0.000568842 9.16333e-05 0.000257384 0.000243244 0.000443263 0.000109194 0.000139178 0.000500078 0.000198004 0.000107967 0.000169954 0.000123934 0.000258871 9.86871e-05 0.000293493 0.000323952 0.000504283 0.00036182 0.000316952 0.000177675 0.00168864 8.59652e-05 7.83207e-05 0.000429965 0.000663861 0.000506927 0.000768278 0.000391109 0.000419152 0.000638448 0.000214176 0.00016114 0.000515638 0.000709203 0.000154853 0.000343536 0.000326896 0.000130624 7.31075e-05 6.40462e-05 0.000139256 0.000695747 0.000437555 0.00208446 0.000180979 0.000100821 0.000760209 0.000238104 9.52171e-05 0.000459536 0.000388741 0.000291907 0.000577998 0.000439995 9.34035e-05 0.000309451 0.000308385 0.00012725 6.17104e-05 0.000231779 0.000489432 0.00012118 0.000211306 0.000357186 0.000356726 0.000311104 0.000615516 0.000252385 0.000400029 0.000204223 0.000195018 7.65522e-05 0.00028094 0.000303784 0.00186481\n------- print end ----------"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "更详细的集成说明"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "关于使用C++接口进行集成的更多细节及高级用法，可以参考模型推理（C++接口）。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "关于使用Java接口进行集成开发，可以参考模型推理（Java接口）。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "关于Android上的集成开发，请查看基于JNI接口的Android应用开发、基于Java接口的Android应用开发及模型支持。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Windows篇"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "本篇以Windows系统环境为例，演示如何进行转换模型和集成推理。"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "模型转换"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "将用户的模型转换为MindSpore Lite的模型文件。该操作主要包括以下步骤："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "下载发布件"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在Windows和Linux的发布件中，都含有转换工具，用户可根据自己的平台，下载使用任一个发布件。\n通过发布件内的converter_lite工具，将非ms模型转换为MindSpore Lite使用的ms模型。\n该操作与平台无关，无论在哪个平台上执行转换，可得到相同的转换后模型文件。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "转换模型"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "使用发布件内的converter_lite转换工具完成模型转换。"
+    },
+    {
+      "kind": "heading",
+      "level": 4,
+      "text": "下载发布件"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "用户可在MindSpore Lite官网下载页面，得到各版本的MindSpore Lite发布件。\n在本例中，我们选择的是软件系统为Windows、底层架构为x86_64的CPU发布件，以1.6.0版本为例，用户可点击此处直接下载。\n每个发布件的包结构会有不同。本例中，Windows发布件的包结构如下："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "mindspore-lite-{version}-win-x64\n├── runtime\n│ ├── include\n│ └── lib\n│ ├── libgcc_s_seh-1.dll # MinGW动态库\n│ ├── libmindspore-lite.a # MindSpore Lite推理框架的静态库\n│ ├── libmindspore-lite.dll # MindSpore Lite推理框架的动态库\n│ ├── libmindspore-lite.dll.a # MindSpore Lite推理框架的动态库的链接文件\n│ ├── libssp-0.dll # MinGW动态库\n│ ├── libstdc++-6.dll # MinGW动态库\n│ └── libwinpthread-1.dll # MinGW动态库\n└── tools\n├── benchmark # 基准测试工具目录\n└── converter # 模型转换工具目录"
+    },
+    {
+      "kind": "heading",
+      "level": 4,
+      "text": "转换模型"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "解压刚刚下载的发布件，在位于mindspore-lite-{version}-win-x64\\tools\\converter\\converter目录，可以找到converter_lite.exe工具。\nconverter_lite.exe模型转换工具提供了离线转换模型功能，支持MindSpore、CAFFE、TensorFlow Lite、TensorFlow、ONNX类型的模型转换。\n模型转换步骤如下："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "环境设置"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "将转换工具需要的动态链接库加入环境变量PATH。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "set PATH=%PACKAGE_ROOT_PATH%\\tools\\converter\\lib;%PATH%"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "进入转换工具所在目录"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "执行如下命令，进入转换工具所在目录。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "cd %PACKAGE_ROOT_PATH%\\tools\\converter\\converter"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "转换参数说明"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在使用converter_lite.exe执行转换时，需设定相关参数。本例中用到的相关参数定义如下表3所示。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "下面以各种类型模型的转换命令为例，说明各参数的使用方法。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "以Caffe模型lenet.prototxt为例，执行转换命令。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "call converter_lite.exe --fmk=CAFFE --modelFile=lenet.prototxt --weightFile=lenet.caffemodel --outputFile=lenet"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在转换Caffe模型时，将fmk配置为CAFFE（--fmk=CAFFE），同时分别通过modelFile和weightFile参数传入模型结构（lenet.prototxt）、模型权值（lenet.caffemodel）两个文件。\n同时通过outputFile，指定转换后输出的模型名，因未指定路径，生成的模型默认在当前路径，并带有.ms后缀，即lenet.ms。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "以MindSpore、TensorFlow Lite、TensorFlow和ONNX模型为例，执行转换命令。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "MindSpore模型lenet.mindir。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "call converter_lite.exe --fmk=MINDIR --modelFile=lenet.mindir --outputFile=lenet"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TensorFlow Lite模型lenet.tflite。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "call converter_lite.exe --fmk=TFLITE --modelFile=lenet.tflite --outputFile=lenet"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TensorFlow模型lenet.pb。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "call converter_lite.exe --fmk=TF --modelFile=lenet.pb --outputFile=lenet"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ONNX模型lenet.onnx。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "call converter_lite.exe --fmk=ONNX --modelFile=lenet.onnx --outputFile=lenet"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在转换各种模型时，将fmk配置为模型类型对应的标志符号，同时通过modelFile参数传入模型文件。\n通过outputFile，指定转换后输出的模型名，因未指定路径，生成的模型默认在当前路径，并带有.ms后缀，即lenet.ms。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "执行转换"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "用户可使用自己的模型进行测试，也可使用我们提供的MindSpore模型进行测试，下载链接点击此处。\n以下载的模型为例，将模型mobilenetv2.mindir拷贝到转换工具所在目录，根据上述转换参数的说明，可以知道该模型的转换命令如下："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "call converter_lite.exe --fmk=MINDIR --modelFile=mobilenetv2.mindir --outputFile=mobilenetv2"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "执行命令后，若转换成功，结果显示如下，并在当前目录生成名为mobilenetv2.ms的新模型文件。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "CONVERT RESULT SUCCESS:0"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "高级功能"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "关于转换工具的更详细说明，可参考端侧模型转换。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "关于如何使用转换工具实现模型训练后量化，可参考量化。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果用户希望转换后的模型能进行训练，需进行训练模型转换，详细可参考端侧训练模型转换。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "表3：converter_lite.exe参数定义"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "是否必选"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数说明"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "取值范围"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "--fmk=<FMK>"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "待转换模型的原始格式。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "MINDIR、CAFFE、TFLITE、TF、ONNX"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "--modelFile=<MODELFILE>"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "待转换模型的路径。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "--outputFile=<OUTPUTFILE>"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "转换后模型的路径及模型名，不需加后缀，可自动生成.ms后缀。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "--weightFile=<WEIGHTFILE>"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "转换Caffe模型时必选"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "输入模型weight文件的路径。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数名和参数值之间用等号连接，中间不能有空格。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Caffe模型一般分为两个文件：*.prototxt模型结构，对应--modelFile参数；*.caffemodel模型权值，对应--weightFile参数。"
+    },
+    {
+      "kind": "heading",
+      "level": 4,
+      "text": "Netron可视化"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参考Linux篇的Netron可视化。"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "模型推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "用户需要集成发布件内的mindspore-lite库文件，并通过MindSpore Lite头文件中声明的API接口，来进行模型推理。\n在进行集成前，用户也可以直接使用随发布件发布的benchmark基准测试工具（位于mindspore-lite-{version}-win-x64/tools/benchmark），来进行推理测试。\nbenchmark工具是已集成mindspore-lite库的可执行程序，通过命令参数的形式，实现包括推理在内的多种功能。"
+    },
+    {
+      "kind": "heading",
+      "level": 4,
+      "text": "下载发布件"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "用户根据模型推理时的系统环境，下载对应的发布件。\n在本例中，我们选择的是软件系统为Windows、底层架构为x86_64的CPU发布件，以1.6.0版本为例，用户可点击此处直接下载。"
+    },
+    {
+      "kind": "heading",
+      "level": 4,
+      "text": "benchmark推理测试"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "环境设置"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "将运行benchmark推理时需要的动态链接库加入环境变量PATH。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "set PATH=%PACKAGE_ROOT_PATH%\\runtime\\lib;%PATH%"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "其中%PACKAGE_ROOT_PATH%是发布件解压后的路径。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "进入benchmark工具所在目录"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "执行如下命令，进入benchmark工具所在目录"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "cd %PACKAGE_ROOT_PATH%\\tools\\benchmark"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "benchmark参数说明"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在使用benchmark.exe执行推理时，需设定相关参数。本例中用到的相关参数定义如下表4所示。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "执行推理，分析推理性能"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "用户可使用上一节转换后的模型mobilenetv2.ms进行推理测试，将模型拷贝到benchmark工具所在目录后，使用如下命令执行推理："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "call benchmark.exe --modelFile=mobilenetv2.ms"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过modelFile指定要进行推理的模型，其他参数使用默认值。\n本例中，未指定输入数据，将生成随机数值作为输入。\n执行命令后，若推理成功，则会输出类似如下统计信息，该信息显示了推理时的并发线程数（NumThreads = 2），测试模型的单次推理最短耗时（6.677000 ms）、单次推理最长耗时（8.656000 ms）和平均推理耗时（7.291000 ms）等性能指标。性能值随环境不同而不同。\n由于未指定numThreads参数，默认采用2线程推理，用户可通过设置不同的线程数，以测试不同线程下的推理性能（线程数不是越高越好，到了一定程度后，由于线程切换的开销，推理时间将延长）。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ModelPath = mobilenetv2.ms\nModelType = MindIR\nInDataPath =\nConfigFilePath =\nInDataType = bin\nLoopCount = 10\nDeviceType = CPU\nAccuracyThreshold = 0.5\nCosineDistanceThreshold = -1.1\nWarmUpLoopCount = 3\nNumThreads = 2\nFp16Priority = 0\nEnableParallel = 0\ncalibDataPath =\ncpuBindMode = HIGHER_CPU\nCalibDataType = FLOAT\nstart unified benchmark run\nPrepareTime = 30.013 ms\nRunning warm up loops...\nRunning benchmark loops...\nModel = mobilenetv2.ms, NumThreads = 2, MinRunTime = 6.677000 ms, MaxRuntime = 8.656000 ms, AvgRunTime = 7.291000 ms\nRun Benchmark mobilenetv2.ms Success."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "执行推理，分析推理精度"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "用户可以使用benchmark.exe工具测试MindSpore Lite的推理精度，使用如下命令测试模型的推理精度："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "call benchmark.exe --modelFile=mobilenetv2.ms --inDataFile=input.bin --benchmarkDataFile=output.txt"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "本例中通过modelFile指定要进行推理的模型。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过inDataFile指定模型的输入数据文件input.bin。\n在之前的Netron打开模型，我们已经知道mobilenetv2.ms模型接收float32的1x224x224x3张量。\nbenchmark的inDataFile选项默认接收二进制格式数据文件，input.bin文件按顺保存了150528个float32的二进制数值，跟模型要求的1x224x224x3数据量一致，且格式均为float32。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通常输入数据文件可以采用以下方式生成："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "将模型训练数据集内的数据进行前处理，将前处理后的数据保存。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过随机生成的方式，生成指定范围内的随机数据。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "本例采用随机生成数作为输入，用户可以通过运行以下Python脚本，或点击此处下载本例中的input.bin文件，并将它放到benchmark目录内。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "import numpy as np\nnp.random.seed(1)\nt = np.random.rand(1,224,224,3)\nt.astype(np.float32).tofile(\"input.bin\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在提供了输入数据之后，用户还需提供用于跟推理结果进行对比的标杆数据，以进行精度误差分析。\n本例通过benchmarkDataFile指定模型的输出标杆文件output.txt。标杆文件的格式需如下所示："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "[输出节点1名称] [输出节点1形状的维度长度] [输出节点1形状的第一维值] ... [输出节点1形状的第n维值]\n[节点1数据1] [节点1数据2] ...\n[输出节点2名称] [输出节点2形状的维度长度] [输出节点2形状的第一维值] ... [输出节点2形状的第n维值]\n[节点2数据1] [节点2数据2] ..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通常标杆文件可以采用以下方式生成："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跟其他框架进行对比：使用其它深度学习模型推理框架，并使用相同输入，将推理结果按照上面的要求格式保存。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跟模型训练时进行对比：在训练框架中，将经过前处理后的数据保存作为inDataFile指定的输入数据。并将模型推理后，还未经过后处理的输出数据按标杆格式进行保存，作为标杆。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跟不同设备或数据类型推理对比：使用不同的数据类型（例如FP16）或者设备（例如GPU/Kirin NPU）进行推理，得到该环境下标杆。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跟理论值进行对比：针对一些简单模型，用户也可以根据对模型的理解，手动构造对应输入的输出标杆。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "提供的标杆数据必须和模型输出拥有相同的数据大小，才能跟模型输出进行对比，以得到推理精度误差量。\n在之前的Netron打开模型章节，我们已经知道mobilenetv2.ms模型，输出的节点名为Default/head-MobileNetV2Head/Softmax-op204，该节点输出的形状为1x1000（如图2中所示），故节点形状的维度长度为2，节点形状的第一维值为1，节点形状的第二维值为1000。\n本例采用跟其他框架进行对比的方式生成标杆，将之前得到的input.bin文件，通过其他框架生成推理后的数据，并按照标杆格式保存文件。\n得到标杆数据如下所示："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Default/head-MobileNetV2Head/Softmax-op204 2 1 1000\n4.75662418466527e-05 0.00044544308912009 ..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "标杆中第二行的数据，就是采用其他框架对相同的输入（input.bin）得到的推理输出，用户可以点击此处下载本例中的output.txt文件，并将它放到benchmark目录内。\n在执行benchmark命令后，若推理成功，则会输出类似如下统计信息："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ModelPath = mobilenetv2.ms\nModelType = MindIR\nInDataPath = input.bin\nConfigFilePath =\nInDataType = bin\nLoopCount = 10\nDeviceType = CPU\nAccuracyThreshold = 0.5\nCosineDistanceThreshold = -1.1\nWarmUpLoopCount = 3\nNumThreads = 2\nFp16Priority = 0\nEnableParallel = 0\ncalibDataPath = output.txt\ncpuBindMode = HIGHER_CPU\nCalibDataType = FLOAT\nstart unified benchmark run\nPrepareTime = 31.709 ms\nMarkAccuracy\nInData 0: 0.417022 0.720325 0.000114375 0.302333 0.146756 0.0923386 0.18626 0.345561 0.396767 0.538817 0.419195 0.68522 0.204452 0.878117 0.0273876 0.670467 0.417305 0.55869 0.140387 0.198101\n================ Comparing Output data ================\nData of node Default/head-MobileNetV2Head/Softmax-op204 : 4.75662e-05 0.000445443 0.000294212 0.000354572 0.000165406 8.36175e-05 0.000198424 0.000329004 0.000288576 0.000203605 0.000962143 0.00421465 0.0019162 0.00129701 0.00260928 0.0012302 0.000879829 0.000609378 0.000691054 0.00119472 0.000516733 0.00160048 0.000959531 0.00176164 0.000365934 0.00013575 0.000245539 0.000414651 0.000165337 0.000480154 0.000216396 0.00101303 0.000105544 0.000475172 0.000761407 0.000305815 0.000294882 0.000307003 0.00188077 0.000454868 0.000897518 0.00051352 0.000595383 0.000644214 0.000513376 0.000343709 0.00103984 0.000197185 7.54722e-05 8.89811e-05\nMean bias of node/tensor Default/head-MobileNetV2Head/Softmax-op204 : 0%\nMean bias of all nodes/tensors: 0%\n=======================================================\n\nRun Benchmark mobilenetv2.ms Success."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在输出信息中，InData 0行打印的是该次推理的输入数据（只打印了前20个），Data of node Default/head-MobileNetV2Head/Softmax-op204行打印的是相关输出节点（Default/head-MobileNetV2Head/Softmax-op204）的推理结果（只打印前50个值），可以直接观察它们跟标杆文件的差异，以获得直观感受。\nMean bias of node/tensor Default/head-MobileNetV2Head/Softmax-op204行，给出了Default/head-MobileNetV2Head/Softmax-op204输出张量与标杆数据对比的平均误差，该误差计算方法为benchmark工具自带的比较算法。\n在最后，Mean bias of all nodes/tensors给出了所有张量与标杆对比的平均误差，在本例中，只有1个输出张量，故总平均误差和Default/head-MobileNetV2Head/Softmax-op204张量误差一致。可以观察到，推理的总平均误差为0%。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "高级功能"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "关于benchmark的更详细说明，以及关于如何使用benchmark来进行基准测试、耗时定量分析、误差分析、Dump数据等，可以参考benchmark。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "表4：benchmark参数定义"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数名"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "是否必选"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数说明"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数类型"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "默认值"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "--modelFile=<MODELPATH>"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "必选"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "指定需要进行基准测试的MindSpore Lite模型文件路径。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "String"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "null"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "--numThreads=<NUMTHREADS>"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "可选"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "指定模型推理程序运行的线程数。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Integer"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "--inDataFile=<INDATAPATH>"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "可选"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "指定测试模型输入数据的文件路径，默认接收二进制格式数据文件。如果未设置，则使用随机输入。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "String"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "null"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "--benchmarkDataFile=<CALIBDATAPATH>"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "可选"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "指定对比标杆数据（用于精度对比的数据）的文件路径，接收按规定格式排列的字符文本。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "String"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "null"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数名和参数值之间用等号连接，中间不能有空格。"
+    },
+    {
+      "kind": "heading",
+      "level": 4,
+      "text": "集成推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在上一节，我们使用了官方推理测试工具进行了模型推理测试，在本节，我们将以使用MindSpore Lite的C++接口进行集成为例，演示如何使用MindSpore Lite的发布件，进行集成开发，编写自己的推理程序。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "环境要求"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "系统环境：Windows 7，Windows 10；64位。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "MinGW 编译依赖"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "CMake >= 3.22.3"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "编译64位：MinGW-W64 x86_64 = GCC-7.3.0"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "编译32位：MinGW-W64 i686 = GCC-7.3.0"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "得到版本发布件"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "用户可通过MindSpore Lite官网，获得MindSpore Lite发布件，点击此处查看各版本。\n在本例中，仍然采用了和前几节一样的发布件，用于本节集成开发，点击此处可直接下载。\n在本节简单的推理集成例子中，需要用到的发布件内容如下："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "mindspore-lite-{version}-win-x64\n└── runtime\n├── include\n└── lib\n├── libgcc_s_seh-1.dll # MinGW动态库\n├── libmindspore-lite.a # MindSpore Lite推理框架的静态库\n├── libmindspore-lite.dll # MindSpore Lite推理框架的动态库\n├── libmindspore-lite.dll.a # MindSpore Lite推理框架的动态库的链接文件\n├── libssp-0.dll # MinGW动态库\n├── libstdc++-6.dll # MinGW动态库\n└── libwinpthread-1.dll # MinGW动态库"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "构建工程目录"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "本例的工程目录如下："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "demo\n├── CMakeLists.txt # cmake工程管理文件\n├── main.cc # 用户代码\n├── build # 编译用目录\n├── model\n│ └── mobilenetv2.ms # 模型文件（之前转出的模型）\n└── runtime # 发布件的runtime目录\n├── include # MindSpore Lite集成开发的API头文件\n└── lib\n└── libmindspore-lite.so # MindSpore Lite推理框架的动态库"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "新建一个demo文件夹，新建main.cc和CMakeLists.txt文件。\n新建build和model目录，将mobilenetv2.ms放到model内。\n将发布件中的runtime目录拷贝到demo中，runtime内的文件可以保持不动，也可以删除除libmindspore-lite.so和include文件夹外的其它库文件。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "构建cmake工程"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "打开上一步创建的CMakeLists.txt，粘贴如下内容，其中每句话的含义见注释："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "cmake_minimum_required(VERSION 3.22.3) # cmake版本要求最低3.22.3\nproject(Demo) # 工程名为Demo\n\n# gcc 版本要求大于等于7.3.0\nif(CMAKE_CXX_COMPILER_ID STREQUAL \"GNU\" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 7.3.0)\nmessage(FATAL_ERROR \"GCC version ${CMAKE_CXX_COMPILER_VERSION} must not be less than 7.3.0\")\nendif()\n\ninclude_directories(${CMAKE_CURRENT_SOURCE_DIR}/runtime/) # 添加头文件寻找路径\n\nlink_directories(${CMAKE_CURRENT_SOURCE_DIR}/runtime/lib) # 添加库文件寻找路径\n\nadd_executable(demo main.cc) # 编译生成demo执行程序\n\n# 声明demo执行程序需要链接的库，mindspore-lite为MindSpore Lite推理框架的动态库\ntarget_link_libraries(\ndemo\nmindspore-lite\npthread\nssp\n)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果想要集成libmindspore-lite.a静态库，则使用-Wl,--whole-archive libmindspore-lite.a -Wl,--no-whole-archive的选项来替换mindspore-lite。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "编写代码"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "打开刚才创建的main.cc，粘贴如下内容："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "#include <iostream>\n#include <fstream>\n#include <random>\n#include \"include/api/model.h\"\n#include \"include/api/context.h\"\n#include \"include/api/status.h\"\n#include \"include/api/types.h\"\nusing mindspore::MSTensor;\n\nchar *ReadFile(const char *file, size_t *size) {\nif (file == nullptr) {\nstd::cerr << \"file is nullptr.\" << std::endl;\nreturn nullptr;\n}\n\nstd::ifstream ifs(file, std::ifstream::in | std::ifstream::binary);\nif (!ifs.good()) {\nstd::cerr << \"file: \" << file << \" is not exist.\" << std::endl;\nreturn nullptr;\n}\n\nif (!ifs.is_open()) {\nstd::cerr << \"file: \" << file << \" open failed.\" << std::endl;\nreturn nullptr;\n}\n\nifs.seekg(0, std::ios::end);\n*size = ifs.tellg();\nstd::unique_ptr<char[]> buf(new (std::nothrow) char[*size]);\nif (buf == nullptr) {\nstd::cerr << \"malloc buf failed, file: \" << file << std::endl;\nifs.close();\nreturn nullptr;\n}\n\nifs.seekg(0, std::ios::beg);\nifs.read(buf.get(), *size);\nifs.close();\n\nreturn buf.release();\n}\n\ntemplate <typename T, typename Distribution>\nvoid GenerateRandomData(int size, void *data, Distribution distribution) {\nstd::mt19937 random_engine;\nint elements_num = size / sizeof(T);\n(void)std::generate_n(static_cast<T *>(data), elements_num,\n[&distribution, &random_engine]() { return static_cast<T>(distribution(random_engine)); });\n}\n\nint main(int argc, const char **argv) {\n// Read model file.\nstd::string model_path = \"../model/mobilenetv2.ms\";\nsize_t size = 0;\nchar *model_buf = ReadFile(model_path.c_str(), &size);\nif (model_buf == nullptr) {\nstd::cerr << \"Read model file failed.\" << std::endl;\nreturn -1;\n}\n\n// Create and init context, add CPU device info\nauto context = std::make_shared<mindspore::Context>();\nif (context == nullptr) {\ndelete[](model_buf);\nstd::cerr << \"New context failed.\" << std::endl;\nreturn -1;\n}\nauto &device_list = context->MutableDeviceInfo();\nauto device_info = std::make_shared<mindspore::CPUDeviceInfo>();\nif (device_info == nullptr) {\ndelete[](model_buf);\nstd::cerr << \"New CPUDeviceInfo failed.\" << std::endl;\nreturn -1;\n}\ndevice_list.push_back(device_info);\n\n// Create model\nauto model = new (std::nothrow) mindspore::Model();\nif (model == nullptr) {\ndelete[](model_buf);\nstd::cerr << \"New Model failed.\" << std::endl;\nreturn -1;\n}\n\n// Build model\nauto build_ret = model->Build(model_buf, size, mindspore::kMindIR, context);\ndelete[](model_buf);\nif (build_ret != mindspore::kSuccess) {\ndelete model;\nstd::cerr << \"Build model error \" << std::endl;\nreturn -1;\n}\n\n// Get Input\nauto inputs = model->GetInputs();\nfor (auto tensor : inputs) {\nauto input_data = reinterpret_cast<float *>(tensor.MutableData());\nif (input_data == nullptr) {\nstd::cerr << \"MallocData for inTensor failed.\" << std::endl;\ndelete model;\nreturn -1;\n}\nGenerateRandomData<float>(tensor.DataSize(), input_data, std::uniform_real_distribution<float>(0.1f, 1.0f));\n}\n\n// Predict\nstd::vector<MSTensor> outputs;\nauto status = model->Predict(inputs, &outputs);\nif (status != mindspore::kSuccess) {\nstd::cerr << \"Inference error.\" << std::endl;\ndelete model;\nreturn -1;\n}\n\n// Get Output Tensor Data.\nstd::cout << \"\\n------- print outputs ----------\" << std::endl;\nfor (auto tensor : outputs) {\nstd::cout << \"out tensor name is:\" << tensor.Name() << \"\\nout tensor size is:\" << tensor.DataSize()\n<< \"\\nout tensor elements num is:\" << tensor.ElementNum() << std::endl;\nauto out_data = reinterpret_cast<float *>(tensor.MutableData());\nstd::cout << \"output data is:\";\nfor (int i = 0; i < tensor.ElementNum(); i++) {\nstd::cout << out_data[i] << \" \";\n}\nstd::cout << std::endl;\n}\nstd::cout << \"------- print end ----------\\n\" << std::endl;\n\n// Delete model.\ndelete model;\nreturn mindspore::kSuccess;\n}"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "代码功能解析如下："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(1) 读取模型文件到buf"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过调用ReadFile函数，将模型文件读入到model_buf内存，用size变量保存模型的大小。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "char *model_buf = ReadFile(model_path.c_str(), &size);"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(2) 初始化Context配置"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Context保存了模型推理时所需的相关配置，包括算子偏好、线程数、自动并发以及推理处理器相关的其他配置。\n关于Context的详细说明，请参考Context的API接口说明。\n在MindSpore Lite加载模型时，必须提供一个Context类的对象，所以在本例中，首先申请了一个Context类的对象context。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "auto context = std::make_shared<mindspore::Context>();"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "接着，通过Context::MutableDeviceInfo接口，得到context对象的设备管理列表。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "auto &device_list = context->MutableDeviceInfo();"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在本例中，由于使用CPU进行推理，故需申请一个CPUDeviceInfo类的对象device_info。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "auto device_info = std::make_shared<mindspore::CPUDeviceInfo>();"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "因为采用了CPU的默认设置，所以不需对device_info对象做任何设置，直接添加到context的设备管理列表。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "device_list.push_back(device_info);"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(3) 加载模型"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "首先创建一个Model类对象model，Model类定义了MindSpore Lite中的模型，用于计算图管理。\n关于Model类的详细说明，可参考API文档。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "auto model = new (std::nothrow) mindspore::Model();"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "接着调用Build接口传入模型，将模型编译至可在设备上运行的状态。\n在加载编译完模型之后，被解析的模型信息已记录在model变量中，原先的模型文件内存model_buf可以释放。\n由于model_buf是以char数组的方式申请的，故使用delete[]释放内存。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "auto build_ret = model->Build(model_buf, size, mindspore::kMindIR, context);\ndelete[](model_buf);"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(4) 传入数据"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在执行模型推理前，需要设置推理的输入数据。\n此例，通过Model.GetInputs接口，获取模型的所有输入张量。单个张量的格式为MSTensor。\n关于MSTensor张量的详细说明，请参考MSTensor的API说明。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "auto inputs = model->GetInputs();"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过张量的MutableData接口，可以获取张量的数据内存指针。\n在本例中，模型的输入为浮点数格式，所以此处将指针强转为浮点指针。用户可根据自己模型的数据格式做不同处理，也可通过张量的DataType接口，得到该张量的数据类型。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "auto input_data = reinterpret_cast<float *>(tensor.MutableData());"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "接着，通过数据指针，将我们要推理的数据传入张量内部。\n在本例中我们传入的是随机生成的0.1至1的浮点数据，且数据呈平均分布。\n在实际的推理中，用户在读取图片或音频等实际数据后，需进行算法特定的预处理操作，并将处理后的数据传入模型。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "template <typename T, typename Distribution>\nvoid GenerateRandomData(int size, void *data, Distribution distribution) {\nstd::mt19937 random_engine;\nint elements_num = size / sizeof(T);\n(void)std::generate_n(static_cast<T *>(data), elements_num,\n[&distribution, &random_engine]() { return static_cast<T>(distribution(random_engine)); });\n}\n\n...\n\nGenerateRandomData<float>(tensor.DataSize(), input_data, std::uniform_real_distribution<float>(0.1f, 1.0f));"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(5) 执行推理"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "首先申请一个放置模型推理输出张量的数组outputs，然后调用模型推理接口Predict，将输入张量和输出张量作为参数。\n在推理成功后，输出张量被保存在outputs内。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "std::vector<MSTensor> outputs;\nauto status = model->Predict(inputs, &outputs);"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(6) 推理结果核验"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过MutableData得到输出张量的数据指针。\n本例中，将它强转为浮点指针，用户可以根据自己模型的数据类型进行对应类型的转换，也可通过张量的DataType接口得到数据类型。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "auto out_data = reinterpret_cast<float *>(tensor.MutableData());"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在本例中，直接通过打印来观察推理输出结果的准确性。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "for (int i = 0; i < tensor.ElementNum(); i++) {\nstd::cout << out_data[i] << \" \";\n}"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(7) 释放model对象"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "delete model;"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "编译"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "进入build目录，输入cmake -G \"CodeBlocks - MinGW Makefiles\" ..生成makefile文件，然后输入cmake --build .编译工程。在编译成功后，可以在build目录下得到demo可执行程序。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "运行推理程序"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "将libmindspore-lite.so动态库的地址加入环境变量PATH。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "set PATH=..\\runtime\\lib;%PATH%"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "输入call demo执行demo程序，根据上文，我们知道demo程序将加载mobilenetv2.ms模型，并将随机生成的输入张量传递给模型进行推理，将推理后的输出张量的值进行打印。\n推理成功，得到如下输出，可以看到输出张量包含1000个数值，这和我们在Netron可视化中得到的模型理解相一致的，由于本例传入的是0.1至1平均分布的数据（可视为噪声），所以输出并无分类特征："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "------- print outputs ----------\nout tensor name is:Default/head-MobileNetV2Head/Softmax-op204\nout tensor size is:4000\nout tensor elements num is:1000\noutput data is:5.26822e-05 0.000497521 0.000296722 0.000377606 0.000177048 8.02106e-05 0.000212863 0.000422287 0.000273189 0.000234106 0.000998072 0.00423312 0.00204994 0.00124968 0.00294459 0.00139796 0.00111545 0.00065636 0.000809462 0.00153732 0.000621052 0.00224638 0.00127046 0.00187558 0.000420145 0.000150638 0.000266477 0.000438629 0.000187774 0.00054668 0.000212853 0.000921661 0.000127179 0.000565873 0.00100395 0.00030016 0.000282677 0.000358068 0.00215288 0.000477846 0.00107597 0.00065134 0.000722135 0.000807503 0.000631416 0.000432471 0.00125898 0.000255094 8.26058e-05 9.91919e-05 0.000794514 0.00031873 0.000525145 0.000564177 0.000390949 0.000239435 0.000769301 0.000522169 0.000489711 0.00106033 0.00188065 0.00162756 0.000154417 0.000423661 0.00114033 0.000521169 0.00104491 0.000394101 0.000574376 0.00103071 0.000328134 0.00220263 0.000588063 0.00114022 0.000639888 0.00160103 0.000883627 0.00168485 0.00749697 0.00378326 0.00049545 0.000697699 0.00094152 0.000694751 0.000361998 0.00249769 0.00224123 0.00144733 0.000867953 0.000409967 0.000414645 0.000921754 0.00362981 0.000598768 0.00939566 0.000354318 0.0011853 0.000582604 0.000977179 0.000363443 0.000252788 0.000161903 0.000498172 0.000835043 0.000125615 0.000150972 0.000271722 0.000391777 8.49806e-05 0.000175627 0.000255629 0.0104205 0.000473356 0.000470714 0.00154926 3.52034e-05 0.00017297 0.000381467 0.000286569 0.00022002 0.000270967 0.00012511 0.000102305 0.000113712 0.000152496 0.00216914 0.000232594 0.00118621 0.00120123 0.000756038 0.000361149 0.000279887 0.00072076 0.0030916 0.000839053 0.000305989 0.000185089 0.00106419 0.00141358 0.000819862 0.000874739 0.00194274 0.000707348 0.00158608 0.000395842 0.000749171 0.00119562 0.000445385 0.000481742 7.57984e-05 0.000101538 0.000709718 0.000151491 0.00051427 0.000212376 0.000216051 9.55411e-05 0.000147092 0.00030403 9.3476e-05 5.85228e-05 0.000247954 0.000708926 0.00022098 0.000342199 0.000117494 0.000191572 3.63169e-05 0.000411851 0.000342481 0.000239097 0.000764161 0.000259073 0.000524563 0.000426145 0.000111397 0.000177984 8.50417e-05 0.000275155 0.000141314 0.000509691 0.000179604 0.000770131 0.000168981 0.000312896 0.000104055 9.1071e-05 0.000408717 8.05139e-05 0.000312057 0.000296877 0.000172418 0.00024341 0.000300782 0.000146993 0.00109211 0.000191816 8.35939e-05 0.000299942 0.000315375 0.000193755 0.000319056 0.000516599 0.000504943 0.000136374 0.000324095 0.000102209 0.000352826 0.000103771 0.000373529 0.000360807 0.000296265 0.000313525 0.000118756 0.000198175 0.000219075 0.000174439 0.000216093 0.000438399 0.000296872 0.000128021 0.00017442 0.000189079 0.000399597 0.000100693 0.000123358 5.15012e-05 0.000218214 0.000222177 0.000299965 0.000147799 0.000234641 0.000149353 4.5897e-05 0.000133614 0.000225688 0.000322703 0.000510069 0.000426839 0.000150078 6.61004e-05 4.68818e-05 0.000280284 0.000124997 0.000113089 0.000687338 0.000183928 0.000232998 0.00018996 0.00016634 9.61161e-05 0.000261457 7.62777e-05 0.000892919 0.00027851 4.25679e-05 0.00012095 0.000143962 0.000543232 0.00019522 0.000152532 8.21291e-05 5.86343e-05 0.000454828 0.000232324 0.000326869 0.00050617 8.3308e-05 8.23556e-05 7.82488e-05 0.000349937 0.000162254 0.000584313 0.000380654 7.41325e-05 0.000328623 0.00052962 0.000750176 0.000374926 0.000511254 0.000546927 0.000420431 0.000673729 0.000211782 0.00163466 0.000524799 0.000383476 0.000244811 7.51562e-05 6.57744e-05 0.000155914 0.000270638 0.000106245 0.000186127 0.000346968 0.000485479 0.000271254 0.00036631 0.000252093 0.000184659 0.000340458 0.00393658 0.00120467 0.00258523 0.000523741 0.00142551 0.00168216 0.00274844 0.00230136 0.000254464 0.000689839 0.00200172 0.000789165 0.00147548 0.00497233 0.00245074 0.00351014 0.000964297 0.0116707 0.00263743 0.000911238 0.000140097 0.000427111 0.000229297 0.000354368 0.000327572 0.000399973 0.000969767 0.000753985 0.000151906 0.000319341 0.00177747 0.00014731 0.000247144 0.00028714 0.000162237 0.000406454 0.000167767 0.000141812 8.20427e-05 0.000140652 0.000154833 0.000414694 0.000191989 0.00028065 0.000298302 0.000326194 0.000358242 0.000218887 0.000214568 0.000456112 0.000153574 5.4711e-05 0.000176373 0.000716305 6.97331e-05 0.000924458 0.00036906 0.000147747 0.000464726 0.000195069 0.000472077 0.000196377 0.000422707 0.000132992 5.76273e-05 0.000180634 0.000355361 0.000247252 0.000157627 0.000537573 0.00020566 0.000577524 0.00019596 0.000227313 0.000237615 0.000251934 0.000581737 0.000156606 0.000377661 0.000534264 9.59369e-05 0.000165362 0.000174582 7.18626e-05 0.000134693 4.02814e-05 0.000179219 0.000100272 9.8463e-05 0.000262976 0.000178799 0.000224355 8.18936e-05 0.000143329 0.000117873 8.40231e-05 0.000588662 0.000158744 0.00069335 0.000287121 0.000151016 0.00152298 0.00024393 0.000737831 0.00115437 5.96499e-05 0.000118379 0.000228003 0.0041712 5.89845e-05 0.00273432 0.00321251 0.00269996 0.000762481 4.82307e-05 0.000160988 0.00115545 0.0155078 0.00138022 0.0025505 0.000223013 0.000251236 0.000123665 5.52253e-05 0.000267688 0.000453393 0.00029877 0.000429822 0.00099786 0.000183652 0.000397013 0.00108393 0.000333911 0.0008731 0.000275806 0.000101959 0.000920896 0.000532173 0.000526293 0.0006834 0.000935434 0.000351484 0.00198101 0.000158832 0.00025276 0.0309715 0.000236896 0.000507701 7.17417e-05 0.000136413 0.00511946 0.001006 0.00030655 0.000170018 0.00102066 0.000676819 0.00111926 0.00101352 0.00122263 0.000436026 0.000709552 0.00280173 0.000343102 0.000684757 0.00250305 8.5246e-05 8.35988e-05 8.50596e-05 0.000745612 0.000384923 0.000115974 0.000104449 0.00142474 0.000464432 0.00013609 4.29949e-05 0.000410546 0.000318726 8.40787e-05 0.00206693 0.00057538 0.000382494 0.000160234 0.000307552 0.000529971 0.000586405 0.00398225 0.00151492 0.00026454 0.000511842 9.7473e-05 0.000163672 0.000160056 0.000816508 3.00784e-05 0.00037759 0.00014328 8.48268e-05 0.00142338 6.22116e-05 0.000788073 0.00155491 0.00121945 0.000680781 0.000758789 0.000459647 0.00708145 0.00120801 7.03766e-05 0.000364867 0.000123017 0.00420891 0.000513928 0.00123761 0.000267312 0.000333363 0.00122328 0.000298812 0.000238888 0.000615765 8.10465e-05 0.000246716 0.00123949 0.000508113 7.77746e-05 0.000487965 0.000462255 0.000310659 0.000585418 0.00176246 0.000181668 0.000288837 0.000232032 0.00549264 0.000113551 0.000251434 0.000276892 0.000604927 0.00410441 0.000628254 0.000532845 0.00177639 0.000769542 0.000172925 0.00065605 0.0015078 4.19799e-05 0.000255064 0.00488681 0.000521465 0.000326431 0.00111252 0.00235686 0.000651842 8.37604e-05 0.00319951 0.000679279 0.00160411 0.000953606 0.00047153 8.01442e-05 0.00192255 0.0110213 0.000130118 0.00018916 0.00082058 0.000194114 0.000183411 0.000152358 0.000211961 5.22587e-05 0.00303399 0.000128953 0.00159357 0.000101542 5.38654e-05 0.000206161 0.000293241 0.000191215 7.02916e-05 0.000230206 0.000109719 0.000682147 0.000378998 0.000515589 0.000204293 0.00115819 0.00252224 0.00132761 4.51228e-05 0.00333054 0.000486169 0.000733327 0.000177619 9.41916e-05 0.00120342 0.00432701 0.000222835 0.000197637 0.00449768 0.00115172 0.000184445 0.000111001 0.00112382 0.0018688 0.00320062 0.000278918 0.000906152 0.000116432 0.00164653 0.000537722 0.000249092 0.00221725 0.000161599 0.000414339 0.00299422 0.000435541 0.00880695 0.00490311 0.00325869 6.05041e-05 0.00458625 0.00517385 0.00024982 0.000220774 0.0032148 0.000275533 0.00222638 0.00206151 0.000420763 0.00028658 0.0149218 0.000693565 6.89355e-05 0.000175107 0.000611934 0.000185402 0.00048781 0.00104491 0.000305031 0.000719747 0.000464874 0.000902618 0.00710998 0.00028243 0.000266798 0.000557195 0.00018203 0.000165886 0.00432344 0.0018616 0.00081676 0.000688068 0.000116212 0.00375912 0.00011202 0.0119426 0.000395667 0.00134768 0.000107723 8.29395e-05 0.00874447 0.000217795 0.00201653 0.000200428 0.000784866 0.000739253 0.000223862 0.000716373 9.37279e-05 1.64484e-05 0.000103597 0.00134084 0.00208305 6.15101e-05 0.000264137 0.00421874 0.000816694 0.019055 0.000882248 0.0265989 0.000885313 0.00189269 0.000819798 0.000479354 0.000194866 4.39721e-05 0.000374197 0.00102411 0.000391648 0.000144945 0.000320067 0.000943551 6.28455e-05 0.000563089 0.00319211 0.000219879 8.42234e-05 0.000555672 0.00231883 0.0037087 0.000302303 0.000149123 0.000789137 7.45903e-05 0.000133478 0.000470522 0.000542576 0.000413181 0.000967243 0.00134348 0.000439858 0.0010091 0.00714279 0.000202303 0.000809548 8.99185e-05 0.000199892 0.00059308 0.00129059 0.00162076 0.00793667 0.000529655 0.000417269 0.00100714 0.000160703 0.00097642 0.000691081 7.56624e-05 0.000217106 0.00290805 0.000661668 0.00104081 0.000133569 0.000945062 0.00132827 0.000932787 0.00482219 3.9986e-05 0.000903322 0.000455647 0.00143754 0.000103266 0.00367346 0.000897197 0.000118318 0.00149419 0.000865034 0.00126782 0.00090065 0.000132982 0.0039552 0.00210961 0.000428278 0.000123607 0.000284831 2.11637e-05 0.000587767 0.000752392 0.00159891 0.00253384 4.46648e-05 0.00597254 0.00373919 0.000849701 4.3499e-05 0.000935258 0.000311729 0.00719802 0.000368296 0.00284921 0.00317468 0.000813635 0.0011214 0.000610401 0.000484875 0.00417738 0.000496244 9.79432e-05 0.000734274 0.000259079 0.00247699 0.00460816 0.00708891 0.000724271 0.00048205 0.000174656 0.000596118 0.000401012 8.25042e-05 0.000161686 0.00197722 0.000806688 0.00684481 0.000596325 0.00131103 0.000204451 0.00100593 0.00151624 8.50725e-05 0.000122174 0.00021799 0.000259111 0.002961 0.000829398 0.000533044 5.0536e-05 0.000946751 6.78423e-05 0.000485367 0.00306399 0.00523905 0.00123471 0.000224707 0.000101096 0.0014873 0.000104553 0.00355624 0.000205465 0.000169472 5.07939e-05 0.000195914 0.000791247 0.000246651 0.000205654 0.000285258 0.000651622 0.00211643 6.79842e-05 0.000138115 0.00103942 0.000187132 0.000409764 0.00214586 0.000292729 0.00031472 0.000691548 0.000382784 0.000125186 0.00233764 0.000536727 0.000502022 4.95937e-05 0.0264263 0.00477407 0.00376776 0.00014371 0.00137865 0.00109858 0.000563498 0.00261839 0.00397829 0.000242258 0.000141749 0.00157776 0.00031561 0.000136863 0.000277254 0.000887197 5.00407e-05 0.0031923 0.000459011 9.37109e-05 0.000129428 9.72145e-05 0.000116087 5.26294e-05 0.000929531 0.00363911 0.000738978 0.000344878 0.00242673 0.000193775 4.87371e-05 0.0010458 0.00015866 0.000108444 7.05613e-05 0.000979656 0.000203967 0.000434424 0.00147155 0.00623083 0.000167943 0.00654287 0.000231375 0.000144977 7.44322e-05 0.000271412 0.000257479 0.000125951 0.0084965 0.00708424 0.000741149 0.000327848 0.00072125 0.00155309 0.000849641 0.000468936 0.000597561 0.000343363 0.0013401 0.000644772 0.00296955 0.00203899 0.000344333 0.000654109 0.000579819 0.000307663 0.00295462 0.00098848 0.000224191 0.000616008 0.000192669 0.000124413 0.000265971 6.58702e-05 0.00031542 0.000253495 0.000276654 0.00289865 0.000574721 0.000131497 0.000204278 0.000568842 9.16333e-05 0.000257384 0.000243244 0.000443263 0.000109194 0.000139178 0.000500078 0.000198004 0.000107967 0.000169954 0.000123934 0.000258871 9.86871e-05 0.000293493 0.000323952 0.000504283 0.00036182 0.000316952 0.000177675 0.00168864 8.59652e-05 7.83207e-05 0.000429965 0.000663861 0.000506927 0.000768278 0.000391109 0.000419152 0.000638448 0.000214176 0.00016114 0.000515638 0.000709203 0.000154853 0.000343536 0.000326896 0.000130624 7.31075e-05 6.40462e-05 0.000139256 0.000695747 0.000437555 0.00208446 0.000180979 0.000100821 0.000760209 0.000238104 9.52171e-05 0.000459536 0.000388741 0.000291907 0.000577998 0.000439995 9.34035e-05 0.000309451 0.000308385 0.00012725 6.17104e-05 0.000231779 0.000489432 0.00012118 0.000211306 0.000357186 0.000356726 0.000311104 0.000615516 0.000252385 0.000400029 0.000204223 0.000195018 7.65522e-05 0.00028094 0.000303784 0.00186481\n------- print end ----------"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "更详细的集成说明"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "关于使用C++接口进行集成的更多细节及高级用法，可以参考模型推理（C++接口）。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "关于使用Java接口进行集成开发，可以参考模型推理（Java接口）。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "关于Android上的集成开发，请查看基于JNI接口的Android应用开发、基于Java接口的Android应用开发及模型支持。"
+    }
+  ]
+}

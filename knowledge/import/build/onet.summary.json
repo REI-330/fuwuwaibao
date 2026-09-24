@@ -1,0 +1,35 @@
+{
+  "schema": "career-graph-external-import/v1",
+  "library": "O*NET",
+  "version": "29.1",
+  "sourceId": "onet-29.1",
+  "sourceUrl": "https://www.onetcenter.org/dl_files/database/db_29_1_text.zip",
+  "rawDir": "knowledge/import/raw/onet-29.1",
+  "output": "knowledge/import/build/onet.jsonl",
+  "note": "由 import-onet.mjs 从官方文本库换算，无人工推断；importance = IM / 5 归一，level = LV 原值。",
+  "counts": {
+    "nodes": 1254,
+    "edges": 71375,
+    "byKind": {
+      "domain": 33,
+      "skill": 35,
+      "standard": 1016,
+      "tool": 170
+    },
+    "byType": {
+      "specifies": 59754,
+      "uses": 11621
+    }
+  },
+  "skipped": {
+    "recommendSuppress": 4921,
+    "notRelevant": 5508,
+    "note": "Recommend Suppress = Y（统计不可靠）与 Not Relevant = Y（对本职业无意义）的评分行被跳过，不计入 specifies 边。"
+  },
+  "notImported": [
+    "Task Statements（18,797 条任务陈述）",
+    "Alternate Titles（55,121 条岗位别名）",
+    "Tools Used（41,663 行非技术类工具）",
+    "Abilities / Work Activities / Work Context / Work Styles / Interests"
+  ]
+}

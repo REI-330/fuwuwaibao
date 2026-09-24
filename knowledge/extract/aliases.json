@@ -1,0 +1,3747 @@
+{
+  "schema": "career-graph-aliases/v1",
+  "generatedAt": "2026-09-15T13:36:02.806Z",
+  "note": "归一化只做确定性变换（去空白、统一全/半角括号与各类连字符、去间隔号、小写）。歧义 key 不猜指向，交给第 06 步人工裁定。",
+  "rules": [
+    "key = label/alias 去掉全部空白 + 统一连字符与括号 + 去掉 ·・ + 转小写",
+    "status=unique：该 key 只命中一个节点，primary 直接给出指向",
+    "status=ambiguous：该 key 命中多个节点，primary=null，必须由 06-adjudicate.mjs 裁决",
+    "cross-kind：歧义跨越节点类型（例如同时命中 skill 与 tool），比同类型歧义更需要人工确认"
+  ],
+  "counts": {
+    "keys": 161,
+    "uniqueKeys": 158,
+    "ambiguousKeys": 3,
+    "surfaces": 161,
+    "nodes": 63,
+    "nodesWithAliases": 40,
+    "nodesInAmbiguity": 6
+  },
+  "entries": [
+    {
+      "key": "把检测模型导出为端侧格式",
+      "surfaces": [
+        "把检测模型导出为端侧格式"
+      ],
+      "kinds": [
+        "task"
+      ],
+      "ids": [
+        "task:T0061"
+      ],
+      "status": "unique",
+      "primary": "task:T0061",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "边缘推理工程师",
+      "surfaces": [
+        "边缘推理工程师"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI004"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI004",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "边缘智能工程师",
+      "surfaces": [
+        "边缘智能工程师"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI004"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI004",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "边缘ai工程师",
+      "surfaces": [
+        "边缘 AI 工程师"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI004"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI004",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "边缘ai与模型部署",
+      "surfaces": [
+        "边缘 AI 与模型部署"
+      ],
+      "kinds": [
+        "domain"
+      ],
+      "ids": [
+        "domain:edge-ai"
+      ],
+      "status": "unique",
+      "primary": "domain:edge-ai",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "不稳定测试",
+      "surfaces": [
+        "不稳定测试"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK134"
+      ],
+      "status": "unique",
+      "primary": "skill:SK134",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "部署格式选型",
+      "surfaces": [
+        "部署格式选型"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK123"
+      ],
+      "status": "unique",
+      "primary": "skill:SK123",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "部署格式选择",
+      "surfaces": [
+        "部署格式选择"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK123"
+      ],
+      "status": "unique",
+      "primary": "skill:SK123",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "部署选项对比",
+      "surfaces": [
+        "部署选项对比"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK123"
+      ],
+      "status": "unique",
+      "primary": "skill:SK123",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "测试隔离",
+      "surfaces": [
+        "测试隔离"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK131"
+      ],
+      "status": "unique",
+      "primary": "skill:SK131",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "测试框架",
+      "surfaces": [
+        "测试框架"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK130"
+      ],
+      "status": "unique",
+      "primary": "skill:SK130",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "测试自动化工程师",
+      "surfaces": [
+        "测试自动化工程师"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI003"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI003",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "测试自动化与质量工程",
+      "surfaces": [
+        "测试自动化与质量工程"
+      ],
+      "kinds": [
+        "domain"
+      ],
+      "ids": [
+        "domain:test-automation"
+      ],
+      "status": "unique",
+      "primary": "domain:test-automation",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "导出格式",
+      "surfaces": [
+        "导出格式"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK113"
+      ],
+      "status": "unique",
+      "primary": "skill:SK113",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "等待策略",
+      "surfaces": [
+        "等待策略"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK133"
+      ],
+      "status": "unique",
+      "primary": "skill:SK133",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "等待策略与稳定测试",
+      "surfaces": [
+        "等待策略与稳定测试"
+      ],
+      "kinds": [
+        "knowledge"
+      ],
+      "ids": [
+        "knowledge:AI003:stage1"
+      ],
+      "status": "unique",
+      "primary": "knowledge:AI003:stage1",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "端侧部署目标激增",
+      "surfaces": [
+        "端侧部署目标激增"
+      ],
+      "kinds": [
+        "trend"
+      ],
+      "ids": [
+        "trend:edge-ai-2026"
+      ],
+      "status": "unique",
+      "primary": "trend:edge-ai-2026",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "端侧后端选型",
+      "surfaces": [
+        "端侧后端选型"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK123"
+      ],
+      "status": "unique",
+      "primary": "skill:SK123",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "端侧实时性与传输速度调优",
+      "surfaces": [
+        "端侧实时性与传输速度调优"
+      ],
+      "kinds": [
+        "knowledge"
+      ],
+      "ids": [
+        "knowledge:AI001:stage4"
+      ],
+      "status": "unique",
+      "primary": "knowledge:AI001:stage4",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "端侧推理集成",
+      "surfaces": [
+        "端侧推理集成"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK120"
+      ],
+      "status": "unique",
+      "primary": "skill:SK120",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "端侧推理性能基准测试",
+      "surfaces": [
+        "端侧推理性能基准测试"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK121"
+      ],
+      "status": "unique",
+      "primary": "skill:SK121",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "端侧性能",
+      "surfaces": [
+        "端侧性能"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK121"
+      ],
+      "status": "unique",
+      "primary": "skill:SK121",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "端侧ai工程师",
+      "surfaces": [
+        "端侧 AI 工程师"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI004"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI004",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "端到端测试稳定性治理",
+      "surfaces": [
+        "端到端测试稳定性治理"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK134"
+      ],
+      "status": "unique",
+      "primary": "skill:SK134",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "堆内存属性与dma缓冲",
+      "surfaces": [
+        "堆内存属性与 DMA 缓冲"
+      ],
+      "kinds": [
+        "skill",
+        "knowledge"
+      ],
+      "ids": [
+        "knowledge:AI001:stage3",
+        "skill:SK104"
+      ],
+      "status": "ambiguous",
+      "primary": null,
+      "conflict": "cross-kind",
+      "resolvedBy": "pending-adjudication"
+    },
+    {
+      "key": "堆属性分配",
+      "surfaces": [
+        "堆属性分配"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK104"
+      ],
+      "status": "unique",
+      "primary": "skill:SK104",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "飞桨",
+      "surfaces": [
+        "飞桨"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "ids": [
+        "tool:paddlepaddle"
+      ],
+      "status": "unique",
+      "primary": "tool:paddlepaddle",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "飞桨(paddlepaddle)",
+      "surfaces": [
+        "飞桨（PaddlePaddle）"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "ids": [
+        "tool:paddlepaddle"
+      ],
+      "status": "unique",
+      "primary": "tool:paddlepaddle",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "分层夹具",
+      "surfaces": [
+        "分层夹具"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK136"
+      ],
+      "status": "unique",
+      "primary": "skill:SK136",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "分层夹具组织conftest",
+      "surfaces": [
+        "分层夹具组织 conftest"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK136"
+      ],
+      "status": "unique",
+      "primary": "skill:SK136",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "分割模型",
+      "surfaces": [
+        "分割模型"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK114"
+      ],
+      "status": "unique",
+      "primary": "skill:SK114",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "固件工程师",
+      "surfaces": [
+        "固件工程师"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI001"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI001",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "机器视觉工程师",
+      "surfaces": [
+        "机器视觉工程师"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI002"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI002",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "机器视觉与深度学习",
+      "surfaces": [
+        "机器视觉与深度学习"
+      ],
+      "kinds": [
+        "domain"
+      ],
+      "ids": [
+        "domain:vision"
+      ],
+      "status": "unique",
+      "primary": "domain:vision",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "计算机视觉工程师",
+      "surfaces": [
+        "计算机视觉工程师"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI002"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI002",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "计算机硬件工程岗位稳定需求",
+      "surfaces": [
+        "计算机硬件工程岗位稳定需求"
+      ],
+      "kinds": [
+        "trend"
+      ],
+      "ids": [
+        "trend:hw-bright-outlook"
+      ],
+      "status": "unique",
+      "primary": "trend:hw-bright-outlook",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "计算机硬件工程师",
+      "surfaces": [
+        "计算机硬件工程师"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI001"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI001",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "技能等级证书",
+      "surfaces": [
+        "技能等级证书"
+      ],
+      "kinds": [
+        "credential"
+      ],
+      "ids": [
+        "credential:osta-skill"
+      ],
+      "status": "unique",
+      "primary": "credential:osta-skill",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "夹具共享",
+      "surfaces": [
+        "夹具共享"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK136"
+      ],
+      "status": "unique",
+      "primary": "skill:SK136",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "夹具设计",
+      "surfaces": [
+        "夹具设计"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK131"
+      ],
+      "status": "unique",
+      "primary": "skill:SK131",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "夹具与测试隔离",
+      "surfaces": [
+        "夹具与测试隔离"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK131"
+      ],
+      "status": "unique",
+      "primary": "skill:SK131",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "夹具组织与跨文件共享",
+      "surfaces": [
+        "夹具组织与跨文件共享"
+      ],
+      "kinds": [
+        "knowledge"
+      ],
+      "ids": [
+        "knowledge:AI003:stage2"
+      ],
+      "status": "unique",
+      "primary": "knowledge:AI003:stage2",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "检测模型训练",
+      "surfaces": [
+        "检测模型训练"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK110"
+      ],
+      "status": "unique",
+      "primary": "skill:SK110",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "检测模型训练与验证流程",
+      "surfaces": [
+        "检测模型训练与验证流程"
+      ],
+      "kinds": [
+        "knowledge"
+      ],
+      "ids": [
+        "knowledge:AI002:stage1"
+      ],
+      "status": "unique",
+      "primary": "knowledge:AI002:stage1",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "竞态条件",
+      "surfaces": [
+        "竞态条件"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK134"
+      ],
+      "status": "unique",
+      "primary": "skill:SK134",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "离线模型转换",
+      "surfaces": [
+        "离线模型转换"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK215"
+      ],
+      "status": "unique",
+      "primary": "skill:SK215",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "量化与端侧基准测试",
+      "surfaces": [
+        "量化与端侧基准测试"
+      ],
+      "kinds": [
+        "knowledge"
+      ],
+      "ids": [
+        "knowledge:AI004:stage2"
+      ],
+      "status": "unique",
+      "primary": "knowledge:AI004:stage2",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "浏览器自动化",
+      "surfaces": [
+        "浏览器自动化"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK132"
+      ],
+      "status": "unique",
+      "primary": "skill:SK132",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "浏览器自动化协议标准化",
+      "surfaces": [
+        "浏览器自动化协议标准化"
+      ],
+      "kinds": [
+        "trend"
+      ],
+      "ids": [
+        "trend:webdriver-bidi"
+      ],
+      "status": "unique",
+      "primary": "trend:webdriver-bidi",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "浏览器自动化webdriver",
+      "surfaces": [
+        "浏览器自动化 WebDriver"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK132"
+      ],
+      "status": "unique",
+      "primary": "skill:SK132",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "轮询传输事务",
+      "surfaces": [
+        "轮询传输事务"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK106"
+      ],
+      "status": "unique",
+      "primary": "skill:SK106",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "模型导出",
+      "surfaces": [
+        "模型导出"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK113"
+      ],
+      "status": "unique",
+      "primary": "skill:SK113",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "模型导出与格式转换",
+      "surfaces": [
+        "模型导出与格式转换"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK113"
+      ],
+      "status": "unique",
+      "primary": "skill:SK113",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "模型结构可视化检查",
+      "surfaces": [
+        "模型结构可视化检查"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK122"
+      ],
+      "status": "unique",
+      "primary": "skill:SK122",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "模型可视化",
+      "surfaces": [
+        "模型可视化"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK122"
+      ],
+      "status": "unique",
+      "primary": "skill:SK122",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "模型量化",
+      "surfaces": [
+        "模型量化"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK215"
+      ],
+      "status": "unique",
+      "primary": "skill:SK215",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "模型量化与部署",
+      "surfaces": [
+        "模型量化与部署"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK215"
+      ],
+      "status": "unique",
+      "primary": "skill:SK215",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "模型验证",
+      "surfaces": [
+        "模型验证"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK112"
+      ],
+      "status": "unique",
+      "primary": "skill:SK112",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "模型验证与指标",
+      "surfaces": [
+        "模型验证与指标"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK112"
+      ],
+      "status": "unique",
+      "primary": "skill:SK112",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "模型转换与lite推理集成",
+      "surfaces": [
+        "模型转换与 Lite 推理集成"
+      ],
+      "kinds": [
+        "knowledge"
+      ],
+      "ids": [
+        "knowledge:AI004:stage1"
+      ],
+      "status": "unique",
+      "primary": "knowledge:AI004:stage1",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "目标检测",
+      "surfaces": [
+        "目标检测"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK110"
+      ],
+      "status": "unique",
+      "primary": "skill:SK110",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "目标检测模型训练",
+      "surfaces": [
+        "目标检测模型训练"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK110"
+      ],
+      "status": "unique",
+      "primary": "skill:SK110",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "内存模型",
+      "surfaces": [
+        "内存模型"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK090"
+      ],
+      "status": "unique",
+      "primary": "skill:SK090",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "内存属性",
+      "surfaces": [
+        "内存属性"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK104"
+      ],
+      "status": "unique",
+      "primary": "skill:SK104",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "评估指标",
+      "surfaces": [
+        "评估指标"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK112"
+      ],
+      "status": "unique",
+      "primary": "skill:SK112",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "嵌入式开发",
+      "surfaces": [
+        "嵌入式开发"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI001"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI001",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "嵌入式开发工程师",
+      "surfaces": [
+        "嵌入式开发工程师"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI001"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI001",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "嵌入式与实时系统",
+      "surfaces": [
+        "嵌入式与实时系统"
+      ],
+      "kinds": [
+        "domain"
+      ],
+      "ids": [
+        "domain:embedded"
+      ],
+      "status": "unique",
+      "primary": "domain:embedded",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "嵌入式c与外设入门",
+      "surfaces": [
+        "嵌入式 C 与外设入门"
+      ],
+      "kinds": [
+        "knowledge"
+      ],
+      "ids": [
+        "knowledge:AI001:stage1"
+      ],
+      "status": "unique",
+      "primary": "knowledge:AI001:stage1",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "轻量级推理引擎集成",
+      "surfaces": [
+        "轻量级推理引擎集成"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK120"
+      ],
+      "status": "unique",
+      "primary": "skill:SK120",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "驱动开发",
+      "surfaces": [
+        "驱动开发"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK101"
+      ],
+      "status": "unique",
+      "primary": "skill:SK101",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "任务调度",
+      "surfaces": [
+        "任务调度"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK105"
+      ],
+      "status": "unique",
+      "primary": "skill:SK105",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "软件质量保证分析师",
+      "surfaces": [
+        "软件质量保证分析师"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI003"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI003",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "软件质量保证岗位需求旺盛",
+      "surfaces": [
+        "软件质量保证岗位需求旺盛"
+      ],
+      "kinds": [
+        "trend"
+      ],
+      "ids": [
+        "trend:sqa-bright-outlook"
+      ],
+      "status": "unique",
+      "primary": "trend:sqa-bright-outlook",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "实例分割",
+      "surfaces": [
+        "实例分割"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK114"
+      ],
+      "status": "unique",
+      "primary": "skill:SK114",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "实例分割训练",
+      "surfaces": [
+        "实例分割训练"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK114"
+      ],
+      "status": "unique",
+      "primary": "skill:SK114",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "实时操作系统任务调度",
+      "surfaces": [
+        "实时操作系统任务调度"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK105"
+      ],
+      "status": "unique",
+      "primary": "skill:SK105",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "实时内核",
+      "surfaces": [
+        "实时内核"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK105"
+      ],
+      "status": "unique",
+      "primary": "skill:SK105",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "视觉算法工程师",
+      "surfaces": [
+        "视觉算法工程师"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI002"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI002",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "数据标注",
+      "surfaces": [
+        "数据标注"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK111"
+      ],
+      "status": "unique",
+      "primary": "skill:SK111",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "数据集格式",
+      "surfaces": [
+        "数据集格式"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK111"
+      ],
+      "status": "unique",
+      "primary": "skill:SK111",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "数据集格式与标注",
+      "surfaces": [
+        "数据集格式与标注"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK111"
+      ],
+      "status": "unique",
+      "primary": "skill:SK111",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "双向协议",
+      "surfaces": [
+        "双向协议"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK137"
+      ],
+      "status": "unique",
+      "primary": "skill:SK137",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "拓扑结构检查",
+      "surfaces": [
+        "拓扑结构检查"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK122"
+      ],
+      "status": "unique",
+      "primary": "skill:SK122",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "推理基准测试",
+      "surfaces": [
+        "推理基准测试"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK121"
+      ],
+      "status": "unique",
+      "primary": "skill:SK121",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "推理库集成",
+      "surfaces": [
+        "推理库集成"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK120"
+      ],
+      "status": "unique",
+      "primary": "skill:SK120",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "外设驱动开发",
+      "surfaces": [
+        "外设驱动开发"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK101"
+      ],
+      "status": "unique",
+      "primary": "skill:SK101",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "微控制器外设驱动",
+      "surfaces": [
+        "微控制器外设驱动"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK101"
+      ],
+      "status": "unique",
+      "primary": "skill:SK101",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "显式等待",
+      "surfaces": [
+        "显式等待"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK133"
+      ],
+      "status": "unique",
+      "primary": "skill:SK133",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "显式等待与隐式等待",
+      "surfaces": [
+        "显式等待与隐式等待"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK133"
+      ],
+      "status": "unique",
+      "primary": "skill:SK133",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "训练并验证一个目标检测模型",
+      "surfaces": [
+        "训练并验证一个目标检测模型"
+      ],
+      "kinds": [
+        "task"
+      ],
+      "ids": [
+        "task:T0060"
+      ],
+      "status": "unique",
+      "primary": "task:T0060",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "掩码分割",
+      "surfaces": [
+        "掩码分割"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK114"
+      ],
+      "status": "unique",
+      "primary": "skill:SK114",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "引脚复用",
+      "surfaces": [
+        "引脚复用"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK103"
+      ],
+      "status": "unique",
+      "primary": "skill:SK103",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "隐式等待",
+      "surfaces": [
+        "隐式等待"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK133"
+      ],
+      "status": "unique",
+      "primary": "skill:SK133",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "用显式等待编写稳定的端到端测试",
+      "surfaces": [
+        "用显式等待编写稳定的端到端测试"
+      ],
+      "kinds": [
+        "task"
+      ],
+      "ids": [
+        "task:T0070"
+      ],
+      "status": "unique",
+      "primary": "task:T0070",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "用freertos搭建多任务采集程序",
+      "surfaces": [
+        "用 FreeRTOS 搭建多任务采集程序"
+      ],
+      "kinds": [
+        "task"
+      ],
+      "ids": [
+        "task:T0051"
+      ],
+      "status": "unique",
+      "primary": "task:T0051",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "用pytest夹具组织可复用测试装置",
+      "surfaces": [
+        "用 pytest 夹具组织可复用测试装置"
+      ],
+      "kinds": [
+        "task"
+      ],
+      "ids": [
+        "task:T0080"
+      ],
+      "status": "unique",
+      "primary": "task:T0080",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "用spi主机驱动读取一次传感器数据",
+      "surfaces": [
+        "用 SPI 主机驱动读取一次传感器数据"
+      ],
+      "kinds": [
+        "task"
+      ],
+      "ids": [
+        "task:T0042"
+      ],
+      "status": "unique",
+      "primary": "task:T0042",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "栈与堆",
+      "surfaces": [
+        "栈与堆"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK090"
+      ],
+      "status": "unique",
+      "primary": "skill:SK090",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "张量",
+      "surfaces": [
+        "张量"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK115"
+      ],
+      "status": "unique",
+      "primary": "skill:SK115",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "张量与自动微分基础",
+      "surfaces": [
+        "张量与自动微分基础"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK115"
+      ],
+      "status": "unique",
+      "primary": "skill:SK115",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "职业技能等级证书",
+      "surfaces": [
+        "职业技能等级证书"
+      ],
+      "kinds": [
+        "credential"
+      ],
+      "ids": [
+        "credential:osta-skill"
+      ],
+      "status": "unique",
+      "primary": "credential:osta-skill",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "职业资格证书",
+      "surfaces": [
+        "职业资格证书"
+      ],
+      "kinds": [
+        "credential"
+      ],
+      "ids": [
+        "credential:osta-skill"
+      ],
+      "status": "unique",
+      "primary": "credential:osta-skill",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "中断传输事务",
+      "surfaces": [
+        "中断传输事务"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK106"
+      ],
+      "status": "unique",
+      "primary": "skill:SK106",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "中断与轮询传输取舍",
+      "surfaces": [
+        "中断与轮询传输取舍"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK106"
+      ],
+      "status": "unique",
+      "primary": "skill:SK106",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "准确率评估",
+      "surfaces": [
+        "准确率评估"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK112"
+      ],
+      "status": "unique",
+      "primary": "skill:SK112",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "自动化测试工程师",
+      "surfaces": [
+        "自动化测试工程师"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI003"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI003",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "自动微分",
+      "surfaces": [
+        "自动微分"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK115"
+      ],
+      "status": "unique",
+      "primary": "skill:SK115",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "abet",
+      "surfaces": [
+        "ABET"
+      ],
+      "kinds": [
+        "credential"
+      ],
+      "ids": [
+        "credential:abet"
+      ],
+      "status": "unique",
+      "primary": "credential:abet",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "abet工程与技术认证",
+      "surfaces": [
+        "ABET 工程与技术认证"
+      ],
+      "kinds": [
+        "credential"
+      ],
+      "ids": [
+        "credential:abet"
+      ],
+      "status": "unique",
+      "primary": "credential:abet",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "benchmark推理测试",
+      "surfaces": [
+        "benchmark 推理测试"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK121"
+      ],
+      "status": "unique",
+      "primary": "skill:SK121",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "c语言",
+      "surfaces": [
+        "C 语言"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK090"
+      ],
+      "status": "unique",
+      "primary": "skill:SK090",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "c语言与内存模型",
+      "surfaces": [
+        "C 语言与内存模型"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK090"
+      ],
+      "status": "unique",
+      "primary": "skill:SK090",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "cdp替代",
+      "surfaces": [
+        "CDP 替代"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK137"
+      ],
+      "status": "unique",
+      "primary": "skill:SK137",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "coco转yolo",
+      "surfaces": [
+        "COCO 转 YOLO"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK111"
+      ],
+      "status": "unique",
+      "primary": "skill:SK111",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "comptia",
+      "surfaces": [
+        "CompTIA"
+      ],
+      "kinds": [
+        "credential"
+      ],
+      "ids": [
+        "credential:comptia"
+      ],
+      "status": "unique",
+      "primary": "credential:comptia",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "comptia认证",
+      "surfaces": [
+        "CompTIA 认证"
+      ],
+      "kinds": [
+        "credential"
+      ],
+      "ids": [
+        "credential:comptia"
+      ],
+      "status": "unique",
+      "primary": "credential:comptia",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "conftest.py",
+      "surfaces": [
+        "conftest.py"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK136"
+      ],
+      "status": "unique",
+      "primary": "skill:SK136",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "cv工程师",
+      "surfaces": [
+        "CV 工程师"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI002"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI002",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "dma存储器",
+      "surfaces": [
+        "DMA 存储器"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK104"
+      ],
+      "status": "unique",
+      "primary": "skill:SK104",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "esp-idf",
+      "surfaces": [
+        "ESP-IDF"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "ids": [
+        "tool:esp-idf"
+      ],
+      "status": "unique",
+      "primary": "tool:esp-idf",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "esp32idf",
+      "surfaces": [
+        "ESP32 IDF"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "ids": [
+        "tool:esp-idf"
+      ],
+      "status": "unique",
+      "primary": "tool:esp-idf",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "fixture",
+      "surfaces": [
+        "fixture"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK131"
+      ],
+      "status": "unique",
+      "primary": "skill:SK131",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "flakytest",
+      "surfaces": [
+        "flaky test"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK134"
+      ],
+      "status": "unique",
+      "primary": "skill:SK134",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "freertos",
+      "surfaces": [
+        "FreeRTOS"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "ids": [
+        "tool:freertos"
+      ],
+      "status": "unique",
+      "primary": "tool:freertos",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "freertos内核",
+      "surfaces": [
+        "FreeRTOS 内核"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "ids": [
+        "tool:freertos"
+      ],
+      "status": "unique",
+      "primary": "tool:freertos",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "gpio配置",
+      "surfaces": [
+        "GPIO 配置"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK103"
+      ],
+      "status": "unique",
+      "primary": "skill:SK103",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "gpio与引脚复用",
+      "surfaces": [
+        "GPIO 与引脚复用"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK103"
+      ],
+      "status": "unique",
+      "primary": "skill:SK103",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "int8量化",
+      "surfaces": [
+        "INT8 量化"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK215"
+      ],
+      "status": "unique",
+      "primary": "skill:SK215",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "io管脚配置",
+      "surfaces": [
+        "IO 管脚配置"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK103"
+      ],
+      "status": "unique",
+      "primary": "skill:SK103",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "isr",
+      "surfaces": [
+        "ISR"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK106"
+      ],
+      "status": "unique",
+      "primary": "skill:SK106",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "mcu开发",
+      "surfaces": [
+        "MCU 开发"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI001"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI001",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "mindspore-lite集成",
+      "surfaces": [
+        "mindspore-lite 集成"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK120"
+      ],
+      "status": "unique",
+      "primary": "skill:SK120",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "mindsporelite",
+      "surfaces": [
+        "MindSpore Lite"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "ids": [
+        "tool:mindspore-lite"
+      ],
+      "status": "unique",
+      "primary": "tool:mindspore-lite",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "mindsporelite推理引擎",
+      "surfaces": [
+        "MindSpore Lite 推理引擎"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "ids": [
+        "tool:mindspore-lite"
+      ],
+      "status": "unique",
+      "primary": "tool:mindspore-lite",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "netron",
+      "surfaces": [
+        "Netron"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "ids": [
+        "tool:netron"
+      ],
+      "status": "unique",
+      "primary": "tool:netron",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "netron可视化",
+      "surfaces": [
+        "Netron 可视化"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK122"
+      ],
+      "status": "unique",
+      "primary": "skill:SK122",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "netron可视化工具",
+      "surfaces": [
+        "Netron 可视化工具"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "ids": [
+        "tool:netron"
+      ],
+      "status": "unique",
+      "primary": "tool:netron",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "onnx导出",
+      "surfaces": [
+        "ONNX 导出"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK113"
+      ],
+      "status": "unique",
+      "primary": "skill:SK113",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "paddlepaddle",
+      "surfaces": [
+        "PaddlePaddle"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "ids": [
+        "tool:paddlepaddle"
+      ],
+      "status": "unique",
+      "primary": "tool:paddlepaddle",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "py.test",
+      "surfaces": [
+        "py.test"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "ids": [
+        "tool:pytest"
+      ],
+      "status": "unique",
+      "primary": "tool:pytest",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "pytest",
+      "surfaces": [
+        "pytest"
+      ],
+      "kinds": [
+        "skill",
+        "tool"
+      ],
+      "ids": [
+        "skill:SK130",
+        "tool:pytest"
+      ],
+      "status": "ambiguous",
+      "primary": null,
+      "conflict": "cross-kind",
+      "resolvedBy": "pending-adjudication"
+    },
+    {
+      "key": "python测试框架pytest",
+      "surfaces": [
+        "Python 测试框架 pytest"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK130"
+      ],
+      "status": "unique",
+      "primary": "skill:SK130",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "python单元测试",
+      "surfaces": [
+        "Python 单元测试"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK130"
+      ],
+      "status": "unique",
+      "primary": "skill:SK130",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "qa工程师",
+      "surfaces": [
+        "QA 工程师"
+      ],
+      "kinds": [
+        "occupation"
+      ],
+      "ids": [
+        "occupation:AI003"
+      ],
+      "status": "unique",
+      "primary": "occupation:AI003",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "rtos任务",
+      "surfaces": [
+        "RTOS 任务"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK105"
+      ],
+      "status": "unique",
+      "primary": "skill:SK105",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "selenium",
+      "surfaces": [
+        "Selenium"
+      ],
+      "kinds": [
+        "skill",
+        "tool"
+      ],
+      "ids": [
+        "skill:SK132",
+        "tool:selenium"
+      ],
+      "status": "ambiguous",
+      "primary": null,
+      "conflict": "cross-kind",
+      "resolvedBy": "pending-adjudication"
+    },
+    {
+      "key": "seleniumwebdriver",
+      "surfaces": [
+        "Selenium WebDriver"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "ids": [
+        "tool:selenium"
+      ],
+      "status": "unique",
+      "primary": "tool:selenium",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "spi传输事务",
+      "surfaces": [
+        "SPI 传输事务"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK102"
+      ],
+      "status": "unique",
+      "primary": "skill:SK102",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "spi时序",
+      "surfaces": [
+        "SPI 时序"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK102"
+      ],
+      "status": "unique",
+      "primary": "skill:SK102",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "spi主机驱动",
+      "surfaces": [
+        "SPI 主机驱动"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK101"
+      ],
+      "status": "unique",
+      "primary": "skill:SK101",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "spi总线事务设计",
+      "surfaces": [
+        "SPI 总线事务设计"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK102"
+      ],
+      "status": "unique",
+      "primary": "skill:SK102",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "spi总线与传输事务",
+      "surfaces": [
+        "SPI 总线与传输事务"
+      ],
+      "kinds": [
+        "knowledge"
+      ],
+      "ids": [
+        "knowledge:AI001:stage2"
+      ],
+      "status": "unique",
+      "primary": "knowledge:AI001:stage2",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "tensor",
+      "surfaces": [
+        "Tensor"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK115"
+      ],
+      "status": "unique",
+      "primary": "skill:SK115",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "ultralytics",
+      "surfaces": [
+        "ultralytics"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "ids": [
+        "tool:ultralytics"
+      ],
+      "status": "unique",
+      "primary": "tool:ultralytics",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "ultralyticsyolo",
+      "surfaces": [
+        "Ultralytics YOLO"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "ids": [
+        "tool:ultralytics"
+      ],
+      "status": "unique",
+      "primary": "tool:ultralytics",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "webdriver",
+      "surfaces": [
+        "WebDriver"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK132"
+      ],
+      "status": "unique",
+      "primary": "skill:SK132",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "webdriverbidi",
+      "surfaces": [
+        "WebDriver BiDi"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK137"
+      ],
+      "status": "unique",
+      "primary": "skill:SK137",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "webdriverbidi双向协议",
+      "surfaces": [
+        "WebDriver BiDi 双向协议"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK137"
+      ],
+      "status": "unique",
+      "primary": "skill:SK137",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "yolo",
+      "surfaces": [
+        "YOLO"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "ids": [
+        "tool:ultralytics"
+      ],
+      "status": "unique",
+      "primary": "tool:ultralytics",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    },
+    {
+      "key": "yolo训练",
+      "surfaces": [
+        "YOLO 训练"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "ids": [
+        "skill:SK110"
+      ],
+      "status": "unique",
+      "primary": "skill:SK110",
+      "conflict": null,
+      "resolvedBy": "unique-surface"
+    }
+  ],
+  "byKey": {
+    "把检测模型导出为端侧格式": [
+      "task:T0061"
+    ],
+    "边缘推理工程师": [
+      "occupation:AI004"
+    ],
+    "边缘智能工程师": [
+      "occupation:AI004"
+    ],
+    "边缘ai工程师": [
+      "occupation:AI004"
+    ],
+    "边缘ai与模型部署": [
+      "domain:edge-ai"
+    ],
+    "不稳定测试": [
+      "skill:SK134"
+    ],
+    "部署格式选型": [
+      "skill:SK123"
+    ],
+    "部署格式选择": [
+      "skill:SK123"
+    ],
+    "部署选项对比": [
+      "skill:SK123"
+    ],
+    "测试隔离": [
+      "skill:SK131"
+    ],
+    "测试框架": [
+      "skill:SK130"
+    ],
+    "测试自动化工程师": [
+      "occupation:AI003"
+    ],
+    "测试自动化与质量工程": [
+      "domain:test-automation"
+    ],
+    "导出格式": [
+      "skill:SK113"
+    ],
+    "等待策略": [
+      "skill:SK133"
+    ],
+    "等待策略与稳定测试": [
+      "knowledge:AI003:stage1"
+    ],
+    "端侧部署目标激增": [
+      "trend:edge-ai-2026"
+    ],
+    "端侧后端选型": [
+      "skill:SK123"
+    ],
+    "端侧实时性与传输速度调优": [
+      "knowledge:AI001:stage4"
+    ],
+    "端侧推理集成": [
+      "skill:SK120"
+    ],
+    "端侧推理性能基准测试": [
+      "skill:SK121"
+    ],
+    "端侧性能": [
+      "skill:SK121"
+    ],
+    "端侧ai工程师": [
+      "occupation:AI004"
+    ],
+    "端到端测试稳定性治理": [
+      "skill:SK134"
+    ],
+    "堆内存属性与dma缓冲": [
+      "knowledge:AI001:stage3",
+      "skill:SK104"
+    ],
+    "堆属性分配": [
+      "skill:SK104"
+    ],
+    "飞桨": [
+      "tool:paddlepaddle"
+    ],
+    "飞桨(paddlepaddle)": [
+      "tool:paddlepaddle"
+    ],
+    "分层夹具": [
+      "skill:SK136"
+    ],
+    "分层夹具组织conftest": [
+      "skill:SK136"
+    ],
+    "分割模型": [
+      "skill:SK114"
+    ],
+    "固件工程师": [
+      "occupation:AI001"
+    ],
+    "机器视觉工程师": [
+      "occupation:AI002"
+    ],
+    "机器视觉与深度学习": [
+      "domain:vision"
+    ],
+    "计算机视觉工程师": [
+      "occupation:AI002"
+    ],
+    "计算机硬件工程岗位稳定需求": [
+      "trend:hw-bright-outlook"
+    ],
+    "计算机硬件工程师": [
+      "occupation:AI001"
+    ],
+    "技能等级证书": [
+      "credential:osta-skill"
+    ],
+    "夹具共享": [
+      "skill:SK136"
+    ],
+    "夹具设计": [
+      "skill:SK131"
+    ],
+    "夹具与测试隔离": [
+      "skill:SK131"
+    ],
+    "夹具组织与跨文件共享": [
+      "knowledge:AI003:stage2"
+    ],
+    "检测模型训练": [
+      "skill:SK110"
+    ],
+    "检测模型训练与验证流程": [
+      "knowledge:AI002:stage1"
+    ],
+    "竞态条件": [
+      "skill:SK134"
+    ],
+    "离线模型转换": [
+      "skill:SK215"
+    ],
+    "量化与端侧基准测试": [
+      "knowledge:AI004:stage2"
+    ],
+    "浏览器自动化": [
+      "skill:SK132"
+    ],
+    "浏览器自动化协议标准化": [
+      "trend:webdriver-bidi"
+    ],
+    "浏览器自动化webdriver": [
+      "skill:SK132"
+    ],
+    "轮询传输事务": [
+      "skill:SK106"
+    ],
+    "模型导出": [
+      "skill:SK113"
+    ],
+    "模型导出与格式转换": [
+      "skill:SK113"
+    ],
+    "模型结构可视化检查": [
+      "skill:SK122"
+    ],
+    "模型可视化": [
+      "skill:SK122"
+    ],
+    "模型量化": [
+      "skill:SK215"
+    ],
+    "模型量化与部署": [
+      "skill:SK215"
+    ],
+    "模型验证": [
+      "skill:SK112"
+    ],
+    "模型验证与指标": [
+      "skill:SK112"
+    ],
+    "模型转换与lite推理集成": [
+      "knowledge:AI004:stage1"
+    ],
+    "目标检测": [
+      "skill:SK110"
+    ],
+    "目标检测模型训练": [
+      "skill:SK110"
+    ],
+    "内存模型": [
+      "skill:SK090"
+    ],
+    "内存属性": [
+      "skill:SK104"
+    ],
+    "评估指标": [
+      "skill:SK112"
+    ],
+    "嵌入式开发": [
+      "occupation:AI001"
+    ],
+    "嵌入式开发工程师": [
+      "occupation:AI001"
+    ],
+    "嵌入式与实时系统": [
+      "domain:embedded"
+    ],
+    "嵌入式c与外设入门": [
+      "knowledge:AI001:stage1"
+    ],
+    "轻量级推理引擎集成": [
+      "skill:SK120"
+    ],
+    "驱动开发": [
+      "skill:SK101"
+    ],
+    "任务调度": [
+      "skill:SK105"
+    ],
+    "软件质量保证分析师": [
+      "occupation:AI003"
+    ],
+    "软件质量保证岗位需求旺盛": [
+      "trend:sqa-bright-outlook"
+    ],
+    "实例分割": [
+      "skill:SK114"
+    ],
+    "实例分割训练": [
+      "skill:SK114"
+    ],
+    "实时操作系统任务调度": [
+      "skill:SK105"
+    ],
+    "实时内核": [
+      "skill:SK105"
+    ],
+    "视觉算法工程师": [
+      "occupation:AI002"
+    ],
+    "数据标注": [
+      "skill:SK111"
+    ],
+    "数据集格式": [
+      "skill:SK111"
+    ],
+    "数据集格式与标注": [
+      "skill:SK111"
+    ],
+    "双向协议": [
+      "skill:SK137"
+    ],
+    "拓扑结构检查": [
+      "skill:SK122"
+    ],
+    "推理基准测试": [
+      "skill:SK121"
+    ],
+    "推理库集成": [
+      "skill:SK120"
+    ],
+    "外设驱动开发": [
+      "skill:SK101"
+    ],
+    "微控制器外设驱动": [
+      "skill:SK101"
+    ],
+    "显式等待": [
+      "skill:SK133"
+    ],
+    "显式等待与隐式等待": [
+      "skill:SK133"
+    ],
+    "训练并验证一个目标检测模型": [
+      "task:T0060"
+    ],
+    "掩码分割": [
+      "skill:SK114"
+    ],
+    "引脚复用": [
+      "skill:SK103"
+    ],
+    "隐式等待": [
+      "skill:SK133"
+    ],
+    "用显式等待编写稳定的端到端测试": [
+      "task:T0070"
+    ],
+    "用freertos搭建多任务采集程序": [
+      "task:T0051"
+    ],
+    "用pytest夹具组织可复用测试装置": [
+      "task:T0080"
+    ],
+    "用spi主机驱动读取一次传感器数据": [
+      "task:T0042"
+    ],
+    "栈与堆": [
+      "skill:SK090"
+    ],
+    "张量": [
+      "skill:SK115"
+    ],
+    "张量与自动微分基础": [
+      "skill:SK115"
+    ],
+    "职业技能等级证书": [
+      "credential:osta-skill"
+    ],
+    "职业资格证书": [
+      "credential:osta-skill"
+    ],
+    "中断传输事务": [
+      "skill:SK106"
+    ],
+    "中断与轮询传输取舍": [
+      "skill:SK106"
+    ],
+    "准确率评估": [
+      "skill:SK112"
+    ],
+    "自动化测试工程师": [
+      "occupation:AI003"
+    ],
+    "自动微分": [
+      "skill:SK115"
+    ],
+    "abet": [
+      "credential:abet"
+    ],
+    "abet工程与技术认证": [
+      "credential:abet"
+    ],
+    "benchmark推理测试": [
+      "skill:SK121"
+    ],
+    "c语言": [
+      "skill:SK090"
+    ],
+    "c语言与内存模型": [
+      "skill:SK090"
+    ],
+    "cdp替代": [
+      "skill:SK137"
+    ],
+    "coco转yolo": [
+      "skill:SK111"
+    ],
+    "comptia": [
+      "credential:comptia"
+    ],
+    "comptia认证": [
+      "credential:comptia"
+    ],
+    "conftest.py": [
+      "skill:SK136"
+    ],
+    "cv工程师": [
+      "occupation:AI002"
+    ],
+    "dma存储器": [
+      "skill:SK104"
+    ],
+    "esp-idf": [
+      "tool:esp-idf"
+    ],
+    "esp32idf": [
+      "tool:esp-idf"
+    ],
+    "fixture": [
+      "skill:SK131"
+    ],
+    "flakytest": [
+      "skill:SK134"
+    ],
+    "freertos": [
+      "tool:freertos"
+    ],
+    "freertos内核": [
+      "tool:freertos"
+    ],
+    "gpio配置": [
+      "skill:SK103"
+    ],
+    "gpio与引脚复用": [
+      "skill:SK103"
+    ],
+    "int8量化": [
+      "skill:SK215"
+    ],
+    "io管脚配置": [
+      "skill:SK103"
+    ],
+    "isr": [
+      "skill:SK106"
+    ],
+    "mcu开发": [
+      "occupation:AI001"
+    ],
+    "mindspore-lite集成": [
+      "skill:SK120"
+    ],
+    "mindsporelite": [
+      "tool:mindspore-lite"
+    ],
+    "mindsporelite推理引擎": [
+      "tool:mindspore-lite"
+    ],
+    "netron": [
+      "tool:netron"
+    ],
+    "netron可视化": [
+      "skill:SK122"
+    ],
+    "netron可视化工具": [
+      "tool:netron"
+    ],
+    "onnx导出": [
+      "skill:SK113"
+    ],
+    "paddlepaddle": [
+      "tool:paddlepaddle"
+    ],
+    "py.test": [
+      "tool:pytest"
+    ],
+    "pytest": [
+      "skill:SK130",
+      "tool:pytest"
+    ],
+    "python测试框架pytest": [
+      "skill:SK130"
+    ],
+    "python单元测试": [
+      "skill:SK130"
+    ],
+    "qa工程师": [
+      "occupation:AI003"
+    ],
+    "rtos任务": [
+      "skill:SK105"
+    ],
+    "selenium": [
+      "skill:SK132",
+      "tool:selenium"
+    ],
+    "seleniumwebdriver": [
+      "tool:selenium"
+    ],
+    "spi传输事务": [
+      "skill:SK102"
+    ],
+    "spi时序": [
+      "skill:SK102"
+    ],
+    "spi主机驱动": [
+      "skill:SK101"
+    ],
+    "spi总线事务设计": [
+      "skill:SK102"
+    ],
+    "spi总线与传输事务": [
+      "knowledge:AI001:stage2"
+    ],
+    "tensor": [
+      "skill:SK115"
+    ],
+    "ultralytics": [
+      "tool:ultralytics"
+    ],
+    "ultralyticsyolo": [
+      "tool:ultralytics"
+    ],
+    "webdriver": [
+      "skill:SK132"
+    ],
+    "webdriverbidi": [
+      "skill:SK137"
+    ],
+    "webdriverbidi双向协议": [
+      "skill:SK137"
+    ],
+    "yolo": [
+      "tool:ultralytics"
+    ],
+    "yolo训练": [
+      "skill:SK110"
+    ]
+  },
+  "byId": {
+    "occupation:AI001": {
+      "label": "嵌入式开发工程师",
+      "key": "嵌入式开发工程师",
+      "aliasKeys": [
+        "嵌入式开发工程师",
+        "嵌入式开发",
+        "mcu开发",
+        "固件工程师",
+        "计算机硬件工程师"
+      ],
+      "conflicts": []
+    },
+    "occupation:AI002": {
+      "label": "机器视觉工程师",
+      "key": "机器视觉工程师",
+      "aliasKeys": [
+        "机器视觉工程师",
+        "视觉算法工程师",
+        "cv工程师",
+        "计算机视觉工程师"
+      ],
+      "conflicts": []
+    },
+    "occupation:AI003": {
+      "label": "自动化测试工程师",
+      "key": "自动化测试工程师",
+      "aliasKeys": [
+        "自动化测试工程师",
+        "测试自动化工程师",
+        "qa工程师",
+        "软件质量保证分析师"
+      ],
+      "conflicts": []
+    },
+    "occupation:AI004": {
+      "label": "边缘 AI 工程师",
+      "key": "边缘ai工程师",
+      "aliasKeys": [
+        "边缘ai工程师",
+        "边缘智能工程师",
+        "端侧ai工程师",
+        "边缘推理工程师"
+      ],
+      "conflicts": []
+    },
+    "skill:SK090": {
+      "label": "C 语言与内存模型",
+      "key": "c语言与内存模型",
+      "aliasKeys": [
+        "c语言与内存模型",
+        "c语言",
+        "内存模型",
+        "栈与堆"
+      ],
+      "conflicts": []
+    },
+    "skill:SK101": {
+      "label": "微控制器外设驱动",
+      "key": "微控制器外设驱动",
+      "aliasKeys": [
+        "微控制器外设驱动",
+        "外设驱动开发",
+        "spi主机驱动",
+        "驱动开发"
+      ],
+      "conflicts": []
+    },
+    "skill:SK102": {
+      "label": "SPI 总线事务设计",
+      "key": "spi总线事务设计",
+      "aliasKeys": [
+        "spi总线事务设计",
+        "spi传输事务",
+        "spi时序"
+      ],
+      "conflicts": []
+    },
+    "skill:SK103": {
+      "label": "GPIO 与引脚复用",
+      "key": "gpio与引脚复用",
+      "aliasKeys": [
+        "gpio与引脚复用",
+        "gpio配置",
+        "io管脚配置",
+        "引脚复用"
+      ],
+      "conflicts": []
+    },
+    "skill:SK104": {
+      "label": "堆内存属性与 DMA 缓冲",
+      "key": "堆内存属性与dma缓冲",
+      "aliasKeys": [
+        "堆内存属性与dma缓冲",
+        "dma存储器",
+        "堆属性分配",
+        "内存属性"
+      ],
+      "conflicts": [
+        {
+          "key": "堆内存属性与dma缓冲",
+          "others": [
+            "knowledge:AI001:stage3"
+          ],
+          "conflict": "cross-kind"
+        }
+      ]
+    },
+    "skill:SK105": {
+      "label": "实时操作系统任务调度",
+      "key": "实时操作系统任务调度",
+      "aliasKeys": [
+        "实时操作系统任务调度",
+        "rtos任务",
+        "实时内核",
+        "任务调度"
+      ],
+      "conflicts": []
+    },
+    "skill:SK106": {
+      "label": "中断与轮询传输取舍",
+      "key": "中断与轮询传输取舍",
+      "aliasKeys": [
+        "中断与轮询传输取舍",
+        "中断传输事务",
+        "轮询传输事务",
+        "isr"
+      ],
+      "conflicts": []
+    },
+    "skill:SK110": {
+      "label": "目标检测模型训练",
+      "key": "目标检测模型训练",
+      "aliasKeys": [
+        "目标检测模型训练",
+        "检测模型训练",
+        "yolo训练",
+        "目标检测"
+      ],
+      "conflicts": []
+    },
+    "skill:SK111": {
+      "label": "数据集格式与标注",
+      "key": "数据集格式与标注",
+      "aliasKeys": [
+        "数据集格式与标注",
+        "数据集格式",
+        "数据标注",
+        "coco转yolo"
+      ],
+      "conflicts": []
+    },
+    "skill:SK112": {
+      "label": "模型验证与指标",
+      "key": "模型验证与指标",
+      "aliasKeys": [
+        "模型验证与指标",
+        "模型验证",
+        "准确率评估",
+        "评估指标"
+      ],
+      "conflicts": []
+    },
+    "skill:SK113": {
+      "label": "模型导出与格式转换",
+      "key": "模型导出与格式转换",
+      "aliasKeys": [
+        "模型导出与格式转换",
+        "模型导出",
+        "导出格式",
+        "onnx导出"
+      ],
+      "conflicts": []
+    },
+    "skill:SK114": {
+      "label": "实例分割",
+      "key": "实例分割",
+      "aliasKeys": [
+        "实例分割",
+        "分割模型",
+        "掩码分割",
+        "实例分割训练"
+      ],
+      "conflicts": []
+    },
+    "skill:SK115": {
+      "label": "张量与自动微分基础",
+      "key": "张量与自动微分基础",
+      "aliasKeys": [
+        "张量与自动微分基础",
+        "tensor",
+        "张量",
+        "自动微分"
+      ],
+      "conflicts": []
+    },
+    "skill:SK120": {
+      "label": "轻量级推理引擎集成",
+      "key": "轻量级推理引擎集成",
+      "aliasKeys": [
+        "轻量级推理引擎集成",
+        "推理库集成",
+        "mindspore-lite集成",
+        "端侧推理集成"
+      ],
+      "conflicts": []
+    },
+    "skill:SK121": {
+      "label": "端侧推理性能基准测试",
+      "key": "端侧推理性能基准测试",
+      "aliasKeys": [
+        "端侧推理性能基准测试",
+        "benchmark推理测试",
+        "推理基准测试",
+        "端侧性能"
+      ],
+      "conflicts": []
+    },
+    "skill:SK122": {
+      "label": "模型结构可视化检查",
+      "key": "模型结构可视化检查",
+      "aliasKeys": [
+        "模型结构可视化检查",
+        "netron可视化",
+        "模型可视化",
+        "拓扑结构检查"
+      ],
+      "conflicts": []
+    },
+    "skill:SK123": {
+      "label": "部署格式选型",
+      "key": "部署格式选型",
+      "aliasKeys": [
+        "部署格式选型",
+        "部署选项对比",
+        "部署格式选择",
+        "端侧后端选型"
+      ],
+      "conflicts": []
+    },
+    "skill:SK130": {
+      "label": "Python 测试框架 pytest",
+      "key": "python测试框架pytest",
+      "aliasKeys": [
+        "python测试框架pytest",
+        "pytest",
+        "测试框架",
+        "python单元测试"
+      ],
+      "conflicts": [
+        {
+          "key": "pytest",
+          "others": [
+            "tool:pytest"
+          ],
+          "conflict": "cross-kind"
+        }
+      ]
+    },
+    "skill:SK131": {
+      "label": "夹具与测试隔离",
+      "key": "夹具与测试隔离",
+      "aliasKeys": [
+        "夹具与测试隔离",
+        "fixture",
+        "夹具设计",
+        "测试隔离"
+      ],
+      "conflicts": []
+    },
+    "skill:SK132": {
+      "label": "浏览器自动化 WebDriver",
+      "key": "浏览器自动化webdriver",
+      "aliasKeys": [
+        "浏览器自动化webdriver",
+        "webdriver",
+        "selenium",
+        "浏览器自动化"
+      ],
+      "conflicts": [
+        {
+          "key": "selenium",
+          "others": [
+            "tool:selenium"
+          ],
+          "conflict": "cross-kind"
+        }
+      ]
+    },
+    "skill:SK133": {
+      "label": "显式等待与隐式等待",
+      "key": "显式等待与隐式等待",
+      "aliasKeys": [
+        "显式等待与隐式等待",
+        "等待策略",
+        "显式等待",
+        "隐式等待"
+      ],
+      "conflicts": []
+    },
+    "skill:SK134": {
+      "label": "端到端测试稳定性治理",
+      "key": "端到端测试稳定性治理",
+      "aliasKeys": [
+        "端到端测试稳定性治理",
+        "不稳定测试",
+        "flakytest",
+        "竞态条件"
+      ],
+      "conflicts": []
+    },
+    "skill:SK136": {
+      "label": "分层夹具组织 conftest",
+      "key": "分层夹具组织conftest",
+      "aliasKeys": [
+        "分层夹具组织conftest",
+        "conftest.py",
+        "夹具共享",
+        "分层夹具"
+      ],
+      "conflicts": []
+    },
+    "skill:SK137": {
+      "label": "WebDriver BiDi 双向协议",
+      "key": "webdriverbidi双向协议",
+      "aliasKeys": [
+        "webdriverbidi双向协议",
+        "webdriverbidi",
+        "双向协议",
+        "cdp替代"
+      ],
+      "conflicts": []
+    },
+    "skill:SK215": {
+      "label": "模型量化与部署",
+      "key": "模型量化与部署",
+      "aliasKeys": [
+        "模型量化与部署",
+        "模型量化",
+        "int8量化",
+        "离线模型转换"
+      ],
+      "conflicts": []
+    },
+    "knowledge:AI001:stage1": {
+      "label": "嵌入式 C 与外设入门",
+      "key": "嵌入式c与外设入门",
+      "aliasKeys": [
+        "嵌入式c与外设入门"
+      ],
+      "conflicts": []
+    },
+    "knowledge:AI001:stage2": {
+      "label": "SPI 总线与传输事务",
+      "key": "spi总线与传输事务",
+      "aliasKeys": [
+        "spi总线与传输事务"
+      ],
+      "conflicts": []
+    },
+    "knowledge:AI001:stage3": {
+      "label": "堆内存属性与 DMA 缓冲",
+      "key": "堆内存属性与dma缓冲",
+      "aliasKeys": [
+        "堆内存属性与dma缓冲"
+      ],
+      "conflicts": [
+        {
+          "key": "堆内存属性与dma缓冲",
+          "others": [
+            "skill:SK104"
+          ],
+          "conflict": "cross-kind"
+        }
+      ]
+    },
+    "knowledge:AI001:stage4": {
+      "label": "端侧实时性与传输速度调优",
+      "key": "端侧实时性与传输速度调优",
+      "aliasKeys": [
+        "端侧实时性与传输速度调优"
+      ],
+      "conflicts": []
+    },
+    "knowledge:AI002:stage1": {
+      "label": "检测模型训练与验证流程",
+      "key": "检测模型训练与验证流程",
+      "aliasKeys": [
+        "检测模型训练与验证流程"
+      ],
+      "conflicts": []
+    },
+    "knowledge:AI003:stage1": {
+      "label": "等待策略与稳定测试",
+      "key": "等待策略与稳定测试",
+      "aliasKeys": [
+        "等待策略与稳定测试"
+      ],
+      "conflicts": []
+    },
+    "knowledge:AI003:stage2": {
+      "label": "夹具组织与跨文件共享",
+      "key": "夹具组织与跨文件共享",
+      "aliasKeys": [
+        "夹具组织与跨文件共享"
+      ],
+      "conflicts": []
+    },
+    "knowledge:AI004:stage1": {
+      "label": "模型转换与 Lite 推理集成",
+      "key": "模型转换与lite推理集成",
+      "aliasKeys": [
+        "模型转换与lite推理集成"
+      ],
+      "conflicts": []
+    },
+    "knowledge:AI004:stage2": {
+      "label": "量化与端侧基准测试",
+      "key": "量化与端侧基准测试",
+      "aliasKeys": [
+        "量化与端侧基准测试"
+      ],
+      "conflicts": []
+    },
+    "task:T0042": {
+      "label": "用 SPI 主机驱动读取一次传感器数据",
+      "key": "用spi主机驱动读取一次传感器数据",
+      "aliasKeys": [
+        "用spi主机驱动读取一次传感器数据"
+      ],
+      "conflicts": []
+    },
+    "task:T0051": {
+      "label": "用 FreeRTOS 搭建多任务采集程序",
+      "key": "用freertos搭建多任务采集程序",
+      "aliasKeys": [
+        "用freertos搭建多任务采集程序"
+      ],
+      "conflicts": []
+    },
+    "task:T0060": {
+      "label": "训练并验证一个目标检测模型",
+      "key": "训练并验证一个目标检测模型",
+      "aliasKeys": [
+        "训练并验证一个目标检测模型"
+      ],
+      "conflicts": []
+    },
+    "task:T0061": {
+      "label": "把检测模型导出为端侧格式",
+      "key": "把检测模型导出为端侧格式",
+      "aliasKeys": [
+        "把检测模型导出为端侧格式"
+      ],
+      "conflicts": []
+    },
+    "task:T0070": {
+      "label": "用显式等待编写稳定的端到端测试",
+      "key": "用显式等待编写稳定的端到端测试",
+      "aliasKeys": [
+        "用显式等待编写稳定的端到端测试"
+      ],
+      "conflicts": []
+    },
+    "task:T0080": {
+      "label": "用 pytest 夹具组织可复用测试装置",
+      "key": "用pytest夹具组织可复用测试装置",
+      "aliasKeys": [
+        "用pytest夹具组织可复用测试装置"
+      ],
+      "conflicts": []
+    },
+    "tool:esp-idf": {
+      "label": "ESP-IDF",
+      "key": "esp-idf",
+      "aliasKeys": [
+        "esp-idf",
+        "esp32idf"
+      ],
+      "conflicts": []
+    },
+    "tool:freertos": {
+      "label": "FreeRTOS",
+      "key": "freertos",
+      "aliasKeys": [
+        "freertos",
+        "freertos内核"
+      ],
+      "conflicts": []
+    },
+    "tool:mindspore-lite": {
+      "label": "MindSpore Lite",
+      "key": "mindsporelite",
+      "aliasKeys": [
+        "mindsporelite",
+        "mindsporelite推理引擎"
+      ],
+      "conflicts": []
+    },
+    "tool:netron": {
+      "label": "Netron",
+      "key": "netron",
+      "aliasKeys": [
+        "netron",
+        "netron可视化工具"
+      ],
+      "conflicts": []
+    },
+    "tool:paddlepaddle": {
+      "label": "飞桨（PaddlePaddle）",
+      "key": "飞桨(paddlepaddle)",
+      "aliasKeys": [
+        "飞桨(paddlepaddle)",
+        "paddlepaddle",
+        "飞桨"
+      ],
+      "conflicts": []
+    },
+    "tool:pytest": {
+      "label": "pytest",
+      "key": "pytest",
+      "aliasKeys": [
+        "pytest",
+        "py.test"
+      ],
+      "conflicts": [
+        {
+          "key": "pytest",
+          "others": [
+            "skill:SK130"
+          ],
+          "conflict": "cross-kind"
+        }
+      ]
+    },
+    "tool:selenium": {
+      "label": "Selenium",
+      "key": "selenium",
+      "aliasKeys": [
+        "selenium",
+        "seleniumwebdriver"
+      ],
+      "conflicts": [
+        {
+          "key": "selenium",
+          "others": [
+            "skill:SK132"
+          ],
+          "conflict": "cross-kind"
+        }
+      ]
+    },
+    "tool:ultralytics": {
+      "label": "Ultralytics YOLO",
+      "key": "ultralyticsyolo",
+      "aliasKeys": [
+        "ultralyticsyolo",
+        "yolo",
+        "ultralytics"
+      ],
+      "conflicts": []
+    },
+    "trend:edge-ai-2026": {
+      "label": "端侧部署目标激增",
+      "key": "端侧部署目标激增",
+      "aliasKeys": [
+        "端侧部署目标激增"
+      ],
+      "conflicts": []
+    },
+    "trend:hw-bright-outlook": {
+      "label": "计算机硬件工程岗位稳定需求",
+      "key": "计算机硬件工程岗位稳定需求",
+      "aliasKeys": [
+        "计算机硬件工程岗位稳定需求"
+      ],
+      "conflicts": []
+    },
+    "trend:sqa-bright-outlook": {
+      "label": "软件质量保证岗位需求旺盛",
+      "key": "软件质量保证岗位需求旺盛",
+      "aliasKeys": [
+        "软件质量保证岗位需求旺盛"
+      ],
+      "conflicts": []
+    },
+    "trend:webdriver-bidi": {
+      "label": "浏览器自动化协议标准化",
+      "key": "浏览器自动化协议标准化",
+      "aliasKeys": [
+        "浏览器自动化协议标准化"
+      ],
+      "conflicts": []
+    },
+    "credential:abet": {
+      "label": "ABET 工程与技术认证",
+      "key": "abet工程与技术认证",
+      "aliasKeys": [
+        "abet工程与技术认证",
+        "abet"
+      ],
+      "conflicts": []
+    },
+    "credential:comptia": {
+      "label": "CompTIA 认证",
+      "key": "comptia认证",
+      "aliasKeys": [
+        "comptia认证",
+        "comptia"
+      ],
+      "conflicts": []
+    },
+    "credential:osta-skill": {
+      "label": "职业技能等级证书",
+      "key": "职业技能等级证书",
+      "aliasKeys": [
+        "职业技能等级证书",
+        "职业资格证书",
+        "技能等级证书"
+      ],
+      "conflicts": []
+    },
+    "domain:edge-ai": {
+      "label": "边缘 AI 与模型部署",
+      "key": "边缘ai与模型部署",
+      "aliasKeys": [
+        "边缘ai与模型部署"
+      ],
+      "conflicts": []
+    },
+    "domain:embedded": {
+      "label": "嵌入式与实时系统",
+      "key": "嵌入式与实时系统",
+      "aliasKeys": [
+        "嵌入式与实时系统"
+      ],
+      "conflicts": []
+    },
+    "domain:test-automation": {
+      "label": "测试自动化与质量工程",
+      "key": "测试自动化与质量工程",
+      "aliasKeys": [
+        "测试自动化与质量工程"
+      ],
+      "conflicts": []
+    },
+    "domain:vision": {
+      "label": "机器视觉与深度学习",
+      "key": "机器视觉与深度学习",
+      "aliasKeys": [
+        "机器视觉与深度学习"
+      ],
+      "conflicts": []
+    }
+  }
+}

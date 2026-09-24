@@ -1,0 +1,3801 @@
+{
+  "schema": "career-graph-eval-results/v1",
+  "step": "11",
+  "generatedAt": "2026-09-15T17:02:24.971Z",
+  "kbVersion": "2026.09.15",
+  "graphVersion": "0.1.0",
+  "note": "逐题 × 5 档配置的原始命中结果。检索用 10 的同一套零依赖 BM25（lib/graph.mjs），不调模型，所以只有检索耗时；「引用支持度」需人工判定，本文件不冒充。失败案例原样保留。",
+  "corpus": {
+    "chunks": 494,
+    "nodes": 63,
+    "edges": 226,
+    "wikiPages": 38
+  },
+  "scoring": {
+    "graphBonus": 0.5,
+    "wikiBonus": 0.5,
+    "draftFactor": 0.6,
+    "topK": 3,
+    "thresholdRule": "每档配置取「可回答问题 Top-1 分」的下四分位作为阈值；无依据问题的 Top-1 分低于该阈值即判为「正确说明资料不足」。",
+    "tokenizer": {
+      "mode": "segmenter",
+      "latin": "整词 [a-z0-9][a-z0-9+._#-]*",
+      "cjk": "Intl.Segmenter（ICU 词典）中文分词"
+    }
+  },
+  "configs": [
+    {
+      "id": "A-bm25-only",
+      "label": "BM25 only",
+      "purpose": "基线：只看问题文本的 chunk 级 BM25。",
+      "graph": false,
+      "wiki": "none"
+    },
+    {
+      "id": "B-graph-1hop",
+      "label": "+ 图遍历（一跳邻居）",
+      "purpose": "图结构是否带来增益：用节点索引定位种子，把一跳邻居的词面并进查询。",
+      "graph": true,
+      "wiki": "none"
+    },
+    {
+      "id": "C-wiki-reviewed",
+      "label": "+ wiki 页（reviewed）",
+      "purpose": "Wiki 层是否带来增益：对 reviewed 页引用的 chunk 加权。",
+      "graph": true,
+      "wiki": "reviewed"
+    },
+    {
+      "id": "D-wiki-with-draft",
+      "label": "+ wiki 页（含 llm-draft 降权）",
+      "purpose": "降权策略是否有效：reviewed 页 ×1.0、llm-draft 页 ×0.6。",
+      "graph": true,
+      "wiki": "weighted"
+    },
+    {
+      "id": "E-full",
+      "label": "全量",
+      "purpose": "完整链路：图遍历 + 全部 wiki 页加权 + 别名/描述扩展。",
+      "graph": true,
+      "wiki": "weighted"
+    }
+  ],
+  "summary": [
+    {
+      "id": "A-bm25-only",
+      "label": "BM25 only",
+      "threshold": 12.701,
+      "metrics": {
+        "hitRate": "2/18",
+        "hitRateValue": 0.111,
+        "meanPrecisionAt3": 0.056,
+        "insufficientDataHandling": "6/6",
+        "insufficientDataHandlingValue": 1,
+        "elapsedMs": 14
+      }
+    },
+    {
+      "id": "B-graph-1hop",
+      "label": "+ 图遍历（一跳邻居）",
+      "threshold": 356.788,
+      "metrics": {
+        "hitRate": "6/18",
+        "hitRateValue": 0.333,
+        "meanPrecisionAt3": 0.185,
+        "insufficientDataHandling": "4/6",
+        "insufficientDataHandlingValue": 0.667,
+        "elapsedMs": 102
+      }
+    },
+    {
+      "id": "C-wiki-reviewed",
+      "label": "+ wiki 页（reviewed）",
+      "threshold": 356.788,
+      "metrics": {
+        "hitRate": "6/18",
+        "hitRateValue": 0.333,
+        "meanPrecisionAt3": 0.185,
+        "insufficientDataHandling": "4/6",
+        "insufficientDataHandlingValue": 0.667,
+        "elapsedMs": 101
+      }
+    },
+    {
+      "id": "D-wiki-with-draft",
+      "label": "+ wiki 页（含 llm-draft 降权）",
+      "threshold": 356.788,
+      "metrics": {
+        "hitRate": "6/18",
+        "hitRateValue": 0.333,
+        "meanPrecisionAt3": 0.185,
+        "insufficientDataHandling": "4/6",
+        "insufficientDataHandlingValue": 0.667,
+        "elapsedMs": 93
+      }
+    },
+    {
+      "id": "E-full",
+      "label": "全量",
+      "threshold": 356.788,
+      "metrics": {
+        "hitRate": "6/18",
+        "hitRateValue": 0.333,
+        "meanPrecisionAt3": 0.185,
+        "insufficientDataHandling": "4/6",
+        "insufficientDataHandlingValue": 0.667,
+        "elapsedMs": 91
+      }
+    }
+  ],
+  "runs": [
+    {
+      "id": "A-bm25-only",
+      "label": "BM25 only",
+      "purpose": "基线：只看问题文本的 chunk 级 BM25。",
+      "threshold": 12.701,
+      "metrics": {
+        "hitRate": "2/18",
+        "hitRateValue": 0.111,
+        "meanPrecisionAt3": 0.056,
+        "insufficientDataHandling": "6/6",
+        "insufficientDataHandlingValue": 1,
+        "elapsedMs": 14
+      },
+      "perQuestion": [
+        {
+          "questionId": "Q01",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S01#s2",
+            "S02#s10",
+            "S02#s11",
+            "S02#s7",
+            "S03#s46",
+            "S03#s53",
+            "S04#s73",
+            "S04#s74",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S05#s101",
+              "score": 12.701
+            },
+            {
+              "chunkId": "S08#s148~2",
+              "score": 12.491
+            },
+            {
+              "chunkId": "S05#s110",
+              "score": 11.578
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q02",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S07#s124",
+            "S09#s152",
+            "S09#s154",
+            "S09#s155",
+            "S09#s156",
+            "S09#s159",
+            "S10#s162"
+          ],
+          "top3": [
+            {
+              "chunkId": "S21#s349",
+              "score": 14.175
+            },
+            {
+              "chunkId": "S21#s349~5",
+              "score": 11.947
+            },
+            {
+              "chunkId": "S14#s238",
+              "score": 9.509
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q03",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S11#s172",
+            "S11#s176",
+            "S12#s180",
+            "S12#s181",
+            "S13#s202",
+            "S13#s204",
+            "S14#s256",
+            "S16#s283",
+            "S16#s291"
+          ],
+          "top3": [
+            {
+              "chunkId": "S05#s110",
+              "score": 12.371
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 12.368
+            },
+            {
+              "chunkId": "S05#s101",
+              "score": 12.304
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q04",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s7",
+            "S03#s46",
+            "S05#s100",
+            "S05#s92",
+            "S05#s96",
+            "S05#s97",
+            "S05#s98",
+            "S08#s146",
+            "S08#s149",
+            "S09#s159"
+          ],
+          "top3": [
+            {
+              "chunkId": "S15#s282",
+              "score": 18.022
+            },
+            {
+              "chunkId": "S08#s148~2",
+              "score": 12.958
+            },
+            {
+              "chunkId": "S21#s349~3",
+              "score": 11.985
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q05",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S01#s2",
+            "S01#s4",
+            "S03#s46",
+            "S03#s47",
+            "S04#s73",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s148~2",
+              "score": 15.991
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 15.624
+            },
+            {
+              "chunkId": "S05#s101",
+              "score": 15.482
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q06",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s7",
+            "S03#s46",
+            "S05#s100",
+            "S05#s92",
+            "S05#s96",
+            "S05#s97",
+            "S05#s98",
+            "S07#s124",
+            "S08#s146",
+            "S08#s149",
+            "S09#s152",
+            "S09#s154",
+            "S09#s155",
+            "S09#s156",
+            "S09#s159",
+            "S10#s162"
+          ],
+          "top3": [
+            {
+              "chunkId": "S21#s349",
+              "score": 22.197
+            },
+            {
+              "chunkId": "S21#s349~5",
+              "score": 19.524
+            },
+            {
+              "chunkId": "S21#s349~3",
+              "score": 18.696
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q07",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s17",
+            "S02#s7",
+            "S03#s46",
+            "S05#s94",
+            "S05#s96"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 14.021
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 11.75
+            },
+            {
+              "chunkId": "S18#s343",
+              "score": 11.069
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q08",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s10",
+            "S02#s17",
+            "S02#s7",
+            "S03#s46",
+            "S03#s53",
+            "S04#s73",
+            "S04#s74",
+            "S04#s75"
+          ],
+          "top3": [
+            {
+              "chunkId": "S18#s343",
+              "score": 11.069
+            },
+            {
+              "chunkId": "S02#s7",
+              "score": 10.103
+            },
+            {
+              "chunkId": "S02#s29",
+              "score": 9.967
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.333,
+          "hits": [
+            "S02#s7"
+          ]
+        },
+        {
+          "questionId": "Q09",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S11#s172",
+            "S11#s176",
+            "S12#s180",
+            "S12#s181",
+            "S12#s187",
+            "S13#s202",
+            "S13#s204",
+            "S13#s209",
+            "S14#s256",
+            "S14#s277"
+          ],
+          "top3": [
+            {
+              "chunkId": "S15#s282",
+              "score": 16.175
+            },
+            {
+              "chunkId": "S14#s278",
+              "score": 14.006
+            },
+            {
+              "chunkId": "S14#s261",
+              "score": 12.297
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q10",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s97",
+            "S07#3.1",
+            "S07#s124",
+            "S08#s145",
+            "S08#s146",
+            "S09#s152",
+            "S09#s154",
+            "S09#s155",
+            "S09#s156",
+            "S09#s159",
+            "S10#s162",
+            "S10#s164"
+          ],
+          "top3": [
+            {
+              "chunkId": "S18#s343",
+              "score": 11.069
+            },
+            {
+              "chunkId": "S21#s349",
+              "score": 10.454
+            },
+            {
+              "chunkId": "S08#s148",
+              "score": 5.847
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q11",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s100",
+            "S05#s101",
+            "S05#s94",
+            "S05#s96",
+            "S05#s98",
+            "S08#s145",
+            "S08#s146"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s148~2",
+              "score": 12.958
+            },
+            {
+              "chunkId": "S18#s343",
+              "score": 11.069
+            },
+            {
+              "chunkId": "S21#s349~3",
+              "score": 9.788
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q12",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s10",
+            "S02#s17",
+            "S02#s23",
+            "S03#s46",
+            "S03#s51",
+            "S03#s53",
+            "S04#s73",
+            "S04#s74",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S21#s349~3",
+              "score": 13.957
+            },
+            {
+              "chunkId": "S08#s148~2",
+              "score": 13.014
+            },
+            {
+              "chunkId": "S01#s6",
+              "score": 12.685
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q13",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S04#s73",
+            "S05#s92",
+            "S08#s146",
+            "S08#s149",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s148~2",
+              "score": 25.449
+            },
+            {
+              "chunkId": "S21#s349~3",
+              "score": 22.653
+            },
+            {
+              "chunkId": "S08#s147",
+              "score": 21.203
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q14",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S04#s73",
+            "S09#s152",
+            "S10#s162",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S05#s101",
+              "score": 20.323
+            },
+            {
+              "chunkId": "S05#s110",
+              "score": 18.713
+            },
+            {
+              "chunkId": "S21#s349~5",
+              "score": 18.109
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q15",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s92",
+            "S05#s98",
+            "S08#s149",
+            "S09#s152",
+            "S10#s162"
+          ],
+          "top3": [
+            {
+              "chunkId": "S21#s349~5",
+              "score": 22.749
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 22.682
+            },
+            {
+              "chunkId": "S21#s349",
+              "score": 19.602
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q16",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s94",
+            "S05#s96",
+            "S08#s145",
+            "S08#s146",
+            "S08#s149"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s148~3",
+              "score": 12.695
+            },
+            {
+              "chunkId": "S18#s343",
+              "score": 11.069
+            },
+            {
+              "chunkId": "S19#s344~2",
+              "score": 8.803
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q17",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S16#s283",
+            "S16#s291",
+            "S16#s306",
+            "S17#s312",
+            "S17#s320"
+          ],
+          "top3": [
+            {
+              "chunkId": "S15#s282",
+              "score": 22.172
+            },
+            {
+              "chunkId": "S21#s349~5",
+              "score": 13.022
+            },
+            {
+              "chunkId": "S21#s349~2",
+              "score": 11.967
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q18",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S11#s172",
+            "S11#s176"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 40.428
+            },
+            {
+              "chunkId": "S11#s172",
+              "score": 21.966
+            },
+            {
+              "chunkId": "S18#s343",
+              "score": 15.17
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S11#s172",
+            "S11#s176"
+          ]
+        },
+        {
+          "questionId": "Q19",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S07#2.3",
+              "score": 8.77
+            },
+            {
+              "chunkId": "S14#s242",
+              "score": 8.195
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 8.053
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q20",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S15#s282",
+              "score": 12.326
+            },
+            {
+              "chunkId": "S01#s2",
+              "score": 11.555
+            },
+            {
+              "chunkId": "S14#s238",
+              "score": 11.017
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q21",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S14#s261",
+              "score": 6.944
+            },
+            {
+              "chunkId": "S05#s103",
+              "score": 5.753
+            },
+            {
+              "chunkId": "S05#s94",
+              "score": 5.753
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q22",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S14#s242",
+              "score": 8.195
+            },
+            {
+              "chunkId": "S18#s343",
+              "score": 7.885
+            },
+            {
+              "chunkId": "S10#s171",
+              "score": 5.983
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q23",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S14#s278",
+              "score": 5.478
+            },
+            {
+              "chunkId": "S07#3.5",
+              "score": 5.239
+            },
+            {
+              "chunkId": "S14#s266",
+              "score": 5.232
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q24",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S18#s343",
+              "score": 10.171
+            },
+            {
+              "chunkId": "S14#s242",
+              "score": 8.195
+            },
+            {
+              "chunkId": "S14#s236",
+              "score": 4.753
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        }
+      ]
+    },
+    {
+      "id": "B-graph-1hop",
+      "label": "+ 图遍历（一跳邻居）",
+      "purpose": "图结构是否带来增益：用节点索引定位种子，把一跳邻居的词面并进查询。",
+      "threshold": 356.788,
+      "metrics": {
+        "hitRate": "6/18",
+        "hitRateValue": 0.333,
+        "meanPrecisionAt3": 0.185,
+        "insufficientDataHandling": "4/6",
+        "insufficientDataHandlingValue": 0.667,
+        "elapsedMs": 102
+      },
+      "perQuestion": [
+        {
+          "questionId": "Q01",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S01#s2",
+            "S02#s10",
+            "S02#s11",
+            "S02#s7",
+            "S03#s46",
+            "S03#s53",
+            "S04#s73",
+            "S04#s74",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S02#s15",
+              "score": 438.386
+            },
+            {
+              "chunkId": "S02#s24",
+              "score": 386.517
+            },
+            {
+              "chunkId": "S02#s10",
+              "score": 383.49
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.333,
+          "hits": [
+            "S02#s10"
+          ]
+        },
+        {
+          "questionId": "Q02",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S07#s124",
+            "S09#s152",
+            "S09#s154",
+            "S09#s155",
+            "S09#s156",
+            "S09#s159",
+            "S10#s162"
+          ],
+          "top3": [
+            {
+              "chunkId": "S09#s160",
+              "score": 536.452
+            },
+            {
+              "chunkId": "S10#s171",
+              "score": 511.606
+            },
+            {
+              "chunkId": "S08#s147~2",
+              "score": 442.371
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q03",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S11#s172",
+            "S11#s176",
+            "S12#s180",
+            "S12#s181",
+            "S13#s202",
+            "S13#s204",
+            "S14#s256",
+            "S16#s283",
+            "S16#s291"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 326.58
+            },
+            {
+              "chunkId": "S12#s180",
+              "score": 316
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 283.324
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S11#s176",
+            "S12#s180"
+          ]
+        },
+        {
+          "questionId": "Q04",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s7",
+            "S03#s46",
+            "S05#s100",
+            "S05#s92",
+            "S05#s96",
+            "S05#s97",
+            "S05#s98",
+            "S08#s146",
+            "S08#s149",
+            "S09#s159"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 586.804
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 521.165
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 474.711
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q05",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S01#s2",
+            "S01#s4",
+            "S03#s46",
+            "S03#s47",
+            "S04#s73",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 635.48
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 574.129
+            },
+            {
+              "chunkId": "S08#s148",
+              "score": 526.549
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q06",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s7",
+            "S03#s46",
+            "S05#s100",
+            "S05#s92",
+            "S05#s96",
+            "S05#s97",
+            "S05#s98",
+            "S07#s124",
+            "S08#s146",
+            "S08#s149",
+            "S09#s152",
+            "S09#s154",
+            "S09#s155",
+            "S09#s156",
+            "S09#s159",
+            "S10#s162"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 708.536
+            },
+            {
+              "chunkId": "S09#s160",
+              "score": 704.245
+            },
+            {
+              "chunkId": "S08#s147~2",
+              "score": 670.808
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q07",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s17",
+            "S02#s7",
+            "S03#s46",
+            "S05#s94",
+            "S05#s96"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 356.788
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 311.055
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 308.292
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q08",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s10",
+            "S02#s17",
+            "S02#s7",
+            "S03#s46",
+            "S03#s53",
+            "S04#s73",
+            "S04#s74",
+            "S04#s75"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 265.273
+            },
+            {
+              "chunkId": "S02#s15",
+              "score": 258.435
+            },
+            {
+              "chunkId": "S21#s349~3",
+              "score": 241.827
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q09",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S11#s172",
+            "S11#s176",
+            "S12#s180",
+            "S12#s181",
+            "S12#s187",
+            "S13#s202",
+            "S13#s204",
+            "S13#s209",
+            "S14#s256",
+            "S14#s277"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 326.58
+            },
+            {
+              "chunkId": "S12#s180",
+              "score": 290.959
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 266.276
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S11#s176",
+            "S12#s180"
+          ]
+        },
+        {
+          "questionId": "Q10",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s97",
+            "S07#3.1",
+            "S07#s124",
+            "S08#s145",
+            "S08#s146",
+            "S09#s152",
+            "S09#s154",
+            "S09#s155",
+            "S09#s156",
+            "S09#s159",
+            "S10#s162",
+            "S10#s164"
+          ],
+          "top3": [
+            {
+              "chunkId": "S09#s160",
+              "score": 530.452
+            },
+            {
+              "chunkId": "S10#s171",
+              "score": 504.118
+            },
+            {
+              "chunkId": "S08#s147~2",
+              "score": 437.426
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q11",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s100",
+            "S05#s101",
+            "S05#s94",
+            "S05#s96",
+            "S05#s98",
+            "S08#s145",
+            "S08#s146"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 605.88
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 532.902
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 491.678
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.333,
+          "hits": [
+            "S08#s145"
+          ]
+        },
+        {
+          "questionId": "Q12",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s10",
+            "S02#s17",
+            "S02#s23",
+            "S03#s46",
+            "S03#s51",
+            "S03#s53",
+            "S04#s73",
+            "S04#s74",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S02#s15",
+              "score": 381.946
+            },
+            {
+              "chunkId": "S02#s24",
+              "score": 329.809
+            },
+            {
+              "chunkId": "S02#s28",
+              "score": 319.128
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q13",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S04#s73",
+            "S05#s92",
+            "S08#s146",
+            "S08#s149",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 665.594
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 586.787
+            },
+            {
+              "chunkId": "S08#s148",
+              "score": 555.296
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q14",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S04#s73",
+            "S09#s152",
+            "S10#s162",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S09#s160",
+              "score": 577.927
+            },
+            {
+              "chunkId": "S10#s171",
+              "score": 565.23
+            },
+            {
+              "chunkId": "S08#s147",
+              "score": 508.501
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q15",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s92",
+            "S05#s98",
+            "S08#s149",
+            "S09#s152",
+            "S10#s162"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 708.536
+            },
+            {
+              "chunkId": "S09#s160",
+              "score": 704.245
+            },
+            {
+              "chunkId": "S08#s147~2",
+              "score": 670.808
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q16",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s94",
+            "S05#s96",
+            "S08#s145",
+            "S08#s146",
+            "S08#s149"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 386.159
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 384.28
+            },
+            {
+              "chunkId": "S08#s146",
+              "score": 359.597
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S08#s145",
+            "S08#s146"
+          ]
+        },
+        {
+          "questionId": "Q17",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S16#s283",
+            "S16#s291",
+            "S16#s306",
+            "S17#s312",
+            "S17#s320"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 309.672
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 294.173
+            },
+            {
+              "chunkId": "S12#s180",
+              "score": 288.351
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q18",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S11#s172",
+            "S11#s176"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 456.695
+            },
+            {
+              "chunkId": "S11#s172",
+              "score": 275.388
+            },
+            {
+              "chunkId": "S12#s180",
+              "score": 161.437
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S11#s172",
+            "S11#s176"
+          ]
+        },
+        {
+          "questionId": "Q19",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S02#s15",
+              "score": 387.958
+            },
+            {
+              "chunkId": "S02#s24",
+              "score": 358.67
+            },
+            {
+              "chunkId": "S02#s17",
+              "score": 342.865
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q20",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S02#s15",
+              "score": 387.958
+            },
+            {
+              "chunkId": "S02#s24",
+              "score": 358.67
+            },
+            {
+              "chunkId": "S02#s17",
+              "score": 345.301
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q21",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S14#s261",
+              "score": 6.944
+            },
+            {
+              "chunkId": "S05#s103",
+              "score": 5.753
+            },
+            {
+              "chunkId": "S05#s94",
+              "score": 5.753
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q22",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S12#s180",
+              "score": 213.287
+            },
+            {
+              "chunkId": "S12#s187",
+              "score": 167.331
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 157.413
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q23",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S14#s278",
+              "score": 5.478
+            },
+            {
+              "chunkId": "S07#3.5",
+              "score": 5.239
+            },
+            {
+              "chunkId": "S14#s266",
+              "score": 5.232
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q24",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S18#s343",
+              "score": 205.256
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 27.697
+            },
+            {
+              "chunkId": "S22#s356",
+              "score": 26.449
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        }
+      ]
+    },
+    {
+      "id": "C-wiki-reviewed",
+      "label": "+ wiki 页（reviewed）",
+      "purpose": "Wiki 层是否带来增益：对 reviewed 页引用的 chunk 加权。",
+      "threshold": 356.788,
+      "metrics": {
+        "hitRate": "6/18",
+        "hitRateValue": 0.333,
+        "meanPrecisionAt3": 0.185,
+        "insufficientDataHandling": "4/6",
+        "insufficientDataHandlingValue": 0.667,
+        "elapsedMs": 101
+      },
+      "perQuestion": [
+        {
+          "questionId": "Q01",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S01#s2",
+            "S02#s10",
+            "S02#s11",
+            "S02#s7",
+            "S03#s46",
+            "S03#s53",
+            "S04#s73",
+            "S04#s74",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S02#s15",
+              "score": 438.386
+            },
+            {
+              "chunkId": "S02#s24",
+              "score": 386.517
+            },
+            {
+              "chunkId": "S02#s10",
+              "score": 383.49
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.333,
+          "hits": [
+            "S02#s10"
+          ]
+        },
+        {
+          "questionId": "Q02",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S07#s124",
+            "S09#s152",
+            "S09#s154",
+            "S09#s155",
+            "S09#s156",
+            "S09#s159",
+            "S10#s162"
+          ],
+          "top3": [
+            {
+              "chunkId": "S09#s160",
+              "score": 536.452
+            },
+            {
+              "chunkId": "S10#s171",
+              "score": 511.606
+            },
+            {
+              "chunkId": "S08#s147~2",
+              "score": 442.371
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q03",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S11#s172",
+            "S11#s176",
+            "S12#s180",
+            "S12#s181",
+            "S13#s202",
+            "S13#s204",
+            "S14#s256",
+            "S16#s283",
+            "S16#s291"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 327.08
+            },
+            {
+              "chunkId": "S12#s180",
+              "score": 316
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 283.324
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S11#s176",
+            "S12#s180"
+          ]
+        },
+        {
+          "questionId": "Q04",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s7",
+            "S03#s46",
+            "S05#s100",
+            "S05#s92",
+            "S05#s96",
+            "S05#s97",
+            "S05#s98",
+            "S08#s146",
+            "S08#s149",
+            "S09#s159"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 586.804
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 521.165
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 475.211
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q05",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S01#s2",
+            "S01#s4",
+            "S03#s46",
+            "S03#s47",
+            "S04#s73",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 635.48
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 574.129
+            },
+            {
+              "chunkId": "S08#s148",
+              "score": 526.549
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q06",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s7",
+            "S03#s46",
+            "S05#s100",
+            "S05#s92",
+            "S05#s96",
+            "S05#s97",
+            "S05#s98",
+            "S07#s124",
+            "S08#s146",
+            "S08#s149",
+            "S09#s152",
+            "S09#s154",
+            "S09#s155",
+            "S09#s156",
+            "S09#s159",
+            "S10#s162"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 708.536
+            },
+            {
+              "chunkId": "S09#s160",
+              "score": 704.245
+            },
+            {
+              "chunkId": "S08#s147~2",
+              "score": 670.808
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q07",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s17",
+            "S02#s7",
+            "S03#s46",
+            "S05#s94",
+            "S05#s96"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 356.788
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 311.555
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 308.292
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q08",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s10",
+            "S02#s17",
+            "S02#s7",
+            "S03#s46",
+            "S03#s53",
+            "S04#s73",
+            "S04#s74",
+            "S04#s75"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 265.273
+            },
+            {
+              "chunkId": "S02#s15",
+              "score": 258.435
+            },
+            {
+              "chunkId": "S21#s349~3",
+              "score": 241.827
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q09",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S11#s172",
+            "S11#s176",
+            "S12#s180",
+            "S12#s181",
+            "S12#s187",
+            "S13#s202",
+            "S13#s204",
+            "S13#s209",
+            "S14#s256",
+            "S14#s277"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 327.08
+            },
+            {
+              "chunkId": "S12#s180",
+              "score": 290.959
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 266.276
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S11#s176",
+            "S12#s180"
+          ]
+        },
+        {
+          "questionId": "Q10",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s97",
+            "S07#3.1",
+            "S07#s124",
+            "S08#s145",
+            "S08#s146",
+            "S09#s152",
+            "S09#s154",
+            "S09#s155",
+            "S09#s156",
+            "S09#s159",
+            "S10#s162",
+            "S10#s164"
+          ],
+          "top3": [
+            {
+              "chunkId": "S09#s160",
+              "score": 530.452
+            },
+            {
+              "chunkId": "S10#s171",
+              "score": 504.118
+            },
+            {
+              "chunkId": "S08#s147~2",
+              "score": 437.426
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q11",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s100",
+            "S05#s101",
+            "S05#s94",
+            "S05#s96",
+            "S05#s98",
+            "S08#s145",
+            "S08#s146"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 605.88
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 532.902
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 492.178
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.333,
+          "hits": [
+            "S08#s145"
+          ]
+        },
+        {
+          "questionId": "Q12",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s10",
+            "S02#s17",
+            "S02#s23",
+            "S03#s46",
+            "S03#s51",
+            "S03#s53",
+            "S04#s73",
+            "S04#s74",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S02#s15",
+              "score": 381.946
+            },
+            {
+              "chunkId": "S02#s24",
+              "score": 329.809
+            },
+            {
+              "chunkId": "S02#s28",
+              "score": 319.128
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q13",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S04#s73",
+            "S05#s92",
+            "S08#s146",
+            "S08#s149",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 665.594
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 586.787
+            },
+            {
+              "chunkId": "S08#s148",
+              "score": 555.296
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q14",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S04#s73",
+            "S09#s152",
+            "S10#s162",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S09#s160",
+              "score": 577.927
+            },
+            {
+              "chunkId": "S10#s171",
+              "score": 565.23
+            },
+            {
+              "chunkId": "S08#s147",
+              "score": 508.501
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q15",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s92",
+            "S05#s98",
+            "S08#s149",
+            "S09#s152",
+            "S10#s162"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 708.536
+            },
+            {
+              "chunkId": "S09#s160",
+              "score": 704.245
+            },
+            {
+              "chunkId": "S08#s147~2",
+              "score": 670.808
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q16",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s94",
+            "S05#s96",
+            "S08#s145",
+            "S08#s146",
+            "S08#s149"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 386.159
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 384.78
+            },
+            {
+              "chunkId": "S08#s146",
+              "score": 360.097
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S08#s145",
+            "S08#s146"
+          ]
+        },
+        {
+          "questionId": "Q17",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S16#s283",
+            "S16#s291",
+            "S16#s306",
+            "S17#s312",
+            "S17#s320"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 310.172
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 294.173
+            },
+            {
+              "chunkId": "S12#s180",
+              "score": 288.351
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q18",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S11#s172",
+            "S11#s176"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 457.195
+            },
+            {
+              "chunkId": "S11#s172",
+              "score": 275.888
+            },
+            {
+              "chunkId": "S12#s180",
+              "score": 161.937
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S11#s172",
+            "S11#s176"
+          ]
+        },
+        {
+          "questionId": "Q19",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S02#s15",
+              "score": 387.958
+            },
+            {
+              "chunkId": "S02#s24",
+              "score": 358.67
+            },
+            {
+              "chunkId": "S02#s17",
+              "score": 342.865
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q20",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S02#s15",
+              "score": 387.958
+            },
+            {
+              "chunkId": "S02#s24",
+              "score": 358.67
+            },
+            {
+              "chunkId": "S02#s17",
+              "score": 345.301
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q21",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S14#s261",
+              "score": 6.944
+            },
+            {
+              "chunkId": "S05#s103",
+              "score": 5.753
+            },
+            {
+              "chunkId": "S05#s94",
+              "score": 5.753
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q22",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S12#s180",
+              "score": 213.787
+            },
+            {
+              "chunkId": "S12#s187",
+              "score": 167.831
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 157.413
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q23",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S14#s278",
+              "score": 5.478
+            },
+            {
+              "chunkId": "S07#3.5",
+              "score": 5.239
+            },
+            {
+              "chunkId": "S14#s266",
+              "score": 5.232
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q24",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S18#s343",
+              "score": 205.256
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 27.697
+            },
+            {
+              "chunkId": "S22#s356",
+              "score": 26.449
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        }
+      ]
+    },
+    {
+      "id": "D-wiki-with-draft",
+      "label": "+ wiki 页（含 llm-draft 降权）",
+      "purpose": "降权策略是否有效：reviewed 页 ×1.0、llm-draft 页 ×0.6。",
+      "threshold": 356.788,
+      "metrics": {
+        "hitRate": "6/18",
+        "hitRateValue": 0.333,
+        "meanPrecisionAt3": 0.185,
+        "insufficientDataHandling": "4/6",
+        "insufficientDataHandlingValue": 0.667,
+        "elapsedMs": 93
+      },
+      "perQuestion": [
+        {
+          "questionId": "Q01",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S01#s2",
+            "S02#s10",
+            "S02#s11",
+            "S02#s7",
+            "S03#s46",
+            "S03#s53",
+            "S04#s73",
+            "S04#s74",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S02#s15",
+              "score": 438.386
+            },
+            {
+              "chunkId": "S02#s24",
+              "score": 386.517
+            },
+            {
+              "chunkId": "S02#s10",
+              "score": 383.79
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.333,
+          "hits": [
+            "S02#s10"
+          ]
+        },
+        {
+          "questionId": "Q02",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S07#s124",
+            "S09#s152",
+            "S09#s154",
+            "S09#s155",
+            "S09#s156",
+            "S09#s159",
+            "S10#s162"
+          ],
+          "top3": [
+            {
+              "chunkId": "S09#s160",
+              "score": 536.452
+            },
+            {
+              "chunkId": "S10#s171",
+              "score": 511.606
+            },
+            {
+              "chunkId": "S08#s147~2",
+              "score": 442.371
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q03",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S11#s172",
+            "S11#s176",
+            "S12#s180",
+            "S12#s181",
+            "S13#s202",
+            "S13#s204",
+            "S14#s256",
+            "S16#s283",
+            "S16#s291"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 327.08
+            },
+            {
+              "chunkId": "S12#s180",
+              "score": 316.3
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 283.324
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S11#s176",
+            "S12#s180"
+          ]
+        },
+        {
+          "questionId": "Q04",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s7",
+            "S03#s46",
+            "S05#s100",
+            "S05#s92",
+            "S05#s96",
+            "S05#s97",
+            "S05#s98",
+            "S08#s146",
+            "S08#s149",
+            "S09#s159"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 586.804
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 521.165
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 475.211
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q05",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S01#s2",
+            "S01#s4",
+            "S03#s46",
+            "S03#s47",
+            "S04#s73",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 635.48
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 574.129
+            },
+            {
+              "chunkId": "S08#s148",
+              "score": 526.549
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q06",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s7",
+            "S03#s46",
+            "S05#s100",
+            "S05#s92",
+            "S05#s96",
+            "S05#s97",
+            "S05#s98",
+            "S07#s124",
+            "S08#s146",
+            "S08#s149",
+            "S09#s152",
+            "S09#s154",
+            "S09#s155",
+            "S09#s156",
+            "S09#s159",
+            "S10#s162"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 708.536
+            },
+            {
+              "chunkId": "S09#s160",
+              "score": 704.245
+            },
+            {
+              "chunkId": "S08#s147~2",
+              "score": 670.808
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q07",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s17",
+            "S02#s7",
+            "S03#s46",
+            "S05#s94",
+            "S05#s96"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 356.788
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 311.555
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 308.292
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q08",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s10",
+            "S02#s17",
+            "S02#s7",
+            "S03#s46",
+            "S03#s53",
+            "S04#s73",
+            "S04#s74",
+            "S04#s75"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 265.273
+            },
+            {
+              "chunkId": "S02#s15",
+              "score": 258.435
+            },
+            {
+              "chunkId": "S21#s349~3",
+              "score": 241.827
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q09",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S11#s172",
+            "S11#s176",
+            "S12#s180",
+            "S12#s181",
+            "S12#s187",
+            "S13#s202",
+            "S13#s204",
+            "S13#s209",
+            "S14#s256",
+            "S14#s277"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 327.08
+            },
+            {
+              "chunkId": "S12#s180",
+              "score": 291.259
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 266.276
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S11#s176",
+            "S12#s180"
+          ]
+        },
+        {
+          "questionId": "Q10",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s97",
+            "S07#3.1",
+            "S07#s124",
+            "S08#s145",
+            "S08#s146",
+            "S09#s152",
+            "S09#s154",
+            "S09#s155",
+            "S09#s156",
+            "S09#s159",
+            "S10#s162",
+            "S10#s164"
+          ],
+          "top3": [
+            {
+              "chunkId": "S09#s160",
+              "score": 530.452
+            },
+            {
+              "chunkId": "S10#s171",
+              "score": 504.118
+            },
+            {
+              "chunkId": "S08#s147~2",
+              "score": 437.426
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q11",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s100",
+            "S05#s101",
+            "S05#s94",
+            "S05#s96",
+            "S05#s98",
+            "S08#s145",
+            "S08#s146"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 605.88
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 532.902
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 492.178
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.333,
+          "hits": [
+            "S08#s145"
+          ]
+        },
+        {
+          "questionId": "Q12",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s10",
+            "S02#s17",
+            "S02#s23",
+            "S03#s46",
+            "S03#s51",
+            "S03#s53",
+            "S04#s73",
+            "S04#s74",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S02#s15",
+              "score": 381.946
+            },
+            {
+              "chunkId": "S02#s24",
+              "score": 329.809
+            },
+            {
+              "chunkId": "S02#s28",
+              "score": 319.128
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q13",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S04#s73",
+            "S05#s92",
+            "S08#s146",
+            "S08#s149",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 665.594
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 586.787
+            },
+            {
+              "chunkId": "S08#s148",
+              "score": 555.296
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q14",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S04#s73",
+            "S09#s152",
+            "S10#s162",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S09#s160",
+              "score": 577.927
+            },
+            {
+              "chunkId": "S10#s171",
+              "score": 565.23
+            },
+            {
+              "chunkId": "S08#s147",
+              "score": 508.501
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q15",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s92",
+            "S05#s98",
+            "S08#s149",
+            "S09#s152",
+            "S10#s162"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 708.536
+            },
+            {
+              "chunkId": "S09#s160",
+              "score": 704.245
+            },
+            {
+              "chunkId": "S08#s147~2",
+              "score": 670.808
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q16",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s94",
+            "S05#s96",
+            "S08#s145",
+            "S08#s146",
+            "S08#s149"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 386.159
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 384.78
+            },
+            {
+              "chunkId": "S08#s146",
+              "score": 360.097
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S08#s145",
+            "S08#s146"
+          ]
+        },
+        {
+          "questionId": "Q17",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S16#s283",
+            "S16#s291",
+            "S16#s306",
+            "S17#s312",
+            "S17#s320"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 310.172
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 294.173
+            },
+            {
+              "chunkId": "S12#s180",
+              "score": 288.651
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q18",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S11#s172",
+            "S11#s176"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 457.195
+            },
+            {
+              "chunkId": "S11#s172",
+              "score": 275.888
+            },
+            {
+              "chunkId": "S12#s180",
+              "score": 161.937
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S11#s172",
+            "S11#s176"
+          ]
+        },
+        {
+          "questionId": "Q19",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S02#s15",
+              "score": 387.958
+            },
+            {
+              "chunkId": "S02#s24",
+              "score": 358.67
+            },
+            {
+              "chunkId": "S02#s17",
+              "score": 343.165
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q20",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S02#s15",
+              "score": 387.958
+            },
+            {
+              "chunkId": "S02#s24",
+              "score": 358.67
+            },
+            {
+              "chunkId": "S02#s17",
+              "score": 345.601
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q21",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S14#s261",
+              "score": 6.944
+            },
+            {
+              "chunkId": "S05#s103",
+              "score": 5.753
+            },
+            {
+              "chunkId": "S05#s94",
+              "score": 5.753
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q22",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S12#s180",
+              "score": 213.787
+            },
+            {
+              "chunkId": "S12#s187",
+              "score": 167.831
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 157.413
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q23",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S14#s278",
+              "score": 5.478
+            },
+            {
+              "chunkId": "S07#3.5",
+              "score": 5.239
+            },
+            {
+              "chunkId": "S14#s266",
+              "score": 5.232
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q24",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S18#s343",
+              "score": 205.256
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 27.697
+            },
+            {
+              "chunkId": "S22#s356",
+              "score": 26.449
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        }
+      ]
+    },
+    {
+      "id": "E-full",
+      "label": "全量",
+      "purpose": "完整链路：图遍历 + 全部 wiki 页加权 + 别名/描述扩展。",
+      "threshold": 356.788,
+      "metrics": {
+        "hitRate": "6/18",
+        "hitRateValue": 0.333,
+        "meanPrecisionAt3": 0.185,
+        "insufficientDataHandling": "4/6",
+        "insufficientDataHandlingValue": 0.667,
+        "elapsedMs": 91
+      },
+      "perQuestion": [
+        {
+          "questionId": "Q01",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S01#s2",
+            "S02#s10",
+            "S02#s11",
+            "S02#s7",
+            "S03#s46",
+            "S03#s53",
+            "S04#s73",
+            "S04#s74",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S02#s15",
+              "score": 438.386
+            },
+            {
+              "chunkId": "S02#s24",
+              "score": 386.517
+            },
+            {
+              "chunkId": "S02#s10",
+              "score": 383.79
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.333,
+          "hits": [
+            "S02#s10"
+          ]
+        },
+        {
+          "questionId": "Q02",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S07#s124",
+            "S09#s152",
+            "S09#s154",
+            "S09#s155",
+            "S09#s156",
+            "S09#s159",
+            "S10#s162"
+          ],
+          "top3": [
+            {
+              "chunkId": "S09#s160",
+              "score": 536.452
+            },
+            {
+              "chunkId": "S10#s171",
+              "score": 511.606
+            },
+            {
+              "chunkId": "S08#s147~2",
+              "score": 442.371
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q03",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S11#s172",
+            "S11#s176",
+            "S12#s180",
+            "S12#s181",
+            "S13#s202",
+            "S13#s204",
+            "S14#s256",
+            "S16#s283",
+            "S16#s291"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 327.08
+            },
+            {
+              "chunkId": "S12#s180",
+              "score": 316.3
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 283.324
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S11#s176",
+            "S12#s180"
+          ]
+        },
+        {
+          "questionId": "Q04",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s7",
+            "S03#s46",
+            "S05#s100",
+            "S05#s92",
+            "S05#s96",
+            "S05#s97",
+            "S05#s98",
+            "S08#s146",
+            "S08#s149",
+            "S09#s159"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 586.804
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 521.165
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 475.211
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q05",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S01#s2",
+            "S01#s4",
+            "S03#s46",
+            "S03#s47",
+            "S04#s73",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 635.48
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 574.129
+            },
+            {
+              "chunkId": "S08#s148",
+              "score": 526.549
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q06",
+          "category": "occupation-requirement",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s7",
+            "S03#s46",
+            "S05#s100",
+            "S05#s92",
+            "S05#s96",
+            "S05#s97",
+            "S05#s98",
+            "S07#s124",
+            "S08#s146",
+            "S08#s149",
+            "S09#s152",
+            "S09#s154",
+            "S09#s155",
+            "S09#s156",
+            "S09#s159",
+            "S10#s162"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 708.536
+            },
+            {
+              "chunkId": "S09#s160",
+              "score": 704.245
+            },
+            {
+              "chunkId": "S08#s147~2",
+              "score": 670.808
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q07",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s17",
+            "S02#s7",
+            "S03#s46",
+            "S05#s94",
+            "S05#s96"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 356.788
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 311.555
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 308.292
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q08",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s10",
+            "S02#s17",
+            "S02#s7",
+            "S03#s46",
+            "S03#s53",
+            "S04#s73",
+            "S04#s74",
+            "S04#s75"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 265.273
+            },
+            {
+              "chunkId": "S02#s15",
+              "score": 258.435
+            },
+            {
+              "chunkId": "S21#s349~3",
+              "score": 241.827
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q09",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S11#s172",
+            "S11#s176",
+            "S12#s180",
+            "S12#s181",
+            "S12#s187",
+            "S13#s202",
+            "S13#s204",
+            "S13#s209",
+            "S14#s256",
+            "S14#s277"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 327.08
+            },
+            {
+              "chunkId": "S12#s180",
+              "score": 291.259
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 266.276
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S11#s176",
+            "S12#s180"
+          ]
+        },
+        {
+          "questionId": "Q10",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s97",
+            "S07#3.1",
+            "S07#s124",
+            "S08#s145",
+            "S08#s146",
+            "S09#s152",
+            "S09#s154",
+            "S09#s155",
+            "S09#s156",
+            "S09#s159",
+            "S10#s162",
+            "S10#s164"
+          ],
+          "top3": [
+            {
+              "chunkId": "S09#s160",
+              "score": 530.452
+            },
+            {
+              "chunkId": "S10#s171",
+              "score": 504.118
+            },
+            {
+              "chunkId": "S08#s147~2",
+              "score": 437.426
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q11",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s100",
+            "S05#s101",
+            "S05#s94",
+            "S05#s96",
+            "S05#s98",
+            "S08#s145",
+            "S08#s146"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 605.88
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 532.902
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 492.178
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.333,
+          "hits": [
+            "S08#s145"
+          ]
+        },
+        {
+          "questionId": "Q12",
+          "category": "skill-gap-prerequisite",
+          "answerable": true,
+          "referenceChunks": [
+            "S02#s10",
+            "S02#s17",
+            "S02#s23",
+            "S03#s46",
+            "S03#s51",
+            "S03#s53",
+            "S04#s73",
+            "S04#s74",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S02#s15",
+              "score": 381.946
+            },
+            {
+              "chunkId": "S02#s24",
+              "score": 329.809
+            },
+            {
+              "chunkId": "S02#s28",
+              "score": 319.128
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q13",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S04#s73",
+            "S05#s92",
+            "S08#s146",
+            "S08#s149",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 665.594
+            },
+            {
+              "chunkId": "S08#s150",
+              "score": 586.787
+            },
+            {
+              "chunkId": "S08#s148",
+              "score": 555.296
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q14",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S04#s73",
+            "S09#s152",
+            "S10#s162",
+            "S17#s312"
+          ],
+          "top3": [
+            {
+              "chunkId": "S09#s160",
+              "score": 577.927
+            },
+            {
+              "chunkId": "S10#s171",
+              "score": 565.23
+            },
+            {
+              "chunkId": "S08#s147",
+              "score": 508.501
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q15",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s92",
+            "S05#s98",
+            "S08#s149",
+            "S09#s152",
+            "S10#s162"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 708.536
+            },
+            {
+              "chunkId": "S09#s160",
+              "score": 704.245
+            },
+            {
+              "chunkId": "S08#s147~2",
+              "score": 670.808
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q16",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S05#s94",
+            "S05#s96",
+            "S08#s145",
+            "S08#s146",
+            "S08#s149"
+          ],
+          "top3": [
+            {
+              "chunkId": "S08#s147",
+              "score": 386.159
+            },
+            {
+              "chunkId": "S08#s145",
+              "score": 384.78
+            },
+            {
+              "chunkId": "S08#s146",
+              "score": 360.097
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S08#s145",
+            "S08#s146"
+          ]
+        },
+        {
+          "questionId": "Q17",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S16#s283",
+            "S16#s291",
+            "S16#s306",
+            "S17#s312",
+            "S17#s320"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 310.172
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 294.173
+            },
+            {
+              "chunkId": "S12#s180",
+              "score": 288.651
+            }
+          ],
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
+        },
+        {
+          "questionId": "Q18",
+          "category": "scenario-advice",
+          "answerable": true,
+          "referenceChunks": [
+            "S11#s172",
+            "S11#s176"
+          ],
+          "top3": [
+            {
+              "chunkId": "S11#s176",
+              "score": 457.195
+            },
+            {
+              "chunkId": "S11#s172",
+              "score": 275.888
+            },
+            {
+              "chunkId": "S12#s180",
+              "score": 161.937
+            }
+          ],
+          "hit": true,
+          "precisionAt3": 0.667,
+          "hits": [
+            "S11#s172",
+            "S11#s176"
+          ]
+        },
+        {
+          "questionId": "Q19",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S02#s15",
+              "score": 387.958
+            },
+            {
+              "chunkId": "S02#s24",
+              "score": 358.67
+            },
+            {
+              "chunkId": "S02#s17",
+              "score": 343.165
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q20",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S02#s15",
+              "score": 387.958
+            },
+            {
+              "chunkId": "S02#s24",
+              "score": 358.67
+            },
+            {
+              "chunkId": "S02#s17",
+              "score": 345.601
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q21",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S14#s261",
+              "score": 6.944
+            },
+            {
+              "chunkId": "S05#s103",
+              "score": 5.753
+            },
+            {
+              "chunkId": "S05#s94",
+              "score": 5.753
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q22",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S12#s180",
+              "score": 213.787
+            },
+            {
+              "chunkId": "S12#s187",
+              "score": 167.831
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 157.413
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q23",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S14#s278",
+              "score": 5.478
+            },
+            {
+              "chunkId": "S07#3.5",
+              "score": 5.239
+            },
+            {
+              "chunkId": "S14#s266",
+              "score": 5.232
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        },
+        {
+          "questionId": "Q24",
+          "category": "out-of-scope",
+          "answerable": false,
+          "referenceChunks": [],
+          "top3": [
+            {
+              "chunkId": "S18#s343",
+              "score": 205.256
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 27.697
+            },
+            {
+              "chunkId": "S22#s356",
+              "score": 26.449
+            }
+          ],
+          "hit": null,
+          "precisionAt3": null,
+          "hits": []
+        }
+      ]
+    }
+  ]
+}

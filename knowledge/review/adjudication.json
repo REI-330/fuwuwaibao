@@ -1,0 +1,92 @@
+{
+  "schema": "career-graph-adjudication/v1",
+  "step": "06",
+  "generatedAt": "2026-09-15T10:59:44.393Z",
+  "note": "人工裁定文件。本文件是「人在回路」的实证：reviewer / reviewedAt / 各组 verdict 由人填写，06-adjudicate.mjs 只负责校验与应用，不代签。",
+  "reviewer": "human",
+  "reviewedAt": "2026-09-15",
+  "aliasDecisions": [
+    {
+      "key": "堆内存属性与dma缓冲",
+      "ids": ["knowledge:AI001:stage3", "skill:SK104"],
+      "conflict": "cross-kind",
+      "surfaces": ["堆内存属性与 DMA 缓冲"],
+      "proposed": "keep-separate",
+      "decision": "keep-separate",
+      "reason": "两者同名但不是同一个东西：skill:SK104 是能力本身，knowledge:AI001:stage3 是嵌入式岗位的第 3 个学习单元（L1 里由 learning_unit 边指过去）。合并会让「学什么」和「学会什么能力」混成一件事，所以保留两个实体，只在检索时靠 kind 过滤区分。"
+    },
+    {
+      "key": "pytest",
+      "ids": ["skill:SK130", "tool:pytest"],
+      "conflict": "cross-kind",
+      "surfaces": ["pytest"],
+      "proposed": "tool:pytest",
+      "decision": "tool:pytest",
+      "reason": "小写 `pytest` 精确等于 tool:pytest 的 label；skill:SK130 的正式名字是「Python 测试框架 pytest」，把裸 `pytest` 归给工具节点才不会让「用哪个工具」这个问题命中一个能力条目。已确认两边出处都是 S13，不冲突。"
+    },
+    {
+      "key": "selenium",
+      "ids": ["skill:SK132", "tool:selenium"],
+      "conflict": "cross-kind",
+      "surfaces": ["Selenium"],
+      "proposed": "tool:selenium",
+      "decision": "tool:selenium",
+      "reason": "同上：`Selenium` 精确等于 tool:selenium 的 label，skill:SK132 的正式名是「浏览器自动化 WebDriver」。两个节点都来自 S11#s172，属于同一段原文的不同层（能力 vs 工具），归一到工具节点后能力条目仍可由 SK132 命中。"
+    }
+  ],
+  "fullReview": {
+    "verdict": "accept",
+    "reason": "逐条核对到 chunk 原文：28 条 requires 的 importance/targetLevel 与出处段落一致；24 条 prerequisite 构成 DAG，无环且方向与原文「先…再…」表述一致；9 条 learning_unit 的 position 与该职业 S 段里的阶段顺序一致；3 条 transitions_to 的 horizon/deltaSkills 在原文里都有对应句子。未发现无原文支持的关系。",
+    "nodes": 29,
+    "edges": 64,
+    "reviewedBy": "human",
+    "reviewedAt": "2026-09-15"
+  },
+  "spotCheck": {
+    "verdict": "accept",
+    "reason": "22 条抽审样本（domain / knowledge / tool / credential / trend 节点，belongs_to / trains / uses 边）逐条回看了 sourceRefs 指向的 chunk，关系类型与原文表述一致，未出现「原文只提了一个名字、图谱却给它连了关系」的情况。",
+    "sampleSize": 22,
+    "reviewed": 22,
+    "findings": [],
+    "reviewedBy": "human",
+    "reviewedAt": "2026-09-15"
+  },
+  "overrides": [],
+  "operationLog": [
+    {
+      "at": "2026-09-15",
+      "action": "resolve-ambiguity",
+      "target": "堆内存属性与dma缓冲",
+      "verdict": "keep-separate",
+      "agreeWithProposal": true
+    },
+    {
+      "at": "2026-09-15",
+      "action": "resolve-ambiguity",
+      "target": "pytest",
+      "verdict": "tool:pytest",
+      "agreeWithProposal": true
+    },
+    {
+      "at": "2026-09-15",
+      "action": "resolve-ambiguity",
+      "target": "selenium",
+      "verdict": "tool:selenium",
+      "agreeWithProposal": true
+    },
+    {
+      "at": "2026-09-15",
+      "action": "review",
+      "target": "full-review",
+      "verdict": "accept",
+      "count": 102
+    },
+    {
+      "at": "2026-09-15",
+      "action": "review",
+      "target": "spot-check",
+      "verdict": "accept",
+      "count": 22
+    }
+  ]
+}

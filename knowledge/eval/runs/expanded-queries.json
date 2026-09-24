@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-09-17T01:24:56+0800",
+  "model": "claude-sonnet-4.6",
+  "queries": {
+    "N01": "FreeRTOS IoT 设备开发 officially qualified certified boards 开发板 验证 reference hardware supported platforms 技术支持 documentation 文档 resources community forum",
+    "N02": "ESP32 SPI 四线 I/O 模式 quad mode configuration spi_device_interface_config_t spi_transaction_ext_t flags SPI_TRANS_MODE_QIO command phase address phase length bits cmd_bits addr_bits 设置 struct fields",
+    "N03": "ESP-IDF MALLOC_CAP_32BIT 内存分配 float 浮点变量 floating point variable heap memory allocation 中断服务程序 ISR interrupt service routine heap function restrictions limitations",
+    "N04": "ESP32 RTC GPIO 使用场景 use cases sleep mode wakeup，gpio_config 功能 function configuration，gpio_reset_pin 功能 function reset default",
+    "N05": "MindSpore Lite benchmark工具 mobilenetv2 输入数据文件规格 input data file format specification 误差输出解读 accuracy error metrics interpretation",
+    "N06": "飞桨 PaddlePaddle 手写数字识别 handwritten digit recognition MNIST 数据集下载加载 dataset download load 网络模型构建 neural network model architecture build 打印结构 print model summary LeNet CNN",
+    "N07": "飞桨 PaddlePaddle Python列表 list 创建 Tensor paddle.to_tensor 全零 zeros 全一 ones 指定形状 shape API 接口",
+    "N08": "YOLO v10/v11/v12 导出格式 export formats ONNX TensorRT CoreML TFLite OpenVINO deployment 部署场景 Hailo accelerator integration 昇腾 Ascend NPU Ambarella CV-series 接入方法 edge inference",
+    "N09": "YOLO v10 YOLOv10 检测模型 pretrained dataset 预训练数据集 inference prediction 推理预测 代码示例 code example bounding box coordinates 框坐标 xyxy xywh结果格式",
+    "N10": "YOLO v8/v11/ultralytics 分割模型 segmentation model 精度指标 accuracy metrics mask mAP box mAP model.val() validation metrics results 评估指标 instance segmentation evaluation",
+    "N11": "pytest fixture yield 清理 vs addfinalizer 区别 差异 pitfalls teardown cleanup finalizer scope exception handling",
+    "N12": "软件质量保证分析师 测试员 Software Quality Assurance Analyst Tester 主要任务 工作活动 job duties work activities responsibilities",
+    "N13": "计算机硬件工程师 computer hardware engineer 日常任务 daily tasks 工作活动 work activities 职责 job duties responsibilities",
+    "N14": "全国标准信息公共服务平台 强制性国家标准 推荐性国家标准 收录数量 在线阅读下载 National Standards Information Public Service Platform mandatory national standards recommended national standards total count online reading download proportion"
+  }
+}

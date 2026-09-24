@@ -1,0 +1,1077 @@
+{
+  "schema": "career-graph-deepeval/v1",
+  "judge": {
+    "model": "claude-sonnet-4.6",
+    "base_url": "https://forum.u3552374.nyat.app:49420/v1"
+  },
+  "levels": {
+    "A-bm25-only": {
+      "n": 18,
+      "summary": {
+        "contextual_precision": {
+          "mean": 0.1204,
+          "n": 18
+        },
+        "contextual_recall": {
+          "mean": 0.1112,
+          "n": 18
+        },
+        "contextual_relevancy": {
+          "mean": 0.1457,
+          "n": 17
+        }
+      },
+      "elapsedSec": 285.9,
+      "perQuestion": [
+        {
+          "questionId": "Q01",
+          "set": "main",
+          "category": "occupation-requirement",
+          "retrieved_chunk_ids": [
+            "S05#s101",
+            "S08#s148~2",
+            "S05#s110"
+          ],
+          "answer": "## 资料不足，无法回答\n\n根据您提供的检索片段，我**无法回答**\"嵌入式开发工程师主要需要哪些能力\"这一问题。\n\n### 原因说明\n\n当前检索片段的内容主要涉及：\n\n- **片段[1]和[3]**：MindSpore Lite的C++集成开发环境搭建（工程目录构建、CMake配置等）\n- **片段[2]**：各类移动端/嵌入式端的AI推理框架介绍（如NCNN、ExecuTorch、Hailo等）\n\n这些内容均为**具体技术工具的使用说明**，并未系统性地描述嵌入式开发工程师所需的核心能力与技能要求。\n\n---\n\n**建议**：如需获取准确答案，可参考以下途径：\n1. 查阅招聘平台（如BOSS直聘、智联招聘）上的嵌入式岗位JD\n2. 参考专业职业规划类文档或行业报告\n3. 补充相关检索片段后重新提问",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.0,
+            "faithfulness": 1.0,
+            "answer_relevancy": 0.875
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all retrieved nodes in the retrieval contexts are irrelevant to the input about skills required for embedded development engineers. The first node (rank 1) discusses MindSpore Lite C++ integration on Linux, covering topics like 'GCC >= 7.3.0' and 'CMake >= 3.22.3', which is unrelated to embedded engineer skills like FreeRTOS and SPI bus knowledge. The second node (rank 2)",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output could be attributed to any nodes in the retrieval context. The expected output covers a wide range of topics including FreeRTOS descriptions (sentences 1-5), SPI bus transaction phases and configurations (sentences 6-20), ESP32 GPIO pin details (sentences 21-30), ESP-IDF memory architecture (sentences 31-35), and computer hardw",
+            "contextual_relevancy": "The score is 0.00 because none of the retrieved content is relevant to the question about required abilities for embedded development engineers. All retrieved statements focus on specific technical topics such as 'MindSpore Lite的C++接口进行集成开发', 'system environment and compilation requirements for MindSpore Lite', hardware platforms like 'Sony IMX500', 'Rockchip RKNN', and 'Hailo', and frameworks lik",
+            "faithfulness": "The score is 1.00 because the actual output is perfectly faithful to the retrieval context with no contradictions found. Great job!",
+            "answer_relevancy": "The score is 0.88 because the response mostly addressed the question about embedded engineer skills effectively. However, it lost some points for including a meta-suggestion about re-asking the question with better snippets, which is irrelevant to what was actually asked and does not contribute to answering the core question about the required skills for an embedded development engineer."
+          },
+          "elapsedSec": 122.7
+        },
+        {
+          "questionId": "Q02",
+          "set": "main",
+          "category": "occupation-requirement",
+          "retrieved_chunk_ids": [
+            "S21#s349",
+            "S21#s349~5",
+            "S14#s238"
+          ],
+          "answer": "## 资料不足\n\n根据您提供的检索片段，**无法回答**\"机器视觉工程师需要掌握哪些能力\"这一问题。\n\n**原因说明：**\n\n- **片段[1]** 主要是与非网的导航页面及科技资讯摘要，仅简单提及\"机器视觉\"作为技术词汇，未涉及岗位能力要求；\n- **片段[2]** 是工业自动化、物联网等相关产品和文章的列表，同样未包含机器视觉工程师的能力描述；\n- **片段[3]** 内容与Python测试框架（pytest）相关，与机器视觉工程师职业能力完全无关。\n\n---\n\n**建议：** 如需准确回答该问题，可提供以下类型的参考资料：\n1. 机器视觉工程师的职位描述（JD）\n2. 相关职业能力标准文件\n3. 专业技术培训课程大纲\n\n届时可依据资料为您做出详细解答。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.0,
+            "faithfulness": 1.0,
+            "answer_relevancy": 1.0
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all retrieved nodes are completely irrelevant to the input about skills required for machine vision engineers. The first node in the retrieval contexts is about an electronics industry website with navigation links and news headlines, only mentioning '机器视觉' in passing without any substantive information about machine vision engineer skills. The second node is about the sa",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output could be attributed to any nodes in retrieval context. Sentences 1-5 regarding 飞桨's use of Tensor for neural network data representation and its comparison with Numpy arrays, sentences 6-10 covering the training code example with paddle.optimizer.Adam and LeNet, sentences 11-15 describing object detection tasks and YOLO26 model",
+            "contextual_relevancy": "The score is 0.00 because none of the retrieved content is relevant to the input about the abilities required for a machine vision engineer. The retrieval context contains entirely unrelated topics, such as '斑马技术的变化与物联网产业演进', '国产智驾芯片', 'DeepSeek的500亿元外部融资', '罗克韦尔5380与西门子S7-200通讯', and even pytest testing frameworks, none of which address the competencies or skills needed by a machine vision engine",
+            "faithfulness": "The score is 1.00 because the actual output is perfectly faithful to the retrieval context with no contradictions found!",
+            "answer_relevancy": "The score is 1.00 because the actual output is perfectly relevant to the input question about the skills required for a machine vision engineer. Every point addressed is directly on-topic and helpful!"
+          },
+          "elapsedSec": 124.8
+        },
+        {
+          "questionId": "Q03",
+          "set": "main",
+          "category": "occupation-requirement",
+          "retrieved_chunk_ids": [
+            "S05#s110",
+            "S15#s282",
+            "S05#s101"
+          ],
+          "answer": "## 资料不足\n\n非常抱歉，根据您提供的检索片段，**无法回答**\"自动化测试工程师的能力要求有哪些\"这一问题。\n\n### 原因说明\n\n当前检索片段的内容主要涉及：\n\n- **片段 [1] 和 [3]**：MindSpore Lite 的 C++ 集成开发教程（环境配置、工程目录构建等技术文档）\n- **片段 [2]**：测试之家（TesterHome）社区的帖子列表，仅提及了一些测试相关话题的标题，未包含具体的能力要求内容\n\n这些片段中**均未包含**自动化测试工程师能力要求的相关信息。\n\n---\n\n### 建议\n\n如需获取准确答案，可参考以下方向查询更多资料：\n\n1. 招聘平台（如Boss直聘、拉勾网）上自动化测试工程师的职位描述\n2. 测试之家（TesterHome）社区中的职业发展专栏\n3. 权威职业能力标准文件\n\n如您能提供相关内容的检索片段，我将基于资料为您进一步解答。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.1765,
+            "faithfulness": 1.0,
+            "answer_relevancy": 0.9
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all retrieved nodes in the retrieval contexts are completely irrelevant to the input about automation test engineer capability requirements. The first node (ranked 1) discusses MindSpore Lite C++ integration on Windows, covering topics like 'MinGW 编译依赖' and 'CMake >= 3.22.3', which has no connection to the query. The second node (ranked 2) is about the TesterHome communit",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output can be attributed to any nodes in retrieval context. The retrieval context appears to contain content about MindSpore Lite integration and a testing community website, which is entirely unrelated to the expected output's topics covering Selenium WebDriver, WebDriver BiDi, implicit/explicit waits, pytest fixtures, conftest.py us",
+            "contextual_relevancy": "The score is 0.18 because the retrieval context is largely irrelevant to the input about capability requirements for automation test engineers. The majority of retrieved content concerns unrelated topics such as 'MindSpore Lite的C++接口进行集成开发', 'system environment and compilation dependencies for MindSpore Lite', 'cmake project build configuration', and '公司内部福利政策调整通知'. Only a few statements show mini",
+            "faithfulness": "The score is 1.00 because the actual output is perfectly faithful to the retrieval context with no contradictions found!",
+            "answer_relevancy": "The score is 0.90 because the actual output is mostly relevant to the input about capability requirements for automation test engineers, but it loses some points for including information about MindSpore Lite C++ integration development tutorials, which is unrelated to the topic of automation test engineer skills and qualifications."
+          },
+          "elapsedSec": 145.0
+        },
+        {
+          "questionId": "Q04",
+          "set": "main",
+          "category": "occupation-requirement",
+          "retrieved_chunk_ids": [
+            "S15#s282",
+            "S08#s148~2",
+            "S21#s349~3"
+          ],
+          "answer": "## 资料不足，无法完整回答\n\n根据提供的检索片段，**均未包含\"边缘 AI 工程师\"岗位所需技能的明确描述**。\n\n检索片段的内容主要涉及：\n\n- **[1]** 软件测试社区（TesterHome）的帖子和活动信息\n- **[2]** 边缘 AI 相关的硬件框架和工具介绍（如 NCNN、ExecuTorch、Hailo、Rockchip RKNN 等）\n- **[3]** 电子技术资讯、芯片产品信息及 TinyML 应用案例\n\n虽然片段 [2] 和 [3] 涉及边缘 AI 的技术生态（如 NPU、嵌入式推理、TinyML、ARM 优化等），可以作为该岗位技术背景的参考，但**并未明确列出\"边缘 AI 工程师\"的岗位技能要求**。\n\n---\n\n**建议**：如需了解该岗位的具体技能要求，可参考：\n1. 招聘平台（如 Boss 直聘、LinkedIn）上的相关职位描述\n2. 官方技术社区（如 Arm Developer、Qualcomm AI Hub）发布的工程师能力框架\n\n如您能提供更相关的资料片段，我可以进一步为您分析。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.5769,
+            "faithfulness": 1.0,
+            "answer_relevancy": 0.8
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because none of the retrieved nodes contain relevant information about the skills required for an Edge AI Engineer position. The first node in the retrieval contexts is about the TesterHome community and software testing job postings, which is entirely unrelated to Edge AI engineering skills. The second node, while touching on edge AI hardware ecosystems such as 'Sony IMX500', 'R",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output could be attributed to any nodes in retrieval context. The retrieval context appears to cover unrelated topics such as TesterHome community, mobile ML frameworks, and electronic components news, while the expected output covers ESP32 SPI host driver documentation, ESP-IDF memory management, MindSpore Lite inference workflows, N",
+            "contextual_relevancy": "The score is 0.58 because while the retrieval context contains several relevant statements about Edge AI engineer skills—such as knowledge of ARM optimization, NPU inference frameworks (RKNN, QNN, Hailo, DEEPX), TinyML, embedded systems (Zephyr OS), and edge deployment tools (RKNN-Toolkit, CANN, HailoRT)—a significant portion of the retrieved content is irrelevant to the input. Irrelevant statemen",
+            "faithfulness": "The score is 1.00 because the actual output is perfectly faithful to the retrieval context with no contradictions found. Great job!",
+            "answer_relevancy": "The score is 0.80 because the actual output mostly addressed the skills required for an Edge AI Engineer position, but was pulled down by two irrelevant elements: a mention of the software testing community TesterHome, which has no bearing on the topic, and a conditional offer for further analysis that added no substantive information about the required skills."
+          },
+          "elapsedSec": 192.8
+        },
+        {
+          "questionId": "Q05",
+          "set": "main",
+          "category": "occupation-requirement",
+          "retrieved_chunk_ids": [
+            "S08#s148~2",
+            "S15#s282",
+            "S05#s101"
+          ],
+          "answer": "## 嵌入式开发工程师常用工具和平台\n\n根据检索片段，可以归纳出以下嵌入式开发工程师日常涉及的工具和平台：\n\n---\n\n### 一、硬件平台 / 芯片\n| 平台 | 说明 |\n|------|------|\n| **Rockchip SoC**（如 RK3588） | 面向嵌入式 SBC 和边缘设备 |\n| **Sony IMX500** | 用于摄像头端边缘 AI，极低功耗传感器推理 |\n| **Hailo NPU**（Hailo-8/8L/10H 等） | 搭配 Raspberry Pi AI HAT+ 使用 |\n| **Qualcomm Snapdragon**（Hexagon NPU / Adreno GPU） | 移动和边缘设备推理 |\n| **Axelera Metis AIPU** | 通过 PCIe 或 M.2 连接，提供高吞吐量边缘推理 |\n| **DEEPX NPU** | 针对 INT8 优化的嵌入式边缘推理硬件 |\n\n---\n\n### 二、SDK / 工具链\n| 工具 | 用途 |\n|------|------|\n| **Rockchip RKNN-Toolkit** | 针对 Rockchip NPU 进行模型优化与推理 |\n| **Sony AITRIOS SDK / MCT 工具链** | Sony 摄像头端边缘 AI 开发 |\n| **Qualcomm AI 技术栈（QAIRT）** | Snapdragon 设备端推理开发 |\n| **Hailo Dataflow Compiler** | Hailo NPU 模型编译与部署 |\n| **Axelera Voyager SDK** | 边缘推理应用开发 |\n| **DEEPX 开发者工具**（dx_com、dx_engine） | DEEPX NPU 推理开发 |\n\n---\n\n### 三、推理框架\n| 框架 | 说明 |\n|------|------|\n| **NCNN** | 针对移动 ARM 设备优化的推理框架 |\n| **ExecuTorch** | 基于 PyTorch 的设备端运行时，支持 iOS、Android 和嵌入式设备，底层使用 XNNPACK |\n| **MindSpore Lite** | 支持 C++ 接口集成开发，适用于 Linux x86_64 环境（如 Ubuntu） |\n\n---\n\n### 四、集成开发环境依赖（以 MindSpore Lite 为例）\n- **操作系统**：Linux x86_64（推荐 Ubuntu）\n- **编译器**：GCC ≥ 7.3.0\n- **构建工具**：CMake ≥ 3.22.3\n- **关键库文件**：`libmindspore-lite.so`、API 头文件（include 目录）\n\n---\n\n> **补充说明**：检索片段主要聚焦于**嵌入式 AI / 边缘推理**方向的工具和平台，对于更广泛的嵌入式开发工具（如 JTAG 调试器、RTOS、IDE 等），现有资料暂不足以覆盖，如需了解可进一步查阅相关资料。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.72,
+            "faithfulness": 1.0,
+            "answer_relevancy": 1.0
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all three nodes in the retrieval contexts are irrelevant to the input question about tools and platforms used by embedded development engineers in their daily work. The first node discusses mobile and embedded ML tools like 'NCNN', 'ExecuTorch', and 'Qualcomm QNN', which are not relevant to the expected focus on FreeRTOS and ESP-IDF. The second node is entirely off-topic,",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output could be attributed to any nodes in the retrieval context. Sentences 1-6 covering FreeRTOS's development history, licensing, libraries, open-source repository, and download packages found no support in any retrieval context node. Sentences 7-19 describing ESP-IDF memory architecture, ESP32 RAM types (DRAM, IRAM, D/IRAM), heap a",
+            "contextual_relevancy": "The score is 0.72 because while a significant portion of the retrieval context is relevant to embedded development tools and platforms — including mentions of tools like 'NCNN', 'Rockchip RKNN-Toolkit', 'Hailo Dataflow Compiler', 'ExecuTorch', 'DEEPX开发者工具', 'MindSpore Lite', 'CMake', 'GCC', and platforms like 'Snapdragon', 'Ascend NPU', and 'Raspberry Pi AI HAT+' — a notable portion of the context",
+            "faithfulness": "The score is 1.00 because the actual output is perfectly faithful to the retrieval context with no contradictions found. Great job!",
+            "answer_relevancy": "The score is 1.00 because the actual output is perfectly relevant to the input question about tools and platforms used by embedded development engineers in their daily work. All statements directly address the question with no irrelevant content. Great job!"
+          },
+          "elapsedSec": 241.8
+        },
+        {
+          "questionId": "Q06",
+          "set": "main",
+          "category": "occupation-requirement",
+          "retrieved_chunk_ids": [
+            "S21#s349",
+            "S21#s349~5",
+            "S21#s349~3"
+          ],
+          "answer": "## 资料不足，无法完整回答\n\n根据您提供的检索片段，其内容主要涵盖：\n\n- 电子元器件资讯与产品介绍\n- 工业自动化通讯模块\n- 智驾芯片动态\n- TinyML边缘推理应用案例\n- 行业活动与社区信息\n\n**这些片段均未涉及\"机器视觉工程师\"与\"边缘AI工程师\"的职业能力要求、岗位对比或技能图谱等内容。**\n\n因此，我无法仅依据现有检索结果，准确回答两类工程师在能力要求上的**重叠点**与**差异点**。\n\n---\n\n**建议您可以通过以下方向补充资料后再提问：**\n\n1. 招聘平台（如拉勾、LinkedIn）上两类岗位的JD（岗位描述）对比\n2. 行业技能认证体系（如CVIA机器视觉认证、Arm Edge AI相关白皮书）\n3. 专业职业发展报告或技术岗位图谱文档\n\n如您能提供上述相关资料片段，我可以为您进行精准的对比分析。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.0,
+            "faithfulness": 1.0,
+            "answer_relevancy": 0.7692
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all three nodes in the retrieval contexts are irrelevant to the input question about the overlapping and differing capability requirements between machine vision engineers and edge AI engineers. The first node is merely a navigation/portal page that only tangentially mentions '机器视觉' and '边缘AI' in event listings like '工厂自动化：加速边缘 AI 与机器视觉，实现智能自动化', containing no substantive",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output can be attributed to any nodes in retrieval context. The retrieval context nodes contain no relevant information matching any part of the expected output, which covers topics such as ESP32 SPI host drivers (sentence 1-3), ESP-IDF memory architecture (sentences 4-7), MindSpore Lite benchmark and inference (sentences 8-19), model",
+            "contextual_relevancy": "The score is 0.00 because none of the retrieved context contains any information relevant to the capability requirements, overlaps, or differences between machine vision engineers and edge AI engineers. The retrieval context consists entirely of unrelated topics such as Zebra Technologies' product strategy, Arm hardware architecture, autonomous driving chips, TSMC semiconductor manufacturing, FPGA",
+            "faithfulness": "The score is 1.00 because the actual output is perfectly faithful to the retrieval context with no contradictions found. Great job!",
+            "answer_relevancy": "The score is 0.77 because the actual output does address the core question of comparing capability requirements between machine vision engineers and edge AI engineers, hence it is not lower. However, it is dragged down by the inclusion of irrelevant content such as details about industrial automation communication modules, intelligent driving chip updates, and industry events/community information"
+          },
+          "elapsedSec": 192.0
+        },
+        {
+          "questionId": "Q07",
+          "set": "main",
+          "category": "skill-gap-prerequisite",
+          "retrieved_chunk_ids": [
+            "S08#s147",
+            "S08#s145",
+            "S18#s343"
+          ],
+          "answer": "## 资料不足，无法回答\n\n根据您提供的检索片段，**均不包含关于课程/技能单元「模型量化与部署（SK215）」的前置技能要求**。\n\n具体来看：\n- **片段[1][2]** 介绍的是 YOLO 模型的各种部署导出格式（如 ONNX、TensorRT、OpenVINO 等），属于技术科普内容，并未涉及课程体系或先修技能的说明。\n- **片段[3]** 是人力资源和社会保障部\"技能人才评价工作网\"的页面信息，与该问题完全无关。\n\n---\n\n### 建议\n\n如需获取「SK215 模型量化与部署」的前置技能信息，可尝试以下途径：\n\n1. **查阅对应课程/职业路径的官方文档**，搜索包含该技能编码（SK215）的课程体系说明；\n2. **补充相关检索片段**，例如该技能的课程大纲、学习路径图或技能树描述；\n3. **联系课程提供方**，直接咨询前置要求。\n\n如您能提供包含 SK215 课程结构的文档片段，我可以进一步为您解答。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.0,
+            "faithfulness": 1.0,
+            "answer_relevancy": 0.9
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all three nodes in the retrieval contexts are entirely irrelevant to the input question about prerequisites for learning 'Model Quantization and Deployment' (SK215). The first node discusses model deployment formats like 'PyTorch (.pt)', 'ONNX', 'TensorRT', and 'OpenVINO', which is only tangentially related but ultimately does not address the prerequisite skills question.",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output could be attributed to any nodes in retrieval context. The retrieval context nodes appear to cover unrelated topics such as YOLO26 deployment formats and a Chinese skills certification website, and contain no information relevant to any of the expected output's topics — including SPI bus initialization (sentences 1-2), SPI tran",
+            "contextual_relevancy": "The score is 0.00 because the retrieval context contains absolutely no relevant information about the prerequisite skills needed to learn '模型量化与部署' (SK215). The retrieved content is entirely composed of irrelevant material, including descriptions of various deployment/export formats (such as 'PyTorch .pt', 'TorchScript', 'ONNX', 'TensorRT', 'CoreML', etc.), general definitions of deployment, and c",
+            "faithfulness": "The score is 1.00 because the actual output is perfectly faithful to the retrieval context with no contradictions found. Great job!",
+            "answer_relevancy": "The score is 0.90 because the response largely addresses the prerequisite skills needed for SK215 '模型量化与部署', but loses some points due to an unrelated mention of the Ministry of Human Resources and Social Security's evaluation network, which has no bearing on the question asked."
+          },
+          "elapsedSec": 129.8
+        },
+        {
+          "questionId": "Q08",
+          "set": "main",
+          "category": "skill-gap-prerequisite",
+          "retrieved_chunk_ids": [
+            "S18#s343",
+            "S02#s7",
+            "S02#s29"
+          ],
+          "answer": "## 资料不足，无法回答\n\n根据您提供的检索片段，我无法回答关于「C 语言与内存模型」（SK090）→「微控制器外设驱动」（SK101）及其后续上层技能先后顺序的问题。\n\n**原因说明：**\n\n- **片段 [1]** 内容为人力资源和社会保障部职业资格证书查询系统的页面说明，不涉及上述技能编码或学习路径。\n- **片段 [2] 和 [3]** 内容为 ESP32 SPI 主机驱动程序的技术文档，虽与嵌入式/外设驱动话题相关，但**未包含任何关于 SK090、SK101 等技能编码体系或技能学习顺序的信息**。\n\n---\n\n**建议：**\n\n若需获取准确的技能路径信息，可尝试以下方向：\n1. 查询定义该技能编码体系（SK0xx）的**原始课程或技能框架文档**；\n2. 联系相关培训机构或课程提供方获取**官方先修/后修关系说明**；\n3. 补充包含该技能图谱的检索片段后重新提问。",
+          "scores": {
+            "contextual_precision": 0.5833,
+            "contextual_recall": 0.0652,
+            "contextual_relevancy": 0.0,
+            "faithfulness": 1.0,
+            "answer_relevancy": 0.8889
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.58 because the relevant nodes are not ranked at the top. The first node in the retrieval contexts is irrelevant, containing content about '技能人员职业资格证书全国联网查询系统' and a complaint portal, which has no connection to the input question about skill ordering from SK090 to SK101 or SPI-related content. This irrelevant node being ranked first pushes down the two relevant nodes. The second node",
+            "contextual_recall": "The score is 0.07 because only a small fraction of the expected output is supported by nodes in retrieval context. Specifically, sentences about the SPI master driver being a software program for controlling ESP32's GP-SPI peripheral, SPI1 limitations, and the reference to the ESP32 technical reference manual (sentences near the end of the expected output) are attributable to node 2 in retrieval c",
+            "contextual_relevancy": "The score is 0.00 because the retrieval context contains entirely irrelevant information. The retrieved content covers topics such as '技能人员职业资格证书全国联网查询系统', government policy guidance, and SPI-related technical documentation (e.g., 'SPI 主机驱动程序', 'ESP32 的通用 SPI (GP-SPI) 外设'), none of which address the learning sequence from 'C语言与内存模型 (SK090)' to '微控制器外设驱动 (SK101)' and beyond. There are zero relevant",
+            "faithfulness": "The score is 1.00 because the actual output is perfectly faithful to the retrieval context with no contradictions found. Great job!",
+            "answer_relevancy": "The score is 0.89 because the actual output largely addresses the question about the learning order from 'C Language and Memory Model' (SK090) to 'Microcontroller Peripheral Drivers' (SK101) and up to higher-level skills. However, it loses some points for including irrelevant information about the Ministry of Human Resources and Social Security's vocational qualification certificate inquiry system"
+          },
+          "elapsedSec": 173.4
+        },
+        {
+          "questionId": "Q09",
+          "set": "main",
+          "category": "skill-gap-prerequisite",
+          "retrieved_chunk_ids": [
+            "S15#s282",
+            "S14#s278",
+            "S14#s261"
+          ],
+          "answer": "## 资料不足，无法完整回答\n\n根据您提供的检索片段，我**无法系统回答**\"自动化测试技能缺口如何补、先修顺序是什么\"这一问题。\n\n以下是片段中**确实涉及**的有限信息：\n\n---\n\n### 片段中能找到的相关线索\n\n**片段[1]** 仅提到了一个帖子标题：\n> *\"作为测试新人，期望在自动化测试工程师发展，怎么系统的学习语言及实践\"*\n\n说明这是社区中存在的真实问题，但**帖子正文内容未被收录**，无法获取具体建议。\n\n**片段[2][3]** 涉及的是 `pytest` 框架中 **fixture（夹具）的依赖执行顺序**，属于自动化测试的某一具体技术点，并非学习路径规划。\n\n---\n\n### 建议\n\n如需获取准确的先修顺序和技能缺口补充方案，建议：\n\n1. 前往 **TesterHome（测试之家）** 社区，查阅上述帖子原文\n2. 补充包含系统学习路径的检索片段后，再来提问\n\n如您能提供更完整的资料片段，我可以进一步为您梳理答案。",
+          "scores": {
+            "contextual_precision": 0.5833,
+            "contextual_recall": 0.4444,
+            "contextual_relevancy": 0.2308,
+            "faithfulness": 1.0,
+            "answer_relevancy": 0.5556
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.58 because, while two relevant nodes exist in the retrieval contexts, the ranking order is suboptimal. The first node, which is irrelevant, is ranked highest despite only containing general mentions of 'Selenium', 'Appium', and '自动化测试' from TesterHome community posts and job listings, offering 'no specific guidance on skill gaps or prerequisite learning order for automated testing.'",
+            "contextual_recall": "The score is 0.44 because a significant portion of the expected output is not supported by the nodes in retrieval context. Sentences 1-8 about WebDriver driving browsers natively, WebDriver BiDi, W3C standards, and WebDriver as an object-oriented API have no coverage in any retrieval context node. Sentences 9-29 covering Selenium-specific topics such as race conditions, page load strategy, implici",
+            "contextual_relevancy": "The score is 0.23 because the retrieval context is largely irrelevant to the input about filling skill gaps in automated testing and prerequisite learning order. Most retrieved content consists of unrelated material such as community founding information, recruitment ads for '蚂蚁数字科技' and '乐信圣文', internal welfare policies about '下午茶福利', hot city job filters, and pytest fixture technical documentati",
+            "faithfulness": "The score is 1.00 because the actual output is perfectly faithful to the retrieval context with no contradictions found. Great job!",
+            "answer_relevancy": "The score is 0.56 because while the actual output partially addresses the question about automation testing skill gaps and prerequisite learning order, it contains several irrelevant elements that drag down its relevancy. Specific technical details like pytest fixture dependency execution order are too narrow and tangential to the broader question asked. Additionally, the response includes unhelpf"
+          },
+          "elapsedSec": 152.0
+        },
+        {
+          "questionId": "Q10",
+          "set": "main",
+          "category": "skill-gap-prerequisite",
+          "retrieved_chunk_ids": [
+            "S18#s343",
+            "S21#s349",
+            "S08#s148"
+          ],
+          "answer": "## 资料不足，无法回答\n\n根据您提供的检索片段，**没有任何片段涉及机器视觉方向技能编码 SK110–SK115、SK122–SK123 的内容**，更无法从中获取相关的技能先修关系信息。\n\n具体来说，三个检索片段的内容分别为：\n\n1. **片段[1]**：技能人才评价工作网的系统导航与投诉信箱说明；\n2. **片段[2]**：电子行业资讯网站（与非网）的栏目介绍与科技新闻；\n3. **片段[3]**：YOLO26 模型的部署格式对比表。\n\n以上内容均**不包含**关于机器视觉职业方向技能编码体系或先修关系的任何描述。\n\n---\n\n**建议您**：\n- 查阅相关职业技能标准文件或课程体系说明文档；\n- 联系发布该技能编码体系的机构或院校；\n- 拨打当地 **12333** 咨询职业技能标准相关政策。\n\n如您能提供包含上述技能编码的原始文档或检索片段，我可以进一步为您解答。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.2917,
+            "contextual_relevancy": 0.0,
+            "faithfulness": 1.0,
+            "answer_relevancy": 0.7273
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all retrieved nodes in the retrieval contexts are completely irrelevant to the input about machine vision skill prerequisite relationships (SK110–SK115, SK122–SK123). The first node pertains to a vocational qualification certificate query system and complaint mailbox, offering no information about skill prerequisites. The second node discusses electronics industry news an",
+            "contextual_recall": "The score is 0.29 because only a small portion of the expected output is supported by nodes in retrieval context. Specifically, node 3 supports sentences related to YOLO26 deployment options, object detection, instance segmentation, model export formats, training/validation examples, and related code snippets. However, the large majority of the expected output — covering Netron as a visualization ",
+            "contextual_relevancy": "The score is 0.00 because the retrieval context contains absolutely no relevant information about machine vision skill prerequisites (SK110–SK115, SK122–SK123). The retrieved content covers entirely unrelated topics such as certificate query systems ('技能人员职业资格证书全国联网查询系统'), complaint mailboxes ('投诉信箱'), Zebra Technologies' IoT products, course listings for 'Altium Designer' and 'STM32', and YOLO26 ",
+            "faithfulness": "The score is 1.00 because the actual output is perfectly faithful to the retrieval context with no contradictions found!",
+            "answer_relevancy": "The score is 0.73 because the actual output partially addressed the question about machine vision skill prerequisite relationships (SK110–SK115 and SK122–SK123), but was pulled down by several irrelevant statements. Specifically, suggesting external consultation documents, advising contact with the issuing institution, and recommending a hotline (12333) are all generic administrative suggestions t"
+          },
+          "elapsedSec": 265.5
+        },
+        {
+          "questionId": "Q11",
+          "set": "main",
+          "category": "skill-gap-prerequisite",
+          "retrieved_chunk_ids": [
+            "S08#s148~2",
+            "S18#s343",
+            "S21#s349~3"
+          ],
+          "answer": "## 资料不足，无法回答\n\n根据您提供的检索片段，其中：\n\n- **片段 [1]** 涉及移动与嵌入式 ML 的各类框架和硬件（如 NCNN、Hailo、Qualcomm QNN 等）的技术描述；\n- **片段 [2]** 涉及职业技能等级证书查询系统及投诉信箱；\n- **片段 [3]** 涉及电子/芯片技术资讯。\n\n**以上片段均未包含任何关于 SK215、SK120、SK121、SK123 这些技能编码的定义、内容说明，以及它们之间先后顺序/前置关系的信息。**\n\n因此，我无法依据现有资料回答\"边缘 AI 方向各技能之间谁先谁后\"这一问题。\n\n---\n\n**建议：** 如需准确答案，请提供包含上述技能编码定义及依赖关系的职业导航文档或课程路径图，以便我为您进行解读。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.0,
+            "faithfulness": 1.0,
+            "answer_relevancy": 0.7778
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all retrieved nodes in the retrieval contexts are irrelevant to the input about edge AI skill ordering (SK215, SK120, SK121, SK123). The first node discusses edge AI hardware deployment options like 'NCNN', 'Sony IMX500', and 'Rockchip RKNN' but does not address skill ordering or MindSpore Lite benchmark environment setup. The second node is entirely off-topic, covering a",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output can be attributed to any nodes in retrieval context. All sentences across the expected output — including environment setup instructions (sentences 1–4), benchmark tool directory navigation (sentences 5–8), inference performance and accuracy analysis commands and outputs (sentences 9–19), C++ integration environment requirement",
+            "contextual_relevancy": "The score is 0.00 because the retrieval context contains absolutely no relevant information about the ordering of Edge AI skills (SK215、SK120、SK121、SK123). All retrieved statements are entirely off-topic, covering unrelated subjects such as 'NCNN技术特性', 'Sony IMX500硬件特性', 'MOSFET power conversion products', 'durian ripeness detection', and 'RISC-V chip company listing', none of which address the sk",
+            "faithfulness": "The score is 1.00 because the actual output is perfectly faithful to the retrieval context with no contradictions found. Great job!",
+            "answer_relevancy": "The score is 0.78 because the actual output does address the ordering of Edge AI skill codes (SK215, SK120, SK121, SK123), which is why it is not lower. However, it loses points for including irrelevant information such as details about a vocational skill level certificate query system and complaint mailbox, as well as general electronics and chip technology information, neither of which help clar"
+          },
+          "elapsedSec": 197.7
+        },
+        {
+          "questionId": "Q12",
+          "set": "main",
+          "category": "skill-gap-prerequisite",
+          "retrieved_chunk_ids": [
+            "S21#s349~3",
+            "S08#s148~2",
+            "S01#s6"
+          ],
+          "answer": "## 资料不足，无法回答\n\n非常抱歉，根据您提供的检索片段，**没有包含任何关于\"嵌入式开发工程师学习单元顺序\"的相关内容**。\n\n检索片段涉及的内容主要包括：\n- 电子元器件技术资料（MOSFET、芯片等）\n- 移动和嵌入式 ML 推理框架介绍\n- FreeRTOS 相关文档资源链接\n\n均与\"嵌入式开发工程师的学习路径/单元顺序\"这一问题**无直接关联**。\n\n---\n\n**建议您可以通过以下方式获取更准确的信息：**\n1. 提供包含嵌入式开发课程体系或职业路径的相关文档片段，以便我准确作答。\n2. 查阅专业职业规划平台或嵌入式开发培训机构的课程大纲。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.0,
+            "faithfulness": 1.0,
+            "answer_relevancy": 1.0
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all retrieved nodes in the retrieval contexts are irrelevant to the input question about the learning order for embedded development engineers. The first node contains information about 'FPGA, MOSFET, autonomous driving, and TinyML,' the second node discusses 'mobile and embedded ML frameworks such as NCNN, ExecuTorch, Hailo, and Qualcomm QNN,' and the third node referenc",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output could be attributed to any nodes in retrieval context. The retrieval context contains information about electronic components news, mobile ML frameworks, and FreeRTOS documentation, which is entirely unrelated to the expected output's content. This includes sentences covering SPI bus transaction phases (sentences 1-7), SPI conf",
+            "contextual_relevancy": "The score is 0.00 because the retrieval context contains absolutely no relevant information about the learning order for embedded development engineers. All retrieved statements are about completely unrelated topics, such as 'FPGA技术资料', specific chip products like '龙夏电子LR009N04SDL10', AI frameworks like 'NCNN' and 'ExecuTorch', AWS services, and industry reports like '低空经济产业地图', none of which addr",
+            "faithfulness": "The score is 1.00 because the actual output is perfectly faithful to the retrieval context with no contradictions found. Great job!",
+            "answer_relevancy": "The score is 1.00 because the actual output is perfectly relevant to the input, directly addressing the learning order for embedded development engineer units. Great job!"
+          },
+          "elapsedSec": 166.7
+        },
+        {
+          "questionId": "Q13",
+          "set": "main",
+          "category": "scenario-advice",
+          "retrieved_chunk_ids": [
+            "S08#s148~2",
+            "S21#s349~3",
+            "S08#s147"
+          ],
+          "answer": "## 从嵌入式开发工程师转型到边缘 AI 工程师：需要补充的技能\n\n根据检索片段，可以从以下几个维度梳理出需要补充的核心技能：\n\n---\n\n### 一、ML 模型推理与量化基础\n\n嵌入式工程师已具备硬件操作能力，但需要补充：\n\n- **模型量化技术**：掌握 **INT8 / FP16** 量化原理（片段中多次提及 Hailo、DEEPX、RKNN 均依赖 INT8 推理）\n- **推理框架使用**：理解不同框架的适用场景，例如：\n  - **NCNN / MNN**：针对移动端 ARM 设备的轻量推理\n  - **LiteRT（原 TFLite）**：嵌入式和移动端通用格式，支持 FP32 和 INT8\n  - **ExecuTorch**：PyTorch 原生设备端运行时，通过 XNNPACK 支持嵌入式设备\n  - **ONNX**：跨框架、跨平台的模型交换格式\n\n---\n\n### 二、面向特定 NPU/硬件的开发能力\n\n不同边缘 AI 芯片有专属 SDK，需针对性学习：\n\n| 硬件平台 | 需掌握的工具/SDK |\n|---|---|\n| Rockchip RK3588 等 SoC | **RKNN-Toolkit**，支持 NPU 推理 |\n| Hailo-8/10/15 系列 | **Hailo Dataflow Compiler**，生成 HEF 格式 |\n| Sony IMX500 | **Sony SDK + MCT 工具链**，传感器级推理 |\n| Qualcomm Snapdragon | **QNN / QAIRT**，面向 Hexagon NPU 和 Adreno GPU |\n| DEEPX NPU | **dx_com、dx_engine** 开发工具 |\n| Axelera Metis AIPU | **Axelera Voyager SDK** |\n\n---\n\n### 三、模型导出与格式转换\n\n需要掌握将训练好的模型转换为边缘端可部署格式的能力：\n\n- **ONNX 导出**：作为中间格式对接各类推理引擎\n- **OpenVINO**：用于 Intel CPU/GPU/NPU 的边缘优化（物联网/边缘计算常用）\n- **TF Edge TPU / LiteRT**：面向 Google Coral 等嵌入式加速器\n- **TorchScript**：在无 Python 的 C++ 嵌入式运行时中部署模型\n\n---\n\n### 四、TinyML 方向（MCU 级场景）\n\n片段中提到面向 MCU 的边缘 AI 解决方案需要：\n\n- 掌握 **AutoML + CNN** 结合的训练流水线\n- 理解 **信号处理（SP）特征提取** 与神经网络的结合\n- 熟悉 **Zephyr OS** 等嵌入式操作系统上的 ML 集成（嵌入式工程师在 RTOS 方面已有基础，可快速迁移）\n\n---\n\n### 五、已有优势（无需重点补充）\n\n嵌入式工程师本身具备：\n- ARM CPU/GPU 底层优化经验（与边缘 AI 高度重叠）\n- 硬件接口与外设驱动开发能力\n- 低功耗设计经验（与边缘 AI 功耗优化需求契合）\n\n---\n\n> ⚠️ **说明**：检索片段主要集中在推理框架与硬件工具链层面，关于机器学习理论基础（如神经网络原理、训练方法）所需的系统性学习路径，**当前资料不足以完整覆盖**，建议结合其他资源进一步了解。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.2,
+            "contextual_relevancy": 0.3571,
+            "faithfulness": 0.9583,
+            "answer_relevancy": 0.9643
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all three nodes in the retrieval contexts are irrelevant to the input question about skill transitions from embedded to edge AI engineering. The first node, ranked first, discusses 'mobile and embedded ML communities, edge AI hardware (Sony IMX500, Rockchip RKNN, Hailo NPU, etc.)' but does not address any skill transition guidance. The second node, ranked second, contains",
+            "contextual_recall": "The score is 0.20 because most sentences in the expected output cannot be attributed to any nodes in retrieval context. Sentences 1-4 regarding ESP32's 34 GPIO pins, IO MUX, RTC IO MUX, and GPIO configuration are not found in any retrieval context node. The detailed GPIO table (sentences covering analog functions, RTC GPIO mappings, and special restrictions) is also absent. Sentences about MindSpo",
+            "contextual_relevancy": "The score is 0.36 because the retrieval context is largely irrelevant to the input question about skill requirements for transitioning from embedded development to edge AI engineering. A significant portion of the retrieved content covers unrelated topics such as 'MOSFET power conversion components', 'touch chips', 'power bank teardown reports', and detailed model format descriptions (e.g., TorchS",
+            "faithfulness": "The score is 0.96 because the actual output makes a minor oversimplification by claiming all three platforms (Hailo, DEEPX, and RKNN) 'rely on INT8 inference,' when in fact RKNN supports both FP16 and INT8, not solely INT8 as implied.",
+            "answer_relevancy": "The score is 0.96 because the response largely addressed the question about skills needed to transition from an embedded development engineer to an edge AI engineer. However, it loses a small amount of points for including a meta-comment about the scope of retrieved information, which is not directly relevant to answering what specific skills need to be supplemented for the transition."
+          },
+          "elapsedSec": 188.1
+        },
+        {
+          "questionId": "Q14",
+          "set": "main",
+          "category": "scenario-advice",
+          "retrieved_chunk_ids": [
+            "S05#s101",
+            "S05#s110",
+            "S21#s349~5"
+          ],
+          "answer": "## 资料不足，无法有效回答\n\n非常抱歉，根据提供的检索片段，**无法回答**\"嵌入式开发工程师转到机器视觉工程师的路径和技能增量\"这一问题。\n\n检索片段的内容主要涉及：\n\n- **片段[1][2]**：MindSpore Lite C++推理接口的集成开发教程（环境配置、CMake工程构建等）\n- **片段[3]**：工业自动化、智能驾驶、半导体等领域的行业资讯列表\n\n这些内容均**不包含**关于职业转型路径、技能增量规划的相关信息。\n\n---\n\n### 建议\n\n如需获得准确的职业导航建议，可以补充以下方向的资料来源：\n\n1. 机器视觉工程师岗位JD（职位描述）对比分析\n2. 嵌入式与机器视觉技术栈差异的系统性文章\n3. 相关职业发展论坛或招聘平台的岗位能力模型数据\n\n在获得充分的参考资料后，我可以为您提供更准确、有依据的回答。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.0,
+            "faithfulness": 1.0,
+            "answer_relevancy": 0.75
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all retrieved nodes in the retrieval contexts are irrelevant to the input about transitioning from embedded to machine vision engineering. The first node covers 'MindSpore Lite C++ integration development on Linux, including cmake project setup and library linking', the second node covers 'MindSpore Lite C++ integration development on Windows, including MinGW compilation ",
+            "contextual_recall": "The score is 0.00 because none of the nodes in retrieval context support any sentence in the expected output. All sentences, ranging from ESP32 GPIO pin descriptions (sentences 1–4), the detailed GPIO pin table entries (sentences 5–41), the GPIO usage notes (sentences 42–47), object detection and instance segmentation explanations (sentences 48–55), to the O*NET occupational information (sentences",
+            "contextual_relevancy": "The score is 0.00 because the retrieval context contains absolutely no relevant information about transitioning from embedded development engineer to machine vision engineer. All retrieved content is entirely off-topic, including 'MindSpore Lite的C++接口集成开发' tutorials, 'MindSpore Lite的环境配置要求', industrial automation product listings like '模拟量转无线数传模块', website footer information such as '公司介绍' and '隐私",
+            "faithfulness": "The score is 1.00 because the actual output is perfectly faithful to the retrieval context with no contradictions found!",
+            "answer_relevancy": "The score is 0.75 because the actual output partially addresses the career transition path and skill increments from embedded development engineer to machine vision engineer, but loses relevancy by including details about MindSpore Lite C++ inference tutorials, CMake project building, and industry news about industrial automation, intelligent driving, and semiconductors — none of which directly sp"
+          },
+          "elapsedSec": 135.1
+        },
+        {
+          "questionId": "Q15",
+          "set": "main",
+          "category": "scenario-advice",
+          "retrieved_chunk_ids": [
+            "S21#s349~5",
+            "S15#s282",
+            "S21#s349"
+          ],
+          "answer": "## 资料不足，无法回答\n\n根据您提供的检索片段，**没有任何内容涉及\"机器视觉工程师如何转型为边缘 AI 工程师\"的职业路径规划**。\n\n检索片段主要包含：\n- 工业自动化/通信模块的产品资讯\n- 软件测试社区的帖子列表\n- 电子行业媒体的文章摘要（芯片、智驾、封装等）\n\n这些内容均不足以支撑对该职业转型问题的专业解答。\n\n---\n\n**建议您可以尝试以下方式获取更准确的信息：**\n\n1. **重新检索**更具针对性的资料，例如搜索\"机器视觉转边缘AI技能路径\"、\"Edge AI工程师技能要求\"等关键词\n2. **参考专业职业发展平台**，如相关技术社区（CSDN、掘金）或职业规划网站\n3. **查阅招聘信息**，对比机器视觉工程师与边缘AI工程师的JD差异，识别技能缺口\n\n如果您能提供包含相关内容的检索片段，我可以基于那些资料为您进行分析。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.1304,
+            "faithfulness": 0.875,
+            "answer_relevancy": 0.7778
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all three nodes in the retrieval contexts are irrelevant to the input about transitioning from a machine vision engineer to an edge AI engineer. The first node, ranked first, is about industrial automation products and electronic components such as '模拟量转无线数传模块' and '4G远程控制开关', with no substantive content on edge AI career transitions. The second node, ranked second, is ab",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output can be attributed to any nodes in retrieval context. The retrieval context nodes only cover topics such as electronics communities, software testing communities, and industry news, which are entirely unrelated to the expected output. Sentences 1-7 about MindSpore Lite's basic functions, model conversion, integration inference, ",
+            "contextual_relevancy": "The score is 0.13 because the retrieval context is largely irrelevant to the question of how a machine vision engineer transitions to an edge AI engineer. The vast majority of retrieved content covers unrelated topics such as '模拟量转无线数传模块', '工业自动化通讯协议转换', 'MIPI I3C规范测试', 'software testing roles', and '台积电芯片制造', none of which address career transition paths. Only a few statements show marginal relev",
+            "faithfulness": "The score is 0.88 because the actual output characterizes the retrieval context as containing only industrial automation and communication modules, while the retrieval context also includes information about DeepSeek financing, TSMC, MicroLED technology, intelligent driving (地平线), electronics products (Infineon, NXP, Arduino), and software testing communities (TesterHome). This incomplete and part",
+            "answer_relevancy": "The score is 0.78 because the actual output partially addresses the career transition from machine vision engineer to edge AI engineer, but is dragged down by irrelevant content. Specifically, information about industrial automation/communication module products and software testing community content have no bearing on the career path planning question asked. These off-topic inclusions prevent the"
+          },
+          "elapsedSec": 172.4
+        },
+        {
+          "questionId": "Q16",
+          "set": "main",
+          "category": "scenario-advice",
+          "retrieved_chunk_ids": [
+            "S08#s148~3",
+            "S18#s343",
+            "S19#s344~2"
+          ],
+          "answer": "## 资料不足，无法回答\n\n根据提供的检索片段，**没有任何内容涉及\"2026年端侧部署技能趋势\"**的具体数据或分析。\n\n三段检索片段的实际内容分别为：\n\n| 片段 | 实际内容 |\n|------|----------|\n| [1] | 关于部署选项评估的通用说明 |\n| [2] | 中国技能人才评价工作网的系统介绍与投诉信箱说明 |\n| [3] | 工业和信息化部2026年的新闻动态列表 |\n\n以上内容均**不包含**：\n- 端侧部署（Edge Deployment）的技能需求分析\n- 2026年技能上升趋势的具体数据\n- 相关岗位技能的排名或变化情况\n\n---\n\n**建议**：如需了解该问题，可参考以下更相关的资料来源：\n- 职场数据平台（如LinkedIn Talent Insights、脉脉、Boss直聘技能报告）\n- 行业研究报告（如Gartner、IDC关于边缘计算人才的报告）\n- 开发者调查（如Stack Overflow Developer Survey）\n\n如您能提供相关数据片段，我可以进一步为您解读。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.0
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because none of the retrieved nodes are relevant to the input question about which specific skills are rising in edge deployment in 2026. The first node in the retrieval contexts only provides a 'high-level overview note about deployment comparisons' without any specific skill trend information. The second node is entirely about 'a vocational skills certification query system and",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output can be attributed to any nodes in retrieval context. The expected output covers MindSpore Lite model conversion steps (sentences 1–24), including the converter_lite tool, directory paths, environment setup, conversion commands for CAFFE/MINDIR/TFLITE/TF/ONNX models, and YOLO26 deployment format comparisons (sentences 25–31), bu",
+            "contextual_relevancy": "The score is 0.00 because none of the retrieved content is relevant to the input about which specific skills are rising in 2026年端侧部署. The retrieval context contains entirely unrelated information such as '技能人员职业资格证书全国联网查询系统', '中小企业回款难问题治理', '电动自行车充电桩国家标准', and various government administrative notices, none of which address edge deployment trends or related rising skills. There are zero relevant s"
+          },
+          "elapsedSec": 131.4
+        },
+        {
+          "questionId": "Q17",
+          "set": "main",
+          "category": "scenario-advice",
+          "retrieved_chunk_ids": [
+            "S15#s282",
+            "S21#s349~5",
+            "S21#s349~2"
+          ],
+          "answer": "## 资料不足，无法完整回答\n\n根据您提供的检索片段，**无法充分回答**\"计算机硬件工程\"与\"软件质量保证\"这两个方向前景如何的问题。\n\n以下是片段中**仅能提取到的有限相关信息**：\n\n### 关于软件质量保证（软件测试方向）\n片段[1]来自测试社区 TesterHome，可以观察到一些行业动态信号：\n- AI 正在深度渗透测试领域（如\"AI 赋能测试岗位\"、\"精准测试\"、\"大模型测评\"等话题活跃）\n- 鸿蒙系统测试成为新兴方向\n- 自动化测试工程师仍有发展空间\n- 有从测试转向开发的案例分享\n\n但片段**未提供系统性的行业前景分析数据或结论**。\n\n### 关于计算机硬件工程\n片段[2][3]涉及工业控制、芯片、汽车电子等硬件领域的技术内容，但**均未涉及该方向的职业前景分析**。\n\n---\n\n### 建议\n\n如需了解这两个方向的前景，建议参考：\n- 权威就业报告（如拉勾、Boss直聘年度报告）\n- 教育部或相关机构发布的专业就业数据\n- 行业白皮书等专项资料\n\n**本助手仅依据所提供片段作答，暂无足够资料支撑完整判断，请以权威来源为准。**",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": null
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all retrieved nodes in the retrieval contexts are completely irrelevant to the input question about career prospects for computer hardware engineering and software quality assurance. The first node (ranked 1) is about TesterHome, a Chinese software testing community, which lacks any specific career outlook data such as 'median wages,' 'employment statistics,' or 'projecte",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output could be attributed to any nodes in retrieval context. The retrieval context appears to contain content about a Chinese software testing community, industrial technology, and electronics, none of which align with the O*NET occupational data present in the expected output. Every element of the expected output — including the occ",
+            "contextual_relevancy": "RetryError: RetryError[<Future at 0x25918363cb0 state=finished raised InternalServerError>]"
+          },
+          "elapsedSec": 285.9
+        },
+        {
+          "questionId": "Q18",
+          "set": "main",
+          "category": "scenario-advice",
+          "retrieved_chunk_ids": [
+            "S11#s176",
+            "S11#s172",
+            "S18#s343"
+          ],
+          "answer": "## 关于 WebDriver BiDi 对测试工程师技能影响的回答\n\n根据提供的检索片段，**仅能支撑以下有限的技术背景信息**：\n\n### 可确认的技术事实（来自片段[1][2]）\n\n| 要点 | 内容 |\n|------|------|\n| 协议性质 | W3C 标准双向协议，由 Selenium 项目与各浏览器厂商共同制定 |\n| 技术特点 | 在 WebDriver 基础上增加 **WebSocket 连接**，支持实时接收浏览器事件 |\n| 能力范围 | 可处理网络请求、控制台消息、JavaScript 错误等实时事件 |\n| 战略定位 | 是**跨浏览器标准**，旨在取代 Chrome DevTools Protocol（CDP） |\n\n### ⚠️ 资料不足说明\n\n检索片段中**没有直接涉及**以下内容：\n\n- WebDriver BiDi 对测试工程师**具体技能要求**的影响分析\n- 测试工程师需要**新增或转型**哪些能力\n- 行业对该协议的**岗位招聘或培训要求**变化\n\n片段[3]属于职业资格证书查询系统的页面内容，与本问题**完全无关**。\n\n---\n\n> **结论：现有检索资料不足以全面回答该问题**，建议参考 Selenium 官方文档、W3C 规范说明或专业测试工程师社区（如 Testing Community、BrowserStack Blog）以获取更系统的技能影响分析。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.2857
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the relevant nodes are perfectly ranked above the irrelevant node. The first node, directly describing WebDriver BiDi as a W3C standard bidirectional protocol with WebSocket capabilities, and the second node, covering Selenium WebDriver as a W3C recommended standard with its API details, are both correctly positioned at the top of the rankings. The irrelevant node about a",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully attributed to nodes in retrieval context — sentences 1 through 7 are found in node 2, and sentence 8 is found in node 1. Great job, everything checks out perfectly!",
+            "contextual_relevancy": "The score is 0.29 because most of the retrieved context is irrelevant to the input. A large portion of the context covers unrelated topics such as '技能人员职业资格证书全国联网查询系统', vocational qualification complaint mailboxes, and basic WebDriver definitions that 'do not address the impact of WebDriver BiDi standardization on test engineers' skills'. Only a few statements are relevant, including that 'WebDriv"
+          },
+          "elapsedSec": 72.7
+        }
+      ]
+    },
+    "VECTOR": {
+      "n": 26,
+      "summary": {
+        "contextual_precision": {
+          "mean": 0.391,
+          "n": 26
+        },
+        "contextual_recall": {
+          "mean": 0.3596,
+          "n": 26
+        },
+        "contextual_relevancy": {
+          "mean": 0.304,
+          "n": 25
+        }
+      },
+      "elapsedSec": 1273.7,
+      "perQuestion": [
+        {
+          "questionId": "H01",
+          "set": "heldout",
+          "category": "embedded",
+          "retrieved_chunk_ids": [
+            "S02#s13",
+            "S02#s43~2",
+            "S02#s8"
+          ],
+          "answer": "根据检索片段 [1]，在 `spi_transaction_t` 的 `flags` 字段中，两种模式需要设置的标志位如下：\n\n---\n\n### 双线输出模式（Dual Output）\n设置标志位：\n```\nSPI_TRANS_MODE_DIO\n```\n\n---\n\n### 四线输出模式（Quad Output）\n设置标志位：\n```\nSPI_TRANS_MODE_QIO\n```\n\n---\n\n### 补充说明\n\n| 模式 | 传输事务标志信号（spi_transaction_t.flags） |\n|------|----------------------------------------------|\n| 双线输出模式 | `SPI_TRANS_MODE_DIO` |\n| 双线 I/O 模式 | `SPI_TRANS_MODE_DIO` + `SPI_TRANS_MULTILINE_ADDR` |\n| 四线输出模式 | `SPI_TRANS_MODE_QIO` |\n| 四线 I/O 模式 | `SPI_TRANS_MODE_QIO` + `SPI_TRANS_MULTILINE_ADDR` |\n\n> **注意**：\"输出模式\"与\"I/O 模式\"的区别在于：I/O 模式还需要额外加上 `SPI_TRANS_MULTILINE_ADDR`，使地址阶段也使用多线传输。单纯的\"输出模式\"只需设置 `SPI_TRANS_MODE_DIO` 或 `SPI_TRANS_MODE_QIO` 即可。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.1852
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the retrieval contexts are perfectly ordered! The first node directly answers the question by stating that 'SPI_TRANS_MODE_DIO' is for 双线输出模式 and 'SPI_TRANS_MODE_QIO' is for 四线输出模式, and the second node provides helpful supplementary definitions confirming that 'SPI_TRANS_MODE_DIO: Transmit/receive data in 2-bit mode' and 'SPI_TRANS_MODE_QIO: Transmit/receive data in 4-bit",
+            "contextual_recall": "The score is 1.00 because all sentences and table content in the expected output are fully attributed to node 1 in retrieval context, including the introductory text about ESP32 line modes and the complete table with all headers and entries (普通 SPI 模式, 双线输出模式, 四线输出模式, 四线 I/O 模式, along with their respective flags). Great job — perfect coverage!",
+            "contextual_relevancy": "The score is 0.19 because while the retrieval context does contain a few directly relevant statements — specifically that 'SPI_TRANS_MODE_DIO' is the flag for dual-line (2-bit) output mode and 'SPI_TRANS_MODE_QIO' is the flag for quad-line (4-bit) output mode, set in 'spi_transaction_t' — the vast majority of the retrieved content is irrelevant. Much of it covers bus-level flags like 'SPICOMMON_BU"
+          },
+          "elapsedSec": 57.6
+        },
+        {
+          "questionId": "H02",
+          "set": "heldout",
+          "category": "embedded",
+          "retrieved_chunk_ids": [
+            "S02#s14",
+            "S02#s10",
+            "S02#s42~3"
+          ],
+          "answer": "## SPI 命令阶段和地址阶段的长度\n\n### 默认长度从哪里来？\n\n命令阶段和地址阶段的**默认长度**在调用 `spi_bus_add_device()` 时，通过 **`spi_device_interface_config_t`** 结构体进行设置，具体字段为：\n\n| 字段 | 说明 |\n|------|------|\n| `spi_device_interface_config_t::command_bits` | 命令阶段长度（0–16 位） |\n| `spi_device_interface_config_t::address_bits` | 地址阶段长度（0–64 位） |\n\n> 若上述字段设置为 **0**，对应阶段将被跳过，不会产生命令或地址传输。\n\n在发起传输时，如果 `spi_transaction_t::flags` 中**未设置** `SPI_TRANS_VARIABLE_CMD` 和 `SPI_TRANS_VARIABLE_ADDR` 标志，驱动程序会自动沿用设备初始化时的默认长度。\n\n---\n\n### 想改的话怎么改？\n\n如果需要**逐笔传输单独指定**命令/地址阶段长度，按以下步骤操作：\n\n1. **声明 `spi_transaction_ext_t` 结构体**（而非普通的 `spi_transaction_t`）；\n2. 在 `spi_transaction_ext_t::base.flags` 中设置对应标志：\n   - `SPI_TRANS_VARIABLE_CMD` —— 启用可变命令长度\n   - `SPI_TRANS_VARIABLE_ADDR` —— 启用可变地址长度\n3. 在 `spi_transaction_ext_t` 中设置具体长度：\n   - `spi_transaction_ext_t::command_bits` —— 本次命令阶段实际位数\n   - `spi_transaction_ext_t::address_bits` —— 本次地址阶段实际位数\n4. 其余字段按正常流程配置即可。\n\n---\n\n### 附加说明\n\n如果希望命令/地址阶段的**线数**与数据阶段保持一致（如多线模式），需在 `spi_transaction_t::flags` 中额外设置：\n- `SPI_TRANS_MULTILINE_CMD`\n- `SPI_TRANS_MULTILINE_ADDR`",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.6111
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because all relevant nodes are perfectly ranked above irrelevant ones. The first node directly and completely answers both parts of the question, explaining that the default lengths come from 'spi_device_interface_config_t' set via 'spi_bus_add_device()', and how to change them using 'spi_transaction_ext_t' with 'SPI_TRANS_VARIABLE_CMD 和/或 SPI_TRANS_VARIABLE_ADDR'. Great retrieva",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are directly attributed to the 1st node in retrieval context, covering the command/address phase transmission details, variable length configuration steps, and multiline mode settings. Perfect recall!",
+            "contextual_relevancy": "The score is 0.61 because while the retrieval context contains highly relevant statements directly addressing the input question — such as '命令阶段和地址阶段的长度默认来自 spi_device_interface_config_t::command_bits 和 spi_device_interface_config_t::address_bits' and the method to change them via 'spi_transaction_ext_t' with flags 'SPI_TRANS_VARIABLE_CMD' and 'SPI_TRANS_VARIABLE_ADDR' — a significant portion of t"
+          },
+          "elapsedSec": 53.3
+        },
+        {
+          "questionId": "H03",
+          "set": "heldout",
+          "category": "embedded",
+          "retrieved_chunk_ids": [
+            "S02#s12",
+            "S02#s20",
+            "S02#s11"
+          ],
+          "answer": "## 轮询传输事务未结束就发送其他事务的后果\n\n### ⚠️ 会产生什么后果？\n\n根据检索片段，未完成的轮询传输事务**会阻塞其他传输事务**，具体表现为：\n\n1. **总线被占用**：轮询传输事务进行期间，CPU 处于忙碌状态，其他事务无法使用总线。\n2. **ISR 干扰风险**：ISR（中断服务程序）会干扰\"飞行中\"的轮询传输事务，以强行适应中断传输事务，可能导致传输异常。\n3. **任务阻塞**：所有执行中断传输事务的任务都可能被队列阻塞。\n\n---\n\n### ✅ 代码上如何避免？\n\n片段给出了以下几条明确建议：\n\n#### 1. 确保轮询事务显式结束\n在调用 `spi_device_polling_start()` 之后，**务必调用** `spi_device_polling_end()`，以释放总线供其他事务或设备使用：\n```c\nspi_device_polling_start(...);\n// ... 等待完成 ...\nspi_device_polling_end(...);  // ⬅️ 必须调用\n```\n\n#### 2. 或使用一体化函数自动结束\n如果轮询过程中**无需切换到其他任务**，直接调用：\n```c\nspi_device_polling_transmit(...);  // 自动开始并结束事务\n```\n\n#### 3. 发送轮询事务前，确保中断事务已全部完成\n在调用 `spi_device_polling_start()` **之前**，需持续调用 `spi_device_get_trans_result()`，直到所有中断传输事务返回：\n```c\n// 确认所有中断事务完成\nspi_device_get_trans_result(...);  // 循环调用直至全部完成\n// 再启动轮询事务\nspi_device_polling_start(...);\n```\n\n#### 4. 打包多个轮询事务以减少开销\n使用 `spi_device_acquire_bus()` 和 `spi_device_release_bus()` 包裹一系列轮询事务：\n```c\nspi_device_acquire_bus(...);\n// 批量发送多个轮询事务\nspi_device_polling_transmit(...);\nspi_device_polling_transmit(...);\nspi_device_release_bus(...);\n```\n\n#### 5. 编码规范建议\n- **一次只向单个设备发送一种类型的事务**（中断或轮询）。\n- 混合发送时，**只在单个任务中**向同一设备发送，以更好地控制调用顺序。\n- 必须等**所有轮询和中断事务完成后**，才可发送新的轮询事务。",
+          "scores": {
+            "contextual_precision": 0.5,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.6875
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.50 because while the relevant node (second node) directly addresses both the consequences of sending other transactions before a polling transaction ends ('未完成的轮询传输事务将阻塞其他传输事务') and the code-level avoidance strategies such as calling 'spi_device_polling_end()' and 'spi_device_polling_transmit()', it is ranked second rather than first. The first node, which is irrelevant, only provid",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are directly attributable to node 2 in retrieval context, providing a perfect match across all five sentences!",
+            "contextual_relevancy": "The score is 0.69 because while several statements in the retrieval context are directly relevant to the input — such as '未完成的轮询传输事务将阻塞其他传输事务，请务必在 spi_device_polling_start() 之后调用函数 spi_device_polling_end() 以允许其他事务或其他设备使用总线' (consequences) and '所有的轮询传输事务和中断传输事务完成后，方可发送轮询传输事务' and '建议调用函数 spi_device_acquire_bus() 和 spi_device_release_bus() 来打包一系列轮询传输事务' (code-level avoidance) — a significant portion"
+          },
+          "elapsedSec": 95.8
+        },
+        {
+          "questionId": "H04",
+          "set": "heldout",
+          "category": "embedded",
+          "retrieved_chunk_ids": [
+            "S03#s55",
+            "S03#s51",
+            "S03#s46"
+          ],
+          "answer": "## 查看 ESP32 程序静态分配的内存\n\n根据检索片段，**没有直接描述如何查看静态内存分配量的具体方法**，但可以从以下信息中推断出一种间接方式：\n\n---\n\n### 间接推断方法：通过启动日志查看动态可用堆\n\n片段 [2] 提到，**ESP-IDF 应用程序在启动时会自动打印堆的可用空间摘要**，例如：\n\n```\nI (259) heap_init: At 3FFB2EC8 len 0002D138 (180 KiB): DRAM\n```\n\n这些日志显示的是**动态分配可用的堆空间**。由于静态内存在编译时已被占用，因此：\n\n> **可用堆空间 = 总 RAM − 静态内存 − 其他系统开销**\n\n通过对比芯片总 RAM 大小与启动日志中显示的可用堆大小，可以大致推算静态内存的占用量。\n\n---\n\n### 补充说明\n\n片段 [3] 明确指出，ESP-IDF 应用程序的内存分为三类：\n- **静态内存**：编译时分配\n- **堆（Heap）**：运行时通过 `malloc()` 等函数动态分配\n- **栈（Stack）**：由程序控制流动态分配\n\n---\n\n### ⚠️ 资料不足说明\n\n检索片段中**未提供直接查看静态内存分配量的工具或命令**（如 `idf.py size` 或 map 文件分析等），如需精确数据，建议查阅 ESP-IDF 官方文档中关于 **内存分析工具** 的相关章节。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.1111
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because none of the retrieved nodes are relevant to the input about how to check statically allocated memory in an ESP32 program. The first node in the retrieval contexts focuses on external SPI RAM allocation using 'malloc' or 'heap_caps_malloc' and the himem API, which does not address checking statically allocated memory. The second node in the retrieval contexts only discusse",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output could be attributed to any nodes in retrieval context. Sentence 1, about DRAM heap containing all non-statically allocated memory at startup, is not explicitly stated in any node. Sentence 2, referencing the 'idf.py size' command, is absent from all nodes. Sentence 3, directing readers to a 'DRAM（数据 RAM）' section, is not found ",
+            "contextual_relevancy": "The score is 0.11 because the retrieval context is almost entirely irrelevant to the input about how to check statically allocated memory in an ESP32 program. The vast majority of the retrieved content focuses on dynamic memory allocation topics such as '片外 RAM 的动态分配方式（malloc 或 heap_caps_malloc）', '外部 SPI RAM 的 4 MiB 动态分配限制', and heap memory logging showing 'RAM available for dynamic allocation' —"
+          },
+          "elapsedSec": 86.6
+        },
+        {
+          "questionId": "H05",
+          "set": "heldout",
+          "category": "edge-ai",
+          "retrieved_chunk_ids": [
+            "S05#s95",
+            "S05#s104",
+            "S05#s107"
+          ],
+          "answer": "根据检索片段[1]，MindSpore Lite 的 Linux 发布件（以 x86_64 架构、1.6.0 版本为例）解压后，`runtime` 目录包含以下内容：\n\n```\nruntime\n├── include          # MindSpore Lite 集成开发的 API 头文件\n├── lib\n│   ├── libmindspore-lite.a          # 推理框架的静态库\n│   ├── libmindspore-lite-jni.so     # 推理框架的 JNI 动态库\n│   ├── libmindspore-lite.so         # 推理框架的动态库\n│   ├── libmindspore-lite-train.a    # 训练框架的静态库\n│   ├── libmindspore-lite-train.so   # 训练框架的动态库\n│   └── mindspore-lite-java.jar      # 推理框架 jar 包\n└── third_party\n    └── libjpeg-turbo\n```\n\n**简要说明：**\n- **include**：存放用于集成开发的 API 头文件；\n- **lib**：存放推理和训练相关的静态库、动态库以及 Java jar 包；\n- **third_party/libjpeg-turbo**：存放第三方依赖库。\n\n> 注：不同版本或不同平台的发布件包结构可能有所不同，以上结构仅针对 Linux x86_64 版本。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": null
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the relevant node is perfectly ranked first, directly describing the contents of the runtime directory in MindSpore Lite's Linux release package, including 'include', 'lib' (with libmindspore-lite.a, libmindspore-lite-jni.so, libmindspore-lite.so, etc.), and 'third_party/libjpeg-turbo'. Great ranking — relevant information right where it should be!",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully supported by node 1 in retrieval context. Sentences 1, 2, and 3 (including the complete package directory structure) are all directly and accurately attributed to node 1. Great retrieval coverage!",
+            "contextual_relevancy": "RetryError: RetryError[<Future at 0x25919c21d60 state=finished raised InternalServerError>]"
+          },
+          "elapsedSec": 207.9
+        },
+        {
+          "questionId": "H06",
+          "set": "heldout",
+          "category": "edge-ai",
+          "retrieved_chunk_ids": [
+            "S05#s94",
+            "S05#s103",
+            "S05#s96"
+          ],
+          "answer": "## 答案\n\n根据检索片段，将非 ms 格式的模型转换为 MindSpore Lite 模型，需要使用发布件内的 **`converter_lite`** 工具。\n\n### 具体说明：\n\n- **工具位置**：解压发布件后，可在以下目录找到该工具：\n  ```\n  mindspore-lite-{version}-linux-x64/tools/converter/converter/\n  ```\n\n- **支持的输入模型类型**：\n  - MindSpore（MINDIR）\n  - CAFFE\n  - TensorFlow Lite（TFLITE）\n  - TensorFlow\n  - ONNX\n\n- **平台支持**：Windows 和 Linux 的发布件中均包含该转换工具，且转换结果与平台无关。\n\n### 使用示例（以 ONNX 模型为例）：\n```bash\n./converter_lite --fmk=ONNX --modelFile=your_model.onnx --outputFile=output_model\n```\n转换后的模型将带有 `.ms` 后缀，即为 MindSpore Lite 可使用的模型文件。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.6154
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because all retrieval context nodes are relevant and perfectly ranked! The first node directly answers the question about using `converter_lite`, the second node reinforces this with the same key information, and the third node provides additional helpful details about the tool's location and supported formats. Great retrieval precision!",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully attributable to nodes in retrieval context, specifically the 1st and 2nd nodes. Every key piece of information, from the introduction of the model conversion process, the steps involving downloading release packages, using the converter_lite tool, platform independence, to the final conversion step, is directly found in those",
+            "contextual_relevancy": "The score is 0.62 because while the retrieval context contains several highly relevant statements that directly answer the input question, such as '通过发布件内的converter_lite工具，将非ms模型转换为MindSpore Lite使用的ms模型' and '解压发布件后，在mindspore-lite-{version}-linux-x64/tools/converter/converter目录可以找到converter_lite工具', a significant portion of the retrieved context is irrelevant to the core question of which tool to"
+          },
+          "elapsedSec": 43.6
+        },
+        {
+          "questionId": "H07",
+          "set": "heldout",
+          "category": "vision",
+          "retrieved_chunk_ids": [
+            "S09#s158",
+            "S10#s168",
+            "S09#s156"
+          ],
+          "answer": "## YOLO 检测结果的属性读取\n\n根据检索片段 **[1]**，YOLO 目标检测结果存储在 `result.boxes` 中，各项信息对应的属性如下：\n\n| 信息 | 属性 | 类型 | 形状 | 说明 |\n|------|------|------|------|------|\n| **框坐标** | `result.boxes.xyxy` | `torch.float32` | `(N, 4)` | 像素级坐标，格式为 `[x1, y1, x2, y2]` |\n| **置信度** | `result.boxes.conf` | `torch.float32` | `(N,)` | 每个检测框的置信度分数 |\n| **类别** | `result.boxes.cls` | `torch.float32` | `(N,)` | 类别 ID，**需转换为 `int`** 才能进一步映射到类别名称 |\n\n### 补充说明\n\n- 如果需要一次性获取所有原始数据，可以使用：\n  ```\n  result.boxes.data  # 形状 (N, 6/7)，包含 [x1, y1, x2, y2, conf, cls]，可选含跟踪 ID\n  ```\n- `result.boxes` 整体是一个 `Boxes` 对象，包含 `N` 个检测框。\n\n> ⚠️ 以上内容仅针对**目标检测**任务。实例分割任务同样包含 `result.boxes`（见片段 **[2]**），但还额外提供 `result.masks` 等字段。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.5714
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because all relevant nodes are perfectly ranked above the irrelevant node. The first node directly provides the exact attributes for bounding box coordinates, confidence scores, and class IDs, and the second node offers supplementary context about 'result.boxes.cls' and 'result.boxes', both ranked before the irrelevant third node which only discusses COCO8 dataset validation metr",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully supported by node 1 in retrieval context. This includes the introductory sentence about object detection returning a Results object, the complete table with all attributes (result.boxes, result.boxes.data, result.boxes.xyxy, result.boxes.conf, and result.boxes.cls), and the closing reference sentence — all perfectly matched. ",
+            "contextual_relevancy": "The score is 0.57 because while the retrieval context contains directly relevant statements about reading YOLO detection results — such as 'result.boxes.xyxy' for bounding box coordinates, 'result.boxes.conf' for confidence scores, and 'result.boxes.cls' for class IDs — a significant portion of the retrieved context is irrelevant to the input. Irrelevant content includes mask-related attributes ('"
+          },
+          "elapsedSec": 67.1
+        },
+        {
+          "questionId": "H08",
+          "set": "heldout",
+          "category": "test-dev",
+          "retrieved_chunk_ids": [
+            "S12#s188~2",
+            "S12#s182",
+            "S12#s188"
+          ],
+          "answer": "## 回答\n\n根据检索片段 [2] 和 [3]，Selenium 的 Java 测试中，等待相关的示例代码位于以下包下：\n\n```\ndev.selenium.waits\n```\n\n具体体现在代码文件的包声明中：\n\n```java\npackage dev.selenium.waits;\n```\n\n对应的测试类名为 `WaitsTest`，继承自 `BaseTest`，其中包含了多种等待方式的示例，例如：\n\n| 测试方法 | 说明 |\n|---|---|\n| `fails()` | 不等待直接查找元素（演示失败场景） |\n| `sleep()` | 使用 `Thread.sleep()` 进行硬等待 |\n| `explicit()` | 使用 `WebDriverWait` 进行显式等待 |\n| `explicitWithOptions()` | 使用 `FluentWait` 进行自定义等待 |",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.3636
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because all retrieved nodes are relevant to the question about which package contains wait-related Java test examples in Selenium. The nodes are perfectly ranked, with the first node containing methods like 'explicit' and 'explicitWithOptions' from the WaitsTest class, the second node explicitly starting with 'package dev.selenium.waits;' and the full class declaration, and the t",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully attributable to nodes in retrieval context, specifically the 2nd and 3rd nodes, which contain the exact Java code including the package declaration, imports, class definition, and all test methods (`fails()`, `sleep()`, and `implicit()`) matching the expected output perfectly!",
+            "contextual_relevancy": "The score is 0.36 because while the retrieval context does contain one directly relevant statement confirming that 'the wait-related example code in Selenium's Java tests is placed under the package dev.selenium.waits', much of the retrieved context is irrelevant to the input. Specifically, details such as 'Python also supports Expected Conditions', 'View Complete Code and View on GitHub links', c"
+          },
+          "elapsedSec": 54.6
+        },
+        {
+          "questionId": "Q01",
+          "set": "main",
+          "category": "occupation-requirement",
+          "retrieved_chunk_ids": [
+            "S17#s320",
+            "S17#s312",
+            "S17#s337"
+          ],
+          "answer": "## 嵌入式开发工程师主要需要的能力\n\n根据检索片段，以下是该职业所需的主要能力：\n\n---\n\n### 🔧 技术能力\n\n- **硬件设计与开发**：能够设计和开发计算机硬件及外围设备，包括 CPU、微处理器、自定义集成电路、打印机和磁盘驱动器等\n- **原型构建与测试**：能够构建、测试和修改产品原型，包括使用实物模型或计算机仿真模型\n- **硬件验证**：能够测试和验证硬件及外围设备，记录并分析测试数据，确保其符合规格要求\n\n---\n\n### 📋 文档与规范能力\n\n- **撰写功能规格文档**：能够编写详细的功能规范，记录硬件开发过程\n\n---\n\n### 🤝 沟通与协作能力\n\n- **跨部门协作**：能够与工程团队沟通，评估硬件与软件之间的接口及系统整体性能需求\n- **技术支持**：能够为设计师、市场销售部门、供应商及其他工程师提供技术支持\n- **团队指导**：能够指导技术人员、工程设计师或其他技术支持人员\n\n---\n\n### 📚 学习能力\n\n- **持续学习**：能够不断更新知识和技能，以跟上计算机技术的快速发展\n\n---\n\n> ⚠️ **说明**：以上内容完全基于所提供的检索片段，若需更详细或针对\"嵌入式\"方向的专项能力描述，现有资料尚不足以完整覆盖，建议参考更多专业资料。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0645,
+            "contextual_relevancy": 0.52
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all three nodes in the retrieval contexts are irrelevant to the input question about the key skills required for an embedded development engineer. The first node (ranked 1) focuses on general hardware engineering tasks such as 'Design and develop computer hardware' and 'Write detailed functional specifications', which do not address embedded-specific competencies like Fre",
+            "contextual_recall": "The score is 0.06 because the vast majority of sentences in the expected output cannot be attributed to any nodes in retrieval context. Sentences covering FreeRTOS (sentences 1–5), SPI bus transaction phases and configurations (sentences 6–17), ESP-IDF memory architecture (sentences 18–22), DMA memory allocation (sentences 23–24), and ESP32 GPIO details (sentences 25–33) all lack support from any ",
+            "contextual_relevancy": "The score is 0.52 because while the retrieval context contains some statements relevant to the abilities required for embedded development engineers — such as 'Design and develop computer hardware and support peripherals, including CPUs, microprocessors, and custom integrated circuits,' 'Confer with engineering staff to evaluate interface between hardware and software,' and 'Update knowledge and s"
+          },
+          "elapsedSec": 81.9
+        },
+        {
+          "questionId": "Q02",
+          "set": "main",
+          "category": "occupation-requirement",
+          "retrieved_chunk_ids": [
+            "S17#s312",
+            "S17#s337",
+            "S17#s333"
+          ],
+          "answer": "## 回答\n\n根据您提供的检索片段，**无法充分回答**\"机器视觉工程师需要掌握哪些能力\"这一问题。\n\n### 原因说明\n\n当前检索片段主要涵盖以下内容：\n\n- **片段[1]**：描述的是计算机硬件工程师（17-2061.00）的职业概况，涉及研究、设计、开发和测试计算机相关设备，但未具体列出机器视觉方向的技能要求。\n- **片段[2]**：列出了一系列相关职业（如机器人工程师、软件开发者、机电一体化工程师等），未涉及技能细节。\n- **片段[3]**：描述了职业兴趣代码（RIC），涉及\"现实型\"\"工程型\"\"研究型\"兴趣特征，属于职业兴趣分类，并非具体技能要求。\n\n---\n\n### 建议\n\n如需准确获取机器视觉工程师的能力要求，建议参考以下方向的资料：\n- O*NET 中关于 **Computer Vision** 或 **Machine Vision** 的专项职业描述\n- 具体职位的技能（Skills）、知识（Knowledge）、技术（Technology）等详细条目\n\n> ⚠️ 本回答仅依据所提供片段，不作额外推断，以确保信息准确性。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.0
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all retrieved nodes are irrelevant to the input about skills required for machine vision engineers. The first node (ranked 1) discusses general computer hardware engineering duties such as 'Research, design, develop, or test computer or computer-related equipment', which does not address machine vision engineer skills. The second node (ranked 2) only lists related enginee",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output could be attributed to any nodes in retrieval context. The retrieval context appears to contain information about computer hardware engineering job titles and O*NET occupational descriptions, which is entirely unrelated to the expected output's content. Sentences covering PaddlePaddle Tensor concepts (sentences 1-4), neural net",
+            "contextual_relevancy": "The score is 0.00 because the retrieval context contains no relevant information about the specific abilities required for a '机器视觉工程师' (machine vision engineer). All retrieved statements are either generic occupation codes and titles (such as '15-1299.08 Computer Systems Engineers/Architects' and '17-2071.00 Electrical Engineers'), broad descriptions of unrelated engineering roles, or general inte"
+          },
+          "elapsedSec": 85.2
+        },
+        {
+          "questionId": "Q03",
+          "set": "main",
+          "category": "occupation-requirement",
+          "retrieved_chunk_ids": [
+            "S15#s282",
+            "S14#s236",
+            "S16#s283"
+          ],
+          "answer": "## 资料不足，无法完整回答\n\n根据您提供的检索片段，**未包含**关于\"自动化测试工程师能力要求\"的具体、系统性内容。\n\n以下是片段中**仅能提取**的相关信息：\n\n### 片段[3] 提及的岗位职责（非能力要求）\n该片段描述了软件测试工程师（含自动化测试方向）的工作内容，包括：\n- 开发并执行软件测试\n- 识别软件问题及其原因\n- 测试系统变更\n- 使用缺陷追踪系统记录和报告缺陷\n- 维护已知缺陷数据库\n- 参与软件设计评审，提供功能需求、操作特性等方面的意见\n\n---\n\n> ⚠️ **说明**：以上内容为**岗位职责描述**，并非系统化的\"能力要求\"。检索片段中未涉及技能栈、工具要求、编程语言、软技能等维度的能力说明，**建议补充更具针对性的资料来源**，以获得准确答案。",
+          "scores": {
+            "contextual_precision": 0.3333,
+            "contextual_recall": 0.2807,
+            "contextual_relevancy": 0.4
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.33 because the only relevant node appears at rank 3, ranked below two irrelevant nodes. The first node, which contains mostly 'navigation links, forum post titles, and city/tag listings' from the TesterHome community page, does not provide structured capability requirements for automation test engineers. Similarly, the second node, which explains 'pytest fixture concepts and the fou",
+            "contextual_recall": "The score is 0.28 because only a small portion of the expected output is supported by nodes in retrieval context. Specifically, node 3 supports sentences 34 through 49, which cover the job description, sample job titles, and task responsibilities (e.g., documenting defects, designing test plans, monitoring bug resolution). However, the vast majority of the expected output — including sentences 1–3",
+            "contextual_relevancy": "The score is 0.40 because while some retrieved statements are relevant to the input about capability requirements for automation test engineers — such as descriptions of what automation testers do (e.g., 'develop and execute software tests', 'document software defects using a bug tracking system', 'participate in software design reviews') and references to relevant technical topics like 'Python、Ja"
+          },
+          "elapsedSec": 148.0
+        },
+        {
+          "questionId": "Q04",
+          "set": "main",
+          "category": "occupation-requirement",
+          "retrieved_chunk_ids": [
+            "S08#s148~2",
+            "S08#s147~2",
+            "S06#s112"
+          ],
+          "answer": "## 资料不足，无法完整回答\n\n根据您提供的检索片段，其内容主要涵盖以下方面：\n\n- 各类**边缘 AI 硬件平台**（如 Hailo、Rockchip RKNN、Qualcomm QNN、Sony IMX500、Axelera AI、DEEPX 等）的特性介绍\n- 各类**推理框架与工具链**（如 NCNN、ExecuTorch、ONNX 工作流等）的功能说明\n- 简单的深度学习入门任务描述\n\n这些片段**并未直接描述\"边缘 AI 工程师\"岗位所需技能的完整要求**，因此无法依据现有资料给出准确、系统的岗位技能清单。\n\n---\n\n**从片段中可间接推断的相关技术方向（仅供参考）：**\n\n| 技术方向 | 片段依据 |\n|---|---|\n| ARM CPU/GPU 优化 | 片段[1] |\n| NPU 推理（INT8 量化等） | 片段[1][2] |\n| 嵌入式系统开发 | 片段[1] |\n| ONNX 模型导出与编译 | 片段[2] |\n| 边缘推理框架使用（RKNN、QNN、Hailo SDK 等） | 片段[1][2] |\n| 深度学习基础 | 片段[3] |\n\n> ⚠️ 以上为间接推断，**建议参考专业招聘平台或岗位JD**以获取完整、权威的技能要求。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0233,
+            "contextual_relevancy": 0.6875
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all nodes in the retrieval contexts are irrelevant to the input question about Edge AI engineer skills. The first node (ranked 1) discusses edge AI hardware platforms like Sony IMX500 and Qualcomm QNN but focuses on 'SPI drivers, memory management, and MindSpore Lite inference' rather than skill requirements for an Edge AI engineer role. The second node (ranked 2) covers ",
+            "contextual_recall": "The score is 0.02 because the vast majority of sentences in the expected output cannot be attributed to any nodes in retrieval context. The expected output covers a wide range of topics including SPI host driver descriptions, ESP-IDF memory management, MindSpore Lite inference workflows, converter_lite tool usage, Netron visualization, and YOLO26 export formats — none of which are supported by the",
+            "contextual_relevancy": "The score is 0.69 because the retrieval context is partially relevant to the input about skills required for an Edge AI engineer role. While several statements provide useful context about edge AI technologies and platforms (e.g., 'NCNN 针对基于移动 ARM 的设备进行优化', 'Rockchip RKNN 针对 Rockchip NPU 进行优化，适用于嵌入式 SBC 和边缘设备', 'Qualcomm QNN 提供快速的设备端 Snapdragon 推理'), which implicitly hint at relevant technical kno"
+          },
+          "elapsedSec": 199.7
+        },
+        {
+          "questionId": "Q05",
+          "set": "main",
+          "category": "occupation-requirement",
+          "retrieved_chunk_ids": [
+            "S01#s5",
+            "S08#s148~2",
+            "S17#s327"
+          ],
+          "answer": "## 嵌入式开发工程师日常使用的工具和平台\n\n根据检索片段，可以从以下几个维度归纳：\n\n---\n\n### 🖥️ 硬件开发平台\n嵌入式工程师常用的硬件平台包括（以 FreeRTOS 兼容设备为例）：\n- **Espressif 系列**：ESP32-DevKitC、ESP-WROVER-KIT 等\n- **STMicroelectronics**：STM32L4 发现工具包 IoT 节点\n- **Nordic**：nRF52840-DK\n- **NXP**：LPC54018 IoT Module\n- **德州仪器**：CC3220SF-LAUNCHXL\n- **Xilinx**：Avnet MicroZed 工业物联网套件\n- **Cypress / Infineon / Renesas / Microchip** 等厂商的开发套件\n\n---\n\n### 🛠️ 开发软件与工具\n| 类别 | 工具示例 |\n|------|----------|\n| **分析/科学计算** | MATLAB、Simulink、Mentor Graphics LeonardoSpectrum |\n| **开发环境** | C、C++、Microsoft Visual Basic、National Instruments LabVIEW、RTL |\n| **CAD 工具** | Autodesk AutoCAD、Xilinx ISE Foundation、Dassault CATIA |\n| **版本控制** | Git、Apache Subversion (SVN) |\n| **数据库** | SQL、Microsoft Access |\n| **编译器** | Cadence Encounter RTL Compiler |\n| **面向对象语言** | C++、Oracle Java |\n\n---\n\n### 🤖 嵌入式 AI/ML 推理工具（边缘端）\n- **NCNN**：针对 ARM CPU/GPU 优化\n- **ExecuTorch**：设备端 PyTorch 运行时（支持嵌入式）\n- **Rockchip RKNN-Toolkit**：适用于 Rockchip NPU\n- **Qualcomm QNN / QAIRT**：Snapdragon 设备推理\n- **Hailo Dataflow Compiler**：Hailo NPU 推理\n- **DEEPX 开发者工具**（dx_com、dx_engine）\n- **Sony MCT 工具链**（Sony IMX500 传感器端推理）\n\n---\n\n### 📌 小结\n嵌入式工程师的工具链横跨 **硬件开发板、编程语言（C/C++）、仿真/建模工具（MATLAB/Simulink）、版本控制（Git）、CAD/EDA 工具** 以及近年来兴起的 **边缘 AI 推理框架**，覆盖范围较广。\n\n> ⚠️ 以上内容均来源于所提供的检索片段，如需更全面的工具清单，建议参阅相关职业数据库或官方文档。",
+          "scores": {
+            "contextual_precision": 0.8333,
+            "contextual_recall": 0.1053,
+            "contextual_relevancy": 0.95
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.83 because while the first and third nodes in retrieval contexts are relevant to the question about tools and platforms used by embedded developers — the first node referencing hardware platforms like 'Espressif ESP32-DevKitC', 'STMicroelectronics STM32L4', and 'Texas Instruments CC3220SF-LAUNCHXL', and the third node directly listing tools such as 'MathWorks MATLAB', 'National Inst",
+            "contextual_recall": "The score is 0.11 because the vast majority of sentences in the expected output cannot be attributed to any nodes in retrieval context. Only a small portion of the expected output — specifically the sentences covering the occupation code '17-2061.00', the 'Bright Outlook / Updated 2026' labels, the job description ('Research, design, develop, or test computer or computer-related equipment...'), an",
+            "contextual_relevancy": "The score is 0.95 because the retrieval context is highly relevant to the input about tools and platforms used by embedded developers. It contains extensive relevant statements covering development tools (e.g., 'MathWorks MATLAB', 'National Instruments LabVIEW', 'C++', 'Python', 'Git'), operating systems ('Linux', 'UNIX', 'Cisco IOS'), CAD software ('Autodesk AutoCAD', 'Xilinx ISE Foundation'), an"
+          },
+          "elapsedSec": 106.4
+        },
+        {
+          "questionId": "Q06",
+          "set": "main",
+          "category": "occupation-requirement",
+          "retrieved_chunk_ids": [
+            "S08#s148~2",
+            "S21#s349",
+            "S17#s337"
+          ],
+          "answer": "## 资料不足，无法完整回答\n\n根据所提供的检索片段，**无法系统地回答**\"机器视觉工程师\"与\"边缘 AI 工程师\"在能力要求上的重叠与差异。\n\n---\n\n### 检索片段中能提取到的有限线索\n\n片段 [1] 涉及边缘 AI / 嵌入式 ML 的部分技术栈，可以看出**边缘 AI 工程师**需要掌握：\n\n| 技术方向 | 具体内容 |\n|---|---|\n| 硬件平台 | ARM CPU/GPU、NPU（Hailo、Rockchip、Qualcomm Hexagon、Sony IMX500 等） |\n| 推理框架 | NCNN、ExecuTorch、RKNN、QNN 等 |\n| 优化方向 | INT8 量化、低功耗推理、设备端本地部署 |\n\n片段 [2] 提及**机器视觉**在工厂/仓库场景中与条码、RFID、3D 视觉、端侧 AI 的融合，但未展开能力要求细节。\n\n片段 [3] 仅列出相关职业类别（如 Robotics Engineers、Mechatronics Engineers），**未提供具体技能描述**。\n\n---\n\n### 建议\n\n如需准确对比，建议补充以下方向的检索资料：\n\n- 机器视觉工程师的 JD（OpenCV、图像处理算法、标定、光学系统等）\n- 边缘 AI 工程师的 JD（模型压缩、部署优化、硬件适配等）\n- O*NET 或行业报告中对两类岗位的技能清单\n\n**目前片段不足以支撑可靠结论，请以补充资料后再行分析。**",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.0
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all three nodes in the retrieval contexts are irrelevant to the input about the overlapping and differing capability requirements between machine vision engineers and edge AI engineers. The first node, ranked first, focuses on edge AI hardware platforms like 'Sony IMX500', 'Hailo NPU', and 'Rockchip RKNN', which is only tangentially related to the topic and does not addre",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output can be attributed to any nodes in retrieval context. The expected output covers highly specific topics such as ESP32 SPI host drivers (sentences 1-3), ESP-IDF memory architecture (sentences 4-7), MindSpore Lite benchmark and model conversion workflows (sentences 8-32), Netron visualization tool usage (sentences 33-42), PaddlePa",
+            "contextual_relevancy": "The score is 0.00 because none of the retrieved content is relevant to the input question about overlapping and differing capability requirements between machine vision engineers and edge AI engineers. The retrieval context consists entirely of unrelated material, such as technical descriptions of hardware/frameworks (e.g., 'NCNN框架', 'Sony IMX500', 'Rockchip RKNN', 'Hailo硬件'), business news (e.g.,"
+          },
+          "elapsedSec": 101.8
+        },
+        {
+          "questionId": "Q07",
+          "set": "main",
+          "category": "skill-gap-prerequisite",
+          "retrieved_chunk_ids": [
+            "S06#s112",
+            "S05#s96~2",
+            "S05#s105~2"
+          ],
+          "answer": "## 资料不足，无法完整回答\n\n根据您提供的检索片段，**无法**回答关于课程「模型量化与部署（SK215）」所需前置技能的问题。\n\n### 原因说明\n\n当前检索片段的内容涉及：\n- 片段 [1]：手写数字识别任务与飞桨框架 API 的简介\n- 片段 [2][3]：`converter_lite` 工具的命令行参数说明（模型格式转换操作示例）\n\n这些片段中**均未包含**以下信息：\n- ❌ 课程编号 SK215 的课程结构\n- ❌ 该课程的前置技能/先修要求\n- ❌ 课程之间的依赖关系图谱\n\n---\n\n### 建议\n\n如需准确获取 SK215 的前置技能，建议您：\n\n1. **查阅官方课程页面**，通常在课程详情页会列出\"先修要求\"或\"适合人群\"\n2. **联系课程平台客服或导师**，获取正式的学习路径建议\n3. **提供包含 SK215 课程说明的文档片段**，我可以基于该内容为您精准解答",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.1905,
+            "contextual_relevancy": 0.0
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all retrieved nodes in the retrieval contexts are irrelevant to the input question about prerequisite skills for 'SK215 模型量化与部署'. The first node (rank 1) discusses 'handwritten digit recognition tasks and deep learning model development workflows', the second node (rank 2) covers 'using the converter_lite tool for model conversion with parameters like --fmk=MINDIR and --m",
+            "contextual_recall": "The score is 0.19 because the majority of the expected output cannot be attributed to the nodes in retrieval context. Sentences 1-12 cover SPI-related topics (spi_bus_initialize(), spi_bus_config_t, spi_bus_add_device(), spi_transaction_t, interrupt/polling transactions, and ESP32 memory management), none of which are found in any retrieval context node, as the nodes focus exclusively on MindSpore",
+            "contextual_relevancy": "The score is 0.00 because the retrieval context contains absolutely no relevant information about prerequisite skills for the '模型量化与部署' (SK215) course. All retrieved content focuses on unrelated tool-specific details, such as 'converter_lite' usage, supported model formats like 'MINDIR、CAFFE、TFLITE、TF、ONNX', and quantization tool features, none of which address the actual question. There are zero "
+          },
+          "elapsedSec": 81.7
+        },
+        {
+          "questionId": "Q08",
+          "set": "main",
+          "category": "skill-gap-prerequisite",
+          "retrieved_chunk_ids": [
+            "S16#s291~3",
+            "S02#s32",
+            "S05#s110~14"
+          ],
+          "answer": "## 资料不足，无法回答\n\n根据所提供的检索片段，其内容分别涉及：\n\n1. **片段 [1]**：职业任务查找的界面说明\n2. **片段 [2]**：SPI 时钟源的 typedef 定义（ESP-IDF 外设 API）\n3. **片段 [3]**：一组数值向量数据及模型推理的集成说明\n\n**上述片段中均未包含**以下相关信息：\n\n- 技能节点「C 语言与内存模型」（SK090）的定义或描述\n- 技能节点「微控制器外设驱动」（SK101）的定义或描述\n- 任何技能图谱的先后顺序、前置/后置依赖关系\n\n---\n\n因此，**仅凭现有检索片段，无法回答**从 SK090 → SK101 再到上层技能的先后学习顺序问题。\n\n建议补充以下资料后再行查询：\n> 📌 包含技能节点定义、依赖关系或学习路径图的知识库片段（如技能树文档、课程大纲或先修条件表）",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.0
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all retrieved nodes in the retrieval contexts are irrelevant to the input about the learning order from SK090 to SK101. The first node, ranked first, is about 'finding occupations related to multiple tasks,' which is entirely unrelated to the skill progression question. The second node, ranked second, only contains a minimal SPI-related type definition ('typedef soc_perip",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output could be attributed to any nodes in retrieval context. The expected output covers topics such as SPI bus transaction phases (sentences 1–6), SPI configuration structures like spi_bus_config_t and spi_transaction_t (sentences 7–12), SPI driver functions like spi_bus_initialize() and spi_device_transmit() (sentences 13–19), ESP32",
+            "contextual_relevancy": "The score is 0.00 because the retrieval context contains absolutely no relevant information about the learning order from 'C语言与内存模型'（SK090）to '微控制器外设驱动'（SK101）or any related skill progression. The retrieved content consists of entirely unrelated material, including 'Find occupations related to multiple tasks', an SPI clock source type definition ('typedef soc_periph_spi_clk_src_t spi_clock_source_"
+          },
+          "elapsedSec": 63.2
+        },
+        {
+          "questionId": "Q09",
+          "set": "main",
+          "category": "skill-gap-prerequisite",
+          "retrieved_chunk_ids": [
+            "S15#s282",
+            "S14#s236",
+            "S15#s281"
+          ],
+          "answer": "## 资料不足，无法完整回答\n\n根据您提供的检索片段，**不包含关于\"自动化测试技能缺口补充方法\"或\"先修学习顺序\"的具体内容**，因此我无法依据现有资料给出系统性的回答。\n\n---\n\n### 检索片段中可参考的有限线索\n\n片段[1]中有一条帖子标题与您的问题最为接近：\n\n> **\"作为测试新人，期望在自动化测试工程师发展，怎么系统的学习语言及实践\"**\n> —— 来自 TesterHome 社区（作者：-Serendipity-，34条回复）\n\n这表明该话题在测试社区中有真实讨论，但**帖子的具体内容未包含在检索片段中**，无法提取实质性建议。\n\n片段[2]仅介绍了测试的四个基本步骤（Arrange / Act / Assert / Cleanup），属于测试基础概念，**不涉及技能路径规划**。\n\n---\n\n### 建议\n\n如需获取准确答案，建议：\n\n1. **访问 TesterHome（testerhome.com）** 查阅上述帖子的具体内容；\n2. 提供更详细的检索片段（如包含技能路径、学习顺序的文章内容），我可以基于此为您做进一步整理和解读。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.42,
+            "contextual_relevancy": 0.125
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because none of the retrieved nodes are relevant to the input question about how to address skill gaps in automation testing and the prerequisite learning sequence. The first node in the retrieval contexts, while mentioning '自动化测试', is merely a TesterHome community platform listing 'hot topics, job postings, and community discussions' without any substantive guidance on skill-bui",
+            "contextual_recall": "The score is 0.42 because a significant portion of the expected output cannot be attributed to any nodes in retrieval context. Specifically, sentences 1-7 about WebDriver driving browsers natively, Selenium WebDriver as a W3C standard, and WebDriver as an object-oriented API; sentence 8 about WebDriver BiDi; sentences 9-18 about race conditions, page load strategies, and dynamic elements in Seleni",
+            "contextual_relevancy": "The score is 0.12 because the retrieval context is almost entirely irrelevant to the question about how to fill skill gaps in automated testing and the prerequisite learning order. The vast majority of retrieved content includes unrelated material such as community founding information, job listings, a job-seeking guide, a tool release announcement ('Aomaker'), basic testing steps (Arrange/Act/Ass"
+          },
+          "elapsedSec": 104.0
+        },
+        {
+          "questionId": "Q10",
+          "set": "main",
+          "category": "skill-gap-prerequisite",
+          "retrieved_chunk_ids": [
+            "S16#s291~3",
+            "S09#s160~2",
+            "S21#s349"
+          ],
+          "answer": "## 资料不足，无法回答\n\n根据您提供的检索片段，其中**不包含**任何关于机器视觉方向技能编码（SK110–SK115、SK122–SK123）及其先修关系的相关内容。\n\n检索片段主要涉及：\n- 职业任务查询工具的界面说明（片段1）\n- GitHub用户列表（片段2）\n- 电子行业资讯网站内容（片段3），仅泛泛提及机器视觉作为技术词汇，无课程/技能体系说明\n\n---\n\n**建议您可以尝试以下方式获取所需信息：**\n\n1. **查阅原始课程/技能框架文档**，确认SK110–SK115、SK122–SK123所在的完整技能图谱\n2. **补充检索片段**，提供包含该技能体系的原始资料，以便准确回答先修关系\n3. **联系课程设计方或相关职业培训机构**，直接获取官方先修路径说明\n\n如您能提供包含上述技能编码的文档或片段，我可以为您进一步分析解答。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.0
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all retrieved nodes in the retrieval contexts are entirely irrelevant to the input about skill prerequisite relationships for machine vision direction (SK110–SK115, SK122–SK123). The first node contains only navigation links about 'Find occupations related to multiple tasks', which has no connection to the query. The second node, ranked second, contains only GitHub userna",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output can be attributed to any nodes in retrieval context. The expected output covers topics such as Netron visualization tool for MindSpore Lite models, PaddlePaddle Tensor concepts and operations, and YOLO26 deployment/detection/segmentation details, but none of the nodes in retrieval context contain any information relevant to the",
+            "contextual_relevancy": "The score is 0.00 because the retrieval context contains absolutely no relevant information about the skill prerequisites for the machine vision direction (SK110–SK115, SK122–SK123). The context only includes irrelevant content such as usernames/handles like 'GLglenn-jocher37' and 'RAraimbekovm5', general website content categories, information about '斑马技术的变化' and IoT industry evolution, a creator"
+          },
+          "elapsedSec": 186.3
+        },
+        {
+          "questionId": "Q11",
+          "set": "main",
+          "category": "skill-gap-prerequisite",
+          "retrieved_chunk_ids": [
+            "S09#s160~2",
+            "S16#s291~3",
+            "S03#s67"
+          ],
+          "answer": "## 资料不足\n\n根据您提供的检索片段，**无法回答**关于边缘 AI 方向技能（SK215、SK120、SK121、SK123）之间先后顺序的问题。\n\n三个检索片段的内容分别涉及：\n1. GitHub 用户列表信息\n2. 职业任务查询功能描述\n3. ESP-IDF 多堆 API 的技术说明\n\n**均不包含**任何与边缘 AI 技能路径、技能编号或学习顺序相关的内容。\n\n---\n\n**建议您**：\n- 检查是否有包含技能体系或学习路径的专项文档\n- 查阅对应课程/认证体系的官方说明材料\n- 补充相关的技能图谱或课程大纲片段后重新提问",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.0
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all retrieved nodes are completely irrelevant to the input about Edge AI skill ordering (SK215, SK120, SK121, SK123). The first node only contains usernames and timestamps ('创建时间 2023年11月12日更新时间 昨天'), providing no information about Edge AI benchmark tools or skill sequencing. The second node discusses 'Find occupations related to multiple tasks', which is entirely unrelat",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output could be attributed to any nodes in retrieval context. The expected output covers topics such as environment setup for benchmark inference (sentences on LD_LIBRARY_PATH configuration), benchmark tool usage and parameters, MindSpore Lite C++ integration, model conversion using converter_lite, CMake project setup, and YOLO26 depl",
+            "contextual_relevancy": "The score is 0.00 because the retrieval context contains entirely irrelevant information to the question about the sequence of Edge AI direction skills (SK215, SK120, SK121, SK123). The context only includes unrelated content such as 'a list of usernames/contributors and timestamps', 'navigation/UI text like Find occupations related to multiple tasks', and information about 'heap attribute allocat"
+          },
+          "elapsedSec": 129.6
+        },
+        {
+          "questionId": "Q12",
+          "set": "main",
+          "category": "skill-gap-prerequisite",
+          "retrieved_chunk_ids": [
+            "S06#s112",
+            "S08#s148~3",
+            "S14#s254~2"
+          ],
+          "answer": "根据您提供的检索片段，**资料不足以回答**\"嵌入式开发工程师的学习单元按什么顺序学\"这一问题。\n\n现有的三个检索片段分别涉及：\n1. 深度学习/手写数字识别任务\n2. 部署选项的高层次概览\n3. 测试固定装置（Fixture）的依赖关系问题\n\n**这些内容均与嵌入式开发工程师的学习路径或学习单元顺序无关。**\n\n建议您：\n- 补充包含嵌入式开发工程师课程体系或学习路径的相关资料\n- 或直接查阅专业的嵌入式开发学习平台（如正点原子、野火等）获取系统的学习顺序指导",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.0
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all three nodes in the retrieval contexts are completely irrelevant to the input about the learning order for embedded development engineers. The first node discusses '手写数字识别任务' (handwritten digit recognition) and deep learning with PaddlePaddle, which has no connection to embedded development learning sequences. The second node covers '高层次概览' (high-level overview) and de",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output could be attributed to any nodes in the retrieval context. The retrieval context nodes contain information about deep learning, deployment options, and dependency fixtures, which are entirely unrelated to the expected output's content. Sentences 1–29 covering SPI bus transaction phases, SPI structures (spi_bus_config_t, spi_dev",
+            "contextual_relevancy": "The score is 0.00 because the retrieval context is entirely irrelevant to the input about the learning order for embedded development engineers ('嵌入式开发工程师'). The retrieved content covers unrelated topics such as '深度学习模型开发的大致流程' using the PaddlePaddle framework, deployment comparison guides, dependency layout and fixtures, atomic operations in tests, and exception handling behavior. None of these h"
+          },
+          "elapsedSec": 61.1
+        },
+        {
+          "questionId": "Q13",
+          "set": "main",
+          "category": "scenario-advice",
+          "retrieved_chunk_ids": [
+            "S08#s148~2",
+            "S21#s349",
+            "S08#s147~2"
+          ],
+          "answer": "## 从嵌入式开发工程师转到边缘 AI 工程师需要补充的技能\n\n根据检索片段中的内容，可以归纳出以下几个方向的技能补充：\n\n---\n\n### 一、硬件平台与 NPU 适配能力\n\n嵌入式背景已具备硬件基础，但边缘 AI 需要进一步掌握：\n\n- **ARM NPU/GPU 优化**：针对 ARM CPU 和 GPU 的推理优化（片段[1]）\n- **主流边缘 AI 芯片**的开发适配，例如：\n  - **Rockchip NPU**（RKNN-Toolkit）\n  - **Hailo NPU**（Hailo-8/10/15 系列）\n  - **Qualcomm Snapdragon Hexagon NPU**\n  - **Axelera Metis AIPU**\n  - **DEEPX NPU**\n  - **Sony IMX500**（传感器级推理）\n\n---\n\n### 二、模型推理框架的使用\n\n需要学习设备端推理框架：\n\n- **NCNN**：针对移动 ARM 设备优化\n- **ExecuTorch**：设备端 PyTorch 运行时，支持 XNNPACK 后端\n- **RKNN-Toolkit**：Rockchip 平台专用\n- **Qualcomm QNN / QAIRT**：Snapdragon 平台\n- **Hailo Dataflow Compiler**：HEF 格式模型编译\n\n---\n\n### 三、模型导出与编译工具链\n\n- 掌握 **ONNX 导出工作流**，用于跨平台模型转换（片段[3]）\n- 了解各厂商编译器，例如：\n  - Ambarella CVflow 工具链（ONNX → AmbaPB）\n  - Huawei CANN ATC 编译器（ONNX → .om 格式）\n  - Hailo 的 HEF 格式导出\n\n---\n\n### 四、量化与模型压缩\n\n- 理解 **INT8 量化推理**（DEEPX、Hailo 均基于 INT8 优化）\n- 了解 **压缩感知训练**（如 Ambarella 的 SpongeTorch）\n\n---\n\n### 五、典型应用场景能力\n\n- **摄像头端边缘 AI**（Sony AITRIOS 生态、机器视觉）\n- 目标检测、分割、姿态估计等视觉模型的端侧部署\n\n---\n\n### ⚠️ 说明\n\n检索片段主要覆盖了**硬件平台、推理框架和工具链**层面，对于机器学习理论基础（如模型训练、神经网络原理）的技能要求，**现有资料不足以完整回答**，建议结合其他资料进一步了解。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0588,
+            "contextual_relevancy": 0.5909
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all three nodes in the retrieval contexts are irrelevant to the input about skills needed to transition from an embedded development engineer to an edge AI engineer. The first node, ranked first, discusses mobile and embedded ML communities and various edge AI hardware platforms (ARM, Hailo, Rockchip, Qualcomm, etc.) but is focused on 'ESP32 GPIO pins and MindSpore Lite i",
+            "contextual_recall": "The score is 0.06 because the vast majority of sentences in the expected output cannot be attributed to any nodes in retrieval context. Sentences 1-4 about ESP32's 34 GPIO pins, IO MUX, RTC IO MUX, and GPIO matrix are unsupported. The detailed GPIO table (sentences 5-6) listing GPIO0-GPIO39 with analog functions and RTC mappings is unsupported. The notes section (sentence 7) covering Strapping pin",
+            "contextual_relevancy": "The score is 0.59 because while the retrieval context contains several statements relevant to edge AI engineering skills for embedded developers—such as details on NCNN optimized for 'mobile ARM-based devices,' Rockchip RKNN for 'embedded SBC and edge devices,' DEEPX for 'embedded edge inference,' ExecuTorch for 'mobile and embedded applications,' and various NPU/SDK toolchains (Hailo, Qualcomm QN"
+          },
+          "elapsedSec": 91.8
+        },
+        {
+          "questionId": "Q14",
+          "set": "main",
+          "category": "scenario-advice",
+          "retrieved_chunk_ids": [
+            "S17#s337",
+            "S17#s312",
+            "S17#s326"
+          ],
+          "answer": "## 回答\n\n根据您提供的检索片段，**资料不足以完整回答**\"嵌入式开发工程师转到机器视觉工程师的路径与技能增量\"这一具体问题。\n\n### 片段中可参考的有限信息：\n\n检索片段主要涉及以下职业分类信息：\n- **计算机硬件工程师**（17-2061.00）：涵盖研究、设计、开发或测试计算机相关设备\n- **机器人工程师**（17-2199.08）、**机电一体化工程师**（17-2199.05）等相关工程类职业有所列出\n- 片段未涉及**机器视觉工程师**的具体职业描述、所需技能或职业转换路径\n\n---\n\n### 建议：\n\n若需准确回答该问题，建议补充以下方向的资料来源：\n\n1. **O*NET职业数据库**中机器视觉相关职业的技能要求条目\n2. 嵌入式开发与机器视觉两类岗位的**技能对比分析**文献\n3. 行业认证机构（如IEEE、Cognex Academy等）发布的**技能路径图**\n\n> ⚠️ 本助手仅依据检索片段作答，暂无法在现有资料范围内给出完整路径规划，请提供更相关的检索内容以获得准确回答。",
+          "scores": {
+            "contextual_precision": 0.5,
+            "contextual_recall": 0.0357,
+            "contextual_relevancy": 0.0
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.50 because while there is a relevant node in the retrieval contexts, it is not ranked first. The first node is an irrelevant node that only lists tangentially related engineering occupations such as 'Robotics Engineers' and 'Mechatronics Engineers' without contributing meaningful information about the transition path from embedded development to machine vision engineering. The secon",
+            "contextual_recall": "The score is 0.04 because the vast majority of sentences in the expected output — including all ESP32 GPIO pin specifications (sentences 1–46), notes on Strapping pins, SPI0/1, JTAG, GPI, TXD/RXD, ADC2, object detection descriptions, and YOLO model details — cannot be attributed to any nodes in retrieval context, as those nodes focus on computer hardware engineering job descriptions rather than em",
+            "contextual_relevancy": "The score is 0.00 because the retrieval context contains absolutely no relevant information to the input about transitioning from embedded development to machine vision engineering. All retrieved statements merely list occupation codes such as 'Computer Systems Engineers/Architects', 'Electrical Engineers', 'Robotics Engineers', etc., without providing any career transition paths or skill incremen"
+          },
+          "elapsedSec": 76.7
+        },
+        {
+          "questionId": "Q15",
+          "set": "main",
+          "category": "scenario-advice",
+          "retrieved_chunk_ids": [
+            "S08#s148~2",
+            "S21#s349",
+            "S17#s337"
+          ],
+          "answer": "# 机器视觉工程师转边缘 AI 工程师的路径\n\n根据现有检索片段，**资料不足以**提供一份完整、系统的职业转型路径建议。片段中并未直接描述\"机器视觉工程师如何转型为边缘 AI 工程师\"的具体步骤或学习路线。\n\n---\n\n## 但从片段中可以提取一些**方向性参考**：\n\n### 1. 需要了解的边缘 AI 硬件生态（片段 [1]）\n转型后可能接触的主流平台包括：\n\n| 平台 | 特点 |\n|---|---|\n| **Hailo**（Hailo-8/8L/10H等） | INT8 HEF 推理，适配 Raspberry Pi |\n| **Rockchip RKNN**（RK3588等） | NPU 优化，嵌入式 SBC |\n| **Sony IMX500** | 传感器级推理，极低功耗，**与机器视觉高度相关** |\n| **Qualcomm QNN** | Snapdragon Hexagon NPU，移动/边缘推理 |\n| **Axelera AI** | 高吞吐量（856 TOPS），PCIe/M.2 接入 |\n| **ExecuTorch / NCNN** | 设备端模型运行时，ARM 优化 |\n\n> ⚠️ **Sony IMX500** 是机器视觉背景工程师的天然切入点——它将推理能力直接集成进摄像头传感器，与机器视觉工程师的原有知识最为贴近。\n\n### 2. 技术演进趋势（片段 [2]）\n> \"从条码、RFID 到机器视觉，再到**端侧 AI**\"\n\n这说明机器视觉本身正在向边缘 AI 演进，两者存在**自然的技术延伸关系**，而非跨越式跳跃。\n\n---\n\n## ⚠️ 重要说明\n\n检索片段**未涵盖**以下关键信息，无法据此作答：\n- 具体的技能差距分析\n- 推荐的学习课程或认证\n- 薪资/岗位市场数据\n- 完整的转型学习路线图\n\n建议参考更专业的职业规划资料或相关社区（如片段 [1] 提到的各平台开发者社区）以获取更完整的指导。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.5333
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all three nodes in the retrieval contexts are irrelevant to the input question about transitioning from a machine vision engineer to an edge AI engineer. The first node, while tangentially related by mentioning edge AI hardware platforms like 'Sony IMX500', 'Rockchip RKNN', 'Hailo NPU', and 'Qualcomm QNN', does not provide substantive guidance on the career transition. Th",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output can be attributed to any nodes in retrieval context. The expected output covers topics such as MindSpore Lite inference workflows (sentences 1–8), YOLO26 export formats (sentence 9), object detection concepts and outputs (sentences 10–13), YOLO26 Detect model details (sentence 14), and instance segmentation concepts and YOLO26 ",
+            "contextual_relevancy": "The score is 0.53 because while some statements in the retrieval context are partially relevant to transitioning from machine vision to edge AI engineering — such as references to edge inference hardware (Hailo, Rockchip RKNN, Qualcomm QNN, Axelera AI), frameworks (NCNN, ExecuTorch), and the evolution from machine vision to edge AI (e.g., '从条码、RFID到机器视觉，再到端侧AI' and '工厂自动化：加速边缘AI与机器视觉') — a large p"
+          },
+          "elapsedSec": 122.3
+        },
+        {
+          "questionId": "Q16",
+          "set": "main",
+          "category": "scenario-advice",
+          "retrieved_chunk_ids": [
+            "S08#s148~3",
+            "S09#s160~2",
+            "S21#s349~4"
+          ],
+          "answer": "## 资料不足，无法回答\n\n根据您提供的检索片段，**没有任何内容涉及\"2026年端侧部署技能上升趋势\"**的相关数据或分析。\n\n现有片段主要涵盖：\n- 模型部署格式的通用说明（片段1）\n- 中国算力基础设施进展（片段3）\n- 芯片设计流程科普（片段3）\n- 充电产品拆解、手机广告乱象、变压器、SiC等硬件资讯\n\n这些内容均**不包含关于端侧部署岗位/技能需求变化的数据**。\n\n---\n\n**建议您可以通过以下渠道获取更准确的信息：**\n1. 招聘平台（如LinkedIn、脉脉、Boss直聘）的技能趋势报告\n2. 行业研究机构发布的AI/MLOps人才需求分析报告\n3. 专注于端侧AI的技术社区（如端侧大模型、TinyML相关论坛）\n\n如果您能提供包含相关内容的检索片段，我可以为您进一步分析解答。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.1053,
+            "contextual_relevancy": 0.0
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all nodes in the retrieval contexts are irrelevant to the input question about which specific skills are rising in edge deployment in 2026. The first node is merely a 'generic deployment note' that provides no actionable insight about rising skills. The second node contains only 'usernames/contributors and a creation date', offering no relevant information whatsoever. The",
+            "contextual_recall": "The score is 0.11 because the vast majority of the expected output, which covers MindSpore Lite model conversion (sentences 1–32), including downloading release packages, using converter_lite, environment setup, directory navigation, and specific conversion commands for CAFFE, MINDIR, TFLITE, TF, and ONNX models, cannot be attributed to any nodes in retrieval context. Only a small portion of the e",
+            "contextual_relevancy": "The score is 0.00 because none of the retrieved context is relevant to the question about which specific skills are rising in edge deployment ('端侧部署') trends in 2026. The retrieval context contains completely unrelated content such as '街电移动电源拆解', '手机弹窗广告乱象治理', '芯片设计流程科普', '韩国变压器工厂投资建设', and '数据中心液冷散热技术', along with usernames and timestamps. No relevant statements were found in the retrieval contex"
+          },
+          "elapsedSec": 79.9
+        },
+        {
+          "questionId": "Q17",
+          "set": "main",
+          "category": "scenario-advice",
+          "retrieved_chunk_ids": [
+            "S17#s312",
+            "S16#s308",
+            "S17#s340"
+          ],
+          "answer": "## 计算机硬件工程与软件质量保证的前景分析\n\n根据检索片段中的信息，可以提供以下判断：\n\n---\n\n### 💻 计算机硬件工程（Computer Hardware Engineers）\n- **前景标识**：明确标注了 **\"Bright Outlook\"（光明前景）**\n- **职业代码**：17-2061.00\n- **信息来源**：美国劳工部，更新于 2026 年\n- **主要工作**：研究、设计、开发或测试计算机及相关设备，应用于商业、工业、军事或科学领域\n- ✅ **结论：前景被官方评定为良好**\n\n---\n\n### 🛡️ 软件质量保证（Software Quality Assurance）\n- 检索片段中**未直接提及\"软件质量保证\"（Software Quality Assurance）**这一具体方向\n- 片段中提到的相近职业（均标注 Bright Outlook）包括：\n  - **Validation Engineers**（验证工程师，17-2112.02）与质量保证有一定关联\n  - Software Developers、Information Security Engineers 等\n\n> ⚠️ **资料不足**：检索片段未提供专门针对\"软件质量保证\"方向的完整前景描述，无法做出准确判断。\n\n---\n\n### 📌 总结\n\n| 方向 | 前景评级 | 数据支持 |\n|------|----------|----------|\n| 计算机硬件工程 | ✅ Bright Outlook | 充分 |\n| 软件质量保证 | ❓ 资料不足 | 不充分 |\n\n如需更准确的软件质量保证方向信息，建议查阅美国劳工部 O*NET 数据库的相关职业页面。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 0.0667,
+            "contextual_relevancy": 0.375
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because all relevant nodes are perfectly ranked above irrelevant ones! The first node, directly covering Computer Hardware Engineers with its 'Bright Outlook' status and job details, is ranked first, and the second node, listing related occupations including both hardware and software roles, follows right after. Great job getting the most useful context to the top!",
+            "contextual_recall": "The score is 0.07 because the vast majority of the expected output cannot be attributed to any nodes in retrieval context. Only a small portion of the content for the second occupation (17-2061.00) is supported — specifically sentences covering the occupation code, 'Bright Outlook' status, 'Updated 2026', the general description, and the sample job titles, all found in node 1. However, all content",
+            "contextual_relevancy": "The score is 0.38 because the retrieval context only partially addresses the input. While there are some relevant statements about computer hardware engineering, such as 'The occupation 17-2061.00 (Computer Hardware Engineering) has a Bright Outlook' and details about its roles, the context completely lacks information on 'software quality assurance', which is one of the two key directions asked a"
+          },
+          "elapsedSec": 95.4
+        },
+        {
+          "questionId": "Q18",
+          "set": "main",
+          "category": "scenario-advice",
+          "retrieved_chunk_ids": [
+            "S11#s176",
+            "S11#s172",
+            "S11#s178"
+          ],
+          "answer": "## 基于检索片段的回答\n\n根据提供的检索片段，可以部分回答这一问题，但**资料不足以全面说明对测试工程师技能的具体影响**。以下是基于现有片段可以推断的内容：\n\n---\n\n### 从片段中可以得出的信息\n\n**WebDriver BiDi 的技术特性（片段[1]）：**\n\n- 它是 **W3C 标准双向协议**，由 Selenium 项目与各浏览器厂商共同制定\n- 在传统 WebDriver 基础上增加了 **WebSocket 连接**，支持实时接收浏览器事件\n- 可处理：**网络请求、控制台消息、JavaScript 错误**\n- 定位为**取代 Chrome DevTools Protocol（CDP）的跨浏览器标准**\n\n### 可合理推断的技能影响\n\n| 变化方向 | 说明 |\n|----------|------|\n| 需了解 WebSocket 通信机制 | BiDi 基于 WebSocket 实现双向通信 |\n| 事件驱动测试能力 | 需掌握实时响应浏览器事件的编写方式 |\n| 跨浏览器兼容性意识 | 从 CDP（仅 Chromium）迁移至跨浏览器标准 |\n\n---\n\n### ⚠️ 资料不足说明\n\n检索片段**未涉及**以下内容，无法作答：\n- 对测试工程师**具体技能要求**的描述\n- 学习路径或培训建议\n- 行业招聘标准的变化\n\n如需更完整的职业影响分析，建议参考 Selenium 官方文档或相关技术社区的专项资料。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.2727
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the relevant nodes are perfectly ranked above the irrelevant one. The first node, which describes WebDriver BiDi as a 'W3C 标准双向协议, 用于浏览器自动化' and its real-time browser event capabilities, and the second node, covering 'WebDriver以原生的方式驱动浏览器' and related standards, are both correctly placed at the top. The irrelevant third node, containing only administrative information abo",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully attributed to nodes in retrieval context — sentences 1 through 7 are supported by node 2, and sentence 8 is supported by node 1. Great job, perfect coverage!",
+            "contextual_relevancy": "The score is 0.27 because most of the retrieval context is irrelevant to the input question about the impact of WebDriver BiDi standardization on test engineers' skills. The majority of retrieved statements only describe general WebDriver concepts, such as 'how WebDriver drives browsers locally or remotely' and 'WebDriver as an object-oriented API', with no connection to WebDriver BiDi or skill im"
+          },
+          "elapsedSec": 46.6
+        }
+      ]
+    }
+  }
+}

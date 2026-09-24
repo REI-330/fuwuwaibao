@@ -1,0 +1,311 @@
+{
+  "schema": "career-graph-raw-blocks/v1",
+  "sourceId": "S11",
+  "url": "https://www.selenium.dev/zh-cn/documentation/webdriver/",
+  "finalUrl": "https://www.selenium.dev/zh-cn/documentation/webdriver/",
+  "fetchedAt": "2026-09-15T09:56:51.087Z",
+  "httpStatus": 200,
+  "contentType": "text/html; charset=utf-8",
+  "charset": "utf-8",
+  "byteSize": 70625,
+  "sha256": "57c5caaee4c92696e531467b0458098dd3a53cf1d6d54ad756a55a2731d0f953",
+  "title": "WebDriver | Selenium",
+  "hops": [
+    {
+      "url": "https://www.selenium.dev/zh-cn/documentation/webdriver/",
+      "finalUrl": "https://www.selenium.dev/zh-cn/documentation/webdriver/",
+      "httpStatus": 200,
+      "bytes": 70625,
+      "charset": "utf-8"
+    }
+  ],
+  "flags": [],
+  "extractionPass": "pruned",
+  "prunedBlockCount": 31,
+  "prunedTextLength": 1002,
+  "blockCount": 31,
+  "textLength": 1002,
+  "ranges": [
+    [
+      0,
+      109
+    ],
+    [
+      111,
+      120
+    ],
+    [
+      122,
+      153
+    ],
+    [
+      155,
+      226
+    ],
+    [
+      228,
+      286
+    ],
+    [
+      288,
+      317
+    ],
+    [
+      319,
+      346
+    ],
+    [
+      348,
+      373
+    ],
+    [
+      375,
+      386
+    ],
+    [
+      388,
+      392
+    ],
+    [
+      394,
+      426
+    ],
+    [
+      428,
+      432
+    ],
+    [
+      434,
+      442
+    ],
+    [
+      444,
+      448
+    ],
+    [
+      450,
+      454
+    ],
+    [
+      456,
+      471
+    ],
+    [
+      473,
+      478
+    ],
+    [
+      480,
+      489
+    ],
+    [
+      491,
+      519
+    ],
+    [
+      521,
+      542
+    ],
+    [
+      544,
+      728
+    ],
+    [
+      730,
+      746
+    ],
+    [
+      748,
+      763
+    ],
+    [
+      765,
+      771
+    ],
+    [
+      773,
+      792
+    ],
+    [
+      794,
+      866
+    ],
+    [
+      868,
+      888
+    ],
+    [
+      890,
+      913
+    ],
+    [
+      915,
+      943
+    ],
+    [
+      945,
+      990
+    ],
+    [
+      992,
+      1002
+    ]
+  ],
+  "blocks": [
+    {
+      "kind": "heading",
+      "level": 4,
+      "text": "Thank you for joining the Selenium and Appium 2026 Conference. Visit Conference Website for more information!"
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "text": "WebDriver"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "WebDriver以原生的方式驱动浏览器; 在此了解更多内容."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "WebDriver 以本地化方式驱动浏览器，就像用户在本地或使用 Selenium\n服务器的远程机器上所做的那样，这标志着浏览器自动化的飞跃。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Selenium WebDriver 指的是语言绑定和各个浏览器控制代码的实现。\n这通常被称为 WebDriver。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Selenium WebDriver 是 W3C 推荐标准"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "WebDriver 被设计成一个简单和简洁的编程接口。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "WebDriver 是一个简洁的面向对象 API。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "它能有效地驱动浏览器。"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "入门指南"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果你是Selenium的新手, 我们有一些资源帮助你快速入门."
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "驱动会话"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "支持的浏览器列表"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "等待策略"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "网络元素"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在DOM中识别和使用元素对象."
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "浏览器交互"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "Actions接口"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "用于向 Web 浏览器提供虚拟化设备输入操作的低级接口."
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "WebDriver BiDi (双向功能)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "WebDriver BiDi 是由 Selenium 项目与各浏览器厂商共同制定的 W3C 标准双向协议, 用于浏览器自动化. 它在 WebDriver 之上增加了 WebSocket 连接, 使脚本能够实时接收并响应浏览器事件, 包括网络请求, 控制台消息和 JavaScript 错误. 它是取代 Chrome DevTools Protocol 的跨浏览器标准."
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "Support features"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "针对更高层面功能的额外支持类."
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "故障排除协助"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如何管理 WebDriver 的问题."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "最后修改 March 29, 2024: fix grammer fixes #1647 [deploy site] (690cd94e738)"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Development Partners"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Selenium Level Sponsors"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Support the Selenium Project"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Learn more or view the full list of sponsors."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Learn more"
+    }
+  ]
+}

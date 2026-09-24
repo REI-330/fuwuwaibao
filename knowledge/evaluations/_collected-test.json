@@ -1,0 +1,132 @@
+{
+  "schema": "career-graph-eval-questions/v3-partial",
+  "split": "test",
+  "note": "由 collect_questions.py 从批量出题缓存收集；剩余配额待人工补。",
+  "counts": {
+    "total": 6,
+    "answerable": 6,
+    "referenceChunksTotal": 12
+  },
+  "questions": [
+    {
+      "questionId": "T01",
+      "split": "test",
+      "category": "嵌入式开发",
+      "question": "在 ESP32 上用 SPI 发送 uint16_t 类型的数据时，字节的发送顺序是怎样的？如果需要对发送或接收的数据做格式转换，应该用哪些宏？",
+      "answerable": true,
+      "referenceChunks": [
+        "S02#s19",
+        "S02#s43~2"
+      ],
+      "gradingNotes": "ESP32 是小端芯片，uint16_t 存储在内存中时，低有效字节（位 [7:0]）先发送，高有效字节（位 [15:8]）后发送。；需要发送的数据使用 SPI_SWAP_DATA_TX 进行转换，接收到的数据使用 SPI_SWAP_DATA_RX 进行转换。",
+      "sourceId": "S02",
+      "provenance": {
+        "chunkA": "S02#s19",
+        "chunkB": "S02#s43~2",
+        "lcsWithSource": 8,
+        "llmVerified": true,
+        "collectedBy": "collect_questions.py"
+      }
+    },
+    {
+      "questionId": "T02",
+      "split": "test",
+      "category": "嵌入式开发",
+      "question": "ESP32 上使用 GPIO 交换矩阵走 SPI 信号和直接使用 IO_MUX 专用管脚相比，在时钟频率上有什么限制？SPI2 的 MISO 专用管脚是哪个 GPIO？",
+      "answerable": true,
+      "referenceChunks": [
+        "S02#s22",
+        "S02#s42~4"
+      ],
+      "gradingNotes": "通过 GPIO 交换矩阵传输时，最大时钟频率只能达到 40 MHz；而使用 IO_MUX 专用管脚时最大可达 80 MHz，且 GPIO 矩阵还会增加 MISO 的输入延迟，提高时序违反风险。；SPI2（SPI2）的 MISO 专用 IO_MUX 管脚对应 GPIO 12。",
+      "sourceId": "S02",
+      "provenance": {
+        "chunkA": "S02#s22",
+        "chunkB": "S02#s42~4",
+        "lcsWithSource": 8,
+        "llmVerified": true,
+        "collectedBy": "collect_questions.py"
+      }
+    },
+    {
+      "questionId": "T03",
+      "split": "test",
+      "category": "嵌入式开发",
+      "question": "在 ESP-IDF 堆内存 API 中，遍历堆块时的回调函数如何通过返回值来控制遍历是否继续？",
+      "answerable": true,
+      "referenceChunks": [
+        "S03#s63~2",
+        "S03#s71"
+      ],
+      "gradingNotes": "multi_heap_walker_cb_t 回调返回 True 表示期望继续堆的遍历，返回 False 则期望停止对该堆的遍历。；multi_heap_handle_t 是指向已注册堆的不透明句柄，用于标识一个堆实例。",
+      "sourceId": "S03",
+      "provenance": {
+        "chunkA": "S03#s63~2",
+        "chunkB": "S03#s71",
+        "lcsWithSource": 2,
+        "llmVerified": true,
+        "collectedBy": "collect_questions.py"
+      }
+    },
+    {
+      "questionId": "T04",
+      "split": "test",
+      "category": "嵌入式开发",
+      "question": "在 ESP-IDF 中，如果想知道某个已分配指针实际占用了多少字节，应该调用哪个函数？使用时需要注意什么？",
+      "answerable": true,
+      "referenceChunks": [
+        "S03#s61",
+        "S03#s61~9"
+      ],
+      "gradingNotes": "heap_caps_get_allocated_size(void *ptr) 可以返回指定指针所分配的内存块大小（字节数）。；传入的指针必须是之前通过 heap_caps_malloc、malloc、calloc 等返回的有效地址且尚未被释放，否则程序会因断言失败而崩溃。",
+      "sourceId": "S03",
+      "provenance": {
+        "chunkA": "S03#s61",
+        "chunkB": "S03#s61~9",
+        "lcsWithSource": 3,
+        "llmVerified": true,
+        "collectedBy": "collect_questions.py"
+      }
+    },
+    {
+      "questionId": "T05",
+      "split": "test",
+      "category": "嵌入式开发",
+      "question": "使用 SPI Master 在 ESP32 上通过 GPIO matrix 连接从设备时，最高支持多少 MHz 的通信频率？如果频率不够用该怎么办？",
+      "answerable": true,
+      "referenceChunks": [
+        "S02#s41",
+        "S02#s41~6"
+      ],
+      "gradingNotes": "ESP32 通过 GPIO matrix 与理想从设备通信时，最高频率约为 26MHz；而使用 IOMUX 专用引脚时最高可达 80MHz。；在半双工模式下，可以通过在 spi_device_interface_config_t 中正确设置 input_delay_ns 来增加额外的 dummy 周期，从而补偿 GPIO matrix 引入的延迟。",
+      "sourceId": "S02",
+      "provenance": {
+        "chunkA": "S02#s41",
+        "chunkB": "S02#s41~6",
+        "lcsWithSource": 10,
+        "llmVerified": true,
+        "collectedBy": "collect_questions.py"
+      }
+    },
+    {
+      "questionId": "T06",
+      "split": "test",
+      "category": "嵌入式开发",
+      "question": "在多堆 API 中，如果需要释放一块通过对齐分配接口申请的内存，推荐使用哪个函数？另外如何查询某个堆的历史最低剩余空闲空间？",
+      "answerable": true,
+      "referenceChunks": [
+        "S03#s69",
+        "S03#s69~4"
+      ],
+      "gradingNotes": "multi_heap_aligned_free() 已被标记为废弃，建议改用 multi_heap_free() 来释放包括对齐分配在内的堆内存。；multi_heap_minimum_free_size() 返回指定堆的生命周期内曾出现过的最低空闲字节数（历史水位线），等同于 multi_heap_get_info() 返回结构体中的 minimum_free_bytes 字段。",
+      "sourceId": "S03",
+      "provenance": {
+        "chunkA": "S03#s69",
+        "chunkB": "S03#s69~4",
+        "lcsWithSource": 1,
+        "llmVerified": true,
+        "collectedBy": "collect_questions.py"
+      }
+    }
+  ]
+}

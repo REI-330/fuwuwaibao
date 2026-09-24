@@ -1,0 +1,100 @@
+{
+  "schema": "career-graph-section-channel/v1",
+  "generatedAt": "2026-09-17T01:39:29+0800",
+  "alpha_bm25": 0.35,
+  "uniqueSectionTitles": 316,
+  "curve": [
+    {
+      "beta": 0.0,
+      "lamPull": 0.0,
+      "hit": "13/14",
+      "hitAt1": 0.7143,
+      "precisionAtK": 0.4524,
+      "fails": [
+        "N12"
+      ]
+    },
+    {
+      "beta": 0.05,
+      "lamPull": 0.0,
+      "hit": "13/14",
+      "hitAt1": 0.7143,
+      "precisionAtK": 0.4524,
+      "fails": [
+        "N12"
+      ]
+    },
+    {
+      "beta": 0.1,
+      "lamPull": 0.0,
+      "hit": "13/14",
+      "hitAt1": 0.7143,
+      "precisionAtK": 0.4524,
+      "fails": [
+        "N12"
+      ]
+    },
+    {
+      "beta": 0.15,
+      "lamPull": 0.0,
+      "hit": "13/14",
+      "hitAt1": 0.7143,
+      "precisionAtK": 0.4524,
+      "fails": [
+        "N12"
+      ]
+    },
+    {
+      "beta": 0.2,
+      "lamPull": 0.0,
+      "hit": "13/14",
+      "hitAt1": 0.7143,
+      "precisionAtK": 0.4524,
+      "fails": [
+        "N12"
+      ]
+    },
+    {
+      "beta": 0.3,
+      "lamPull": 0.0,
+      "hit": "12/14",
+      "hitAt1": 0.7143,
+      "precisionAtK": 0.4524,
+      "fails": [
+        "N12",
+        "N13"
+      ]
+    },
+    {
+      "beta": 0.5,
+      "lamPull": 0.0,
+      "hit": "12/14",
+      "hitAt1": 0.7143,
+      "precisionAtK": 0.4524,
+      "fails": [
+        "N12",
+        "N13"
+      ]
+    },
+    {
+      "beta": 0.0,
+      "lamPull": 0.5,
+      "hit": "13/14",
+      "hitAt1": 0.7143,
+      "precisionAtK": 0.4762,
+      "fails": [
+        "N12"
+      ]
+    },
+    {
+      "beta": 0.0,
+      "lamPull": 0.5,
+      "hit": "13/14",
+      "hitAt1": 0.7143,
+      "precisionAtK": 0.4762,
+      "fails": [
+        "N12"
+      ]
+    }
+  ]
+}

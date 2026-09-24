@@ -1,0 +1,132 @@
+{
+  "schema": "career-graph-eval-questions/v3-partial",
+  "split": "dev",
+  "note": "由 collect_questions.py 从批量出题缓存收集；剩余配额待人工补。",
+  "counts": {
+    "total": 6,
+    "answerable": 6,
+    "referenceChunksTotal": 12
+  },
+  "questions": [
+    {
+      "questionId": "D01",
+      "split": "dev",
+      "category": "嵌入式开发",
+      "question": "在 ESP32 SPI 主机驱动中，启用 DMA 进行数据传输时，对缓冲区有哪些具体要求？如果不满足这些要求会有什么影响？",
+      "answerable": true,
+      "referenceChunks": [
+        "S02#s15",
+        "S02#s43~3"
+      ],
+      "gradingNotes": "DMA 缓冲区需申请支持 DMA 的内存，且必须 32 位对齐（从 32 位边界开始，长度为 4 字节的倍数）；若未满足对齐要求，传输效率会因临时缓冲区的分配和数据复制而降低；另外启用 DMA 时不支持同时具有读取和写入阶段的半双工传输事务",
+      "sourceId": "S02",
+      "provenance": {
+        "chunkA": "S02#s15",
+        "chunkB": "S02#s43~3",
+        "lcsWithSource": 5,
+        "llmVerified": true,
+        "collectedBy": "collect_questions.py"
+      }
+    },
+    {
+      "questionId": "D02",
+      "split": "dev",
+      "category": "嵌入式开发",
+      "question": "在同一个 SPI 设备上混合使用中断传输和轮询传输时，有哪些关键注意事项？",
+      "answerable": true,
+      "referenceChunks": [
+        "S02#s20",
+        "S02#s42~3"
+      ],
+      "gradingNotes": "必须等所有中断传输事务和轮询传输事务都完成后，才能再次发起轮询传输；调用 spi_device_polling_start() 前，需通过反复调用 spi_device_get_trans_result() 确认所有中断传输事务已全部返回。；spi_device_polling_start() 之后必须调用 spi_device_polling_end() 以释放总线；若无需在轮询期间切换任务，可直接使用 spi_device_polling_transmit()，该函数会自动完成结束流程；建议只在单个任务中向同一设备发送混合类型传输事务，以便更好地控制调用顺序。",
+      "sourceId": "S02",
+      "provenance": {
+        "chunkA": "S02#s20",
+        "chunkB": "S02#s42~3",
+        "lcsWithSource": 5,
+        "llmVerified": true,
+        "collectedBy": "collect_questions.py"
+      }
+    },
+    {
+      "questionId": "D03",
+      "split": "dev",
+      "category": "嵌入式开发",
+      "question": "使用 ESP-IDF SPI 主机驱动时，轮询传输和中断传输在单字节传输延迟上有多大差异？启用 DMA 和不启用 DMA 对这两种模式分别有什么影响？",
+      "answerable": true,
+      "referenceChunks": [
+        "S02#s24",
+        "S02#s42~2"
+      ],
+      "gradingNotes": "中断传输单字节典型延迟：使用 DMA 约 28 µs，使用 CPU 约 25 µs；轮询传输：使用 DMA 约 10 µs，使用 CPU 约 8 µs，轮询方式比中断方式快约 3 倍；启用 DMA 时每笔事务设置链接列表需约 2 µs，但主机可自动从链接列表读取数据；不启用 DMA 时 CPU 须逐字节读写 FIFO，通常不到 2 µs，但单次传输长度被限制在 64 字节以内",
+      "sourceId": "S02",
+      "provenance": {
+        "chunkA": "S02#s24",
+        "chunkB": "S02#s42~2",
+        "lcsWithSource": 6,
+        "llmVerified": true,
+        "collectedBy": "collect_questions.py"
+      }
+    },
+    {
+      "questionId": "D04",
+      "split": "dev",
+      "category": "嵌入式开发",
+      "question": "在 ESP-IDF 中，如果我想在系统运行过程中动态添加一块新的内存区域到堆管理器，应该调用哪个函数？调用时有什么需要注意的地方？",
+      "answerable": true,
+      "referenceChunks": [
+        "S03#s66",
+        "S03#s69~5"
+      ],
+      "gradingNotes": "应调用 heap_caps_add_region(intptr_t start, intptr_t end)，传入内存区域的起止地址即可在运行时将其加入堆集合。；该函数不会自动处理 soc_memory_layout 中定义的「保留」区域，调用者需要自己确保所添加的内存范围不与保留区域冲突。",
+      "sourceId": "S03",
+      "provenance": {
+        "chunkA": "S03#s66",
+        "chunkB": "S03#s69~5",
+        "lcsWithSource": 3,
+        "llmVerified": true,
+        "collectedBy": "collect_questions.py"
+      }
+    },
+    {
+      "questionId": "D05",
+      "split": "dev",
+      "category": "嵌入式开发",
+      "question": "芯片处于 Deep-sleep 模式时，如何让数字 GPIO 在每次睡眠过程中都保持电平状态，以及怎样关闭这一功能？",
+      "answerable": true,
+      "referenceChunks": [
+        "S04#s78~2",
+        "S04#s78~9"
+      ],
+      "gradingNotes": "调用启用深度睡眠保持的 API 后，数字 GPIO 的深度睡眠保持特性会在每次睡眠过程中生效；但在芯片处于活跃模式时，除已被 gpio_hold_en 锁定的引脚外，GPIO 状态仍可自由改变。；若要关闭所有数字 GPIO 在 Deep-sleep 期间的保持功能，可以调用 gpio_deep_sleep_hold_dis()。",
+      "sourceId": "S04",
+      "provenance": {
+        "chunkA": "S04#s78~2",
+        "chunkB": "S04#s78~9",
+        "lcsWithSource": 10,
+        "llmVerified": true,
+        "collectedBy": "collect_questions.py"
+      }
+    },
+    {
+      "questionId": "D06",
+      "split": "dev",
+      "category": "嵌入式开发",
+      "question": "进入深度睡眠前，如何最小化 RTC IO 的漏电流？以 ESP32-WROVER 模组为例，官方推荐怎么操作？另外，通过 RTC GPIO 从睡眠中唤醒支持哪些触发方式？",
+      "answerable": true,
+      "referenceChunks": [
+        "S04#s87~2",
+        "S04#s87~5"
+      ],
+      "gradingNotes": "调用 rtc_gpio_isolate 可断开 RTC IO 与内部电路的连接，该函数会禁用输入、输出、上下拉并启用 hold，从而将漏电流降到最低；对于 ESP32-WROVER 模组，建议在进入深度睡眠前调用 rtc_gpio_isolate(GPIO_NUM_12)。；rtc_gpio_wakeup_enable 支持的唤醒触发类型：所有目标均支持 GPIO_INTR_HIGH_LEVEL 和 GPIO_INTR_LOW_LEVEL；若芯片支持 SOC_RTC_GPIO_EDGE_WAKEUP_SUPPORTED，则还支持 GPIO_INTR_POSEDGE、GPIO_INTR_NEGEDGE 和 GPIO_INTR_ANYEDGE。",
+      "sourceId": "S04",
+      "provenance": {
+        "chunkA": "S04#s87~2",
+        "chunkB": "S04#s87~5",
+        "lcsWithSource": 12,
+        "llmVerified": true,
+        "collectedBy": "collect_questions.py"
+      }
+    }
+  ]
+}

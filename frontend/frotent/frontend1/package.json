@@ -1,0 +1,55 @@
+{
+  "name": "xiangxin-ai-career-navigator",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "vinext dev",
+    "dev:frontend": "vinext dev",
+    "dev:backend": "python backend/run.py",
+    "backend:install": "python -m pip install -r backend/requirements-dev.txt",
+    "build": "vinext build",
+    "start": "vinext start",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "mcp": "node --import tsx mcp/stdio.ts",
+    "mcp:http": "node --import tsx mcp/http.ts",
+    "mcp:verify": "node --import tsx scripts/verify-mcp.ts",
+    "mcp:verify-http": "node --import tsx scripts/verify-mcp-http.ts",
+    "test:backend": "python -m pytest backend/tests -q -p no:cacheprovider",
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
+    "db:generate": "drizzle-kit generate",
+    "db:seed-migration": "node scripts/build-career-catalog-migration.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "drizzle-orm": "0.45.2",
+    "next": "16.2.6",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "tbox-nodejs-sdk": "^0.0.19",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "1.37.1",
+    "@cloudflare/workers-types": "^4.20260515.1",
+    "@tailwindcss/postcss": "4.2.1",
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.2",
+    "@vitejs/plugin-rsc": "0.5.26",
+    "drizzle-kit": "0.31.10",
+    "eslint": "9.39.4",
+    "eslint-config-next": "16.2.6",
+    "react-server-dom-webpack": "19.2.6",
+    "tailwindcss": "4.2.1",
+    "tsx": "^4.23.13",
+    "typescript": "5.9.3",
+    "vinext": "0.0.50",
+    "vite": "8.0.13",
+    "wrangler": "4.92.0"
+  },
+  "type": "module"
+}

@@ -1,0 +1,107 @@
+View a markdown version of this page
+
+注册获取 AWS 账户下载 FreeRTOS 源代码FreeRTOS-qualified 硬件平台其他资源
+
+本文属于机器翻译版本。若本译文内容与英语原文存在差异，则一律以英文原文为准。
+
+什么是 FreeRTOS？
+
+与世界领先的芯片公司合作开发了 15 年，现在每 170 秒有一次下载，FreeRTOS 是面向微控制器和小型微处理器的市场领先的实时操作系统 (RTOS)。根据 MIT 开源许可免费分发，FreeRTOS 包含一个内核和一组持续增加的库，可广泛应用于各个行业领域。FreeRTOS 的设计非常注重可靠性和易用性。
+
+FreeRTOS 包含用于连接、安全性和空中下载 (OTA) 更新的库。FreeRTOS 还包括演示应用程序，可在合格的主板上显示 FreeRTOS 功能。
+
+FreeRTOS 是一个开源项目。您可以下载源代码、贡献更改或改进，或者在网站上报告问题， GitHub 网址为https://github.com/FreeRTOS/FreeRTOS。
+
+我们根据 MIT 开源许可证发布 FreeRTOS 代码，以便您可以在商业和个人项目中使用这些代码。
+
+我们也欢迎您对 FreeRTOS 文档（《FreeRTOS 用户指南》、《FreeRTOS 移植指南》和《FreeRTOS 资格认证指南》）提供意见或建议。要查看文档的 markdown 源代码，请参阅https://github.com/awsdocs/aws-freertos-docs。它是在知识共享 (CC BY-ND) 许可下发布的。
+
+注册获取 AWS 账户
+
+要开始使用 AWS，你需要一个 AWS 账户。有关创建的信息 AWS 账户，请参阅《AWS 账户管理 参考指南》 AWS 账户中的入门指南。
+
+下载 FreeRTOS 源代码
+
+从 freertos.org 的下载页面下载最新的 FreeRTOS 和长期支持 (LTS) 程序包。
+
+FreeRTOS-qualified 硬件平台
+
+以下硬件平台符合 FreeRTOS 的条件：
+
+ATECC608A Zero Touch 配置套件适用于 AWS IoT
+
+Cypress CYW943907AEVAL1F 开发工具包
+
+Cypress CYW954907AEVAL1F 开发工具包
+
+赛普拉斯套件 CY8CKIT-064S0S2-4343W
+
+Espressif ESP32-DevKitC
+
+Espressif ESP-WROVER-KIT
+
+Espressif ESP-WROOM-32SE
+
+Espressif ESP32-S2-Saola-1
+
+Infineon XMC4800 IoT 连接工具包
+
+Marvell MW320 AWS IoT 入门套件
+
+Marvell MW322 AWS IoT 入门套件
+
+MediaTek mt7697hx 开发套件
+
+Microchip Curiosity PIC32MZEF Bundle
+
+北欧 n RF52840-DK
+
+NuMaker-IoT-M487
+
+NXP LPC54018 IoT Module
+
+OPTIGA Trust X 安全解决方案
+
+Renesas RX65N RSK IoT Module
+
+STMicroelectronicsSTM32L4 发现工具包 IoT 节点
+
+德州仪器 CC3220SF-LAUNCHXL
+
+Microsoft Windows 7 或更高版本，至少双核处理器以及有线以太网连接
+
+Xilinx Avnet MicroZed 工业物联网套件
+
+AWS 合作伙伴设备目录中也列出了取得认证的设备。
+
+有关新设备资格鉴定的信息，请参阅 FreeRTOS 资格认证指南。
+
+其他资源
+
+这些资源可能对您很有用。
+
+有关其他 FreeRTOS 文档，请参阅 freertos.org。
+
+如果 FreeRTOS 工程团队对 FreeRTOS 有疑问，可以在 FreeRTOS 页面上打开一个问题。 GitHub
+
+有关 FreeRTOS 的技术问题，请访问 FreeRTOS 社区论坛。
+
+有关将设备连接至的更多信息 AWS IoT，请参阅《AWS IoT Core 开发者指南》中的设备配置。
+
+有关技术支持 AWS，请参阅 Supp AWS ort。
+
+有关 AWS 账单、账户服务、活动、滥用行为或其他问题的问题 AWS，请参阅 “联系我们” 页面。
+
+文档惯例
+
+此页面对您有帮助吗？- 是
+
+感谢您对我们工作的肯定！
+
+如果不耽误您的时间，请告诉我们做得好的地方，让我们做得更好。
+
+此页面对您有帮助吗？- 否
+
+感谢您告诉我们本页内容还需要完善。很抱歉让您失望了。
+
+如果不耽误您的时间，请告诉我们如何改进文档。

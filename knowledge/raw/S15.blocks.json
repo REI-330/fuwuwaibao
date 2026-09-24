@@ -1,0 +1,1004 @@
+{
+  "schema": "career-graph-raw-blocks/v1",
+  "sourceId": "S15",
+  "url": "https://testerhome.com/",
+  "finalUrl": "https://testerhome.com/",
+  "fetchedAt": "2026-09-15T09:56:51.087Z",
+  "httpStatus": 200,
+  "contentType": "text/html; charset=utf-8",
+  "charset": "utf-8",
+  "byteSize": 52966,
+  "sha256": "39a859f44190e626718a62c51906088803409a12ed14107e6c6e8e9ffa169156",
+  "title": "测试之家",
+  "hops": [
+    {
+      "url": "https://testerhome.com/",
+      "finalUrl": "https://testerhome.com/",
+      "httpStatus": 200,
+      "bytes": 52966,
+      "charset": "utf-8"
+    }
+  ],
+  "flags": [],
+  "extractionPass": "pruned",
+  "prunedBlockCount": 108,
+  "prunedTextLength": 1785,
+  "blockCount": 108,
+  "textLength": 1785,
+  "ranges": [
+    [
+      0,
+      4
+    ],
+    [
+      6,
+      8
+    ],
+    [
+      10,
+      12
+    ],
+    [
+      14,
+      16
+    ],
+    [
+      18,
+      23
+    ],
+    [
+      25,
+      29
+    ],
+    [
+      31,
+      33
+    ],
+    [
+      35,
+      39
+    ],
+    [
+      41,
+      43
+    ],
+    [
+      45,
+      47
+    ],
+    [
+      49,
+      53
+    ],
+    [
+      55,
+      158
+    ],
+    [
+      160,
+      193
+    ],
+    [
+      195,
+      200
+    ],
+    [
+      202,
+      206
+    ],
+    [
+      208,
+      240
+    ],
+    [
+      242,
+      249
+    ],
+    [
+      251,
+      284
+    ],
+    [
+      286,
+      290
+    ],
+    [
+      292,
+      326
+    ],
+    [
+      328,
+      332
+    ],
+    [
+      334,
+      355
+    ],
+    [
+      357,
+      359
+    ],
+    [
+      361,
+      400
+    ],
+    [
+      402,
+      409
+    ],
+    [
+      411,
+      536
+    ],
+    [
+      538,
+      541
+    ],
+    [
+      543,
+      545
+    ],
+    [
+      547,
+      554
+    ],
+    [
+      556,
+      560
+    ],
+    [
+      562,
+      580
+    ],
+    [
+      582,
+      593
+    ],
+    [
+      595,
+      597
+    ],
+    [
+      599,
+      633
+    ],
+    [
+      635,
+      638
+    ],
+    [
+      640,
+      654
+    ],
+    [
+      656,
+      658
+    ],
+    [
+      660,
+      662
+    ],
+    [
+      664,
+      700
+    ],
+    [
+      702,
+      704
+    ],
+    [
+      706,
+      708
+    ],
+    [
+      710,
+      740
+    ],
+    [
+      742,
+      744
+    ],
+    [
+      746,
+      748
+    ],
+    [
+      750,
+      779
+    ],
+    [
+      781,
+      793
+    ],
+    [
+      795,
+      797
+    ],
+    [
+      799,
+      807
+    ],
+    [
+      809,
+      816
+    ],
+    [
+      818,
+      851
+    ],
+    [
+      853,
+      866
+    ],
+    [
+      868,
+      870
+    ],
+    [
+      872,
+      890
+    ],
+    [
+      892,
+      905
+    ],
+    [
+      907,
+      919
+    ],
+    [
+      921,
+      933
+    ],
+    [
+      935,
+      937
+    ],
+    [
+      939,
+      950
+    ],
+    [
+      952,
+      955
+    ],
+    [
+      957,
+      959
+    ],
+    [
+      961,
+      997
+    ],
+    [
+      999,
+      1001
+    ],
+    [
+      1003,
+      1025
+    ],
+    [
+      1027,
+      1034
+    ],
+    [
+      1036,
+      1038
+    ],
+    [
+      1040,
+      1051
+    ],
+    [
+      1053,
+      1059
+    ],
+    [
+      1061,
+      1063
+    ],
+    [
+      1065,
+      1084
+    ],
+    [
+      1086,
+      1089
+    ],
+    [
+      1091,
+      1093
+    ],
+    [
+      1095,
+      1129
+    ],
+    [
+      1131,
+      1141
+    ],
+    [
+      1143,
+      1145
+    ],
+    [
+      1147,
+      1170
+    ],
+    [
+      1172,
+      1176
+    ],
+    [
+      1178,
+      1180
+    ],
+    [
+      1182,
+      1198
+    ],
+    [
+      1200,
+      1206
+    ],
+    [
+      1208,
+      1210
+    ],
+    [
+      1212,
+      1224
+    ],
+    [
+      1226,
+      1229
+    ],
+    [
+      1231,
+      1234
+    ],
+    [
+      1236,
+      1253
+    ],
+    [
+      1255,
+      1257
+    ],
+    [
+      1259,
+      1261
+    ],
+    [
+      1263,
+      1273
+    ],
+    [
+      1275,
+      1279
+    ],
+    [
+      1281,
+      1485
+    ],
+    [
+      1487,
+      1491
+    ],
+    [
+      1493,
+      1529
+    ],
+    [
+      1531,
+      1534
+    ],
+    [
+      1536,
+      1541
+    ],
+    [
+      1543,
+      1556
+    ],
+    [
+      1558,
+      1573
+    ],
+    [
+      1575,
+      1587
+    ],
+    [
+      1589,
+      1593
+    ],
+    [
+      1595,
+      1618
+    ],
+    [
+      1620,
+      1646
+    ],
+    [
+      1648,
+      1658
+    ],
+    [
+      1660,
+      1666
+    ],
+    [
+      1668,
+      1678
+    ],
+    [
+      1680,
+      1690
+    ],
+    [
+      1692,
+      1734
+    ],
+    [
+      1736,
+      1740
+    ],
+    [
+      1742,
+      1756
+    ],
+    [
+      1758,
+      1770
+    ],
+    [
+      1772,
+      1785
+    ]
+  ],
+  "blocks": [
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "测试之家"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "社区"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "问答"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "招聘"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "社区学堂新"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "开源项目"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "活动"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Wiki"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "注册"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "登录"
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "text": "测试之家"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "测试之家（TesterHome）由一线测试工程师发起和运营，社区的主旨是公益，开源，分享，落地。\n社区以推进国内软件测试开源为己任，不遗余力的引入和输出国内外测试工具，紧跟流行技术，是软件测试行业的风向标。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "众人拾柴火焰高，期待更多人加入测试之家，一起为中国软件测试做贡献。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "注册\n登录"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "最新帖子"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "做为一个 10 几年的测试，目前已经全职开发 2 年。随便唠唠~"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Fun_Fox"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "作为一个测试，我做了个统一管理面试信息的小程序：Offer 时光机"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "红衣娃娃"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "iPhone Duo 发布后，折叠态 App 测试矩阵应该怎么设计？"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "无缺智测"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "最近火爆出圈的，FDE 到底是个什么岗位？"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "狂师"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "【AI 时代下 - 精准测试新范式】用 AI + Git 自动生成提测变更日志"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Fun_Fox"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "关于下午茶福利适用范围的调整通知： 经与集团于 9 月 4 日确认，自 2026 年 9 月起，劳务派遣人员不享受我司下午茶福利，相关福利由其签约的第三方公司另行安排。因此，后续的下午茶接龙活动劳务派遣同事请不必再参与接龙,感谢各位的配合！@ 所有人"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "逍遥子"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "14"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "查看更多..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "精华帖子"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "面向 AI、面向企业级的远程真机平台"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "codeskyblue"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "12"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "六万字长文：科普 AI 产品测试人员，都在如何测试全品类 AI 产品"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "孙高飞"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "2025，我们这样评测 AI"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "小志"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "12"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "【开源】全新一代 Aomaker 发布！——重塑接口自动化测试的工程范式"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "古一"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "26"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "专栏文章 质量保障系统的落地实践 (八)-AI 赋能测试岗位"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "困学"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "10"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "hmdriver2 发布：开启鸿蒙 NEXT 自动化新时代"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "codematrixer"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "34"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "故障演练体系建设"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "货拉拉质量星火"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "作为测试新人，期望在自动化测试工程师发展，怎么系统的学习语言及实践"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "-Serendipity-"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "34"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "鸿蒙应用怎么测试？这个工具包请收藏！"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TesterHome小助手"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "为什么放弃精准测试平台？"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "simonpatrick"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "53"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "我的 2025 年总结"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "啊木森"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "11"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "火爆全网的 Agent Skills，普通人到底该怎么用？-- 详细教程"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "狂师"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "大模型稳定性测评：从理念到实现的完整技术方案"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "andyguo"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "13"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "关于一些副业的小小见解"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "无敌测试大王"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "66"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "测试技艺 | 在 AI 极速发展下重塑"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "张昊翔"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "30"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Nico，从零开始干掉 Appium，移动端自动化测试框架实现（一）"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "hank.huang"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "39"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "大家好，希望各位前辈给予新人一些职业发展的建议"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "茯苓山楂"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "41"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "基于 AI 大模型的精准测试分享"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "AMEAME"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "37"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "2024 年测试求职手册"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "5t5"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "128"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "一个基于多接口的业务自动化测试框架"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "陆压"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "14"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "查看更多精华帖..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "热门节点"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Appium\n招聘\n问答\nAI测试\n测试基础\n接口测试\n匿名职言\n自动化工具\n新手区\n研发效能\n灌水\nBug 曝光台\n通用技术\n职业经验\n性能测试工具\nSelenium\nPython\n违规处理区\n其他测试框架\nMacaca\n活动沙龙\n测试管理\n持续集成\niOS 测试\n京东质量社区\n移动性能测试\nSTF\n求职\nMTSC\nUiAutomator\n鸿蒙\nWeTest腾讯质量开发平台\nJava\n性能常识\n游戏测试"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "热门城市"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "北京\n上海\n深圳\n杭州\n广州\n成都\n南京\n武汉\n西安\n苏州\n重庆\n长沙市"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "公众号"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "个人号助手"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Hi-CC精准测试质管平台"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Hi-CC 前端覆盖率实时展示"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Hi-CC 精准测试工具"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "最新招聘"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "【杭州】蚂蚁数字科技 - AI 产品质量工程师"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "【北京】乐信圣文 APP测试组长/主测试/AI 测开"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "七日最热 Top10"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "最新 bug"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "最新收录开源测试项目"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "最新加入 （新同学）"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "think-aloud\n\nL-zisheng\n\nJoel\n\nldl\n\nTestwww"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "统计信息"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "社区会员: 100217 人"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "帖子数: 42034 个"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "回帖数: 264406 条"
+    }
+  ]
+}

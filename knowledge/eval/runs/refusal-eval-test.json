@@ -1,0 +1,489 @@
+{
+  "schema": "career-graph-refusal-eval/v1",
+  "generatedAt": "2026-09-17T17:18:10+0800",
+  "set": "knowledge\\evaluations\\questions-test.json",
+  "signal": "max cosine（绝对值，跨查询可比）",
+  "threshold": 0.595,
+  "metrics": {
+    "threshold": 0.595,
+    "rejectionRate": 0.9333,
+    "falseRejectRate": 0.0,
+    "balancedAccuracy": 0.9667,
+    "nRefusal": 15,
+    "nAnswerable": 32
+  },
+  "perQuestion": [
+    {
+      "questionId": "RT01",
+      "answerable": false,
+      "maxCos": 0.374669,
+      "judgedRefusal": true,
+      "correct": true,
+      "referenceChunks": []
+    },
+    {
+      "questionId": "RT02",
+      "answerable": false,
+      "maxCos": 0.509778,
+      "judgedRefusal": true,
+      "correct": true,
+      "referenceChunks": []
+    },
+    {
+      "questionId": "RT03",
+      "answerable": false,
+      "maxCos": 0.385633,
+      "judgedRefusal": true,
+      "correct": true,
+      "referenceChunks": []
+    },
+    {
+      "questionId": "RT04",
+      "answerable": false,
+      "maxCos": 0.433274,
+      "judgedRefusal": true,
+      "correct": true,
+      "referenceChunks": []
+    },
+    {
+      "questionId": "RT05",
+      "answerable": false,
+      "maxCos": 0.409964,
+      "judgedRefusal": true,
+      "correct": true,
+      "referenceChunks": []
+    },
+    {
+      "questionId": "RT06",
+      "answerable": false,
+      "maxCos": 0.493937,
+      "judgedRefusal": true,
+      "correct": true,
+      "referenceChunks": []
+    },
+    {
+      "questionId": "RT07",
+      "answerable": false,
+      "maxCos": 0.509451,
+      "judgedRefusal": true,
+      "correct": true,
+      "referenceChunks": []
+    },
+    {
+      "questionId": "RT08",
+      "answerable": false,
+      "maxCos": 0.415067,
+      "judgedRefusal": true,
+      "correct": true,
+      "referenceChunks": []
+    },
+    {
+      "questionId": "RT09",
+      "answerable": false,
+      "maxCos": 0.450984,
+      "judgedRefusal": true,
+      "correct": true,
+      "referenceChunks": []
+    },
+    {
+      "questionId": "RT10",
+      "answerable": false,
+      "maxCos": 0.37209,
+      "judgedRefusal": true,
+      "correct": true,
+      "referenceChunks": []
+    },
+    {
+      "questionId": "RT11",
+      "answerable": false,
+      "maxCos": 0.512879,
+      "judgedRefusal": true,
+      "correct": true,
+      "referenceChunks": []
+    },
+    {
+      "questionId": "RT12",
+      "answerable": false,
+      "maxCos": 0.570434,
+      "judgedRefusal": true,
+      "correct": true,
+      "referenceChunks": []
+    },
+    {
+      "questionId": "RT13",
+      "answerable": false,
+      "maxCos": 0.518352,
+      "judgedRefusal": true,
+      "correct": true,
+      "referenceChunks": []
+    },
+    {
+      "questionId": "RT14",
+      "answerable": false,
+      "maxCos": 0.443667,
+      "judgedRefusal": true,
+      "correct": true,
+      "referenceChunks": []
+    },
+    {
+      "questionId": "RT15",
+      "answerable": false,
+      "maxCos": 0.595911,
+      "judgedRefusal": false,
+      "correct": false,
+      "referenceChunks": []
+    },
+    {
+      "questionId": "T01",
+      "answerable": true,
+      "maxCos": 0.80107,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S02#s19",
+        "S02#s43~2"
+      ]
+    },
+    {
+      "questionId": "T02",
+      "answerable": true,
+      "maxCos": 0.927133,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S02#s22",
+        "S02#s42~4"
+      ]
+    },
+    {
+      "questionId": "T03",
+      "answerable": true,
+      "maxCos": 0.686588,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S03#s63~2",
+        "S03#s71"
+      ]
+    },
+    {
+      "questionId": "T04",
+      "answerable": true,
+      "maxCos": 0.680761,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S03#s61",
+        "S03#s61~9"
+      ]
+    },
+    {
+      "questionId": "T05",
+      "answerable": true,
+      "maxCos": 0.761241,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S02#s41",
+        "S02#s41~6"
+      ]
+    },
+    {
+      "questionId": "T06",
+      "answerable": true,
+      "maxCos": 0.750372,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S03#s69",
+        "S03#s69~4"
+      ]
+    },
+    {
+      "questionId": "T07",
+      "answerable": true,
+      "maxCos": 0.749156,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S03#s61~2",
+        "S03#s61~6"
+      ]
+    },
+    {
+      "questionId": "T08",
+      "answerable": true,
+      "maxCos": 0.780473,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S03#s61~3",
+        "S03#s61~7"
+      ]
+    },
+    {
+      "questionId": "T09",
+      "answerable": true,
+      "maxCos": 0.783441,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S03#s61~4",
+        "S03#s61~10"
+      ]
+    },
+    {
+      "questionId": "T10",
+      "answerable": true,
+      "maxCos": 0.704094,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S04#s78~3",
+        "S04#s78~7"
+      ]
+    },
+    {
+      "questionId": "T11",
+      "answerable": true,
+      "maxCos": 0.710289,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S04#s78~5",
+        "S04#s78~10"
+      ]
+    },
+    {
+      "questionId": "T12",
+      "answerable": true,
+      "maxCos": 0.74264,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S02#s41~2",
+        "S02#s41~5"
+      ]
+    },
+    {
+      "questionId": "T13",
+      "answerable": true,
+      "maxCos": 0.730524,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S02#s41~3",
+        "S02#s41~7"
+      ]
+    },
+    {
+      "questionId": "T14",
+      "answerable": true,
+      "maxCos": 0.782874,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S13#s223",
+        "S13#s223~4"
+      ]
+    },
+    {
+      "questionId": "T15",
+      "answerable": true,
+      "maxCos": 0.747218,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S13#s225",
+        "S13#s231"
+      ]
+    },
+    {
+      "questionId": "T16",
+      "answerable": true,
+      "maxCos": 0.760234,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S14#s247",
+        "S14#s266"
+      ]
+    },
+    {
+      "questionId": "T17",
+      "answerable": true,
+      "maxCos": 0.847747,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S05#s109",
+        "S05#s109~4"
+      ]
+    },
+    {
+      "questionId": "T18",
+      "answerable": true,
+      "maxCos": 0.822393,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S05#s110",
+        "S05#s110~4"
+      ]
+    },
+    {
+      "questionId": "T19",
+      "answerable": true,
+      "maxCos": 0.760475,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S05#s101~2",
+        "S05#s101~6"
+      ]
+    },
+    {
+      "questionId": "T20",
+      "answerable": true,
+      "maxCos": 0.620165,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S16#s298~2",
+        "S16#s298~5"
+      ]
+    },
+    {
+      "questionId": "T21",
+      "answerable": true,
+      "maxCos": 0.634214,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S16#s298",
+        "S16#s298~4"
+      ]
+    },
+    {
+      "questionId": "T22",
+      "answerable": true,
+      "maxCos": 0.816007,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S07#2.3",
+        "S07#4.1"
+      ]
+    },
+    {
+      "questionId": "T23",
+      "answerable": true,
+      "maxCos": 0.766937,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S07#3.1~2",
+        "S07#s141"
+      ]
+    },
+    {
+      "questionId": "T24",
+      "answerable": true,
+      "maxCos": 0.836108,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S07#3.3",
+        "S07#s142"
+      ]
+    },
+    {
+      "questionId": "T25",
+      "answerable": true,
+      "maxCos": 0.784263,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S06#s115",
+        "S06#3.4.1"
+      ]
+    },
+    {
+      "questionId": "T26",
+      "answerable": true,
+      "maxCos": 0.753897,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S06#3.3.1",
+        "S06#3.4.2"
+      ]
+    },
+    {
+      "questionId": "T27",
+      "answerable": true,
+      "maxCos": 0.767205,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S14#s240",
+        "S14#s259"
+      ]
+    },
+    {
+      "questionId": "T28",
+      "answerable": true,
+      "maxCos": 0.819145,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S14#s237",
+        "S14#s255"
+      ]
+    },
+    {
+      "questionId": "T29",
+      "answerable": true,
+      "maxCos": 0.643491,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S14#s236",
+        "S14#s254"
+      ]
+    },
+    {
+      "questionId": "T30",
+      "answerable": true,
+      "maxCos": 0.76718,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S14#s235",
+        "S14#s253"
+      ]
+    },
+    {
+      "questionId": "T31",
+      "answerable": true,
+      "maxCos": 0.731114,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S02#s18",
+        "S02#s27"
+      ]
+    },
+    {
+      "questionId": "T32",
+      "answerable": true,
+      "maxCos": 0.789043,
+      "judgedRefusal": false,
+      "correct": true,
+      "referenceChunks": [
+        "S02#s21",
+        "S02#s28"
+      ]
+    }
+  ]
+}

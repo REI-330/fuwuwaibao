@@ -1,0 +1,461 @@
+{
+  "schema": "career-graph-pipeline-log/v1",
+  "updatedAt": "2026-09-15T17:02:25.527Z",
+  "steps": [
+    {
+      "step": "01",
+      "title": "来源登记",
+      "command": "node knowledge/pipeline/01-register-sources.mjs",
+      "startedAt": "2026-09-15T09:56:51.001Z",
+      "finishedAt": "2026-09-15T09:56:51.011Z",
+      "durationMs": 10,
+      "inputs": [
+        "knowledge/pipeline/sources.candidates.json"
+      ],
+      "outputs": [
+        "knowledge/sources/sources.json"
+      ],
+      "counts": {
+        "candidates": 22,
+        "registered": 22,
+        "rejected": 0,
+        "duplicates": 0,
+        "missingPublishedAt": 22
+      },
+      "notes": [
+        "候选 22 条，登记 22 条，拒绝 0 条，按 sourceId/url 去重 0 条。",
+        "publishedAt 缺失 22/22 条：公开文档站多无明确定版日期，按设计 §2.1 留 null、不猜。",
+        "sha256 全部为 null：字节哈希必须来自真实抓取，由步骤 02 回填。",
+        "非契约字段 direction / tags / status / byteSize / charset / fetchedAt / notes 仅存在于中间产物，导出时由步骤 11 剥除。"
+      ],
+      "node": "v22.22.2",
+      "runCount": 3
+    },
+    {
+      "step": "02",
+      "title": "抓取与去重",
+      "command": "node knowledge/pipeline/02-fetch-sources.mjs",
+      "startedAt": "2026-09-15T09:56:51.087Z",
+      "finishedAt": "2026-09-15T09:57:22.939Z",
+      "durationMs": 31852,
+      "inputs": [
+        "knowledge/sources/sources.json"
+      ],
+      "outputs": [
+        "knowledge/raw/manifest.json",
+        "knowledge/sources/sourceset.json",
+        "knowledge/sources/sources.json"
+      ],
+      "counts": {
+        "sources": 22,
+        "fetched": 22,
+        "fetchedThin": 0,
+        "duplicateContent": 0,
+        "fetchFailed": 0,
+        "distinctSha256": 22,
+        "metaRefreshFollowed": 0,
+        "unprunedFallback": 1,
+        "totalBytes": 4553319
+      },
+      "notes": [
+        "抓取 22 条：正常 22，正文过薄 0，内容重复 0，失败 0。",
+        "内容去重后不同正文 22 份，合计 4553319 字节。",
+        "其中 0 条命中「200 但只是 meta refresh 跳转页」，已跟随一跳取真实正文。",
+        "其中 1 条剪枝后正文过薄，已改用无剪枝抽取并取更长结果。",
+        "insufficient-text 判定阈值：blocks < 4 或纯文本 < 300 字符。",
+        "无剪枝回退采纳门槛（更严）：blocks ≥ 16 且纯文本 ≥ 900 字符，避免把只剩菜单的门户首页当成正常来源。"
+      ],
+      "node": "v22.22.2",
+      "runCount": 4
+    },
+    {
+      "step": "03",
+      "title": "主题分块",
+      "command": "node knowledge/pipeline/03-chunk-topics.mjs",
+      "startedAt": "2026-09-15T09:57:23.012Z",
+      "finishedAt": "2026-09-15T09:57:23.049Z",
+      "durationMs": 37,
+      "inputs": [
+        "knowledge/sources/sources.json"
+      ],
+      "outputs": [
+        "knowledge/chunks/chunks.jsonl",
+        "knowledge/sources/sources.json"
+      ],
+      "counts": {
+        "sources": 22,
+        "sourcesWithChunks": 22,
+        "chunks": 494,
+        "splitSections": 78,
+        "skippedSections": 43,
+        "droppedTooShort": 20,
+        "charRangeMismatch": 0,
+        "totalChars": 433699,
+        "longestChunk": 1600
+      },
+      "notes": [
+        "从 22 个来源切出 494 个 chunk，合计 433699 字符，最长 1600 字符。",
+        "超长小节按段落边界切开 78 处；丢弃过短片段 20 个（阈值 40 字符）。",
+        "charRange 硬校验（docText.slice(start,end) === chunk.text）：不一致 0 处。",
+        "空小节 43 处（只有标题没有正文），未成块。",
+        "全部来源都有 raw 产物。"
+      ],
+      "node": "v22.22.2",
+      "runCount": 2
+    },
+    {
+      "step": "04",
+      "title": "实体与关系抽取",
+      "command": "node knowledge/pipeline/04-extract-candidates.mjs",
+      "startedAt": "2026-09-15T13:35:50.625Z",
+      "finishedAt": "2026-09-15T13:35:50.640Z",
+      "durationMs": 15,
+      "inputs": [
+        "knowledge/extract/seed.json",
+        "knowledge/chunks/chunks.jsonl",
+        "knowledge/pipeline/taxonomy.json"
+      ],
+      "outputs": [
+        "knowledge/extract/candidates.jsonl"
+      ],
+      "counts": {
+        "nodes": 63,
+        "edges": 226,
+        "evidencedByEdges": 109,
+        "learningUnitEdges": 9,
+        "authoredEdges": 108,
+        "nodesByKind": {
+          "occupation": 4,
+          "domain": 4,
+          "skill": 25,
+          "knowledge": 9,
+          "task": 6,
+          "tool": 8,
+          "trend": 4,
+          "credential": 3
+        },
+        "edgesByType": {
+          "requires": 28,
+          "prerequisite": 24,
+          "belongs_to": 25,
+          "uses": 8,
+          "transitions_to": 3,
+          "emerging_in": 8,
+          "trains": 12,
+          "evidenced_by": 109,
+          "learning_unit": 9
+        },
+        "distinctChunksCited": 54,
+        "prerequisiteCycle": null
+      },
+      "notes": [
+        "从 seed.json 校验出 63 个节点、226 条边（其中 109 条 evidenced_by、9 条 learning_unit 由结构自动生成）。",
+        "每条结论都挂到了具体 chunk：引文逐字符子串校验通过率 100%（不通过会直接构建失败）。",
+        "节点分布：occupation 4，domain 4，skill 25，knowledge 9，task 6，tool 8，trend 4，credential 3。",
+        "边分布：requires 28，prerequisite 24，belongs_to 25，uses 8，transitions_to 3，emerging_in 8，trains 12，evidenced_by 109，learning_unit 9。",
+        "prerequisite 无环。",
+        "annotatedBy 统一标为 llm-draft：人工裁定前都只是草稿，第 06/08 步才会升级为 human / llm-reviewed。"
+      ],
+      "node": "v22.22.2",
+      "runCount": 3
+    },
+    {
+      "step": "05",
+      "title": "术语归一与消歧",
+      "command": "node knowledge/pipeline/05-normalize.mjs",
+      "startedAt": "2026-09-15T13:36:02.806Z",
+      "finishedAt": "2026-09-15T13:36:02.822Z",
+      "durationMs": 16,
+      "inputs": [
+        "knowledge/extract/candidates.jsonl",
+        "knowledge/pipeline/taxonomy.json"
+      ],
+      "outputs": [
+        "knowledge/extract/aliases.json",
+        "knowledge/extract/normalized.jsonl"
+      ],
+      "counts": {
+        "nodes": 63,
+        "edges": 226,
+        "aliasKeys": 161,
+        "ambiguousKeys": 3,
+        "nodesByKind": {
+          "occupation": 4,
+          "skill": 25,
+          "knowledge": 9,
+          "task": 6,
+          "tool": 8,
+          "trend": 4,
+          "credential": 3,
+          "domain": 4
+        },
+        "edgesByType": {
+          "requires": 28,
+          "prerequisite": 24,
+          "belongs_to": 25,
+          "trains": 12,
+          "uses": 8,
+          "learning_unit": 9,
+          "transitions_to": 3,
+          "emerging_in": 8,
+          "evidenced_by": 109
+        }
+      },
+      "notes": [
+        "把 63 个节点、226 条边归一化；别名倒排 161 个 key（158 个唯一、3 个歧义）。",
+        "节点分布：occupation 4，skill 25，knowledge 9，task 6，tool 8，trend 4，credential 3，domain 4。",
+        "边分布：belongs_to 25，emerging_in 8，evidenced_by 109，learning_unit 9，prerequisite 24，requires 28，trains 12，transitions_to 3，uses 8。",
+        "歧义 key：堆内存属性与dma缓冲(cross-kind:knowledge:AI001:stage3/skill:SK104)，pytest(cross-kind:skill:SK130/tool:pytest)，selenium(cross-kind:skill:SK132/tool:selenium) —— 已写进 06 的待裁定清单。",
+        "不发明 weight：设计文档 §3.2 把它列在边结构里，§10 L371 明确「缺失时不要用线宽表示重要度」，所以抽取层没给就保持缺席。",
+        "节点与边的 annotatedBy 统一为 llm-draft，等第 06 步裁定升级。"
+      ],
+      "node": "v22.22.2",
+      "runCount": 6
+    },
+    {
+      "step": "06",
+      "title": "人工裁定",
+      "command": "node knowledge/pipeline/06-adjudicate.mjs",
+      "startedAt": "2026-09-15T13:36:02.893Z",
+      "finishedAt": "2026-09-15T13:36:02.912Z",
+      "durationMs": 19,
+      "inputs": [
+        "knowledge/extract/normalized.jsonl",
+        "knowledge/extract/aliases.json",
+        "knowledge/review/adjudication.json"
+      ],
+      "outputs": [
+        "knowledge/extract/accepted.jsonl",
+        "knowledge/review/review-queue.md"
+      ],
+      "counts": {
+        "nodes": 63,
+        "edges": 226,
+        "reviewedNodes": 41,
+        "reviewedEdges": 74,
+        "reviewedRows": 115,
+        "rejectedRows": 0,
+        "cascadedEdges": 0,
+        "aliasKeysResolved": 3,
+        "overrides": 0,
+        "nodesByKind": {
+          "occupation": 4,
+          "skill": 25,
+          "knowledge": 9,
+          "task": 6,
+          "tool": 8,
+          "trend": 4,
+          "credential": 3,
+          "domain": 4
+        },
+        "edgesByType": {
+          "requires": 28,
+          "prerequisite": 24,
+          "belongs_to": 25,
+          "trains": 12,
+          "uses": 8,
+          "learning_unit": 9,
+          "transitions_to": 3,
+          "emerging_in": 8,
+          "evidenced_by": 109
+        }
+      },
+      "notes": [
+        "human 于 2026-09-15 完成人工裁定：全审 accept，抽审 accept（22/22）。",
+        "annotatedBy 分布：llm-draft 174，llm-reviewed 115 —— 其中 115 行由 llm-draft 升为 llm-reviewed（06 是唯一通道，设计 §6 L251）。",
+        "歧义 key 裁定：堆内存属性与dma缓冲→keep-separate，pytest→tool:pytest，selenium→tool:selenium。",
+        "节点分布：occupation 4，skill 25，knowledge 9，task 6，tool 8，trend 4，credential 3，domain 4。",
+        "边分布：belongs_to 25，emerging_in 8，evidenced_by 109，learning_unit 9，prerequisite 24，requires 28，trains 12，transitions_to 3，uses 8。"
+      ],
+      "node": "v22.22.2",
+      "runCount": 7
+    },
+    {
+      "step": "07",
+      "title": "编译 Wiki 草稿",
+      "command": "node knowledge/pipeline/07-compile-wiki.mjs",
+      "startedAt": "2026-09-15T13:36:02.983Z",
+      "finishedAt": "2026-09-15T13:36:03.032Z",
+      "durationMs": 49,
+      "inputs": [
+        "knowledge/extract/accepted.jsonl",
+        "knowledge/chunks/chunks.jsonl",
+        "knowledge/sources/sources.json"
+      ],
+      "outputs": [
+        "knowledge/wiki",
+        "knowledge/wiki/index.json"
+      ],
+      "counts": {
+        "pages": 38,
+        "internalLinks": 178,
+        "edgeRefs": 181,
+        "byKind": {
+          "occupation": 4,
+          "skill": 25,
+          "knowledge": 9
+        }
+      },
+      "notes": [
+        "编页范围 occupation / skill / knowledge，共 38 页（occupation 4，skill 25，knowledge 9），落在 scaleTargets.wikiPages [30,40] 内。",
+        "正文内链 178 条，全部由已有边推出；反向校验在第 09 步。",
+        "「常见误区」等需要 L0 原文而语料没有的章节留空并注明原因，不生成无依据结论（§4.3）。",
+        "wiki/ 下没有残留页。"
+      ],
+      "node": "v22.22.2",
+      "runCount": 5
+    },
+    {
+      "step": "08",
+      "title": "人工审核 Wiki",
+      "command": "node knowledge/pipeline/08-review-wiki.mjs",
+      "startedAt": "2026-09-15T13:36:03.104Z",
+      "finishedAt": "2026-09-15T13:36:03.146Z",
+      "durationMs": 42,
+      "inputs": [
+        "knowledge/wiki/index.json",
+        "knowledge/review/wiki-review.json"
+      ],
+      "outputs": [
+        "knowledge/wiki",
+        "knowledge/wiki/index.json"
+      ],
+      "counts": {
+        "pages": 38,
+        "reviewed": 29,
+        "draft": 9,
+        "rejected": 0,
+        "spotChecked": 6,
+        "byTier": {
+          "full": 29,
+          "spot": 9
+        }
+      },
+      "notes": [
+        "human 于 2026-09-15 完成 Wiki 审核：全审 accept，抽审 accept（6/6）。",
+        "review 分布：reviewed 29，llm-draft 9；分级：full 29，spot 9。",
+        "驳回 0 页（驳回理由已写进页面正文）。",
+        "已审核覆盖率 76.3%，其余保持 llm-draft 并按 §5 检索降权。"
+      ],
+      "node": "v22.22.2",
+      "runCount": 4
+    },
+    {
+      "step": "09",
+      "title": "完整性校验",
+      "command": "node knowledge/pipeline/09-integrity-check.mjs",
+      "startedAt": "2026-09-15T17:02:24.849Z",
+      "finishedAt": "2026-09-15T17:02:24.875Z",
+      "durationMs": 26,
+      "inputs": [
+        "knowledge/extract/accepted.jsonl",
+        "knowledge/chunks/chunks.jsonl",
+        "knowledge/wiki/index.json",
+        "knowledge/pipeline/taxonomy.json"
+      ],
+      "outputs": [
+        "knowledge/evidence/integrity-report.json"
+      ],
+      "counts": {
+        "nodes": 63,
+        "edges": 226,
+        "checks": 13,
+        "hardFailed": 0,
+        "pending": 0,
+        "warned": 0
+      },
+      "notes": [
+        "硬约束全部通过（12 项）。",
+        "无 pending 项。",
+        "无非阻断提醒。",
+        "标注分布：llm-reviewed 115，llm-draft 174"
+      ],
+      "node": "v22.22.2",
+      "runCount": 17
+    },
+    {
+      "step": "10",
+      "title": "布局与索引",
+      "command": "node knowledge/pipeline/10-layout-index.mjs",
+      "startedAt": "2026-09-15T16:16:11.124Z",
+      "finishedAt": "2026-09-15T16:16:11.344Z",
+      "durationMs": 220,
+      "inputs": [
+        "knowledge/extract/accepted.jsonl",
+        "knowledge/chunks/chunks.jsonl",
+        "knowledge/pipeline/taxonomy.json",
+        "knowledge/extract/aliases.json",
+        "knowledge/review/adjudication.json"
+      ],
+      "outputs": [
+        "knowledge/graph/graph.json",
+        "knowledge/graph/search-index.json"
+      ],
+      "counts": {
+        "nodes": 63,
+        "edges": 226,
+        "bands": 8,
+        "rows": 15,
+        "requires": 28,
+        "requiresWithWeight": 28,
+        "nodeDocs": 63,
+        "chunkDocs": 494,
+        "aliasKeys": 161
+      },
+      "notes": [
+        "确定性布局：8 条色带 / 15 行，行距 54px，x ∈ [105, 945]，y ∈ [29, 785]，全部落在 1050×820 内；无随机数、与运行时间无关。",
+        "weight 按 WEIGHT_RULE 只写 requires：28/28 条 = importance（同一份数字）。",
+        "检索索引：节点 BM25（449 个词） + chunk BM25（494 篇） + 别名倒排 161 条。",
+        "本步不改 annotatedBy：llm-draft → llm-reviewed 的唯一通道仍是第 06 步（设计文档 L251）。"
+      ],
+      "node": "v22.22.2",
+      "runCount": 8
+    },
+    {
+      "step": "11",
+      "title": "版本化导出与效果评测",
+      "command": "node knowledge/pipeline/11-export-eval.mjs",
+      "startedAt": "2026-09-15T17:02:24.971Z",
+      "finishedAt": "2026-09-15T17:02:25.527Z",
+      "durationMs": 556,
+      "inputs": [
+        "knowledge/graph/graph.json",
+        "knowledge/chunks/chunks.jsonl",
+        "knowledge/sources/sources.json",
+        "knowledge/wiki/index.json",
+        "knowledge/pipeline/taxonomy.json",
+        "knowledge/review/adjudication.json"
+      ],
+      "outputs": [
+        "knowledge/exports/career-graph.json",
+        "knowledge/evaluations/questions.json",
+        "knowledge/evaluations/results.json",
+        "knowledge/evaluations/report.md"
+      ],
+      "counts": {
+        "sources": 22,
+        "chunks": 494,
+        "nodes": 63,
+        "edges": 226,
+        "renderableEdges": 117,
+        "wikiPages": 38,
+        "evaluationQuestions": 24,
+        "answerable": 18,
+        "category_occupation-requirement": 6,
+        "category_skill-gap-prerequisite": 6,
+        "category_scenario-advice": 6,
+        "category_out-of-scope": 6
+      },
+      "notes": [
+        "导出 knowledge/exports/career-graph.json：status=pipeline-export（≠ contract-sample），顶层 7 键与 sample 同形；节点/边/来源/chunk 全部只保留契约字段。",
+        "引用完整性：节点/边/wiki 页共 327 条记录的 chunk 引用全部能在同一份 chunks[] 里查到，悬空 0 处。",
+        "weight 按 WEIGHT_RULE 只出现在 requires 上；weight 的值来自第 10 步，未在本步重算或改写。",
+        "本步不碰 annotatedBy：human 0 / llm-reviewed 115 / llm-draft 174，llm-draft → llm-reviewed 的唯一通道仍是第 06 步（L251）。",
+        "评测 24 题（occupation-requirement 6，skill-gap-prerequisite 6，scenario-advice 6，out-of-scope 6），消融 5 档：BM25 only 命中 2/18；+ 图遍历（一跳邻居） 命中 6/18；+ wiki 页（reviewed） 命中 6/18；+ wiki 页（含 llm-draft 降权） 命中 6/18；全量 命中 6/18。",
+        "评测只报检索中间态（Top-3 + 分值 + 耗时），不调模型；「引用支持度」需人工判定，报告已明确标注为未做（§7 L262 / L276）。"
+      ],
+      "node": "v22.22.2",
+      "runCount": 29
+    }
+  ]
+}

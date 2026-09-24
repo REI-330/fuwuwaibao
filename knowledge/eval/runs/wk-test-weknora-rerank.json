@@ -1,0 +1,371 @@
+{
+  "schema": "career-graph-weknora-rerank/v1",
+  "generatedAt": "2026-09-17T15:13:45+0800",
+  "source": "knowledge\\eval\\runs\\wk-test-weknora-topk.json",
+  "pipeline": "WeKnora hybrid-search → 对齐到本地 chunkId → 同一套 LLM 重排 Top-3",
+  "candidates": 10,
+  "metrics": {
+    "main": {
+      "hitRate": "17/21",
+      "hitRateValue": 0.8095,
+      "precisionAt3": 0.3492,
+      "recallAt3": 0.5238
+    }
+  },
+  "perQuestion": [
+    {
+      "questionId": "T01",
+      "question": "在 ESP32 上用 SPI 发送 uint16_t 类型的数据时，字节的发送顺序是怎样的？如果需要对发送或接收的数据做格式转换，应该用哪些宏？",
+      "referenceChunks": [
+        "S02#s19",
+        "S02#s43~2"
+      ],
+      "reranked": [
+        "S02#s19",
+        "S02#s37",
+        "S02#s18"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S02#s19"
+      ]
+    },
+    {
+      "questionId": "T02",
+      "question": "ESP32 上使用 GPIO 交换矩阵走 SPI 信号和直接使用 IO_MUX 专用管脚相比，在时钟频率上有什么限制？SPI2 的 MISO 专用管脚是哪个 GPIO？",
+      "referenceChunks": [
+        "S02#s22",
+        "S02#s42~4"
+      ],
+      "reranked": [
+        "S02#s22",
+        "S02#s27",
+        "S04#s73"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S02#s22"
+      ]
+    },
+    {
+      "questionId": "T03",
+      "question": "在 ESP-IDF 堆内存 API 中，遍历堆块时的回调函数如何通过返回值来控制遍历是否继续？",
+      "referenceChunks": [
+        "S03#s63~2",
+        "S03#s71"
+      ],
+      "reranked": [
+        "S03#s71",
+        "S03#s61~10",
+        "S03#s64"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S03#s71"
+      ]
+    },
+    {
+      "questionId": "T04",
+      "question": "在 ESP-IDF 中，如果想知道某个已分配指针实际占用了多少字节，应该调用哪个函数？使用时需要注意什么？",
+      "referenceChunks": [
+        "S03#s61",
+        "S03#s61~9"
+      ],
+      "reranked": [
+        "S03#s47",
+        "S03#32",
+        "S03#s46"
+      ],
+      "hitRerank": false,
+      "hitsRerank": []
+    },
+    {
+      "questionId": "T05",
+      "question": "使用 SPI Master 在 ESP32 上通过 GPIO matrix 连接从设备时，最高支持多少 MHz 的通信频率？如果频率不够用该怎么办？",
+      "referenceChunks": [
+        "S02#s41",
+        "S02#s41~6"
+      ],
+      "reranked": [
+        "S02#s22",
+        "S02#s27",
+        "S02#s27~2"
+      ],
+      "hitRerank": false,
+      "hitsRerank": []
+    },
+    {
+      "questionId": "T06",
+      "question": "在多堆 API 中，如果需要释放一块通过对齐分配接口申请的内存，推荐使用哪个函数？另外如何查询某个堆的历史最低剩余空闲空间？",
+      "referenceChunks": [
+        "S03#s69",
+        "S03#s69~4"
+      ],
+      "reranked": [
+        "S03#s69",
+        "S03#s69~4",
+        "S03#s69~3"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S03#s69",
+        "S03#s69~4"
+      ]
+    },
+    {
+      "questionId": "T07",
+      "question": "在 ESP-IDF 里要申请一块带对齐要求、并且指定内存能力的内存，对齐参数有什么硬性约束？另外，如果想检查所有堆有没有被写坏、并且希望把具体出错信息打出来，该调哪个接口、返回值怎么读？",
+      "referenceChunks": [
+        "S03#s61~2",
+        "S03#s61~6"
+      ],
+      "reranked": [
+        "S03#s61~6",
+        "S03#s61~5",
+        "S03#s66~3"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S03#s61~6"
+      ]
+    },
+    {
+      "questionId": "T08",
+      "question": "用 heap_caps_calloc 拿到的内存初值是什么？它和标准库 calloc 在 IDF 里是什么对应关系？还有，如果已经知道堆损坏发生在某个地址附近、想用开销更小的方式查，应该用哪个接口，什么情况下这种查法会不管用？",
+      "referenceChunks": [
+        "S03#s61~3",
+        "S03#s61~7"
+      ],
+      "reranked": [
+        "S03#s61~3",
+        "S03#s46",
+        "S03#s61"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S03#s61~3"
+      ]
+    },
+    {
+      "questionId": "T09",
+      "question": "heap_caps_get_minimum_free_size 返回的数值，和「这块内存历史上最少剩多少」是不是一回事？为什么？另外，如果我想遍历某个能力集合下的所有堆、并在每个块上做点事，用哪个接口、回调要带哪些参数？",
+      "referenceChunks": [
+        "S03#s61~10",
+        "S03#s61~4"
+      ],
+      "reranked": [
+        "S03#s61~4",
+        "S03#s69~4",
+        "S03#s61~5"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S03#s61~4"
+      ]
+    },
+    {
+      "questionId": "T10",
+      "question": "在 ESP32 上给某个 IO 配内部上拉或下拉时要注意哪些坑：重复调用会怎样、有没有哪些引脚根本没有内部上下拉电阻？另外 gpio_hold 是做什么用的，开启后引脚还受不受后续配置改动影响？",
+      "referenceChunks": [
+        "S04#s78~3",
+        "S04#s78~7"
+      ],
+      "reranked": [
+        "S04#s78~10",
+        "S04#s78~3",
+        "S04#s78~9"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S04#s78~3"
+      ]
+    },
+    {
+      "questionId": "T11",
+      "question": "要把一个 IO 配成开漏输出，应该用哪个接口？如果还想单独设置它在睡眠期间的上拉下拉，用哪个函数？这个函数和普通模式下的上下拉配置在参数与返回值风格上有什么一致之处？",
+      "referenceChunks": [
+        "S04#s78~10",
+        "S04#s78~5"
+      ],
+      "reranked": [
+        "S04#s74",
+        "S04#s78~10",
+        "S04#s78~3"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S04#s78~10"
+      ]
+    },
+    {
+      "questionId": "T12",
+      "question": "SPI 主机驱动里「排队交给中断去执行」和「轮询发送」这两类事务，在接口用法和并发限制上分别有什么讲究？各自有没有明确的使用禁忌？",
+      "referenceChunks": [
+        "S02#s41~2",
+        "S02#s41~5"
+      ],
+      "reranked": [
+        "S02#s11",
+        "S02#s12",
+        "S02#s20"
+      ],
+      "hitRerank": false,
+      "hitsRerank": []
+    },
+    {
+      "questionId": "T13",
+      "question": "从 SPI 事务结果接口取回结果时，对事务描述符的使用有什么约束、为什么？另外 SPI 主机频率上限意味着什么：超过上限之后会出现什么现象？",
+      "referenceChunks": [
+        "S02#s41~3",
+        "S02#s41~7"
+      ],
+      "reranked": [
+        "S02#s41~3",
+        "S02#s27",
+        "S02#s24"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S02#s41~3"
+      ]
+    },
+    {
+      "questionId": "T14",
+      "question": "pytest 里把 fixture 参数化之后，依赖它的测试会怎么执行？如果我不想用自动生成的用例 ID、而是自己指定名字，有哪几种写法、返回值需要注意什么？",
+      "referenceChunks": [
+        "S13#s223",
+        "S13#s223~4"
+      ],
+      "reranked": [
+        "S14#s267",
+        "S14#s267~3",
+        "S13#s223~4"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S13#s223~4"
+      ]
+    },
+    {
+      "questionId": "T15",
+      "question": "fixture 之间能不能互相引用、这样做的价值是什么？另外，当同一个 fixture 在 conftest 与具体测试文件里都被定义时，哪一层生效、能不能只对个别用例覆盖？",
+      "referenceChunks": [
+        "S13#s225",
+        "S13#s231"
+      ],
+      "reranked": [
+        "S13#s229",
+        "S14#s256",
+        "S13#s205"
+      ],
+      "hitRerank": false,
+      "hitsRerank": []
+    },
+    {
+      "questionId": "T16",
+      "question": "有没有办法不改 fixture 代码、只用命令行选项就改变它的作用范围？如果有，那个 callable 是怎么被调用的？另外，同一个测试里需要多次创建同类数据时，fixture 该怎么写比较合适？",
+      "referenceChunks": [
+        "S14#s247",
+        "S14#s266"
+      ],
+      "reranked": [
+        "S14#s247",
+        "S14#s266",
+        "S14#s267"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S14#s247",
+        "S14#s266"
+      ]
+    },
+    {
+      "questionId": "T17",
+      "question": "用 MindSpore Lite 的 benchmark 工具在 Windows 上做推理测试，运行前要做哪些环境准备、怎么指定要跑的模型？跑完之后输出里的平均误差是什么意思、如果不指定输入数据会怎样？",
+      "referenceChunks": [
+        "S05#s109",
+        "S05#s109~4"
+      ],
+      "reranked": [
+        "S05#s109",
+        "S05#s109~4",
+        "S05#s107"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S05#s109",
+        "S05#s109~4"
+      ]
+    },
+    {
+      "questionId": "T18",
+      "question": "用 MindSpore Lite 的 C++ 接口自己写推理程序时，编译环境有什么要求？代码里取输入张量、填数据、再执行预测大致是怎样的调用序列、失败时怎么判断？",
+      "referenceChunks": [
+        "S05#s110",
+        "S05#s110~4"
+      ],
+      "reranked": [
+        "S05#s101",
+        "S05#s110",
+        "S05#s110~6"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S05#s110"
+      ]
+    },
+    {
+      "questionId": "T19",
+      "question": "在 Linux 上把 MindSpore Lite 集成进自己的工程时，如果要链接静态库应该加什么链接选项？程序跑起来后想直观看看输出对不对，一般怎么处理输出张量？",
+      "referenceChunks": [
+        "S05#s101~2",
+        "S05#s101~6"
+      ],
+      "reranked": [
+        "S05#s101~2",
+        "S05#s101",
+        "S05#s110~6"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S05#s101~2"
+      ]
+    },
+    {
+      "questionId": "T20",
+      "question": "O*NET 收录的软件质量保证分析师与测试员这个职业，在数据库和操作系统这两类软件上分别常用到哪些工具？能不能举出被标为热门技术的例子？",
+      "referenceChunks": [
+        "S16#s298~2",
+        "S16#s298~5"
+      ],
+      "reranked": [
+        "S16#s298~5",
+        "S16#s298~2",
+        "S16#s298~4"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S16#s298~5",
+        "S16#s298~2"
+      ]
+    },
+    {
+      "questionId": "T21",
+      "question": "这个职业在分析与科学计算软件、图形图像软件上分别用到什么？其中哪些被标为热门技术？",
+      "referenceChunks": [
+        "S16#s298",
+        "S16#s298~4"
+      ],
+      "reranked": [
+        "S16#s298",
+        "S16#s298~4",
+        "S17#s327"
+      ],
+      "hitRerank": true,
+      "hitsRerank": [
+        "S16#s298",
+        "S16#s298~4"
+      ]
+    }
+  ]
+}

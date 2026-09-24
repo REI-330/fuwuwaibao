@@ -1,0 +1,2273 @@
+{
+  "schema": "career-graph-raw-blocks/v1",
+  "sourceId": "S09",
+  "url": "https://docs.ultralytics.com/zh/tasks/detect/",
+  "finalUrl": "https://docs.ultralytics.com/zh/tasks/detect",
+  "fetchedAt": "2026-09-15T09:56:51.087Z",
+  "httpStatus": 200,
+  "contentType": "text/html; charset=utf-8",
+  "charset": "utf-8",
+  "byteSize": 431276,
+  "sha256": "9ef7780cbdf01539c9e9bd05a35163cccc6a1a8a9f475c575a33f615c03360a1",
+  "title": "使用 Ultralytics YOLO 进行目标检测",
+  "hops": [
+    {
+      "url": "https://docs.ultralytics.com/zh/tasks/detect/",
+      "finalUrl": "https://docs.ultralytics.com/zh/tasks/detect",
+      "httpStatus": 200,
+      "bytes": 431276,
+      "charset": "utf-8"
+    }
+  ],
+  "flags": [],
+  "extractionPass": "pruned",
+  "prunedBlockCount": 249,
+  "prunedTextLength": 7785,
+  "blockCount": 249,
+  "textLength": 7785,
+  "ranges": [
+    [
+      0,
+      32
+    ],
+    [
+      34,
+      51
+    ],
+    [
+      53,
+      80
+    ],
+    [
+      82,
+      111
+    ],
+    [
+      113,
+      204
+    ],
+    [
+      206,
+      269
+    ],
+    [
+      271,
+      273
+    ],
+    [
+      275,
+      336
+    ],
+    [
+      338,
+      341
+    ],
+    [
+      343,
+      475
+    ],
+    [
+      477,
+      510
+    ],
+    [
+      512,
+      514
+    ],
+    [
+      516,
+      518
+    ],
+    [
+      520,
+      524
+    ],
+    [
+      526,
+      532
+    ],
+    [
+      534,
+      539
+    ],
+    [
+      541,
+      547
+    ],
+    [
+      549,
+      559
+    ],
+    [
+      561,
+      563
+    ],
+    [
+      565,
+      573
+    ],
+    [
+      575,
+      579
+    ],
+    [
+      581,
+      583
+    ],
+    [
+      585,
+      598
+    ],
+    [
+      600,
+      604
+    ],
+    [
+      606,
+      609
+    ],
+    [
+      611,
+      614
+    ],
+    [
+      616,
+      621
+    ],
+    [
+      623,
+      626
+    ],
+    [
+      628,
+      635
+    ],
+    [
+      637,
+      640
+    ],
+    [
+      642,
+      646
+    ],
+    [
+      648,
+      652
+    ],
+    [
+      654,
+      664
+    ],
+    [
+      666,
+      675
+    ],
+    [
+      677,
+      680
+    ],
+    [
+      682,
+      685
+    ],
+    [
+      687,
+      694
+    ],
+    [
+      696,
+      699
+    ],
+    [
+      701,
+      705
+    ],
+    [
+      707,
+      711
+    ],
+    [
+      713,
+      723
+    ],
+    [
+      725,
+      734
+    ],
+    [
+      736,
+      739
+    ],
+    [
+      741,
+      745
+    ],
+    [
+      747,
+      754
+    ],
+    [
+      756,
+      759
+    ],
+    [
+      761,
+      765
+    ],
+    [
+      767,
+      771
+    ],
+    [
+      773,
+      784
+    ],
+    [
+      786,
+      795
+    ],
+    [
+      797,
+      801
+    ],
+    [
+      803,
+      807
+    ],
+    [
+      809,
+      816
+    ],
+    [
+      818,
+      821
+    ],
+    [
+      823,
+      827
+    ],
+    [
+      829,
+      833
+    ],
+    [
+      835,
+      846
+    ],
+    [
+      848,
+      857
+    ],
+    [
+      859,
+      863
+    ],
+    [
+      865,
+      869
+    ],
+    [
+      871,
+      878
+    ],
+    [
+      880,
+      883
+    ],
+    [
+      885,
+      889
+    ],
+    [
+      891,
+      895
+    ],
+    [
+      897,
+      908
+    ],
+    [
+      910,
+      920
+    ],
+    [
+      922,
+      926
+    ],
+    [
+      928,
+      933
+    ],
+    [
+      935,
+      982
+    ],
+    [
+      984,
+      1058
+    ],
+    [
+      1060,
+      1104
+    ],
+    [
+      1106,
+      1173
+    ],
+    [
+      1175,
+      1254
+    ],
+    [
+      1256,
+      1298
+    ],
+    [
+      1300,
+      1303
+    ],
+    [
+      1305,
+      1396
+    ],
+    [
+      1398,
+      1400
+    ],
+    [
+      1402,
+      1755
+    ],
+    [
+      1757,
+      1824
+    ],
+    [
+      1826,
+      1832
+    ],
+    [
+      1834,
+      1975
+    ],
+    [
+      1977,
+      1980
+    ],
+    [
+      1982,
+      2055
+    ],
+    [
+      2057,
+      2059
+    ],
+    [
+      2061,
+      2553
+    ],
+    [
+      2555,
+      2563
+    ],
+    [
+      2565,
+      2590
+    ],
+    [
+      2592,
+      2594
+    ],
+    [
+      2596,
+      3271
+    ],
+    [
+      3273,
+      3298
+    ],
+    [
+      3300,
+      3305
+    ],
+    [
+      3307,
+      3384
+    ],
+    [
+      3386,
+      3388
+    ],
+    [
+      3390,
+      3392
+    ],
+    [
+      3394,
+      3396
+    ],
+    [
+      3398,
+      3400
+    ],
+    [
+      3402,
+      3414
+    ],
+    [
+      3416,
+      3421
+    ],
+    [
+      3423,
+      3426
+    ],
+    [
+      3428,
+      3432
+    ],
+    [
+      3434,
+      3451
+    ],
+    [
+      3453,
+      3466
+    ],
+    [
+      3468,
+      3475
+    ],
+    [
+      3477,
+      3514
+    ],
+    [
+      3516,
+      3533
+    ],
+    [
+      3535,
+      3548
+    ],
+    [
+      3550,
+      3555
+    ],
+    [
+      3557,
+      3566
+    ],
+    [
+      3568,
+      3585
+    ],
+    [
+      3587,
+      3600
+    ],
+    [
+      3602,
+      3606
+    ],
+    [
+      3608,
+      3614
+    ],
+    [
+      3616,
+      3632
+    ],
+    [
+      3634,
+      3647
+    ],
+    [
+      3649,
+      3653
+    ],
+    [
+      3655,
+      3675
+    ],
+    [
+      3677,
+      3717
+    ],
+    [
+      3719,
+      3722
+    ],
+    [
+      3724,
+      3761
+    ],
+    [
+      3763,
+      3765
+    ],
+    [
+      3767,
+      3973
+    ],
+    [
+      3975,
+      4132
+    ],
+    [
+      4134,
+      4136
+    ],
+    [
+      4138,
+      4147
+    ],
+    [
+      4149,
+      4151
+    ],
+    [
+      4153,
+      4156
+    ],
+    [
+      4158,
+      4160
+    ],
+    [
+      4162,
+      4169
+    ],
+    [
+      4171,
+      4181
+    ],
+    [
+      4183,
+      4194
+    ],
+    [
+      4196,
+      4207
+    ],
+    [
+      4209,
+      4228
+    ],
+    [
+      4230,
+      4269
+    ],
+    [
+      4271,
+      4275
+    ],
+    [
+      4277,
+      4281
+    ],
+    [
+      4283,
+      4295
+    ],
+    [
+      4297,
+      4365
+    ],
+    [
+      4367,
+      4375
+    ],
+    [
+      4377,
+      4385
+    ],
+    [
+      4387,
+      4410
+    ],
+    [
+      4412,
+      4465
+    ],
+    [
+      4467,
+      4475
+    ],
+    [
+      4477,
+      4483
+    ],
+    [
+      4485,
+      4499
+    ],
+    [
+      4501,
+      4579
+    ],
+    [
+      4581,
+      4587
+    ],
+    [
+      4589,
+      4595
+    ],
+    [
+      4597,
+      4614
+    ],
+    [
+      4616,
+      4655
+    ],
+    [
+      4657,
+      4670
+    ],
+    [
+      4672,
+      4683
+    ],
+    [
+      4685,
+      4705
+    ],
+    [
+      4707,
+      4764
+    ],
+    [
+      4766,
+      4777
+    ],
+    [
+      4779,
+      4781
+    ],
+    [
+      4783,
+      4793
+    ],
+    [
+      4795,
+      4819
+    ],
+    [
+      4821,
+      4832
+    ],
+    [
+      4834,
+      4841
+    ],
+    [
+      4843,
+      4865
+    ],
+    [
+      4867,
+      4908
+    ],
+    [
+      4910,
+      4922
+    ],
+    [
+      4924,
+      4930
+    ],
+    [
+      4932,
+      4953
+    ],
+    [
+      4955,
+      4973
+    ],
+    [
+      4975,
+      4978
+    ],
+    [
+      4980,
+      4983
+    ],
+    [
+      4985,
+      4996
+    ],
+    [
+      4998,
+      5052
+    ],
+    [
+      5054,
+      5058
+    ],
+    [
+      5060,
+      5064
+    ],
+    [
+      5066,
+      5085
+    ],
+    [
+      5087,
+      5114
+    ],
+    [
+      5116,
+      5122
+    ],
+    [
+      5124,
+      5127
+    ],
+    [
+      5129,
+      5147
+    ],
+    [
+      5149,
+      5188
+    ],
+    [
+      5190,
+      5194
+    ],
+    [
+      5196,
+      5200
+    ],
+    [
+      5202,
+      5221
+    ],
+    [
+      5223,
+      5284
+    ],
+    [
+      5286,
+      5296
+    ],
+    [
+      5298,
+      5308
+    ],
+    [
+      5310,
+      5335
+    ],
+    [
+      5337,
+      5355
+    ],
+    [
+      5357,
+      5364
+    ],
+    [
+      5366,
+      5373
+    ],
+    [
+      5375,
+      5397
+    ],
+    [
+      5399,
+      5440
+    ],
+    [
+      5442,
+      5447
+    ],
+    [
+      5449,
+      5454
+    ],
+    [
+      5456,
+      5476
+    ],
+    [
+      5478,
+      5528
+    ],
+    [
+      5530,
+      5542
+    ],
+    [
+      5544,
+      5547
+    ],
+    [
+      5549,
+      5565
+    ],
+    [
+      5567,
+      5628
+    ],
+    [
+      5630,
+      5636
+    ],
+    [
+      5638,
+      5644
+    ],
+    [
+      5646,
+      5660
+    ],
+    [
+      5662,
+      5703
+    ],
+    [
+      5705,
+      5710
+    ],
+    [
+      5712,
+      5717
+    ],
+    [
+      5719,
+      5739
+    ],
+    [
+      5741,
+      5792
+    ],
+    [
+      5794,
+      5807
+    ],
+    [
+      5809,
+      5815
+    ],
+    [
+      5817,
+      5838
+    ],
+    [
+      5840,
+      5884
+    ],
+    [
+      5886,
+      5899
+    ],
+    [
+      5901,
+      5907
+    ],
+    [
+      5909,
+      5924
+    ],
+    [
+      5926,
+      5946
+    ],
+    [
+      5948,
+      6059
+    ],
+    [
+      6061,
+      6083
+    ],
+    [
+      6085,
+      6090
+    ],
+    [
+      6092,
+      6169
+    ],
+    [
+      6171,
+      6200
+    ],
+    [
+      6202,
+      6252
+    ],
+    [
+      6254,
+      6304
+    ],
+    [
+      6306,
+      6365
+    ],
+    [
+      6367,
+      6369
+    ],
+    [
+      6371,
+      6561
+    ],
+    [
+      6563,
+      6594
+    ],
+    [
+      6596,
+      6727
+    ],
+    [
+      6729,
+      6736
+    ],
+    [
+      6738,
+      6745
+    ],
+    [
+      6747,
+      6754
+    ],
+    [
+      6756,
+      6763
+    ],
+    [
+      6765,
+      6772
+    ],
+    [
+      6774,
+      6800
+    ],
+    [
+      6802,
+      6904
+    ],
+    [
+      6906,
+      6908
+    ],
+    [
+      6910,
+      7066
+    ],
+    [
+      7068,
+      7088
+    ],
+    [
+      7090,
+      7165
+    ],
+    [
+      7167,
+      7169
+    ],
+    [
+      7171,
+      7307
+    ],
+    [
+      7309,
+      7338
+    ],
+    [
+      7340,
+      7401
+    ],
+    [
+      7403,
+      7450
+    ],
+    [
+      7452,
+      7483
+    ],
+    [
+      7485,
+      7514
+    ],
+    [
+      7516,
+      7560
+    ],
+    [
+      7562,
+      7598
+    ],
+    [
+      7600,
+      7603
+    ],
+    [
+      7605,
+      7756
+    ],
+    [
+      7758,
+      7781
+    ],
+    [
+      7783,
+      7785
+    ]
+  ],
+  "blocks": [
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Ultralytics YOLO27： 即将推出。加入候补名单。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "GitHub repository"
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "text": "使用 Ultralytics YOLO 进行目标检测#"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "目标检测是一项用于识别图像或视频流中对象位置和类别的任务。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "目标检测器的输出是一组包围图像中对象的边界框，以及每个框对应的类别标签和置信度分数。当你需要识别场景中感兴趣的对象，但不需要知道对象的确切位置或精确形状时，目标检测是一个很好的选择。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Watch: Object Detection with Pretrained Ultralytics YOLO Model."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "提示"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "YOLO26 Detect 模型是默认的 YOLO26 模型，即 yolo26n.pt，并且已在 COCO 上完成预训练。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "模型#"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "这里展示了 YOLO26 预训练 Detect 模型。Detect、Segment 和 Pose 模型在 COCO 数据集上进行预训练，Semantic 模型在 Cityscapes 上进行预训练，Classify 模型则在 ImageNet 数据集上进行预训练。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "模型首次使用时会自动从最新的 Ultralytics 发行版下载。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "模型"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "尺寸"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "（像素）"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "mAPval"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "50-95"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "mAPval"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "50-95(e2e)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "速度"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "CPU ONNX"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "（毫秒）"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "速度"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "T4 TensorRT10"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "（毫秒）"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数量"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "（M）"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "FLOPs"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "（B）"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "YOLO26n"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "640"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "40.9"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "40.1"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "38.9 ± 0.7"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "1.7 ± 0.0"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "2.4"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "5.5"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "YOLO26s"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "640"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "48.6"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "47.8"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "87.2 ± 0.9"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "2.5 ± 0.0"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "9.5"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "20.9"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "YOLO26m"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "640"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "53.1"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "52.5"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "220.0 ± 1.4"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "4.7 ± 0.1"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "20.4"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "68.4"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "YOLO26l"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "640"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "55.0"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "54.4"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "286.2 ± 2.0"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "6.2 ± 0.2"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "24.8"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "86.8"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "YOLO26x"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "640"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "57.5"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "56.9"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "525.8 ± 4.0"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "11.8 ± 0.2"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "55.7"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "194.4"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "mAPval 数值适用于在 COCO val2017 数据集上使用单模型单尺度进行评估的结果。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "可以通过运行 yolo val detect data=coco.yaml device=0 来复现。添加 nms=False 来复现 e2e 列。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "速度是在使用 Amazon EC2 P4d 实例处理 COCO val 图像时的平均值。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过 yolo val detect data=coco.yaml batch=1 device=0|cpu nms=False 复现"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Params 和 FLOPs 数值适用于在进行卷积与批归一化折叠以及移除未使用的检测分支之后的融合模型。预训练检查点保留完整的训练架构，可能会显示更高的数值。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "查看unreleased YOLO27 preview以获取初步的COCO检测结果。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "训练#"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在图像大小为 640 的情况下，在 COCO8 数据集上训练 YOLO26n，共训练 100 个 epochs。有关所有可用参数的完整列表，请参阅 Configuration 页面。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "示例"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "from ultralytics import YOLO\n\n# Load a model\nmodel = YOLO(\"yolo26n.yaml\") # build a new model from YAML\nmodel = YOLO(\"yolo26n.pt\") # load a pretrained model (recommended for training)\nmodel = YOLO(\"yolo26n.yaml\").load(\"yolo26n.pt\") # build from YAML and transfer weights\n\n# Train the model\nresults = model.train(data=\"coco8.yaml\", epochs=100, imgsz=640)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "请在 Train 页面查看完整的 train 模式详情。检测模型还可以通过 Ultralytics Platform 云训练进行训练。"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "数据集格式#"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "YOLO 检测数据集格式可在数据集指南中找到详细说明。要将现有的 COCO JSON 数据集转换为 YOLO 格式，请使用COCO 转 YOLO 指南中所述的内置 convert_coco 函数。你还可以使用Ultralytics 平台的 AI 辅助标注工具来标注和管理检测数据集。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "验证#"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在 COCO8 数据集上验证训练好的 YOLO26n 模型的准确率。无需提供参数，因为 model 会将训练时的 data 和参数保留为模型属性。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "示例"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "from ultralytics import YOLO\n\n# Load a model\nmodel = YOLO(\"yolo26n.pt\") # load an official model\nmodel = YOLO(\"path/to/best.pt\") # load a custom model\n\n# Validate the model\nmetrics = model.val() # no arguments needed, dataset and settings remembered\nmetrics.box.map # map50-95\nmetrics.box.map50 # map50\nmetrics.box.map75 # map75\nmetrics.box.maps # a list containing mAP50-95 for each category\nmetrics.box.image_metrics # per-image metrics dictionary with precision, recall, F1, TP, FP, and FN"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Predict#"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "使用训练好的 YOLO26n 模型对图像运行预测。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "示例"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "from ultralytics import YOLO\n\n# Load a model\nmodel = YOLO(\"yolo26n.pt\") # load an official model\nmodel = YOLO(\"path/to/best.pt\") # load a custom model\n\n# Predict with the model\nresults = model(\"https://ultralytics.com/images/bus.jpg\") # predict on an image\n\n# Access the results\nfor result in results:\nxywh = result.boxes.xywh # center-x, center-y, width, height\nxywhn = result.boxes.xywhn # normalized\nxyxy = result.boxes.xyxy # top-left-x, top-left-y, bottom-right-x, bottom-right-y\nxyxyn = result.boxes.xyxyn # normalized\nnames = [result.names[cls.item()] for cls in result.boxes.cls.int()] # class name of each box\nconfs = result.boxes.conf # confidence score of each box"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "请在预测页面查看完整的 predict 模式详情。"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "结果输出#"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "目标检测会为每张图像返回一个 Results 对象。主要的预测字段是 result.boxes，其中包含\n每个检测对象的框坐标、类别 ID 和置信度分数。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "属性"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "类型"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "形状"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "描述"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "result.boxes"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Boxes"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(N)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "检测框。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "result.boxes.data"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "torch.float32"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(N,6/7)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "原始 [x1,y1,x2,y2,conf,cls]，以及可选的跟踪 ID。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "result.boxes.xyxy"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "torch.float32"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(N,4)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "xyxy 像素框。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "result.boxes.conf"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "torch.float32"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(N,)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "置信度分数。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "result.boxes.cls"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "torch.float32"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(N,)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "类别 ID；转换为 int 以获取名称。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "有关每项任务中任务专用的 Results 字段，请参阅按任务划分的预测结果部分。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "导出#"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "将 YOLO26n 模型导出为其他格式，例如 ONNX、CoreML 等。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "示例"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "from ultralytics import YOLO\n\n# Load a model\nmodel = YOLO(\"yolo26n.pt\") # load an official model\nmodel = YOLO(\"path/to/best.pt\") # load a custom-trained model\n\n# Export the model\nmodel.export(format=\"onnx\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "下表列出了可用的 YOLO26 导出格式。你可以使用 format 参数导出为任意格式，即使用 format='onnx' 或 format='engine'。你可以直接在导出的模型上进行预测或验证，即使用 yolo predict model=yolo26n.onnx。导出完成后，系统会为你的模型显示使用示例。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "格式"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "format 参数"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "模型"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "元数据"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "PyTorch"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n.pt"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TorchScript"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "torchscript"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n.torchscript"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、quantize、dynamic、nms、batch、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ONNX"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "onnx"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n.onnx"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、quantize、dynamic、simplify、opset、nms、batch、data、fraction、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "OpenVINO"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "openvino"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n_openvino_model/"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、quantize、dynamic、nms、batch、data、fraction、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TensorRT"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "engine"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n.engine"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、quantize、dynamic、simplify、opset、workspace、nms、batch、data、fraction、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "CoreML"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "coreml"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n.mlpackage"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、dynamic、quantize、nms、batch、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TF SavedModel"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "saved_model"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n_saved_model/"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、keras、quantize、opset、nms、batch、data、fraction、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TF GraphDef"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pb"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n.pb"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、opset、batch、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "TF Edge TPU"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "edgetpu"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n_edgetpu.tflite"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、quantize、opset、data、fraction、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "PaddlePaddle"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "paddle"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n_paddle_model/"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、batch、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "MNN"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "mnn"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n.mnn"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、batch、dynamic、quantize、simplify、opset、nms、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "NCNN"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ncnn"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n_ncnn_model/"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、quantize、batch、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "IMX500"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imx"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n_imx_model/"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、quantize、data、fraction、nms、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "RKNN"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "rknn"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n_rknn_model/"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、batch、name、quantize、simplify、opset、data、fraction、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ExecuTorch"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "executorch"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n_executorch_model/"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、batch、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Axelera"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "axelera"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n_axelera_model/"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、batch、quantize、data、fraction、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "DEEPX"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "deepx"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n_deepx_model/"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、quantize、simplify、opset、data、optimize、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Qualcomm QNN"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "qnn"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n_qnn.onnx"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、batch、name、quantize、simplify、opset、data、fraction、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "LiteRT"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "litert"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n.tflite"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、quantize、batch、data、fraction、device"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Hailo"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "hailo"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n_hailo_model/"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、name、quantize、data、fraction、simplify、conf、iou"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Huawei Ascend"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ascend"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n_ascend_model/"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、batch、name、quantize、opset、simplify、nms"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Apple Core AI"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "coreai"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "yolo26n.aimodel"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "imgsz、batch、quantize"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "nms=None 默认对外部 NMS 使用原始输出。设置 nms=False 以选择可用的无 NMS 检测头；不支持的格式将回退到其本机输出路径。上面的 nms 条目标识了可以通过 nms=True 嵌入 NMS 的格式。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "请在导出页面查看完整的 export 详情。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "常见问题#"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "可以。Ultralytics Platform 快速入门介绍了基于浏览器的工作流，用于标注数据集、在云 GPU 上训练检测模型，以及将模型部署到推理端点。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "在自定义数据集上训练 YOLO26 模型包括以下几个步骤："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "准备数据集：确保你的数据集采用 YOLO 格式。有关指导，请参阅我们的 Dataset Guide。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "加载模型：使用 Ultralytics YOLO 库加载预训练模型，或从 YAML 文件创建新模型。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "训练模型：在 Python 中执行 train 方法，或在 CLI 中执行 yolo detect train 命令。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "示例"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "from ultralytics import YOLO\n\n# Load a pretrained model\nmodel = YOLO(\"yolo26n.pt\")\n\n# Train the model on your custom dataset\nmodel.train(data=\"my_custom_dataset.yaml\", epochs=100, imgsz=640)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "有关详细的配置选项，请访问 Configuration 页面。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Ultralytics YOLO26 提供多种预训练模型，用于目标检测、实例分割、语义分割和姿态估计。这些模型在 COCO 数据集上进行预训练，语义分割模型在 Cityscapes 上进行预训练，分类模型则在 ImageNet 上进行预训练。以下是部分可用模型："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "YOLO26n"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "YOLO26s"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "YOLO26m"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "YOLO26l"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "YOLO26x"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "有关详细列表和性能指标，请参阅 Models 部分。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "要验证训练好的 YOLO26 模型的准确率，你可以在 Python 中使用 .val() 方法，或在 CLI 中使用 yolo detect val 命令。这将提供 mAP50-95、mAP50 等指标。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "示例"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "from ultralytics import YOLO\n\n# Load the model\nmodel = YOLO(\"path/to/best.pt\")\n\n# Validate the model\nmetrics = model.val()\nprint(metrics.box.map) # mAP50-95"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "有关更多验证详情，请访问 Val 页面。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Ultralytics YOLO26 支持将模型导出为多种格式，例如 ONNX、TensorRT、CoreML 等，以确保在不同平台和设备上的兼容性。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "示例"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "from ultralytics import YOLO\n\n# Load the model\nmodel = YOLO(\"yolo26n.pt\")\n\n# Export the model to ONNX format\nmodel.export(format=\"onnx\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "请在 Export 页面查看支持格式的完整列表和相关说明。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Ultralytics YOLO26 旨在为目标检测、实例分割、语义分割和姿态估计提供业界领先的性能。以下是一些主要优势："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "预训练模型：使用在 COCO 和 ImageNet 等常用数据集上预训练的模型，加快开发速度。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "高准确率：可实现出色的 mAP 分数，确保可靠的目标检测效果。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "速度：针对实时推理进行了优化，非常适合需要快速处理的应用。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "灵活性：将模型导出为 ONNX 和 TensorRT 等多种格式，以便在多个平台上部署。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "探索我们的 Blog，了解展示 YOLO26 实际应用的用例和成功案例。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "贡献者"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "GLglenn-jocher37RAraimbekovm5BUBurhan-Q4AMambitious-octopus3MImiles-deans-ultralytics1LALaughing-q1PDpderrenger1Y-Y-T-G1MAMatthewNoyce1RIRizwanMunawar1"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "创建时间 2023年11月12日更新时间 昨天"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "评论"
+    }
+  ]
+}

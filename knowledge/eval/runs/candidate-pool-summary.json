@@ -1,0 +1,198 @@
+{
+  "schema": "career-graph-candidate-pool/v1",
+  "generatedAt": "2026-09-17T16:20:01+0800",
+  "rules": {
+    "minChars": 300,
+    "minGap": 2,
+    "lang": "cjk",
+    "cited": "未被 graph.json 的 nodes/edges sourceRefs 引用",
+    "cjk": "只收含中文段"
+  },
+  "totals": {
+    "chunksAll": 494,
+    "citedChunks": 54,
+    "poolUsable": 189,
+    "reservedByCurrentSet": 28,
+    "freeUsable": 165,
+    "maxQuestionsFromFree": 78,
+    "maxQuestionsPlusCurrent14": 92
+  },
+  "perSource": [
+    {
+      "sourceId": "S01",
+      "chunksTotal": 6,
+      "poolUsable": 2,
+      "reservedByCurrentSet": 2,
+      "freeUsable": 0,
+      "maxQuestions": 0
+    },
+    {
+      "sourceId": "S02",
+      "chunksTotal": 54,
+      "poolUsable": 27,
+      "reservedByCurrentSet": 2,
+      "freeUsable": 25,
+      "maxQuestions": 12
+    },
+    {
+      "sourceId": "S03",
+      "chunksTotal": 41,
+      "poolUsable": 22,
+      "reservedByCurrentSet": 2,
+      "freeUsable": 20,
+      "maxQuestions": 10
+    },
+    {
+      "sourceId": "S04",
+      "chunksTotal": 34,
+      "poolUsable": 18,
+      "reservedByCurrentSet": 2,
+      "freeUsable": 16,
+      "maxQuestions": 8
+    },
+    {
+      "sourceId": "S05",
+      "chunksTotal": 51,
+      "poolUsable": 22,
+      "reservedByCurrentSet": 2,
+      "freeUsable": 20,
+      "maxQuestions": 10
+    },
+    {
+      "sourceId": "S06",
+      "chunksTotal": 13,
+      "poolUsable": 8,
+      "reservedByCurrentSet": 2,
+      "freeUsable": 6,
+      "maxQuestions": 3
+    },
+    {
+      "sourceId": "S07",
+      "chunksTotal": 24,
+      "poolUsable": 16,
+      "reservedByCurrentSet": 2,
+      "freeUsable": 14,
+      "maxQuestions": 7
+    },
+    {
+      "sourceId": "S08",
+      "chunksTotal": 10,
+      "poolUsable": 5,
+      "reservedByCurrentSet": 2,
+      "freeUsable": 3,
+      "maxQuestions": 1
+    },
+    {
+      "sourceId": "S09",
+      "chunksTotal": 12,
+      "poolUsable": 5,
+      "reservedByCurrentSet": 2,
+      "freeUsable": 3,
+      "maxQuestions": 1
+    },
+    {
+      "sourceId": "S10",
+      "chunksTotal": 12,
+      "poolUsable": 7,
+      "reservedByCurrentSet": 2,
+      "freeUsable": 5,
+      "maxQuestions": 2
+    },
+    {
+      "sourceId": "S11",
+      "chunksTotal": 4,
+      "poolUsable": 0,
+      "reservedByCurrentSet": 0,
+      "freeUsable": 0,
+      "maxQuestions": 0
+    },
+    {
+      "sourceId": "S12",
+      "chunksTotal": 32,
+      "poolUsable": 1,
+      "reservedByCurrentSet": 0,
+      "freeUsable": 1,
+      "maxQuestions": 0
+    },
+    {
+      "sourceId": "S13",
+      "chunksTotal": 50,
+      "poolUsable": 0,
+      "reservedByCurrentSet": 0,
+      "freeUsable": 0,
+      "maxQuestions": 0
+    },
+    {
+      "sourceId": "S14",
+      "chunksTotal": 55,
+      "poolUsable": 44,
+      "reservedByCurrentSet": 2,
+      "freeUsable": 42,
+      "maxQuestions": 21
+    },
+    {
+      "sourceId": "S15",
+      "chunksTotal": 3,
+      "poolUsable": 1,
+      "reservedByCurrentSet": 0,
+      "freeUsable": 1,
+      "maxQuestions": 0
+    },
+    {
+      "sourceId": "S16",
+      "chunksTotal": 39,
+      "poolUsable": 0,
+      "reservedByCurrentSet": 2,
+      "freeUsable": 0,
+      "maxQuestions": 0
+    },
+    {
+      "sourceId": "S17",
+      "chunksTotal": 35,
+      "poolUsable": 0,
+      "reservedByCurrentSet": 2,
+      "freeUsable": 0,
+      "maxQuestions": 0
+    },
+    {
+      "sourceId": "S18",
+      "chunksTotal": 1,
+      "poolUsable": 0,
+      "reservedByCurrentSet": 0,
+      "freeUsable": 0,
+      "maxQuestions": 0
+    },
+    {
+      "sourceId": "S19",
+      "chunksTotal": 3,
+      "poolUsable": 3,
+      "reservedByCurrentSet": 0,
+      "freeUsable": 3,
+      "maxQuestions": 1
+    },
+    {
+      "sourceId": "S20",
+      "chunksTotal": 4,
+      "poolUsable": 2,
+      "reservedByCurrentSet": 2,
+      "freeUsable": 0,
+      "maxQuestions": 0
+    },
+    {
+      "sourceId": "S21",
+      "chunksTotal": 6,
+      "poolUsable": 5,
+      "reservedByCurrentSet": 0,
+      "freeUsable": 5,
+      "maxQuestions": 2
+    },
+    {
+      "sourceId": "S22",
+      "chunksTotal": 5,
+      "poolUsable": 1,
+      "reservedByCurrentSet": 0,
+      "freeUsable": 1,
+      "maxQuestions": 0
+    }
+  ]
+}

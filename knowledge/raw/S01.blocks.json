@@ -1,0 +1,518 @@
+{
+  "schema": "career-graph-raw-blocks/v1",
+  "sourceId": "S01",
+  "url": "https://docs.aws.amazon.com/zh_cn/freertos/latest/userguide/what-is-freertos.html",
+  "finalUrl": "https://docs.aws.amazon.com/zh_cn/freertos/latest/userguide/what-is-freertos.html",
+  "fetchedAt": "2026-09-15T09:56:51.087Z",
+  "httpStatus": 200,
+  "contentType": "text/html",
+  "charset": "utf-8",
+  "byteSize": 23494,
+  "sha256": "229adcd6fee2c92be8a6758df1ccff83e9e2a2712b804f3d13887b1f6362fe61",
+  "title": "什么是 FreeRTOS？ - FreeRTOS",
+  "hops": [
+    {
+      "url": "https://docs.aws.amazon.com/zh_cn/freertos/latest/userguide/what-is-freertos.html",
+      "finalUrl": "https://docs.aws.amazon.com/zh_cn/freertos/latest/userguide/what-is-freertos.html",
+      "httpStatus": 200,
+      "bytes": 23494,
+      "charset": "utf-8"
+    }
+  ],
+  "flags": [],
+  "extractionPass": "pruned",
+  "prunedBlockCount": 54,
+  "prunedTextLength": 2033,
+  "blockCount": 54,
+  "textLength": 2033,
+  "ranges": [
+    [
+      0,
+      36
+    ],
+    [
+      38,
+      91
+    ],
+    [
+      93,
+      131
+    ],
+    [
+      133,
+      146
+    ],
+    [
+      148,
+      305
+    ],
+    [
+      307,
+      385
+    ],
+    [
+      387,
+      480
+    ],
+    [
+      482,
+      532
+    ],
+    [
+      534,
+      706
+    ],
+    [
+      708,
+      719
+    ],
+    [
+      721,
+      791
+    ],
+    [
+      793,
+      808
+    ],
+    [
+      810,
+      861
+    ],
+    [
+      863,
+      886
+    ],
+    [
+      888,
+      910
+    ],
+    [
+      912,
+      948
+    ],
+    [
+      950,
+      980
+    ],
+    [
+      982,
+      1012
+    ],
+    [
+      1014,
+      1042
+    ],
+    [
+      1044,
+      1067
+    ],
+    [
+      1069,
+      1093
+    ],
+    [
+      1095,
+      1119
+    ],
+    [
+      1121,
+      1147
+    ],
+    [
+      1149,
+      1175
+    ],
+    [
+      1177,
+      1203
+    ],
+    [
+      1205,
+      1231
+    ],
+    [
+      1233,
+      1255
+    ],
+    [
+      1257,
+      1293
+    ],
+    [
+      1295,
+      1310
+    ],
+    [
+      1312,
+      1328
+    ],
+    [
+      1330,
+      1353
+    ],
+    [
+      1355,
+      1376
+    ],
+    [
+      1378,
+      1406
+    ],
+    [
+      1408,
+      1446
+    ],
+    [
+      1448,
+      1470
+    ],
+    [
+      1472,
+      1514
+    ],
+    [
+      1516,
+      1545
+    ],
+    [
+      1547,
+      1572
+    ],
+    [
+      1574,
+      1607
+    ],
+    [
+      1609,
+      1613
+    ],
+    [
+      1615,
+      1627
+    ],
+    [
+      1629,
+      1663
+    ],
+    [
+      1665,
+      1726
+    ],
+    [
+      1728,
+      1764
+    ],
+    [
+      1766,
+      1818
+    ],
+    [
+      1820,
+      1848
+    ],
+    [
+      1850,
+      1899
+    ],
+    [
+      1901,
+      1905
+    ],
+    [
+      1907,
+      1920
+    ],
+    [
+      1922,
+      1934
+    ],
+    [
+      1936,
+      1966
+    ],
+    [
+      1968,
+      1981
+    ],
+    [
+      1983,
+      2009
+    ],
+    [
+      2011,
+      2033
+    ]
+  ],
+  "blocks": [
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View a markdown version of this page"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "注册获取 AWS 账户下载 FreeRTOS 源代码FreeRTOS-qualified 硬件平台其他资源"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "本文属于机器翻译版本。若本译文内容与英语原文存在差异，则一律以英文原文为准。"
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "text": "什么是 FreeRTOS？"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "与世界领先的芯片公司合作开发了 15 年，现在每 170 秒有一次下载，FreeRTOS 是面向微控制器和小型微处理器的市场领先的实时操作系统 (RTOS)。根据 MIT 开源许可免费分发，FreeRTOS 包含一个内核和一组持续增加的库，可广泛应用于各个行业领域。FreeRTOS 的设计非常注重可靠性和易用性。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "FreeRTOS 包含用于连接、安全性和空中下载 (OTA) 更新的库。FreeRTOS 还包括演示应用程序，可在合格的主板上显示 FreeRTOS 功能。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "FreeRTOS 是一个开源项目。您可以下载源代码、贡献更改或改进，或者在网站上报告问题， GitHub 网址为https://github.com/FreeRTOS/FreeRTOS。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "我们根据 MIT 开源许可证发布 FreeRTOS 代码，以便您可以在商业和个人项目中使用这些代码。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "我们也欢迎您对 FreeRTOS 文档（《FreeRTOS 用户指南》、《FreeRTOS 移植指南》和《FreeRTOS 资格认证指南》）提供意见或建议。要查看文档的 markdown 源代码，请参阅https://github.com/awsdocs/aws-freertos-docs。它是在知识共享 (CC BY-ND) 许可下发布的。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "注册获取 AWS 账户"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "要开始使用 AWS，你需要一个 AWS 账户。有关创建的信息 AWS 账户，请参阅《AWS 账户管理 参考指南》 AWS 账户中的入门指南。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "下载 FreeRTOS 源代码"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "从 freertos.org 的下载页面下载最新的 FreeRTOS 和长期支持 (LTS) 程序包。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "FreeRTOS-qualified 硬件平台"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "以下硬件平台符合 FreeRTOS 的条件："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ATECC608A Zero Touch 配置套件适用于 AWS IoT"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Cypress CYW943907AEVAL1F 开发工具包"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Cypress CYW954907AEVAL1F 开发工具包"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "赛普拉斯套件 CY8CKIT-064S0S2-4343W"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Espressif ESP32-DevKitC"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Espressif ESP-WROVER-KIT"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Espressif ESP-WROOM-32SE"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Espressif ESP32-S2-Saola-1"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Infineon XMC4800 IoT 连接工具包"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Marvell MW320 AWS IoT 入门套件"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Marvell MW322 AWS IoT 入门套件"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "MediaTek mt7697hx 开发套件"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Microchip Curiosity PIC32MZEF Bundle"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "北欧 n RF52840-DK"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "NuMaker-IoT-M487"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "NXP LPC54018 IoT Module"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "OPTIGA Trust X 安全解决方案"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Renesas RX65N RSK IoT Module"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "STMicroelectronicsSTM32L4 发现工具包 IoT 节点"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "德州仪器 CC3220SF-LAUNCHXL"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Microsoft Windows 7 或更高版本，至少双核处理器以及有线以太网连接"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Xilinx Avnet MicroZed 工业物联网套件"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "AWS 合作伙伴设备目录中也列出了取得认证的设备。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "有关新设备资格鉴定的信息，请参阅 FreeRTOS 资格认证指南。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "其他资源"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "这些资源可能对您很有用。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "有关其他 FreeRTOS 文档，请参阅 freertos.org。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果 FreeRTOS 工程团队对 FreeRTOS 有疑问，可以在 FreeRTOS 页面上打开一个问题。 GitHub"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "有关 FreeRTOS 的技术问题，请访问 FreeRTOS 社区论坛。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "有关将设备连接至的更多信息 AWS IoT，请参阅《AWS IoT Core 开发者指南》中的设备配置。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "有关技术支持 AWS，请参阅 Supp AWS ort。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "有关 AWS 账单、账户服务、活动、滥用行为或其他问题的问题 AWS，请参阅 “联系我们” 页面。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "文档惯例"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "此页面对您有帮助吗？- 是"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "感谢您对我们工作的肯定！"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果不耽误您的时间，请告诉我们做得好的地方，让我们做得更好。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "此页面对您有帮助吗？- 否"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "感谢您告诉我们本页内容还需要完善。很抱歉让您失望了。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果不耽误您的时间，请告诉我们如何改进文档。"
+    }
+  ]
+}

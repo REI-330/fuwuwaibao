@@ -1,0 +1,285 @@
+{
+  "rules": {
+    "minChars": 300,
+    "minGap": 3,
+    "minCjkRatio": 0.2,
+    "exclude": "questions-dev.json,questions-test.json,questions-v2.json"
+  },
+  "picks": [
+    {
+      "split": "dev",
+      "category": "AI框架与推理",
+      "a": "S05#s97~2",
+      "b": "S05#s109~2",
+      "sourceId": "S05",
+      "gap": 28,
+      "sameSection": false,
+      "cjkRatioA": 0.521,
+      "cjkRatioB": 0.567
+    },
+    {
+      "split": "dev",
+      "category": "AI框架与推理",
+      "a": "S05#s95",
+      "b": "S05#s105",
+      "sourceId": "S05",
+      "gap": 27,
+      "sameSection": false,
+      "cjkRatioA": 0.303,
+      "cjkRatioB": 0.3
+    },
+    {
+      "split": "dev",
+      "category": "AI框架与推理",
+      "a": "S05#s96~2",
+      "b": "S05#s105~2",
+      "sourceId": "S05",
+      "gap": 26,
+      "sameSection": false,
+      "cjkRatioA": 0.423,
+      "cjkRatioB": 0.416
+    },
+    {
+      "split": "dev",
+      "category": "AI框架与推理",
+      "a": "S05#s101~5",
+      "b": "S05#s110~5",
+      "sourceId": "S05",
+      "gap": 24,
+      "sameSection": false,
+      "cjkRatioA": 0.345,
+      "cjkRatioB": 0.319
+    },
+    {
+      "split": "dev",
+      "category": "AI框架与推理",
+      "a": "S05#s104",
+      "b": "S05#s110~6",
+      "sourceId": "S05",
+      "gap": 14,
+      "sameSection": false,
+      "cjkRatioA": 0.271,
+      "cjkRatioB": 0.379
+    },
+    {
+      "split": "dev",
+      "category": "AI框架与推理",
+      "a": "S07#s125",
+      "b": "S07#3.5",
+      "sourceId": "S07",
+      "gap": 14,
+      "sameSection": false,
+      "cjkRatioA": 0.635,
+      "cjkRatioB": 0.228
+    },
+    {
+      "split": "dev",
+      "category": "AI框架与推理",
+      "a": "S07#2.4",
+      "b": "S07#4.2",
+      "sourceId": "S07",
+      "gap": 12,
+      "sameSection": false,
+      "cjkRatioA": 0.265,
+      "cjkRatioB": 0.436
+    },
+    {
+      "split": "dev",
+      "category": "AI框架与推理",
+      "a": "S07#2.5",
+      "b": "S07#4.3",
+      "sourceId": "S07",
+      "gap": 12,
+      "sameSection": false,
+      "cjkRatioA": 0.264,
+      "cjkRatioB": 0.391
+    },
+    {
+      "split": "test",
+      "category": "AI框架与推理",
+      "a": "S07#2.3",
+      "b": "S07#4.1",
+      "sourceId": "S07",
+      "gap": 12,
+      "sameSection": false,
+      "cjkRatioA": 0.272,
+      "cjkRatioB": 0.219
+    },
+    {
+      "split": "test",
+      "category": "AI框架与推理",
+      "a": "S07#3.1~2",
+      "b": "S07#s141",
+      "sourceId": "S07",
+      "gap": 11,
+      "sameSection": false,
+      "cjkRatioA": 0.372,
+      "cjkRatioB": 0.479
+    },
+    {
+      "split": "test",
+      "category": "AI框架与推理",
+      "a": "S07#3.3",
+      "b": "S07#s142",
+      "sourceId": "S07",
+      "gap": 8,
+      "sameSection": false,
+      "cjkRatioA": 0.334,
+      "cjkRatioB": 0.401
+    },
+    {
+      "split": "test",
+      "category": "AI框架与推理",
+      "a": "S06#s115",
+      "b": "S06#3.4.1",
+      "sourceId": "S06",
+      "gap": 6,
+      "sameSection": false,
+      "cjkRatioA": 0.247,
+      "cjkRatioB": 0.502
+    },
+    {
+      "split": "test",
+      "category": "AI框架与推理",
+      "a": "S06#3.3.1",
+      "b": "S06#3.4.2",
+      "sourceId": "S06",
+      "gap": 3,
+      "sameSection": false,
+      "cjkRatioA": 0.249,
+      "cjkRatioB": 0.271
+    },
+    {
+      "split": "dev",
+      "category": "测试自动化",
+      "a": "S14#s244",
+      "b": "S14#s263~2",
+      "sourceId": "S14",
+      "gap": 23,
+      "sameSection": false,
+      "cjkRatioA": 0.334,
+      "cjkRatioB": 0.33
+    },
+    {
+      "split": "dev",
+      "category": "测试自动化",
+      "a": "S14#s243",
+      "b": "S14#s262~2",
+      "sourceId": "S14",
+      "gap": 22,
+      "sameSection": false,
+      "cjkRatioA": 0.318,
+      "cjkRatioB": 0.258
+    },
+    {
+      "split": "dev",
+      "category": "测试自动化",
+      "a": "S14#s241",
+      "b": "S14#s261",
+      "sourceId": "S14",
+      "gap": 22,
+      "sameSection": false,
+      "cjkRatioA": 0.243,
+      "cjkRatioB": 0.295
+    },
+    {
+      "split": "dev",
+      "category": "测试自动化",
+      "a": "S14#s238",
+      "b": "S14#s257",
+      "sourceId": "S14",
+      "gap": 21,
+      "sameSection": false,
+      "cjkRatioA": 0.61,
+      "cjkRatioB": 0.284
+    },
+    {
+      "split": "test",
+      "category": "测试自动化",
+      "a": "S14#s240",
+      "b": "S14#s259",
+      "sourceId": "S14",
+      "gap": 21,
+      "sameSection": false,
+      "cjkRatioA": 0.284,
+      "cjkRatioB": 0.439
+    },
+    {
+      "split": "test",
+      "category": "测试自动化",
+      "a": "S14#s237",
+      "b": "S14#s255",
+      "sourceId": "S14",
+      "gap": 20,
+      "sameSection": false,
+      "cjkRatioA": 0.372,
+      "cjkRatioB": 0.447
+    },
+    {
+      "split": "test",
+      "category": "测试自动化",
+      "a": "S14#s236",
+      "b": "S14#s254",
+      "sourceId": "S14",
+      "gap": 19,
+      "sameSection": false,
+      "cjkRatioA": 0.8,
+      "cjkRatioB": 0.301
+    },
+    {
+      "split": "test",
+      "category": "测试自动化",
+      "a": "S14#s235",
+      "b": "S14#s253",
+      "sourceId": "S14",
+      "gap": 19,
+      "sameSection": false,
+      "cjkRatioA": 0.508,
+      "cjkRatioB": 0.294
+    },
+    {
+      "split": "dev",
+      "category": "嵌入式开发",
+      "a": "S02#s8",
+      "b": "S02#s25",
+      "sourceId": "S02",
+      "gap": 17,
+      "sameSection": false,
+      "cjkRatioA": 0.561,
+      "cjkRatioB": 0.598
+    },
+    {
+      "split": "dev",
+      "category": "嵌入式开发",
+      "a": "S02#s9",
+      "b": "S02#s26",
+      "sourceId": "S02",
+      "gap": 17,
+      "sameSection": false,
+      "cjkRatioA": 0.676,
+      "cjkRatioB": 0.444
+    },
+    {
+      "split": "test",
+      "category": "嵌入式开发",
+      "a": "S02#s18",
+      "b": "S02#s27",
+      "sourceId": "S02",
+      "gap": 9,
+      "sameSection": false,
+      "cjkRatioA": 0.368,
+      "cjkRatioB": 0.572
+    },
+    {
+      "split": "test",
+      "category": "嵌入式开发",
+      "a": "S02#s21",
+      "b": "S02#s28",
+      "sourceId": "S02",
+      "gap": 8,
+      "sameSection": false,
+      "cjkRatioA": 0.524,
+      "cjkRatioB": 0.565
+    }
+  ]
+}

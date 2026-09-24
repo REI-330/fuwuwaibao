@@ -1,0 +1,152 @@
+[
+  {
+    "split": "test",
+    "category": "嵌入式开发",
+    "a": "S03#s61~2",
+    "b": "S03#s61~10"
+  },
+  {
+    "split": "test",
+    "category": "嵌入式开发",
+    "a": "S04#s78~3",
+    "b": "S04#s78~10"
+  },
+  {
+    "split": "test",
+    "category": "嵌入式开发",
+    "a": "S03#s61~3",
+    "b": "S03#s61~8"
+  },
+  {
+    "split": "test",
+    "category": "测试自动化",
+    "a": "S14#s235",
+    "b": "S14#s276"
+  },
+  {
+    "split": "test",
+    "category": "测试自动化",
+    "a": "S14#s236",
+    "b": "S14#s270~2"
+  },
+  {
+    "split": "test",
+    "category": "测试自动化",
+    "a": "S13#s207",
+    "b": "S13#s232"
+  },
+  {
+    "split": "test",
+    "category": "测试自动化",
+    "a": "S14#s237",
+    "b": "S14#s269"
+  },
+  {
+    "split": "test",
+    "category": "测试自动化",
+    "a": "S14#s238",
+    "b": "S14#s268"
+  },
+  {
+    "split": "test",
+    "category": "测试自动化",
+    "a": "S14#s243",
+    "b": "S14#s267~2"
+  },
+  {
+    "split": "test",
+    "category": "测试自动化",
+    "a": "S13#s209~2",
+    "b": "S13#s225~2"
+  },
+  {
+    "split": "test",
+    "category": "AI框架与推理",
+    "a": "S05#s110",
+    "b": "S05#s110~6"
+  },
+  {
+    "split": "test",
+    "category": "AI框架与推理",
+    "a": "S05#s95",
+    "b": "S05#s110~5"
+  },
+  {
+    "split": "test",
+    "category": "AI框架与推理",
+    "a": "S05#s97~2",
+    "b": "S05#s110~4"
+  },
+  {
+    "split": "test",
+    "category": "AI框架与推理",
+    "a": "S05#s101~4",
+    "b": "S05#s109~4"
+  },
+  {
+    "split": "test",
+    "category": "AI框架与推理",
+    "a": "S07#2.3",
+    "b": "S07#s142"
+  },
+  {
+    "split": "test",
+    "category": "职业能力",
+    "a": "S16#s298",
+    "b": "S16#s298~6"
+  },
+  {
+    "split": "test",
+    "category": "职业能力",
+    "a": "S16#s298~2",
+    "b": "S16#s298~5"
+  },
+  {
+    "split": "test",
+    "category": "职业能力",
+    "a": "S16#s292~2",
+    "b": "S16#s305"
+  },
+  {
+    "split": "test",
+    "category": "职业能力",
+    "a": "S16#s292~3",
+    "b": "S16#s304~2"
+  },
+  {
+    "split": "test",
+    "category": "计算机视觉",
+    "a": "S10#s167",
+    "b": "S10#s171"
+  },
+  {
+    "split": "dev",
+    "category": "测试自动化",
+    "a": "S14#s244",
+    "b": "S14#s267"
+  },
+  {
+    "split": "dev",
+    "category": "测试自动化",
+    "a": "S12#s182",
+    "b": "S12#s197"
+  },
+  {
+    "split": "dev",
+    "category": "测试自动化",
+    "a": "S14#s245",
+    "b": "S14#s266"
+  },
+  {
+    "split": "dev",
+    "category": "AI框架与推理",
+    "a": "S05#s101~5",
+    "b": "S05#s109~2"
+  },
+  {
+    "split": "dev",
+    "category": "职业能力",
+    "a": "S17#s321~2",
+    "b": "S17#s334"
+  }
+]

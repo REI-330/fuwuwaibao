@@ -1,0 +1,560 @@
+Ultralytics YOLO27： 即将推出。加入候补名单。
+
+GitHub repository
+
+使用 Ultralytics YOLO 进行目标检测#
+
+目标检测是一项用于识别图像或视频流中对象位置和类别的任务。
+
+目标检测器的输出是一组包围图像中对象的边界框，以及每个框对应的类别标签和置信度分数。当你需要识别场景中感兴趣的对象，但不需要知道对象的确切位置或精确形状时，目标检测是一个很好的选择。
+
+Watch: Object Detection with Pretrained Ultralytics YOLO Model.
+
+提示
+
+YOLO26 Detect 模型是默认的 YOLO26 模型，即 yolo26n.pt，并且已在 COCO 上完成预训练。
+
+模型#
+
+这里展示了 YOLO26 预训练 Detect 模型。Detect、Segment 和 Pose 模型在 COCO 数据集上进行预训练，Semantic 模型在 Cityscapes 上进行预训练，Classify 模型则在 ImageNet 数据集上进行预训练。
+
+模型首次使用时会自动从最新的 Ultralytics 发行版下载。
+
+模型
+
+尺寸
+
+（像素）
+
+mAPval
+
+50-95
+
+mAPval
+
+50-95(e2e)
+
+速度
+
+CPU ONNX
+
+（毫秒）
+
+速度
+
+T4 TensorRT10
+
+（毫秒）
+
+参数量
+
+（M）
+
+FLOPs
+
+（B）
+
+YOLO26n
+
+640
+
+40.9
+
+40.1
+
+38.9 ± 0.7
+
+1.7 ± 0.0
+
+2.4
+
+5.5
+
+YOLO26s
+
+640
+
+48.6
+
+47.8
+
+87.2 ± 0.9
+
+2.5 ± 0.0
+
+9.5
+
+20.9
+
+YOLO26m
+
+640
+
+53.1
+
+52.5
+
+220.0 ± 1.4
+
+4.7 ± 0.1
+
+20.4
+
+68.4
+
+YOLO26l
+
+640
+
+55.0
+
+54.4
+
+286.2 ± 2.0
+
+6.2 ± 0.2
+
+24.8
+
+86.8
+
+YOLO26x
+
+640
+
+57.5
+
+56.9
+
+525.8 ± 4.0
+
+11.8 ± 0.2
+
+55.7
+
+194.4
+
+mAPval 数值适用于在 COCO val2017 数据集上使用单模型单尺度进行评估的结果。
+
+可以通过运行 yolo val detect data=coco.yaml device=0 来复现。添加 nms=False 来复现 e2e 列。
+
+速度是在使用 Amazon EC2 P4d 实例处理 COCO val 图像时的平均值。
+
+通过 yolo val detect data=coco.yaml batch=1 device=0|cpu nms=False 复现
+
+Params 和 FLOPs 数值适用于在进行卷积与批归一化折叠以及移除未使用的检测分支之后的融合模型。预训练检查点保留完整的训练架构，可能会显示更高的数值。
+
+查看unreleased YOLO27 preview以获取初步的COCO检测结果。
+
+训练#
+
+在图像大小为 640 的情况下，在 COCO8 数据集上训练 YOLO26n，共训练 100 个 epochs。有关所有可用参数的完整列表，请参阅 Configuration 页面。
+
+示例
+
+from ultralytics import YOLO
+
+# Load a model
+model = YOLO("yolo26n.yaml") # build a new model from YAML
+model = YOLO("yolo26n.pt") # load a pretrained model (recommended for training)
+model = YOLO("yolo26n.yaml").load("yolo26n.pt") # build from YAML and transfer weights
+
+# Train the model
+results = model.train(data="coco8.yaml", epochs=100, imgsz=640)
+
+请在 Train 页面查看完整的 train 模式详情。检测模型还可以通过 Ultralytics Platform 云训练进行训练。
+
+数据集格式#
+
+YOLO 检测数据集格式可在数据集指南中找到详细说明。要将现有的 COCO JSON 数据集转换为 YOLO 格式，请使用COCO 转 YOLO 指南中所述的内置 convert_coco 函数。你还可以使用Ultralytics 平台的 AI 辅助标注工具来标注和管理检测数据集。
+
+验证#
+
+在 COCO8 数据集上验证训练好的 YOLO26n 模型的准确率。无需提供参数，因为 model 会将训练时的 data 和参数保留为模型属性。
+
+示例
+
+from ultralytics import YOLO
+
+# Load a model
+model = YOLO("yolo26n.pt") # load an official model
+model = YOLO("path/to/best.pt") # load a custom model
+
+# Validate the model
+metrics = model.val() # no arguments needed, dataset and settings remembered
+metrics.box.map # map50-95
+metrics.box.map50 # map50
+metrics.box.map75 # map75
+metrics.box.maps # a list containing mAP50-95 for each category
+metrics.box.image_metrics # per-image metrics dictionary with precision, recall, F1, TP, FP, and FN
+
+Predict#
+
+使用训练好的 YOLO26n 模型对图像运行预测。
+
+示例
+
+from ultralytics import YOLO
+
+# Load a model
+model = YOLO("yolo26n.pt") # load an official model
+model = YOLO("path/to/best.pt") # load a custom model
+
+# Predict with the model
+results = model("https://ultralytics.com/images/bus.jpg") # predict on an image
+
+# Access the results
+for result in results:
+xywh = result.boxes.xywh # center-x, center-y, width, height
+xywhn = result.boxes.xywhn # normalized
+xyxy = result.boxes.xyxy # top-left-x, top-left-y, bottom-right-x, bottom-right-y
+xyxyn = result.boxes.xyxyn # normalized
+names = [result.names[cls.item()] for cls in result.boxes.cls.int()] # class name of each box
+confs = result.boxes.conf # confidence score of each box
+
+请在预测页面查看完整的 predict 模式详情。
+
+结果输出#
+
+目标检测会为每张图像返回一个 Results 对象。主要的预测字段是 result.boxes，其中包含
+每个检测对象的框坐标、类别 ID 和置信度分数。
+
+属性
+
+类型
+
+形状
+
+描述
+
+result.boxes
+
+Boxes
+
+(N)
+
+检测框。
+
+result.boxes.data
+
+torch.float32
+
+(N,6/7)
+
+原始 [x1,y1,x2,y2,conf,cls]，以及可选的跟踪 ID。
+
+result.boxes.xyxy
+
+torch.float32
+
+(N,4)
+
+xyxy 像素框。
+
+result.boxes.conf
+
+torch.float32
+
+(N,)
+
+置信度分数。
+
+result.boxes.cls
+
+torch.float32
+
+(N,)
+
+类别 ID；转换为 int 以获取名称。
+
+有关每项任务中任务专用的 Results 字段，请参阅按任务划分的预测结果部分。
+
+导出#
+
+将 YOLO26n 模型导出为其他格式，例如 ONNX、CoreML 等。
+
+示例
+
+from ultralytics import YOLO
+
+# Load a model
+model = YOLO("yolo26n.pt") # load an official model
+model = YOLO("path/to/best.pt") # load a custom-trained model
+
+# Export the model
+model.export(format="onnx")
+
+下表列出了可用的 YOLO26 导出格式。你可以使用 format 参数导出为任意格式，即使用 format='onnx' 或 format='engine'。你可以直接在导出的模型上进行预测或验证，即使用 yolo predict model=yolo26n.onnx。导出完成后，系统会为你的模型显示使用示例。
+
+格式
+
+format 参数
+
+模型
+
+元数据
+
+参数
+
+PyTorch
+
+yolo26n.pt
+
+TorchScript
+
+torchscript
+
+yolo26n.torchscript
+
+imgsz、quantize、dynamic、nms、batch、device
+
+ONNX
+
+onnx
+
+yolo26n.onnx
+
+imgsz、quantize、dynamic、simplify、opset、nms、batch、data、fraction、device
+
+OpenVINO
+
+openvino
+
+yolo26n_openvino_model/
+
+imgsz、quantize、dynamic、nms、batch、data、fraction、device
+
+TensorRT
+
+engine
+
+yolo26n.engine
+
+imgsz、quantize、dynamic、simplify、opset、workspace、nms、batch、data、fraction、device
+
+CoreML
+
+coreml
+
+yolo26n.mlpackage
+
+imgsz、dynamic、quantize、nms、batch、device
+
+TF SavedModel
+
+saved_model
+
+yolo26n_saved_model/
+
+imgsz、keras、quantize、opset、nms、batch、data、fraction、device
+
+TF GraphDef
+
+pb
+
+yolo26n.pb
+
+imgsz、opset、batch、device
+
+TF Edge TPU
+
+edgetpu
+
+yolo26n_edgetpu.tflite
+
+imgsz、quantize、opset、data、fraction、device
+
+PaddlePaddle
+
+paddle
+
+yolo26n_paddle_model/
+
+imgsz、batch、device
+
+MNN
+
+mnn
+
+yolo26n.mnn
+
+imgsz、batch、dynamic、quantize、simplify、opset、nms、device
+
+NCNN
+
+ncnn
+
+yolo26n_ncnn_model/
+
+imgsz、quantize、batch、device
+
+IMX500
+
+imx
+
+yolo26n_imx_model/
+
+imgsz、quantize、data、fraction、nms、device
+
+RKNN
+
+rknn
+
+yolo26n_rknn_model/
+
+imgsz、batch、name、quantize、simplify、opset、data、fraction、device
+
+ExecuTorch
+
+executorch
+
+yolo26n_executorch_model/
+
+imgsz、batch、device
+
+Axelera
+
+axelera
+
+yolo26n_axelera_model/
+
+imgsz、batch、quantize、data、fraction、device
+
+DEEPX
+
+deepx
+
+yolo26n_deepx_model/
+
+imgsz、quantize、simplify、opset、data、optimize、device
+
+Qualcomm QNN
+
+qnn
+
+yolo26n_qnn.onnx
+
+imgsz、batch、name、quantize、simplify、opset、data、fraction、device
+
+LiteRT
+
+litert
+
+yolo26n.tflite
+
+imgsz、quantize、batch、data、fraction、device
+
+Hailo
+
+hailo
+
+yolo26n_hailo_model/
+
+imgsz、name、quantize、data、fraction、simplify、conf、iou
+
+Huawei Ascend
+
+ascend
+
+yolo26n_ascend_model/
+
+imgsz、batch、name、quantize、opset、simplify、nms
+
+Apple Core AI
+
+coreai
+
+yolo26n.aimodel
+
+imgsz、batch、quantize
+
+nms=None 默认对外部 NMS 使用原始输出。设置 nms=False 以选择可用的无 NMS 检测头；不支持的格式将回退到其本机输出路径。上面的 nms 条目标识了可以通过 nms=True 嵌入 NMS 的格式。
+
+请在导出页面查看完整的 export 详情。
+
+常见问题#
+
+可以。Ultralytics Platform 快速入门介绍了基于浏览器的工作流，用于标注数据集、在云 GPU 上训练检测模型，以及将模型部署到推理端点。
+
+在自定义数据集上训练 YOLO26 模型包括以下几个步骤：
+
+准备数据集：确保你的数据集采用 YOLO 格式。有关指导，请参阅我们的 Dataset Guide。
+
+加载模型：使用 Ultralytics YOLO 库加载预训练模型，或从 YAML 文件创建新模型。
+
+训练模型：在 Python 中执行 train 方法，或在 CLI 中执行 yolo detect train 命令。
+
+示例
+
+from ultralytics import YOLO
+
+# Load a pretrained model
+model = YOLO("yolo26n.pt")
+
+# Train the model on your custom dataset
+model.train(data="my_custom_dataset.yaml", epochs=100, imgsz=640)
+
+有关详细的配置选项，请访问 Configuration 页面。
+
+Ultralytics YOLO26 提供多种预训练模型，用于目标检测、实例分割、语义分割和姿态估计。这些模型在 COCO 数据集上进行预训练，语义分割模型在 Cityscapes 上进行预训练，分类模型则在 ImageNet 上进行预训练。以下是部分可用模型：
+
+YOLO26n
+
+YOLO26s
+
+YOLO26m
+
+YOLO26l
+
+YOLO26x
+
+有关详细列表和性能指标，请参阅 Models 部分。
+
+要验证训练好的 YOLO26 模型的准确率，你可以在 Python 中使用 .val() 方法，或在 CLI 中使用 yolo detect val 命令。这将提供 mAP50-95、mAP50 等指标。
+
+示例
+
+from ultralytics import YOLO
+
+# Load the model
+model = YOLO("path/to/best.pt")
+
+# Validate the model
+metrics = model.val()
+print(metrics.box.map) # mAP50-95
+
+有关更多验证详情，请访问 Val 页面。
+
+Ultralytics YOLO26 支持将模型导出为多种格式，例如 ONNX、TensorRT、CoreML 等，以确保在不同平台和设备上的兼容性。
+
+示例
+
+from ultralytics import YOLO
+
+# Load the model
+model = YOLO("yolo26n.pt")
+
+# Export the model to ONNX format
+model.export(format="onnx")
+
+请在 Export 页面查看支持格式的完整列表和相关说明。
+
+Ultralytics YOLO26 旨在为目标检测、实例分割、语义分割和姿态估计提供业界领先的性能。以下是一些主要优势：
+
+预训练模型：使用在 COCO 和 ImageNet 等常用数据集上预训练的模型，加快开发速度。
+
+高准确率：可实现出色的 mAP 分数，确保可靠的目标检测效果。
+
+速度：针对实时推理进行了优化，非常适合需要快速处理的应用。
+
+灵活性：将模型导出为 ONNX 和 TensorRT 等多种格式，以便在多个平台上部署。
+
+探索我们的 Blog，了解展示 YOLO26 实际应用的用例和成功案例。
+
+贡献者
+
+GLglenn-jocher37RAraimbekovm5BUBurhan-Q4AMambitious-octopus3MImiles-deans-ultralytics1LALaughing-q1PDpderrenger1Y-Y-T-G1MAMatthewNoyce1RIRizwanMunawar1
+
+创建时间 2023年11月12日更新时间 昨天
+
+评论

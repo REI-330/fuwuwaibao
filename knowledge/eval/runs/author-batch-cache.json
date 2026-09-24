@@ -1,0 +1,783 @@
+{
+ "items": {
+  "S03#s61|S03#s61~10||S04#s78~2|S04#s78~10||S02#s41|S02#s41~7||S03#s69|S03#s69~5||S04#s87~2|S04#s87~5": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "在 ESP-IDF 堆内存分配中，如果我想在内存分配失败时收到通知，应该用哪个函数？另外，heap_caps_free 和标准 libc 的 free 有什么关系？",
+     "n1": "调用 heap_caps_register_failed_alloc_callback 并传入自定义回调函数，即可在内存分配失败时被调用，成功返回 ESP_OK。",
+     "n2": "在 IDF 中 free(p) 等价于 heap_caps_free(p)，heap_caps_free 用于释放之前由 heap_caps_malloc 或 heap_caps_realloc 分配的内存，ptr 参数可以为 NULL。"
+    },
+    {
+     "i": 1,
+     "q": "ESP32 上哪些 GPIO 引脚没有内置上下拉电阻？另外，用 gpio_get_level 读取一个未配置为输入模式的引脚会返回什么？",
+     "n1": "ESP32 上仅支持同时输入和输出的引脚才有集成的上下拉电阻，输入专用的 GPIO 34-39 没有内置上下拉电阻。",
+     "n2": "如果引脚未配置为输入（或输入输出）模式，gpio_get_level 的返回值始终为 0。"
+    },
+    {
+     "i": 2,
+     "q": "ESP32 上用 SPI Master 与从设备通信时，走 GPIO matrix 和走 IOMUX 引脚的最高频率分别是多少？spi_get_freq_limit 函数的返回值代表什么含义？",
+     "n1": "ESP32 上典型最高频率：使用 IOMUX 引脚时为 80MHz，使用 GPIO matrix 引脚时为 26MHz；在半双工模式下可通过配置 input_delay_ns 增加哑元周期来补偿延迟。",
+     "n2": "spi_get_freq_limit 返回当前配置下的频率上限，SPI Master 工作在该上限内是安全的，超过该上限则全双工模式和 DMA 将无法工作，半双工模式下会自动应用哑元位。"
+    },
+    {
+     "i": 3,
+     "q": "多堆 API 中，multi_heap_aligned_free 和 multi_heap_free 有什么区别？如果想遍历某个堆的所有内存块，应该调用哪个函数？",
+     "n1": "multi_heap_aligned_free 已被标记为废弃（deprecated），建议改用 multi_heap_free；两者都用于释放指定堆中的内存块，语义与标准 free() 相同。",
+     "n2": "调用 multi_heap_walk 可以遍历指定堆的所有内存块，需要传入堆句柄、walker 回调函数以及用户自定义的不透明数据指针。"
+    },
+    {
+     "i": 4,
+     "q": "进入深度睡眠前，如何最小化 RTC IO 的漏电流？以 ESP32-WROVER 模组为例，官方推荐怎么操作？另外，通过 RTC GPIO 从睡眠中唤醒支持哪些触发方式？",
+     "n1": "调用 rtc_gpio_isolate 可断开 RTC IO 与内部电路的连接，该函数会禁用输入、输出、上下拉并启用 hold，从而将漏电流降到最低；对于 ESP32-WROVER 模组，建议在进入深度睡眠前调用 rtc_gpio_isolate(GPIO_NUM_12)。",
+     "n2": "rtc_gpio_wakeup_enable 支持的唤醒触发类型：所有目标均支持 GPIO_INTR_HIGH_LEVEL 和 GPIO_INTR_LOW_LEVEL；若芯片支持 SOC_RTC_GPIO_EDGE_WAKEUP_SUPPORTED，则还支持 GPIO_INTR_POSEDGE、GPIO_INTR_NEGEDGE 和 GPIO_INTR_ANYEDGE。"
+    }
+   ],
+   "verify": [
+    {
+     "i": 4,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    }
+   ],
+   "raw": "[{\"i\": 0, \"q\": \"在 ESP-IDF 堆内存分配中，如果我想在内存分配失败时收到通知，应该用哪个函数？另外，heap_caps_free 和标准 libc 的 free 有什么关系？\", \"n1\": \"调用 heap_caps_register_failed_alloc_callback 并传入自定义回调函数，即可在内存分配失败时被调用，成功返回 ESP_OK。\", \"n2\": \"在 IDF 中 free(p) 等价于 heap_caps_free(p)，heap_caps_free 用于释放之前由 heap_caps_malloc 或 heap_caps_realloc 分配的内存，ptr 参数可以为 NULL。\"}, {\"i\": 1, \"q\": \"ESP32 上哪些 GPIO 引脚没有内置上下拉电阻？另外，用 gpio_get_level 读取一个未配置为输入模式的引脚会返回什么？\", \"n1\": \"ESP32 上仅支持同时输入和输出的引脚才有集成的上下拉电阻，输入专用的 GPIO 34-39 没有内置上下拉电阻。\", \"n2\": \"如果引脚未配置为输入（或输入输出）模式，gpio_get_level 的返回值始终为 0。\"}, {\"i\": 2, \"q\": \"ESP32 上用 SPI Master 与从设备通信时，走 GPIO matrix 和走 IOMUX 引脚"
+  },
+  "S02#s15|S02#s43~3||S02#s19|S02#s43~3||S02#s20|S02#s43~3||S02#s21|S02#s43~3||S02#s22|S02#s43~3": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "在 ESP32 SPI 主机驱动中，启用 DMA 进行数据传输时，对缓冲区有哪些具体要求？如果不满足这些要求会有什么影响？",
+     "n1": "DMA 缓冲区需申请支持 DMA 的内存，且必须 32 位对齐（从 32 位边界开始，长度为 4 字节的倍数）",
+     "n2": "若未满足对齐要求，传输效率会因临时缓冲区的分配和数据复制而降低；另外启用 DMA 时不支持同时具有读取和写入阶段的半双工传输事务"
+    },
+    {
+     "i": 1,
+     "q": "在 ESP32 系列芯片上用 SPI 发送非整字节长度的数据时，不同芯片的支持情况有何差异？如果芯片不支持该长度，有哪些替代方案？",
+     "n1": "各芯片支持情况不同，例如 ESP32 的 RX DMA 不支持任意位长，ESP32-S2 的 RX 均不支持，而 ESP32-S3/C2/C3/C6 和 ESP32-H2/P4/C5/C61 的 RX 支持任意长度；不支持的长度会返回 ESP_ERR_NOT_SUPPORTED",
+     "n2": "替代方案包括：利用 cmd/addr 与数据阶段组合，或拆分为两次支持长度的传输并保持 CS 线有效（但两次传输之间存在最小时间间隔，整体速率较低）"
+    },
+    {
+     "i": 2,
+     "q": "在向同一个 SPI 设备混合发送轮询传输和中断传输时，应该注意哪些关键事项以避免冲突？",
+     "n1": "必须在所有轮询及中断传输事务完成后才能发送新的轮询传输事务；调用 spi_device_polling_start() 后必须调用 spi_device_polling_end() 以释放总线，避免阻塞其他传输",
+     "n2": "在启动轮询传输前，需确保已发送给 ISR 的所有中断传输事务都已完成，可通过持续调用 spi_device_get_trans_result() 来确认；建议只在单个任务中操作以便更好地控制调用顺序"
+    },
+    {
+     "i": 3,
+     "q": "在 SPI1 总线上运行 SPI 主机驱动时，为什么代码和数据必须放在内部存储器中？应该如何将函数和数据分别放置到 IRAM 和 DRAM？",
+     "n1": "SPI1 总线由设备、flash 缓存和 PSRAM 共享，驱动占用总线期间缓存会被禁用，此时访问 flash 上的代码/数据或 PSRAM 会触发缓存禁用异常，因此代码和数据必须在 IRAM/DRAM 或 ROM 中",
+     "n2": "将函数放入 IRAM 可使用 IRAM_ATTR 宏或 linker.lf 中的 noflash 位置；将数据放入 DRAM 可使用 DRAM_ATTR 宏或 linker.lf 中的 noflash 位置"
+    },
+    {
+     "i": 4,
+     "q": "在 ESP32 上使用 SPI 时，GPIO 交换矩阵和专用 IO_MUX 管脚在性能上有什么区别？SPI2 总线的 MISO 和 MOSI 分别对应哪些 IO_MUX 管脚编号？",
+     "n1": "GPIO 交换矩阵灵活但有缺陷：会加大 MISO 输入延迟、增加时序违反风险，且最大时钟频率只有 40 MHz；而 IO_MUX 管脚最高可达 80 MHz",
+     "n2": "SPI2 的 IO_MUX 管脚中，MISO 对应 GPIO 12，MOSI 对应 GPIO 13"
+    }
+   ],
+   "verify": [
+    {
+     "i": 0,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 1,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 2,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 4,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    }
+   ],
+   "raw": "[\n{\"i\": 0, \"q\": \"在 ESP32 SPI 主机驱动中，启用 DMA 进行数据传输时，对缓冲区有哪些具体要求？如果不满足这些要求会有什么影响？\", \"n1\": \"DMA 缓冲区需申请支持 DMA 的内存，且必须 32 位对齐（从 32 位边界开始，长度为 4 字节的倍数）\", \"n2\": \"若未满足对齐要求，传输效率会因临时缓冲区的分配和数据复制而降低；另外启用 DMA 时不支持同时具有读取和写入阶段的半双工传输事务\"},\n{\"i\": 1, \"q\": \"在 ESP32 系列芯片上用 SPI 发送非整字节长度的数据时，不同芯片的支持情况有何差异？如果芯片不支持该长度，有哪些替代方案？\", \"n1\": \"各芯片支持情况不同，例如 ESP32 的 RX DMA 不支持任意位长，ESP32-S2 的 RX 均不支持，而 ESP32-S3/C2/C3/C6 和 ESP32-H2/P4/C5/C61 的 RX 支持任意长度；不支持的长度会返回 ESP_ERR_NOT_SUPPORTED\", \"n2\": \"替代方案包括：利用 cmd/addr 与数据阶段组合，或拆分为两次支持长度的传输并保持 CS 线有效（但两次传输之间存在最小时间间隔，整体速率较低）\"},\n{\"i\": 2, \"q\": \"在向同一个 SPI 设备混合发送轮询传输和中断传输时，应该注意哪些关键事项以避免冲突？\", \""
+  },
+  "S03#s63~2|S03#s71||S03#s64|S03#s71||S03#s66|S03#s71||S03#s61~2|S03#s61~10||S04#s78~2|S04#s78~9": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "在 ESP-IDF 堆内存 API 中，遍历堆块时的回调函数如何通过返回值来控制遍历是否继续？",
+     "n1": "multi_heap_walker_cb_t 回调返回 True 表示期望继续堆的遍历，返回 False 则期望停止对该堆的遍历。",
+     "n2": "multi_heap_handle_t 是指向已注册堆的不透明句柄，用于标识一个堆实例。"
+    },
+    {
+     "i": 1,
+     "q": "在使用 heap_caps_walk 遍历堆时，回调函数返回 False 会发生什么？它和 multi_heap_walker_cb_t 返回 False 的行为有什么不同？",
+     "n1": "heap_caps_walker_cb_t 返回 False 会停止对当前堆的遍历，但会继续遍历下一个堆。",
+     "n2": "multi_heap_walker_cb_t 返回 False 则直接停止整个堆的遍历，不会继续处理其他部分。"
+    },
+    {
+     "i": 2,
+     "q": "FreeRTOS 完全启动之前，为什么某些内存区域不能用于堆分配，后来又是如何开放的？",
+     "n1": "启动阶段 pro/app CPU 将部分内存用作栈帧，因此这些区域无法进行分配；待 FreeRTOS 完全启动后，这些内存不再被用作栈，可通过 heap_caps_enable_nonos_stack_heaps() 将其开放为堆。",
+     "n2": "若需要在运行时动态追加内存区域到堆，可调用 heap_caps_add_region()，但调用者需自行考虑保留区域等问题，该函数不会自动处理 soc_memory_layout 中的保留区域。"
+    },
+    {
+     "i": 3,
+     "q": "heap_caps_aligned_free 这个函数现在还推荐使用吗？对齐分配的内存应该怎样释放？",
+     "n1": "heap_caps_aligned_free 已被标记为废弃（deprecated），建议改用 heap_caps_free() 来释放内存。",
+     "n2": "heap_caps_aligned_alloc 用于分配具有指定能力且按给定对齐方式排列的内存块，对齐值必须是 2 的幂次方。"
+    },
+    {
+     "i": 4,
+     "q": "芯片处于 Deep-sleep 模式时，如何让数字 GPIO 在每次睡眠过程中都保持电平状态，以及怎样关闭这一功能？",
+     "n1": "调用启用深度睡眠保持的 API 后，数字 GPIO 的深度睡眠保持特性会在每次睡眠过程中生效；但在芯片处于活跃模式时，除已被 gpio_hold_en 锁定的引脚外，GPIO 状态仍可自由改变。",
+     "n2": "若要关闭所有数字 GPIO 在 Deep-sleep 期间的保持功能，可以调用 gpio_deep_sleep_hold_dis()。"
+    }
+   ],
+   "verify": [
+    {
+     "i": 0,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 2,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 4,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    }
+   ],
+   "raw": "[{\"i\": 0, \"q\": \"在 ESP-IDF 堆内存 API 中，遍历堆块时的回调函数如何通过返回值来控制遍历是否继续？\", \"n1\": \"multi_heap_walker_cb_t 回调返回 True 表示期望继续堆的遍历，返回 False 则期望停止对该堆的遍历。\", \"n2\": \"multi_heap_handle_t 是指向已注册堆的不透明句柄，用于标识一个堆实例。\"}, {\"i\": 1, \"q\": \"在使用 heap_caps_walk 遍历堆时，回调函数返回 False 会发生什么？它和 multi_heap_walker_cb_t 返回 False 的行为有什么不同？\", \"n1\": \"heap_caps_walker_cb_t 返回 False 会停止对当前堆的遍历，但会继续遍历下一个堆。\", \"n2\": \"multi_heap_walker_cb_t 返回 False 则直接停止整个堆的遍历，不会继续处理其他部分。\"}, {\"i\": 2, \"q\": \"FreeRTOS 完全启动之前，为什么某些内存区域不能用于堆分配，后来又是如何开放的？\", \"n1\": \"启动阶段 pro/app CPU 将部分内存用作栈帧，因此这些区域无法进行分配；待 FreeRTOS 完全启动后，这些内存不再被用作栈，可通过 heap_caps_enable_nonos_stack_h"
+  },
+  "S02#s41~2|S02#s41~7||S03#s69~2|S03#s69~5||S02#s19|S02#s43~2||S02#s20|S02#s43~2||S02#s21|S02#s43~2": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "调用 spi_device_queue_trans() 时，什么情况下会返回 ESP_ERR_TIMEOUT，以及如何让它永不超时？",
+     "n1": "当队列在 ticks_to_wait 耗尽前没有空余位置时，返回 ESP_ERR_TIMEOUT",
+     "n2": "将 ticks_to_wait 参数设置为 portMAX_DELAY 可以让等待永不超时"
+    },
+    {
+     "i": 1,
+     "q": "multi_heap_get_allocated_size() 返回的大小有时会比当初申请的大，这是为什么？",
+     "n1": "返回的是该内存块实际分配的大小，可能因为内存对齐填充（padding）和最小块大小限制而大于原始申请的 size",
+     "n2": "传入的指针必须是之前通过 multi_heap_malloc() 或 multi_heap_realloc() 在同一堆上分配的地址，否则结果无效"
+    },
+    {
+     "i": 2,
+     "q": "在 ESP32 上用 SPI 发送 uint16_t 数据时，字节顺序是怎样的？如果想按正确的位顺序发送，应该怎么处理？",
+     "n1": "ESP32 是小端芯片，uint16_t 变量低地址存放最低有效位，因此发送时先发位 [7:0]，再发位 [15:8]，字节顺序与预期相反",
+     "n2": "需要发送的数据可使用宏 SPI_SWAP_DATA_TX 进行转换，接收到的数据则使用 SPI_SWAP_DATA_RX 转换，以得到正确格式"
+    },
+    {
+     "i": 3,
+     "q": "在同一个 SPI 设备上混用轮询传输和中断传输时，如何确保轮询传输不会阻塞总线或被 ISR 干扰？",
+     "n1": "调用 spi_device_polling_start() 后必须紧接着调用 spi_device_polling_end()，以释放总线供其他事务或设备使用；若轮询期间无需切换任务，可直接用 spi_device_polling_transmit() 让其自动结束",
+     "n2": "在启动轮询传输前，需确保所有已发往 ISR 的中断传输事务都已完成，可通过持续调用 spi_device_get_trans_result() 直到所有事务返回来实现"
+    }
+   ],
+   "verify": [
+    {
+     "i": 2,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 3,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    }
+   ],
+   "raw": "[{\"i\": 0, \"q\": \"调用 spi_device_queue_trans() 时，什么情况下会返回 ESP_ERR_TIMEOUT，以及如何让它永不超时？\", \"n1\": \"当队列在 ticks_to_wait 耗尽前没有空余位置时，返回 ESP_ERR_TIMEOUT\", \"n2\": \"将 ticks_to_wait 参数设置为 portMAX_DELAY 可以让等待永不超时\"},{\"i\": 1, \"q\": \"multi_heap_get_allocated_size() 返回的大小有时会比当初申请的大，这是为什么？\", \"n1\": \"返回的是该内存块实际分配的大小，可能因为内存对齐填充（padding）和最小块大小限制而大于原始申请的 size\", \"n2\": \"传入的指针必须是之前通过 multi_heap_malloc() 或 multi_heap_realloc() 在同一堆上分配的地址，否则结果无效\"},{\"i\": 2, \"q\": \"在 ESP32 上用 SPI 发送 uint16_t 数据时，字节顺序是怎样的？如果想按正确的位顺序发送，应该怎么处理？\", \"n1\": \"ESP32 是小端芯片，uint16_t 变量低地址存放最低有效位，因此发送时先发位 [7:0]，再发位 [15:8]，字节顺序与预期相反\", \"n2\": \"需要发送的数据可使用宏 SPI_S"
+  },
+  "S03#s64|S03#s69~5||S03#s61|S03#s61~9||S04#s78~3|S04#s78~10||S02#s41|S02#s41~6||S03#s69|S03#s69~4": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "在 ESP-IDF 堆遍历回调中，如果我想中途停止对当前堆的遍历并跳到下一个堆，回调函数应该返回什么值？另外 multi_heap_find_containing_block 使用时有什么需要注意的前提条件？",
+     "n1": "heap_caps_walker_cb_t 回调返回 False 时会停止当前堆的遍历并继续遍历下一个堆，返回 True 则继续遍历。",
+     "n2": "multi_heap_find_containing_block 要求传入的 heap 参数必须有效，且 ptr 必须属于某块已分配内存，否则程序会因断言失败而崩溃。"
+    },
+    {
+     "i": 1,
+     "q": "用 heap_caps_malloc 分配的内存，调用哪个函数可以释放？在 IDF 里直接调用标准 free() 和调用该函数是否等价？",
+     "n1": "释放 heap_caps_malloc 或 heap_caps_realloc 所分配内存应使用 heap_caps_free，传入的指针可以为 NULL。",
+     "n2": "在 IDF 中，free(p) 与 heap_caps_free(p) 是等价的。"
+    },
+    {
+     "i": 2,
+     "q": "ESP32 上哪些 GPIO 引脚不支持内部上下拉电阻？在普通运行和睡眠模式下设置上下拉的函数分别是什么？",
+     "n1": "ESP32 上仅输入的 GPIO 34-39 没有集成上下拉电阻，只有同时支持输入和输出的引脚才有。",
+     "n2": "普通模式下使用 gpio_set_pull_mode 配置上下拉，睡眠模式下使用 gpio_sleep_set_pull_mode 进行配置。"
+    },
+    {
+     "i": 3,
+     "q": "ESP32 SPI Master 在使用 GPIO matrix 引脚时，与使用 IOMUX 引脚相比，最高通信频率有什么区别？如果需要补偿延迟，应该怎么做？",
+     "n1": "使用 IOMUX 引脚时典型最高频率为 80MHz，而使用 GPIO matrix 引脚时仅为 26MHz，原因是 GPIO matrix 存在额外延迟。",
+     "n2": "在半双工模式下，可以通过在 dev_config 结构体中正确设置 input_delay_ns 来引入额外的 dummy 周期，从而补偿该延迟。"
+    },
+    {
+     "i": 4,
+     "q": "多堆 API 中 multi_heap_aligned_free 和 multi_heap_free 都能释放内存，官方建议优先用哪个？另外如何获取某个堆的历史最低剩余空间？",
+     "n1": "multi_heap_aligned_free 已被标记为废弃，建议改用 multi_heap_free 来释放内存。",
+     "n2": "调用 multi_heap_minimum_free_size 可返回指定堆的生命周期内最低剩余字节数，等同于 multi_heap_get_info 返回结构中的 minimum_free_bytes 字段。"
+    }
+   ],
+   "verify": [
+    {
+     "i": 2,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 3,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    }
+   ],
+   "raw": "[\n{\"i\": 0, \"q\": \"在 ESP-IDF 堆遍历回调中，如果我想中途停止对当前堆的遍历并跳到下一个堆，回调函数应该返回什么值？另外 multi_heap_find_containing_block 使用时有什么需要注意的前提条件？\", \"n1\": \"heap_caps_walker_cb_t 回调返回 False 时会停止当前堆的遍历并继续遍历下一个堆，返回 True 则继续遍历。\", \"n2\": \"multi_heap_find_containing_block 要求传入的 heap 参数必须有效，且 ptr 必须属于某块已分配内存，否则程序会因断言失败而崩溃。\"},\n{\"i\": 1, \"q\": \"用 heap_caps_malloc 分配的内存，调用哪个函数可以释放？在 IDF 里直接调用标准 free() 和调用该函数是否等价？\", \"n1\": \"释放 heap_caps_malloc 或 heap_caps_realloc 所分配内存应使用 heap_caps_free，传入的指针可以为 NULL。\", \"n2\": \"在 IDF 中，free(p) 与 heap_caps_free(p) 是等价的。\"},\n{\"i\": 2, \"q\": \"ESP32 上哪些 GPIO 引脚不支持内部上下拉电阻？在普通运行和睡眠模式下设置上下拉的函数分别是什么？\", \"n1\": \"E"
+  },
+  "S02#s20|S02#s42~4||S02#s21|S02#s42~4||S02#s22|S02#s42~4||S02#s24|S02#s42~4||S02#s25|S02#s42~4": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "在 SPI 开发中，如果我想混合使用轮询和中断两种传输方式，调用 spi_device_polling_start() 之前需要满足什么条件？不满足会有什么后果？",
+     "n1": "调用 spi_device_polling_start() 前，必须确保已发送到 ISR 的所有中断传输事务都已完成，可通过持续调用 spi_device_get_trans_result() 直至全部返回来确认。",
+     "n2": "未完成的轮询传输事务会阻塞其他传输事务，因此 spi_device_polling_start() 之后必须调用 spi_device_polling_end()，否则其他事务或其他设备将无法使用总线。"
+    },
+    {
+     "i": 2,
+     "q": "ESP32 上用 GPIO 交换矩阵走 SPI 信号和直接用专用 IO_MUX 管脚相比，在时钟频率方面有什么限制？",
+     "n1": "通过 GPIO 交换矩阵传输时，最大时钟频率只能达到 40 MHz；而使用专用 IO_MUX 管脚时，最大时钟频率可达 80 MHz。",
+     "n2": "GPIO 交换矩阵还会加大 MISO 信号的输入延迟，增加 MISO 设置时序违反的概率，对高速 SPI 场景不友好。"
+    },
+    {
+     "i": 3,
+     "q": "在 ESP32 SPI 驱动中，启用 DMA 与不启用 DMA 各有什么权衡？单字节传输时，轮询方式和中断方式的典型耗时分别是多少？",
+     "n1": "启用 DMA 时，每次传输需约 2 µs 来设置链接列表，但数据由 DMA 自动读取；不启用 DMA 时，CPU 需逐字节读写 FIFO，通常不到 2 µs，但传输长度被限制在 64 字节。",
+     "n2": "单字节典型耗时：使用 DMA 的中断传输约 28 µs，使用 CPU 的中断传输约 25 µs；使用 DMA 的轮询传输约 10 µs，使用 CPU 的轮询传输约 8 µs（均在 CONFIG_SPI_MASTER_ISR_IN_IRAM 启用状态下测得）。"
+    },
+    {
+     "i": 4,
+     "q": "SPI 设备在传输过程中能动态修改时钟频率吗？如果设置的频率硬件无法精确实现，驱动会怎么处理？",
+     "n1": "可以在传输过程中实时更改时钟频率，通过设置 spi_transaction_t::override_freq_hz 实现，新频率将作用于该次及以后的传输。",
+     "n2": "若期望设置的时钟频率硬件无法实现，驱动会打印警告并继续沿用之前的时钟频率进行传输，不会中止传输。"
+    }
+   ],
+   "verify": [
+    {
+     "i": 2,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 3,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 4,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    }
+   ],
+   "raw": "[\n  {\"i\": 0, \"q\": \"在 SPI 开发中，如果我想混合使用轮询和中断两种传输方式，调用 spi_device_polling_start() 之前需要满足什么条件？不满足会有什么后果？\", \"n1\": \"调用 spi_device_polling_start() 前，必须确保已发送到 ISR 的所有中断传输事务都已完成，可通过持续调用 spi_device_get_trans_result() 直至全部返回来确认。\", \"n2\": \"未完成的轮询传输事务会阻塞其他传输事务，因此 spi_device_polling_start() 之后必须调用 spi_device_polling_end()，否则其他事务或其他设备将无法使用总线。\"},\n  {\"i\": 1, \"q\": \"在 SPI1 总线上运行 SPI 主机驱动时，为什么要求代码和数据必须放在内部存储器中？如果放在外部存储器里会发生什么？\", \"n1\": \"SPI1 总线由设备、flash 缓存和 PSRAM 共享，驱动获取总线期间缓存会被禁用，此时 flash 上的代码/数据及 PSRAM 数据无法被访问。\", \"n2\": \"在缓存禁用期间访问外部存储器（flash 代码、flash 常量数据、PSRAM 静态或堆数据）将触发\"缓存禁用情况下访问缓存内存区域\"异常，导致系统出错。\"},\n  {\"i\": 2, \""
+  },
+  "S03#s64|S03#s69~4||S03#s66|S03#s69~5||S03#s61~3|S03#s61~10||S02#s41~3|S02#s41~7||S02#s20|S02#s42~3": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "在 ESP-IDF 堆遍历回调中，heap_caps_walker_cb_t 返回 false 时会发生什么？另外 multi_heap_minimum_free_size 返回的是什么数据？",
+     "n1": "返回 false 会停止对当前堆的遍历，并继续遍历下一个堆",
+     "n2": "multi_heap_minimum_free_size 返回该堆有史以来空闲字节数的历史最低水位线"
+    },
+    {
+     "i": 1,
+     "q": "heap_caps_enable_nonos_stack_heaps 这个函数是在什么时机被调用的，为什么不能在启动阶段就启用这些堆？",
+     "n1": "该函数在 FreeRTOS 完全启动之后才被调用",
+     "n2": "启动阶段 pro/app CPU 的栈帧仍然占用那部分内存区域，无法在其中进行分配，等 FreeRTOS 启动完毕后这些内存才不再被用作栈"
+    },
+    {
+     "i": 2,
+     "q": "ESP-IDF 里 heap_caps_calloc 和 heap_caps_walk_all 分别用来做什么？",
+     "n1": "heap_caps_calloc 用于分配具有指定能力的内存块，且初始值清零，语义等同于 libc 的 calloc",
+     "n2": "heap_caps_walk_all 用于遍历堆组件定义的所有堆，对每个内存块触发用户提供的回调函数"
+    },
+    {
+     "i": 3,
+     "q": "调用 spi_device_transmit 和直接使用 spi_device_get_trans_result 等待结果相比，有什么区别？spi_get_freq_limit 又是用来判断什么的？",
+     "n1": "spi_device_transmit 相当于先调用 spi_device_queue_trans 再调用 spi_device_get_trans_result，是两步操作的封装，而 spi_device_get_trans_result 只负责等待并取回已完成事务的描述符",
+     "n2": "spi_get_freq_limit 返回当前配置下 SPI 主机的频率上限，超过该上限时全双工模式和 DMA 将无法工作，半双工模式下会自动插入哑位"
+    },
+    {
+     "i": 4,
+     "q": "在同一 SPI 设备上混合使用轮询传输和中断传输时，如何确保轮询传输不会被 ISR 干扰？",
+     "n1": "在调用 spi_device_polling_start 之前，必须确保所有已发送给 ISR 的中断传输事务都已完成，可持续调用 spi_device_get_trans_result 直到全部事务返回",
+     "n2": "若轮询过程中不需要切换任务，可直接使用 spi_device_polling_transmit，它会自动完成结束流程；否则必须在 spi_device_polling_start 之后显式调用 spi_device_polling_end 以释放总线"
+    }
+   ],
+   "verify": [
+    {
+     "i": 4,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    }
+   ],
+   "raw": "[\n{\"i\": 0, \"q\": \"在 ESP-IDF 堆遍历回调中，heap_caps_walker_cb_t 返回 false 时会发生什么？另外 multi_heap_minimum_free_size 返回的是什么数据？\", \"n1\": \"返回 false 会停止对当前堆的遍历，并继续遍历下一个堆\", \"n2\": \"multi_heap_minimum_free_size 返回该堆有史以来空闲字节数的历史最低水位线\"},\n{\"i\": 1, \"q\": \"heap_caps_enable_nonos_stack_heaps 这个函数是在什么时机被调用的，为什么不能在启动阶段就启用这些堆？\", \"n1\": \"该函数在 FreeRTOS 完全启动之后才被调用\", \"n2\": \"启动阶段 pro/app CPU 的栈帧仍然占用那部分内存区域，无法在其中进行分配，等 FreeRTOS 启动完毕后这些内存才不再被用作栈\"},\n{\"i\": 2, \"q\": \"ESP-IDF 里 heap_caps_calloc 和 heap_caps_walk_all 分别用来做什么？\", \"n1\": \"heap_caps_calloc 用于分配具有指定能力的内存块，且初始值清零，语义等同于 libc 的 calloc\", \"n2\": \"heap_caps_walk_all 用于遍历堆组件定义的所有堆，对每个"
+  },
+  "S03#s64|S03#s69~3||S03#s61|S03#s61~8||S02#s21|S02#s42~2||S02#s24|S02#s42~2||S02#s25|S02#s42~2": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "在 ESP-IDF 的堆内存接口里，如果我想在内存分配失败时收到通知，回调函数能拿到哪些信息？另外，遍历堆时用到的那个 walker 回调返回 false 会发生什么？",
+     "n1": "分配失败回调可获得三项信息：失败分配的字节数（size）、所请求的能力标志（caps）以及触发失败的函数名称（function_name）。",
+     "n2": "heap_caps_walker_cb_t 返回 false 时，会停止对当前堆的遍历，但会继续遍历下一个堆，而不是完全终止整个遍历过程。"
+    },
+    {
+     "i": 1,
+     "q": "在 ESP-IDF 中，如果我想按优先级顺序尝试从不同类型内存分配一块空间，应该用哪个函数？它失败时返回什么？",
+     "n1": "应使用 heap_caps_malloc_prefer（或其变体 heap_caps_calloc_prefer / heap_caps_realloc_prefer），通过可变参数依次传入 MALLOC_CAP_* 标志，驱动会按照参数顺序逐一尝试分配，直到成功或全部失败。",
+     "n2": "分配成功时返回指向所分配内存的指针，失败时返回 NULL。"
+    },
+    {
+     "i": 3,
+     "q": "在 ESP-IDF SPI 主机驱动中，中断传输和轮询传输各有什么典型延迟？启用 DMA 对延迟有什么影响？",
+     "n1": "单字节典型传输持续时间：使用 DMA 的中断传输约 28 µs，使用 CPU 的中断传输约 25 µs；使用 DMA 的轮询传输约 10 µs，使用 CPU 的轮询传输约 8 µs。上述数据基于 CONFIG_SPI_MASTER_ISR_IN_IRAM 启用的条件测得。",
+     "n2": "启用 DMA 时，每次传输需约 2 µs 设置链接列表，之后主机自动从链接列表读取数据；不启用 DMA 时 CPU 须逐字节读写 FIFO，耗时通常不足 2 µs，但传输长度被限制在 64 字节以内。"
+    },
+    {
+     "i": 4,
+     "q": "使用 ESP-IDF SPI 主机驱动时，如果想在某次传输中临时更换时钟频率，应该怎么做？如果目标频率无法实现会怎样？",
+     "n1": "可以在 spi_transaction_t 中设置 override_freq_hz 字段来为该次及此后的传输指定新的时钟频率，无需重新配置整个设备。",
+     "n2": "若所期望的时钟频率由于硬件限制无法精确实现，驱动会打印警告信息，并继续沿用之前的时钟频率进行传输，不会中断通信。"
+    }
+   ],
+   "verify": [
+    {
+     "i": 0,
+     "answerable": "N",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 1,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 3,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 4,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    }
+   ],
+   "raw": "[\n{\"i\": 0, \"q\": \"在 ESP-IDF 的堆内存接口里，如果我想在内存分配失败时收到通知，回调函数能拿到哪些信息？另外，遍历堆时用到的那个 walker 回调返回 false 会发生什么？\", \"n1\": \"分配失败回调可获得三项信息：失败分配的字节数（size）、所请求的能力标志（caps）以及触发失败的函数名称（function_name）。\", \"n2\": \"heap_caps_walker_cb_t 返回 false 时，会停止对当前堆的遍历，但会继续遍历下一个堆，而不是完全终止整个遍历过程。\"},\n{\"i\": 1, \"q\": \"在 ESP-IDF 中，如果我想按优先级顺序尝试从不同类型内存分配一块空间，应该用哪个函数？它失败时返回什么？\", \"n1\": \"应使用 heap_caps_malloc_prefer（或其变体 heap_caps_calloc_prefer / heap_caps_realloc_prefer），通过可变参数依次传入 MALLOC_CAP_* 标志，驱动会按照参数顺序逐一尝试分配，直到成功或全部失败。\", \"n2\": \"分配成功时返回指向所分配内存的指针，失败时返回 NULL。\"},\n{\"i\": 2, \"q\": \"在 SPI1 总线上运行 SPI 主机驱动时，为什么代码和数据必须放在内部存储器里？如何把函数强制放入 IRAM？\", "
+  },
+  "S03#s64|S03#s69~2||S03#s66|S03#s69~4||S03#s61~2|S03#s61~9||S02#s21|S02#s41~7||S02#s25|S02#s41~7": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "在 ESP-IDF 堆遍历回调中，如果想中途停止对当前堆的遍历并跳到下一个堆，回调函数应该返回什么值？另外，当内存分配失败时，注册的钩子函数会收到哪些信息？",
+     "n1": "heap_caps_walker_cb_t 回调返回 False 时会停止对当前堆的遍历并继续遍历下一个堆，返回 True 则继续遍历。",
+     "n2": "分配失败钩子 esp_alloc_failed_hook_t 会接收到失败分配的字节大小、请求的 capabilities 以及触发失败的函数名称。"
+    },
+    {
+     "i": 1,
+     "q": "heap_caps_init() 这个函数可以在应用程序运行期间多次调用吗？另外，如果想在程序运行期间动态地把一块新的内存区域加入堆，应该用哪个 API？",
+     "n1": "heap_caps_init() 只应在 IDF 启动代码中调用一次，不应在其他时机调用。",
+     "n2": "可以调用 heap_caps_add_region(intptr_t start, intptr_t end) 在运行时把新的内存区域加入堆集合，但调用者需要自行确认该区域不在 soc_memory_layout 的保留区域内。"
+    },
+    {
+     "i": 2,
+     "q": "用 heap_caps_aligned_alloc() 分配了对齐内存之后，该怎么释放它？另外，如果想知道某个已分配指针实际占用了多少字节，可以调用哪个函数？",
+     "n1": "heap_caps_aligned_free() 可用于释放 heap_caps_aligned_alloc() 分配的内存，但该函数已被废弃，建议改用 heap_caps_free()。",
+     "n2": "调用 heap_caps_get_allocated_size(void *ptr) 可获取指定指针实际分配的内存大小，若传入无效指针，程序会因断言失败而崩溃。"
+    },
+    {},
+    {
+     "i": 4,
+     "q": "SPI 设备的实际时钟频率不一定等于配置值，驱动是怎么处理这个问题的？另外，如果当前配置下时钟频率超过某个上限会有什么后果，该上限如何获取？",
+     "n1": "驱动会将设置的时钟频率重新计算为与硬件兼容的最接近值且不超过时钟源频率，可调用 spi_device_get_actual_freq() 查询实际频率；若传输中途通过 override_freq_hz 设置了无法实现的频率，驱动会打印警告并沿用之前的频率。",
+     "n2": "可调用 spi_get_freq_limit() 获取当前配置的频率上限，超过该上限时全双工模式和 DMA 将无法工作，半双工模式下会自动插入 dummy bits；该函数需要传入是否使用 GPIO matrix 以及 MISO 输入延迟（ns）两个参数。"
+    }
+   ],
+   "verify": [
+    {
+     "i": 0,
+     "answerable": "N",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 4,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    }
+   ],
+   "raw": "[{\"i\": 0, \"q\": \"在 ESP-IDF 堆遍历回调中，如果想中途停止对当前堆的遍历并跳到下一个堆，回调函数应该返回什么值？另外，当内存分配失败时，注册的钩子函数会收到哪些信息？\", \"n1\": \"heap_caps_walker_cb_t 回调返回 False 时会停止对当前堆的遍历并继续遍历下一个堆，返回 True 则继续遍历。\", \"n2\": \"分配失败钩子 esp_alloc_failed_hook_t 会接收到失败分配的字节大小、请求的 capabilities 以及触发失败的函数名称。\"}, {\"i\": 1, \"q\": \"heap_caps_init() 这个函数可以在应用程序运行期间多次调用吗？另外，如果想在程序运行期间动态地把一块新的内存区域加入堆，应该用哪个 API？\", \"n1\": \"heap_caps_init() 只应在 IDF 启动代码中调用一次，不应在其他时机调用。\", \"n2\": \"可以调用 heap_caps_add_region(intptr_t start, intptr_t end) 在运行时把新的内存区域加入堆集合，但调用者需要自行确认该区域不在 soc_memory_layout 的保留区域内。\"}, {\"i\": 2, \"q\": \"用 heap_caps_aligned_alloc() 分配了对齐内存之后，该怎么释放它？另外，如果"
+  },
+  "S03#s64|S03#s69||S03#s66~2|S03#s69~5||S03#s61~4|S03#s61~10||S03#s64|S03#s66~3||S03#s66~3|S03#s69~5": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "在ESP-IDF的堆内存API中，用 multi_heap_aligned_alloc 分配的内存，应该用哪个函数来释放？有没有已废弃的替代选项？",
+     "n1": "应使用 multi_heap_free() 释放堆内存，其语义与标准 free() 相同。",
+     "n2": "multi_heap_aligned_free() 虽然也能释放 multi_heap_aligned_alloc() 分配的内存，但该函数已被标记为废弃（deprecated），官方建议改用 multi_heap_free()。"
+    },
+    {
+     "i": 1,
+     "q": "在运行时动态向堆系统添加新内存区域时，有哪些地址范围限制？比如已有区域是 0x1000 到 0x3000，哪些新区域不被允许？",
+     "n1": "新区域不能与已有区域产生部分重叠但又超出其范围的情况，例如 0x0000~0x2000、0x0000~0x4000、0x1000~0x4000、0x2000~0x4000 均不被允许，因为它们与已有区域存在跨越起点或终点的重叠。",
+     "n2": "新区域可以与已有区域完全相同、完全包含于其中，或者首尾相接但不重叠，例如 0x1000~0x3000、0x1000~0x2000、0x0000~0x1000、0x3000~0x4000 均被允许。"
+    },
+    {
+     "i": 2,
+     "q": "heap_caps_get_minimum_free_size 返回的最小空闲内存值，和实际历史最低可用堆相比可能偏高，这是为什么？另外运行时动态添加的堆区域会计入这个值吗？",
+     "n1": "该函数对每个区域分别记录低水位线（low watermark），各区域可能在不同时间点达到各自的最低值，因此累加结果可能低于全局历史最低值，但仍能作为最差情况的参考。",
+     "n2": "通过 heap_caps_add_region_with_caps() 在运行时（app_main 之后）添加的堆区域，不会被计入最小空闲内存的计算中。"
+    },
+    {
+     "i": 3,
+     "q": "在ESP-IDF堆遍历回调 heap_caps_walker_cb_t 中，返回 false 会发生什么？另外，用 heap_caps_add_region_with_caps 添加新区域时，如果地址范围与已有区域存在交叉会返回什么错误？",
+     "n1": "回调返回 false 时，会停止对当前堆的遍历，并继续遍历下一个堆；返回 true 则继续当前堆的遍历。",
+     "n2": "当新区域的地址范围与已有区域的起点或终点存在重叠时，heap_caps_add_region_with_caps 会返回 ESP_FAIL。"
+    },
+    {
+     "i": 4,
+     "q": "调用 heap_caps_add_region_with_caps 添加内存区域时，caps 参数传入的数组在函数返回后还需要保持有效吗？另外 multi_heap_find_containing_block 对传入的指针有什么前提要求？",
+     "n1": "caps 数组在函数调用返回后不需要继续保持有效，即函数内部会在返回前完成对它的使用。",
+     "n2": "multi_heap_find_containing_block 要求传入的指针必须属于某个已分配内存块，且 heap 参数必须有效；若不满足这些条件，程序将因断言失败而崩溃。"
+    }
+   ],
+   "verify": [
+    {
+     "i": 1,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    }
+   ],
+   "raw": "[{\"i\": 0, \"q\": \"在ESP-IDF的堆内存API中，用 multi_heap_aligned_alloc 分配的内存，应该用哪个函数来释放？有没有已废弃的替代选项？\", \"n1\": \"应使用 multi_heap_free() 释放堆内存，其语义与标准 free() 相同。\", \"n2\": \"multi_heap_aligned_free() 虽然也能释放 multi_heap_aligned_alloc() 分配的内存，但该函数已被标记为废弃（deprecated），官方建议改用 multi_heap_free()。\"}, {\"i\": 1, \"q\": \"在运行时动态向堆系统添加新内存区域时，有哪些地址范围限制？比如已有区域是 0x1000 到 0x3000，哪些新区域不被允许？\", \"n1\": \"新区域不能与已有区域产生部分重叠但又超出其范围的情况，例如 0x0000~0x2000、0x0000~0x4000、0x1000~0x4000、0x2000~0x4000 均不被允许，因为它们与已有区域存在跨越起点或终点的重叠。\", \"n2\": \"新区域可以与已有区域完全相同、完全包含于其中，或者首尾相接但不重叠，例如 0x1000~0x3000、0x1000~0x2000、0x0000~0x1000、0x3000~0x4000 均被允许。\"}, {\"i\": 2, \"q\":"
+  },
+  "S02#s41~2|S02#s41~5||S02#s21|S02#s41~5||S02#s26|S02#s41~5||S02#s27|S02#s41~5||S02#s28|S02#s41~5": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "使用 spi_device_queue_trans 把事务加入队列时，如果我在没有先获取总线的情况下设置了 CS 保持激活标志，会返回什么错误？spi_device_polling_transmit 在多任务同时访问同一 SPI 设备时是否线程安全？",
+     "n1": "spi_device_queue_trans 在未先调用 spi_device_acquire_bus() 就使用 SPI_TRANS_CS_KEEP_ACTIVE 标志时，会返回 ESP_ERR_INVALID_ARG。",
+     "n2": "spi_device_polling_transmit 在多个任务访问同一 SPI 设备时不是线程安全的，且设备通常不能同时启动轮询和中断事务。"
+    },
+    {
+     "i": 2,
+     "q": "在 ESP32 的 SPI 主机驱动中，如何减少因缓存缺失导致的传输性能下降？如果想在 flash 操作期间也能继续发送 SPI 事务，需要做哪些配置？",
+     "n1": "可以启用 CONFIG_SPI_MASTER_IN_IRAM 将整个 SPI 驱动置入 IRAM，同时将回调及其调用的函数也放入 IRAM；使用该选项时还需同步启用 CONFIG_FREERTOS_IN_IRAM。",
+     "n2": "要在 flash 操作期间继续发送事务，需启用 CONFIG_SPI_MASTER_ISR_IN_IRAM 并在 spi_bus_config_t::intr_flags 中设置 ESP_INTR_FLAG_IRAM，此外每个设备的回调及其调用函数都应放在 IRAM 中以避免缓存缺失崩溃。"
+    },
+    {
+     "i": 3,
+     "q": "SPI 主机在使用 GPIO 矩阵时读取频率会受到什么影响？如何通过 Dummy 位机制来提升读取速度？",
+     "n1": "使用 GPIO 矩阵时，最大有效读取频率会降至现有输入延迟下的 33%～77%，而使用 IO_MUX 管脚或 Dummy 位可以保留较高频率；可调用 spi_get_freq_limit() 查询主机的最大读取频率。",
+     "n2": "Dummy 位是在读取阶段开始前插入的额外时钟周期，主机在这段时间不读取数据，但设备已开始发出数据，从而补偿了 MISO 建立时间不足的问题，使主机能以更高频率正确读取数据。"
+    },
+    {
+     "i": 4,
+     "q": "ESP32 SPI 主机驱动在使用 DMA 时有哪些已知的兼容性限制，遇到半双工读写同时进行的场景应该怎么解决？",
+     "n1": "半双工传输事务在写入和读取阶段同时进行时与 DMA 不兼容；如需此类传输，可改用全双工事务，或将总线初始化时 DMA 通道参数设为 0 来禁用 DMA（但这样单次传输不能超过 64 字节），也可尝试用命令和地址字段代替写入阶段。",
+     "n2": "若启用了 DMA，RX 缓冲区必须以 32 位边界对齐且字节长度为 4 的倍数，否则 DMA 可能覆盖未对齐部分的数据；此外全双工模式下命令和地址阶段与 cs_ena_pretrans 不兼容。"
+    }
+   ],
+   "verify": [
+    {
+     "i": 2,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 3,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 4,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    }
+   ],
+   "raw": "[{\"i\": 0, \"q\": \"使用 spi_device_queue_trans 把事务加入队列时，如果我在没有先获取总线的情况下设置了 CS 保持激活标志，会返回什么错误？spi_device_polling_transmit 在多任务同时访问同一 SPI 设备时是否线程安全？\", \"n1\": \"spi_device_queue_trans 在未先调用 spi_device_acquire_bus() 就使用 SPI_TRANS_CS_KEEP_ACTIVE 标志时，会返回 ESP_ERR_INVALID_ARG。\", \"n2\": \"spi_device_polling_transmit 在多个任务访问同一 SPI 设备时不是线程安全的，且设备通常不能同时启动轮询和中断事务。\"}, {\"i\": 1, \"q\": \"在 SPI1 总线上运行 SPI 主机驱动时，为什么必须把代码和数据放到内部存储器中，有哪些具体的方法可以做到这一点？\", \"n1\": \"SPI1 总线由设备、flash 缓存和 PSRAM 共享，驱动获取总线期间缓存会被禁用，此时访问 flash 上的代码或 PSRAM 中的数据会触发\"缓存禁用情况下访问缓存内存区域\"异常，因此代码和数据必须放在 IRAM/DRAM 或 ROM 中。\", \"n2\": \"将函数放入 IRAM 可用 IRAM_ATTR 宏修饰函数定义，或"
+  },
+  "S03#s66|S03#s69~3||S02#s21|S02#s41~4||S02#s27|S02#s41~4||S02#s28|S02#s41~4||S03#s61~3|S03#s61~9": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "ESP-IDF 里，FreeRTOS 完全启动之前为什么不能使用启动栈所在区域的堆？完全启动之后怎么把那块内存加入堆？",
+     "n1": "启动阶段 pro/app CPU 把某段内存当作栈使用，此期间无法在这些区域做内存分配",
+     "n2": "FreeRTOS 完全启动后可调用 heap_caps_enable_nonos_stack_heaps() 将这些区域的堆启用"
+    },
+    {
+     "i": 1,
+     "q": "在 ESP-IDF 的 SPI1 总线上跑 SPI 主机驱动时，代码和数据为什么必须放在内部存储器里？有哪些具体方法可以把函数或数据强制放到 IRAM/DRAM？",
+     "n1": "驱动占用 SPI1 总线期间缓存会被禁用，访问 flash 代码、flash 常量数据或 PSRAM 数据都会触发「缓存禁用情况下访问缓存内存区域」异常，因此代码和数据必须在 DRAM/IRAM 或 ROM 中",
+     "n2": "函数可加 IRAM_ATTR 宏或在 linker.lf 中使用 noflash 位置；数据可加 DRAM_ATTR 宏或同样使用 linker.lf 的 noflash 位置；使用 NOLINE_ATTR 可防止内联导致属性失效"
+    },
+    {
+     "i": 2,
+     "q": "SPI 主机驱动里的 input_delay_ns 参数是什么含义？把它设成 0 会有什么影响，设置精确值又能带来哪些好处？",
+     "n1": "input_delay_ns 表示 SCLK 发出后 MISO 总线上数据保持有效的最大时间，它直接影响 SPI 时钟速度上限；使用 GPIO 矩阵时最大有效频率会降至输入延迟的 33~77%",
+     "n2": "设为 0 驱动仍可运行，但设置精确值有助于正确计算全双工传输的频率限制，以及用半双工的 Dummy 位准确补偿时序；实际 PCB 布局和负载电容也可能使实际延迟超过规格值"
+    },
+    {
+     "i": 3,
+     "q": "ESP-IDF SPI 主机驱动在半双工模式下同时读写时不能使用 DMA，遇到这种情况有哪些替代方案？",
+     "n1": "可改用全双工传输事务，或在初始化总线时将最后一个参数设为 0 来禁用 DMA（但这样单次传输不能超过 64 字节）",
+     "n2": "也可以尝试用命令和地址字段来代替写入阶段，从而规避半双工读写同时进行与 DMA 不兼容的问题"
+    },
+    {
+     "i": 4,
+     "q": "ESP-IDF 的 heap_caps_calloc 和 heap_caps_get_allocated_size 分别有什么用途，使用后者时有什么注意事项？",
+     "n1": "heap_caps_calloc 按照指定能力标志分配一块内存并将其初始化为零，语义与 libc calloc() 相同，在 IDF 中 calloc(p) 等价于以 MALLOC_CAP_8BIT 调用该函数",
+     "n2": "heap_caps_get_allocated_size 返回某个已分配指针对应的实际分配字节数；若传入的指针无效，应用程序会因断言失败而崩溃，且传入的指针必须是由 malloc/calloc 等返回且尚未释放的值"
+    }
+   ],
+   "verify": [
+    {
+     "i": 0,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 1,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 3,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    }
+   ],
+   "raw": "[{\"i\": 0, \"q\": \"ESP-IDF 里，FreeRTOS 完全启动之前为什么不能使用启动栈所在区域的堆？完全启动之后怎么把那块内存加入堆？\", \"n1\": \"启动阶段 pro/app CPU 把某段内存当作栈使用，此期间无法在这些区域做内存分配\", \"n2\": \"FreeRTOS 完全启动后可调用 heap_caps_enable_nonos_stack_heaps() 将这些区域的堆启用\"},{\"i\": 1, \"q\": \"在 ESP-IDF 的 SPI1 总线上跑 SPI 主机驱动时，代码和数据为什么必须放在内部存储器里？有哪些具体方法可以把函数或数据强制放到 IRAM/DRAM？\", \"n1\": \"驱动占用 SPI1 总线期间缓存会被禁用，访问 flash 代码、flash 常量数据或 PSRAM 数据都会触发「缓存禁用情况下访问缓存内存区域」异常，因此代码和数据必须在 DRAM/IRAM 或 ROM 中\", \"n2\": \"函数可加 IRAM_ATTR 宏或在 linker.lf 中使用 noflash 位置；数据可加 DRAM_ATTR 宏或同样使用 linker.lf 的 noflash 位置；使用 NOLINE_ATTR 可防止内联导致属性失效\"},{\"i\": 2, \"q\": \"SPI 主机驱动里的 input_delay_ns 参数是什么含义？把它设成 0 "
+  },
+  "S02#s27|S02#s41~3||S02#s28|S02#s41~3||S03#s61~5|S03#s61~10||S02#s27|S02#s41~2||S02#s28|S02#s41~2": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "在 ESP32 SPI 主机驱动中，如果读取频率受到 MISO 延迟限制，有哪些方法可以提升最大读取频率？另外，如果只需要写数据而不需要读取，该如何去掉频率上限的限制？",
+     "n1": "可以使用 IO_MUX 管脚或插入 Dummy 位来保留较高的读取频率，也可以调用 spi_get_freq_limit() 查询主机当前最大读取频率上限。",
+     "n2": "若主机仅做写操作，可在配置标志中置位 SPI_DEVICE_NO_DUMMY 来禁用 Dummy 位和频率检查，这样即使走 GPIO 矩阵输出频率也能达到 80 MHz。"
+    },
+    {
+     "i": 1,
+     "q": "使用 ESP32 SPI 驱动时，半双工模式下同时做读写操作遇到与 DMA 不兼容的问题，有哪些解决办法？另外启用 DMA 时对 RX 缓冲区有什么要求？",
+     "n1": "可以改用全双工传输、禁用 DMA（spi_bus_initialize 最后一个参数传 0，但单次收发不能超过 64 字节），或者改用命令和地址字段代替写入阶段。",
+     "n2": "启用 DMA 时，RX 缓冲区必须从 32 位边界开始且字节长度为 4 的倍数，否则 DMA 可能覆盖未对齐区域的数据。"
+    },
+    {
+     "i": 2,
+     "q": "",
+     "n1": "",
+     "n2": ""
+    },
+    {
+     "i": 3,
+     "q": "在 ESP32 SPI 主机驱动中，input_delay_ns 配置为 0 时驱动能否正常工作？设置精确值具体有什么好处？另外，实际使用中哪些因素可能导致真实的输入延迟超过器件手册标称值？",
+     "n1": "input_delay_ns 设为 0 时驱动仍可运行，但设置精确值能正确计算全双工传输的频率限制，并在半双工模式下用 Dummy 位准确补偿时序。",
+     "n2": "实际 PCB 布线设计不佳或总线上负载电容过大，都会增加输入延迟，导致实测值超过器件规格说明中的标称值。"
+    },
+    {
+     "i": 4,
+     "q": "在使用 spi_device_queue_trans() 排队一笔 SPI 中断传输时，哪种情况下会返回 ESP_ERR_INVALID_ARG？另外，ESP32 SPI 已知问题中，全双工模式下 dummy_bits 字段的行为是怎样的？",
+     "n1": "若指定了 SPI_TRANS_CS_KEEP_ACTIVE 标志但未提前调用 spi_device_acquire_bus() 获取总线，或者设置了 SPI_TRANS_DMA_BUFFER_ALIGN_MANUAL 但缓冲区不符合 DMA 要求，都会返回 ESP_ERR_INVALID_ARG。",
+     "n2": "在读写阶段同时进行的情况下，无论全双工还是半双工模式，spi_device_interface_config_t 和 spi_transaction_ext_t 中的 dummy_bits 均会失效。"
+    }
+   ],
+   "verify": [
+    {
+     "i": 0,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    },
+    {
+     "i": 1,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    }
+   ],
+   "raw": "[\n{\"i\": 0, \"q\": \"在 ESP32 SPI 主机驱动中，如果读取频率受到 MISO 延迟限制，有哪些方法可以提升最大读取频率？另外，如果只需要写数据而不需要读取，该如何去掉频率上限的限制？\", \"n1\": \"可以使用 IO_MUX 管脚或插入 Dummy 位来保留较高的读取频率，也可以调用 spi_get_freq_limit() 查询主机当前最大读取频率上限。\", \"n2\": \"若主机仅做写操作，可在配置标志中置位 SPI_DEVICE_NO_DUMMY 来禁用 Dummy 位和频率检查，这样即使走 GPIO 矩阵输出频率也能达到 80 MHz。\"},\n{\"i\": 1, \"q\": \"使用 ESP32 SPI 驱动时，半双工模式下同时做读写操作遇到与 DMA 不兼容的问题，有哪些解决办法？另外启用 DMA 时对 RX 缓冲区有什么要求？\", \"n1\": \"可以改用全双工传输、禁用 DMA（spi_bus_initialize 最后一个参数传 0，但单次收发不能超过 64 字节），或者改用命令和地址字段代替写入阶段。\", \"n2\": \"启用 DMA 时，RX 缓冲区必须从 32 位边界开始且字节长度为 4 的倍数，否则 DMA 可能覆盖未对齐区域的数据。\"},\n{\"i\": 2, \"q\": \"\", \"n1\": \"\", \"n2\": \"\"},\n{\"i\": 3, \"q\": \"在"
+  },
+  "S03#s61~4|S03#s61~9||S02#s28|S02#s37~2||S03#s61~2|S03#s61~7||S02#s28|S02#s37||S02#s28|S02#s36~2": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "heap_caps_get_minimum_free_size 返回的最小空闲内存值，和运行时动态添加的堆区域有什么关系？另外，如果我想知道某个已分配指针实际占用了多少字节，应该调用哪个函数？",
+     "n1": "通过 heap_caps_add_region_with_caps() 在运行时添加的堆区域不会被纳入最小空闲内存的计算范围。",
+     "n2": "可以调用 heap_caps_get_allocated_size(ptr) 获取该指针实际分配的内存大小，但若指针无效则会触发断言崩溃。"
+    },
+    {
+     "i": 1,
+     "q": "在 ESP-IDF SPI 主机驱动中，半双工事务同时进行读写时无法使用 DMA，有哪些方法可以绕开这个限制？",
+     "n1": "可以改用全双工传输事务来替代半双工模式。",
+     "n2": "也可以在调用总线初始化函数时将最后一个参数设为 0 来禁用 DMA，但这样会限制单次传输不超过 64 字节。"
+    },
+    {
+     "i": 2,
+     "q": "ESP-IDF 中分配对齐内存用的 heap_caps_aligned_alloc，其对齐参数有什么要求？释放这类内存时官方推荐用哪个函数？",
+     "n1": "alignment 参数必须是 2 的幂次方。",
+     "n2": "heap_caps_aligned_free() 已被标记为废弃，官方建议改用 heap_caps_free() 来释放对齐分配的内存。"
+    },
+    {
+     "i": 3,
+     "q": "用 SPI 驱动发送不足 32 位的数据时，SPI_SWAP_DATA_TX 宏的 LEN 参数起什么作用？接收端对应的宏又是怎么处理数据的？",
+     "n1": "SPI_SWAP_DATA_TX 的 LEN 参数表示实际要发送的位数，因为 SPI 外设从 MSB 开始发送，该宏会将数据移位到 MSB 对齐的位置。",
+     "n2": "接收端使用 SPI_SWAP_DATA_RX，同样因为外设从 MSB 写入数据，该宏会将收到的数据从 MSB 移位到 LSB，方便作为普通无符号整数使用。"
+    },
+    {
+     "i": 4,
+     "q": "在 ESP-IDF SPI 总线配置中，max_transfer_sz 的默认值是如何确定的？DMA 传输的 burst size 又有哪些设置规则？",
+     "n1": "当 max_transfer_sz 设为 0 时，若启用了 DMA 则默认值为 4092 字节；若禁用 DMA 则默认为硬件 FIFO 长度（通常是 64 字节）。",
+     "n2": "dma_burst_size 仅在 DMA 启用时生效，设为 0 表示使用驱动默认值；非零时必须是芯片支持的值之一，且在不支持可配置 burst size 的芯片上该字段会被忽略。"
+    }
+   ],
+   "verify": [
+    {
+     "i": 1,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    }
+   ],
+   "raw": "[{\"i\": 0, \"q\": \"heap_caps_get_minimum_free_size 返回的最小空闲内存值，和运行时动态添加的堆区域有什么关系？另外，如果我想知道某个已分配指针实际占用了多少字节，应该调用哪个函数？\", \"n1\": \"通过 heap_caps_add_region_with_caps() 在运行时添加的堆区域不会被纳入最小空闲内存的计算范围。\", \"n2\": \"可以调用 heap_caps_get_allocated_size(ptr) 获取该指针实际分配的内存大小，但若指针无效则会触发断言崩溃。\"}, {\"i\": 1, \"q\": \"在 ESP-IDF SPI 主机驱动中，半双工事务同时进行读写时无法使用 DMA，有哪些方法可以绕开这个限制？\", \"n1\": \"可以改用全双工传输事务来替代半双工模式。\", \"n2\": \"也可以在调用总线初始化函数时将最后一个参数设为 0 来禁用 DMA，但这样会限制单次传输不超过 64 字节。\"}, {\"i\": 2, \"q\": \"ESP-IDF 中分配对齐内存用的 heap_caps_aligned_alloc，其对齐参数有什么要求？释放这类内存时官方推荐用哪个函数？\", \"n1\": \"alignment 参数必须是 2 的幂次方。\", \"n2\": \"heap_caps_aligned_free() 已被标记为废弃，官方建"
+  },
+  "S03#s61~6|S03#s61~10||S03#s61~2|S03#s61~6||S03#s61~5|S03#s61~9||S03#s61~3|S03#s61~7||S02#s35|S02#s41~2": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "在 ESP-IDF 中，如果我想遍历所有堆的内存块并对每个块执行自定义回调，应该用哪个函数？它需要哪些参数？",
+     "n1": "heap_caps_walk_all 用于遍历所有堆，参数为 walker_func（每个内存块的回调函数）和 user_data（用户自定义数据的不透明指针）",
+     "n2": "heap_caps_walk 则可以按能力标志筛选需要遍历的堆，额外需要传入 caps 参数指定堆的能力集合"
+    },
+    {
+     "i": 1,
+     "q": "heap_caps_aligned_alloc 申请到的内存，应该用哪个函数释放？有什么需要注意的地方？",
+     "n1": "可以用 heap_caps_aligned_free 释放，但该函数已被标记为废弃（deprecated），建议改用 heap_caps_free() 替代",
+     "n2": "heap_caps_aligned_alloc 要求 alignment 必须是 2 的幂次，若分配失败则返回 NULL"
+    },
+    {
+     "i": 2,
+     "q": "调用 heap_caps_get_allocated_size 时，如果传入的指针无效会发生什么？该函数的返回值代表什么？",
+     "n1": "如果传入的指针无效，程序会因断言失败而崩溃（app will crash with an assertion failure）",
+     "n2": "返回值是该指针对应内存块实际分配的字节数，实际大小可能大于 malloc 时请求的大小"
+    },
+    {
+     "i": 3,
+     "q": "在 ESP-IDF 中，heap_caps_calloc 和普通 calloc 有什么关系？它的参数 n 和 size 分别代表什么？",
+     "n1": "heap_caps_calloc 等价于支持能力标志的 libc calloc()，在 IDF 中 calloc(p) 等同于以 MALLOC_CAP_8BIT 为 caps 调用 heap_caps_calloc(p)",
+     "n2": "n 表示要连续分配的内存块数量，size 表示每块内存的字节数，分配的内存初始值被置零"
+    },
+    {
+     "i": 4,
+     "q": "用 spi_bus_initialize 初始化 SPI 总线时，DMA 通道应该如何选择？不同选择对事务大小有什么影响？",
+     "n1": "选择具体 DMA 通道后，总线上事务的大小仅受内部内存容量限制；选择 SPI_DMA_DISABLED 则会限制事务大小；也可以设置 SPI_DMA_CH_AUTO 让驱动自动分配",
+     "n2": "使用 DMA 时，收发缓冲区必须分配在支持 DMA 的内存中；另外 SPI0/1 不受支持，且 ISR 始终在调用该函数的核心上执行"
+    }
+   ],
+   "verify": [
+    {
+     "i": 0,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    }
+   ],
+   "raw": "[{\"i\": 0, \"q\": \"在 ESP-IDF 中，如果我想遍历所有堆的内存块并对每个块执行自定义回调，应该用哪个函数？它需要哪些参数？\", \"n1\": \"heap_caps_walk_all 用于遍历所有堆，参数为 walker_func（每个内存块的回调函数）和 user_data（用户自定义数据的不透明指针）\", \"n2\": \"heap_caps_walk 则可以按能力标志筛选需要遍历的堆，额外需要传入 caps 参数指定堆的能力集合\"},{\"i\": 1, \"q\": \"heap_caps_aligned_alloc 申请到的内存，应该用哪个函数释放？有什么需要注意的地方？\", \"n1\": \"可以用 heap_caps_aligned_free 释放，但该函数已被标记为废弃（deprecated），建议改用 heap_caps_free() 替代\", \"n2\": \"heap_caps_aligned_alloc 要求 alignment 必须是 2 的幂次，若分配失败则返回 NULL\"},{\"i\": 2, \"q\": \"调用 heap_caps_get_allocated_size 时，如果传入的指针无效会发生什么？该函数的返回值代表什么？\", \"n1\": \"如果传入的指针无效，程序会因断言失败而崩溃（app will crash with an assertion fail"
+  },
+  "S02#s36|S02#s41~2||S02#s37|S02#s41~2||S02#s35~2|S02#s41~2||S02#s36~2|S02#s41~2||S02#s35|S02#s37": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "在 ESP32 上用 SPI 总线配置结构体时，使用 GPIO matrix 和 IO_MUX 路由信号有什么区别？如果我想排队一个中断事务，调用哪个函数，它的 ticks_to_wait 参数该如何设置才能永不超时？",
+     "n1": "GPIO matrix 会带来约 25ns 的输入延迟，可能导致超过 40MHz 时读取错误；当所有信号都能通过 IO_MUX 路由或为 -1 时，驱动会自动使用 IO_MUX",
+     "n2": "使用 spi_device_queue_trans 排队中断事务，将 ticks_to_wait 设为 portMAX_DELAY 可以永不超时"
+    },
+    {
+     "i": 1,
+     "q": "我想用 SPI 发送 9 位整数数据，应该怎么用宏来转换格式？另外在调用 spi_device_queue_trans 时，什么情况下会返回 ESP_ERR_INVALID_ARG？",
+     "n1": "使用 SPI_SWAP_DATA_TX(0x145, 9) 将数据转换为可直接发送的格式，因为 SPI 外设从 MSB 开始发送，该宏会将数据移位到 MSB",
+     "n2": "当参数无效时返回 ESP_ERR_INVALID_ARG，例如指定了 SPI_TRANS_CS_KEEP_ACTIVE 但未先调用 spi_device_acquire_bus()，或设置了 SPI_TRANS_DMA_BUFFER_ALIGN_MANUAL 但缓冲区不支持 DMA 或地址长度未对齐缓存行"
+    },
+    {
+     "i": 2,
+     "q": "在 SPI 驱动中为 DMA 分配内存有什么专用的辅助函数？需要注意什么使用前提，分配的内存该如何释放？",
+     "n1": "需要在 spi_bus_initialize() 调用之后再使用该辅助函数，驱动内部会自动处理缓存和硬件对齐问题",
+     "n2": "分配成功返回内存指针，失败或总线未初始化时返回 NULL；释放时直接调用标准 free() 即可"
+    },
+    {
+     "i": 3,
+     "q": "在配置 SPI 总线时，如果启用了 DMA，max_transfer_sz 字段默认值是多少？dma_burst_size 字段设为 0 意味着什么？",
+     "n1": "启用 DMA 时 max_transfer_sz 默认为 4092 字节，未启用 DMA 时默认为硬件 FIFO 长度（通常 64 字节）",
+     "n2": "dma_burst_size 设为 0 表示使用驱动默认值；非零时必须是芯片支持的值，不支持可配置 burst size 的芯片上该字段会被忽略"
+    },
+    {
+     "i": 4,
+     "q": "调用 spi_bus_initialize 初始化 SPI 总线时，DMA 通道应该如何选择？另外，如果我收到了 15 位的 SPI 数据存放在 4 字节数组里，怎么把它转换成整数？",
+     "n1": "选择 DMA 通道后事务大小仅受内部内存限制；设为 SPI_DMA_DISABLED 则限制事务大小，只用 SPI flash 时也可设此值；设为 SPI_DMA_CH_AUTO 让驱动自动分配通道",
+     "n2": "使用 SPI_SWAP_DATA_RX(*(uint32_t*)t->rx_data, 15) 将数据从 MSB 移位到 LSB，转换为 uint16_t 整数"
+    }
+   ],
+   "verify": [
+    {
+     "i": 2,
+     "answerable": "Y",
+     "copied": "N",
+     "ambiguous": "N"
+    }
+   ],
+   "raw": "[{\"i\": 0, \"q\": \"在 ESP32 上用 SPI 总线配置结构体时，使用 GPIO matrix 和 IO_MUX 路由信号有什么区别？如果我想排队一个中断事务，调用哪个函数，它的 ticks_to_wait 参数该如何设置才能永不超时？\", \"n1\": \"GPIO matrix 会带来约 25ns 的输入延迟，可能导致超过 40MHz 时读取错误；当所有信号都能通过 IO_MUX 路由或为 -1 时，驱动会自动使用 IO_MUX\", \"n2\": \"使用 spi_device_queue_trans 排队中断事务，将 ticks_to_wait 设为 portMAX_DELAY 可以永不超时\"}, {\"i\": 1, \"q\": \"我想用 SPI 发送 9 位整数数据，应该怎么用宏来转换格式？另外在调用 spi_device_queue_trans 时，什么情况下会返回 ESP_ERR_INVALID_ARG？\", \"n1\": \"使用 SPI_SWAP_DATA_TX(0x145, 9) 将数据转换为可直接发送的格式，因为 SPI 外设从 MSB 开始发送，该宏会将数据移位到 MSB\", \"n2\": \"当参数无效时返回 ESP_ERR_INVALID_ARG，例如指定了 SPI_TRANS_CS_KEEP_ACTIVE 但未先调用 spi_device_acquire_bu"
+  },
+  "S02#s35|S02#s36~2": {
+   "draft": [
+    {
+     "i": 0,
+     "q": "在ESP32上用spi_bus_initialize初始化SPI总线时，如果启用了DMA，发送和接收缓冲区有什么限制？另外，max_transfer_sz设为0时默认是多少字节？",
+     "n1": "启用DMA时，收发缓冲区必须分配在支持DMA的内存区域中",
+     "n2": "启用DMA且max_transfer_sz为0时，默认传输大小为4092字节；若DMA禁用则默认为硬件FIFO长度（通常64字节）"
+    }
+   ],
+   "verify": [],
+   "raw": "[{\"i\": 0, \"q\": \"在ESP32上用spi_bus_initialize初始化SPI总线时，如果启用了DMA，发送和接收缓冲区有什么限制？另外，max_transfer_sz设为0时默认是多少字节？\", \"n1\": \"启用DMA时，收发缓冲区必须分配在支持DMA的内存区域中\", \"n2\": \"启用DMA且max_transfer_sz为0时，默认传输大小为4092字节；若DMA禁用则默认为硬件FIFO长度（通常64字节）\"}]"
+  }
+ }
+}

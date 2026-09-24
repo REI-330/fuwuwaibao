@@ -1,0 +1,4280 @@
+{
+  "schema": "career-graph-raw-blocks/v1",
+  "sourceId": "S17",
+  "url": "https://www.onetonline.org/link/summary/17-2061.00",
+  "finalUrl": "https://www.onetonline.org/link/summary/17-2061.00",
+  "fetchedAt": "2026-09-15T09:56:51.087Z",
+  "httpStatus": 200,
+  "contentType": "text/html; charset=UTF-8",
+  "charset": "utf-8",
+  "byteSize": 202122,
+  "sha256": "d794f16ae87d74c69e5ddfdb49dae51111d5ae43b1e1993773f3c312cfd758f0",
+  "title": "17-2061.00 - Computer Hardware Engineers",
+  "hops": [
+    {
+      "url": "https://www.onetonline.org/link/summary/17-2061.00",
+      "finalUrl": "https://www.onetonline.org/link/summary/17-2061.00",
+      "httpStatus": 200,
+      "bytes": 202122,
+      "charset": "utf-8"
+    }
+  ],
+  "flags": [],
+  "extractionPass": "pruned",
+  "prunedBlockCount": 472,
+  "prunedTextLength": 28743,
+  "blockCount": 472,
+  "textLength": 28743,
+  "ranges": [
+    [
+      0,
+      27
+    ],
+    [
+      29,
+      39
+    ],
+    [
+      41,
+      69
+    ],
+    [
+      71,
+      308
+    ],
+    [
+      310,
+      525
+    ],
+    [
+      527,
+      601
+    ],
+    [
+      603,
+      830
+    ],
+    [
+      832,
+      845
+    ],
+    [
+      847,
+      875
+    ],
+    [
+      877,
+      964
+    ],
+    [
+      966,
+      1219
+    ],
+    [
+      1221,
+      1234
+    ],
+    [
+      1236,
+      1264
+    ],
+    [
+      1266,
+      1357
+    ],
+    [
+      1359,
+      1600
+    ],
+    [
+      1602,
+      1611
+    ],
+    [
+      1613,
+      1651
+    ],
+    [
+      1653,
+      1672
+    ],
+    [
+      1674,
+      1689
+    ],
+    [
+      1691,
+      1707
+    ],
+    [
+      1709,
+      1728
+    ],
+    [
+      1730,
+      1739
+    ],
+    [
+      1741,
+      1750
+    ],
+    [
+      1752,
+      1774
+    ],
+    [
+      1776,
+      1785
+    ],
+    [
+      1787,
+      1796
+    ],
+    [
+      1798,
+      1809
+    ],
+    [
+      1811,
+      1836
+    ],
+    [
+      1838,
+      1856
+    ],
+    [
+      1858,
+      1870
+    ],
+    [
+      1872,
+      1888
+    ],
+    [
+      1890,
+      1909
+    ],
+    [
+      1911,
+      1936
+    ],
+    [
+      1938,
+      1969
+    ],
+    [
+      1971,
+      1976
+    ],
+    [
+      1978,
+      2064
+    ],
+    [
+      2066,
+      2085
+    ],
+    [
+      2087,
+      2281
+    ],
+    [
+      2283,
+      2302
+    ],
+    [
+      2304,
+      2476
+    ],
+    [
+      2478,
+      2497
+    ],
+    [
+      2499,
+      2623
+    ],
+    [
+      2625,
+      2644
+    ],
+    [
+      2646,
+      2768
+    ],
+    [
+      2770,
+      2789
+    ],
+    [
+      2791,
+      2935
+    ],
+    [
+      2937,
+      2956
+    ],
+    [
+      2958,
+      3047
+    ],
+    [
+      3049,
+      3068
+    ],
+    [
+      3070,
+      3249
+    ],
+    [
+      3251,
+      3270
+    ],
+    [
+      3272,
+      3367
+    ],
+    [
+      3369,
+      3388
+    ],
+    [
+      3390,
+      3480
+    ],
+    [
+      3482,
+      3501
+    ],
+    [
+      3503,
+      3557
+    ],
+    [
+      3559,
+      3578
+    ],
+    [
+      3580,
+      3722
+    ],
+    [
+      3724,
+      3743
+    ],
+    [
+      3745,
+      3804
+    ],
+    [
+      3806,
+      3825
+    ],
+    [
+      3827,
+      3954
+    ],
+    [
+      3956,
+      3975
+    ],
+    [
+      3977,
+      4099
+    ],
+    [
+      4101,
+      4120
+    ],
+    [
+      4122,
+      4193
+    ],
+    [
+      4195,
+      4214
+    ],
+    [
+      4216,
+      4345
+    ],
+    [
+      4347,
+      4366
+    ],
+    [
+      4368,
+      4474
+    ],
+    [
+      4476,
+      4495
+    ],
+    [
+      4497,
+      4539
+    ],
+    [
+      4541,
+      4552
+    ],
+    [
+      4554,
+      4579
+    ],
+    [
+      4581,
+      4596
+    ],
+    [
+      4598,
+      4775
+    ],
+    [
+      4777,
+      4796
+    ],
+    [
+      4798,
+      4930
+    ],
+    [
+      4932,
+      4951
+    ],
+    [
+      4953,
+      5063
+    ],
+    [
+      5065,
+      5084
+    ],
+    [
+      5086,
+      5247
+    ],
+    [
+      5249,
+      5268
+    ],
+    [
+      5270,
+      5376
+    ],
+    [
+      5378,
+      5397
+    ],
+    [
+      5399,
+      5551
+    ],
+    [
+      5553,
+      5572
+    ],
+    [
+      5574,
+      5700
+    ],
+    [
+      5702,
+      5721
+    ],
+    [
+      5723,
+      5899
+    ],
+    [
+      5901,
+      5920
+    ],
+    [
+      5922,
+      6122
+    ],
+    [
+      6124,
+      6143
+    ],
+    [
+      6145,
+      6358
+    ],
+    [
+      6360,
+      6379
+    ],
+    [
+      6381,
+      6527
+    ],
+    [
+      6529,
+      6548
+    ],
+    [
+      6550,
+      6736
+    ],
+    [
+      6738,
+      6757
+    ],
+    [
+      6759,
+      6891
+    ],
+    [
+      6893,
+      6912
+    ],
+    [
+      6914,
+      7211
+    ],
+    [
+      7213,
+      7232
+    ],
+    [
+      7234,
+      7366
+    ],
+    [
+      7368,
+      7387
+    ],
+    [
+      7389,
+      7514
+    ],
+    [
+      7516,
+      7535
+    ],
+    [
+      7537,
+      7700
+    ],
+    [
+      7702,
+      7721
+    ],
+    [
+      7723,
+      7838
+    ],
+    [
+      7840,
+      7859
+    ],
+    [
+      7861,
+      8022
+    ],
+    [
+      8024,
+      8043
+    ],
+    [
+      8045,
+      8290
+    ],
+    [
+      8292,
+      8311
+    ],
+    [
+      8313,
+      8421
+    ],
+    [
+      8423,
+      8442
+    ],
+    [
+      8444,
+      8557
+    ],
+    [
+      8559,
+      8578
+    ],
+    [
+      8580,
+      8745
+    ],
+    [
+      8747,
+      8766
+    ],
+    [
+      8768,
+      8888
+    ],
+    [
+      8890,
+      8909
+    ],
+    [
+      8911,
+      9085
+    ],
+    [
+      9087,
+      9106
+    ],
+    [
+      9108,
+      9275
+    ],
+    [
+      9277,
+      9296
+    ],
+    [
+      9298,
+      9455
+    ],
+    [
+      9457,
+      9476
+    ],
+    [
+      9478,
+      9762
+    ],
+    [
+      9764,
+      9783
+    ],
+    [
+      9785,
+      9796
+    ],
+    [
+      9798,
+      9822
+    ],
+    [
+      9824,
+      9851
+    ],
+    [
+      9853,
+      9872
+    ],
+    [
+      9874,
+      9933
+    ],
+    [
+      9935,
+      9954
+    ],
+    [
+      9956,
+      10028
+    ],
+    [
+      10030,
+      10049
+    ],
+    [
+      10051,
+      10088
+    ],
+    [
+      10090,
+      10109
+    ],
+    [
+      10111,
+      10202
+    ],
+    [
+      10204,
+      10223
+    ],
+    [
+      10225,
+      10254
+    ],
+    [
+      10256,
+      10275
+    ],
+    [
+      10277,
+      10328
+    ],
+    [
+      10330,
+      10349
+    ],
+    [
+      10351,
+      10402
+    ],
+    [
+      10404,
+      10423
+    ],
+    [
+      10425,
+      10518
+    ],
+    [
+      10520,
+      10539
+    ],
+    [
+      10541,
+      10605
+    ],
+    [
+      10607,
+      10626
+    ],
+    [
+      10628,
+      10653
+    ],
+    [
+      10655,
+      10674
+    ],
+    [
+      10676,
+      10728
+    ],
+    [
+      10730,
+      10749
+    ],
+    [
+      10751,
+      10797
+    ],
+    [
+      10799,
+      10818
+    ],
+    [
+      10820,
+      10869
+    ],
+    [
+      10871,
+      10890
+    ],
+    [
+      10892,
+      10940
+    ],
+    [
+      10942,
+      10961
+    ],
+    [
+      10963,
+      11012
+    ],
+    [
+      11014,
+      11033
+    ],
+    [
+      11035,
+      11068
+    ],
+    [
+      11070,
+      11089
+    ],
+    [
+      11091,
+      11152
+    ],
+    [
+      11154,
+      11165
+    ],
+    [
+      11167,
+      11179
+    ],
+    [
+      11181,
+      11216
+    ],
+    [
+      11218,
+      11237
+    ],
+    [
+      11239,
+      11306
+    ],
+    [
+      11308,
+      11327
+    ],
+    [
+      11329,
+      11400
+    ],
+    [
+      11402,
+      11421
+    ],
+    [
+      11423,
+      11510
+    ],
+    [
+      11512,
+      11531
+    ],
+    [
+      11533,
+      11597
+    ],
+    [
+      11599,
+      11618
+    ],
+    [
+      11620,
+      11696
+    ],
+    [
+      11698,
+      11717
+    ],
+    [
+      11719,
+      11800
+    ],
+    [
+      11802,
+      11821
+    ],
+    [
+      11823,
+      11880
+    ],
+    [
+      11882,
+      11901
+    ],
+    [
+      11903,
+      11955
+    ],
+    [
+      11957,
+      11976
+    ],
+    [
+      11978,
+      12047
+    ],
+    [
+      12049,
+      12068
+    ],
+    [
+      12070,
+      12137
+    ],
+    [
+      12139,
+      12158
+    ],
+    [
+      12160,
+      12218
+    ],
+    [
+      12220,
+      12239
+    ],
+    [
+      12241,
+      12311
+    ],
+    [
+      12313,
+      12332
+    ],
+    [
+      12334,
+      12426
+    ],
+    [
+      12428,
+      12447
+    ],
+    [
+      12449,
+      12538
+    ],
+    [
+      12540,
+      12559
+    ],
+    [
+      12561,
+      12643
+    ],
+    [
+      12645,
+      12664
+    ],
+    [
+      12666,
+      12729
+    ],
+    [
+      12731,
+      12750
+    ],
+    [
+      12752,
+      12837
+    ],
+    [
+      12839,
+      12858
+    ],
+    [
+      12860,
+      12871
+    ],
+    [
+      12873,
+      12896
+    ],
+    [
+      12898,
+      12906
+    ],
+    [
+      12908,
+      12913
+    ],
+    [
+      12915,
+      12961
+    ],
+    [
+      12963,
+      12972
+    ],
+    [
+      12974,
+      13055
+    ],
+    [
+      13057,
+      13075
+    ],
+    [
+      13077,
+      13311
+    ],
+    [
+      13313,
+      13325
+    ],
+    [
+      13327,
+      13461
+    ],
+    [
+      13463,
+      13480
+    ],
+    [
+      13482,
+      13731
+    ],
+    [
+      13733,
+      13742
+    ],
+    [
+      13744,
+      13758
+    ],
+    [
+      13760,
+      13771
+    ],
+    [
+      13773,
+      13795
+    ],
+    [
+      13797,
+      13811
+    ],
+    [
+      13813,
+      13827
+    ],
+    [
+      13829,
+      13843
+    ],
+    [
+      13845,
+      13875
+    ],
+    [
+      13877,
+      13891
+    ],
+    [
+      13893,
+      13904
+    ],
+    [
+      13906,
+      13934
+    ],
+    [
+      13936,
+      13986
+    ],
+    [
+      13988,
+      14005
+    ],
+    [
+      14007,
+      14153
+    ],
+    [
+      14155,
+      14293
+    ],
+    [
+      14295,
+      14306
+    ],
+    [
+      14308,
+      14327
+    ],
+    [
+      14329,
+      14344
+    ],
+    [
+      14346,
+      14487
+    ],
+    [
+      14489,
+      14508
+    ],
+    [
+      14510,
+      14575
+    ],
+    [
+      14577,
+      14596
+    ],
+    [
+      14598,
+      14745
+    ],
+    [
+      14747,
+      14766
+    ],
+    [
+      14768,
+      14940
+    ],
+    [
+      14942,
+      14961
+    ],
+    [
+      14963,
+      15000
+    ],
+    [
+      15002,
+      15021
+    ],
+    [
+      15023,
+      15170
+    ],
+    [
+      15172,
+      15191
+    ],
+    [
+      15193,
+      15277
+    ],
+    [
+      15279,
+      15298
+    ],
+    [
+      15300,
+      15374
+    ],
+    [
+      15376,
+      15395
+    ],
+    [
+      15397,
+      15445
+    ],
+    [
+      15447,
+      15466
+    ],
+    [
+      15468,
+      15577
+    ],
+    [
+      15579,
+      15598
+    ],
+    [
+      15600,
+      15664
+    ],
+    [
+      15666,
+      15685
+    ],
+    [
+      15687,
+      15792
+    ],
+    [
+      15794,
+      15813
+    ],
+    [
+      15815,
+      15863
+    ],
+    [
+      15865,
+      15884
+    ],
+    [
+      15886,
+      15945
+    ],
+    [
+      15947,
+      15966
+    ],
+    [
+      15968,
+      16036
+    ],
+    [
+      16038,
+      16057
+    ],
+    [
+      16059,
+      16110
+    ],
+    [
+      16112,
+      16131
+    ],
+    [
+      16133,
+      16186
+    ],
+    [
+      16188,
+      16207
+    ],
+    [
+      16209,
+      16301
+    ],
+    [
+      16303,
+      16351
+    ],
+    [
+      16353,
+      16439
+    ],
+    [
+      16441,
+      16489
+    ],
+    [
+      16491,
+      16502
+    ],
+    [
+      16504,
+      16520
+    ],
+    [
+      16522,
+      16674
+    ],
+    [
+      16676,
+      16695
+    ],
+    [
+      16697,
+      16794
+    ],
+    [
+      16796,
+      16815
+    ],
+    [
+      16817,
+      17017
+    ],
+    [
+      17019,
+      17038
+    ],
+    [
+      17040,
+      17103
+    ],
+    [
+      17105,
+      17124
+    ],
+    [
+      17126,
+      17218
+    ],
+    [
+      17220,
+      17239
+    ],
+    [
+      17241,
+      17373
+    ],
+    [
+      17375,
+      17394
+    ],
+    [
+      17396,
+      17446
+    ],
+    [
+      17448,
+      17467
+    ],
+    [
+      17469,
+      17611
+    ],
+    [
+      17613,
+      17632
+    ],
+    [
+      17634,
+      17645
+    ],
+    [
+      17647,
+      17666
+    ],
+    [
+      17668,
+      17813
+    ],
+    [
+      17815,
+      17834
+    ],
+    [
+      17836,
+      17967
+    ],
+    [
+      17969,
+      17988
+    ],
+    [
+      17990,
+      18072
+    ],
+    [
+      18074,
+      18093
+    ],
+    [
+      18095,
+      18235
+    ],
+    [
+      18237,
+      18256
+    ],
+    [
+      18258,
+      18430
+    ],
+    [
+      18432,
+      18451
+    ],
+    [
+      18453,
+      18517
+    ],
+    [
+      18519,
+      18538
+    ],
+    [
+      18540,
+      18605
+    ],
+    [
+      18607,
+      18626
+    ],
+    [
+      18628,
+      18678
+    ],
+    [
+      18680,
+      18699
+    ],
+    [
+      18701,
+      18812
+    ],
+    [
+      18814,
+      18833
+    ],
+    [
+      18835,
+      18846
+    ],
+    [
+      18848,
+      18857
+    ],
+    [
+      18859,
+      19032
+    ],
+    [
+      19034,
+      19053
+    ],
+    [
+      19055,
+      19294
+    ],
+    [
+      19296,
+      19315
+    ],
+    [
+      19317,
+      19466
+    ],
+    [
+      19468,
+      19487
+    ],
+    [
+      19489,
+      19592
+    ],
+    [
+      19594,
+      19613
+    ],
+    [
+      19615,
+      19779
+    ],
+    [
+      19781,
+      19800
+    ],
+    [
+      19802,
+      20045
+    ],
+    [
+      20047,
+      20066
+    ],
+    [
+      20068,
+      20194
+    ],
+    [
+      20196,
+      20215
+    ],
+    [
+      20217,
+      20228
+    ],
+    [
+      20230,
+      20239
+    ],
+    [
+      20241,
+      20335
+    ],
+    [
+      20337,
+      20340
+    ],
+    [
+      20342,
+      20379
+    ],
+    [
+      20381,
+      20384
+    ],
+    [
+      20386,
+      20421
+    ],
+    [
+      20423,
+      20425
+    ],
+    [
+      20427,
+      20470
+    ],
+    [
+      20472,
+      20483
+    ],
+    [
+      20485,
+      20507
+    ],
+    [
+      20509,
+      20518
+    ],
+    [
+      20520,
+      20633
+    ],
+    [
+      20635,
+      20654
+    ],
+    [
+      20656,
+      20827
+    ],
+    [
+      20829,
+      20848
+    ],
+    [
+      20850,
+      21068
+    ],
+    [
+      21070,
+      21089
+    ],
+    [
+      21091,
+      21219
+    ],
+    [
+      21221,
+      21240
+    ],
+    [
+      21242,
+      21347
+    ],
+    [
+      21349,
+      21368
+    ],
+    [
+      21370,
+      21472
+    ],
+    [
+      21474,
+      21493
+    ],
+    [
+      21495,
+      21669
+    ],
+    [
+      21671,
+      21690
+    ],
+    [
+      21692,
+      21799
+    ],
+    [
+      21801,
+      21820
+    ],
+    [
+      21822,
+      21914
+    ],
+    [
+      21916,
+      21935
+    ],
+    [
+      21937,
+      22066
+    ],
+    [
+      22068,
+      22087
+    ],
+    [
+      22089,
+      22236
+    ],
+    [
+      22238,
+      22257
+    ],
+    [
+      22259,
+      22334
+    ],
+    [
+      22336,
+      22355
+    ],
+    [
+      22357,
+      22518
+    ],
+    [
+      22520,
+      22539
+    ],
+    [
+      22541,
+      22630
+    ],
+    [
+      22632,
+      22651
+    ],
+    [
+      22653,
+      22783
+    ],
+    [
+      22785,
+      22804
+    ],
+    [
+      22806,
+      22961
+    ],
+    [
+      22963,
+      22982
+    ],
+    [
+      22984,
+      23093
+    ],
+    [
+      23095,
+      23114
+    ],
+    [
+      23116,
+      23206
+    ],
+    [
+      23208,
+      23227
+    ],
+    [
+      23229,
+      23240
+    ],
+    [
+      23242,
+      23251
+    ],
+    [
+      23253,
+      23271
+    ],
+    [
+      23273,
+      23339
+    ],
+    [
+      23341,
+      23733
+    ],
+    [
+      23735,
+      23994
+    ],
+    [
+      23996,
+      24015
+    ],
+    [
+      24017,
+      24182
+    ],
+    [
+      24184,
+      24203
+    ],
+    [
+      24205,
+      24224
+    ],
+    [
+      24226,
+      24590
+    ],
+    [
+      24592,
+      24611
+    ],
+    [
+      24613,
+      24897
+    ],
+    [
+      24899,
+      25037
+    ],
+    [
+      25039,
+      25058
+    ],
+    [
+      25060,
+      25079
+    ],
+    [
+      25081,
+      25092
+    ],
+    [
+      25094,
+      25105
+    ],
+    [
+      25107,
+      25224
+    ],
+    [
+      25226,
+      25245
+    ],
+    [
+      25247,
+      25350
+    ],
+    [
+      25352,
+      25371
+    ],
+    [
+      25373,
+      25575
+    ],
+    [
+      25577,
+      25596
+    ],
+    [
+      25598,
+      25742
+    ],
+    [
+      25744,
+      25763
+    ],
+    [
+      25765,
+      25864
+    ],
+    [
+      25866,
+      25885
+    ],
+    [
+      25887,
+      25994
+    ],
+    [
+      25996,
+      26015
+    ],
+    [
+      26017,
+      26028
+    ],
+    [
+      26030,
+      26055
+    ],
+    [
+      26057,
+      26082
+    ],
+    [
+      26084,
+      26103
+    ],
+    [
+      26105,
+      26135
+    ],
+    [
+      26137,
+      26148
+    ],
+    [
+      26150,
+      26161
+    ],
+    [
+      26163,
+      26180
+    ],
+    [
+      26182,
+      26198
+    ],
+    [
+      26200,
+      26228
+    ],
+    [
+      26230,
+      26269
+    ],
+    [
+      26271,
+      26305
+    ],
+    [
+      26307,
+      26312
+    ],
+    [
+      26314,
+      26326
+    ],
+    [
+      26328,
+      26349
+    ],
+    [
+      26351,
+      26399
+    ],
+    [
+      26401,
+      26414
+    ],
+    [
+      26416,
+      26718
+    ],
+    [
+      26720,
+      26731
+    ],
+    [
+      26733,
+      26756
+    ],
+    [
+      26758,
+      26776
+    ],
+    [
+      26778,
+      26796
+    ],
+    [
+      26798,
+      26809
+    ],
+    [
+      26811,
+      26827
+    ],
+    [
+      26829,
+      26848
+    ],
+    [
+      26850,
+      26913
+    ],
+    [
+      26915,
+      26993
+    ],
+    [
+      26995,
+      27041
+    ],
+    [
+      27043,
+      27107
+    ],
+    [
+      27109,
+      27172
+    ],
+    [
+      27174,
+      27207
+    ],
+    [
+      27209,
+      27242
+    ],
+    [
+      27244,
+      27273
+    ],
+    [
+      27275,
+      27306
+    ],
+    [
+      27308,
+      27353
+    ],
+    [
+      27355,
+      27366
+    ],
+    [
+      27368,
+      27393
+    ],
+    [
+      27395,
+      27612
+    ],
+    [
+      27614,
+      27624
+    ],
+    [
+      27626,
+      27772
+    ],
+    [
+      27774,
+      27797
+    ],
+    [
+      27799,
+      27820
+    ],
+    [
+      27822,
+      27878
+    ],
+    [
+      27880,
+      27929
+    ],
+    [
+      27931,
+      27966
+    ],
+    [
+      27968,
+      28031
+    ],
+    [
+      28033,
+      28052
+    ],
+    [
+      28054,
+      28110
+    ],
+    [
+      28112,
+      28152
+    ],
+    [
+      28154,
+      28192
+    ],
+    [
+      28194,
+      28258
+    ],
+    [
+      28260,
+      28281
+    ],
+    [
+      28283,
+      28294
+    ],
+    [
+      28296,
+      28318
+    ],
+    [
+      28320,
+      28348
+    ],
+    [
+      28350,
+      28356
+    ],
+    [
+      28358,
+      28390
+    ],
+    [
+      28392,
+      28419
+    ],
+    [
+      28421,
+      28451
+    ],
+    [
+      28453,
+      28637
+    ],
+    [
+      28639,
+      28649
+    ],
+    [
+      28651,
+      28689
+    ],
+    [
+      28691,
+      28719
+    ],
+    [
+      28721,
+      28731
+    ],
+    [
+      28733,
+      28743
+    ]
+  ],
+  "blocks": [
+    {
+      "kind": "heading",
+      "level": 1,
+      "text": "Computer Hardware Engineers"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "17-2061.00"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Bright Outlook\n\nUpdated 2026"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Research, design, develop, or test computer or computer-related equipment for commercial, industrial, military, or scientific use. May supervise the manufacturing and installation of computer or computer-related equipment and components."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Sample of reported job titles:\nDesign Engineer, Engineer, Field Service Engineer, Hardware Design Engineer, Hardware Engineer, Physical Design Engineer, Project Engineer, Staff Engineer, Systems Integration Engineer"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "See the easy-read overview for Computer Hardware Engineers at My Next Move"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "You will be leaving O*NET OnLine to visit our sister site My Next Move. You can return by using the Back button in your browser, or by choosing “O*NET OnLine” from the O*NET Sites menu at the bottom of any page in My Next Move."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Yes, let’s go"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Don’t ask again this session"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "See the easy-read overview for Computer Hardware Engineers at My Next Move for Veterans"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "You will be leaving O*NET OnLine to visit our sister site My Next Move for Veterans. You can return by using the Back button in your browser, or by choosing “O*NET OnLine” from the O*NET Sites menu at the bottom of any page in My Next Move for Veterans."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Yes, let’s go"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Don’t ask again this session"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Ver la perspectiva general fácil de leer para Ingenieros de Computadoras en Mi Próximo Paso"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Saldrá de O*NET OnLine para visitar nuestro sitio afiliado Mi Próximo Paso. Puede regresar usando el botón Atrás en su navegador, o eligiendo “O*NET OnLine” en el menú Sitios O*NET en la parte inferior de cualquier página en Mi Próximo Paso."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Sí, vamos"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "No preguntar de nuevo para esta sesión"
+    },
+    {
+      "kind": "heading",
+      "level": 6,
+      "text": "Worker Requirements"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Software Skills"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Essential Skills"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Transferable Skills"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Knowledge"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Education"
+    },
+    {
+      "kind": "heading",
+      "level": 6,
+      "text": "Worker Characteristics"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Abilities"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Interests"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Work Styles"
+    },
+    {
+      "kind": "heading",
+      "level": 6,
+      "text": "Workforce Characteristics"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Wages & Employment"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Job Openings"
+    },
+    {
+      "kind": "heading",
+      "level": 6,
+      "text": "More Information"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related Occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Professional Associations"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Occupation-Specific Information"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Tasks"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Update knowledge and skills to keep up with rapid advancements in computer technology."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Design and develop computer hardware and support peripherals, including central processing units (CPUs), support logic, microprocessors, custom integrated circuits, and printers and disk drives."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Confer with engineering staff and consult specifications to evaluate interface between hardware and software and operational and performance requirements of overall system."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Build, test, and modify product prototypes, using working models or theoretical models constructed with computer simulation."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Write detailed functional specifications that document the hardware development process and support hardware introduction."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Test and verify hardware and support peripherals to ensure that they meet specifications and requirements, by recording and analyzing test data."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Direct technicians, engineering designers or other technical support personnel as needed."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Provide technical support to designers, marketing and sales departments, suppliers, engineers and other team members throughout the product development and implementation process."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Select hardware and material, assuring compliance with specifications and product requirements."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Store, retrieve, and manipulate data for analysis of system capabilities and requirements."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Analyze user needs and recommend appropriate hardware."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Evaluate factors such as reporting formats required, cost constraints, and need for security restrictions to determine hardware configuration."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Provide training and support to system designers and users."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Monitor functioning of equipment and make necessary modifications to ensure system operates in conformance with specifications."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Specify power supply requirements and configuration, drawing on system performance expectations and design specifications."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Assemble and modify existing pieces of equipment to meet special needs."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Analyze information to determine, recommend, and plan layout, including type of computers and peripheral equipment modifications."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Recommend purchase of equipment to control dust, temperature, and humidity in area of system installation."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Find occupations related to multiple tasks"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Occupational Requirements"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Work Activities"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Working with Computers — Using computers and computer systems (including hardware and software) to program, write software, set up functions, enter data, or process information."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Making Decisions and Solving Problems — Analyzing information and evaluating results to choose the best solution and solve problems."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Updating and Using Relevant Knowledge — Keeping up-to-date technically and applying new knowledge to your job."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Analyzing Data or Information — Identifying the underlying principles, reasons, or facts of information by breaking down information or data into separate parts."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Getting Information — Observing, receiving, and otherwise obtaining information from all relevant sources."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Thinking Creatively — Developing, designing, or creating new applications, ideas, relationships, systems, or products, including artistic contributions."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Processing Information — Compiling, coding, categorizing, calculating, tabulating, auditing, or verifying information or data."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Communicating with Supervisors, Peers, or Subordinates — Providing information to supervisors, co-workers, and subordinates by telephone, in written form, e-mail, or in person."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Evaluating Information to Determine Compliance with Standards — Using relevant information and individual judgment to determine whether events or processes comply with laws, regulations, or standards."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Estimating the Quantifiable Characteristics of Products, Events, or Information — Estimating sizes, distances, and quantities; or determining time, costs, resources, or materials needed to perform a work activity."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Documenting/Recording Information — Entering, transcribing, recording, storing, or maintaining information in written or electronic/magnetic form."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Identifying Objects, Actions, and Events — Identifying information by categorizing, estimating, recognizing differences or similarities, and detecting changes in circumstances or events."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Organizing, Planning, and Prioritizing Work — Developing specific goals and plans to prioritize, organize, and accomplish your work."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Drafting, Laying Out, and Specifying Technical Devices, Parts, and Equipment — Providing documentation, detailed instructions, drawings, or specifications to tell others about how devices, parts, equipment, or structures are to be fabricated, constructed, assembled, modified, maintained, or used."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Developing Objectives and Strategies — Establishing long-range objectives and specifying the strategies and actions to achieve them."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Interpreting the Meaning of Information for Others — Translating or explaining what information means and how it can be used."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Providing Consultation and Advice to Others — Providing guidance and expert advice to management or other groups on technical, systems-, or process-related topics."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Developing and Building Teams — Encouraging and building mutual trust, respect, and cooperation among team members."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Monitoring Processes, Materials, or Surroundings — Monitoring and reviewing information from materials, events, or the environment, to detect or assess problems."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Repairing and Maintaining Electronic Equipment — Servicing, repairing, calibrating, regulating, fine-tuning, or testing machines, devices, and equipment that operate primarily on the basis of electrical or electronic (not mechanical) principles."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Scheduling Work and Activities — Scheduling events, programs, and activities, as well as the work of others."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Coordinating the Work and Activities of Others — Getting members of a group to work together to accomplish tasks."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Establishing and Maintaining Interpersonal Relationships — Developing constructive and cooperative working relationships with others, and maintaining them over time."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Judging the Qualities of Objects, Services, or People — Assessing the value, importance, or quality of things or people."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Training and Teaching Others — Identifying the educational needs of others, developing formal educational or training programs or classes, and teaching or instructing others."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Guiding, Directing, and Motivating Subordinates — Providing guidance and direction to subordinates, including setting performance standards and monitoring performance."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Inspecting Equipment, Structures, or Materials — Inspecting equipment, structures, or materials to identify the cause of errors or other problems or defects."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Communicating with People Outside the Organization — Communicating with people outside the organization, representing the organization to customers, the public, government, and other external sources. This information can be exchanged in person, in writing, or by telephone or e-mail."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Detailed Work Activities"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Update technical knowledge."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Design electronic or computer equipment or instrumentation."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Confer with technical personnel to prepare designs or operational plans."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Create physical models or prototypes."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Test performance of electrical, electronic, mechanical, or integrated systems or equipment."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Prepare procedural documents."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Conduct validation tests of equipment or processes."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Supervise engineering or other technical personnel."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Recommend technical design or process changes to improve efficiency, quality, or performance."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Analyze design requirements for computer or electronics systems."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Select project materials."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Advise customers on the use of products or services."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Provide technical guidance to other personnel."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Train personnel on proper operational procedures."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Monitor processes for compliance with standards."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Determine operational criteria or specifications."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Assemble equipment or components."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Find occupations related to multiple detailed work activities"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Work Context"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "E-Mail — 93% responded “Every day.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Duration of Typical Work Week — 76% responded “More than 40 hours.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Spend Time Sitting — 61% responded “Continually or almost continually.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Face-to-Face Discussions with Individuals and Within Teams — 50% responded “Every day.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Indoors, Environmentally Controlled — 79% responded “Every day.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Importance of Being Exact or Accurate — 59% responded “Extremely important.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Work With or Contribute to a Work Group or Team — 50% responded “Very important.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Freedom to Make Decisions — 66% responded “Some freedom.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Telephone Conversations — 39% responded “Every day.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Determine Tasks, Priorities and Goals — 66% responded “Some freedom.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Contact With Others — 34% responded “Constant contact with others.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Level of Competition — 59% responded “Highly competitive.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Time Pressure — 45% responded “Once a week or more but not every day.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Coordinate or Lead Others in Accomplishing Work Activities — 52% responded “Very important.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Impact of Decisions on Co-workers or Company Results — 38% responded “Important results.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Written Letters and Memos — 32% responded “Once a week or more but not every day.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Importance of Repeating Same Tasks — 32% responded “Important.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Work Outcomes and Results of Other Workers — 46% responded “Moderate responsibility.”"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Experience Requirements"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Job Zone"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Title"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Job Zone Four: Considerable Preparation Needed"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Education"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Most of these occupations require a four-year bachelor's degree, but some do not."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related Experience"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "A considerable amount of work-related skill, knowledge, or experience is needed for these occupations. For example, an accountant must complete four years of college and work for several years in accounting to be considered qualified."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Job Training"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Employees in these occupations usually need several years of work-related experience, on-the-job training, and/or vocational training."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Job Zone Examples"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Many of these occupations involve coordinating, supervising, managing, or training others. Examples include real estate brokers, sales managers, database administrators, graphic designers, conservation scientists, art directors, and cost estimators."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "SVP Range"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "(7.0 to < 8.0)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Training & Credentials"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "State training"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Local training"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Certifications"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Find certifications nationwide"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "State licenses"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Apprenticeship Opportunities"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Example apprenticeship titles for this occupation:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Hardware Engineer"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Specific title(s) listed above are vetted by industry and approved by the U.S. Department of Labor for use in a Registered Apprenticeship Program."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Start your career and build your skillset. Visit Apprenticeship.gov\nexternal site to learn about opportunities related to this occupation."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Worker Requirements"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Software Skills"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Analytical or scientific software — MathWorks Simulink; Mentor Graphics LeonardoSpectrum; SAS Hot Technology ; The MathWorks MATLAB ; 49 more"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Compiler and decompiler software — Cadence Encounter RTL Compiler"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Computer aided design CAD software — Autodesk AutoCAD Hot Technology ; Dassault Systemes CATIA; PTC Creo Parametric; Xilinx ISE Foundation; 15 more"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Data base user interface and query software — Database software; Microsoft Access Hot Technology ; PCI Express PCIe In Demand ; Structured query language SQL Hot Technology"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Desktop communications software — Eko"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Development environment software — C ; Microsoft Visual Basic Hot Technology ; National Instruments LabVIEW; Register transfer language RTL; 9 more"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "File versioning software — Apache Subversion SVN Hot Technology ; Git Hot Technology"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Information retrieval or search software — Internet search engine software"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Internet browser software — Web browser software"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Object or component oriented development software — C++ ; Oracle Java Hot Technology ; Perl ; Python ; 2 more"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Office suite software — Microsoft Office software Hot Technology"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Operating system software — Cisco IOS; Linux ; Shell script Hot Technology ; UNIX Hot Technology ; 1 more"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Pattern design software — Block diagram software"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Presentation software — Microsoft PowerPoint Hot Technology"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Process mapping and design software — Microsoft Visio Hot Technology"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Program testing software — Windows kernel debuggers"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Spreadsheet software — Microsoft Excel Hot Technology"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Hot Technologies are requirements most frequently included across all employer job postings."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "See all 20 Hot Technologies for this occupation."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "In Demand skills are frequently included in employer job postings for this occupation."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "See all 13 In Demand skills for this occupation."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Essential Skills"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Critical Thinking — Using logic and reasoning to identify the strengths and weaknesses of alternative solutions, conclusions, or approaches to problems."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Reading Comprehension — Understanding written sentences and paragraphs in work-related documents."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Active Listening — Giving full attention to what other people are saying, taking time to understand the points being made, asking questions as appropriate, and not interrupting at inappropriate times."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Speaking — Talking to others to convey information effectively."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Writing — Communicating effectively in writing as appropriate for the needs of the audience."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Active Learning — Understanding the implications of new information for both current and future problem-solving and decision-making."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Mathematics — Using mathematics to solve problems."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Monitoring — Monitoring/Assessing performance of yourself, other individuals, or organizations to make improvements or take corrective action."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Transferable Skills"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Complex Problem Solving — Identifying complex problems and reviewing related information to develop and evaluate options and implement solutions."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Judgment and Decision Making — Considering the relative costs and benefits of potential actions to choose the most appropriate one."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Operations Analysis — Analyzing needs and product requirements to create a design."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Systems Analysis — Determining how a system should work and how changes in conditions, operations, and the environment will affect outcomes."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Systems Evaluation — Identifying measures or indicators of system performance and the actions needed to improve or correct performance, relative to the goals of the system."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Coordination — Adjusting actions in relation to others' actions."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Time Management — Managing one's own time and the time of others."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Instructing — Teaching others how to do something."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Operations Monitoring — Watching gauges, dials, or other indicators to make sure a machine is working properly."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Knowledge"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Computers and Electronics — Knowledge of circuit boards, processors, chips, electronic equipment, and computer hardware and software, including applications and programming."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Engineering and Technology — Knowledge of the practical application of engineering science and technology. This includes applying principles, techniques, procedures, and equipment to the design and production of various goods and services."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Design — Knowledge of design techniques, tools, and principles involved in production of precision technical plans, blueprints, drawings, and models."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Mathematics — Knowledge of arithmetic, algebra, geometry, calculus, statistics, and their applications."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "English Language — Knowledge of the structure and content of the English language including the meaning and spelling of words, and rules of composition and grammar."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Physics — Knowledge and prediction of physical principles, laws, their interrelationships, and applications to understanding fluid, material, and atmospheric dynamics, and mechanical, electrical, atomic and sub-atomic structures and processes."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Telecommunications — Knowledge of transmission, broadcasting, switching, control, and operation of telecommunications systems."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Education"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "How much education does a new hire need to perform a job in this occupation? Respondents said:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "48%"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "responded:\nBachelor’s degree required"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "34%"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "responded:\nMaster’s degree required"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "7%"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "responded:\nSome college, no degree required"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Worker Characteristics"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Abilities"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Deductive Reasoning — The ability to apply general rules to specific problems to produce answers that make sense."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Inductive Reasoning — The ability to combine pieces of information to form general rules or conclusions (includes finding a relationship among seemingly unrelated events)."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Information Ordering — The ability to arrange things or actions in a certain order or pattern according to a specific rule or set of rules (e.g., patterns of numbers, letters, words, pictures, mathematical operations)."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Oral Comprehension — The ability to listen to and understand information and ideas presented through spoken words and sentences."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Oral Expression — The ability to communicate information and ideas in speaking so others will understand."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Written Comprehension — The ability to read and understand information and ideas presented in writing."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Problem Sensitivity — The ability to tell when something is wrong or is likely to go wrong. It does not involve solving the problem, only recognizing that there is a problem."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Written Expression — The ability to communicate information and ideas in writing so others will understand."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Near Vision — The ability to see details at close range (within a few feet of the observer)."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Category Flexibility — The ability to generate or use different sets of rules for combining or grouping things in different ways."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Originality — The ability to come up with unusual or clever ideas about a given topic or situation, or to develop creative ways to solve a problem."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Speech Clarity — The ability to speak clearly so others can understand you."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Fluency of Ideas — The ability to come up with a number of ideas about a topic (the number of ideas is important, not their quality, correctness, or creativity)."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Speech Recognition — The ability to identify and understand the speech of another person."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Visualization — The ability to imagine how something will look after it is moved around or when its parts are moved or rearranged."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Flexibility of Closure — The ability to identify or detect a known pattern (a figure, object, word, or sound) that is hidden in other distracting material."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Mathematical Reasoning — The ability to choose the right mathematical methods or formulas to solve a problem."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Number Facility — The ability to add, subtract, multiply, or divide quickly and correctly."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Interests"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Interest code: RIC"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Want to discover your interests? Take the O*NET Interest Profiler."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Realistic — Work involves designing, building, or repairing of equipment, materials, or structures, engaging in physical activity, or working outdoors. Realistic occupations are often associated with engineering, mechanics and electronics, construction, woodworking, transportation, machine operation, agriculture, animal services, physical or manual labor, athletics, or protective services."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Engineering — Work involves applying science and technology to the design, building, testing, and use of electrical and electronic components, mechanical devices and machines, automotive, marine, and aerospace equipment and vehicles, materials, or structures."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Mechanics/Electronics — Work involves maintaining and repairing of machinery, such as automotive engines, electronic equipment, computers, and communication systems."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Investigative — Work involves studying and researching non-living objects, living organisms, disease or other forms of impairment, or human behavior. Investigative occupations are often associated with physical, life, medical, or social sciences, and can be found in the fields of humanities, mathematics/statistics, information technology, or health care service."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Conventional — Work involves following procedures and regulations to organize information or data, typically in a business setting. Conventional occupations are often associated with office work, accounting, mathematics/statistics, information technology, finance, or human resources."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Information Technology — Work involves designing, developing, testing, and maintaining computer software, hardware, networks, and systems."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Work Styles"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Innovation — A tendency to be inventive, to be imaginative, and to adopt new perspectives on ways to accomplish work."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Adaptability — A tendency to be open to and comfortable with change, new experiences, or ideas at work."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Achievement Orientation — A tendency to establish and maintain personally challenging work-related goals, set high work-related standards, and exert high effort toward meeting those goals and standards."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Intellectual Curiosity — A tendency to seek out and acquire new work-related knowledge and obtain a deep understanding of work-related subjects."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Attention to Detail — A tendency to be detail-oriented, organized, and thorough in completing work."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Dependability — A tendency to be reliable, responsible, and consistent in meeting work-related obligations."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Related occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Workforce Characteristics"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Wages & Employment Trends"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Median wages (2025)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$77.76 hourly, $161,740 annual"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "State wages"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Local wages"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Employment (2024)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "76,800 employees"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Projected growth (2024-2034)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Much faster than average (7% or higher)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Projected job openings (2024-2034)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "4,700"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "State trends"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Top industries (2024)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Professional, Scientific, and Technical Services"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Manufacturing"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Source: Bureau of Labor Statistics 2025 wage data\nexternal site and 2024-2034 employment projections\nexternal site.\n“Projected growth” represents the estimated change in total employment over the projections period (2024-2034). “Projected job openings” represent openings due to growth and replacement."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Job Openings on the Web"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "State job openings"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Local job openings"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "More Information"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Related Occupations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "15-1299.08 Computer Systems Engineers/Architects\nBright Outlook"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "17-3023.00 Electrical and Electronic Engineering Technologists and Technicians"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "17-2071.00 Electrical Engineers Bright Outlook"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "17-2072.00 Electronics Engineers, Except Computer Bright Outlook"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "17-3027.00 Mechanical Engineering Technologists and Technicians"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "17-2199.05 Mechatronics Engineers"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "17-2199.06 Microsystems Engineers"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "17-2199.08 Robotics Engineers"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "17-3024.01 Robotics Technicians"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "15-1252.00 Software Developers Bright Outlook"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "Professional Associations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Disclaimer:\nSources are listed to provide additional information on related jobs, specialties, and/or industries.\nLinks to non-DOL Internet sites are provided for your convenience and do not constitute an endorsement."
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "O*NET Ally"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Actively assisted with the O*NET data collection, helping to identify occupational experts who can be surveyed about their work in the occupation."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "View the list of Allies"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "National Associations"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "American Society for Engineering Education\nexternal site"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Association for Computing Machinery\nexternal site"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "IEEE Computer Society\nexternal site"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Institute of Electrical and Electronics Engineers\nexternal site"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "ISACA\nexternal site"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "National Society of Professional Engineers\nexternal site"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Society of Women Engineers\nexternal site"
+    },
+    {
+      "kind": "heading",
+      "level": 5,
+      "text": "Accreditation, Certification, & Unions"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Accreditation Board for Engineering and Technology\nexternal site"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "CompTIA\nexternal site"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "back to top"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Was this page helpful?"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Job Seeker Help • Contact Us"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Share:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Facebook\nX\nLinkedIn\nReddit\nEmail"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Link to Us • Cite this Page"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Creative Commons CC-BY\nLicense"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "17-2061.00 - Computer Hardware Engineers by U.S. Department of Labor, Employment and Training Administration is licensed under a Creative Commons Attribution 4.0 International License."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Follow us:"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "About this Site • Privacy • Disclaimer"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Site updated August 25, 2026"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Loading..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Loading..."
+    }
+  ]
+}

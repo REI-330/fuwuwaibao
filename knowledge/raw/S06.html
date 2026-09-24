@@ -1,0 +1,1038 @@
+<!doctype html><html lang="zh-cmn-Hans-CN"><head><meta charset="utf-8"/><!--[if IE]><link rel="shortcut icon" href="https://paddlepaddle-org-cn.cdn.bcebos.com/paddle-unique-front/favicon.ico" /><![endif]--><link rel="icon" href="https://paddlepaddle-org-cn.cdn.bcebos.com/paddle-unique-front/favicon-48.png" sizes="48x48"/><link rel="icon" href="https://paddlepaddle-org-cn.cdn.bcebos.com/paddle-unique-front/favicon-64.png" sizes="64x64"/><link rel="icon" href="https://paddlepaddle-org-cn.cdn.bcebos.com/paddle-unique-front/favicon-128.png" sizes="128x128"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#fff"/><link rel="manifest" href="https://paddlepaddle-org-cn.cdn.bcebos.com/paddle-unique-front/manifest.json"/><title>10分钟快速上手飞桨-使用文档-PaddlePaddle深度学习平台</title><meta name="keywords" content="10分钟快速上手飞桨一、快速安装飞桨,二、导入飞桨,三、实践：手写数字识别任务,四、总结3.1 数据集定义与加载,3.2 模型组网,3.3 模型训练与评估,3.4 模型推理开源深度学习平台,PaddlePaddle Fluid,飞桨,PaddlePaddle教程"/><meta name="description" content="从完成一个简单的『手写数字识别任务』开始，可快速了解深度学习模型开发的大致流程，并初步掌握飞桨框架 API 的使用方法。 如果已经安装好飞桨那么可以跳过此步骤。飞桨支持很多种安装方式，这里介绍其中一种"/><script>if (typeof (_historyPolyfill) === 'undefined') {
+
+        var _historyPolyfill = function (type) {
+            var orig = history[type];
+
+            function createNewEvent(eventName) {
+                var event;
+                if (typeof(Event) === 'function') {
+                    event = new Event(eventName);
+                } else {
+                    event = document.createEvent('Event');
+                    event.initEvent(eventName, true, true);
+                }
+                return event;
+            }
+
+            return function () {
+                var rv = orig.apply(this, arguments);
+                var typelow = type.toLowerCase();
+                var ontype = 'on' + typelow;
+                var e = createNewEvent(typelow);
+                e.arguments = arguments;
+                window.dispatchEvent(e);
+                typeof (window[ontype]) === 'function' && window[ontype].apply(this, arguments);
+                return rv;
+            };
+        };
+        history.pushState = _historyPolyfill('pushState');
+        history.replaceState = _historyPolyfill('replaceState');
+    }</script><script>// 百度统计
+        var _hmt = _hmt || {};
+        (function () {
+            var baiduTj = function () {
+                _hmt = _hmt || {};
+                var hmid = 'baidu-tj';
+                var oldHm = document.getElementById(hmid);
+                if (oldHm) {
+                    oldHm.parentNode.removeChild(oldHm);
+                }
+                var hm = document.createElement('script');
+                hm.id = hmid;
+                hm.src = 'https://hm.baidu.com/hm.js?89be97848720f62fa00a07b1e0d83ae6';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(hm, s);
+                setTimeout(function () {
+                    if (typeof (_hmt.push) !== 'function') {
+                        _hmt = undefined;
+                    }
+                }, 0);
+            }
+            baiduTj();
+            window.addEventListener('popstate', baiduTj);
+            window.addEventListener('pushstate', baiduTj);
+            window.addEventListener('replacestate', baiduTj);
+        })();</script><script>// 百度收录
+        (function () {
+            var baiduPush = function () {
+                var bpid = 'baidu-push';
+                var oldBp = document.getElementById('baidu-push');
+                if (oldBp) {
+                    oldBp.parentNode.removeChild(oldBp);
+                }
+                var bp = document.createElement('script');
+                bp.id = bpid;
+                var curProtocol = window.location.protocol.split(':')[0];
+                if (curProtocol === 'https') {
+                    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+                }
+                else {
+                    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+                }
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(bp, s);
+            }
+            baiduPush();
+            window.addEventListener('popstate', baiduPush);
+            window.addEventListener('pushstate', baiduPush);
+            window.addEventListener('replacestate', baiduPush);
+        })();</script><style>.paddle-s-e-o {
+        position: absolute;
+        overflow: hidden;
+        height: 0;
+        width: 0;
+    }</style><script defer="defer" src="https://paddlepaddle-org-cn.cdn.bcebos.com/paddle-unique-front/static/js/verdor.19b9cc3d.js"></script><script defer="defer" src="https://paddlepaddle-org-cn.cdn.bcebos.com/paddle-unique-front/static/js/common.627c84b2.js"></script><script defer="defer" src="https://paddlepaddle-org-cn.cdn.bcebos.com/paddle-unique-front/static/js/document.c86c8ca8.js"></script><link href="https://paddlepaddle-org-cn.cdn.bcebos.com/paddle-unique-front/static/css/verdor.cbeaa622.css" rel="stylesheet"><link href="https://paddlepaddle-org-cn.cdn.bcebos.com/paddle-unique-front/static/css/common.dab2e4f6.css" rel="stylesheet"></head><body class="wy-body-for-nav"><style>.paddle-logo {
+        position: absolute;
+        overflow: hidden;
+        height: 0;
+        width: 0;
+    }</style><div class="paddle-logo"><img src=""/></div><noscript>You need to enable JavaScript to run this app.</noscript><div style="height: 0; overflow: hidden">\u200E</div><div id="root"></div><script>(function(){window.pageData={"navData":null,"seo":{"title":"10分钟快速上手飞桨-使用文档-PaddlePaddle深度学习平台","keywords":"10分钟快速上手飞桨一、快速安装飞桨,二、导入飞桨,三、实践：手写数字识别任务,四、总结3.1 数据集定义与加载,3.2 模型组网,3.3 模型训练与评估,3.4 模型推理开源深度学习平台,PaddlePaddle Fluid,飞桨,PaddlePaddle教程","description":"从完成一个简单的『手写数字识别任务』开始，可快速了解深度学习模型开发的大致流程，并初步掌握飞桨框架 API 的使用方法。 如果已经安装好飞桨那么可以跳过此步骤。飞桨支持很多种安装方式，这里介绍其中一种"},"pageData":null}})();</script><script>window.docInfo={};</script><script>(function(){window.docInfo.lang="zh";})();</script><script>(function(){window.docInfo.version="3.3";})();</script><div class="paddle-s-e-o"><div class="header"></div></div><div class="paddle-s-e-o"><div class="docheader"><ul id="doc_version" class="doc-version"><li class="current"><a href="/change-version?version=3.3">3.3</a></li><li><a href="/change-version?version=3.2">3.2</a></li><li><a href="/change-version?version=3.1">3.1</a></li><li><a href="/change-version?version=3.0">3.0</a></li><li><a href="/change-version?version=develop">develop</a></li><li><a href="/change-version?version=3.0-beta">3.0-beta</a></li><li><a href="/change-version?version=2.6">2.6</a></li><li><a href="/change-version?version=2.5">2.5</a></li><li><a href="/change-version?version=2.4">2.4</a></li><li><a href="/change-version?version=2.3">2.3</a></li><li><a href="/change-version?version=2.2">2.2</a></li><li><a href="/change-version?version=2.1">2.1</a></li><li><a href="/change-version?version=2.0">2.0</a></li><li><a href="/change-version?version=1.8">1.8</a></li></ul><ul id="doc_lang" class="doc-lang"><li class="current"><a href="/change-lang?lang=zh">中文(简)</a></li><li><a href="/change-lang?lang=en">English(En)</a></li></ul></div><div id="document_content"><div class="wy-grid-for-nav"> 
+ <nav data-toggle="wy-nav-shift" class="wy-nav-side"> 
+  <div class="wy-side-scroll"> 
+   <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+    <ul class="current">
+     <li class="toctree-l1"><a class="reference internal" href="/documentation/docs/zh/install/index_cn.html">安装指南</a>
+      <ul>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/install/pip/frompip.html">Pip 安装</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/install/pip/linux-pip.html">Linux 下的 PIP 安装</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/install/pip/macos-pip.html">macOS 下的 PIP 安装</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/install/pip/windows-pip.html">Windows 下的 PIP 安装</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/install/docker/fromdocker.html">Docker 安装</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/install/docker/linux-docker.html">Linux 下的 Docker 安装</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/install/docker/macos-docker.html">macOS 下的 Docker 安装</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/install/docker/docker_list.html">Docker 列表</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/install/compile/fromsource.html">从源码编译</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/install/compile/linux-compile-by-make.html">Linux 下使用 make 从源码编译</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/install/compile/macos-compile-make.html">macOS 下使用 make 从源码编译</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/install/compile/linux-compile-by-ninja.html">Linux 下使用 ninja 从源码编译</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/install/compile/macos-compile-ninja.html">macOS 下使用 ninja 从源码编译</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/install/compile/windows-compile.html">Windows 下从源码编译</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/install/compile/arm-compile.html">飞腾/鲲鹏下从源码编译</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/install/compile/sw-compile.html">申威下从源码编译</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/install/compile/zhaoxin-compile.html">兆芯下从源码编译</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/install/Tables.html">附录</a></li>
+      </ul></li>
+     <li class="toctree-l1 current"><a class="reference internal" href="/documentation/docs/zh/guides/index_cn.html">使用指南</a>
+      <ul class="current">
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/guides/paddle_v3_features/index_cn.html">飞桨 3.0 全新特性</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/paddle_v3_features/overview_cn.html">飞桨框架 3.0 正式版发布——加速大模型时代的技术创新与产业应用</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/paddle_v3_features/auto_parallel_cn.html">自动并行训练</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/paddle_v3_features/cinn_cn.html">CINN 神经网络编译器</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/paddle_v3_features/higher_order_ad_cn.html">高阶自动微分功能支持科学计算</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/paddle_v3_features/sot_cn.html">动转静 SOT 原理及使用</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/paddle_v3_features/paddle_ir_cn.html">PIR 基本概念和开发</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/paddle_v3_features/paddle_trt_cn.html">Paddle Inference(TensorRT 子图引擎)</a></li>
+        </ul></li>
+       <li class="toctree-l2 current"><a class="reference internal" href="/documentation/docs/zh/guides/beginner/index_cn.html">模型开发入门</a>
+        <ul class="current">
+         <li class="toctree-l3 current"><a class="reference internal current" href="/documentation/docs/zh/guides/beginner/quick_start_cn.html">10分钟快速上手飞桨</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/beginner/tensor_cn.html">Tensor 介绍</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/beginner/data_load_cn.html">数据集定义与加载</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/beginner/data_preprocessing_cn.html">数据预处理</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/beginner/model_cn.html">模型组网</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/beginner/train_eval_predict_cn.html">模型训练、评估与推理</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/beginner/model_save_load_cn.html">模型保存与加载</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/guides/advanced/index_cn.html">模型开发更多用法</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/advanced/visualdl_usage_cn.html">使用 VisualDL 可视化模型，数据和训练</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/advanced/comate_paddle_cn.html">使用 Comate 加速飞桨编程</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/advanced/autograd_cn.html">自动微分机制介绍</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/advanced/layer_and_model_cn.html">使用 paddle.nn.Layer 自定义网络</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/advanced/customize_cn.html">自定义Loss、Metric 及 Callback</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/advanced/gradient_clip_cn.html">梯度裁剪方式介绍</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/advanced/model_to_onnx_cn.html">飞桨模型转 ONNX 模型</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/advanced/auto_type_promotion_cn.html">隐式数据类型提升介绍</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/guides/jit/index_cn.html">动态图转静态图</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/jit/basic_usage_cn.html">使用样例</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/jit/principle_cn.html">转换原理</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/jit/grammar_list_cn.html">支持语法</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/jit/case_analysis_cn.html">案例解析</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/jit/debugging_cn.html">报错调试</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/jit/limitations_cn.html">Limitations</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/guides/infer/index_cn.html">推理部署</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/infer/inference/inference_cn.html">服务器部署 — Paddle Inference</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/infer/mobile/mobile_index_cn.html">移动端/嵌入式部署 — Paddle Lite</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/infer/paddleslim/paddle_slim_cn.html">模型自动化压缩工具（ACT）</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/index_cn.html">分布式训练</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/distributed_overview.html">分布式训练简介</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/deployment_cn.html">环境部署</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/cluster_quick_start_collective_cn.html">快速开始-数据并行</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/cluster_quick_start_ps_cn.html">快速开始-参数服务器</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/data_parallel/index_cn.html">数据并行</a>
+          <ul>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/data_parallel/principle_and_demo_cn.html">原理和实践案例</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/data_parallel/recompute_cn.html">前向重计算</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/data_parallel/amp_cn.html">自动混合精度</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/data_parallel/gradient_merge_cn.html">Gradient Merge</a></li>
+          </ul></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/ps/index_cn.html">参数服务器</a>
+          <ul>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/ps/cluster_overview_ps_cn.html">参数服务器概述</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/ps/cluster_example_gpups_cn.html">纯 GPU 参数服务器</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/ps/cluster_example_cpups_cn.html">CPUPS 流式训练示例</a></li>
+          </ul></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/model_parallel_cn.html">张量模型并行</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/pipeline_parallel_cn.html">流水线并行</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/group_sharded_parallel_cn.html">分组切分并行</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/moe_cn.html">MoE</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/06_distributed_training/visual_pipeline_parallel_static_mode_cn.html">静态图流水并行时序图可视化工具</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/guides/performance_improving/index_cn.html">性能调优</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/performance_improving/amp_cn.html">自动混合精度训练（AMP）</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/performance_improving/profiling_model.html">模型性能分析（Profiler）</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/performance_improving/training_improving_model_cn.html">训练全流程自动调优（Beta）</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/index_cn.html">模型迁移</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_guide_cn.html">迁移指南</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_from_pytorch/index_cn.html">从 PyTorch 迁移到飞桨</a>
+          <ul>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_from_pytorch/pytorch_api_mapping_cn.html">PyTorch 最新 release 与 Paddle develop API 映射表</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_from_pytorch/cv_quick_start_cn.html">CV - 快速上手</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_from_pytorch/cv_experience_cn.html">CV - 迁移经验汇总</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_from_pytorch/nlp_fast_explore_cn.html">NLP - 快速上手</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_from_pytorch/nlp_migration_experiences_cn.html">NLP - 迁移经验汇总</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_from_pytorch/convert_net_structure_cn.html">解读网络结构转换</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_from_pytorch/convert_bert_weights_cn.html">解读 Bert 模型权重转换</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_from_pytorch/pytorch_custom_op_convert_cn.html">PyTorch 自定义算子转写教程</a></li>
+          </ul></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_with_paconvert_cn.html">代码自动转换工具</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_with_x2paddle_cn.html">使用 X2Paddle 迁移推理模型</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_from_older_versions/index_cn.html">迁移飞桨旧版本</a>
+          <ul>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_from_older_versions/update_cn.html">升级指南</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_from_older_versions/migration_cn.html">版本迁移工具</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_from_older_versions/load_old_format_model_cn.html">兼容载入旧格式模型</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/convert_from_older_versions/paddle_api_mapping_cn.html">Paddle 1.8 与 Paddle 2.0 API 映射表</a></li>
+          </ul></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/model_convert/paddle_2_x_cn.html">附录: 飞桨框架 2.x</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/guides/custom_op/index_cn.html">自定义算子</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/custom_op/new_cpp_op_cn.html">自定义 C++算子</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/custom_op/cpp_extension_cn.html">自定义 C++ 扩展</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/custom_op/new_python_op_cn.html">自定义 Python 算子</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/custom_op/cross_ecosystem_custom_op/index_cn.html">跨生态自定义算子接入</a>
+          <ul>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/custom_op/cross_ecosystem_custom_op/user_guide_cn.html">使用指南</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/custom_op/cross_ecosystem_custom_op/design_and_migration_cn.html">原理和迁移方式</a></li>
+          </ul></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/guides/flags/flags_cn.html">环境变量 FLAGS</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/flags/cudnn_cn.html">cudnn</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/flags/data_cn.html">数值计算</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/flags/debug_cn.html">调试</a>
+          <ul>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/guides/flags/check_nan_inf_cn.html">check nan inf 工具</a></li>
+          </ul></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/flags/device_cn.html">设备管理</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/flags/distributed_cn.html">分布式</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/flags/executor_cn.html">执行器</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/flags/memory_cn.html">存储管理</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/flags/npu_cn.html">昇腾 NPU</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/guides/flags/others_cn.html">其他</a></li>
+        </ul></li>
+      </ul></li>
+     <li class="toctree-l1"><a class="reference internal" href="/documentation/docs/zh/hardware_support/index_cn.html">硬件支持</a>
+      <ul>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/hardware_support/hardware_info_cn.html">飞桨产品硬件支持表</a></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/hardware_support/xpu/index_cn.html">昆仑芯 XPU 芯片</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/xpu/xpu-p800_install_cn.html">昆仑芯 XPU P800 安装说明</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/xpu/xpu-p800_paddle_tutorial_cn.html">昆仑芯 XPU P800 基于框架的使用指南</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/xpu/xpu-p800_paddlex_tutorial_cn.html">昆仑芯 XPU P800 基于 PaddleX 的使用指南</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/xpu/xpu-p800_support_cn.html">昆仑芯 XPU 支持模型</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/hardware_support/dcu/index_cn.html">海光 DCU 芯片</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/dcu/install_cn.html">海光 DCU 安装说明</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/dcu/paddle_tutorial_cn.html">海光 DCU 基于框架的使用指南</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/dcu/paddlex_tutorial_cn.html">海光 DCU 基于 PaddleX 的使用指南</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/dcu/support_cn.html">海光 DCU 验证模型</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/hardware_support/npu/index_cn.html">昇腾 NPU 芯片</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/npu/install_cn.html">昇腾 NPU 安装说明</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/npu/paddle_tutorial_cn.html">昇腾 NPU 基于框架的使用指南</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/npu/paddlex_tutorial_cn.html">昇腾 NPU 基于 PaddleX 的使用指南</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/npu/support_cn.html">昇腾 NPU 验证模型</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/hardware_support/mlu/index_cn.html">寒武纪 MLU 芯片</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/mlu/install_cn.html">寒武纪 MLU 安装说明</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/mlu/paddle_tutorial_cn.html">寒武纪 MLU 基于框架的使用指南</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/mlu/paddlex_tutorial_cn.html">寒武纪 MLU 基于 PaddleX 的使用指南</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/mlu/support_cn.html">寒武纪 MLU 验证模型</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/hardware_support/gcu/index_cn.html">燧原 GCU 芯片</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/gcu/install_cn.html">燧原 GCU 安装说明</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/gcu/paddlex_tutorial_cn.html">燧原 GCU 基于 PaddleX 的使用指南</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/gcu/support_cn.html">燧原 GCU 验证模型</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/hardware_support/sdaa/index_cn.html">太初 SDAA 芯片</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/sdaa/install_cn.html">太初 SDAA 安装说明</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/sdaa/paddle_tutorial_cn.html">太初 SDAA 基于框架的使用指南</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/hardware_support/metax/index_cn.html">METAX GPGPU 芯片</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/metax/install_cn.html">沐曦 曦云 C 系列 安装说明</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/metax/paddle_tutorial_cn.html">沐曦 曦云 C500 基于 PaddlePaddle 框架的使用指南</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/hardware_support/iluvatar_gpu/index_cn.html">天数 GPGPU 芯片</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/hardware_support/iluvatar_gpu/install_cn.html">天数 GPGPU 安装说明</a></li>
+        </ul></li>
+      </ul></li>
+     <li class="toctree-l1"><a class="reference internal" href="/documentation/docs/zh/practices/index_cn.html">应用实践</a>
+      <ul>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/practices/quick_start/index_cn.html">快速上手</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/quick_start/hello_paddle.html">hello paddle: 从普通程序走向机器学习程序</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/quick_start/dynamic_graph.html">动态图</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/quick_start/high_level_api.html">飞桨高层API使用指南</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/quick_start/save_model.html">模型保存及加载</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/quick_start/linear_regression.html">使用线性回归预测波士顿房价</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/practices/cv/index_cn.html">计算机视觉</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/cv/image_classification.html">使用LeNet在MNIST数据集实现图像分类</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/cv/convnet_image_classification.html">使用卷积神经网络进行图像分类</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/cv/image_classification_ViT.html">CIFAR-100数据集上基于Vision Transformer 实现图片分类</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/cv/glaucoma_classification.html">GAMMA比赛多模态眼底图像数据集下基于EfficientNet和ResNet构造fundus_img和oct_img的分类模型</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/cv/3D_image_classification_from_CT_scans.html">MosMedData: 新冠肺炎胸部 CT扫描数据集上基于3D-CNN实现二分类</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/cv/image_search.html">基于图片相似度的图片搜索</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/cv/image_segmentation.html">基于U-Net卷积神经网络实现宠物图像分割</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/cv/image_ocr.html">通过OCR实现验证码识别</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/cv/super_resolution_sub_pixel.html">通过Sub-Pixel实现图像超分辨率</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/cv/landmark_detection.html">人脸关键点检测</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/cv/pointnet.html">点云处理：实现PointNet点云分类</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/cv/pc_segmentation.html">点云处理：实现PointNet点云分割</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/practices/nlp/index_cn.html">自然语言处理</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/nlp/n_gram_model.html">用N-Gram模型在莎士比亚文集中训练word embedding</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/nlp/imdb_bow_classification.html">IMDB 数据集使用BOW网络的文本分类</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/nlp/pretrained_word_embeddings.html">使用预训练的词向量完成文本分类任务</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/nlp/seq2seq_with_attention.html">使用注意力机制的LSTM的机器翻译</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/nlp/transformer_in_English-to-Spanish.html">1. 项目背景</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/nlp/addition_rnn.html">使用序列到序列模型完成数字加法</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/practices/recommendations/index_cn.html">推荐</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/recommendations/collaborative_filtering.html">使用协同过滤实现电影推荐</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/practices/reinforcement_learning/index_cn.html">强化学习</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/reinforcement_learning/actor_critic_method.html">强化学习——Actor Critic Method</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/reinforcement_learning/advantage_actor_critic.html">强化学习——Advantage Actor-Critic(A2C)</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/reinforcement_learning/deep_deterministic_policy_gradient.html">强化学习——Deep Deterministic Policy Gradient (DDPG)</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/reinforcement_learning/dqn_fruit_merger.html">强化学习——DQN玩合成大西瓜</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/reinforcement_learning/AlphaZero.html">用飞桨框架2.0造一个会下五子棋的AI模型</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/practices/time_series/index_cn.html">时序数据</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/time_series/autoencoder.html">通过AutoEncoder实现时序数据异常检测</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/time_series/temperature_forecast.html">Jena Climate时间序列数据集上使用LSTM进行温度的预报</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/time_series/stock_forecast.html">证券数据集下使用LSTM模型预测A股走势</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/practices/jit/index_cn.html">动转静</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/jit/image_search_with_jit.html">使用动转静完成以图搜图</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/practices/gan/index_cn.html">生成式对抗网络</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/gan/cyclegan/cyclegan.html">图像风格迁移模型-CycleGAN</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/gan/dcgan_face/dcgan_face.html">通过DCGAN实现人脸图像生成</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/gan/GAN_with_MINIST/GAN_with_MINIST.html">MNIST数据集下用Paddle框架的动态图模式玩耍经典对抗生成网络（GAN）</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/practices/gan/Pix2Pix/Pix2Pix_with_Cityscapes.html">城市街景分割数据集下使用对抗网络Pix2Pix根据掩码生成街景</a></li>
+        </ul></li>
+      </ul></li>
+     <li class="toctree-l1"><a class="reference internal" href="/documentation/docs/zh/api/index_cn.html">API 文档</a></li>
+     <li class="toctree-l1"><a class="reference internal" href="/documentation/docs/zh/dev_guides/index_cn.html">贡献指南</a>
+      <ul>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/dev_guides/Overview_cn.html">概述</a></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/dev_guides/code_contributing_path_cn.html">代码贡献流程</a></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/dev_guides/api_contributing_guides/api_contributing_guides_cn.html">新增 API 开发&amp;提交流程</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/api_contributing_guides/read_before_contributing_cn.html">贡献前阅读</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/api_contributing_guides/new_python_api_cn.html">开发 API Python 端</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/api_contributing_guides/new_cpp_op_cn.html">开发 C++ 算子</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/api_contributing_guides/auto_parallel_op_cn.html">分布式算子开发</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/api_contributing_guides/api_design_guidelines_standard_cn.html">API 设计和命名规范</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/api_contributing_guides/api_docs_guidelines_cn.html">API 文档书写规范</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/api_contributing_guides/api_acceptance_criteria_cn.html">API 单测开发及验收规范</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/dev_guides/op_optimization/op_optimization_contributing_guides_cn.html">算子性能优化 提交流程</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/op_optimization/op_optimization_method_introduction_cn.html">算子性能优化 方法介绍</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/op_optimization/op_optimization_acceptance_criteria_cn.html">算子性能优化 验收规范</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/op_optimization/kernel_primitive_api/index_cn.html">Kernel Primitive API</a>
+          <ul>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/dev_guides/op_optimization/kernel_primitive_api/api_description_cn.html">API 介绍</a>
+            <ul>
+             <li class="toctree-l5"><a class="reference internal" href="/documentation/docs/zh/dev_guides/op_optimization/kernel_primitive_api/io_api_cn.html">API 介绍 - IO</a></li>
+             <li class="toctree-l5"><a class="reference internal" href="/documentation/docs/zh/dev_guides/op_optimization/kernel_primitive_api/compute_api_cn.html">API 介绍 - Compute</a></li>
+             <li class="toctree-l5"><a class="reference internal" href="/documentation/docs/zh/dev_guides/op_optimization/kernel_primitive_api/functor_api_cn.html">API 介绍 - OpFunc</a></li>
+            </ul></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/dev_guides/op_optimization/kernel_primitive_api/example_cn.html">API 示例</a>
+            <ul>
+             <li class="toctree-l5"><a class="reference internal" href="/documentation/docs/zh/dev_guides/op_optimization/kernel_primitive_api/add_example_cn.html">示例 - ElementwiseAdd</a></li>
+             <li class="toctree-l5"><a class="reference internal" href="/documentation/docs/zh/dev_guides/op_optimization/kernel_primitive_api/reduce_example_cn.html">示例 - Reduce</a></li>
+             <li class="toctree-l5"><a class="reference internal" href="/documentation/docs/zh/dev_guides/op_optimization/kernel_primitive_api/model_example_cn.html">示例 - Model</a></li>
+            </ul></li>
+          </ul></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/dev_guides/op_dtype_extension/op_dtype_extension_contributing_guides_cn.html">算子数据类型扩展 提交流程</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/op_dtype_extension/op_dtype_extension_acceptance_criteria_cn.html">算子数据类型扩展 验收规范</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/dev_guides/amp_precision/index_cn.html">低精度算子开发贡献指南</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/amp_precision/amp_op_dev_guide_cn.html">低精度算子支持开发规范</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/amp_precision/amp_test_dev_guide_cn.html">低精度算子单测开发规范</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/dev_guides/sugon/index_cn.html">曙光开发指南</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/sugon/compile_and_test_cn.html">曙光智算平台-Paddle 源码编译和单测执行</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/sugon/paddle_c86_cn.html">Paddle 适配 C86 加速卡详解</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/sugon/paddle_c86_fix_guides_cn.html">Paddle 框架下 ROCm(HIP)算子单测修复指导</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/index_cn.html">硬件接入飞桨后端指南</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/new_device_backend_overview_cn.html">硬件接入飞桨后端方案介绍</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/custom_device_overview_cn.html">训练硬件 Custom Device 接入方案介绍</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/custom_runtime_cn.html">自定义 Runtime</a>
+          <ul>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/runtime_data_type_cn.html">数据类型</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/device_api_cn.html">Device 接口</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/memory_api_cn.html">Memory 接口</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/stream_api_cn.html">Stream 接口</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/event_api_cn.html">Event 接口</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/ccl_api_cn.html">集合通讯接口</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/profiler_api_cn.html">Profiler 接口</a></li>
+          </ul></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/custom_kernel_cn.html">自定义 Kernel</a>
+          <ul>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/custom_kernel_docs/kernel_declare_cn.html">Kernel 函数声明</a></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/custom_kernel_docs/cpp_api_cn.html">Kernel 实现接口</a>
+            <ul>
+             <li class="toctree-l5"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/custom_kernel_docs/context_api_cn.html">Context API</a></li>
+             <li class="toctree-l5"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/custom_kernel_docs/tensor_api_cn.html">Tensor API</a></li>
+             <li class="toctree-l5"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/custom_kernel_docs/exception_api_cn.html">Exception API</a></li>
+            </ul></li>
+           <li class="toctree-l4"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/custom_kernel_docs/register_api_cn.html">Kernel 注册接口</a></li>
+          </ul></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/custom_device_docs/custom_device_example_cn.html">新硬件接入示例</a></li>
+        </ul></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/dev_guides/docs_contributing_guides_cn.html">文档贡献指南</a></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/dev_guides/style_guide_and_references/index_cn.html">规范和参考信息</a>
+        <ul>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/style_guides_cn.html">代码规范</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/style_guide_and_references/error_message_writing_specification_cn.html">报错信息文案书写规范</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/git_guides/codestyle_check_guide_cn.html">代码风格检查指南</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/git_guides/paddle_ci_manual_cn.html">Paddle CI 测试详解</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/style_guide_and_references/code_example_writing_specification_cn.html">Python 文档示例代码书写规范</a></li>
+         <li class="toctree-l3"><a class="reference internal" href="/documentation/docs/zh/dev_guides/style_guide_and_references/type_annotations_specification_cn.html">Python 类型提示标注规范</a></li>
+        </ul></li>
+      </ul></li>
+     <li class="toctree-l1"><a class="reference internal" href="/documentation/docs/zh/faq/index_cn.html">常见问题与解答</a>
+      <ul>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/faq/2.0.html">2.0 升级常见问题</a></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/faq/install_cn.html">安装常见问题</a></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/faq/data_cn.html">数据及其加载常见问题</a></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/faq/train_cn.html">组网、训练、评估常见问题</a></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/faq/save_cn.html">模型保存常见问题</a></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/faq/params_cn.html">参数调整常见问题</a></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/faq/distributed_cn.html">分布式训练常见问题</a></li>
+       <li class="toctree-l2"><a class="reference internal" href="/documentation/docs/zh/faq/others_cn.html">其他常见问题</a></li>
+      </ul></li>
+     <li class="toctree-l1"><a class="reference internal" href="/documentation/docs/zh/release_note_cn.html">3.2 Release Note</a></li>
+    </ul>
+   </div> 
+  </div> 
+  <div class="toc" id="navigation-toc"> 
+   <ul> 
+    <li><a class="reference internal" href="#">10分钟快速上手飞桨</a>
+     <ul> 
+      <li><a class="reference internal" href="#一、快速安装飞桨">一、快速安装飞桨</a></li> 
+      <li><a class="reference internal" href="#二、导入飞桨">二、导入飞桨</a></li> 
+      <li><a class="reference internal" href="#三、实践：手写数字识别任务">三、实践：手写数字识别任务</a>
+       <ul> 
+        <li><a class="reference internal" href="#3.1-数据集定义与加载">3.1 数据集定义与加载</a></li> 
+        <li><a class="reference internal" href="#3.2-模型组网">3.2 模型组网</a></li> 
+        <li><a class="reference internal" href="#3.3-模型训练与评估">3.3 模型训练与评估</a>
+         <ul> 
+          <li><a class="reference internal" href="#3.3.1-模型训练">3.3.1 模型训练</a></li> 
+          <li><a class="reference internal" href="#3.3.2-模型评估">3.3.2 模型评估</a></li> 
+         </ul> </li> 
+        <li><a class="reference internal" href="#3.4-模型推理">3.4 模型推理</a>
+         <ul> 
+          <li><a class="reference internal" href="#3.4.1-模型保存">3.4.1 模型保存</a></li> 
+          <li><a class="reference internal" href="#3.4.2-模型加载并执行推理">3.4.2 模型加载并执行推理</a></li> 
+         </ul> </li> 
+       </ul> </li> 
+      <li><a class="reference internal" href="#四、总结">四、总结</a></li> 
+     </ul> </li> 
+   </ul> 
+  </div> 
+ </nav> 
+ <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"> 
+  <div class="wy-nav-content"> 
+   <div class="rst-content style-external-links"> 
+    <div role="navigation" aria-label="breadcrumbs navigation"> 
+     <ul class="wy-breadcrumbs"> 
+      <li><a href="../../index_cn.html" class="icon icon-home"></a> »</li> 
+      <li><a href="../index_cn.html">使用指南</a> »</li> 
+      <li><a href="index_cn.html">模型开发入门</a> »</li> 
+      <li>10分钟快速上手飞桨</li> 
+      <li class="wy-breadcrumbs-aside"> <a href="https://github.com/PaddlePaddle/docs/blob/release/3.3/docs/guides/beginner/quick_start_cn.ipynb" class="fa fa-github"> 在 GitHub 上编辑</a> </li> 
+     </ul> 
+     <hr> 
+    </div>
+    <div role="main" class="document"> 
+     <div itemprop="articleBody"> 
+      <div class="section" id="10分钟快速上手飞桨"> 
+       <h1>10分钟快速上手飞桨<a class="headerlink" href="#10分钟快速上手飞桨" title="此标题的永久链接"></a></h1> 
+       <p>从完成一个简单的『手写数字识别任务』开始，可快速了解深度学习模型开发的大致流程，并初步掌握飞桨框架 API 的使用方法。</p> 
+       <div class="section" id="一、快速安装飞桨"> 
+        <h2>一、快速安装飞桨<a class="headerlink" href="#一、快速安装飞桨" title="此标题的永久链接"></a></h2> 
+        <p>如果已经安装好飞桨那么可以跳过此步骤。飞桨支持很多种安装方式，这里介绍其中一种简单的安装命令。</p> 
+        <blockquote> 
+         <div>
+          <p>注：目前飞桨支持 Python 3.6 ~ 3.9 版本，pip3 要求 20.2.2 或更高版本，请提前安装对应版本的 Python 和 pip 工具。</p> 
+         </div>
+        </blockquote> 
+        <div class="nbinput nblast docutils container"> 
+         <div class="prompt highlight-none notranslate">
+          <div class="highlight">
+           <pre><span></span>[2]:
+</pre>
+          </div> 
+         </div> 
+         <div class="input_area highlight-ipython3 notranslate">
+          <div class="highlight">
+           <pre><span></span><span class="c1"># 使用 pip 工具安装飞桨 CPU 版</span>
+<span class="o">!</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>paddlepaddle<span class="w"> </span>-i<span class="w"> </span>https://mirror.baidu.com/pypi/simple
+</pre>
+          </div> 
+         </div> 
+        </div> 
+        <p>该命令用于安装 CPU 版本的飞桨。如果要安装其他计算平台或操作系统支持的版本，可点击 <a class="reference external" href="https://www.paddlepaddle.org.cn/install/quick">快速安装</a> 查看安装引导。</p> 
+       </div> 
+       <div class="section" id="二、导入飞桨"> 
+        <h2>二、导入飞桨<a class="headerlink" href="#二、导入飞桨" title="此标题的永久链接"></a></h2> 
+        <p>安装完成后，需要在Python解释器中使用 import 导入飞桨，即可开始实践深度学习任务。</p> 
+        <p>若操作成功，会输出飞桨的版本号。</p> 
+        <div class="nbinput docutils container"> 
+         <div class="prompt highlight-none notranslate">
+          <div class="highlight">
+           <pre><span></span>[3]:
+</pre>
+          </div> 
+         </div> 
+         <div class="input_area highlight-ipython3 notranslate">
+          <div class="highlight">
+           <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">paddle</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">paddle</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre>
+          </div> 
+         </div> 
+        </div> 
+        <div class="nboutput nblast docutils container"> 
+         <div class="prompt empty docutils container"> 
+         </div> 
+         <div class="output_area docutils container"> 
+          <div class="highlight">
+           <pre>2.2.1
+</pre>
+          </div>
+         </div> 
+        </div> 
+       </div> 
+       <div class="section" id="三、实践：手写数字识别任务"> 
+        <h2>三、实践：手写数字识别任务<a class="headerlink" href="#三、实践：手写数字识别任务" title="此标题的永久链接"></a></h2> 
+        <p>『手写数字识别』是深度学习里的 Hello World 任务，用于对 0 ~ 9 的十类数字进行分类，即输入手写数字的图片，可识别出这个图片中的数字。</p> 
+        <p>本任务用到的数据集为 <a class="reference external" href="http://yann.lecun.com/exdb/mnist/">MNIST 手写数字数据集</a>，用于训练和测试模型。该数据集包含 60000 张训练图片、 10000 张测试图片、以及对应的分类标签文件，每张图片上是一个 0 ~ 9 的手写数字，分辨率为 28 * 28。部分图像和对应的分类标签如下图所示。</p> 
+        <img alt="../../_images/mnist.png" src="../../_images/mnist.png"> 
+        <p>图 1：MNIST 数据集样例</p> 
+        <p>开始之前，需要使用下面的命令安装 Python 的 matplotlib 库和 numpy 库，matplotlib 库用于可视化图片，numpy 库用于处理数据。</p> 
+        <div class="nbinput nblast docutils container"> 
+         <div class="prompt highlight-none notranslate">
+          <div class="highlight">
+           <pre><span></span>[3]:
+</pre>
+          </div> 
+         </div> 
+         <div class="input_area highlight-ipython3 notranslate">
+          <div class="highlight">
+           <pre><span></span><span class="c1"># 使用 pip 工具安装 matplotlib 和 numpy</span>
+<span class="o">!</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>matplotlib<span class="w"> </span>numpy<span class="w"> </span>-i<span class="w"> </span>https://mirror.baidu.com/pypi/simple
+</pre>
+          </div> 
+         </div> 
+        </div> 
+        <p>下面是手写数字识别任务的完整代码，如果想直接运行代码，可以拷贝下面的完整代码到一个Python文件中运行。</p> 
+        <div class="nbinput docutils container"> 
+         <div class="prompt highlight-none notranslate">
+          <div class="highlight">
+           <pre><span></span>[5]:
+</pre>
+          </div> 
+         </div> 
+         <div class="input_area highlight-ipython3 notranslate">
+          <div class="highlight">
+           <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">paddle</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">paddle.vision.transforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">Normalize</span>
+
+<span class="n">transform</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mf">127.5</span><span class="p">],</span> <span class="n">std</span><span class="o">=</span><span class="p">[</span><span class="mf">127.5</span><span class="p">],</span> <span class="n">data_format</span><span class="o">=</span><span class="s2">"CHW"</span><span class="p">)</span>
+<span class="c1"># 下载数据集并初始化 DataSet</span>
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">paddle</span><span class="o">.</span><span class="n">vision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">"train"</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">paddle</span><span class="o">.</span><span class="n">vision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">"test"</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+
+<span class="c1"># 模型组网并初始化网络</span>
+<span class="n">lenet</span> <span class="o">=</span> <span class="n">paddle</span><span class="o">.</span><span class="n">vision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">LeNet</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">paddle</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">lenet</span><span class="p">)</span>
+
+<span class="c1"># 模型训练的配置准备，准备损失函数，优化器和评价指标</span>
+<span class="n">model</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span>
+    <span class="n">paddle</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">()),</span>
+    <span class="n">paddle</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">(),</span>
+    <span class="n">paddle</span><span class="o">.</span><span class="n">metric</span><span class="o">.</span><span class="n">Accuracy</span><span class="p">(),</span>
+<span class="p">)</span>
+
+<span class="c1"># 模型训练</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># 模型评估</span>
+<span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># 保存模型</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"./output/mnist"</span><span class="p">)</span>
+<span class="c1"># 加载模型</span>
+<span class="n">model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"output/mnist"</span><span class="p">)</span>
+
+<span class="c1"># 从测试集中取出一张图片</span>
+<span class="n">img</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">test_dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># 将图片shape从1*28*28变为1*1*28*28，增加一个batch维度，以匹配模型输入格式要求</span>
+<span class="n">img_batch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"float32"</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># 执行推理并打印结果，此处predict_batch返回的是一个list，取出其中数据获得预测结果</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_batch</span><span class="p">(</span><span class="n">img_batch</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">pred_label</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"true label: </span><span class="si">{}</span><span class="s2">, pred label: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">label</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pred_label</span><span class="p">))</span>
+<span class="c1"># 可视化图片</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre>
+          </div> 
+         </div> 
+        </div> 
+        <div class="nboutput docutils container"> 
+         <div class="prompt empty docutils container"> 
+         </div> 
+         <div class="output_area docutils container"> 
+          <div class="highlight">
+           <pre>The loss value printed in the log is the current step, and the metric is the average value of previous steps.
+Epoch 1/5
+step 938/938 [==============================] - loss: 0.0519 - acc: 0.9344 - 14ms/step
+Epoch 2/5
+step 938/938 [==============================] - loss: 0.0239 - acc: 0.9767 - 14ms/step
+Epoch 3/5
+step 938/938 [==============================] - loss: 0.0416 - acc: 0.9811 - 14ms/step
+Epoch 4/5
+step 938/938 [==============================] - loss: 0.0084 - acc: 0.9837 - 14ms/step
+Epoch 5/5
+step 938/938 [==============================] - loss: 0.0838 - acc: 0.9860 - 14ms/step
+Eval begin...
+step 157/157 [==============================] - loss: 1.7577e-04 - acc: 0.9844 - 6ms/step
+Eval samples: 10000
+true label: 7, pred label: 7
+</pre>
+          </div>
+         </div> 
+        </div> 
+        <div class="nboutput docutils container"> 
+         <div class="prompt highlight-none notranslate">
+          <div class="highlight">
+           <pre><span></span>[5]:
+</pre>
+          </div> 
+         </div> 
+         <div class="output_area docutils container"> 
+          <div class="highlight">
+           <pre>&lt;matplotlib.image.AxesImage at 0x7feb8a585dd0&gt;
+</pre>
+          </div>
+         </div> 
+        </div> 
+        <div class="nboutput nblast docutils container"> 
+         <div class="prompt empty docutils container"> 
+         </div> 
+         <div class="output_area docutils container"> 
+          <img alt="../../_images/guides_beginner_quick_start_cn_7_2.png" src="../../_images/guides_beginner_quick_start_cn_7_2.png"> 
+         </div> 
+        </div> 
+        <p>以上代码使用 MNIST 数据集训练并测试了 LeNet 模型，并最终成功推理出了一张手写数字图片的标签，该图片推理结果是 7 （ pred label: 7），真实标签也是7 （true label: 7）。</p> 
+        <p>简单地说，深度学习任务一般分为以下几个核心步骤：</p> 
+        <ol class="arabic simple"> 
+         <li><p>数据集定义与加载</p></li> 
+         <li><p>模型组网</p></li> 
+         <li><p>模型训练与评估</p></li> 
+         <li><p>模型推理</p></li> 
+        </ol> 
+        <p>接下来逐个步骤介绍，帮助你快速掌握使用飞桨框架实践深度学习任务的方法。</p> 
+        <div class="section" id="3.1-数据集定义与加载"> 
+         <h3>3.1 数据集定义与加载<a class="headerlink" href="#3.1-数据集定义与加载" title="此标题的永久链接"></a></h3> 
+         <p>飞桨在 <a class="reference external" href="../../api/paddle/vision/Overview_cn.html#api">paddle.vision.datasets</a> 下内置了计算机视觉（Computer Vision，CV）领域常见的数据集，如 MNIST、Cifar10、Cifar100、FashionMNIST 和 VOC2012 等。在本任务中，先后加载了 MNIST 训练集（<code class="docutils literal notranslate"><span class="pre">mode='train'</span></code>）和测试集（<code class="docutils literal notranslate"><span class="pre">mode='test'</span></code>），训练集用于训练模型，测试集用于评估模型效果。</p> 
+         <div class="nbinput docutils container"> 
+          <div class="prompt highlight-none notranslate">
+           <div class="highlight">
+            <pre><span></span>[2]:
+</pre>
+           </div> 
+          </div> 
+          <div class="input_area highlight-ipython3 notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">paddle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">paddle.vision.transforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">Normalize</span>
+
+<span class="n">transform</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mf">127.5</span><span class="p">],</span> <span class="n">std</span><span class="o">=</span><span class="p">[</span><span class="mf">127.5</span><span class="p">],</span> <span class="n">data_format</span><span class="o">=</span><span class="s2">"CHW"</span><span class="p">)</span>
+<span class="c1"># 下载数据集并初始化 DataSet</span>
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">paddle</span><span class="o">.</span><span class="n">vision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">"train"</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">paddle</span><span class="o">.</span><span class="n">vision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">"test"</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+
+<span class="c1"># 打印数据集里图片数量</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">"</span><span class="si">{}</span><span class="s2"> images in train_dataset, </span><span class="si">{}</span><span class="s2"> images in test_dataset"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre>
+           </div> 
+          </div> 
+         </div> 
+         <div class="nboutput nblast docutils container"> 
+          <div class="prompt empty docutils container"> 
+          </div> 
+          <div class="output_area docutils container"> 
+           <div class="highlight">
+            <pre>60000 images in train_dataset, 10000 images in test_dataset
+</pre>
+           </div>
+          </div> 
+         </div> 
+         <p>飞桨除了内置了 CV 领域常见的数据集，还在 <a class="reference external" href="../../api/paddle/text/Overview_cn.html#api">paddle.text</a> 下内置了自然语言处理（Natural Language Processing，NLP）领域常见的数据集，并提供了自定义数据集与加载功能的 <a class="reference external" href="../../api/paddle/io/Dataset_cn.html#dataset">paddle.io.Dataset</a> 和 <a class="reference external" href="../../api/paddle/io/DataLoader_cn.html#dataloader">paddle.io.DataLoader</a> API，详细使用方法可参考『数据集定义与加载』 章节。</p> 
+         <p>另外在 <a class="reference external" href="../..api/paddle/vision/Overview_cn.html#about-transforms">paddle.vision.transforms</a> 下提供了一些常用的图像变换操作，如对图像的翻转、裁剪、调整亮度等处理，可实现数据增强，以增加训练样本的多样性，提升模型的泛化能力。本任务在初始化 MNIST 数据集时通过 <code class="docutils literal notranslate"><span class="pre">transform</span></code> 字段传入了 <code class="docutils literal notranslate"><span class="pre">Normalize</span></code> 变换对图像进行归一化，对图像进行归一化可以加快模型训练的收敛速度。该功能的具体使用方法可参考『数据预处理』 章节。</p> 
+         <p>更多参考： * <a class="reference external" href="data_load_cn.html">数据集定义与加载</a> * <a class="reference external" href="data_preprocessing_cn.html">数据预处理</a></p> 
+        </div> 
+        <div class="section" id="3.2-模型组网"> 
+         <h3>3.2 模型组网<a class="headerlink" href="#3.2-模型组网" title="此标题的永久链接"></a></h3> 
+         <p>飞桨的模型组网有多种方式，既可以直接使用飞桨内置的模型，也可以自定义组网。</p> 
+         <p>『手写数字识别任务』比较简单，普通的神经网络就能达到很高的精度，在本任务中使用了飞桨内置的 LeNet 作为模型。飞桨在 <a class="reference external" href="../../api/paddle/vision/Overview_cn.html#about-models">paddle.vision.models</a> 下内置了 CV 领域的一些经典模型，LeNet 就是其中之一，调用很方便，只需一行代码即可完成 LeNet 的网络构建和初始化。<code class="docutils literal notranslate"><span class="pre">num_classes</span></code> 字段中定义分类的类别数，因为需要对 0 ~ 9 的十类数字进行分类，所以设置为 10。</p> 
+         <p>另外通过 <a class="reference external" href="../../api/paddle/summary_cn.html#summary">paddle.summary</a> 可方便地打印网络的基础结构和参数信息。</p> 
+         <div class="nbinput docutils container"> 
+          <div class="prompt highlight-none notranslate">
+           <div class="highlight">
+            <pre><span></span>[3]:
+</pre>
+           </div> 
+          </div> 
+          <div class="input_area highlight-ipython3 notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="c1"># 模型组网并初始化网络</span>
+<span class="n">lenet</span> <span class="o">=</span> <span class="n">paddle</span><span class="o">.</span><span class="n">vision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">LeNet</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># 可视化模型组网结构和参数</span>
+<span class="n">paddle</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">lenet</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">))</span>
+</pre>
+           </div> 
+          </div> 
+         </div> 
+         <div class="nboutput docutils container"> 
+          <div class="prompt empty docutils container"> 
+          </div> 
+          <div class="output_area docutils container"> 
+           <div class="highlight">
+            <pre>---------------------------------------------------------------------------
+ Layer (type)       Input Shape          Output Shape         Param #
+===========================================================================
+   Conv2D-1       [[1, 1, 28, 28]]      [1, 6, 28, 28]          60
+    ReLU-1        [[1, 6, 28, 28]]      [1, 6, 28, 28]           0
+  MaxPool2D-1     [[1, 6, 28, 28]]      [1, 6, 14, 14]           0
+   Conv2D-2       [[1, 6, 14, 14]]     [1, 16, 10, 10]         2,416
+    ReLU-2       [[1, 16, 10, 10]]     [1, 16, 10, 10]           0
+  MaxPool2D-2    [[1, 16, 10, 10]]      [1, 16, 5, 5]            0
+   Linear-1          [[1, 400]]            [1, 120]           48,120
+   Linear-2          [[1, 120]]            [1, 84]            10,164
+   Linear-3          [[1, 84]]             [1, 10]              850
+===========================================================================
+Total params: 61,610
+Trainable params: 61,610
+Non-trainable params: 0
+---------------------------------------------------------------------------
+Input size (MB): 0.00
+Forward/backward pass size (MB): 0.11
+Params size (MB): 0.24
+Estimated Total Size (MB): 0.35
+---------------------------------------------------------------------------
+
+</pre>
+           </div>
+          </div> 
+         </div> 
+         <div class="nboutput nblast docutils container"> 
+          <div class="prompt highlight-none notranslate">
+           <div class="highlight">
+            <pre><span></span>[3]:
+</pre>
+           </div> 
+          </div> 
+          <div class="output_area docutils container"> 
+           <div class="highlight">
+            <pre>{'total_params': 61610, 'trainable_params': 61610}
+</pre>
+           </div>
+          </div> 
+         </div> 
+         <p>通过飞桨的 <a class="reference external" href="../../api/paddle/nn/Sequential_cn.html">paddle.nn.Sequential</a> 和 <a class="reference external" href="../../api/paddle/nn/Layer_cn.html">paddle.nn.Layer</a> API 可以更灵活方便的组建自定义的神经网络，详细使用方法可参考『模型组网』章节。</p> 
+         <p>更多参考： * <a class="reference external" href="model_cn.html">模型组网</a></p> 
+        </div> 
+        <div class="section" id="3.3-模型训练与评估"> 
+         <h3>3.3 模型训练与评估<a class="headerlink" href="#3.3-模型训练与评估" title="此标题的永久链接"></a></h3> 
+         <div class="section" id="3.3.1-模型训练"> 
+          <h4>3.3.1 模型训练<a class="headerlink" href="#3.3.1-模型训练" title="此标题的永久链接"></a></h4> 
+          <p>模型训练需完成如下步骤：</p> 
+          <ol class="arabic simple"> 
+           <li><p><strong>使用</strong><a class="reference external" href="../../api/paddle/Model_cn.html">paddle.Model</a><strong>封装模型。</strong> 将网络结构组合成可快速使用 <a class="reference external" href="../../practices/quick_start/high_level_api.html">飞桨高层 API</a> 进行训练、评估、推理的实例，方便后续操作。</p></li> 
+           <li><p><strong>使用</strong><a class="reference external" href="../../api/paddle/Model_cn.html#prepare-optimizer-none-loss-none-metrics-none-amp-configs-none">paddle.Model.prepare</a><strong>完成训练的配置准备工作。</strong> 包括损失函数、优化器和评价指标等。飞桨在 <a class="reference external" href="../../api/paddle/optimizer/Overview_cn.html#api">paddle.optimizer</a> 下提供了优化器算法相关 API，在 <a class="reference external" href="../../api/paddle/nn/Overview_cn.html#loss">paddle.nn Loss层</a> 提供了损失函数相关 API，在 <a class="reference external" href="../../api/paddle/metric/Overview_cn.html">paddle.metric</a> 下提供了评价指标相关 API。</p></li> 
+           <li><p><strong>使用</strong><a class="reference external" href="../../api/paddle/Model_cn.html#fit-train-data-none-eval-data-none-batch-size-1-epochs-1-eval-freq-1-log-freq-10-save-dir-none-save-freq-1-verbose-2-drop-last-false-shuffle-true-num-workers-0-callbacks-none">paddle.Model.fit</a><strong>配置循环参数并启动训练。</strong> 配置参数包括指定训练的数据源 <code class="docutils literal notranslate"><span class="pre">train_dataset</span></code>、训练的批大小 <code class="docutils literal notranslate"><span class="pre">batch_size</span></code>、训练轮数 <code class="docutils literal notranslate"><span class="pre">epochs</span></code> 等，执行后将自动完成模型的训练循环。</p></li> 
+          </ol> 
+          <p>因为是分类任务，这里损失函数使用常见的 <a class="reference external" href="../../api/paddle/nn/CrossEntropyLoss_cn.html#crossentropyloss">CrossEntropyLoss</a> （交叉熵损失函数），优化器使用 <a class="reference external" href="../../api/paddle/optimizer/Adam_cn.html#adam">Adam</a>，评价指标使用 <a class="reference external" href="../../api/paddle/metric/accuracy_cn.html#accuracy">Accuracy</a> 来计算模型在训练集上的精度。</p> 
+          <div class="nbinput docutils container"> 
+           <div class="prompt highlight-none notranslate">
+            <div class="highlight">
+             <pre><span></span>[5]:
+</pre>
+            </div> 
+           </div> 
+           <div class="input_area highlight-ipython3 notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1"># 封装模型，便于进行后续的训练、评估和推理</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">paddle</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">lenet</span><span class="p">)</span>
+
+<span class="c1"># 模型训练的配置准备，准备损失函数，优化器和评价指标</span>
+<span class="n">model</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span>
+    <span class="n">paddle</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">()),</span>
+    <span class="n">paddle</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">(),</span>
+    <span class="n">paddle</span><span class="o">.</span><span class="n">metric</span><span class="o">.</span><span class="n">Accuracy</span><span class="p">(),</span>
+<span class="p">)</span>
+
+<span class="c1"># 开始训练</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre>
+            </div> 
+           </div> 
+          </div> 
+          <div class="nboutput nblast docutils container"> 
+           <div class="prompt empty docutils container"> 
+           </div> 
+           <div class="output_area docutils container"> 
+            <div class="highlight">
+             <pre>The loss value printed in the log is the current step, and the metric is the average value of previous steps.
+Epoch 1/5
+step 938/938 [==============================] - loss: 0.0011 - acc: 0.9865 - 14ms/step
+Epoch 2/5
+step 938/938 [==============================] - loss: 0.0045 - acc: 0.9885 - 14ms/step
+Epoch 3/5
+step 938/938 [==============================] - loss: 0.0519 - acc: 0.9896 - 14ms/step
+Epoch 4/5
+step 938/938 [==============================] - loss: 4.1989e-05 - acc: 0.9912 - 14ms/step
+Epoch 5/5
+step 938/938 [==============================] - loss: 0.0671 - acc: 0.9918 - 15ms/step
+</pre>
+            </div>
+           </div> 
+          </div> 
+          <p>从训练过程的打印日志中，可观察到损失函数值 loss 逐渐变小，精度 acc 逐渐上升的趋势，反映出不错的训练效果。</p> 
+         </div> 
+         <div class="section" id="3.3.2-模型评估"> 
+          <h4>3.3.2 模型评估<a class="headerlink" href="#3.3.2-模型评估" title="此标题的永久链接"></a></h4> 
+          <p>模型训练完成之后，调用 <a class="reference external" href="../../api/paddle/Model_cn.html#evaluate-eval-data-batch-size-1-log-freq-10-verbose-2-num-workers-0-callbacks-none">paddle.Model.evaluate</a> ，使用预先定义的测试数据集，来评估训练好的模型效果，评估完成后将输出模型在测试集上的损失函数值 loss 和精度 acc。</p> 
+          <div class="nbinput docutils container"> 
+           <div class="prompt highlight-none notranslate">
+            <div class="highlight">
+             <pre><span></span>[6]:
+</pre>
+            </div> 
+           </div> 
+           <div class="input_area highlight-ipython3 notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1"># 进行模型评估</span>
+<span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre>
+            </div> 
+           </div> 
+          </div> 
+          <div class="nboutput docutils container"> 
+           <div class="prompt empty docutils container"> 
+           </div> 
+           <div class="output_area docutils container"> 
+            <div class="highlight">
+             <pre>Eval begin...
+step 157/157 [==============================] - loss: 5.7177e-04 - acc: 0.9859 - 6ms/step
+Eval samples: 10000
+</pre>
+            </div>
+           </div> 
+          </div> 
+          <div class="nboutput nblast docutils container"> 
+           <div class="prompt highlight-none notranslate">
+            <div class="highlight">
+             <pre><span></span>[6]:
+</pre>
+            </div> 
+           </div> 
+           <div class="output_area docutils container"> 
+            <div class="highlight">
+             <pre>{'loss': [0.00057177414], 'acc': 0.9859}
+</pre>
+            </div>
+           </div> 
+          </div> 
+          <p>从结果可以看到，初步训练得到的模型精度在98%附近，在逐渐熟悉深度学习模型开发和训练技巧后，可以通过调整其中的训练参数来进一步提升模型的精度。</p> 
+          <p>更多参考： * <a class="reference external" href="train_eval_predict_cn.html">模型训练、评估与推理</a></p> 
+         </div> 
+        </div> 
+        <div class="section" id="3.4-模型推理"> 
+         <h3>3.4 模型推理<a class="headerlink" href="#3.4-模型推理" title="此标题的永久链接"></a></h3> 
+         <div class="section" id="3.4.1-模型保存"> 
+          <h4>3.4.1 模型保存<a class="headerlink" href="#3.4.1-模型保存" title="此标题的永久链接"></a></h4> 
+          <p>模型训练完成后，通常需要将训练好的模型参数和优化器等信息，持久化保存到参数文件中，便于后续执行推理验证。</p> 
+          <p>在飞桨中可通过调用 <a class="reference external" href="../../api/paddle/Model_cn.html#save-path-training-true">paddle.Model.save</a> 保存模型。代码示例如下，其中 output 为模型保存的文件夹名称，minst 为保存的模型文件名称。</p> 
+          <div class="nbinput nblast docutils container"> 
+           <div class="prompt highlight-none notranslate">
+            <div class="highlight">
+             <pre><span></span>[5]:
+</pre>
+            </div> 
+           </div> 
+           <div class="input_area highlight-ipython3 notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1"># 保存模型，文件夹会自动创建</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"./output/mnist"</span><span class="p">)</span>
+</pre>
+            </div> 
+           </div> 
+          </div> 
+          <p>以上代码执行后会在<code class="docutils literal notranslate"><span class="pre">output</span></code>目录下保存两个文件，<code class="docutils literal notranslate"><span class="pre">mnist.pdopt</span></code>为优化器的参数，<code class="docutils literal notranslate"><span class="pre">mnist.pdparams</span></code>为模型的参数。</p> 
+          <div class="highlight-bash notranslate">
+           <div class="highlight">
+            <pre><span></span>output
+├──<span class="w"> </span>mnist.pdopt<span class="w">     </span><span class="c1"># 优化器的参数</span>
+└──<span class="w"> </span>mnist.pdparams<span class="w">  </span><span class="c1"># 模型的参数</span>
+</pre>
+           </div> 
+          </div> 
+         </div> 
+         <div class="section" id="3.4.2-模型加载并执行推理"> 
+          <h4>3.4.2 模型加载并执行推理<a class="headerlink" href="#3.4.2-模型加载并执行推理" title="此标题的永久链接"></a></h4> 
+          <p>执行模型推理时，可调用 <a class="reference external" href="../../api/paddle/Model_cn.html#load-path-skip-mismatch-false-reset-optimizer-false">paddle.Model.load</a> 加载模型，然后即可通过 <a class="reference external" href="../../api/paddle/Model_cn.html#predict-batch-inputs">paddle.Model.predict_batch</a> 执行推理操作。</p> 
+          <p>如下示例中，针对前面创建的 <code class="docutils literal notranslate"><span class="pre">model</span></code> 网络加载保存的参数文件 <code class="docutils literal notranslate"><span class="pre">output/mnist</span></code>，并选择测试集中的一张图片 <code class="docutils literal notranslate"><span class="pre">test_dataset[0]</span></code> 作为输入，执行推理并打印结果，可以看到推理的结果与可视化图片一致。</p> 
+          <div class="nbinput docutils container"> 
+           <div class="prompt highlight-none notranslate">
+            <div class="highlight">
+             <pre><span></span>[10]:
+</pre>
+            </div> 
+           </div> 
+           <div class="input_area highlight-ipython3 notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1"># 加载模型</span>
+<span class="n">model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"output/mnist"</span><span class="p">)</span>
+
+<span class="c1"># 从测试集中取出一张图片</span>
+<span class="n">img</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">test_dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># 将图片shape从1*28*28变为1*1*28*28，增加一个batch维度，以匹配模型输入格式要求</span>
+<span class="n">img_batch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"float32"</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># 执行推理并打印结果，此处predict_batch返回的是一个list，取出其中数据获得预测结果</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_batch</span><span class="p">(</span><span class="n">img_batch</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">pred_label</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"true label: </span><span class="si">{}</span><span class="s2">, pred label: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">label</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pred_label</span><span class="p">))</span>
+<span class="c1"># 可视化图片</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre>
+            </div> 
+           </div> 
+          </div> 
+          <div class="nboutput docutils container"> 
+           <div class="prompt empty docutils container"> 
+           </div> 
+           <div class="output_area docutils container"> 
+            <div class="highlight">
+             <pre>true label: 7, pred label: 7
+</pre>
+            </div>
+           </div> 
+          </div> 
+          <div class="nboutput docutils container"> 
+           <div class="prompt highlight-none notranslate">
+            <div class="highlight">
+             <pre><span></span>[10]:
+</pre>
+            </div> 
+           </div> 
+           <div class="output_area docutils container"> 
+            <div class="highlight">
+             <pre>&lt;matplotlib.image.AxesImage at 0x7f853e6f0e50&gt;
+</pre>
+            </div>
+           </div> 
+          </div> 
+          <div class="nboutput nblast docutils container"> 
+           <div class="prompt empty docutils container"> 
+           </div> 
+           <div class="output_area docutils container"> 
+            <img alt="../../_images/guides_beginner_quick_start_cn_26_2.png" src="../../_images/guides_beginner_quick_start_cn_26_2.png"> 
+           </div> 
+          </div> 
+          <p>更多参考： * <a class="reference external" href="model_save_load_cn.html">模型保存与加载</a> * <a class="reference external" href="train_eval_predict_cn.html">模型训练、评估与推理</a></p> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="section" id="四、总结"> 
+        <h2>四、总结<a class="headerlink" href="#四、总结" title="此标题的永久链接"></a></h2> 
+        <p>至此通过飞桨几个简单的API完成了一个深度学习任务，总结整个流程和用到的关键 API 如下图所示。</p> 
+        <img alt="../../_images/model_develop_flow.png" src="../../_images/model_develop_flow.png"> 
+        <p>图 2：模型开发流程</p> 
+        <p>如果想要完成更复杂的深度学习任务，开发更强大的模型，飞桨提供了功能丰富的 API 帮助开发者完成任务，比如对数据集应用数据增强、使用更大的 CNN 模型、调优性能等。飞桨官网提供了丰富的教程与案例可供参考，欢迎一起探索深度学习的世界。</p> 
+       </div> 
+      </div> 
+     </div> 
+    </div>
+   </div> 
+  </div> 
+ </section> 
+</div></div></div></body></html>

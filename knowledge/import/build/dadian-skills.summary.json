@@ -1,0 +1,61 @@
+{
+  "schema": "career-graph-external-import/v1",
+  "library": "国家职业技能标准（工作内容 → 技能）",
+  "version": "osta-standards",
+  "sourceId": "cn-osta-standards",
+  "sourceName": "《国家职业技能标准》（人力资源和社会保障部 · 技能人才评价工作网 国家职业标准查询系统）",
+  "sourcePage": "https://www.osta.org.cn/skillStandard",
+  "rawDir": "knowledge/import/raw/osta-standards",
+  "output": "knowledge/import/build/dadian-skills.jsonl",
+  "note": "技能节点取自表格的「工作内容」列（跨职业按 cleanCn 清理后的名字合并），不是「技能要求」的每一条；每行的技能要求原文整段存在节点的 sampleRequirements 里（不拆条，原因见脚本里 cleanCn 的注释）。边上的 level = 该职业首次要求这项能力的职业技能等级（五级=1 … 一级=5）。职业功能单独成 domain 节点，用 belongs_to 连到技能上。",
+  "dataQuality": {
+    "pdfTextLayerIssue": "这些 PDF 的文本层把条目编号排在了词中间（「1. 1 监 控 / 运行」），按坐标取文本时会插进字符串里。cleanCn 负责去掉编号并收拢重复标点，实测清理后 0 个标签残留编号。",
+    "stillImperfect": "标点与个别字仍可能因文本层位移而语序错乱 —— 这一层只保证「编号不混进内容」，不保证逐字还原。要逐字还原得回到 PDF 版面重新排版。",
+    "droppedUnreadableRows": "258 行工作内容、4 行职业功能的字体编码是坏的（取出来只剩 ASCII 标点），已丢弃并在 unreadableRows 里计数。"
+  },
+  "counts": {
+    "nodes": 19057,
+    "edges": 37738,
+    "byKind": {
+      "domain": 4873,
+      "skill": 14184
+    },
+    "byType": {
+      "belongs_to": 17330,
+      "specifies": 20408
+    },
+    "standards": 702,
+    "missingTableFiles": 0,
+    "unreadableRows": {
+      "skill": 258,
+      "function": 4,
+      "samples": [
+        "养",
+        "修",
+        "&",
+        "%",
+        "$",
+        "#",
+        "\"",
+        "!",
+        "A",
+        "B"
+      ],
+      "note": "字体编码坏掉的 PDF 取出来只剩 Latin/ASCII 字符，这些行被丢弃（要求条目名至少含一个汉字）。样例在此，供核对丢的确实是乱码而不是误伤。"
+    },
+    "tableRows": 43642,
+    "standardCodes": 471,
+    "share": {
+      "skillsAcrossOccupations": 836,
+      "skillsOnlyInOneOccupation": 13348,
+      "functionsAcrossOccupations": 252,
+      "functionsOnlyInOneOccupation": 2866,
+      "note": "跨职业复用率低不是 bug，是这份标准的性质：它逐个职业描述工作活动，不是一份技能分类法。两个数字都列出来，不拿好那个充数。注意「出现次数多」不等于「多个职业共用」——要求表按五级/四级/三级分别列一遍，同一对 (职业功能, 工作内容) 会被重复计入多次。"
+    }
+  },
+  "notImported": [
+    "「技能要求」逐条不建节点（五万多条且绑死具体工种），只作为技能的 sampleRequirements 保留",
+    "「相关知识要求」逐条同样不建节点",
+    "「权重表」本次未使用"
+  ]
+}

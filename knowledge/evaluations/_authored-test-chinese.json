@@ -1,0 +1,139 @@
+{
+  "schema": "career-graph-eval-questions/v3",
+  "note": "新写的中文答案层题目（test 分片）。由 Agent 读候选段原文手写，规则见 knowledge/evaluations/EVAL_SET_DESIGN.md 与 _plan-new.md。",
+  "questions": [
+    {
+      "questionId": "C-T01",
+      "category": "AI框架与推理",
+      "sourceId": "S07",
+      "question": "想按固定步长、或者按固定元素个数生成一段区间内的 Tensor，分别该用哪个 API？另外飞桨的索引除了普通的切片取值，还支持哪些更灵活的写法？",
+      "referenceChunks": [
+        "S07#2.3",
+        "S07#4.1"
+      ],
+      "gradingNotes": "按步长均匀分隔区间用 paddle.arange(start, end, step)（区间左闭右开），按元素个数均匀分隔区间用 paddle.linspace(start, stop, num)；此外创建未初始化元素的空 Tensor 用 paddle.empty，创建与其它 Tensor 同 shape 同 dtype 的 Tensor 用 paddle.ones_like、paddle.zeros_like、paddle.full_like、paddle.empty_like，完全拷贝用 paddle.clone，按特定分布生成用 paddle.rand、paddle.randn、paddle.randint，配合 paddle.seed 可以让每次生成的随机数相同。；索引支持基础索引（如 x[0, 2:4]，等价于 paddle.slice）、高级索引（如 x[[0,1], [2,3]]，等价于先用 paddle.stack 拼索引再 paddle.gather_nd）和联合索引（如 x[0, [0,2], ..., 2:5:2, None]）；这些索引操作都支持在 GPU 等设备上运行以加速，也都支持自动反向梯度计算。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-T02",
+      "category": "AI框架与推理",
+      "sourceId": "S07",
+      "question": "用 reshape 改形状时，参数里的 -1 和 0 分别代表什么意思？另外两个形状不一样的 Tensor 相加运算，什么情况下能自动广播、什么情况下会直接报错？",
+      "referenceChunks": [
+        "S07#3.1~2",
+        "S07#s141"
+      ],
+      "gradingNotes": "-1 表示该维度的大小由元素总数推断出来（[3,2,5] 变成 [-1] 得到 [30]，变成 [-1,5] 得到 [6,5]）；0 表示该维度的元素数量与原 Tensor 相同，且 0 所在位置的索引值必须小于原 Tensor 的维度数，否则报错（[3,2] 变成 [3,1,0] 时 0 的索引是 2、原 Tensor 没有第 3 维，因此出错）。；广播要求每个 Tensor 至少是一维，并从最后一个维度向前逐维比较：两维大小相等、或其中一维为 1、或其中一维不存在时可以广播（如 (2,3,1,5) 与 (3,4,1) 可广播成 (2,3,4,5)）；一旦遇到既不相等又都不为 1 的维度就不可广播，报 Broadcast dimension mismatch（如 (2,3,4) 与 (2,3,6)）。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-T03",
+      "category": "AI框架与推理",
+      "sourceId": "S07",
+      "question": "飞桨的 Tensor 可以指定放在哪些设备上？其中固定内存这种位置有什么好处、又有什么代价？另外用 Numpy 数组创建 Tensor 时，两者是共享同一块内存吗？",
+      "referenceChunks": [
+        "S07#3.3",
+        "S07#s142"
+      ],
+      "gradingNotes": "初始化时可用 Tensor.place 指定设备位置，支持 CPU、GPU、固定内存、XPU、NPU、MLU、IPU 等；未指定时默认与所安装的飞桨版本一致（装了 GPU 版就默认 GPU），paddle.device.set_device 可设置全局默认位置，而 Tensor.place 的指定优先级高于全局默认值。固定内存又叫不可分页内存或锁页内存，它与 GPU 之间的读写效率更高、支持异步传输，对整体性能有提升，但分配过多会减少可分页内存，反而拖慢主机系统性能。；用 paddle.to_tensor 从 Numpy 数组创建 Tensor 时是按拷贝方式创建的，与原始数据不共享内存，且形状与数据类型保持一致；反过来 Tensor 可以用 Tensor.numpy 方法转成 Numpy 数组。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-T04",
+      "category": "AI框架与推理",
+      "sourceId": "S06",
+      "question": "拿 MNIST 做手写数字识别时，这个数据集有多少张图、图片分辨率是多少？跑这份代码之前要先用 pip 装哪两个库？另外训练完把模型保存下来，指定目录里会出现哪两个文件、各自存的是什么？",
+      "referenceChunks": [
+        "S06#s115",
+        "S06#3.4.1"
+      ],
+      "gradingNotes": "MNIST 手写数字数据集用于对 0~9 十类数字分类，含 60000 张训练图片、10000 张测试图片以及对应的分类标签文件，每张图片是一个 0~9 的手写数字，分辨率 28*28；开始前需要用 pip 安装 matplotlib（用于可视化图片）和 numpy（用于处理数据）。；训练完成后用 paddle.Model.save 保存，示例 model.save(\"./output/mnist\") 中文件夹会自动创建；保存后目录下有两个文件，.pdopt 保存优化器的参数，.pdparams 保存模型的参数。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-T05",
+      "category": "AI框架与推理",
+      "sourceId": "S06",
+      "question": "用飞桨高层 API 训练一个模型，标准流程是哪几步、每一步分别负责什么？训练好之后拿测试集里的一张图做推理，为什么还要先给图片增加一个维度？",
+      "referenceChunks": [
+        "S06#3.3.1",
+        "S06#3.4.2"
+      ],
+      "gradingNotes": "标准流程是三步：先用 paddle.Model 封装网络结构，得到可快速训练/评估/推理的实例；再用 paddle.Model.prepare 完成配置准备，传入损失函数（如 paddle.nn.CrossEntropyLoss）、优化器（如 paddle.optimizer.Adam）和评价指标（如 paddle.metric.Accuracy）；最后用 paddle.Model.fit 指定数据源 train_dataset、批大小 batch_size、训练轮数 epochs 并启动训练，训练循环会自动完成。；推理时先调 paddle.Model.load 加载保存的参数文件，再用 paddle.Model.predict_batch 执行推理；单张图片的 shape 是 1*28*28，需要先用 np.expand_dims 增加一个 batch 维度变成 1*1*28*28 以匹配模型输入格式，predict_batch 返回的是 list，取出其中数据后用 argmax 得到预测类别。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-T06",
+      "category": "测试自动化",
+      "sourceId": "S14",
+      "question": "pytest 决定夹具执行顺序时到底参考了哪些东西？夹具或测试的名字、定义在哪个文件、定义的先后，会不会影响执行顺序？",
+      "referenceChunks": [
+        "S14#s240",
+        "S14#s259"
+      ],
+      "gradingNotes": "夹具可以像测试一样请求其他夹具，示例中 order 夹具请求了 first_entry，所以会先执行 first_entry，order 才能用它构造出列表；如果手工实现，就相当于先调用一次 first_entry()，再把返回值传给 order()。；执行顺序由三个因素决定：作用域、依赖关系、是否自动使用；而夹具或测试的名称、定义位置、定义先后、以及请求夹具的先后都不影响执行顺序——pytest 只会尽量让这类巧合在多次运行中保持一致，但这并不是可以依赖的东西。要控制顺序，最安全的做法就是依赖这三件事，并把依赖关系写清楚。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-T07",
+      "category": "测试自动化",
+      "sourceId": "S14",
+      "question": "pytest 里的 fixture 究竟是什么？另外，写在测试类里面的夹具和写在模块顶层的夹具，分别能被哪些测试请求到？",
+      "referenceChunks": [
+        "S14#s237",
+        "S14#s255"
+      ],
+      "gradingNotes": "fixture 就是用户自己定义、用 @pytest.fixture 装饰的函数，字面意义上它是每个测试的“安排”步骤和数据，是测试完成任务所需要的一切；测试函数通过把夹具名声明成参数来请求它（如 test_my_fruit_in_basket(my_fruit, fruit_basket)），而且夹具不只局限于准备步骤，也可以承担 act 步骤；测试可以依赖任意多个装置，装置也能使用其他装置。；夹具可用性是从测试的角度确定的：定义在类里的装置只能由该类内的测试请求；定义在模块全局作用域的装置，该模块里的每个测试都能请求，即使测试本身写在类里；自动使用的夹具同样只对与其作用域相同的测试起作用。此外装置可以请求任何其他装置，只要请求它们的测试能看到所有涉及的装置——示例中模块级的 outer 请求的 inner 分别定义在两个测试类里，pytest 从测试往下搜索，所以两个类各自拿到属于自己的那个 inner。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-T08",
+      "category": "测试自动化",
+      "sourceId": "S14",
+      "question": "一个测试通常可以拆成哪几个步骤、各自负责什么？另外要让夹具的清理足够安全，夹具的结构应该遵循什么原则？",
+      "referenceChunks": [
+        "S14#s236",
+        "S14#s254"
+      ],
+      "gradingNotes": "通常拆成四步：Arrange（安排，把测试需要的一切准备好，例如准备对象、启动或停止服务、往数据库写记录，相当于把多米诺骨牌排成一排）、Act（启动要测的那次行为，通常是一次函数或方法调用，它会改变被测系统的状态）、Assert（观察改变后的状态并做判断，例如断言某个东西应该是绿色的）、Cleanup（把自己收拾干净，使其他测试不会被它影响）；核心其实是 act 和 assert 两步，arrange 只是提供上下文。；最安全也最简单的结构是：每个装置只执行一个状态更改操作，并把它与自己的拆卸代码捆绑在一起。由于状态更改操作大多是事务性的、失败时可能留下脏状态，应当把成功的状态更改操作拆到单独的装置函数里、与可能失败的操作分开，从而保证已成功的操作一定会被拆除，测试环境能恢复原样——例如把“通过管理 API 创建用户”与“用 Selenium 启动浏览器并登录”拆成不同装置，测试结束后既不留用户也不留浏览器会话。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-T09",
+      "category": "测试自动化",
+      "sourceId": "S14",
+      "question": "pytest 的夹具机制相比传统的 setup/teardown 写法好在哪些地方？另外如果把多个清理步骤全塞进一个夹具里，可能会踩什么坑？",
+      "referenceChunks": [
+        "S14#s235",
+        "S14#s253"
+      ],
+      "gradingNotes": "主要有四点：夹具都有明确的名称，通过在测试函数、模块、类或整个项目里声明来激活；以模块化的方式实现，每个夹具函数都可以使用其他夹具；能从简单单元测试扩展到复杂功能测试，支持根据配置和组件选项参数化夹具与测试，也支持跨函数、类、模块或整个测试会话复用夹具；拆卸逻辑无论用了多少夹具都能安全简便地管理，不用手写易错代码、也不必微调清理步骤的先后。此外它仍支持经典的 xUnit 风格 setup/teardown，两种风格可以混用，也能从 unittest.TestCase 或 nose 项目逐步迁移；框架还内置了 capfd、capfdbinary、caplog、capsys、capsysbinary、cache、doctest_namespace、monkeypatch 等常用装置。；把多个步骤塞进同一个夹具里虽然更紧凑，但可读性差，夹具名不够有描述性，也难以复用；更严重的问题是：只要其中任何一步抛出异常，后面的 tearDown 代码就一条都不会执行，测试环境会残留脏数据。改用 addfinalizer 可以缓解，但会明显变复杂、难以维护，也不再紧凑。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-T10",
+      "category": "嵌入式开发",
+      "sourceId": "S02",
+      "question": "要发送或接收的数据不超过 32 位时，还有必要为它单独申请一块缓冲区吗、该怎么做？另外改成用 GPIO 矩阵接从设备之后，为什么 SPI 读取的频率上限会明显下降、有什么办法弥补？",
+      "referenceChunks": [
+        "S02#s18",
+        "S02#s27"
+      ],
+      "gradingNotes": "没必要。传输事务的数据等于或小于 32 位时，数据可以直接存放在传输事务结构体里：要发送的数据用 spi_transaction_t::tx_data，并在传输时设置 SPI_TRANS_USE_TXDATA 标志；要接收的数据用 spi_transaction_t::rx_data 并设置 SPI_TRANS_USE_RXDATA 标志。这两种情况下都不要再去修改 tx_buffer 或 rx_buffer，因为它们与 tx_data、rx_data 的内存位置相同。；因为 MISO 线在 SCLK 发射沿之后、信号被内部寄存器锁存之前存在延迟，MISO 的设置时间就成了 SPI 时钟速度的限制因素；走 GPIO 矩阵会增大延迟，最大有效频率会降到现有输入延迟的 33~77%，而使用 IO_MUX 专用管脚或插入 Dummy 位可以保留较高频率，主机最大读取频率可调用 spi_get_freq_limit() 获取。理想情况下（输入延迟控制在一个 APB 时钟周期 12.5ns 以内），GPIO 矩阵约 26.6MHz、IO_MUX 管脚约 80MHz。",
+      "answerable": true
+    },
+    {
+      "questionId": "C-T11",
+      "category": "嵌入式开发",
+      "sourceId": "S02",
+      "question": "在 SPI1 总线上跑 SPI 主机驱动时，为什么要求代码和数据都放在内部存储器里、什么情况下缓存会被禁用？另外半双工模式下读写阶段同时进行会遇到什么问题、怎么绕开？",
+      "referenceChunks": [
+        "S02#s21",
+        "S02#s28"
+      ],
+      "gradingNotes": "因为 SPI1 总线是由设备、flash 中的代码缓存以及 PSRAM 共享的；当其他驱动在这条总线上运行时缓存必须被禁用，这样 flash 上的代码和 PSRAM 数据就不会在驱动获取总线时被抓取。驱动获取总线的方式有两种：在 spi_device_acquire_bus() 与 spi_device_release_bus() 之间显式获取，或在 spi_device_polling_start() 与 polling_end()（以及 polling_transmit()）之间隐式获取；这段时间内其他任务和大多数 ISR 都会被禁用，所以当前任务用到的代码和数据必须放在 DRAM 或 IRAM 中、或者已经在 ROM 里，去访问外部存储器会触发“缓存禁用情况下访问缓存内存区域”异常。把函数放进 IRAM 可以加 IRAM_ATTR，或使用 linker.lf 里的 noflash 位置（注意函数内联时属性会失效，可用 NOLINE_ATTR 规避）。；写入和读取阶段同时进行时，半双工传输事务与 DMA 不兼容。替代做法有三种：改成全双工传输事务；把总线初始化函数的最后一个参数设为 0 以禁用 DMA（代价是收发数据不能超过 64 字节）；或者用命令与地址字段代替写入阶段。此外全双工事务与 Dummy 位不兼容、因此存在频率限制，读写同时进行时 dummy_bits 在两种模式下都会失效，启用 DMA 时 RX 缓冲区还要从 32 位边界开始并按 4 的倍数对齐，否则 DMA 可能覆盖未对齐部分。",
+      "answerable": true
+    }
+  ],
+  "batchCursor": "END-11"
+}

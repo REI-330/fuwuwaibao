@@ -1,0 +1,77 @@
+{
+  "generatedAt": "2026-09-17T01:36:09+0800",
+  "model": "claude-sonnet-4.6",
+  "perQuestionSec": 3.14,
+  "subqueries": {
+    "N01": [
+      "FreeRTOS 官方认证开发板 IoT 硬件验证 FreeRTOS qualified hardware development boards IoT reference",
+      "FreeRTOS 支持芯片平台 合作伙伴硬件 FreeRTOS supported microcontroller partner hardware ecosystem",
+      "FreeRTOS 技术支持 文档社区论坛 FreeRTOS documentation technical support community forum"
+    ],
+    "N02": [
+      "ESP32 SPI 四线 IO 模式配置 quad mode QSPI setup",
+      "ESP32 命令阶段长度设置 command phase bits spi_transaction_ext_t",
+      "ESP32 地址阶段长度标志位 address phase length flags SPI_TRANS_VARIABLE_ADDR"
+    ],
+    "N03": [
+      "MALLOC_CAP_32BIT 浮点变量存储 ESP-IDF float variable memory capability",
+      "ESP-IDF 堆内存分配能力标志 32位对齐 heap capability flags aligned memory",
+      "中断服务程序 堆函数限制 ISR heap allocation restrictions interrupt handler ESP-IDF"
+    ],
+    "N04": [
+      "ESP32 RTC GPIO 使用场景 深度睡眠唤醒 保持功能 ESP32 RTC GPIO use cases deep sleep wakeup hold function",
+      "gpio_config 函数功能 配置参数 方向中断上下拉 gpio_config function pin configuration direction interrupt pull",
+      "gpio_reset_pin 函数功能 引脚复位默认状态 gpio_reset_pin function reset pin default state"
+    ],
+    "N05": [
+      "MindSpore Lite benchmark 工具输入数据文件格式规范 input data file format specification",
+      "MindSpore Lite mobilenetv2 benchmark 输入张量形状数据类型准备 input tensor shape dtype preparation",
+      "MindSpore Lite benchmark 输出误差指标含义解读 output error metrics mean absolute error cosine similarity interpretation"
+    ],
+    "N06": [
+      "飞桨 MNIST数据集 下载加载 PaddlePaddle dataset handwritten digit recognition",
+      "飞桨 网络模型构建 卷积神经网络 PaddlePaddle CNN model definition LeNet",
+      "飞桨 打印网络结构 模型摘要 PaddlePaddle print model summary layer structure"
+    ],
+    "N07": [
+      "飞桨 Python列表 创建Tensor paddle.to_tensor from Python list",
+      "飞桨 全零Tensor 创建 paddle.zeros create zero tensor PaddlePaddle",
+      "飞桨 全一Tensor 指定形状 paddle.ones create ones tensor shape PaddlePaddle"
+    ],
+    "N08": [
+      "YOLO 导出格式 部署格式 export formats ONNX TensorRT CoreML TFLite deployment",
+      "Hailo Ambarella 华为昇腾 NPU 加速器接入 edge AI accelerator integration YOLO",
+      "非NVIDIA硬件 异构加速 heterogeneous inference accelerator SDK model conversion workflow"
+    ],
+    "N09": [
+      "YOLO v26 预训练数据集 训练集 pretrained dataset training data COCO ImageNet",
+      "YOLO v26 推理代码示例 预测调用 inference example predict code usage",
+      "YOLO v26 检测结果 边界框坐标格式 bounding box coordinates xyxy xywh output format"
+    ],
+    "N10": [
+      "YOLO 分割模型精度指标 segmentation metrics mask mAP",
+      "model.val() 验证输出指标 validation results metrics dict",
+      "实例分割评估指标 box AP mask AP50 AP75 instance segmentation evaluation"
+    ],
+    "N11": [
+      "pytest fixture yield 清理机制 vs yield-based teardown",
+      "pytest addfinalizer 用法区别 finalizer registration difference",
+      "pytest fixture 清理陷阱常见问题 teardown pitfalls exceptions handling"
+    ],
+    "N12": [
+      "软件质量保证分析师职责 Software Quality Assurance Analyst responsibilities",
+      "测试员主要任务工作内容 Software Tester job duties tasks",
+      "质量保证测试工作活动流程 QA testing work activities processes"
+    ],
+    "N13": [
+      "计算机硬件工程师 职责 computer hardware engineer responsibilities duties",
+      "硬件工程师 日常工作任务 hardware engineer daily tasks work activities",
+      "硬件工程师 工作内容 设计测试 hardware engineer job description design testing"
+    ],
+    "N14": [
+      "全国标准信息公共服务平台 收录数量 强制性国家标准 mandatory national standards total count",
+      "推荐性国家标准 收录数量 现行有效 recommended national standards valid active",
+      "在线阅读 下载比例 国家标准 online access download ratio national standards platform"
+    ]
+  }
+}

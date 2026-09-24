@@ -1,0 +1,37 @@
+{
+  "schema": "career-graph-external-import/v1",
+  "library": "中华人民共和国职业分类大典",
+  "version": "osta-versionId-2",
+  "sourceId": "cn-dadian",
+  "sourceName": "中华人民共和国职业分类大典（人力资源和社会保障部 · 技能人才评价工作网 职业分类大典系统）",
+  "sourcePage": "https://www.osta.org.cn/career",
+  "rawDir": "knowledge/import/raw/osta-dadian",
+  "output": "knowledge/import/build/dadian.jsonl",
+  "note": "职业在第四级（编号形如 1-01-00-01）。本版只导入职业节点，不造边：职业要求什么技能要等 702 份国家职业技能标准解析完。",
+  "counts": {
+    "nodes": 1676,
+    "edges": 0,
+    "byLargeCategory": {
+      "1 党的机关、国家机关、群众团体和社会组织、企事业单位负责人": 25,
+      "2 专业技术人员": 496,
+      "3 办事人员和有关人员": 36,
+      "4 社会生产服务和生活服务人员": 379,
+      "5 农、林、牧、渔业生产及辅助人员": 56,
+      "6 生产制造及有关人员": 679,
+      "7 军队人员": 4,
+      "8 不便分类的其他从业人员": 1
+    },
+    "works": 3053
+  },
+  "markers": {
+    "tally": {
+      "L": 139,
+      "S": 108
+    },
+    "note": "职业名称末尾的 `S` / `L` 是大典的官方标注符号，已从 label 剥离并记进 dadianMarkers；本层不据此做任何图上的判断。一个名字可以同时带两个（如 `L/S`），此时 S 与 L 各计一次，所以两个数字相加大于带标注的节点数（223）。实测：只标 L 115 个、只标 S 84 个、两个都标 24 个。"
+  },
+  "notImported": [
+    "工种（3,053 个，只记数量，是同一职业下的分工而非另一个职业）",
+    "702 份国家职业技能标准（PDF，待解析）"
+  ]
+}

@@ -1,0 +1,553 @@
+Ultralytics YOLO27： 即将推出。加入候补名单。
+
+GitHub repository
+
+使用 Ultralytics YOLO 进行实例分割#
+
+实例分割比目标检测更进一步，它不仅要识别图像中的各个对象，还要将它们从图像的其余部分中分割出来。
+
+实例分割模型的输出是一组用于勾勒图像中每个对象的掩码或轮廓，同时还会为每个对象提供类别标签和置信度分数。当你不仅需要知道图像中对象的位置，还需要知道它们的确切形状时，实例分割就非常有用。
+
+Watch: Run Segmentation with Pretrained Ultralytics YOLO Model in Python.
+
+提示
+
+YOLO26 Segment 模型使用 -seg 后缀，即 yolo26n-seg.pt，并在 COCO 上进行预训练。
+
+模型#
+
+这里展示了 YOLO26 预训练 Segment 模型。Detect、Segment 和 Pose 模型在 COCO 数据集上进行预训练，语义模型在 Cityscapes 上进行预训练，而 Classify 模型在 ImageNet 数据集上进行预训练。
+
+首次使用时，模型 会自动从最新的 Ultralytics 发布版本 下载。
+
+模型
+
+尺寸
+
+（像素）
+
+mAP框
+
+50-95(e2e)
+
+mAP掩码
+
+50-95(e2e)
+
+速度
+
+CPU ONNX
+
+（毫秒）
+
+速度
+
+T4 TensorRT10
+
+（毫秒）
+
+参数量
+
+（M）
+
+FLOPs
+
+（B）
+
+YOLO26n-seg
+
+640
+
+39.6
+
+33.9
+
+53.3 ± 0.5
+
+2.1 ± 0.0
+
+2.7
+
+9.3
+
+YOLO26s-seg
+
+640
+
+47.3
+
+40.0
+
+118.4 ± 0.9
+
+3.3 ± 0.0
+
+10.4
+
+34.5
+
+YOLO26m-seg
+
+640
+
+52.5
+
+44.1
+
+328.2 ± 2.4
+
+6.7 ± 0.1
+
+23.6
+
+121.7
+
+YOLO26l-seg
+
+640
+
+54.4
+
+45.5
+
+387.0 ± 3.7
+
+8.0 ± 0.1
+
+28.0
+
+140.1
+
+YOLO26x-seg
+
+640
+
+56.5
+
+47.0
+
+787.0 ± 6.8
+
+16.4 ± 0.1
+
+62.8
+
+314.0
+
+mAPval 值基于 COCO val2017 数据集上的单模型、单尺度评估。
+
+通过 yolo val segment data=coco.yaml device=0 nms=False 复现
+
+速度是在使用 Amazon EC2 P4d 实例处理 COCO val 图像时的平均值。
+
+通过 yolo val segment data=coco.yaml batch=1 device=0|cpu nms=False 复现
+
+Params 和 FLOPs 数值适用于在进行卷积与批归一化折叠以及移除未使用的检测分支之后的融合模型。预训练检查点保留完整的训练架构，可能会显示更高的数值。
+
+这些检查点可分割 COCO 的 80 个类别。若要在无需重新训练的情况下分割该列表之外的类别，请参阅 YOLOE，它可以将类别作为文本提示、视觉示例或内置词汇表输入。
+
+请参阅unreleased YOLO27 preview以获取初步的COCO边界框和掩码结果。
+
+训练#
+
+在 COCO8-seg 数据集上训练 YOLO26n-seg，图像大小为 640，训练 100 个轮次。可用参数的完整列表请参阅配置页面。
+
+示例
+
+from ultralytics import YOLO
+
+# Load a model
+model = YOLO("yolo26n-seg.yaml") # build a new model from YAML
+model = YOLO("yolo26n-seg.pt") # load a pretrained model (recommended for training)
+model = YOLO("yolo26n-seg.yaml").load("yolo26n-seg.pt") # build from YAML and transfer weights
+
+# Train the model
+results = model.train(data="coco8-seg.yaml", epochs=100, imgsz=640)
+
+在训练页面查看完整的 train 模式详情。分割模型也可以使用 Ultralytics Platform 云训练进行训练。
+
+数据集格式#
+
+YOLO 分割数据集格式的详细信息可在数据集指南中找到。要将现有的 COCO JSON 数据集转换为 YOLO 格式，请使用内置的 convert_coco 函数及 use_segments=True，如COCO 转 YOLO 指南中所述。你还可以使用多边形工具和由 SAM 驱动的智能标注功能，通过Ultralytics 平台标注来创建分割掩码。
+
+验证#
+
+在 COCO8-seg 数据集上验证训练好的 YOLO26n-seg 模型的准确率。无需提供参数，因为 model 会将其训练用的 data 和参数保留为模型属性。
+
+示例
+
+from ultralytics import YOLO
+
+# Load a model
+model = YOLO("yolo26n-seg.pt") # load an official model
+model = YOLO("path/to/best.pt") # load a custom model
+
+# Validate the model
+metrics = model.val() # no arguments needed, dataset and settings remembered
+metrics.box.map # map50-95(B)
+metrics.box.map50 # map50(B)
+metrics.box.map75 # map75(B)
+metrics.box.maps # a list containing mAP50-95(B) for each category
+metrics.box.image_metrics # per-image metrics dictionary for det with precision, recall, F1, TP, FP, and FN
+metrics.seg.map # map50-95(M)
+metrics.seg.map50 # map50(M)
+metrics.seg.map75 # map75(M)
+metrics.seg.maps # a list containing mAP50-95(M) for each category
+metrics.seg.image_metrics # per-image metrics dictionary for seg with precision, recall, F1, TP, FP, and FN
+
+Predict#
+
+使用训练好的 YOLO26n-seg 模型对图像运行预测。
+
+示例
+
+from ultralytics import YOLO
+
+# Load a model
+model = YOLO("yolo26n-seg.pt") # load an official model
+model = YOLO("path/to/best.pt") # load a custom model
+
+# Predict with the model
+results = model("https://ultralytics.com/images/bus.jpg") # predict on an image
+
+# Access the results
+for result in results:
+xy = result.masks.xy # mask polygons in pixel coordinates
+xyn = result.masks.xyn # normalized mask polygons
+masks = result.masks.data # binary masks, shape (N,H,W), dtype torch.uint8
+
+请在预测页面查看完整的 predict 模式详情。
+
+结果输出#
+
+YOLO 实例分割会为每张图像返回一个 Results 对象。每个结果都存储对象级预测，其中
+每个检测到的实例都有自己的二值掩码、类别、置信度和边界框。
+
+属性
+
+类型
+
+形状
+
+描述
+
+result.masks
+
+Masks
+
+(N)
+
+实例掩码。
+
+result.masks.data
+
+torch.uint8
+
+(N,H,W)
+
+二进制掩码，值为 0 或 1。
+
+result.masks.xy
+
+np.float32
+
+list[(P,2)]
+
+像素多边形。
+
+result.masks.xyn
+
+np.float32
+
+list[(P,2)]
+
+归一化多边形。
+
+result.boxes
+
+Boxes
+
+(N)
+
+实例框/类别/置信度。
+
+result.boxes.cls
+
+torch.float32
+
+(N,)
+
+类别 ID；转换为 int 以获取名称。
+
+有关每项任务中任务专用的 Results 字段，请参阅按任务划分的预测结果部分。
+
+这与语义分割有何不同#
+
+实例分割是对象级分割：两辆汽车会生成两个掩码、两个边界框和两个置信度分数。
+语义分割是像素级分类：同样的两辆汽车会变成具有相同类别 ID 的像素，
+位于一张图像大小的类别图中，不包含逐对象边界框、置信度或默认的多边形列表。
+
+导出#
+
+将 YOLO26n-seg 模型导出为其他格式，例如 ONNX、CoreML 等。
+
+示例
+
+from ultralytics import YOLO
+
+# Load a model
+model = YOLO("yolo26n-seg.pt") # load an official model
+model = YOLO("path/to/best.pt") # load a custom-trained model
+
+# Export the model
+model.export(format="onnx")
+
+可用的 YOLO26-seg 导出格式如下表所示。你可以使用 format 参数导出为任意格式，即 format='onnx' 或 format='engine'。你可以直接在导出的模型上进行预测或验证，即 yolo predict model=yolo26n-seg.onnx。导出完成后，系统会为你的模型显示使用示例。
+
+注意
+
+对于静态形状的检测、实例分割和姿态估计，CoreML 支持嵌入式 NMS（nms=True）。默认分割导出（nms=None）将 NMS 留给消费者处理。
+
+格式
+
+format 参数
+
+模型
+
+元数据
+
+参数
+
+PyTorch
+
+yolo26n-seg.pt
+
+TorchScript
+
+torchscript
+
+yolo26n-seg.torchscript
+
+imgsz、quantize、dynamic、nms、batch、device
+
+ONNX
+
+onnx
+
+yolo26n-seg.onnx
+
+imgsz、quantize、dynamic、simplify、opset、nms、batch、data、fraction、device
+
+OpenVINO
+
+openvino
+
+yolo26n-seg_openvino_model/
+
+imgsz、quantize、dynamic、nms、batch、data、fraction、device
+
+TensorRT
+
+engine
+
+yolo26n-seg.engine
+
+imgsz、quantize、dynamic、simplify、opset、workspace、nms、batch、data、fraction、device
+
+CoreML
+
+coreml
+
+yolo26n-seg.mlpackage
+
+imgsz、dynamic、quantize、nms、batch、device
+
+TF SavedModel
+
+saved_model
+
+yolo26n-seg_saved_model/
+
+imgsz、keras、quantize、opset、nms、batch、data、fraction、device
+
+TF GraphDef
+
+pb
+
+yolo26n-seg.pb
+
+imgsz、opset、batch、device
+
+TF Edge TPU
+
+edgetpu
+
+yolo26n-seg_edgetpu.tflite
+
+imgsz、quantize、opset、data、fraction、device
+
+PaddlePaddle
+
+paddle
+
+yolo26n-seg_paddle_model/
+
+imgsz、batch、device
+
+MNN
+
+mnn
+
+yolo26n-seg.mnn
+
+imgsz、batch、dynamic、quantize、simplify、opset、nms、device
+
+NCNN
+
+ncnn
+
+yolo26n-seg_ncnn_model/
+
+imgsz、quantize、batch、device
+
+IMX500
+
+imx
+
+yolo26n-seg_imx_model/
+
+imgsz、quantize、data、fraction、nms、device
+
+RKNN
+
+rknn
+
+yolo26n-seg_rknn_model/
+
+imgsz、batch、name、quantize、simplify、opset、data、fraction、device
+
+ExecuTorch
+
+executorch
+
+yolo26n-seg_executorch_model/
+
+imgsz、batch、device
+
+Axelera
+
+axelera
+
+yolo26n-seg_axelera_model/
+
+imgsz、batch、quantize、data、fraction、device
+
+DEEPX
+
+deepx
+
+yolo26n-seg_deepx_model/
+
+imgsz、quantize、simplify、opset、data、optimize、device
+
+Qualcomm QNN
+
+qnn
+
+yolo26n-seg_qnn.onnx
+
+imgsz、batch、name、quantize、simplify、opset、data、fraction、device
+
+LiteRT
+
+litert
+
+yolo26n-seg.tflite
+
+imgsz、quantize、batch、data、fraction、device
+
+Hailo
+
+hailo
+
+yolo26n-seg_hailo_model/
+
+imgsz、name、quantize、data、fraction、simplify、conf、iou
+
+Huawei Ascend
+
+ascend
+
+yolo26n-seg_ascend_model/
+
+imgsz、batch、name、quantize、opset、simplify、nms
+
+Apple Core AI
+
+coreai
+
+yolo26n-seg.aimodel
+
+imgsz、batch、quantize
+
+nms=None 默认对外部 NMS 使用原始输出。设置 nms=False 以选择可用的无 NMS 检测头；不支持的格式将回退到其本机输出路径。上面的 nms 条目标识了可以通过 nms=True 嵌入 NMS 的格式。
+
+请在导出页面查看完整的 export 详情。
+
+常见问题#
+
+要在自定义数据集上训练 YOLO26 分割模型，你需要先准备好 YOLO 分割格式的数据集。你可以使用内置的 convert_coco 工具来转换 COCO JSON 数据集。数据集准备好后，你可以使用 Python 或 CLI 命令来训练模型：
+
+示例
+
+from ultralytics import YOLO
+
+# Load a pretrained YOLO26 segment model
+model = YOLO("yolo26n-seg.pt")
+
+# Train the model
+results = model.train(data="path/to/your_dataset.yaml", epochs=100, imgsz=640)
+
+请查看配置页面，了解更多可用参数。
+
+目标检测通过在对象周围绘制边界框来识别和定位图像中的对象，而实例分割不仅能识别边界框，还能勾勒出每个对象的确切形状。YOLO26 实例分割模型会提供用于勾勒每个检测对象的掩码或轮廓，这对于需要了解对象精确形状的任务尤其有用，例如医学影像或自动驾驶。
+
+Ultralytics YOLO26 是一种最先进的模型，以高准确率和实时性能著称，非常适合实例分割任务。YOLO26 Segment 模型在 COCO 数据集上进行预训练，确保在各种对象上的稳健性能。此外，YOLO 支持训练、验证、预测和导出功能，并能实现无缝集成，因此在研究和行业应用中都具有很高的灵活性。
+
+加载和验证预训练的 YOLO 分割模型非常简单。下面介绍如何使用 Python 和 CLI 完成此操作：
+
+示例
+
+from ultralytics import YOLO
+
+# Load a pretrained model
+model = YOLO("yolo26n-seg.pt")
+
+# Validate the model
+metrics = model.val()
+print("Mean Average Precision for boxes:", metrics.box.map)
+print("Mean Average Precision for masks:", metrics.seg.map)
+
+这些步骤将为你提供平均精度均值（mAP）等验证指标，这些指标对于评估模型性能至关重要。
+
+将 YOLO 分割模型导出为 ONNX 格式非常简单，可以使用 Python 或 CLI 命令完成：
+
+示例
+
+from ultralytics import YOLO
+
+# Load a pretrained model
+model = YOLO("yolo26n-seg.pt")
+
+# Export the model to ONNX format
+model.export(format="onnx")
+
+有关导出为各种格式的更多详情，请参阅导出页面。
+
+贡献者
+
+GLglenn-jocher35RAraimbekovm5BUBurhan-Q4AMambitious-octopus3Y-Y-T-G2MImiles-deans-ultralytics1LALaughing-q1AMamanharshx1PDpderrenger1JKjk4e1MAMatthewNoyce1RIRizwanMunawar1
+
+创建时间 2023年11月12日更新时间 昨天
+
+评论

@@ -1,0 +1,665 @@
+{
+  "schema": "career-graph-deepeval/v1",
+  "judge": {
+    "model": "claude-sonnet-4.6",
+    "base_url": "https://forum.u3552374.nyat.app:49420/v1"
+  },
+  "levels": {
+    "BM25": {
+      "n": 14,
+      "summary": {
+        "contextual_precision": {
+          "mean": 0.8333,
+          "n": 14
+        },
+        "contextual_recall": {
+          "mean": 0.6569,
+          "n": 14
+        },
+        "contextual_relevancy": {
+          "mean": 0.4638,
+          "n": 12
+        }
+      },
+      "elapsedSec": 713.8,
+      "perQuestion": [
+        {
+          "questionId": "N01",
+          "set": "main",
+          "category": "嵌入式开发",
+          "retrieved_chunk_ids": [
+            "S01#s6",
+            "S01#s5",
+            "S22#s354"
+          ],
+          "answer": "## 一、官方认证的现成开发板\n\n根据检索片段 [2]，以下硬件平台已符合 FreeRTOS 资格认证条件，可直接用于验证开发：\n\n| 厂商 | 开发板/套件 |\n|------|------------|\n| **Espressif** | ESP32-DevKitC、ESP-WROVER-KIT、ESP-WROOM-32SE、ESP32-S2-Saola-1 |\n| **Cypress** | CYW943907AEVAL1F、CYW954907AEVAL1F、CY8CKIT-064S0S2-4343W |\n| **STMicroelectronics** | STM32L4 发现工具包 IoT 节点 |\n| **Texas Instruments** | CC3220SF-LAUNCHXL |\n| **Nordic** | nRF52840-DK |\n| **NXP** | LPC54018 IoT Module |\n| **Infineon** | XMC4800 IoT 连接工具包 |\n| **Renesas** | RX65N RSK IoT Module |\n| **Marvell** | MW320 / MW322 AWS IoT 入门套件 |\n| **Microchip** | Curiosity PIC32MZEF Bundle |\n| **MediaTek** | mt7697hx 开发套件 |\n| **Xilinx** | Avnet MicroZed 工业物联网套件 |\n| **其他** | ATECC608A Zero Touch 套件、OPTIGA Trust X、NuMaker-IoT-M487、Microsoft Windows 7+ (双核+有线以太网) |\n\n> 💡 **补充**：更多取得认证的设备可查阅 **AWS 合作伙伴设备目录**；若需为新设备申请资格认证，可参考 **FreeRTOS 资格认证指南**。\n\n---\n\n## 二、遇到技术问题的支持渠道\n\n根据检索片段 [1]，推荐按以下层级寻求帮助：\n\n1. 📖 **官方文档**：访问 [freertos.org](https://freertos.org) 获取完整 FreeRTOS 文档\n2. 🐛 **问题反馈**：在 **FreeRTOS GitHub 页面**提交 Issue（适合向官方工程团队反馈 Bug 或疑问）\n3. 💬 **社区论坛**：前往 **FreeRTOS 社区论坛**提问，适合技术讨论\n4. 🌐 **AWS IoT 连接问题**：参阅《**AWS IoT Core 开发者指南**》中的设备配置章节\n5. 🎫 **AWS 官方技术支持**：通过 **AWS Support** 获取付费/专业级支持\n6. 📞 **账号/账单/滥用等问题**：访问 AWS **\"联系我们\"** 页面\n\n---\n\n> ⚠️ **说明**：检索片段中未涉及阿里云等其他平台的相关内容，以上回答严格依据所提供资料。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": null
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because all relevant nodes are perfectly ranked at the top! The first node covers FreeRTOS documentation and support resources, and the second node lists officially qualified hardware platforms — both appearing before the irrelevant third node about Alibaba Cloud products, which has no bearing on FreeRTOS certified boards or support channels.",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully supported by nodes in retrieval context — specifically, sentences 1–25 are attributed to node 2, and sentences 26–39 are attributed to node 1. Great job, everything checks out perfectly!",
+            "contextual_relevancy": "DeepEvalError: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model."
+          },
+          "elapsedSec": 228.5
+        },
+        {
+          "questionId": "N02",
+          "set": "main",
+          "category": "嵌入式开发",
+          "retrieved_chunk_ids": [
+            "S02#s14",
+            "S02#s13",
+            "S02#s10"
+          ],
+          "answer": "# ESP32 SPI 四线 I/O 模式配置及命令/地址阶段长度修改\n\n---\n\n## 一、四线 I/O 模式（Quad I/O）的设置\n\n根据检索片段 [2]，需要同时在**两个结构体**中设置对应标志位：\n\n### 1. `spi_transaction_t` 的 `flags` 成员（传输事务标志）\n\n需同时设置以下两个标志：\n\n| 标志信号 | 作用 |\n|---|---|\n| `SPI_TRANS_MODE_QIO` | 数据阶段使用四线 |\n| `SPI_TRANS_MULTILINE_ADDR` | 地址阶段也使用四线（与数据阶段一致） |\n\n### 2. `spi_bus_config_t` 的 `flags` 成员（总线 IO 设置标志）\n\n需设置：\n\n| 标志信号 | 作用 |\n|---|---|\n| `SPICOMMON_BUSFLAG_QUAD` | 检查/使能 QUAD 所需的 IO 管脚 |\n\n> ⚠️ 注意：如果还希望**命令阶段**也使用多线，需额外在 `spi_transaction_t::flags` 中加上 `SPI_TRANS_MULTILINE_CMD`（参见片段 [1]）。\n\n---\n\n## 二、修改命令阶段和地址阶段的长度\n\n### 默认方式（不修改长度）\n\n根据片段 [1]，默认长度在调用 `spi_bus_add_device()` 时通过 `spi_device_interface_config_t` 指定：\n\n- `spi_device_interface_config_t::command_bits` → 命令阶段位数\n- `spi_device_interface_config_t::address_bits` → 地址阶段位数\n\n若未设置可变标志，驱动会自动沿用这些默认值。\n\n---\n\n### 按需修改长度（逐笔事务可变）\n\n需要按以下步骤操作（来自片段 [1]）：\n\n#### Step 1：声明扩展结构体\n```c\nspi_transaction_ext_t ext_trans = {0};\n```\n\n#### Step 2：在 `spi_transaction_ext_t::base.flags` 中设置可变标志\n\n| 标志信号 | 含义 |\n|---|---|\n| `SPI_TRANS_VARIABLE_CMD` | 命令阶段长度由本次事务自定义 |\n| `SPI_TRANS_VARIABLE_ADDR` | 地址阶段长度由本次事务自定义 |\n\n```c\next_trans.base.flags = SPI_TRANS_VARIABLE_CMD | SPI_TRANS_VARIABLE_ADDR;\n```\n\n#### Step 3：设置具体位数\n\n```c\next_trans.command_bits = 8;   // 本次命令阶段长度（位）\next_trans.address_bits = 24;  // 本次地址阶段长度（位）\n```\n\n#### Step 4：按正常流程完成其余配置并发送事务\n\n---\n\n## 总结对照表\n\n| 需求 | 涉及结构体 | 关键字段/标志 |\n|---|---|---|\n| 四线 I/O 模式（数据+地址） | `spi_transaction_t` | `SPI_TRANS_MODE_QIO` + `SPI_TRANS_MULTILINE_ADDR` |\n| 使能 QUAD 管脚 | `spi_bus_config_t` | `SPICOMMON_BUSFLAG_QUAD` |\n| 设置默认命令/地址长度 | `spi_device_interface_config_t` | `command_bits` / `address_bits` |\n| 按事务动态改变长度 | `spi_transaction_ext_t` | `SPI_TRANS_VARIABLE_CMD/ADDR` + `command_bits` / `address_bits` |",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.8
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because all three retrieval context nodes are relevant and ranked perfectly! The first node covers the command and address phase length configuration, the second node addresses the four-line I/O mode setup, and the third node provides essential background on SPI transaction phases and structures — together forming a complete and well-ordered answer.",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully supported by nodes in retrieval context. Sentences 1 and the table content are attributed to node 2, which contains the ESP32 line mode descriptions and the complete mode table with flags. Sentences covering command/address phase behavior, spi_transaction_ext_t usage, and SPI_TRANS_MULTILINE_CMD/ADDR configuration are all att",
+            "contextual_relevancy": "The score is 0.80 because the retrieval context covers a substantial portion of the input's questions: it provides relevant details on configuring Quad I/O mode (e.g., '四线 I/O 模式需要在 spi_transaction_t 中设置 SPI_TRANS_MODE_QIO 和 SPI_TRANS_MULTILINE_ADDR 标志，同时在 spi_bus_config_t 中设置 SPICOMMON_BUSFLAG_QUAD'), and thoroughly addresses command/address phase length modification via 'spi_transaction_ext_t' a"
+          },
+          "elapsedSec": 273.0
+        },
+        {
+          "questionId": "N03",
+          "set": "main",
+          "category": "嵌入式开发",
+          "retrieved_chunk_ids": [
+            "S03#32",
+            "S03#s56",
+            "S03#s46"
+          ],
+          "answer": "## 关于 `MALLOC_CAP_32BIT` 与浮点变量\n\n**不能**用 `MALLOC_CAP_32BIT` 存储浮点变量。\n\n根据检索片段 [1]，原因如下：\n\n> `MALLOC_CAP_32BIT` 可能返回**指令 RAM（IRAM）**，而 ESP32 上的**浮点汇编指令无法访问指令 RAM**，因此将浮点变量存储在此类内存中会导致错误。\n\n此外还需注意：\n- 使用 `MALLOC_CAP_32BIT` 分配的内存**只能通过 32 位读写访问**，其他类型的访问将导致 `LoadStoreError` 异常。\n- 它适合的场景是**仅以 32 位为单位寻址的数据结构**，例如整数数组或指针数组。\n\n---\n\n## 关于在中断服务程序（ISR）中调用堆函数\n\n根据检索片段 [2]，限制和建议如下：\n\n| 方面 | 说明 |\n|------|------|\n| **技术可行性** | 从 ISR 上下文中调用 `malloc`、`free` 等函数在技术上可行 |\n| **官方态度** | **不建议**在 ISR 中调用堆函数 |\n| **原因** | 调用堆函数可能会**延迟其他中断**，影响实时性 |\n| **推荐做法** | 将 ISR 所需的 buffer **提前在 ISR 之外预先分配好** |\n| **未来兼容性** | 官方提示**之后可能会删除**从 ISR 调用堆函数的功能，存在兼容性风险 |\n\n---\n\n**总结建议：** 浮点变量请使用普通 `malloc()` 或带 `MALLOC_CAP_8BIT` 等标志的分配方式；ISR 中所需内存应在任务初始化阶段提前分配，避免在中断处理程序中动态申请/释放内存。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 0.8333,
+            "contextual_relevancy": 0.4615
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because all relevant nodes are perfectly ranked above the irrelevant ones. The first node directly addresses both parts of the question, explicitly stating that 'MALLOC_CAP_32BIT 可能返回指令 RAM，而 ESP32 上的浮点汇编指令无法访问指令 RAM', and the second node supplements with ISR-related heap function usage, noting that '从中断处理程序 (ISR) 上下文中调用 malloc、free 和相关函数虽然在技术层面可行'. The retrieval is spot on!",
+            "contextual_recall": "The score is 0.83 because most of the expected output is well-supported by nodes in retrieval context. Sentences 1-3 regarding MALLOC_CAP_32BIT usage, floating-point variable restrictions, and LoadStoreError exceptions are all directly attributed to the 1st node. The general mention of heap functions being callable in ISR and the advisory note against the practice are supported by the 2nd node. Ho",
+            "contextual_relevancy": "The score is 0.46 because the retrieval context partially addresses the input. For the MALLOC_CAP_32BIT and floating-point question, there are directly relevant statements, such as '在 ESP32 系列芯片上，不可使用 MALLOC_CAP_32BIT 存储浮点变量，因为 MALLOC_CAP_32BIT 可能返回指令 RAM，而 ESP32 上的浮点汇编指令无法访问指令 RAM' and 'MALLOC_CAP_32BIT 分配的内存只能通过 32 位读写访问'. For the ISR heap function restriction question, there are relevant but li"
+          },
+          "elapsedSec": 149.6
+        },
+        {
+          "questionId": "N04",
+          "set": "main",
+          "category": "嵌入式开发",
+          "retrieved_chunk_ids": [
+            "S04#s78",
+            "S04#s73~2",
+            "S04#s74"
+          ],
+          "answer": "## ESP32 RTC GPIO 使用场景\n\n根据检索片段 [2]，RTC GPIO 是 ESP32 芯片在 GPIO 连接到 **RTC 低功耗、模拟子系统、低功耗外设**时单独支持的管脚功能，可在以下三种情况下使用：\n\n1. **处于 Deep-sleep 模式时**\n2. **超低功耗协处理器（ULP-FSM）运行时**\n3. **使用 ADC/DAC 等模拟功能时**\n\n---\n\n## `gpio_config` 与 `gpio_reset_pin` 的职责\n\n### `gpio_config`（片段 [1][3]）\n- **一体化配置函数**，用于同时配置 GPIO 的：\n  - 工作模式（Mode）\n  - 内部上拉（Pull-up）\n  - 内部下拉（Pull-down）\n  - 中断触发类型（IntrType）\n- ⚠️ **重要注意**：该函数会**覆盖当前 IO 的所有配置**，因此在与其他外设驱动（如 LEDC）配合使用时，需注意调用顺序（应先调用 `gpio_config`，再调用外设驱动 API）。\n\n### `gpio_reset_pin`（片段 [1]）\n- 将指定 GPIO **复位到默认状态**，具体包括：\n  - 切换为 **GPIO 功能**（而非外设复用功能）\n  - **启用上拉电阻**\n  - **禁用输入和输出**\n\n---\n\n## 两者核心区别对比\n\n| 对比项 | `gpio_config` | `gpio_reset_pin` |\n|--------|--------------|-----------------|\n| 用途 | 按需灵活配置引脚 | 将引脚恢复到默认状态 |\n| 配置项 | 模式/上下拉/中断等全量配置 | 固定：GPIO功能+上拉+禁用输入输出 |\n| 灵活性 | 高，由用户指定参数 | 低，固定行为 |",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.3077
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the relevant nodes are perfectly ranked at the top! The first node accurately covers `gpio_config` and `gpio_reset_pin` functions, and the second node precisely addresses ESP32 RTC GPIO usage scenarios — both directly answering the input. Great retrieval ordering!",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully attributable to nodes in retrieval context. Sentences 1-6 are found in node 2, covering GPIO36/GPIO39 interrupt warnings, RTC GPIO support details, and usage scenarios (Deep-sleep, ULP-FSM, ADC/DAC). The remaining sentences, including all function signatures, descriptions, parameters, return values, and notes for gpio_config,",
+            "contextual_relevancy": "The score is 0.31 because while some relevant statements exist—such as 'gpio_config configures GPIO's Mode, pull-up, PullDown, and IntrType', 'gpio_reset_pin resets a GPIO by selecting gpio function, enabling pullup, and disabling input and output', and the RTC GPIO usage scenarios (Deep-sleep, ULP-FSM, ADC/DAC)—the majority of the retrieval context is irrelevant to the input. Specifically, the co"
+          },
+          "elapsedSec": 62.4
+        },
+        {
+          "questionId": "N05",
+          "set": "main",
+          "category": "AI框架与推理",
+          "retrieved_chunk_ids": [
+            "S05#s100~4",
+            "S05#s109~4",
+            "S05#s100~2"
+          ],
+          "answer": "## 一、输入数据文件的规格准备\n\n### 1. 推理输入文件（`--inDataFile`）\n\n根据片段[3]，`input.bin` 需满足以下规格：\n\n| 规格项 | 要求 |\n|--------|------|\n| **文件格式** | 二进制（`.bin`） |\n| **数据类型** | `float32` |\n| **数据形状** | `1 × 224 × 224 × 3`（与模型输入张量一致） |\n| **数据总量** | `1 × 224 × 224 × 3 = 150,528` 个 float32 数值 |\n| **存储方式** | 按顺序连续存储所有数值的二进制内容 |\n\n可用以下 Python 脚本随机生成：\n```python\nimport numpy as np\nnp.random.seed(1)\nt = np.random.rand(1, 224, 224, 3)\nt.astype(np.float32).tofile(\"input.bin\")\n```\n\n### 2. 标杆对比文件（`--benchmarkDataFile`）\n\n标杆文件为**字符文本格式**（`.txt`），格式规则如下：\n\n```\n[输出节点名称] [形状维度长度] [第一维值] ... [第n维值]\n[数据1] [数据2] ...\n```\n\n以 mobilenetv2 为例：\n- 输出节点名：`Default/head-MobileNetV2Head/Softmax-op204`\n- 输出形状：`1 × 1000`，维度长度为 `2`\n\n> ⚠️ 标杆数据的数据量必须与模型输出完全一致，否则无法进行误差对比。\n\n---\n\n## 二、输出误差信息的理解\n\n运行完成后，输出中主要包含以下几类信息：\n\n### 1. `InData 0`\n- **含义**：本次推理实际使用的**输入数据**（仅打印前 20 个值）\n- **用途**：可与标杆输入对照，确认输入是否一致\n\n### 2. `Data of node Default/head-MobileNetV2Head/Softmax-op204`\n- **含义**：该输出节点的**推理结果**（仅打印前 50 个值）\n- **用途**：与标杆输出直观对比，快速判断结果是否合理\n\n### 3. `Mean bias of node/tensor Default/head-MobileNetV2Head/Softmax-op204`\n- **含义**：该**单个输出张量**与标杆数据之间的**平均误差**\n- **计算方法**：由 benchmark 工具内置比较算法计算\n\n### 4. `Mean bias of all nodes/tensors`\n- **含义**：**所有输出张量**与标杆对比的**整体平均误差**\n- **说明**：当模型只有 1 个输出张量时（如本例），该值与单节点误差完全一致\n- **示例结果**：本例推理总平均误差为 **0%**，说明推理精度完全对齐标杆\n\n---\n\n## 总结\n\n```\n输入文件：float32 二进制，shape=1×224×224×3，共 150528 个数值\n标杆文件：文本格式，含节点名、形状、输出数值\n\n误差输出解读：\n  ├── InData 0              → 实际输入（前20个）\n  ├── Data of node xxx      → 推理结果（前50个）\n  ├── Mean bias of node xxx → 单节点平均误差\n  └── Mean bias of all      → 所有节点总体平均误差\n```",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.8077
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because all three nodes in the retrieval contexts are relevant and ranked perfectly! The first node covers error interpretation (e.g., 'Mean bias of node/tensor' and 'Mean bias of all nodes/tensors') and benchmark parameter specifications. The second node reinforces the same error metrics explanation, and the third node nails the input data preparation details, such as 'input.bin",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully supported by nodes in the retrieval context. Nodes 1, 2, and 3 in the retrieval context together cover everything comprehensively — great job!",
+            "contextual_relevancy": "The score is 0.81 because the retrieval context contains substantial relevant information directly addressing both parts of the input: for input data preparation, it covers key specs such as 'mobilenetv2.ms模型接收float32的1x224x224x3张量，input.bin文件按顺序保存了150528个float32的二进制数值' and that '--inDataFile参数默认接收二进制格式数据文件'; for understanding error output, it explains 'Mean bias of node/tensor行给出了输出张量与标杆数据对比的平均误差"
+          },
+          "elapsedSec": 93.4
+        },
+        {
+          "questionId": "N06",
+          "set": "main",
+          "category": "AI框架与推理",
+          "retrieved_chunk_ids": [
+            "S06#s115",
+            "S06#3.4.2",
+            "S06#3.2"
+          ],
+          "answer": "# 用飞桨做手写数字识别：数据集加载 & 网络构建\n\n---\n\n## 一、数据集的下载和加载\n\n根据检索片段 [1] 和 [5]，任务使用的是 **MNIST 手写数字数据集**（60000 张训练图 + 10000 张测试图，分辨率 28×28）。\n\n飞桨通过 `paddle.vision.datasets.MNIST` **自动完成下载与加载**，无需手动下载，代码如下：\n\n```python\nimport paddle\nfrom paddle.vision.transforms import Normalize\n\n# 定义归一化变换（将像素值从[0,255]归一化到[-1,1]）\ntransform = Normalize(mean=[127.5], std=[127.5], data_format=\"CHW\")\n\n# 下载数据集并初始化 DataSet\ntrain_dataset = paddle.vision.datasets.MNIST(mode=\"train\", transform=transform)\ntest_dataset  = paddle.vision.datasets.MNIST(mode=\"test\",  transform=transform)\n```\n\n| 参数 | 说明 |\n|------|------|\n| `mode=\"train\"` | 加载训练集（60000 张） |\n| `mode=\"test\"` | 加载测试集（10000 张） |\n| `transform` | 对图像做归一化预处理 |\n\n---\n\n## 二、网络模型的选择、构建与结构打印\n\n### 1. 使用的模型\n根据检索片段 [3]，本任务使用的是飞桨内置的经典模型 **LeNet**，位于 `paddle.vision.models` 下。\n\n### 2. 构建网络（一行代码）\n\n```python\n# num_classes=10，对应 0~9 十类数字\nlenet = paddle.vision.models.LeNet(num_classes=10)\n```\n\n### 3. 打印网络结构\n\n通过 `paddle.summary` 可打印每一层的输入/输出形状及参数量：\n\n```python\npaddle.summary(lenet, (1, 1, 28, 28))\n```\n\n打印结果如下：\n\n```\n---------------------------------------------------------------------------\n Layer (type)       Input Shape          Output Shape         Param #\n===========================================================================\n   Conv2D-1       [[1, 1, 28, 28]]      [1, 6, 28, 28]          60\n     ReLU-1       [[1, 6, 28, 28]]      [1, 6, 28, 28]           0\n  MaxPool2D-1     [[1, 6, 28, 28]]      [1, 6, 14, 14]           0\n   Conv2D-2       [[1, 6, 14, 14]]      [1, 16, 10, 10]       2,416\n     ReLU-2       [[1, 16, 10, 10]]     [1, 16, 10, 10]          0\n  MaxPool2D-2     [[1, 16, 10, 10]]     [1, 16, 5, 5]            0\n   Linear-1         [[1, 400]]           [1, 120]             48,120\n   Linear-2         [[1, 120]]           [1, 84]              10,164\n   Linear-3          [[1, 84]]           [1, 10]                850\n===========================================================================\nTotal params: 61,610\nTrainable params: 61,610\nNon-trainable params: 0\n```\n\n> `paddle.summary` 的第二个参数 `(1, 1, 28, 28)` 表示输入形状：**batch=1，通道=1，高=28，宽=28**，与 MNIST 图片格式对应。\n\n---\n\n## 总结\n\n| 步骤 | 关键 API |\n|------|----------|\n| 数据下载与加载 | `paddle.vision.datasets.MNIST` |\n| 数据预处理 | `paddle.vision.transforms.Normalize` |\n| 模型构建 | `paddle.vision.models.LeNet(num_classes=10)` |\n| 打印网络结构 | `paddle.summary(lenet, (1, 1, 28, 28))` |",
+          "scores": {
+            "contextual_precision": 0.8333,
+            "contextual_recall": 0.6364,
+            "contextual_relevancy": 0.5
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.83 because the retrieval contexts are mostly well-ranked, with the first node correctly covering the dataset downloading and loading code (e.g., 'train_dataset = paddle.vision.datasets.MNIST(mode=\"train\", transform=transform)') and the third node thoroughly addressing the model construction using LeNet ('lenet = paddle.vision.models.LeNet(num_classes=10)') and structure printing ('p",
+            "contextual_recall": "The score is 0.64 because several sentences in the expected output are well-supported by nodes in retrieval context, while others are not. Sentences 3 (the code block for MNIST dataset loading), 6–11 (the LeNet model construction discussion, code block, summary output, paddle.nn.Sequential mention, and '更多参考: 模型组网') are all directly attributed to node 1 and node 3. However, sentence 1 describing t",
+            "contextual_relevancy": "The score is 0.50 because while the retrieval context contains several statements directly relevant to the input's questions — such as dataset downloading/loading via 'paddle.vision.datasets.MNIST' with 'mode=train/test' and Normalize preprocessing, network construction using 'paddle.vision.models.LeNet(num_classes=10)' and structure printing via 'model.summary()' or 'paddle.summary(lenet, (1, 1, "
+          },
+          "elapsedSec": 78.0
+        },
+        {
+          "questionId": "N07",
+          "set": "main",
+          "category": "AI框架与推理",
+          "retrieved_chunk_ids": [
+            "S07#2.1",
+            "S07#3.2",
+            "S07#2.2"
+          ],
+          "answer": "## 飞桨（PaddlePaddle）创建 Tensor 的方式\n\n### 1. 从 Python 列表创建 Tensor\n\n使用 **`paddle.to_tensor()`** 接口，将 Python 列表（list）或元组（tuple）传入即可，支持任意维度：\n\n```python\nimport paddle\n\n# 1 维 Tensor（类似向量）\nndim_1_Tensor = paddle.to_tensor([2.0, 3.0, 4.0])\n# → shape=[3], dtype=float32\n\n# 2 维 Tensor（类似矩阵）\nndim_2_Tensor = paddle.to_tensor([[1.0, 2.0, 3.0],\n                                   [4.0, 5.0, 6.0]])\n# → shape=[2, 3], dtype=float32\n\n# 还可通过 dtype 参数指定数据类型\nndim_1_tensor = paddle.to_tensor([2.0, 3.0, 4.0], dtype='float64')\n```\n\n> **默认类型说明：**\n> - Python 整型 → `int64`\n> - Python 浮点型 → `float32`\n\n---\n\n### 2. 创建指定形状、全 0 或全 1 的 Tensor\n\n使用以下三个专用接口，传入目标形状 `[m, n]`：\n\n| 接口 | 作用 | 示例 |\n|------|------|------|\n| `paddle.zeros([m, n])` | 全为 **0** | `paddle.zeros([2, 3])` |\n| `paddle.ones([m, n])` | 全为 **1** | `paddle.ones([2, 3])` |\n| `paddle.full([m, n], val)` | 全为指定值 | `paddle.full([2, 3], 10)` |\n\n例如 `paddle.ones([2, 3])` 输出：\n```\nTensor(shape=[2, 3], dtype=float32, ...)\n[[1., 1., 1.],\n [1., 1., 1.]]\n```\n\n---\n\n**总结：**\n- 从列表建 Tensor → `paddle.to_tensor(list)`\n- 全 0 指定形状 → `paddle.zeros([m, n])`\n- 全 1 指定形状 → `paddle.ones([m, n])`\n- 全指定值 → `paddle.full([m, n], value)`",
+          "scores": {
+            "contextual_precision": 0.8333,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.3889
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.83 because while the two relevant nodes are present in the retrieval contexts — the first node correctly covers creating Tensors from Python lists using 'paddle.to_tensor', and the third node correctly covers creating Tensors filled with 0s or 1s using 'paddle.zeros、paddle.ones、paddle.full' — the second node, ranked between them, is irrelevant as it only discusses specifying and mod",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully supported by nodes in retrieval context. The 1st node in retrieval context covers sentences describing Tensor creation via paddle.to_tensor, the 1D/2D/3D Tensor examples, the scalar input behavior, the visualization description, the rectangular shape requirement, and the notes on paddle.tolist and memory copying. The 3rd node",
+            "contextual_relevancy": "The score is 0.39 because while the retrieval context does contain some relevant statements directly addressing the input, such as 'paddle.to_tensor 可以从 Python 序列（如列表 list、元组 tuple）创建任意维度的 Tensor' and 'paddle.zeros([m, n]) 可以创建数据全为 0' / 'paddle.ones([m, n]) 可以创建数据全为 1', a significant portion of the context is irrelevant. For example, statements about '内存拷贝机制', 'Tensor 转换为 Python 序列', 'paddle.cast "
+          },
+          "elapsedSec": 94.5
+        },
+        {
+          "questionId": "N08",
+          "set": "main",
+          "category": "计算机视觉",
+          "retrieved_chunk_ids": [
+            "S08#s147~2",
+            "S08#s147",
+            "S08#s150"
+          ],
+          "answer": "## YOLO26 支持的部署格式及适用场景\n\n根据检索片段，YOLO26 支持以下部署格式：\n\n| 格式 | 标识符 | 适用场景 |\n|------|--------|----------|\n| **PyTorch** | `.pt` | 研究、原型开发，需要 Python 环境，支持 NVIDIA CUDA / AMD ROCm GPU 加速 |\n| **TorchScript** | `torchscript` | 无 Python 的 C++ 生产系统 |\n| **ONNX** | `onnx` | 跨平台、跨框架兼容，广泛的硬件支持，也是多个下游工具链的中间格式 |\n| **OpenVINO** | `openvino` | Intel CPU、集成 GPU、NPU，物联网与边缘计算场景 |\n| **TensorRT** | `engine` | NVIDIA GPU 高性能推理，支持 FP16 / INT8 |\n| **CoreML** | `coreml` | Apple 生态（iOS / macOS / watchOS / tvOS），利用 Apple Neural Engine |\n| **TF SavedModel** | `saved_model` | 服务器端 TensorFlow Serving 可扩展部署 |\n| **TF GraphDef** | `pb` | 需要固定静态计算图的 TF 环境 |\n| **TF Edge TPU** | `edgetpu` | Google Coral Edge TPU 加速器 |\n| **LiteRT（原 TFLite）** | `litert` | 移动端（Android / iOS）、嵌入式、浏览器（LiteRT.js），支持 FP32 / INT8 |\n| **PaddlePaddle** | `paddle` | 百度生态，国内广泛使用，多硬件支持 |\n| **MNN** | `mnn` | 移动端及嵌入式 ARM / x86-64，轻量高性能 |\n| **NCNN** | `ncnn` | 移动 ARM 设备，轻量级高性能推理 |\n| **Sony IMX500** | `imx` | Sony IMX500 智能视觉传感器（如树莓派 AI Camera），支持芯片上处理 |\n| **Rockchip RKNN** | `rknn` | 嵌入式开发板上的 Rockchip NPU，支持 FP16 / INT8 量化 |\n| **ExecuTorch** | `executorch` | PyTorch 原生端侧运行时，通过 XNNPACK 加速（片段截断，细节有限） |\n\n---\n\n## 非 NVIDIA 加速器的接入方式\n\n### 🔷 Hailo\n- **方式**：直接导出为 **Hailo HEF** 格式\n- **支持的任务**：检测、分割、语义分割、深度估计、分类、姿态估计、OBB\n- **建议**：参考 Hailo 兼容性表确认目标芯片的支持情况\n\n### 🔷 Ambarella（CVflow SoC，如 CV72）\n- **方式**：**ONNX 优先工作流**\n  1. 先将模型导出为 ONNX\n  2. 使用 Ambarella 的 **CVflow 工具链**将 ONNX 编译为 **AmbaPB** 格式\n- **可选优化**：使用 **SpongeTorch** 进行压缩感知训练以进一步压缩模型\n\n### 🔷 华为昇腾（Ascend AI Processors）\n- **方式**：**ONNX 优先工作流**\n  1. 先将模型导出为 ONNX\n  2. 使用华为 **CANN ATC 编译器**将 ONNX 编译为 `.om` 离线模型格式\n- **推理精度**：支持 **FP16** 推理\n\n---\n\n## 选型建议总结\n\n> - **跨平台/不确定硬件** → 优先导出 **ONNX**，作为通用中间格式再转换\n> - **NVIDIA GPU 极致性能** → **TensorRT**\n> - **Intel 边缘设备** → **OpenVINO**\n> - **移动端 Android** → **LiteRT** 或 **NCNN**\n> - **移动端 iOS** → **CoreML** 或 **LiteRT**\n> - **Hailo 芯片** → 直接导出 **HEF**\n> - **Ambarella / 华为昇腾** → 先导出 **ONNX**，再用各自工具链二次编译",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.9189
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because all retrieval context nodes are relevant and perfectly ranked. The first node directly addresses Hailo, Ambarella, and Huawei Ascend integrations, the second comprehensively covers all YOLO26 deployment formats and their use cases, and the third provides additional relevant background on format selection and mobile deployment — all ranked in a logical, highly useful order",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully attributed to nodes in retrieval context — sentences 1 through 21 are directly found in node 2, and the final sentence covering Hailo, Ambarella, and Huawei Ascend integrations is directly found in node 1. Great coverage!",
+            "contextual_relevancy": "The score is 0.92 because the retrieval context comprehensively covers the first part of the input regarding YOLO26's supported export formats and their applicable scenarios, with detailed statements on PyTorch, TorchScript, ONNX, TensorRT, OpenVINO, CoreML, and many others. It also contains directly relevant information on the three non-NVIDIA accelerators mentioned — Hailo ('导出为 Hailo HEF 格式'), "
+          },
+          "elapsedSec": 108.6
+        },
+        {
+          "questionId": "N09",
+          "set": "main",
+          "category": "计算机视觉",
+          "retrieved_chunk_ids": [
+            "S09#s153",
+            "S09#s158",
+            "S10#s163"
+          ],
+          "answer": "# YOLO26 检测模型相关问题解答\n\n---\n\n## 1. 预训练数据集\n\n根据片段 [1] 和 [3]：\n\n| 模型类型 | 预训练数据集 |\n|---|---|\n| **Detect（检测）** | **COCO** |\n| Segment（分割） | COCO |\n| Pose（姿态） | COCO |\n| Semantic（语义） | Cityscapes |\n| Classify（分类） | ImageNet |\n\n> ✅ YOLO26 的检测（Detect）模型是在 **COCO 数据集** 上预训练的。\n\n---\n\n## 2. 典型预测代码\n\n检索片段中**未提供**完整的 Python 推理代码示例，资料不足，无法给出典型代码写法。\n\n---\n\n## 3. 结果中可取到的框坐标形式\n\n根据片段 [2]，预测结果通过 `result.boxes` 访问，可取到以下形式：\n\n| 属性 | 类型 | 形状 | 说明 |\n|---|---|---|---|\n| `result.boxes.data` | torch.float32 | (N, 6/7) | 原始数据，格式为 **[x1, y1, x2, y2, conf, cls]**，可选含跟踪 ID |\n| `result.boxes.xyxy` | torch.float32 | (N, 4) | **xyxy 像素坐标框**（左上角 + 右下角） |\n| `result.boxes.conf` | torch.float32 | (N,) | 每个框的置信度分数 |\n| `result.boxes.cls` | torch.float32 | (N,) | 类别 ID（转为 int 可获取类别名称） |\n\n> **总结：** 可直接取到的框坐标形式为 **`xyxy`（像素坐标）** 以及包含完整信息的 **`data`（原始张量）**。\n\n---\n\n> ⚠️ **说明：** 典型预测代码部分，检索片段未包含相关内容，无法依据资料作答，建议参考 Ultralytics 官方文档获取示例代码。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 0.8182,
+            "contextual_relevancy": 0.3158
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because all relevant nodes are ranked above the irrelevant node, which is exactly what contextual precision measures. The first node, ranked first, directly answers the question about the pretraining dataset ('Detect、Segment 和 Pose 模型在 COCO 数据集上进行预训练') and detection model details. The second node, ranked second, provides supplementary information about bounding box coordinate for",
+            "contextual_recall": "The score is 0.82 because most sentences in the expected output are well-supported by node 1 in retrieval context, including the YOLO26 pretrained model introduction, training dataset details, the full performance table, reproduction commands, speed benchmarks, and the YOLO27 preview reference. However, the sentence introducing the prediction example ('使用训练好的 YOLO26n 模型对图像运行预测。'), the accompanying",
+            "contextual_relevancy": "The score is 0.32 because while the retrieval context does contain a few relevant statements—such as 'Detect、Segment 和 Pose 模型在 COCO 数据集上进行预训练' (answering the pretraining dataset question) and details about 'result.boxes.xyxy'、'result.boxes.data 的形状为 (N,6/7)' (partially answering the bounding box formats question)—the majority of the retrieved content is irrelevant. Most statements cover unrelated"
+          },
+          "elapsedSec": 64.2
+        },
+        {
+          "questionId": "N10",
+          "set": "main",
+          "category": "计算机视觉",
+          "retrieved_chunk_ids": [
+            "S10#s171",
+            "S09#s160",
+            "S06#3.3.1"
+          ],
+          "answer": "## YOLO26 分割模型验证指标说明\n\n根据检索片段 **[1]** 和 **[2]** 的内容，以下是详细说明：\n\n---\n\n### 一、如何进行验证\n\n使用 `model.val()` 方法即可触发验证流程：\n\n```python\nfrom ultralytics import YOLO\n\n# 加载预训练或自训练的分割模型\nmodel = YOLO(\"yolo26n-seg.pt\")\n\n# 执行验证\nmetrics = model.val()\n```\n\n---\n\n### 二、可获得的指标\n\n| 指标属性 | 含义 |\n|---|---|\n| `metrics.box.map` | **边界框**的 mAP50-95（IoU 从 0.5 到 0.95 的平均精度均值） |\n| `metrics.seg.map` | **分割掩码**的 mAP50-95 |\n\n```python\nprint(\"Mean Average Precision for boxes:\", metrics.box.map)\nprint(\"Mean Average Precision for masks:\", metrics.seg.map)\n```\n\n此外，片段 **[2]** 还提到验证会提供：\n- **mAP50-95**：主要综合精度指标\n- **mAP50**：IoU 阈值为 0.5 时的精度\n\n---\n\n### 三、指标解读要点\n\n- **`metrics.box.*`**：评估检测框定位精度，与目标检测任务一致\n- **`metrics.seg.*`**：专门评估实例分割掩码的精度，反映轮廓/掩码勾勒效果\n- 两类指标结合使用，可全面评估分割模型在**定位**和**形状识别**两方面的表现\n\n---\n\n### ⚠️ 补充说明\n\n检索片段中未提供 `metrics.box.map50`、`metrics.seg.map50` 等更细分子指标的完整列表，若需了解全部可用字段，建议参考 Ultralytics 官方 Val 页面（片段中有提及但未展开）。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 0.2,
+            "contextual_relevancy": 0.3
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because all relevant nodes are perfectly ranked above irrelevant ones! The first two nodes, which cover YOLO26 segmentation validation metrics like `metrics.box.map` and `metrics.seg.map` via `model.val()`, are correctly placed at the top of the retrieval contexts, while the irrelevant third node about PaddlePaddle training with 'CrossEntropyLoss' and 'Adam optimizer' is appropri",
+            "contextual_recall": "The score is 0.20 because only a few sentences in the expected output are supported by nodes in retrieval context. Specifically, the introduction about YOLO26 pretrained Segment models and the datasets used (COCO, Cityscapes, ImageNet) is supported by node 2, and the validation code example with YOLO26n-seg.pt and associated metrics (metrics.box.map, metrics.seg.map, etc.) is supported by node 1. ",
+            "contextual_relevancy": "The score is 0.30 because while there are a few relevant statements in the retrieval context that directly address the input — such as using 'model.val()' to obtain 'metrics.box.map', 'metrics.seg.map', 'mAP50-95', and 'mAP50' for segmentation model validation — the majority of the retrieved content is irrelevant. Most statements cover unrelated topics such as dataset preparation, model export to "
+          },
+          "elapsedSec": 72.4
+        },
+        {
+          "questionId": "N11",
+          "set": "main",
+          "category": "测试自动化",
+          "retrieved_chunk_ids": [
+            "S14#2",
+            "S14#s278",
+            "S14#s236"
+          ],
+          "answer": "## pytest 中 `yield` 清理 与 `addfinalizer` 清理的差别\n\n根据检索片段，以下是两者的对比分析：\n\n---\n\n### 一、基本用法对比\n\n| 维度 | `yield` fixture | `addfinalizer` |\n|------|----------------|----------------|\n| 写法 | 在 fixture 函数中用 `yield` 分隔 setup 和 teardown | 需要请求 `request` 对象，将清理函数以可调用对象形式传入 |\n| 代码简洁性 | ✅ 更简洁、直接（官方推荐） | ❌ 相对冗长、复杂 |\n| 返回值方式 | `yield` 出需要的对象 | `return` 出需要的对象 |\n\n**`yield` 写法示例（片段[1]中的 `sending_user`）：**\n```python\n@pytest.fixture\ndef sending_user(mail_admin):\n    user = mail_admin.create_user()\n    yield user                        # setup 结束，测试运行\n    admin_client.delete_user(user)    # teardown\n```\n\n**`addfinalizer` 写法示例（片段[1]中的 `receiving_user`）：**\n```python\n@pytest.fixture\ndef receiving_user(mail_admin, request):\n    user = mail_admin.create_user()\n\n    def delete_user():                         # 清理函数\n        admin_client.delete_user(user)\n\n    request.addfinalizer(delete_user)          # 注册清理函数\n    return user\n```\n\n---\n\n### 二、关键差别与各自的\"坑\"\n\n#### `addfinalizer` 的特殊行为（也是坑）\n\n片段[1] 明确指出：\n\n> **\"pytest 将在添加终结器后运行该终结器，即使该 fixture 在添加终结器后引发异常。\"**\n\n这意味着：\n\n- ✅ **优点**：只要 `addfinalizer` 被成功注册，清理代码**一定会执行**，即便后续代码抛出异常。\n- ⚠️ **坑**：如果在调用 `addfinalizer` **之前** fixture 就抛出异常，清理函数**不会被注册**，也就**不会执行**。\n\n**正确做法（片段[1]的建议）：**\n> \"我们只需要在 fixture 完成需要拆除的操作之后才添加终结器。\"\n\n即：**先完成需要清理的资源创建，再注册 finalizer**，而不是一开始就注册。\n\n---\n\n#### `yield` fixture 的坑\n\n片段[1] 虽未展开详述，但从目录片段[2] 可以看到官方文档有专门章节：\n\n> **\"处理屈服夹具的错误\"**（Handling errors for yield fixtures）\n\n这暗示 `yield` fixture 在 yield 之前抛出异常时，yield 之后的清理代码**不会执行**，需要额外注意。\n\n---\n\n### 三、总结建议\n\n| 场景 | 推荐方式 |\n|------|---------|\n| 常规清理逻辑 | ✅ 优先用 `yield`，更简洁 |\n| 需要**有条件**注册清理（例如资源创建可能失败） | ✅ 考虑 `addfinalizer`，可精确控制注册时机 |\n| 需要注册**多个独立**清理步骤 | ✅ `addfinalizer` 可多次调用，更灵活 |\n\n> ⚠️ **注意**：检索片段对 `yield` 的错误处理细节描述不足，若需深入了解，建议查阅 pytest 官方文档中 **\"处理屈服夹具的错误\"** 章节。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 0.3333,
+            "contextual_relevancy": 0.6111
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the relevant node is ranked first, perfectly placed above the irrelevant nodes. The first node directly addresses the differences between yield fixtures and addfinalizer, including key pitfalls like pytest running finalizers even when exceptions occur mid-fixture. Great ranking!",
+            "contextual_recall": "The score is 0.33 because only a portion of the expected output is supported by nodes in retrieval context. Specifically, node 1 in retrieval context supports the later sentences in the expected output, including the explanation of addfinalizer as an alternative to yield fixtures, the usage of the request-context object, the caution about pytest running finalizers even after exceptions, the full a",
+            "contextual_relevancy": "The score is 0.61 because while the retrieval context contains some relevant statements directly addressing the input — such as 'yield fixture 被认为是更干净、更直接的选择', 'addfinalizer 方法比 yield fixture 更冗长、更复杂', and notes about addfinalizer's flexibility in special cases and its error-handling nuance (e.g., finalizers running even after exceptions) — a significant portion of the retrieved content is irrelev"
+          },
+          "elapsedSec": 77.1
+        },
+        {
+          "questionId": "N12",
+          "set": "main",
+          "category": "职业能力",
+          "retrieved_chunk_ids": [
+            "S15#s282",
+            "S14#s238",
+            "S21#s349~2"
+          ],
+          "answer": "## 资料不足，无法回答\n\n根据您提供的检索片段，我**无法回答**关于\"软件质量保证分析师与测试员的主要任务和工作活动\"这一问题。\n\n**原因说明：**\n\n- **片段[1]** 内容为测试社区（TesterHome）的介绍页面，涉及社区帖子标题和公告，未系统描述该岗位的职责与工作活动；\n- **片段[2]** 内容为pytest测试框架中\"fixture（固定装置）\"的技术说明，属于具体工具使用教程，不涉及岗位职责描述；\n- **片段[3]** 内容为电子/半导体、汽车行业相关技术文章摘要，与软件测试岗位完全无关。\n\n---\n\n**建议：**\n\n如需了解该岗位的主要任务和工作活动，可参考以下权威来源：\n\n1. **O*NET（美国职业信息网络）**：搜索\"Software Quality Assurance Analysts and Testers\"\n2. **中国职业分类大典**：查阅软件测试工程师相关条目\n3. **招聘平台（如LinkedIn、Boss直聘）**：参考岗位JD（职位描述）\n\n如您能提供包含该岗位详细介绍的检索片段，我可以为您进一步分析和整理。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": null
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all retrieved nodes in the retrieval contexts are irrelevant to the input about the main tasks and work activities of a Software Quality Assurance Analyst and Tester. The first node (ranked 1) pertains to a software testing community (TesterHome) with job listings and community discussions, but lacks specific information about tasks like 'conduct software compatibility te",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output, including sentences 1 through 24 covering topics such as software compatibility testing, investigating customer problems, reviewing software documentation, debugging procedures, designing automated testing tools, and various job activity descriptors like 'Working with Computers' and 'Communicating with Supervisors,' could be a",
+            "contextual_relevancy": "DeepEvalError: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model."
+          },
+          "elapsedSec": 299.8
+        },
+        {
+          "questionId": "N13",
+          "set": "main",
+          "category": "职业能力",
+          "retrieved_chunk_ids": [
+            "S08#s145",
+            "S22#s354",
+            "S21#s349~5"
+          ],
+          "answer": "## 资料不足，无法回答\n\n根据您提供的检索片段，我**无法回答**\"计算机硬件工程师日常要完成哪些任务和工作活动\"这一问题。\n\n**原因说明：**\n\n- **片段[1]** 涉及的是 YOLO 模型的部署格式选择，属于计算机视觉/AI 模型部署领域，并不涉及硬件工程师的岗位职责。\n- **片段[2]** 是阿里云产品介绍页面的导航内容，与硬件工程师职业内容无关。\n- **片段[3]** 是一系列工业自动化、芯片、智驾等行业资讯的标题列表，同样不包含硬件工程师岗位任务的系统性描述。\n\n---\n\n**建议您通过以下途径获取准确信息：**\n\n1. 查阅职业分类标准（如 O*NET、国家职业分类大典）中对\"计算机硬件工程师\"的岗位描述；\n2. 参考各大招聘平台（如 LinkedIn、Boss直聘）上硬件工程师的职位职责说明；\n3. 查阅相关职业规划或行业报告文献。\n\n如您能提供包含相关内容的检索片段，我将为您进一步解答。",
+          "scores": {
+            "contextual_precision": 0.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.0
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.00 because all three nodes in the retrieval contexts are irrelevant to the input about the daily tasks and work activities of computer hardware engineers. The first node, ranked first, discusses 'PyTorch, ONNX, TensorRT, OpenVINO' and YOLO26 deployment options for computer vision projects, which has no connection to hardware engineering tasks. The second node, ranked second, is abou",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output can be attributed to any nodes in retrieval context. The retrieval context appears to contain information about YOLO deployment options, Alibaba Cloud products, and Chinese tech industry news, which is entirely unrelated to the expected output's content covering hardware configuration evaluation (sentence 1), training and suppo",
+            "contextual_relevancy": "The score is 0.00 because the retrieval context is entirely irrelevant to the input about the daily tasks and work activities of computer hardware engineers. The retrieved content covers completely unrelated topics such as 'YOLO26部署选项', '阿里云产品', '云计算基础概念', '工业自动化通讯', '自动驾驶推理', '台积电工艺', and '网站版权信息', none of which address the daily responsibilities of computer hardware engineers. There are zero rel"
+          },
+          "elapsedSec": 85.0
+        },
+        {
+          "questionId": "N14",
+          "set": "main",
+          "category": "标准与政策",
+          "retrieved_chunk_ids": [
+            "S20#s345",
+            "S19#s344~2",
+            "S19#s344~3"
+          ],
+          "answer": "根据检索片段[1]中的信息，可以具体回答如下：\n\n---\n\n## 全国标准信息公共服务平台标准收录情况\n\n### 一、强制性国家标准（GB）\n\n- **现行有效总数：2,031项**\n- 其中：\n  - **非采标 1,691项**：可在线**阅读和下载**\n  - **采标 340项**：只可在线**阅读**（不可下载）\n\n> 可阅读和下载的比例约为：1,691 ÷ 2,031 ≈ **83.3%**\n\n---\n\n### 二、推荐性国家标准（GB/T）\n\n- **现行有效总数：47,164项**\n- 其中：\n  - **非采标 31,144项**：可在线**阅读和下载**\n  - **采标 16,020项**：只提供**标准题录信息**（不可阅读全文）\n\n> 可阅读和下载的比例约为：31,144 ÷ 47,164 ≈ **66.0%**\n\n---\n\n### 补充说明\n\n- 强制性标准中的采标部分（340项）虽不能下载，但仍可在线阅读；\n- 推荐性标准中的采标部分（16,020项）则仅提供题录信息，**无法阅读全文**，限制程度更高。\n\n如需进一步了解具体标准内容，建议直接访问全国标准信息公共服务平台查询。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 0.375,
+            "contextual_relevancy": 0.1538
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the most relevant node is perfectly ranked first! The first node in the retrieval contexts directly answers the question by providing the exact numbers: '本系统收录现行有效强制性国家标准2,031项。其中非采标1,691项可在线阅读和下载，采标340项只可在线阅读' and '本系统收录现行有效推荐性国家标准47,164项。其中非采标31,144项可在线阅读和下载，采标16,020项只提供标准题录信息', with the irrelevant nodes about Ministry of Industry news and policy documents correctly ran",
+            "contextual_recall": "The score is 0.38 because while sentences 1–24 of the expected output (covering the platform header, navigation items, announcements, standard counts, and search tags) are all well-supported by node 1 in retrieval context, the remaining ~40 sentences comprising the detailed category listings (e.g., '综合、术语学、标准化、文献 (1,586', '社会学、服务、公司（企业）的组织和管理、行政、运输 (2,441', and all subsequent industry/discipline c",
+            "contextual_relevancy": "The score is 0.15 because while the retrieval context does contain two directly relevant statements — specifically that the platform includes '2,031 mandatory national standards (1,691 non-adopted available for online reading and downloading, 340 adopted only for online reading)' and '47,164 recommended national standards (31,144 non-adopted available for online reading and downloading, 16,020 ado"
+          },
+          "elapsedSec": 88.3
+        }
+      ]
+    },
+    "VECTOR": {
+      "n": 14,
+      "summary": {
+        "contextual_precision": {
+          "mean": 0.8988,
+          "n": 14
+        },
+        "contextual_recall": {
+          "mean": 0.5547,
+          "n": 13
+        },
+        "contextual_relevancy": {
+          "mean": 0.5586,
+          "n": 13
+        }
+      },
+      "elapsedSec": 567.0,
+      "perQuestion": [
+        {
+          "questionId": "N01",
+          "set": "main",
+          "category": "嵌入式开发",
+          "retrieved_chunk_ids": [
+            "S01#s6",
+            "S01#s5",
+            "S01#s2"
+          ],
+          "answer": "## 一、官方认证的现成开发板\n\n根据检索片段 [2]，以下硬件平台符合 FreeRTOS 资格认证条件，可直接用于验证：\n\n| 厂商 | 开发板/套件 |\n|------|------------|\n| **Espressif** | ESP32-DevKitC、ESP-WROVER-KIT、ESP-WROOM-32SE、ESP32-S2-Saola-1 |\n| **Cypress** | CYW943907AEVAL1F、CYW954907AEVAL1F、CY8CKIT-064S0S2-4343W |\n| **STMicroelectronics** | STM32L4 发现工具包 IoT 节点 |\n| **Nordic** | nRF52840-DK |\n| **NXP** | LPC54018 IoT Module |\n| **Texas Instruments** | CC3220SF-LAUNCHXL |\n| **Infineon** | XMC4800 IoT 连接工具包 |\n| **Marvell** | MW320 / MW322 AWS IoT 入门套件 |\n| **Microchip** | Curiosity PIC32MZEF Bundle |\n| **Renesas** | RX65N RSK IoT Module |\n| **MediaTek** | mt7697hx 开发套件 |\n| **Xilinx** | Avnet MicroZed 工业物联网套件 |\n| **其他** | ATECC608A Zero Touch 套件、OPTIGA Trust X、NuMaker-IoT-M487 |\n\n> 💡 **补充**：更多已认证设备可查阅 **AWS 合作伙伴设备目录**；若需为新设备做资格认证，可参考 **《FreeRTOS 资格认证指南》**。\n\n---\n\n## 二、遇到技术问题的文档与支持渠道\n\n根据检索片段 [1] 和 [3]，推荐以下途径：\n\n1. **官方文档**\n   - FreeRTOS 官网：[freertos.org](https://freertos.org)\n   - AWS 文档：《AWS IoT Core 开发者指南》（设备配置部分）\n\n2. **开源社区与问题反馈**\n   - GitHub 仓库：[https://github.com/FreeRTOS/FreeRTOS](https://github.com/FreeRTOS/FreeRTOS)（可提 Issue、贡献代码）\n   - **FreeRTOS 社区论坛**：适合技术问题讨论\n\n3. **AWS 官方支持**\n   - AWS Support：适合商业级技术支持\n   - AWS \"联系我们\" 页面：适合账单、账户、滥用等非技术问题\n\n---\n\n**总结**：开发验证可优先选用 Espressif ESP32 系列或 STM32L4 等主流认证板；技术问题优先查 freertos.org 文档和社区论坛，深度问题可在 GitHub 提 Issue 或联系 AWS Support。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": null,
+            "contextual_relevancy": null
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the retrieval contexts are perfectly ranked! The first node relevantly covers technical support resources, citing '有关其他 FreeRTOS 文档，请参阅 freertos.org' and '有关 FreeRTOS 的技术问题，请访问 FreeRTOS 社区论坛', and the second node precisely lists certified development boards like 'Espressif ESP32-DevKitC' and 'STMicroelectronicsSTM32L4 发现工具包 IoT 节点' — both ranked before the third node, whi",
+            "contextual_recall": "DeepEvalError: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model.",
+            "contextual_relevancy": "DeepEvalError: Evaluation LLM outputted an invalid JSON. Please use a better evaluation model."
+          },
+          "elapsedSec": 439.1
+        },
+        {
+          "questionId": "N02",
+          "set": "main",
+          "category": "嵌入式开发",
+          "retrieved_chunk_ids": [
+            "S02#s13",
+            "S02#s14",
+            "S02#s19"
+          ],
+          "answer": "## ESP32 SPI 四线 I/O 模式配置 & 命令/地址阶段长度修改\n\n---\n\n### 一、配置四线 I/O 模式\n\n根据片段 [1]，需要在**两处**分别设置标志位：\n\n| 配置位置 | 结构体 | 需设置的标志位 |\n|---|---|---|\n| **传输事务层**（控制传输行为） | `spi_transaction_t.flags` | `SPI_TRANS_MODE_QIO` **+** `SPI_TRANS_MULTILINE_ADDR` |\n| **总线层**（检查/使能 IO 管脚） | `spi_bus_config_t.flags` | `SPICOMMON_BUSFLAG_QUAD` |\n\n> ⚠️ 两处缺一不可：总线层确保四线 IO 管脚正确初始化，事务层确保每次传输以四线 I/O 模式运行。\n\n---\n\n### 二、修改命令阶段和地址阶段的长度\n\n根据片段 [2]，具体步骤如下：\n\n#### 默认情况（不修改）\n- 命令/地址阶段长度由 `spi_bus_add_device()` 时在 `spi_device_interface_config_t` 中设定的默认值决定。\n\n#### 需要修改时，按以下步骤操作：\n\n**第一步：** 使用扩展结构体替代普通事务结构体\n```\n声明 spi_transaction_ext_t（而非 spi_transaction_t）\n```\n\n**第二步：** 在扩展结构体的 base 成员中设置变长标志位\n\n| 要修改的阶段 | 在 `spi_transaction_ext_t::base.flags` 中设置 |\n|---|---|\n| 命令阶段长度 | `SPI_TRANS_VARIABLE_CMD` |\n| 地址阶段长度 | `SPI_TRANS_VARIABLE_ADDR` |\n| 两者都改 | 两个标志同时设置 |\n\n**第三步：** 在扩展结构体中指定具体长度\n\n| 字段 | 作用 |\n|---|---|\n| `spi_transaction_ext_t::command_bits` | 指定命令阶段实际位数 |\n| `spi_transaction_ext_t::address_bits` | 指定地址阶段实际位数 |\n\n---\n\n### 三、额外补充：多线命令/地址阶段\n\n如果希望**命令阶段和地址阶段的线数**也与数据阶段保持一致（即也走四线），还需在 `spi_transaction_t.flags` 中额外设置：\n\n- `SPI_TRANS_MULTILINE_CMD`（命令阶段多线）\n- `SPI_TRANS_MULTILINE_ADDR`（地址阶段多线，四线 I/O 模式下必须设置）\n\n---\n\n> 📌 以上内容完全依据所提供的检索片段，未添加额外内容。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.5294
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the retrieval contexts are perfectly ordered! The first node directly addresses the four-wire I/O mode configuration, specifying 'SPI_TRANS_MODE_QIO', 'SPI_TRANS_MULTILINE_ADDR', and 'SPICOMMON_BUSFLAG_QUAD', while the second node precisely covers the command and address phase length configuration via 'spi_transaction_ext_t', 'SPI_TRANS_VARIABLE_CMD', and 'SPI_TRANS_VARIA",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are well-supported by nodes in retrieval context. Sentences 1 and the mode table are directly attributed to the 1st node, while sentences covering command/address phase behavior, the use of spi_transaction_ext_t, and multiline configuration are all clearly found in the 2nd node. Great coverage!",
+            "contextual_relevancy": "The score is 0.53 because the retrieval context partially addresses the input. It covers the Quad I/O mode configuration (e.g., setting SPI_TRANS_MODE_QIO, SPI_TRANS_MULTILINE_ADDR in spi_transaction_t and SPICOMMON_BUSFLAG_QUAD in spi_bus_config_t) and the command/address phase length modification (e.g., using spi_transaction_ext_t with SPI_TRANS_VARIABLE_CMD/SPI_TRANS_VARIABLE_ADDR flags and com"
+          },
+          "elapsedSec": 76.1
+        },
+        {
+          "questionId": "N03",
+          "set": "main",
+          "category": "嵌入式开发",
+          "retrieved_chunk_ids": [
+            "S03#32",
+            "S03#s57",
+            "S03#s46"
+          ],
+          "answer": "## 关于 `MALLOC_CAP_32BIT` 与浮点变量\n\n**不能**用 `MALLOC_CAP_32BIT` 分配的内存来存储浮点变量。\n\n根据检索片段 [1]，原因如下：\n\n> `MALLOC_CAP_32BIT` 可能返回**指令 RAM（IRAM）**，而 **ESP32 上的浮点汇编指令无法访问指令 RAM**，因此将浮点变量存放在此类内存中会导致错误。\n\n此外，使用 `MALLOC_CAP_32BIT` 分配的内存**只能通过 32 位读写访问**，其他类型的访问将触发 `LoadStoreError` 异常。\n\n---\n\n## 在中断服务程序（ISR）中调用堆函数的限制\n\n根据检索片段 [2]，以下堆组件函数**可以**在 ISR 中调用：\n\n| 可用函数 |\n|---|\n| `heap_caps_malloc()` |\n| `heap_caps_malloc_default()` |\n| `heap_caps_realloc_default()` |\n| `heap_caps_malloc_prefer()` |\n| `heap_caps_realloc_prefer()` |\n| `heap_caps_calloc_prefer()` |\n| `heap_caps_free()` |\n| `heap_caps_realloc()` |\n| `heap_caps_calloc()` |\n| `heap_caps_aligned_alloc()` |\n| `heap_caps_aligned_free()` |\n\n⚠️ **重要限制**：\n- 上述列表之外的堆函数（如标准 `malloc()` / `free()`）**不在允许范围内**，片段中未提及其可在 ISR 中使用。\n- 即使是上述允许的函数，官方也**明确备注\"不建议使用此种方法\"**，在 ISR 中进行堆操作本身属于不推荐的实践。\n\n---\n\n**总结**：浮点变量不可存入 `MALLOC_CAP_32BIT` 内存；ISR 中仅限使用特定的 `heap_caps_*` 系列函数，且官方不推荐在 ISR 中进行堆操作。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.5833
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the retrieval contexts are perfectly ordered! The first node covers the MALLOC_CAP_32BIT and floating-point variable restrictions, explicitly noting '不可使用 MALLOC_CAP_32BIT 存储浮点变量' and the risk of LoadStoreError exceptions. The second node directly addresses ISR heap function limitations, listing callable functions in '中断处理程序 (ISR)' with the '备注：不建议使用此种方法' caveat. All rele",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully supported by nodes in retrieval context. Sentences 1-3 are attributed to the 1st node, while sentences 4-6 (including the list of heap functions and the closing note) are attributed to the 2nd node. Great retrieval coverage!",
+            "contextual_relevancy": "The score is 0.58 because the retrieval context partially addresses the input. For the MALLOC_CAP_32BIT and float variable question, there are directly relevant statements, including '在 ESP32 系列芯片上，不可使用 MALLOC_CAP_32BIT 存储浮点变量，因为 MALLOC_CAP_32BIT 可能返回指令 RAM，而 ESP32 上的浮点汇编指令无法访问指令 RAM' and 'MALLOC_CAP_32BIT 分配的内存只能通过 32 位读写访问'. For the ISR heap function restrictions question, the context only provi"
+          },
+          "elapsedSec": 52.5
+        },
+        {
+          "questionId": "N04",
+          "set": "main",
+          "category": "嵌入式开发",
+          "retrieved_chunk_ids": [
+            "S04#s73~2",
+            "S04#s87",
+            "S04#s73"
+          ],
+          "answer": "## ESP32 RTC GPIO 的使用场景\n\n根据检索片段 [1]，当 GPIO 连接到 **RTC 低功耗、模拟子系统、低功耗外设**时，ESP32 单独支持 RTC GPIO。可在以下三种情况下使用这些管脚功能：\n\n1. **处于 Deep-sleep 模式时**\n2. **超低功耗协处理器（ULP-FSM）运行时**\n3. **使用 ADC/DAC 等模拟功能时**\n\n此外，根据片段 [3]，具备 RTC GPIO 功能的管脚包括：GPIO0、GPIO2、GPIO4、GPIO12～GPIO15、GPIO25～GPIO27、GPIO32～GPIO39 等（详见管脚表中 \"RTC GPIO\" 列有值的行）。\n\n---\n\n## gpio_config 与 gpio_reset_pin 的职责\n\n> ⚠️ **资料不足**\n\n提供的检索片段中**没有涉及 `gpio_config` 和 `gpio_reset_pin` 这两个函数**的任何描述，无法依据现有资料回答它们各自负责什么。\n\n建议参考 **ESP-IDF 官方文档**中的 GPIO & RTC GPIO API 说明（`driver/gpio.h`），以获取这两个函数的准确定义和用途。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 0.4286,
+            "contextual_relevancy": 0.5
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the relevant node is ranked first, perfectly prioritized above the irrelevant nodes. The first node directly addresses when RTC GPIO can be used, citing scenarios such as Deep-sleep mode, ULP-FSM operation, and analog functions like ADC/DAC. Great retrieval ordering!",
+            "contextual_recall": "The score is 0.43 because sentences 1 through 6 of the expected output (covering the GPIO36/GPIO39 interrupt warning, RTC GPIO support descriptions, and usage conditions like Deep-sleep mode, ULP-FSM, and ADC/DAC) are all directly attributable to node 1 in retrieval context. However, the remaining sentences covering the API functions — including 'esp_err_t gpio_config()', 'esp_err_t gpio_reset_pin",
+            "contextual_relevancy": "The score is 0.50 because the retrieval context only partially addresses the input. It does cover the RTC GPIO usage scenarios well, stating that 'RTC GPIO 可在 Deep-sleep 模式、ULP-FSM 运行时，以及使用 ADC/DAC 等模拟功能时使用', and includes relevant RTC GPIO API details (e.g., rtc_gpio_init, rtc_gpio_set_direction). However, as noted in the irrelevancy reasons, '上下文中完全没有提到 gpio_config 和 gpio_reset_pin 这两个函数', meanin"
+          },
+          "elapsedSec": 157.4
+        },
+        {
+          "questionId": "N05",
+          "set": "main",
+          "category": "AI框架与推理",
+          "retrieved_chunk_ids": [
+            "S05#s109~4",
+            "S05#s100~4",
+            "S05#s100"
+          ],
+          "answer": "# MindSpore Lite Benchmark 工具使用说明（mobilenetv2）\n\n## 一、输入数据文件规格\n\n根据检索片段中的参数表，`--inDataFile` 的规格要求如下：\n\n| 要点 | 说明 |\n|------|------|\n| **参数名** | `--inDataFile=<INDATAPATH>` |\n| **是否必选** | 可选 |\n| **文件格式** | 默认接收**二进制格式（bin）**数据文件 |\n| **不设置时** | 工具自动生成**随机数值**作为输入 |\n| **精度测试场景** | 该输入会作为**标杆输入**使用 |\n\n> ⚠️ 参数名和参数值之间用 `=` 连接，**中间不能有空格**。\n\n如需进行**精度对比**，还需额外提供标杆数据文件：\n- `--benchmarkDataFile=<CALIBDATAPATH>`：接收**按规定格式排列的字符文本**文件\n\n---\n\n## 二、输出误差信息的理解\n\n输出结果中涉及误差的信息共有以下几层，含义如下：\n\n### 1. 输入数据回显\n```\nInData 0: ...\n```\n- 打印本次推理的**输入数据前 20 个值**，可与标杆输入对照，直观确认输入是否正确。\n\n### 2. 单节点输出结果\n```\nData of node Default/head-MobileNetV2Head/Softmax-op204: ...\n```\n- 打印该输出节点的**推理结果前 50 个值**，可直接与标杆文件对比，获得直观感受。\n\n### 3. 单节点平均误差\n```\nMean bias of node/tensor Default/head-MobileNetV2Head/Softmax-op204: X%\n```\n- 表示该输出张量与标杆数据对比的**平均误差**。\n- 误差计算采用 **benchmark 工具自带的比较算法**。\n\n### 4. 全局平均误差\n```\nMean bias of all nodes/tensors: X%\n```\n- 表示**所有输出张量**与标杆对比的**总平均误差**。\n- 若模型只有 1 个输出张量（如本例 mobilenetv2 只有 Softmax 节点输出），则总平均误差与该单节点误差数值**完全一致**。\n- 检索片段中示例结果显示：推理总平均误差为 **0%**，说明推理精度与标杆完全吻合。\n\n---\n\n## 三、补充说明\n\n检索片段资料仅说明了 `--inDataFile` 接收二进制格式、`--benchmarkDataFile` 接收字符文本格式，但**未详细说明二进制文件的具体排列规则（如数据类型、维度顺序等）**。若需了解更底层的文件构造规范，建议参考官方 benchmark 详细文档，当前片段中资料不足以完整回答这部分细节。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 0.2903,
+            "contextual_relevancy": 0.68
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because all three nodes in the retrieval contexts are relevant to the input question about input data file preparation and error output interpretation when benchmarking MobileNetV2 with MindSpore Lite. Great job — the ranking is spot on!",
+            "contextual_recall": "The score is 0.29 because only a limited portion of the expected output is supported by nodes in retrieval context. Specifically, sentences covering the benchmark output statistics (InData 0, Mean bias of node/tensor, Mean bias of all nodes/tensors), the advanced features section, the benchmark parameter table (--modelFile, --numThreads, --inDataFile, --benchmarkDataFile), and the note about param",
+            "contextual_relevancy": "The score is 0.68 because while the retrieval context contains several statements directly relevant to the input — such as '--inDataFile参数默认接收二进制格式数据文件', '--benchmarkDataFile参数接收按规定格式排列的字符文本', output interpretation details like 'InData 0行打印前20个输入数据', 'Mean bias of node/tensor给出输出张量与标杆数据对比的平均误差', and '推理的总平均误差为0%' — a significant portion of the retrieved context is irrelevant to the question. Speci"
+          },
+          "elapsedSec": 197.5
+        },
+        {
+          "questionId": "N06",
+          "set": "main",
+          "category": "AI框架与推理",
+          "retrieved_chunk_ids": [
+            "S06#s112",
+            "S06#s115",
+            "S06#3.2"
+          ],
+          "answer": "## 用飞桨做手写数字识别：数据集加载 & 网络构建\n\n---\n\n### 一、数据集的下载和加载\n\n飞桨通过 `paddle.vision.datasets.MNIST` 可以**自动下载并加载** MNIST 数据集，同时结合 `Normalize` 做数据预处理，代码如下：\n\n```python\nimport paddle\nfrom paddle.vision.transforms import Normalize\n\n# 定义归一化变换（均值127.5，标准差127.5，通道格式CHW）\ntransform = Normalize(mean=[127.5], std=[127.5], data_format=\"CHW\")\n\n# 下载数据集并初始化 DataSet\ntrain_dataset = paddle.vision.datasets.MNIST(mode=\"train\", transform=transform)\ntest_dataset  = paddle.vision.datasets.MNIST(mode=\"test\",  transform=transform)\n```\n\n> **说明：**\n> - `mode=\"train\"` 对应 60,000 张训练图片；\n> - `mode=\"test\"` 对应 10,000 张测试图片；\n> - 每张图片分辨率为 28×28，标签为 0~9 的十类数字。\n\n---\n\n### 二、网络模型：LeNet\n\n#### 1. 使用的模型\n本任务使用飞桨内置的 **LeNet**，位于 `paddle.vision.models` 下，**一行代码**即可完成网络构建和初始化：\n\n```python\n# 模型组网并初始化网络\nlenet = paddle.vision.models.LeNet(num_classes=10)\n```\n\n> `num_classes=10`：对应 0~9 共十类数字的分类输出。\n\n---\n\n#### 2. 打印网络结构\n通过 `paddle.summary` 可以打印网络的层结构和参数信息：\n\n```python\npaddle.summary(lenet, (1, 1, 28, 28))\n```\n\n输出结果如下：\n\n```\nLayer (type)    Input Shape        Output Shape      Param #\n===========================================================\nConv2D-1        [[1, 1, 28, 28]]   [1, 6, 28, 28]       60\nReLU-1          [[1, 6, 28, 28]]   [1, 6, 28, 28]        0\nMaxPool2D-1     [[1, 6, 28, 28]]   [1, 6, 14, 14]        0\nConv2D-2        [[1, 6, 14, 14]]   [1, 16, 10, 10]   2,416\nReLU-2          [[1, 16, 10, 10]]  [1, 16, 10, 10]       0\nMaxPool2D-2     [[1, 16, 10, 10]]  [1, 16, 5, 5]         0\nLinear-1        [[1, 400]]         [1, 120]          48,120\nLinear-2        [[1, 120]]         [1, 84]           10,164\nLinear-3        [[1, 84]]          [1, 10]              850\n===========================================================\nTotal params: 61,610\nTrainable params: 61,610\nNon-trainable params: 0\n```\n\n---\n\n### 总结\n\n| 步骤 | 关键 API | 说明 |\n|------|----------|------|\n| 数据加载 | `paddle.vision.datasets.MNIST` | 自动下载，mode 区分训练/测试集 |\n| 数据预处理 | `paddle.vision.transforms.Normalize` | 归一化到 [-1, 1] |\n| 模型构建 | `paddle.vision.models.LeNet(num_classes=10)` | 内置 LeNet，一行搞定 |\n| 结构打印 | `paddle.summary(lenet, (1, 1, 28, 28))` | 打印各层结构与参数量 |",
+          "scores": {
+            "contextual_precision": 0.5833,
+            "contextual_recall": 0.6667,
+            "contextual_relevancy": 0.5294
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.58 because while both relevant nodes are present in the retrieval contexts, an irrelevant node is ranked first, pushing the relevant nodes down. Specifically, the first node only offers a general introduction to the handwritten digit recognition task ('从完成一个简单的『手写数字识别任务』开始，可快速了解深度学习模型开发的大致流程') without any specific dataset or model construction details, making it irrelevant to the in",
+            "contextual_recall": "The score is 0.67 because several sentences in the expected output are well-supported by nodes in retrieval context, while others are not. Sentences covering the MNIST dataset loading code (nodes 1 and 2), the model building approach, LeNet usage under paddle.vision.models with num_classes=10, paddle.summary, the full model output table, and paddle.nn.Sequential/Layer API (all from node 3) are all",
+            "contextual_relevancy": "The score is 0.53 because while the retrieval context contains several statements directly relevant to the input—such as how to download and load datasets via 'paddle.vision.datasets.MNIST(mode=\\'train\\', transform=transform)', data normalization using 'Normalize', model construction using 'paddle.vision.models.LeNet(num_classes=10)', and printing the structure via 'paddle.summary'—a significant p"
+          },
+          "elapsedSec": 71.6
+        },
+        {
+          "questionId": "N07",
+          "set": "main",
+          "category": "AI框架与推理",
+          "retrieved_chunk_ids": [
+            "S07#2.2",
+            "S07#s125",
+            "S07#2.3"
+          ],
+          "answer": "## 飞桨创建 Tensor 的方式\n\n### 1. 从 Python 列表创建 Tensor\n\n根据检索片段 [2]，飞桨支持**指定数据创建** Tensor 的方式（属于\"2.1 指定数据创建\"），但片段中**未提供具体的接口名称和示例代码**，因此无法给出确切的 API 名称。关于从 Python 列表创建 Tensor 的具体接口，**资料不足，建议查阅飞桨官方文档的\"2.1 指定数据创建\"章节**。\n\n---\n\n### 2. 创建指定形状、全 0 或全 1 的 Tensor\n\n根据检索片段 [1]，可以使用以下接口：\n\n| 接口 | 说明 |\n|------|------|\n| `paddle.zeros([m, n])` | 创建形状为 `[m, n]`、数据**全为 0** 的 Tensor |\n| `paddle.ones([m, n])` | 创建形状为 `[m, n]`、数据**全为 1** 的 Tensor |\n| `paddle.full([m, n], 10)` | 创建形状为 `[m, n]`、数据**全为指定值**（如 10）的 Tensor |\n\n**示例输出**（以 `paddle.ones([2, 3])` 为例）：\n```\nTensor(shape=[2, 3], dtype=float32, place=Place(gpu:0), stop_gradient=True,\n[[1., 1., 1.],\n [1., 1., 1.]])\n```\n\n> 💡 **补充**：若需要创建与已有 Tensor **形状相同**的全 0 或全 1 Tensor，还可以使用 `paddle.zeros_like` 和 `paddle.ones_like`（见片段 [3]）。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 0.2308,
+            "contextual_relevancy": 0.2941
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the retrieval contexts are perfectly ranked! The relevant nodes appear before the irrelevant one, with the first node directly addressing Tensor creation filled with 0s and 1s using 'paddle.zeros([m, n])' and 'paddle.ones([m, n])', and the second node providing helpful structural context about general Tensor creation methods in PaddlePaddle. The irrelevant node about 'pad",
+            "contextual_recall": "The score is 0.23 because only a small portion of the expected output can be attributed to the nodes in retrieval context. Specifically, sentences about creating Tensors with specified shapes using paddle.zeros, paddle.ones, and paddle.full, along with their code examples and the paddle.ones([2,3]) output, are all supported by the 1st node. However, the majority of the expected output is unsupport",
+            "contextual_relevancy": "The score is 0.29 because while the retrieval context contains some relevant statements about creating zero/one-filled Tensors (e.g., 'paddle.zeros([m, n]) 创建数据全为 0' and 'paddle.ones([m, n]) 创建数据全为 1'), it completely fails to address the first part of the input regarding '从 Python 列表创建 Tensor 的相关内容'. Additionally, much of the context is filled with irrelevant information about unrelated interfaces"
+          },
+          "elapsedSec": 61.6
+        },
+        {
+          "questionId": "N08",
+          "set": "main",
+          "category": "计算机视觉",
+          "retrieved_chunk_ids": [
+            "S08#s149",
+            "S08#s145",
+            "S08#s150"
+          ],
+          "answer": "## YOLO26 支持的部署格式及适用场景\n\n根据检索片段，YOLO26 支持 **20 多种部署格式**，以下是文档中明确列出的主要选项：\n\n| 格式 | 适用场景 |\n|------|----------|\n| **PyTorch** | 研究、原型开发，Python 集成友好 |\n| **TorchScript** | 无法使用 Python 的生产环境 |\n| **ONNX** | 跨平台兼容性、硬件加速，兼容性最广 |\n| **OpenVINO** | Intel CPU/GPU 硬件上的优化推理 |\n| **TensorRT** | NVIDIA GPU 上的高速推理 |\n| **LiteRT（原 TFLite）** | Android 移动端、iOS、浏览器端侧推理 |\n| **CoreML** | iOS / macOS 生态系统部署 |\n| **NCNN** | 移动及嵌入式设备（`model.export(format=\"ncnn\")`） |\n| **LiteRT.js** | Web 应用，无需后端基础设施 |\n\n---\n\n## 关于 Hailo、Ambarella、华为昇腾等第三方加速器\n\n**检索片段中的资料不足以回答这个问题。**\n\n文档仅提到 YOLO26 支持\"20 多种部署选项\"，并涵盖了\"专用的边缘 NPU 格式\"这一笼统表述，但**没有具体说明 Hailo、Ambarella、华为昇腾（Ascend）的接入方式或对应工具链**。\n\n---\n\n### 建议下一步\n\n- 查阅 Ultralytics 官方的 **导出格式文档**（文档中多次提及\"详细操作流程请参阅导出流程文档\"）；\n- 前往 **Ultralytics 社区**提问，社区支持是官方推荐的故障排查渠道；\n- 针对上述第三方加速器，建议直接参考各厂商的 SDK 文档（如 Hailo Dataflow Compiler、Ambarella CV SDK、昇腾 ATC 工具），通常以 **ONNX 作为中间格式**进行转换，但具体流程需以厂商文档为准。",
+          "scores": {
+            "contextual_precision": 0.5833,
+            "contextual_recall": 0.4091,
+            "contextual_relevancy": 0.7273
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.58 because the ranking of retrieval context nodes is suboptimal. The first node is irrelevant, as it only vaguely states that 'YOLO26 支持广泛的导出格式' without providing any specific deployment format details, use cases, or information about Hailo, Ambarella, or Huawei Ascend accelerators — yet it is ranked first. The relevant nodes are ranked second and third: the second node mentions tha",
+            "contextual_recall": "The score is 0.41 because several sentences in the expected output are supported by nodes in retrieval context, while many others are not. Sentences 1–2 (intro and PyTorch), sentence 3 (TorchScript), sentence 4 (ONNX), sentence 5 (OpenVINO), sentence 6 (TensorRT), sentence 7 (CoreML), sentence 10 (LiteRT), and sentence 13 (NCNN) are partially or fully attributable to nodes 2 and 3 in retrieval con",
+            "contextual_relevancy": "The score is 0.73 because the retrieval context provides substantial coverage of YOLO26's supported export formats and their use cases, including statements like 'YOLO26 支持 20 多种部署选项' and specific format descriptions (PyTorch for prototyping, TensorRT for NVIDIA GPUs, OpenVINO for Intel hardware, ONNX for cross-platform compatibility, LiteRT/CoreML for mobile). However, the score is penalized beca"
+          },
+          "elapsedSec": 88.0
+        },
+        {
+          "questionId": "N09",
+          "set": "main",
+          "category": "计算机视觉",
+          "retrieved_chunk_ids": [
+            "S08#s149",
+            "S09#s153",
+            "S10#s163"
+          ],
+          "answer": "## 根据检索片段的回答\n\n---\n\n### 1. 预训练数据集\n\n根据片段 [2] 和 [3]，**YOLO26 的 Detect（检测）模型在 COCO 数据集上进行预训练**，具体评估基准为 COCO val2017。\n\n> 附带说明：Segment 和 Pose 模型同样在 COCO 上预训练；Semantic 模型在 Cityscapes 上预训练；Classify 模型在 ImageNet 上预训练。\n\n---\n\n### 2. 典型预测代码\n\n**检索片段中未提供任何推理/预测的示例代码。**\n\n片段中出现的命令仅为**验证评估**命令，例如：\n```\nyolo val detect data=coco.yaml device=0\n```\n这是复现 mAP 指标用的，并非预测代码。\n\n> ⚠️ 资料不足，无法回答\"跑一次预测的典型代码\"这一问题，编造内容会超出片段范围，故此处不作补充。\n\n---\n\n### 3. 结果中可取到的框坐标形式\n\n**检索片段中同样未涉及预测结果的数据结构，也未说明可以取到哪些坐标格式**（如 xyxy、xywh、xywhn 等）。\n\n> ⚠️ 资料不足，无法回答此问题。\n\n---\n\n### 总结\n\n| 问题 | 是否可回答 | 依据 |\n|------|-----------|------|\n| 预训练数据集 | ✅ **COCO 数据集** | 片段 [2][3] |\n| 典型预测代码 | ❌ 资料不足 | 片段未涉及 |\n| 框坐标形式 | ❌ 资料不足 | 片段未涉及 |",
+          "scores": {
+            "contextual_precision": 0.5833,
+            "contextual_recall": 0.8182,
+            "contextual_relevancy": 0.1333
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.58 because the most relevant node is ranked second rather than first, which reduces the contextual precision. The first node in the retrieval contexts is irrelevant to the input — it only discusses 'YOLO26 支持广泛的导出格式' and deployment topics, containing nothing about pretraining datasets, prediction code, or bounding box coordinate formats. Meanwhile, the second node is the most critic",
+            "contextual_recall": "The score is 0.82 because most sentences in the expected output are well-supported by node 2 in retrieval context, including the introduction about YOLO26 pretrained models and dataset details (sentence 1), the auto-download note (sentence 2), the full performance table, and all footnotes regarding mAPval, speed benchmarks, reproduction commands, and Params/FLOPs details, as well as the YOLO27 pre",
+            "contextual_relevancy": "The score is 0.13 because the retrieval context is largely irrelevant to the input. The input asks about three things: the pretraining dataset, a typical inference code example, and available bounding box coordinate formats. While there are two relevant statements confirming that 'Detect、Segment 和 Pose 模型在 COCO 数据集上进行预训练，Semantic 模型在 Cityscapes 上进行预训练，Classify 模型则在 ImageNet 数据集上进行预训练', the vast ma"
+          },
+          "elapsedSec": 71.2
+        },
+        {
+          "questionId": "N10",
+          "set": "main",
+          "category": "计算机视觉",
+          "retrieved_chunk_ids": [
+            "S10#s166",
+            "S10#s163",
+            "S08#s149"
+          ],
+          "answer": "## YOLO26 分割模型精度指标说明\n\n### 一、`model.val()` 能拿到的指标\n\n根据检索片段 [1]，调用 `metrics = model.val()` 后，可以获取以下两大类指标：\n\n#### 🔲 边界框指标（`metrics.box.*`）\n| 属性 | 含义 |\n|---|---|\n| `metrics.box.map` | mAP@50-95（B），边界框综合精度 |\n| `metrics.box.map50` | mAP@50（B） |\n| `metrics.box.map75` | mAP@75（B） |\n| `metrics.box.maps` | 每个类别的 mAP@50-95 列表 |\n| `metrics.box.image_metrics` | 每张图片的 precision、recall、F1、TP、FP、FN |\n\n#### 🎭 分割掩码指标（`metrics.seg.*`）\n| 属性 | 含义 |\n|---|---|\n| `metrics.seg.map` | mAP@50-95（M），掩码综合精度 |\n| `metrics.seg.map50` | mAP@50（M） |\n| `metrics.seg.map75` | mAP@75（M） |\n| `metrics.seg.maps` | 每个类别的 mAP@50-95 列表 |\n| `metrics.seg.image_metrics` | 每张图片的 precision、recall、F1、TP、FP、FN |\n\n---\n\n### 二、各预训练模型的官方精度参考（COCO val2017）\n\n根据检索片段 [2]，各尺寸模型的精度基准如下：\n\n| 模型 | mAP框 50-95 | mAP掩码 50-95 |\n|---|---|---|\n| YOLO26n-seg | 39.6 | 33.9 |\n| YOLO26s-seg | 47.3 | 40.0 |\n| YOLO26m-seg | 52.5 | 44.1 |\n| YOLO26l-seg | 54.4 | 45.5 |\n| YOLO26x-seg | 56.5 | 47.0 |\n\n---\n\n### 三、使用示例\n\n```python\nfrom ultralytics import YOLO\n\nmodel = YOLO(\"yolo26n-seg.pt\")  # 加载官方模型或自定义模型\n\nmetrics = model.val()  # 无需额外参数，自动读取训练时的数据集配置\n\n# 查看分割掩码精度\nprint(metrics.seg.map)    # mAP@50-95\nprint(metrics.seg.map50)  # mAP@50\nprint(metrics.seg.maps)   # 每类别精度列表\n```\n\n> ✅ **注意**：`model.val()` 不需要额外提供参数，模型会自动记住训练时使用的 `data` 和相关配置。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.5714
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the retrieval contexts are perfectly ordered! The first node directly answers the question about 'model.val() 做验证时能拿到哪些指标' with complete code examples and metric descriptions like 'metrics.box.map', 'metrics.seg.map', and 'metrics.seg.image_metrics'. The second node complements it by showcasing the segmentation model precision metrics table with key indicators like 'mAP框 ",
+            "contextual_recall": "The score is 1.00 because all sentences in the expected output are fully supported by nodes in retrieval context, particularly nodes 1 and 2. Every element — from the introductory description of YOLO26 pretrained Segment models, the full performance table with all five model variants (YOLO26n/s/m/l/x-seg), the footnotes on mAP evaluation and speed benchmarks, the class segmentation notes, and the ",
+            "contextual_relevancy": "The score is 0.57 because while a meaningful portion of the retrieval context is directly relevant to the input — covering key details such as how to use model.val() (including that no extra parameters are needed), metrics accessible via metrics.box and metrics.seg (mAP50-95, map50, map75, precision, recall, F1, etc.), and specific YOLO26 segmentation accuracy figures (e.g., YOLO26n-seg: 39.6/33.9"
+          },
+          "elapsedSec": 78.8
+        },
+        {
+          "questionId": "N11",
+          "set": "main",
+          "category": "测试自动化",
+          "retrieved_chunk_ids": [
+            "S13#s216~2",
+            "S13#2",
+            "S13#s216"
+          ],
+          "answer": "## pytest 中 `yield` 清理 vs `addfinalizer` 清理的对比\n\n---\n\n### 🔧 底层关系\n\n两者**本质上是同一套机制**。根据片段 [1]：\n\n> yield fixtures 在幕后使用的就是 `addfinalizer`：fixture 执行时，`addfinalizer` 注册一个\"恢复生成器\"的函数，该函数继续执行 `yield` 之后的清理代码。\n\n所以 `yield` 是对 `addfinalizer` 的语法封装，并非两套独立实现。\n\n---\n\n### 📋 主要差别\n\n| 对比维度 | `yield` 方式 | `addfinalizer` 方式 |\n|---|---|---|\n| **代码简洁性** | ✅ 更简洁直观，setup/teardown 写在同一函数 | ❌ 需额外请求 `request` 对象，代码稍繁琐 |\n| **推荐程度** | ✅ 官方推荐（cleaner and more straightforward）| 作为备选方案 |\n| **灵活性** | 一个 yield 只能对应一段清理逻辑 | 可多次调用，注册**多个独立**清理函数 |\n| **执行顺序** | 见下方详述 | 见下方详述 |\n\n---\n\n### ⚠️ 各自的坑\n\n#### `addfinalizer` 的坑（片段 [2]）\n\n> **一旦注册，即使 fixture 后续抛出异常，清理函数依然会执行。**\n\n```python\n@pytest.fixture\ndef my_fixture(request):\n    resource = setup_resource()\n    request.addfinalizer(lambda: cleanup(resource))  # ← 已注册\n    do_something_that_may_raise()  # ← 若此处抛异常，cleanup 仍会跑\n```\n\n**正确做法**：只在真正需要清理时才注册 finalizer，避免对\"还未成功创建\"的资源执行清理：\n\n```python\n@pytest.fixture\ndef my_fixture(request):\n    resource = setup_resource()          # 先完成创建\n    request.addfinalizer(lambda: cleanup(resource))  # 成功后再注册\n```\n\n---\n\n#### 清理函数执行顺序的坑（片段 [3]）\n\n两者的顺序规则**不同**，容易混淆：\n\n**`yield` 方式** → **先依赖的 fixture 后清理**（右侧先执行 teardown）\n\n```\ntest_bar(fix_w_yield1, fix_w_yield2)\n# 清理顺序：fix_w_yield2 → fix_w_yield1\n```\n\n**`addfinalizer` 方式** → **后注册的先执行**（FILO，栈结构）\n\n```python\nrequest.addfinalizer(print(\"finalizer_2\"))  # 先注册\nrequest.addfinalizer(print(\"finalizer_1\"))  # 后注册\n# 执行顺序：finalizer_1 → finalizer_2\n```\n\n---\n\n### ✅ 总结建议\n\n- **日常首选 `yield`**：代码更清晰，不容易出错。\n- **需要条件性注册多个清理步骤时用 `addfinalizer`**：但要注意\"注册即生效\"的副作用，精确控制注册时机。\n- **混用时**要特别注意两者不同的执行顺序规则，避免清理逻辑依赖错误的顺序。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 0.2667,
+            "contextual_relevancy": 0.9231
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because all retrieved nodes are perfectly relevant and well-ordered! The first node establishes the foundational relationship between yield fixtures and addfinalizer, the second node dives into addfinalizer's caveats and provides a comparison code example, and the third node addresses execution order differences — together forming a comprehensive and logically progressive answer ",
+            "contextual_recall": "The score is 0.27 because only a small portion of the expected output can be attributed to nodes in retrieval context. Specifically, sentences in the expected output related to the addfinalizer approach (sentences describing yield fixtures as the cleaner option, the request-context object usage, the finalizer behavior after exceptions, and the addfinalizer code example) are supported by node 2 in ",
+            "contextual_relevancy": "The score is 0.92 because the retrieval context covers most aspects of the input well, including how 'yield fixtures use addfinalizer behind the scenes,' the verbosity differences, execution ordering (first-in-last-out for finalizers, reverse order for yield fixtures), and practical usage details. However, the input explicitly asks about '各自有什么坑' (respective pitfalls), and as noted, 'the context c"
+          },
+          "elapsedSec": 66.3
+        },
+        {
+          "questionId": "N12",
+          "set": "main",
+          "category": "职业能力",
+          "retrieved_chunk_ids": [
+            "S16#s283",
+            "S16#s300",
+            "S16#s310"
+          ],
+          "answer": "## 软件质量保证分析师与测试员的主要任务与工作活动\n\n根据检索片段，该岗位（O*NET 编号：15-1253.00）的主要内容如下：\n\n---\n\n### 🔧 主要任务（Tasks）\n\n1. **开发并执行软件测试**，以识别软件问题及其根本原因\n2. **测试系统修改内容**，为上线实施做好准备\n3. **记录软件与应用程序缺陷**，使用缺陷追踪系统（Bug Tracking System）进行文档化，并向软件或网页开发人员报告缺陷\n4. **创建并维护已知缺陷数据库**\n5. **参与软件设计评审**（可选），就功能需求、操作特性、产品设计及项目计划提供意见\n\n---\n\n### 🛠️ 主要工作活动（Work Activities）\n\n| 工作活动 | 说明 |\n|----------|------|\n| **质量控制分析** | 对产品、服务或流程进行测试与检验，评估质量或性能 |\n| **系统评估** | 识别系统性能指标，并采取行动改善或修正系统表现 |\n| **系统分析** | 判断系统应如何运作，以及条件、操作和环境变化对结果的影响 |\n| **运营分析** | 分析需求与产品要求，辅助设计方案的形成 |\n| **复杂问题解决** | 识别复杂问题，评估并实施解决方案 |\n| **编程** | 为各类目的编写计算机程序 |\n| **判断与决策** | 权衡潜在行动方案的成本与收益，选择最合适的方案 |\n| **协调配合** | 根据他人的行动调整自身行动 |\n\n---\n\n### 📌 补充说明\n\n该岗位涵盖多种职称，包括：QA Analyst、QA Engineer、SQA Engineer、Test Engineer、Software Test Engineer 等，是软件开发流程中保障产品质量的关键角色。\n\n> ⚠️ 以上内容完全依据所提供的检索片段，如需更详细的薪资、技能要求等信息，现有片段暂不足以支撑，建议参阅 O*NET 官方页面（15-1253.00）获取完整资料。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 0.0,
+            "contextual_relevancy": 0.7
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because all relevant nodes are perfectly ranked above the irrelevant node. The first node directly describes key tasks such as 'Develop and execute software tests to identify software problems' and 'Document software and application defects using a bug tracking system,' while the second node covers important work activities like 'Quality Control Analysis' and 'Complex Problem Sol",
+            "contextual_recall": "The score is 0.00 because none of the sentences in the expected output could be attributed to any nodes in retrieval context. Sentences 1 through 24, covering specific tasks such as conducting software compatibility tests, investigating customer problems, reviewing software documentation, debugging procedures, designing automated testing tools, and work activities like 'Working with Computers,' 'G",
+            "contextual_relevancy": "The score is 0.70 because while the retrieval context contains several highly relevant statements directly addressing the main tasks and work activities of Software Quality Assurance Analysts and Testers — such as 'Develop and execute software tests to identify software problems and their causes,' 'Document software and application defects using a bug tracking system,' and key skills like 'Quality"
+          },
+          "elapsedSec": 109.9
+        },
+        {
+          "questionId": "N13",
+          "set": "main",
+          "category": "职业能力",
+          "retrieved_chunk_ids": [
+            "S17#s320",
+            "S17#s312",
+            "S17#s320~2"
+          ],
+          "answer": "## 计算机硬件工程师的日常任务与工作活动\n\n根据检索片段，计算机硬件工程师的主要工作任务涵盖以下几个方面：\n\n---\n\n### 🔧 设计与开发\n- **设计和开发**计算机硬件及外围设备，包括中央处理器（CPU）、微处理器、定制集成电路、打印机及磁盘驱动器等。\n- **评估硬件配置**，综合考虑报告格式要求、成本限制及安全需求等因素。\n- **规划电源需求与配置**，依据系统性能预期和设计规范进行制定。\n\n---\n\n### 🧪 测试与验证\n- **构建、测试和修改产品原型**，使用实体模型或计算机仿真模型进行验证。\n- **测试和验证硬件及外围设备**，通过记录和分析测试数据，确保其符合规格要求。\n\n---\n\n### 📋 文档与规范\n- **撰写详细的功能规范文档**，记录硬件开发过程并支持硬件发布上市。\n\n---\n\n### 🤝 协调与沟通\n- **与工程团队沟通协作**，参考技术规范，评估硬件与软件之间的接口及系统整体性能需求。\n- **向设计师、市场和销售部门、供应商及工程师**提供技术支持。\n- **指导技术人员、工程设计师**或其他技术支持人员开展工作。\n- **为系统设计人员和用户提供培训与支持**。\n\n---\n\n### 🔍 监控与维护\n- **监控设备运行状态**，并进行必要的修改，确保系统符合规格运行。\n- **组装和改造现有设备**，以满足特殊需求。\n- **分析信息**，推荐并规划计算机及外围设备的布局与改进方案。\n\n---\n\n### 📚 持续学习\n- **持续更新知识与技能**，跟上计算机技术的快速发展步伐。\n\n---\n\n> 📌 **总结**：计算机硬件工程师的工作涉及从**研究、设计、开发、测试**到**文档编写、团队协作、技术支持及持续学习**的全流程，是一个高度综合性的技术岗位。",
+          "scores": {
+            "contextual_precision": 0.8333,
+            "contextual_recall": 0.7353,
+            "contextual_relevancy": 0.9091
+          },
+          "reasons": {
+            "contextual_precision": "The score is 0.83 because while the two relevant nodes are present in the retrieval contexts, an irrelevant node appears at rank 2, disrupting the ideal ordering. The first node is relevant, containing information about tasks such as 'Design and develop computer hardware and support peripherals' and 'Analyze user needs and recommend appropriate hardware.' The third node is also relevant, directly ",
+            "contextual_recall": "The score is 0.74 because several sentences in the expected output are well-supported by nodes in retrieval context, particularly node 3, which directly contains sentences 1 through 7 (e.g., 'Evaluate factors such as reporting formats required...', 'Provide training and support to system designers and users', 'Monitor functioning of equipment...', etc.), along with recurring labels like 'Related o",
+            "contextual_relevancy": "The score is 0.91 because the retrieval context is highly relevant to the input, containing extensive information about the daily tasks and work activities of computer hardware engineers, such as 'Design and develop computer hardware and support peripherals', 'Build, test, and modify product prototypes', 'Test and verify hardware and support peripherals to ensure that they meet specifications', an"
+          },
+          "elapsedSec": 60.6
+        },
+        {
+          "questionId": "N14",
+          "set": "main",
+          "category": "标准与政策",
+          "retrieved_chunk_ids": [
+            "S20#s345",
+            "S20#s348",
+            "S20#s347"
+          ],
+          "answer": "## 全国标准信息公共服务平台收录情况\n\n根据检索片段中的平台数据，具体情况如下：\n\n---\n\n### 一、强制性国家标准（GB）\n\n- **现行有效总数**：**2,031项**\n- 其中：\n  - **非采标 1,691项**：可在线**阅读和下载**\n  - **采标 340项**：仅可在线**阅读**（不可下载）\n\n> 可在线阅读和下载的比例约为 **1,691 ÷ 2,031 ≈ 83.3%**\n\n---\n\n### 二、推荐性国家标准（GB/T）\n\n- **现行有效总数**：**47,164项**\n- 其中：\n  - **非采标 31,144项**：可在线**阅读和下载**\n  - **采标 16,020项**：仅提供**标准题录信息**（不可阅读全文）\n\n> 可在线阅读和下载的比例约为 **31,144 ÷ 47,164 ≈ 66.0%**\n\n---\n\n### 三、补充说明\n\n| 类别 | 总数 | 可阅读下载 | 受限访问 |\n|------|------|-----------|---------|\n| 强制性国家标准（GB） | 2,031项 | 1,691项（可读可下载） | 340项（仅可读） |\n| 推荐性国家标准（GB/T） | 47,164项 | 31,144项（可读可下载） | 16,020项（仅题录） |\n\n总体来看，**采标类**（即采用国际标准的）在访问权限上受到较大限制，这主要与版权授权有关。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 0.3651,
+            "contextual_relevancy": 0.1818
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the most relevant node is perfectly ranked first! It directly answers the question by providing the exact counts of mandatory national standards (2,031 items, with 1,691 non-adopted standards available for online reading and downloading, and 340 adopted standards for online reading only) and recommended national standards (47,164 items, with 31,144 non-adopted standards a",
+            "contextual_recall": "The score is 0.37 because while node 1 in retrieval context successfully supports the earlier portions of the expected output — including the platform title (sentence 1), navigation menu items (sentences 2–7), the announcement notices (sentences 8–13), standard type summaries for GB, GB/T, GB/Z, and foreign language versions (sentences 15–22), and the search tag section (sentence 23) — the entire ",
+            "contextual_relevancy": "The score is 0.18 because while there are two directly relevant statements addressing the input — '本系统收录现行有效强制性国家标准2,031项。其中非采标1,691项可在线阅读和下载，采标340项只可在线阅读' and '本系统收录现行有效推荐性国家标准47,164项。其中非采标31,144项可在线阅读和下载，采标16,020项只提供标准题录信息' — the vast majority of the retrieval context is irrelevant. Most of the context consists of unrelated elements such as guidance technical documents ('指导性技术文件742项'), foreign l"
+          },
+          "elapsedSec": 94.3
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,592 @@
+## 1.页面总览
+
+| 前端路由 | 页面用途 | 页面代码 | 主要实现组件 | 当前数据状态 |
+| --- | --- | --- | --- | --- |
+| `/` | 根入口，跳转 `/auth` | [`app/page.tsx`](../app/page.tsx) | — | 无数据 |
+| `/auth` | 登录、注册、体验账号入口 | [`app/(entry)/auth/page.tsx`](<../app/(entry)/auth/page.tsx>) | `EntryBrand` | 仅体验账号接口已接入 |
+| `/onboarding` | 建立、预览并确认初始画像 | [`app/(entry)/onboarding/page.tsx`](<../app/(entry)/onboarding/page.tsx>) | — | 手填画像已接入；简历解析为前端演示 |
+|                   |                                      |                                                              |                         |                                           |
+| `/path` | 个性化成长路径、技能差距、路径评估 | [`app/(product)/path/page.tsx`](<../app/(product)/path/page.tsx>) | — | 路径生成已接入，用户能力输入仍为硬编码 |
+| `/actions` | 职场模拟 | [`app/(product)/actions/page.tsx`](<../app/(product)/actions/page.tsx>) | — | 空页面，待建设 |
+| `/growth` | 用户画像总览、岗位推荐和市场信息 | [`app/(product)/growth/page.tsx`](<../app/(product)/growth/page.tsx>) | — | 画像和推荐已接入；部分个人/市场数据为占位 |
+| `/growth-records` | 成长变化、行动结果和证据档案 | [`app/(product)/growth-records/page.tsx`](<../app/(product)/growth-records/page.tsx>) | `ProfileProvider` | 仅前端会话内存，刷新丢失 |
+| `/chat` | 兼容入口，跳转到 `/growth?chat=open` | [`app/(product)/chat/page.tsx`](<../app/(product)/chat/page.tsx>) | 全局 `ChatConversation` | 对话接口已接入；候选画像仅前端内存 |
+|                   |                                      |                                                              |                         |                                           |
+
+## 2. `/auth` 登录、注册和体验账号
+
+代码位置：
+
+- 页面：[`app/(entry)/auth/page.tsx`](<../app/(entry)/auth/page.tsx>)
+- 请求：[`lib/client/profile-api.ts`](../lib/client/profile-api.ts)
+- 后端：[`backend/app/api/auth.py`](../backend/app/api/auth.py)
+
+### 页面需要的数据
+
+当前页面首屏不请求后端数据。
+
+### 用户输入
+
+- 登录：`email`、`password`、保持登录勾选。
+- 注册：`name`、`email`、`password`、协议勾选。
+- 体验账号：无输入，默认显示名为“体验用户”。
+
+### 当前实际提交
+
+登录和注册按钮当前都没有提交邮箱和密码，只把姓名或邮箱前缀作为 `displayName` 调用体验账号接口：
+
+`POST /api/auth/guest`（**已接入**）
+
+```json
+{
+  "displayName": "周同学"
+}
+```
+
+后端应返回 `201`，并设置会话 Cookie：
+
+```json
+{
+  "requestId": "uuid",
+  "data": {
+    "user": {
+      "userId": "user_xxx",
+      "displayName": "周同学",
+      "isGuest": true,
+      "createdAt": "2026-09-11T08:00:00Z"
+    }
+  },
+  "error": null
+}
+```
+
+### 后端待补
+
+正式登录/注册至少需要：
+
+- `POST /api/auth/register`：接收 `displayName`、`email`、`password`、`agreementAccepted`，返回用户和会话。
+- `POST /api/auth/login`：接收 `email`、`password`、`rememberMe`，返回用户和会话。
+- 找回密码接口。
+
+新增后端接口后，前端也必须修改，当前表单不会自动使用它们。
+
+## 3. `/onboarding` 初始画像
+
+代码位置：
+
+- 页面：[`app/(entry)/onboarding/page.tsx`](<../app/(entry)/onboarding/page.tsx>)
+- 请求：[`lib/client/profile-api.ts`](../lib/client/profile-api.ts)
+- 类型：[`types/contracts/profile.ts`](../types/contracts/profile.ts)
+- 后端：[`backend/app/api/profile.py`](../backend/app/api/profile.py)
+
+### 页面需要的数据
+
+当前页面不读取已有画像，初始表单数据来自页面内部。若要支持用户返回继续编辑，建议进入页面时调用 `GET /api/profile` 并回填。
+
+页面维护以下字段：
+
+| 字段 | 类型 | 说明 |
+| --- | --- | --- |
+| `identity` | string | `在校生`、`应届生`、`职场新人`、`转型探索中` |
+| `school` | string | 学校/毕业院校，选填 |
+| `major` | string | 专业或行业背景，选填 |
+| `grade` | string | 年级、毕业届别或工作年限，选填 |
+| `careerStage` | string | 当前岗位或状态，选填 |
+| `skills` | string | 逗号、顿号、分号或换行分隔的技能，选填 |
+| `experience` | string | 经历文本，允许用分隔符拆成多条，选填 |
+| `directions` | string | 兴趣/职业方向，选填 |
+| `location` | string | 当前或意向城市，选填 |
+| `question` | string | 当前最想解决的问题，选填 |
+| `source` | string | `manual` 或 `resume` |
+
+### 用户提交与后端返回
+
+用户点击“确认并开始探索”时，前端连续发两个请求。
+
+第一步：`PUT /api/profile`（**已接入**）
+
+```json
+{
+  "identity": "在校生",
+  "school": "浙江大学",
+  "major": "自动化",
+  "grade": "大三",
+  "careerStage": "在校学习",
+  "skills": "C语言、STM32、Python",
+  "experience": "传感器采集项目；视觉识别小车",
+  "directions": "嵌入式开发、边缘AI",
+  "location": "杭州",
+  "question": "希望确认更适合哪个方向",
+  "source": "manual"
+}
+```
+
+后端将身份映射为英文枚举，将技能、经历、方向标准化，并返回：
+
+```json
+{
+  "requestId": "uuid",
+  "data": {
+    "profile": {
+      "userId": "user_xxx",
+      "profileVersion": 1,
+      "status": "draft",
+      "identity": "student",
+      "school": "浙江大学",
+      "major": "自动化",
+      "grade": "大三",
+      "graduationYear": null,
+      "location": "杭州",
+      "careerStage": "在校学习",
+      "currentGoal": "希望确认更适合哪个方向",
+      "interests": ["嵌入式开发", "边缘AI"],
+      "skills": [
+        { "name": "C语言", "level": "unknown" },
+        { "name": "STM32", "level": "unknown" }
+      ],
+      "experiences": [
+        {
+          "experienceId": "experience_1_1",
+          "type": "project",
+          "title": "传感器采集项目",
+          "description": "传感器采集项目"
+        }
+      ],
+      "candidateOccupationIds": ["embedded", "edge-ai"],
+      "source": "manual",
+      "updatedAt": "2026-09-11T08:00:00Z"
+    }
+  },
+  "error": null
+}
+```
+
+第二步：`POST /api/profile/confirm`（**已接入，无请求体**）
+
+返回同一个 `profile` 结构，其中：
+
+- `status` 变为 `confirmed`；
+- `updatedAt` 更新；
+- `profileVersion` 当前不会因确认再次递增。
+
+补充读取：`GET /api/profile`（**已接入，`/growth` 正在使用**）返回 `{ data: { profile } }`。
+
+### 简历上传待补
+
+当前选择的 PDF/DOC/DOCX/JPG/PNG 文件**不会发送到后端**，“开始提取”会在前端延时 760ms 后填入固定演示数据。
+
+建议新增 `POST /api/resumes/extract`，使用 `multipart/form-data`，字段 `file`，限制 10MB，并返回候选画像而不是直接写入正式画像：
+
+```json
+{
+  "requestId": "uuid",
+  "data": {
+    "resumeId": "resume_xxx",
+    "profileDraft": {
+      "identity": "在校生",
+      "school": "...",
+      "major": "...",
+      "grade": "...",
+      "careerStage": "...",
+      "skills": "...",
+      "experience": "...",
+      "directions": "...",
+      "location": "...",
+      "question": "...",
+      "source": "resume"
+    },
+    "warnings": [],
+    "originalFileRetained": false
+  },
+  "error": null
+}
+```
+
+
+
+## 4. 全局聊天抽屉与 `/chat`
+
+代码位置：
+
+- 兼容页：[`app/(product)/chat/page.tsx`](<../app/(product)/chat/page.tsx>)
+- 抽屉状态：[`components/chat/chat-provider.tsx`](../components/chat/chat-provider.tsx)
+- 对话界面：[`components/chat/chat-conversation.tsx`](../components/chat/chat-conversation.tsx)
+- 请求：[`lib/client/chat-api.ts`](../lib/client/chat-api.ts)
+- 后端：[`backend/app/api/chat.py`](../backend/app/api/chat.py)
+
+聊天不是独立产品页，而是挂在所有产品页右侧的全局抽屉。`/chat` 会跳转到 `/growth?chat=open` 并打开抽屉。
+
+用户发送消息时调用 `POST /api/chat`（**已接入**）：
+
+```json
+{
+  "message": "我应该优先补哪些技能？",
+  "conversationId": "conversation_xxx"
+}
+```
+
+第一轮可以不传 `conversationId`。如果后端返回 `401`，前端会自动创建体验账号后重试一次。
+
+后端返回：
+
+```json
+{
+  "requestId": "uuid",
+  "data": {
+    "message": "...",
+    "conversationId": "conversation_xxx",
+    "provider": "tbox"
+  },
+  "error": null
+}
+```
+
+后端当前会把已确认画像和当前路径作为系统上下文传给 TBox，并持久化最近的 `conversationId`。
+
+每条用户消息还会在前端生成一条“候选画像”，用户可修改内容、选择画像模块和信息类别，再确认写入；这些候选和确认结果目前**不会提交后端**，刷新后丢失。聊天附件按钮也只展示说明，不上传文件。
+
+## 5. `/path` 个性化成长路径
+
+代码位置：
+
+- 页面：[`app/(product)/path/page.tsx`](<../app/(product)/path/page.tsx>)
+- 类型：[`types/domain/career-path.ts`](../types/domain/career-path.ts)
+- 后端：[`backend/app/api/career_path.py`](../backend/app/api/career_path.py)
+
+### 页面需要的数据
+
+页面先调用 `GET /api/v1/occupations`，用于确认 URL 中的 `occupation` 是否有效。随后调用路径生成接口。
+
+### 当前实际提交
+
+`POST /api/v1/career-path/generate`（**已接入**）：
+
+```json
+{
+  "target_job": "AI001",
+  "current_skills": [
+    { "skill_id": "SK215", "current_level": 3 }
+  ],
+  "weekly_hours": 10
+}
+```
+
+完整可接收字段：
+
+| 字段 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `target_job` | string | 是 | 职业 ID 或后端支持的职业名称 |
+| `current_skills` | array | 否 | `{ skill_id/skill_name, current_level }[]` |
+| `experience_years` | number | 否 | 工作年限 |
+| `education` | string | 否 | 学历/阶段 |
+| `major` | string | 否 | 专业 |
+| `weekly_hours` | number | 否 | 每周可投入小时数 |
+| `career_goal` | string | 否 | 职业目标 |
+
+当前前端固定 `weekly_hours = 10`，且只有 `AI001` 会硬编码一项当前技能，其他职业传空数组。后端虽然会保存路径快照，但生成输入尚未自动取用已确认画像。建议由后端根据当前用户画像补全缺省字段，或由前端先读取画像后提交，避免路径“个性化”只依赖硬编码。
+
+### 后端返回
+
+接口返回 `201`，`data` 直接是 `GeneratedCareerPath`：
+
+```json
+{
+  "occupation_id": "AI001",
+  "target_job": "机器视觉应用工程师",
+  "target_job_en": "Machine Vision Application Engineer",
+  "profile_summary": "...",
+  "match_score": 0.86,
+  "match_type": "...",
+  "weekly_hours": 10,
+  "skill_gap_summary": {
+    "total_target_skills": 12,
+    "satisfied_count": 2,
+    "improve_count": 3,
+    "learning_count": 4,
+    "priority_learning_count": 3
+  },
+  "path": [
+    {
+      "stage": "junior",
+      "period": "0—1年",
+      "goal": "...",
+      "skills": [
+        {
+          "skill_id": "SK215",
+          "name_zh": "Python 编程",
+          "current_level": 1,
+          "target_level": 3,
+          "gap": 2,
+          "importance": 5,
+          "status": "priority_learning",
+          "prerequisite_ids": [],
+          "priority_score": 9.5,
+          "prerequisite_depth": 0,
+          "default_stage": "junior",
+          "prerequisite_only": false,
+          "primary_learning": true
+        }
+      ],
+      "tasks": [
+        {
+          "task": "完成一个视觉项目",
+          "required_skill_ids": ["SK215"],
+          "tools": ["Python"],
+          "deliverable": "代码仓库与演示",
+          "evidence": [{ "type": "git_repository", "description": "代码仓库" }],
+          "subtasks": ["..."],
+          "source_refs": ["..."]
+        }
+      ],
+      "estimated_hours": 40,
+      "estimated_weeks": 4,
+      "satisfied_ratio": 0.2,
+      "compressed": false,
+      "stage_skipped": false
+    }
+  ],
+  "evaluation": {
+    "path_valid": true,
+    "overall_score": 88,
+    "grade": "优秀",
+    "metrics": {
+      "prerequisite_reasonableness": 100,
+      "gap_coverage": 90,
+      "stage_alignment": 85,
+      "personalization": 80,
+      "task_skill_alignment": 90,
+      "executability": 85
+    },
+    "hard_checks": {
+      "prerequisite_cycle": false,
+      "missing_skill_id": false,
+      "invalid_level": false,
+      "invalid_stage": false,
+      "invalid_gap": false,
+      "prerequisite_order": false
+    },
+    "workload": {
+      "status": "normal",
+      "stages": {
+        "junior": {
+          "required_weeks": 4,
+          "recommended_max_weeks": 12,
+          "status": "normal"
+        }
+      }
+    },
+    "warnings": [],
+    "suggestions": []
+  },
+  "generated_at": "2026-09-11T08:00:00Z",
+  "rules_version": "...",
+  "metrics_version": "..."
+}
+```
+
+注意：`hard_checks` 的布尔值表示“是否发现问题”，因此 `false` 才会在前端显示为通过。
+
+页面没有路径编辑、确认、重新生成表单或安排任务的写操作。页面中的任务只展示，尚未连接 `/actions`。
+
+## 6. `/actions` 职场模拟
+
+代码位置：[`app/(product)/actions/page.tsx`](<../app/(product)/actions/page.tsx>)。
+
+当前仅显示“内容筹备中”，不请求数据、不提交数据。仓库中存在历史演示任务和模拟评估函数：
+
+- [`lib/fixtures/product-data.ts`](../lib/fixtures/product-data.ts)
+- [`lib/client/training-api.ts`](../lib/client/training-api.ts)
+
+但当前 `/actions` 页面没有使用它们。
+
+后端建设时建议至少提供：
+
+- `GET /api/tasks?status=planned|available|completed`：返回任务 ID、来源路径、标题、说明、目标能力、执行步骤、预计时长、难度、交付要求、证据要求和状态。
+- `GET /api/tasks/{taskId}`：返回任务详情及历史提交。
+- `POST /api/tasks/{taskId}/runs`：接收用户行动说明、文本成果和附件引用，返回独立的 `taskRunId`、完成时间和待确认的能力观察。
+- `POST /api/task-runs/{taskRunId}/evaluate`：返回反馈、观察到的能力、仍需验证内容以及候选画像，不应自动把单次表现写成已掌握能力。
+
+建议任务提交结构：
+
+```json
+{
+  "action": "我先核对硬件约束，再按优先级逐项验证",
+  "submission": "定位结论与验证记录……",
+  "attachmentIds": []
+}
+```
+
+建议返回：
+
+```json
+{
+  "requestId": "uuid",
+  "data": {
+    "run": {
+      "id": "run_xxx",
+      "taskId": "task_xxx",
+      "title": "边缘 AI 设备异常定位",
+      "action": "...",
+      "submission": "...",
+      "observedAbilities": ["问题拆解", "工程判断"],
+      "pendingValidation": "还需要真实设备记录验证",
+      "completedAt": "2026-09-11T08:00:00Z"
+    },
+    "profileCandidates": []
+  },
+  "error": null
+}
+```
+
+## 7. `/growth` 用户画像与岗位市场动态
+
+代码位置：
+
+- 页面：[`app/(product)/growth/page.tsx`](<../app/(product)/growth/page.tsx>)
+- 画像请求：[`lib/client/profile-api.ts`](../lib/client/profile-api.ts)
+- 推荐请求：[`lib/client/career-recommendation-api.ts`](../lib/client/career-recommendation-api.ts)
+- 后端：[`backend/app/api/profile.py`](../backend/app/api/profile.py)、[`backend/app/api/career_recommendations.py`](../backend/app/api/career_recommendations.py)
+
+页面进入时并行读取：
+
+1. `GET /api/profile`：返回第 4 节的 `UserProfile`。
+2. `GET /api/career/recommendations`：返回岗位推荐。
+
+岗位推荐接口当前**不使用通用响应包**，应直接返回：
+
+```json
+{
+  "recommendations": [
+    {
+      "occupation_id": "AI001",
+      "occupation_name": "机器视觉应用工程师",
+      "match_score": 86,
+      "reason": "已有视觉项目经历；方向兴趣一致",
+      "core_skills": ["Python", "OpenCV"],
+      "skill_gaps": ["模型部署"],
+      "salary_range": "15k-30k",
+      "future_signal": "...",
+      "career_path": "/path?occupation=AI001"
+    }
+  ]
+}
+```
+
+页面展示：
+
+- 基本信息：身份、专业、城市、兴趣；
+- 学校经历；
+- 项目/实习/竞赛/工作经历；
+- 推荐岗位、匹配分、核心技能和推荐原因；
+- 选中岗位的薪资区间、行业前景、核心能力和技能差距。
+
+用户只会切换标签和选择查看哪个岗位，不产生写请求。
+
+当前占位/缺失数据：
+
+- 用户姓名固定显示“周同学”，头像固定显示“周”；性别、年龄、在校职务、奖项和核心课程没有后端字段。
+- 人才需求趋势图是固定高度的布局占位，不是市场数据。
+- 只有 `AI001` 有硬编码薪资 `15k-30k`，其他职业返回“暂未提供”。
+- 薪资没有城市、经验范围、币种、周期、样本和更新时间，不能作为可信市场数据。
+
+若要完成市场页，建议在推荐项或独立市场接口中返回：`region`、`experienceRange`、`salaryMin`、`salaryMax`、`currency`、`salaryPeriod`、`demandTrend[]`、`skillTrend[]`、`source`、`sourceUpdatedAt`。
+
+## 8. `/growth-records` 成长记录档案
+
+代码位置：
+
+- 页面：[`app/(product)/growth-records/page.tsx`](<../app/(product)/growth-records/page.tsx>)
+- 状态容器：[`components/profile/profile-provider.tsx`](../components/profile/profile-provider.tsx)
+- 状态规则：[`lib/client/profile-state.ts`](../lib/client/profile-state.ts)
+- 类型：[`types/view-models/dynamic-profile.ts`](../types/view-models/dynamic-profile.ts)
+- 候选确认：[`components/profile/candidate-profile-card.tsx`](../components/profile/candidate-profile-card.tsx)
+
+### 当前数据来源
+
+本页没有后端请求。所有数据都来自 `ProfileProvider` 的 React 内存（**前端本地**），包括：
+
+- `records`：用户已确认的画像记录；
+- `taskRuns`：任务提交；
+- `evidence`：画像记录与任务提交之间的证据关联；
+- `events`：新增画像证据、职业方向变化、成长路径调整；
+- `plannedTasks`：用户从路径安排的任务。
+
+用户的分类、时间范围、确认状态和关键词筛选都是本地操作，不需要后端写请求。但刷新页面后全部记录会丢失。
+
+### 后端应返回的数据
+
+建议提供 `GET /api/growth-records`，支持查询参数：
+
+- `category=ability|action|career|path`；
+- `status=confirmed|recorded|pending`；
+- `from`、`to`；
+- `keyword`；
+- `cursor`、`limit`。
+
+返回：
+
+```json
+{
+  "requestId": "uuid",
+  "data": {
+    "summary": {
+      "eventCount": 8,
+      "completedActionCount": 3,
+      "confirmedEvidenceCount": 5,
+      "pendingConfirmationCount": 1
+    },
+    "items": [
+      {
+        "id": "event_xxx",
+        "category": "ability",
+        "title": "能力基础新增一条已确认信息",
+        "before": null,
+        "after": "具备 Python 项目经验",
+        "explanation": "用户确认了候选画像",
+        "occurredAt": "2026-09-11T08:00:00Z",
+        "source": "用户聊天原文",
+        "status": "confirmed",
+        "taskRunId": null,
+        "evidence": {
+          "id": "evidence_xxx",
+          "level": "用户自述",
+          "profileRecordId": "profile_record_xxx"
+        },
+        "taskRun": null,
+        "impact": "该记录已进入动态画像的证据链"
+      }
+    ],
+    "nextCursor": null
+  },
+  "error": null
+}
+```
+
+### 候选画像确认待补
+
+聊天、图谱和职业情境页都会生成候选画像卡。建议统一后端流程：
+
+1. `POST /api/profile-candidates`：保存 AI/前端生成的候选信息；
+2. `PATCH /api/profile-candidates/{id}`：用户修改内容和分类；
+3. `POST /api/profile-candidates/{id}/confirm`：用户明确确认后，原子地创建画像记录、证据和成长事件；
+4. `POST /api/profile-candidates/{id}/dismiss`：记录暂不写入。
+
+确认请求至少包含：
+
+```json
+{
+  "module": "能力基础",
+  "field": "已有技能",
+  "content": "具备 Python 项目经验"
+}
+```
+
+后端应保证：
+
+- 未分类候选不能确认；
+- 同一候选重复确认必须幂等；
+- 关联 `taskRunId` 时必须校验任务提交属于当前用户；
+- 单次任务观察不能自动升级为“已掌握”；
+- 画像记录、证据关联和成长事件应在同一事务中写入。
+
+## 

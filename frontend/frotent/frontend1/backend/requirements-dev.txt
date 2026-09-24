@@ -1,0 +1,3 @@
+# 后端运行本身只用 Python 标准库；这里只声明测试依赖。
+# 安装：python -m pip install -r backend/requirements-dev.txt
+pytest>=8.0,<10

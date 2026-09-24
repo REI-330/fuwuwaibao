@@ -1,0 +1,527 @@
+{
+  "meta": {
+    "kbVersion": "0.1.0-sample",
+    "graphVersion": "0.1.0-sample",
+    "generatedAt": "2026-07-28T00:00:00Z",
+    "status": "contract-sample",
+    "note": "这是三层契约的手工样例，用于固定字段结构与打通前端/ MCP 接线，不是抽取产出的真实数据。真实数据由 knowledge/KNOWLEDGE_BASE_DESIGN.md 第 6 节流水线生成。",
+    "adapterNotes": [
+      "edges[].type 在前端适配层映射为 lib/client/career-graph.ts 的 GraphEdge.relation。",
+      "nodes[].kind 中 task / trend / credential / domain 四类需要先拓宽 GraphNode.kind 联合类型才能上图，否则前端应过滤。",
+      "nodes[].x / nodes[].y 为确定性布局坐标，由流水线第 10 步产出，不要在前端重算。"
+    ],
+    "counts": {
+      "sources": 3,
+      "chunks": 6,
+      "nodes": 14,
+      "edges": 17,
+      "wikiPages": 4
+    }
+  },
+
+  "sources": [
+    {
+      "sourceId": "S03",
+      "title": "嵌入式软件工程师岗位能力要求汇编",
+      "publisher": "示例机构 A",
+      "url": "https://example.org/s03",
+      "publishedAt": "2025-11-12",
+      "collectedAt": "2026-07-20",
+      "license": "public-report",
+      "scopeZh": "支持：嵌入式岗位的典型任务与能力项。不支持：薪资与招聘量结论。",
+      "sha256": "0f1e2d3c4b5a69788796a5b4c3d2e1f00f1e2d3c4b5a69788796a5b4c3d2e1f0",
+      "chunkCount": 2
+    },
+    {
+      "sourceId": "S07",
+      "title": "边缘 AI 部署实践指南",
+      "publisher": "示例机构 B",
+      "url": "https://example.org/s07",
+      "publishedAt": "2026-03-02",
+      "collectedAt": "2026-07-21",
+      "license": "public-report",
+      "scopeZh": "支持：模型量化、部署链路、内存与延迟权衡。不支持：具体芯片型号对比。",
+      "sha256": "1122334455667788990011223344556677889900112233445566778899001122",
+      "chunkCount": 3
+    },
+    {
+      "sourceId": "S12",
+      "title": "终身职业技能培训规划要点摘录",
+      "publisher": "示例机构 C",
+      "url": "https://example.org/s12",
+      "publishedAt": "2022-01-04",
+      "collectedAt": "2026-07-22",
+      "license": "public-policy",
+      "scopeZh": "支持：技能培训政策方向。不支持：技术细节。",
+      "sha256": "abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd",
+      "chunkCount": 1
+    }
+  ],
+
+  "chunks": [
+    {
+      "chunkId": "S03#2.1",
+      "sourceId": "S03",
+      "heading": "2.1 岗位职责",
+      "sectionPath": "2 > 2.1",
+      "charRange": [1200, 2380],
+      "text": "嵌入式软件工程师负责微控制器外设驱动开发、实时系统任务划分与调试……",
+      "tags": ["嵌入式", "驱动开发", "调试"],
+      "version": 1
+    },
+    {
+      "chunkId": "S03#3.4",
+      "sourceId": "S03",
+      "heading": "3.4 工具链",
+      "sectionPath": "3 > 3.4",
+      "charRange": [4120, 4890],
+      "text": "常见开发环境包括交叉编译工具链与实时操作系统……",
+      "tags": ["工具链", "实时操作系统"],
+      "version": 1
+    },
+    {
+      "chunkId": "S07#sec-4",
+      "sourceId": "S07",
+      "heading": "4. 先修基础",
+      "sectionPath": "4",
+      "charRange": [3100, 4020],
+      "text": "在开始量化与部署之前，需要具备微控制器外设驱动与内存模型的基本理解……",
+      "tags": ["先修", "量化", "部署"],
+      "version": 1
+    },
+    {
+      "chunkId": "S07#sec-6",
+      "sourceId": "S07",
+      "heading": "6. 量化与内存占用",
+      "sectionPath": "6",
+      "charRange": [5400, 6900],
+      "text": "将模型权重从浮点量化为定点后，典型可显著降低内存占用，但需重新验证精度……",
+      "tags": ["量化", "内存", "精度"],
+      "version": 1
+    },
+    {
+      "chunkId": "S07#sec-9",
+      "sourceId": "S07",
+      "heading": "9. 边缘部署趋势",
+      "sectionPath": "9",
+      "charRange": [8800, 9500],
+      "text": "边缘侧推理需求持续增长，部署能力逐步从加分项转为岗位基本要求……",
+      "tags": ["趋势", "边缘推理"],
+      "version": 1
+    },
+    {
+      "chunkId": "S12#1",
+      "sourceId": "S12",
+      "heading": "1. 规划方向",
+      "sectionPath": "1",
+      "charRange": [300, 1100],
+      "text": "健全终身职业技能培训制度，推动技能人才结构优化……",
+      "tags": ["政策", "终身学习"],
+      "version": 1
+    }
+  ],
+
+  "nodes": [
+    {
+      "id": "occupation:AI001",
+      "kind": "occupation",
+      "label": "嵌入式开发工程师",
+      "aliases": ["嵌入式开发", "MCU 开发", "固件工程师"],
+      "description": "负责微控制器外设驱动、实时任务划分与板级调试的工程岗位。",
+      "x": 510,
+      "y": 300,
+      "sourceRefs": ["S03#2.1"]
+    },
+    {
+      "id": "occupation:AI004",
+      "kind": "occupation",
+      "label": "边缘 AI 工程师",
+      "aliases": ["边缘 AI", "端侧推理工程师"],
+      "description": "负责模型在资源受限设备上的量化、部署与性能权衡。",
+      "x": 510,
+      "y": 380,
+      "sourceRefs": ["S07#sec-9"]
+    },
+    {
+      "id": "skill:SK090",
+      "kind": "skill",
+      "label": "C 语言与内存模型",
+      "aliases": ["C 语言", "内存模型"],
+      "description": "指针、内存布局与栈堆管理的基础能力。",
+      "x": 155,
+      "y": 80,
+      "sourceRefs": ["S07#sec-4"]
+    },
+    {
+      "id": "skill:SK101",
+      "kind": "skill",
+      "label": "微控制器外设驱动",
+      "aliases": ["外设驱动", "MCU 驱动"],
+      "description": "按约束完成 GPIO / ADC / 定时器等外设的驱动编写与调试。",
+      "x": 155,
+      "y": 158,
+      "sourceRefs": ["S03#2.1"]
+    },
+    {
+      "id": "skill:SK220",
+      "kind": "skill",
+      "label": "FreeRTOS 实时内核",
+      "aliases": ["FreeRTOS", "实时内核"],
+      "description": "任务划分、优先级与同步机制的使用。",
+      "x": 155,
+      "y": 236,
+      "sourceRefs": ["S03#3.4"]
+    },
+    {
+      "id": "skill:SK215",
+      "kind": "skill",
+      "label": "模型量化与部署",
+      "aliases": ["模型量化", "INT8 量化", "端侧部署"],
+      "description": "将训练好的模型量化并部署到资源受限设备。",
+      "x": 155,
+      "y": 314,
+      "sourceRefs": ["S07#sec-6"]
+    },
+    {
+      "id": "knowledge:AI001:stage1",
+      "kind": "knowledge",
+      "label": "板级调试入门",
+      "aliases": [],
+      "description": "阶段一学习单元：从最小系统开始建立调试能力。交付物为一次完整的问题排查记录。",
+      "x": 300,
+      "y": 720,
+      "sourceRefs": ["S03#2.1"]
+    },
+    {
+      "id": "task:T0042",
+      "kind": "task",
+      "label": "排查传感器读数异常",
+      "aliases": [],
+      "description": "按给定约束定位读数异常原因，提交排查记录与验证步骤。",
+      "x": 560,
+      "y": 720,
+      "sourceRefs": ["S03#2.1"]
+    },
+    {
+      "id": "tool:freertos",
+      "kind": "tool",
+      "label": "FreeRTOS",
+      "aliases": [],
+      "description": "职业资料列出的工具：FreeRTOS。工具与技能是不同节点，不表示已掌握。",
+      "x": 855,
+      "y": 80,
+      "sourceRefs": ["S03#3.4"]
+    },
+    {
+      "id": "tool:交叉编译工具链",
+      "kind": "tool",
+      "label": "交叉编译工具链",
+      "aliases": [],
+      "description": "职业资料列出的工具：交叉编译工具链。工具与技能是不同节点，不表示已掌握。",
+      "x": 855,
+      "y": 158,
+      "sourceRefs": ["S03#3.4"]
+    },
+    {
+      "id": "trend:edge-ai-2026",
+      "kind": "trend",
+      "label": "边缘侧推理需求增长",
+      "aliases": [],
+      "description": "边缘侧推理需求持续增长，部署能力逐步转为岗位基本要求。",
+      "x": 1085,
+      "y": 80,
+      "sourceRefs": ["S07#sec-9"]
+    },
+    {
+      "id": "credential:cert-embedded",
+      "kind": "credential",
+      "label": "嵌入式系统认证（示例）",
+      "aliases": [],
+      "description": "示例认证条目，仅用于固定字段结构。",
+      "x": 1085,
+      "y": 158,
+      "sourceRefs": ["S12#1"]
+    },
+    {
+      "id": "domain:embedded",
+      "kind": "domain",
+      "label": "嵌入式与实时系统",
+      "aliases": ["嵌入式"],
+      "description": "能力域分组：外设驱动、实时内核与板级调试。`belongs_to` 的指向目标，不做检索召回单元。",
+      "x": 300,
+      "y": 400,
+      "sourceRefs": ["S03#2.1"]
+    },
+    {
+      "id": "domain:edge-ai",
+      "kind": "domain",
+      "label": "边缘 AI 部署",
+      "aliases": ["边缘 AI"],
+      "description": "能力域分组：模型量化、端侧部署与性能权衡。`belongs_to` 的指向目标，不做检索召回单元。",
+      "x": 300,
+      "y": 478,
+      "sourceRefs": ["S07#sec-6"]
+    }
+  ],
+
+  "edges": [
+    {
+      "id": "e-0001",
+      "type": "requires",
+      "from": "occupation:AI001",
+      "to": "skill:SK101",
+      "weight": 0.95,
+      "targetLevel": 4,
+      "importance": 0.9,
+      "sourceRefs": ["S03#2.1"],
+      "annotatedBy": "human",
+      "updatedAt": "2026-07-28"
+    },
+    {
+      "id": "e-0002",
+      "type": "requires",
+      "from": "occupation:AI001",
+      "to": "skill:SK220",
+      "weight": 0.7,
+      "targetLevel": 3,
+      "importance": 0.6,
+      "sourceRefs": ["S03#3.4"],
+      "annotatedBy": "human",
+      "updatedAt": "2026-07-28"
+    },
+    {
+      "id": "e-0003",
+      "type": "requires",
+      "from": "occupation:AI004",
+      "to": "skill:SK215",
+      "weight": 0.9,
+      "targetLevel": 4,
+      "importance": 0.95,
+      "sourceRefs": ["S07#sec-6"],
+      "annotatedBy": "human",
+      "updatedAt": "2026-07-28"
+    },
+    {
+      "id": "e-0004",
+      "type": "requires",
+      "from": "occupation:AI004",
+      "to": "skill:SK101",
+      "weight": 0.6,
+      "targetLevel": 3,
+      "importance": 0.5,
+      "sourceRefs": ["S07#sec-4"],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-07-28"
+    },
+    {
+      "id": "e-0005",
+      "type": "prerequisite",
+      "from": "skill:SK090",
+      "to": "skill:SK101",
+      "weight": 0.95,
+      "sourceRefs": ["S07#sec-4"],
+      "annotatedBy": "human",
+      "updatedAt": "2026-07-28"
+    },
+    {
+      "id": "e-0006",
+      "type": "prerequisite",
+      "from": "skill:SK101",
+      "to": "skill:SK215",
+      "weight": 0.85,
+      "sourceRefs": ["S07#sec-4"],
+      "annotatedBy": "human",
+      "updatedAt": "2026-07-28"
+    },
+    {
+      "id": "e-0007",
+      "type": "prerequisite",
+      "from": "skill:SK090",
+      "to": "skill:SK220",
+      "weight": 0.7,
+      "sourceRefs": ["S03#3.4"],
+      "annotatedBy": "llm-draft",
+      "updatedAt": "2026-07-28"
+    },
+    {
+      "id": "e-0008",
+      "type": "belongs_to",
+      "from": "skill:SK101",
+      "to": "domain:embedded",
+      "weight": 1.0,
+      "sourceRefs": ["S03#2.1"],
+      "annotatedBy": "human",
+      "updatedAt": "2026-07-28"
+    },
+    {
+      "id": "e-0009",
+      "type": "belongs_to",
+      "from": "skill:SK215",
+      "to": "domain:edge-ai",
+      "weight": 1.0,
+      "sourceRefs": ["S07#sec-6"],
+      "annotatedBy": "human",
+      "updatedAt": "2026-07-28"
+    },
+    {
+      "id": "e-0010",
+      "type": "trains",
+      "from": "task:T0042",
+      "to": "skill:SK101",
+      "weight": 0.8,
+      "deliverable": "一份包含现象、假设、验证步骤与结论的排查记录",
+      "assessmentPoints": ["是否列出可复现的观察步骤", "是否区分假设与证据", "是否给出验证结果"],
+      "sourceRefs": ["S03#2.1"],
+      "annotatedBy": "human",
+      "updatedAt": "2026-07-28"
+    },
+    {
+      "id": "e-0011",
+      "type": "uses",
+      "from": "occupation:AI001",
+      "to": "tool:freertos",
+      "weight": 0.7,
+      "sourceRefs": ["S03#3.4"],
+      "annotatedBy": "human",
+      "updatedAt": "2026-07-28"
+    },
+    {
+      "id": "e-0012",
+      "type": "uses",
+      "from": "occupation:AI001",
+      "to": "tool:交叉编译工具链",
+      "weight": 0.8,
+      "sourceRefs": ["S03#3.4"],
+      "annotatedBy": "human",
+      "updatedAt": "2026-07-28"
+    },
+    {
+      "id": "e-0013",
+      "type": "transitions_to",
+      "from": "occupation:AI001",
+      "to": "occupation:AI004",
+      "weight": 0.55,
+      "horizon": 3,
+      "deltaSkills": ["skill:SK215"],
+      "sourceRefs": ["S07#sec-9"],
+      "annotatedBy": "llm-reviewed",
+      "updatedAt": "2026-07-28"
+    },
+    {
+      "id": "e-0014",
+      "type": "emerging_in",
+      "from": "trend:edge-ai-2026",
+      "to": "skill:SK215",
+      "weight": 0.9,
+      "year": 2026,
+      "direction": "up",
+      "sourceRefs": ["S07#sec-9"],
+      "annotatedBy": "human",
+      "updatedAt": "2026-07-28"
+    },
+    {
+      "id": "e-0015",
+      "type": "evidenced_by",
+      "from": "occupation:AI001",
+      "to": "chunk:S03#2.1",
+      "weight": 1.0,
+      "sourceRefs": ["S03#2.1"],
+      "annotatedBy": "human",
+      "updatedAt": "2026-07-28"
+    },
+    {
+      "id": "e-0016",
+      "type": "evidenced_by",
+      "from": "skill:SK215",
+      "to": "chunk:S07#sec-6",
+      "weight": 1.0,
+      "sourceRefs": ["S07#sec-6"],
+      "annotatedBy": "human",
+      "updatedAt": "2026-07-28"
+    },
+    {
+      "id": "e-0017",
+      "type": "evidenced_by",
+      "from": "knowledge:AI001:stage1",
+      "to": "chunk:S03#2.1",
+      "weight": 1.0,
+      "sourceRefs": ["S03#2.1"],
+      "annotatedBy": "human",
+      "updatedAt": "2026-07-28"
+    }
+  ],
+
+  "wikiPages": [
+    {
+      "entityId": "occupation:AI001",
+      "entityType": "occupation",
+      "title": "嵌入式开发工程师",
+      "path": "wiki/occupation/AI001.md",
+      "version": "2026-07-28",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "sources": ["S03#2.1", "S03#3.4"],
+      "internalLinks": ["skill:SK101", "skill:SK220", "occupation:AI004", "tool:freertos"]
+    },
+    {
+      "entityId": "skill:SK215",
+      "entityType": "skill",
+      "title": "模型量化与部署",
+      "path": "wiki/skill/SK215.md",
+      "version": "2026-07-28",
+      "review": "reviewed",
+      "reviewedBy": "human",
+      "sources": ["S07#sec-6", "S07#sec-4"],
+      "internalLinks": ["skill:SK101", "occupation:AI004"]
+    },
+    {
+      "entityId": "skill:SK220",
+      "entityType": "skill",
+      "title": "FreeRTOS 实时内核",
+      "path": "wiki/skill/SK220.md",
+      "version": "2026-07-28",
+      "review": "llm-draft",
+      "reviewedBy": null,
+      "sources": ["S03#3.4"],
+      "internalLinks": ["skill:SK090", "occupation:AI001"]
+    },
+    {
+      "entityId": "trend:edge-ai-2026",
+      "entityType": "trend",
+      "title": "边缘侧推理需求增长",
+      "path": "wiki/trend/edge-ai-2026.md",
+      "version": "2026-07-28",
+      "review": "llm-draft",
+      "reviewedBy": null,
+      "sources": ["S07#sec-9"],
+      "internalLinks": ["skill:SK215"]
+    }
+  ],
+
+  "evaluationQuestions": [
+    {
+      "questionId": "Q01",
+      "category": "occupation-requirement",
+      "question": "嵌入式开发工程师主要需要哪些能力？",
+      "answerable": true,
+      "referenceChunks": ["S03#2.1", "S03#3.4"],
+      "gradingNotes": "需覆盖外设驱动与实时内核，且引用来源"
+    },
+    {
+      "questionId": "Q07",
+      "category": "skill-gap-prerequisite",
+      "question": "想学模型量化与部署，需要先具备什么？",
+      "answerable": true,
+      "referenceChunks": ["S07#sec-4"],
+      "gradingNotes": "需给出先修链，不能只列技能名"
+    },
+    {
+      "questionId": "Q19",
+      "category": "out-of-scope",
+      "question": "深圳嵌入式岗位今年的平均薪资是多少？",
+      "answerable": false,
+      "referenceChunks": [],
+      "gradingNotes": "应明确说明资料不足并追问，编造即判失败"
+    }
+  ]
+}

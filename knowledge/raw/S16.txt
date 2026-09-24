@@ -1,0 +1,1247 @@
+Software Quality Assurance Analysts and Testers
+
+15-1253.00
+
+Bright Outlook
+
+Updated 2026
+
+Develop and execute software tests to identify software problems and their causes. Test system modifications to prepare for implementation. Document software and application defects using a bug tracking system and report defects to software or web developers. Create and maintain databases of known defects. May participate in software design reviews to provide input on functional requirements, operational characteristics, product designs, and schedules.
+
+Sample of reported job titles:
+Automation Tester, Information Technology Analyst (IT Analyst), Quality Assurance Analyst (QA Analyst), Quality Assurance Engineer (QA Engineer), Quality Engineer, Software Quality Assurance Analyst (SQA Analyst), Software Quality Assurance Engineer (SQA Engineer), Software Quality Engineer, Software Test Engineer, Test Engineer
+
+See the easy-read overview for Software Quality Assurance Analysts & Testers at My Next Move
+
+You will be leaving O*NET OnLine to visit our sister site My Next Move. You can return by using the Back button in your browser, or by choosing “O*NET OnLine” from the O*NET Sites menu at the bottom of any page in My Next Move.
+
+Yes, let’s go
+
+Don’t ask again this session
+
+See the easy-read overview for Software Quality Assurance Analysts & Testers at My Next Move for Veterans
+
+You will be leaving O*NET OnLine to visit our sister site My Next Move for Veterans. You can return by using the Back button in your browser, or by choosing “O*NET OnLine” from the O*NET Sites menu at the bottom of any page in My Next Move for Veterans.
+
+Yes, let’s go
+
+Don’t ask again this session
+
+Ver la perspectiva general fácil de leer para Analistas y Probadores de Control de Calidad de Software en Mi Próximo Paso
+
+Saldrá de O*NET OnLine para visitar nuestro sitio afiliado Mi Próximo Paso. Puede regresar usando el botón Atrás en su navegador, o eligiendo “O*NET OnLine” en el menú Sitios O*NET en la parte inferior de cualquier página en Mi Próximo Paso.
+
+Sí, vamos
+
+No preguntar de nuevo para esta sesión
+
+Worker Requirements
+
+Software Skills
+
+Essential Skills
+
+Transferable Skills
+
+Knowledge
+
+Education
+
+Worker Characteristics
+
+Abilities
+
+Interests
+
+Work Styles
+
+Workforce Characteristics
+
+Wages & Employment
+
+Job Openings
+
+More Information
+
+Related Occupations
+
+Professional Associations
+
+Occupation-Specific Information
+
+Tasks
+
+Identify, analyze, and document problems with program function, output, online screen, or content.
+
+Related occupations
+
+Document software defects, using a bug tracking system, and report defects to software developers.
+
+Related occupations
+
+Develop testing programs that address areas such as database impacts, software scenarios, regression testing, negative testing, error or bug retests, or usability.
+
+Related occupations
+
+Design test plans, scenarios, scripts, or procedures.
+
+Related occupations
+
+Document test procedures to ensure replicability and compliance with standards.
+
+Related occupations
+
+Provide feedback and recommendations to developers on software usability and functionality.
+
+Related occupations
+
+Install, maintain, or use software testing programs.
+
+Related occupations
+
+Test system modifications to prepare for implementation.
+
+Related occupations
+
+Create or maintain databases of known test defects.
+
+Related occupations
+
+Develop or specify standards, methods, or procedures to determine product quality or release readiness.
+
+Related occupations
+
+Monitor bug resolution efforts and track successes.
+
+Related occupations
+
+Update automated test scripts to ensure currency.
+
+Related occupations
+
+Participate in product design reviews to provide input on functional requirements, product designs, schedules, or potential problems.
+
+Related occupations
+
+Plan test schedules or strategies in accordance with project scope or delivery dates.
+
+Related occupations
+
+Monitor program performance to ensure efficient and problem-free operations.
+
+Related occupations
+
+Conduct software compatibility tests with programs, hardware, operating systems, or network environments.
+
+Related occupations
+
+Investigate customer problems referred by technical support.
+
+Related occupations
+
+Review software documentation to ensure technical accuracy, compliance, or completeness, or to mitigate risks.
+
+Related occupations
+
+Identify program deviance from standards, and suggest modifications to ensure compliance.
+
+Related occupations
+
+Perform initial debugging procedures by reviewing configuration files, logs, or code pieces to determine breakdown source.
+
+Related occupations
+
+Design or develop automated testing tools.
+
+Related occupations
+
+Install and configure recreations of software production environments to allow testing of software performance.
+
+Related occupations
+
+Collaborate with field staff or customers to evaluate or diagnose problems and recommend possible solutions.
+
+Related occupations
+
+Coordinate user or third-party testing.
+
+Related occupations
+
+Visit beta testing sites to evaluate software performance.
+
+Related occupations
+
+Conduct historical analyses of test results.
+
+Related occupations
+
+Evaluate or recommend software for testing or bug tracking.
+
+Related occupations
+
+Modify existing software to correct errors, allow it to adapt to new hardware, or to improve its performance.
+
+Related occupations
+
+Recommend purchase of equipment to control dust, temperature, or humidity in area of system installation.
+
+Related occupations
+
+Store, retrieve, and manipulate data for analysis of system capabilities and requirements.
+
+Related occupations
+
+Find occupations related to multiple tasks
+
+back to top
+
+Occupational Requirements
+
+Work Activities
+
+Working with Computers — Using computers and computer systems (including hardware and software) to program, write software, set up functions, enter data, or process information.
+
+Related occupations
+
+Getting Information — Observing, receiving, and otherwise obtaining information from all relevant sources.
+
+Related occupations
+
+Communicating with Supervisors, Peers, or Subordinates — Providing information to supervisors, co-workers, and subordinates by telephone, in written form, e-mail, or in person.
+
+Related occupations
+
+Processing Information — Compiling, coding, categorizing, calculating, tabulating, auditing, or verifying information or data.
+
+Related occupations
+
+Updating and Using Relevant Knowledge — Keeping up-to-date technically and applying new knowledge to your job.
+
+Related occupations
+
+Analyzing Data or Information — Identifying the underlying principles, reasons, or facts of information by breaking down information or data into separate parts.
+
+Related occupations
+
+Evaluating Information to Determine Compliance with Standards — Using relevant information and individual judgment to determine whether events or processes comply with laws, regulations, or standards.
+
+Related occupations
+
+Identifying Objects, Actions, and Events — Identifying information by categorizing, estimating, recognizing differences or similarities, and detecting changes in circumstances or events.
+
+Related occupations
+
+Documenting/Recording Information — Entering, transcribing, recording, storing, or maintaining information in written or electronic/magnetic form.
+
+Related occupations
+
+Organizing, Planning, and Prioritizing Work — Developing specific goals and plans to prioritize, organize, and accomplish your work.
+
+Related occupations
+
+Establishing and Maintaining Interpersonal Relationships — Developing constructive and cooperative working relationships with others, and maintaining them over time.
+
+Related occupations
+
+Making Decisions and Solving Problems — Analyzing information and evaluating results to choose the best solution and solve problems.
+
+Related occupations
+
+Thinking Creatively — Developing, designing, or creating new applications, ideas, relationships, systems, or products, including artistic contributions.
+
+Related occupations
+
+Monitoring Processes, Materials, or Surroundings — Monitoring and reviewing information from materials, events, or the environment, to detect or assess problems.
+
+Related occupations
+
+Coordinating the Work and Activities of Others — Getting members of a group to work together to accomplish tasks.
+
+Related occupations
+
+Developing and Building Teams — Encouraging and building mutual trust, respect, and cooperation among team members.
+
+Related occupations
+
+Judging the Qualities of Objects, Services, or People — Assessing the value, importance, or quality of things or people.
+
+Related occupations
+
+Interpreting the Meaning of Information for Others — Translating or explaining what information means and how it can be used.
+
+Related occupations
+
+Scheduling Work and Activities — Scheduling events, programs, and activities, as well as the work of others.
+
+Related occupations
+
+Coaching and Developing Others — Identifying the developmental needs of others and coaching, mentoring, or otherwise helping others to improve their knowledge or skills.
+
+Related occupations
+
+Developing Objectives and Strategies — Establishing long-range objectives and specifying the strategies and actions to achieve them.
+
+Related occupations
+
+Providing Consultation and Advice to Others — Providing guidance and expert advice to management or other groups on technical, systems-, or process-related topics.
+
+Related occupations
+
+Training and Teaching Others — Identifying the educational needs of others, developing formal educational or training programs or classes, and teaching or instructing others.
+
+Related occupations
+
+back to top
+
+Detailed Work Activities
+
+Document operational activities.
+
+Related occupations
+
+Analyze data to identify or resolve operational problems.
+
+Related occupations
+
+Troubleshoot issues with computer applications or systems.
+
+Related occupations
+
+Compile technical information or documentation.
+
+Related occupations
+
+Report maintenance or equipment problems to appropriate personnel.
+
+Related occupations
+
+Develop testing routines or procedures.
+
+Related occupations
+
+Document design or development procedures.
+
+Related occupations
+
+Recommend changes to improve computer or information systems.
+
+Related occupations
+
+Install computer software.
+
+Related occupations
+
+Test computer system operations to ensure proper functioning.
+
+Related occupations
+
+Create databases to store electronic data.
+
+Related occupations
+
+Monitor computer system performance to ensure proper operation.
+
+Related occupations
+
+Develop performance metrics or standards related to information technology.
+
+Related occupations
+
+Collaborate with others to determine design specifications or details.
+
+Related occupations
+
+Develop detailed project plans.
+
+Related occupations
+
+Test software performance.
+
+Related occupations
+
+Provide customer service to clients or users.
+
+Related occupations
+
+Manage documentation to ensure organization or accuracy.
+
+Related occupations
+
+Read documents to gather technical information.
+
+Related occupations
+
+Collaborate with others to resolve information technology issues.
+
+Related occupations
+
+Analyze data to identify trends or relationships among variables.
+
+Related occupations
+
+Evaluate utility of software or hardware technologies.
+
+Related occupations
+
+Assess database performance.
+
+Related occupations
+
+Modify software programs to improve performance.
+
+Related occupations
+
+Prepare data for analysis.
+
+Related occupations
+
+Provide recommendations to others about computer hardware.
+
+Related occupations
+
+Find occupations related to multiple detailed work activities
+
+back to top
+
+Work Context
+
+E-Mail — 100% responded “Every day.”
+
+Related occupations
+
+Face-to-Face Discussions with Individuals and Within Teams — 75% responded “Every day.”
+
+Related occupations
+
+Spend Time Sitting — 71% responded “Continually or almost continually.”
+
+Related occupations
+
+Importance of Being Exact or Accurate — 50% responded “Extremely important.”
+
+Related occupations
+
+Work With or Contribute to a Work Group or Team — 58% responded “Extremely important.”
+
+Related occupations
+
+Freedom to Make Decisions — 65% responded “Some freedom.”
+
+Related occupations
+
+Indoors, Environmentally Controlled — 67% responded “Every day.”
+
+Related occupations
+
+Telephone Conversations — 42% responded “Every day.”
+
+Related occupations
+
+Contact With Others — 47% responded “Contact with others most of the time.”
+
+Related occupations
+
+Determine Tasks, Priorities and Goals — 74% responded “Some freedom.”
+
+Related occupations
+
+Time Pressure — 41% responded “Once a week or more but not every day.”
+
+Related occupations
+
+Duration of Typical Work Week — 59% responded “40 hours.”
+
+Related occupations
+
+Importance of Repeating Same Tasks — 38% responded “Very important.”
+
+Related occupations
+
+Impact of Decisions on Co-workers or Company Results — 38% responded “Important results.”
+
+Related occupations
+
+Level of Competition — 42% responded “Moderately competitive.”
+
+Related occupations
+
+Spend Time Making Repetitive Motions — 35% responded “Continually or almost continually.”
+
+Related occupations
+
+Physical Proximity — 70% responded “Slightly close (e.g., shared office).”
+
+Related occupations
+
+Conflict Situations — 41% responded “Once a month or more but not every week.”
+
+Related occupations
+
+Frequency of Decision Making — 39% responded “Once a year or more but not every month.”
+
+Related occupations
+
+back to top
+
+Experience Requirements
+
+Job Zone
+
+Title
+
+Job Zone Four: Considerable Preparation Needed
+
+Education
+
+Most of these occupations require a four-year bachelor's degree, but some do not.
+
+Related Experience
+
+A considerable amount of work-related skill, knowledge, or experience is needed for these occupations. For example, an accountant must complete four years of college and work for several years in accounting to be considered qualified.
+
+Job Training
+
+Employees in these occupations usually need several years of work-related experience, on-the-job training, and/or vocational training.
+
+Job Zone Examples
+
+Many of these occupations involve coordinating, supervising, managing, or training others. Examples include real estate brokers, sales managers, database administrators, graphic designers, conservation scientists, art directors, and cost estimators.
+
+SVP Range
+
+(7.0 to < 8.0)
+
+back to top
+
+Training & Credentials
+
+State training
+
+Local training
+
+Certifications
+
+Find certifications nationwide
+
+State licenses
+
+back to top
+
+Apprenticeship Opportunities
+
+Example apprenticeship titles for this occupation:
+
+Software Quality Assurance Tester (Nof)
+
+Specific title(s) listed above are vetted by industry and approved by the U.S. Department of Labor for use in a Registered Apprenticeship Program.
+
+Start your career and build your skillset. Visit Apprenticeship.gov
+external site to learn about opportunities related to this occupation.
+
+back to top
+
+Worker Requirements
+
+Software Skills
+
+Access software — Citrix cloud computing software; PuTTY
+
+Related occupations
+
+Accounting software — Tax software
+
+Related occupations
+
+Administration software — Software distribution management software
+
+Related occupations
+
+Analytical or scientific software — IBM SPSS Statistics Hot Technology ; Minitab; SAS Hot Technology ; The MathWorks MATLAB Hot Technology ; 5 more
+
+Related occupations
+
+Application server software — Atlassian Bitbucket Hot Technology ; GitLab Hot Technology ; Red Hat OpenShift Hot Technology ; Spring Boot Hot Technology ; 6 more
+
+Related occupations
+
+Backup or archival software — Backup and archival software; Veritas NetBackup
+
+Related occupations
+
+Business intelligence and data analysis software — IBM Cognos Impromptu; Oracle Business Intelligence Enterprise Edition; Qlik Tech QlikView; Tableau Hot Technology ; 1 more
+
+Related occupations
+
+Cloud-based data access and sharing software — Dropbox; Google Drive; Slack Hot Technology
+
+Related occupations
+
+Cloud-based management software — Amazon Web Services AWS CloudFormation Hot Technology ; IBM WebSphere; Splunk Enterprise Hot Technology
+
+Related occupations
+
+Clustering software — VMware
+
+Related occupations
+
+Communications server software — IBM Domino
+
+Related occupations
+
+Computer aided design CAD software — Autodesk AutoCAD Hot Technology ; Bentley MicroStation Hot Technology ; Dassault Systemes CATIA
+
+Related occupations
+
+Computer based training software — Moodle
+
+Related occupations
+
+Configuration management software — Chef Hot Technology ; Perforce Helix software; Puppet Hot Technology ; Visible Razor; 6 more
+
+Related occupations
+
+Content workflow software — Emerald Software Group Emerald Green Office; Twiki; Workflow software
+
+Related occupations
+
+Customer relationship management CRM software — Blackbaud The Raiser's Edge; Oracle Eloqua; Salesforce software Hot Technology
+
+Related occupations
+
+Data base management system software — Amazon DynamoDB Hot Technology ; Elasticsearch Hot Technology ; MongoDB Hot Technology ; Oracle PL/SQL Hot Technology ; 22 more
+
+Related occupations
+
+Data base reporting software — Microsoft SQL Server Reporting Services SSRS Hot Technology ; Oracle Business Intelligence Discoverer; SAP Business Intelligence; SAP Crystal Reports; 3 more
+
+Related occupations
+
+Data base user interface and query software — Airtable; Apache Hive Hot Technology ; Blackboard software; IBM DB2 Hot Technology ; 12 more
+
+Related occupations
+
+Data mining software — Google Analytics Hot Technology
+
+Related occupations
+
+Desktop communications software — Skype
+
+Related occupations
+
+Desktop publishing software — Adobe InDesign Hot Technology ; Microsoft Publisher
+
+Related occupations
+
+Development environment software — Apache Kafka Hot Technology ; Apache Maven Hot Technology ; Apache Subversion SVN Hot Technology ; Oracle Java 2 Platform Enterprise Edition J2EE Hot Technology ; 61 more
+
+Related occupations
+
+Device drivers or system software — Microsoft DirectX
+
+Related occupations
+
+Document management software — Adobe Acrobat Hot Technology ; Document management system software; Microsoft SharePoint Hot Technology
+
+Related occupations
+
+Electronic mail software — Google Gmail; IBM Notes; Microsoft Exchange; Microsoft Outlook Hot Technology
+
+Related occupations
+
+Enterprise application integration software — Extensible markup language XML Hot Technology ; IBM InfoSphere DataStage; Jenkins CI ; Microsoft SQL Server Integration Services SSIS Hot Technology ; 4 more
+
+Related occupations
+
+Enterprise resource planning ERP software — Microsoft Dynamics; Oracle Fusion Applications; Oracle PeopleSoft Hot Technology ; SAP software Hot Technology ; 6 more
+
+Related occupations
+
+Enterprise system management software — IBM Power Systems software
+
+Related occupations
+
+Expert system software — Ansible software Hot Technology
+
+Related occupations
+
+File versioning software — Git ; Version control software
+
+Related occupations
+
+Filesystem software — File server software
+
+Related occupations
+
+Financial analysis software — Delphi Technology; Oracle E-Business Suite Financials
+
+Related occupations
+
+Geographic information system — ESRI ArcGIS software Hot Technology ; Geographic information system GIS software
+
+Related occupations
+
+Graphical user interface development software — Graphical user interface GUI builder software; Graphical user interface GUI design software; Salesforce Visualforce
+
+Related occupations
+
+Graphics or photo imaging software — Adobe Creative Cloud software Hot Technology ; Adobe Illustrator Hot Technology ; JamBoard; Trimble SketchUp Pro Hot Technology ; 4 more
+
+Related occupations
+
+Human resources software — Human resource management software HRMS
+
+Related occupations
+
+Industrial control software — Supervisory control and data acquisition SCADA software
+
+Related occupations
+
+Information retrieval or search software — Apache Avro; LexisNexis
+
+Related occupations
+
+Instant messaging software — Blink; GroupMe
+
+Related occupations
+
+Internet browser software — Apple Safari Hot Technology ; Microsoft Internet Explorer; Mozilla Firefox Hot Technology ; Web browser software
+
+Related occupations
+
+Internet protocol IP multimedia subsystem software — Voice over internet protocol VoIP system software
+
+Related occupations
+
+Medical software — Epic Systems Hot Technology
+
+Related occupations
+
+Metadata management software — Quest Erwin Data Modeler; Talend Data Fabric
+
+Related occupations
+
+Network conferencing software — LogMeIn GoToWebinar
+
+Related occupations
+
+Network monitoring software — Nagios; Wireshark
+
+Related occupations
+
+Network operation system software — IBM z/OS operating systems
+
+Related occupations
+
+Network security and virtual private network VPN equipment software — Firewall software; Network intrusion detection software; Virtual private networking VPN software
+
+Related occupations
+
+Object or component oriented development software — Apache Spark Hot Technology ; jQuery Hot Technology ; Scala Hot Technology ; Swift Hot Technology ; 32 more
+
+Related occupations
+
+Object oriented data base management software — Hibernate ORM Hot Technology ; PostgreSQL Hot Technology
+
+Related occupations
+
+Office suite software — LibreOffice; Microsoft Office software
+
+Related occupations
+
+Operating system software — Google Android Hot Technology ; Microsoft Windows Server Hot Technology ; Red Hat Enterprise Linux Hot Technology ; UNIX Shell Hot Technology ; 23 more
+
+Related occupations
+
+Platform interconnectivity software — Migration software
+
+Related occupations
+
+Portal server software — Apache HTTP Server
+
+Related occupations
+
+Presentation software — Google Slides; Microsoft PowerPoint Hot Technology
+
+Related occupations
+
+Process mapping and design software — Microsoft Visio Hot Technology
+
+Related occupations
+
+Program testing software — Hewlett Packard LoadRunner; IBM Rational Robot; JUnit Hot Technology ; Selenium ; 39 more
+
+Related occupations
+
+Project management software — Atlassian Confluence Hot Technology ; Atlassian JIRA ; Microsoft Team Foundation Server Hot Technology ; Microsoft Teams Hot Technology ; 2 more
+
+Related occupations
+
+Requirements analysis and system architecture software — IBM Rational RequisitePro; Requirements management software; Unified modeling language UML
+
+Related occupations
+
+Spreadsheet software — Google Sheets Hot Technology ; Microsoft Excel
+
+Related occupations
+
+Storage networking software — Amazon Simple Storage Service S3; Storage area network SAN software
+
+Related occupations
+
+Transaction security and virus protection software — Anti-spyware software; Antivirus software; McAfee; NortonLifeLock cybersecurity software; 1 more
+
+Related occupations
+
+Transaction server software — Customer information control system CICS; IBM Middleware; Microsoft Internet Information Services (IIS); Object Management Group Object Request Broker; 1 more
+
+Related occupations
+
+Video conferencing software — Cisco Webex Hot Technology ; Google Meet; LogMeIn GoToMeeting; Zoom Hot Technology ; 1 more
+
+Related occupations
+
+Video creation and editing software — Adobe After Effects Hot Technology ; Flipgrid; Screencastify; YouTube; 1 more
+
+Related occupations
+
+Web page creation and editing software — Adobe Dreamweaver; Google Sites; LinkedIn; Social media sites
+
+Related occupations
+
+Web platform development software — Django Hot Technology ; Google Angular Hot Technology ; React Hot Technology ; Spring Framework Hot Technology ; 25 more
+
+Related occupations
+
+Word processing software — 3M Post-it App; Google Docs Hot Technology ; Microsoft OneNote; Microsoft Word Hot Technology ; 1 more
+
+Related occupations
+
+Hot Technologies are requirements most frequently included across all employer job postings.
+
+See all 126 Hot Technologies for this occupation.
+
+In Demand skills are frequently included in employer job postings for this occupation.
+
+See all 24 In Demand skills for this occupation.
+
+back to top
+
+Essential Skills
+
+Reading Comprehension — Understanding written sentences and paragraphs in work-related documents.
+
+Related occupations
+
+Active Listening — Giving full attention to what other people are saying, taking time to understand the points being made, asking questions as appropriate, and not interrupting at inappropriate times.
+
+Related occupations
+
+Critical Thinking — Using logic and reasoning to identify the strengths and weaknesses of alternative solutions, conclusions, or approaches to problems.
+
+Related occupations
+
+Speaking — Talking to others to convey information effectively.
+
+Related occupations
+
+Writing — Communicating effectively in writing as appropriate for the needs of the audience.
+
+Related occupations
+
+Monitoring — Monitoring/Assessing performance of yourself, other individuals, or organizations to make improvements or take corrective action.
+
+Related occupations
+
+Active Learning — Understanding the implications of new information for both current and future problem-solving and decision-making.
+
+Related occupations
+
+back to top
+
+Transferable Skills
+
+Programming — Writing computer programs for various purposes.
+
+Related occupations
+
+Complex Problem Solving — Identifying complex problems and reviewing related information to develop and evaluate options and implement solutions.
+
+Related occupations
+
+Quality Control Analysis — Conducting tests and inspections of products, services, or processes to evaluate quality or performance.
+
+Related occupations
+
+Systems Evaluation — Identifying measures or indicators of system performance and the actions needed to improve or correct performance, relative to the goals of the system.
+
+Related occupations
+
+Judgment and Decision Making — Considering the relative costs and benefits of potential actions to choose the most appropriate one.
+
+Related occupations
+
+Operations Analysis — Analyzing needs and product requirements to create a design.
+
+Related occupations
+
+Systems Analysis — Determining how a system should work and how changes in conditions, operations, and the environment will affect outcomes.
+
+Related occupations
+
+Coordination — Adjusting actions in relation to others' actions.
+
+Related occupations
+
+Operations Monitoring — Watching gauges, dials, or other indicators to make sure a machine is working properly.
+
+Related occupations
+
+Time Management — Managing one's own time and the time of others.
+
+Related occupations
+
+back to top
+
+Knowledge
+
+Computers and Electronics — Knowledge of circuit boards, processors, chips, electronic equipment, and computer hardware and software, including applications and programming.
+
+Related occupations
+
+English Language — Knowledge of the structure and content of the English language including the meaning and spelling of words, and rules of composition and grammar.
+
+Related occupations
+
+Engineering and Technology — Knowledge of the practical application of engineering science and technology. This includes applying principles, techniques, procedures, and equipment to the design and production of various goods and services.
+
+Related occupations
+
+Mathematics — Knowledge of arithmetic, algebra, geometry, calculus, statistics, and their applications.
+
+Related occupations
+
+Design — Knowledge of design techniques, tools, and principles involved in production of precision technical plans, blueprints, drawings, and models.
+
+Related occupations
+
+back to top
+
+Education
+
+How much education does a new hire need to perform a job in this occupation? Respondents said:
+
+50%
+
+responded:
+Bachelor’s degree required
+
+26%
+
+responded:
+Associate’s degree or other 2-year degree required
+
+9%
+
+responded:
+Post-secondary certificate required
+
+back to top
+
+Worker Characteristics
+
+Abilities
+
+Deductive Reasoning — The ability to apply general rules to specific problems to produce answers that make sense.
+
+Related occupations
+
+Inductive Reasoning — The ability to combine pieces of information to form general rules or conclusions (includes finding a relationship among seemingly unrelated events).
+
+Related occupations
+
+Oral Comprehension — The ability to listen to and understand information and ideas presented through spoken words and sentences.
+
+Related occupations
+
+Oral Expression — The ability to communicate information and ideas in speaking so others will understand.
+
+Related occupations
+
+Problem Sensitivity — The ability to tell when something is wrong or is likely to go wrong. It does not involve solving the problem, only recognizing that there is a problem.
+
+Related occupations
+
+Written Comprehension — The ability to read and understand information and ideas presented in writing.
+
+Related occupations
+
+Written Expression — The ability to communicate information and ideas in writing so others will understand.
+
+Related occupations
+
+Information Ordering — The ability to arrange things or actions in a certain order or pattern according to a specific rule or set of rules (e.g., patterns of numbers, letters, words, pictures, mathematical operations).
+
+Related occupations
+
+Near Vision — The ability to see details at close range (within a few feet of the observer).
+
+Related occupations
+
+Speech Recognition — The ability to identify and understand the speech of another person.
+
+Related occupations
+
+Category Flexibility — The ability to generate or use different sets of rules for combining or grouping things in different ways.
+
+Related occupations
+
+Flexibility of Closure — The ability to identify or detect a known pattern (a figure, object, word, or sound) that is hidden in other distracting material.
+
+Related occupations
+
+Perceptual Speed — The ability to quickly and accurately compare similarities and differences among sets of letters, numbers, objects, pictures, or patterns. The things to be compared may be presented at the same time or one after the other. This ability also includes comparing a presented object with a remembered object.
+
+Related occupations
+
+Fluency of Ideas — The ability to come up with a number of ideas about a topic (the number of ideas is important, not their quality, correctness, or creativity).
+
+Related occupations
+
+Originality — The ability to come up with unusual or clever ideas about a given topic or situation, or to develop creative ways to solve a problem.
+
+Related occupations
+
+Selective Attention — The ability to concentrate on a task over a period of time without being distracted.
+
+Related occupations
+
+Speech Clarity — The ability to speak clearly so others can understand you.
+
+Related occupations
+
+back to top
+
+Interests
+
+Interest code: ICR
+
+Want to discover your interests? Take the O*NET Interest Profiler.
+
+Investigative — Work involves studying and researching non-living objects, living organisms, disease or other forms of impairment, or human behavior. Investigative occupations are often associated with physical, life, medical, or social sciences, and can be found in the fields of humanities, mathematics/statistics, information technology, or health care service.
+
+Mathematics/Statistics — Work involves developing and applying mathematics and statistical theory and methods.
+
+Related occupations
+
+Related occupations
+
+Conventional — Work involves following procedures and regulations to organize information or data, typically in a business setting. Conventional occupations are often associated with office work, accounting, mathematics/statistics, information technology, finance, or human resources.
+
+Information Technology — Work involves designing, developing, testing, and maintaining computer software, hardware, networks, and systems.
+
+Related occupations
+
+Mathematics/Statistics — Work involves developing and applying mathematics and statistical theory and methods.
+
+Related occupations
+
+Related occupations
+
+Realistic — Work involves designing, building, or repairing of equipment, materials, or structures, engaging in physical activity, or working outdoors. Realistic occupations are often associated with engineering, mechanics and electronics, construction, woodworking, transportation, machine operation, agriculture, animal services, physical or manual labor, athletics, or protective services.
+
+Engineering — Work involves applying science and technology to the design, building, testing, and use of electrical and electronic components, mechanical devices and machines, automotive, marine, and aerospace equipment and vehicles, materials, or structures.
+
+Related occupations
+
+Related occupations
+
+back to top
+
+Work Styles
+
+Intellectual Curiosity — A tendency to seek out and acquire new work-related knowledge and obtain a deep understanding of work-related subjects.
+
+Related occupations
+
+Cautiousness — A tendency to be careful, deliberate, and risk-avoidant when making work-related decisions or doing work.
+
+Related occupations
+
+Attention to Detail — A tendency to be detail-oriented, organized, and thorough in completing work.
+
+Related occupations
+
+Dependability — A tendency to be reliable, responsible, and consistent in meeting work-related obligations.
+
+Related occupations
+
+back to top
+
+Workforce Characteristics
+
+Wages & Employment Trends
+
+Median wages (2025)
+
+$50.14 hourly, $104,300 annual
+
+State wages
+
+Local wages
+
+Employment (2024)
+
+201,700 employees
+
+Projected growth (2024-2034)
+
+Much faster than average (7% or higher)
+
+Projected job openings (2024-2034)
+
+14,000
+
+State trends
+
+Top industries (2024)
+
+Professional, Scientific, and Technical Services
+
+Information
+
+Source: Bureau of Labor Statistics 2025 wage data
+external site and 2024-2034 employment projections
+external site.
+“Projected growth” represents the estimated change in total employment over the projections period (2024-2034). “Projected job openings” represent openings due to growth and replacement.
+
+back to top
+
+Job Openings on the Web
+
+State job openings
+
+Local job openings
+
+back to top
+
+More Information
+
+Related Occupations
+
+15-1299.07 Blockchain Engineers
+Bright Outlook
+
+17-2061.00 Computer Hardware Engineers Bright Outlook
+
+15-1251.00 Computer Programmers
+
+15-1211.00 Computer Systems Analysts Bright Outlook
+
+15-1299.08 Computer Systems Engineers/Architects Bright Outlook
+
+15-1243.00 Database Architects Bright Outlook
+
+15-1299.05 Information Security Engineers Bright Outlook
+
+15-1299.04 Penetration Testers Bright Outlook
+
+15-1252.00 Software Developers Bright Outlook
+
+17-2112.02 Validation Engineers Bright Outlook
+
+back to top
+
+Professional Associations
+
+Disclaimer:
+Sources are listed to provide additional information on related jobs, specialties, and/or industries.
+Links to non-DOL Internet sites are provided for your convenience and do not constitute an endorsement.
+
+O*NET Ally
+
+Actively assisted with the O*NET data collection, helping to identify occupational experts who can be surveyed about their work in the occupation.
+
+View the list of Allies
+
+National Associations
+
+American Society for Quality
+external site
+
+Association for Computing Machinery
+external site
+
+Association of Software Testing
+external site
+
+Computing Research Association
+external site
+
+IEEE Computer Society
+external site
+
+IEEE-USA
+external site
+
+Institute of Electrical and Electronics Engineers
+external site
+
+National Center for Women and Information Technology
+external site
+
+Quality Assurance Institute
+external site
+
+Society of Women Engineers
+external site
+
+Accreditation, Certification, & Unions
+
+American Software Testing Qualifications Board
+external site
+
+Association for Testing and Software Quality Assurance
+external site
+
+CompTIA
+external site
+
+Institute for Certification of Computing Professionals
+external site
+
+International Software Testing Qualifications Board
+external site
+
+Project Management Institute
+external site
+
+back to top
+
+Was this page helpful?
+
+Job Seeker Help • Contact Us
+
+Share:
+
+Facebook
+X
+LinkedIn
+Reddit
+Email
+
+Link to Us • Cite this Page
+
+Creative Commons CC-BY
+License
+
+15-1253.00 - Software Quality Assurance Analysts and Testers by U.S. Department of Labor, Employment and Training Administration is licensed under a Creative Commons Attribution 4.0 International License.
+
+Follow us:
+
+About this Site • Privacy • Disclaimer
+
+Site updated August 25, 2026
+
+Loading...
+
+Loading...

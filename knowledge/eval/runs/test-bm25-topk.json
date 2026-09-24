@@ -1,0 +1,619 @@
+{
+  "schema": "career-graph-bm25-retrieval/v1",
+  "generatedAt": "2026-09-17T05:55:33.406Z",
+  "retriever": {
+    "type": "bm25",
+    "impl": "knowledge/pipeline/lib/graph.mjs",
+    "tokenizer": "segmenter",
+    "topk": 3,
+    "corpus": 494
+  },
+  "metrics": {
+    "main": {
+      "hitRate": "5/21",
+      "hitRateValue": 0.2381,
+      "meanPrecisionAtK": 0.0952
+    }
+  },
+  "perQuestion": [
+    {
+      "questionId": "T01",
+      "set": "嵌入式开发",
+      "question": "在 ESP32 上用 SPI 发送 uint16_t 类型的数据时，字节的发送顺序是怎样的？如果需要对发送或接收的数据做格式转换，应该用哪些宏？",
+      "referenceChunks": [
+        "S02#s19",
+        "S02#s43~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s19",
+          "score": 53.606,
+          "text": "SPI 主机逐字节地将数据读入和写入内存。默认情况下，数据优先以最高有效位 (MSB) 发送，极少数情况下会优先使用最低有效位 (LSB)。如果需要发送一个小于 8 位的值，这些位应以 MSB 优先的方式写入内存。\n\n例如，如果需要发送 0b00010，则应将其写成 uint8_t 变量，读取长度设置为 5 位。此时，设备仍然会收到 8 位数据，并另有 3 个“随机”位，所以读取过程必须准确。\n\n不是所有芯片都支持任意位长度的数据传输，发送或接收不支持的位长度时会返回 ESP_ERR_NOT_SUPPORTED 错误。支持的长度如下表所示（YES 表示支持任意长度，NO 表示只支持整字节 8 bits 长度）：\n\nESP32\n\nESP32-S2\n\nESP32-S3/C2/C3/C6\n\nESP32-H2/P4/C5/C61\n\nTX\n\nDMA\n\nYES\n\nYES\n\n(bit_len % 8) != 1\n\nYES\n\nNO DMA\n\nYES\n\nYES\n\n(bit_len % 8) != 1\n\nYES\n\nRX\n\nDMA\n\nNO\n\nNO\n\nYES\n\nYES\n\nNO DMA\n\nYES\n\nNO\n\nYES\n\nYES\n\n如仍需使用不支持的长度传输，根据表格可以有以下替代方法：\n\n使用 spi_transaction_t::cmd 和 spi_transaction_t::addr 和数据阶段组合。缺点：命令和地址阶段不接收从机数据。\n\n使用两次支持长度的传输组合，比如 2+7 实现 9 bit 传输，期间保持 CS 线有效。缺点：两次传输之间有最小时间间隔（见 传输事务持续时间），整体速率较低。\n\n此外，ESP32 属于小端芯片，即 uint16_t 和 uint32_t 变量的最低有效位存储在最小的地址。因此，如果 uint16_t 存储在内存中，则首先发送位 [7:0]，其次是位 [15:8]。\n\n在某些情况下，要传输的数据大小与 uint8_t 数组不同，可使用以下宏将数据转换为可由 SPI 驱动直接发送的格式：\n\n需传输的数据，使用 SPI_SWAP_DATA_TX\n\n接收到的数据，使用 SPI_SWAP_DATA_RX"
+        },
+        {
+          "chunkId": "S02#s10",
+          "score": 39.709,
+          "text": "SPI 总线传输事务由五个阶段构成，详见下表（任意阶段均可跳过）。\n\n阶段名称\n\n描述\n\n命令阶段 (Command)\n\n在此阶段，主机向总线发送命令字段，长度为 0-16 位。\n\n地址阶段 (Address)\n\n在此阶段，主机向总线发送地址字段，长度为 0-64 位。\n\nDummy 阶段\n\n此阶段可自行配置，用于适配时序要求。\n\n写入阶段 (Write)\n\n此阶段主机向设备传输数据，这些数据在紧随命令阶段（可选）和地址阶段（可选）之后。从电平的角度来看，数据与命令没有区别。\n\n读取阶段 (Read)\n\n此阶段主机读取设备数据。\n\n传输事务属性由总线配置结构体 spi_bus_config_t、设备配置结构体 spi_device_interface_config_t 和传输事务配置结构体 spi_transaction_t 共同决定。\n\n一个 SPI 主机可以发送全双工传输事务，此时读取和写入阶段同步进行。传输事务总长度取决于以下结构体成员长度总和：\n\nspi_device_interface_config_t::command_bits\n\nspi_device_interface_config_t::address_bits\n\nspi_transaction_t::length\n\n而 spi_transaction_t::rxlength 则决定了接收到的数据包长度。\n\n在半双工传输事务中，读取和写入阶段独立进行（一次一个方向）。写入和读取阶段的长度由 spi_transaction_t::length 和 spi_transaction_t::rxlength 分别决定。\n\n并非每个 SPI 设备都要求命令和/或地址，因此命令阶段和地址阶段为可选项。这反映在设备的配置中：如果 spi_device_interface_config_t::command_bits 和/或 spi_device_interface_config_t::address_bits 被设置为零，则不会唤起命令或地址阶段。\n\n并非每个传输事务都需要写入和读取数据，因此读取和写入阶段也是可选项。如果将 spi_transaction_t::rx_buffer 设置为 NULL，且未设置 SPI_TRANS_USE_RXDATA，读取阶段将被跳过。如果将 spi_transaction_t::tx_buffer 设置为 NULL，且未设置 SPI_TRANS_USE_TXDATA，写入阶段将被跳过。\n\n主机驱动程序支持两种类型的传输事务：中断传输事务和轮询传输事务。用户可以选择在不同设备上使用不同的传输事务类型。若设备需要同时使用两种传输事务类型，请参阅 向同一设备发送混合传输事务的注意事项。"
+        },
+        {
+          "chunkId": "S02#s20",
+          "score": 35.745,
+          "text": "为避免代码过于复杂，请一次只向单个设备发送一种类型的传输事务（中断或轮询）。如有需要，可交替发送中断传输事务和轮询传输事务，详见下文。\n\n所有的轮询传输事务和中断传输事务完成后，方可发送轮询传输事务。\n\n由于未完成的轮询传输事务将阻塞其他传输事务，请务必在 spi_device_polling_start() 之后调用函数 spi_device_polling_end() 以允许其他事务或其他设备使用总线。如果在轮询过程中无需切换到其他任务，可调用函数 spi_device_polling_transmit() 启动传输事务，则该传输事务将自动结束。\n\nISR 会干扰飞行中的轮询传输事务，以适应中断传输事务。在调用 spi_device_polling_start() 前，需确保所有发送到 ISR 的中断传输事务已经完成。为此可持续调用 spi_device_get_trans_result()，直至全部传输事务返回。\n\n为更好地控制函数的调用顺序，只在单个任务中向同一设备发送混合传输事务。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s19"
+      ]
+    },
+    {
+      "questionId": "T02",
+      "set": "嵌入式开发",
+      "question": "ESP32 上使用 GPIO 交换矩阵走 SPI 信号和直接使用 IO_MUX 专用管脚相比，在时钟频率上有什么限制？SPI2 的 MISO 专用管脚是哪个 GPIO？",
+      "referenceChunks": [
+        "S02#s22",
+        "S02#s42~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s22",
+          "score": 89.859,
+          "text": "ESP32 的多数外设信号都直接与之专用的 IO_MUX 管脚连接，但这些信号也可以通过 GPIO 交换矩阵传输到任何其他可用的管脚。只要有一个信号通过 GPIO 交换矩阵传输，那么所有的信号都将通由其传输。\n\nGPIO 交换矩阵提高了信号传输的灵活性，但也存在以下缺陷：\n\n加大了 MISO 信号的输入延迟，增加了 MISO 设置时序违反的可能性。如果需要高速运行 SPI，请使用专用的 IO_MUX 管脚。\n\n只能传输最大时钟频率为 40 MHz 的信号，而使用 IO_MUX 管脚时可以传输的最大时钟频率为 80 MHz。\n\n备注\n\n了解有关 MISO 输入延迟对最大时钟频率影响的更多信息，请参阅 时序影响因素。\n\nSPI 总线的 IO_MUX 管脚如下表所示。\n\n管脚名称\n\nGPIO 编号 (SPI2)\n\nGPIO 编号 (SPI3)\n\nCS0 [1]\n\n15\n\nSCLK\n\n14\n\n18\n\nMISO\n\n12\n\n19\n\nMOSI\n\n13\n\n23\n\nQUADWP\n\n22\n\nQUADHD\n\n21"
+        },
+        {
+          "chunkId": "S02#s27",
+          "score": 59.056,
+          "text": "如图所示， SCLK 发射沿之后、信号被内部寄存器锁存之前， MISO 线存在延迟。因此， MISO 管脚的设置时间是 SPI 时钟速度的限制因素。当延迟过长时，设置松弛度 < 0 ，违反了设置时序要求，读取可能有误。\n\n最大有效频率取决于：\n\nspi_device_interface_config_t::input_delay_ns - SCLK 上的一个时钟周期开始后 MISO 总线上的最大数据有效时间\n\n是否使用了 IO_MUX 管脚或 GPIO 矩阵\n\n使用 GPIO 矩阵时，最大有效频率降至现有 输入延迟 的 33 ~ 77%。使用 IO_MUX 管脚或 dummy 位 可以保留较高的频率，调用函数 spi_get_freq_limit() 能够获取主机的最大读取频率。\n\nDummy 位：在读取阶段开始之前，可以插入 Dummy 时钟，在此期间，主机不读取数据。设备能看到 Dummy 时钟并发出数据，但主机在读取阶段之前不会读取。这就弥补了主机 MISO 设置时间不足的问题，并使主机达到更高的读取频率。\n\n理想状态下，如果设备的速度足以使输入延迟控制在一个 APB 时钟周期 (12.5 ns) 以内，则在不同的条件下，主机读取（或读取和写入）的最大频率如下表所示：\n\n频率限制 (MHz)\n\n频率限制 (MHz)\n\n驱动是否使用 Dummy 位\n\n备注\n\nGPIO 矩阵\n\nIO_MUX 管脚\n\n26.6\n\n80\n\n40\n\n--\n\n半双工，禁用 DMA\n\n如果主机仅写入数据，可以通过设置 spi_device_interface_config_t::flags 中的 SPI_DEVICE_NO_DUMMY 位来禁用 Dummy 位 和频率检查机制。禁用 Dummy 位 和频率检查机制后，即便在使用 GPIO 矩阵的情况下，输出频率也可达 80 MHz。\n\nspi_device_interface_config_t::flags\n\n即使 spi_device_interface_config_t 结构体中的 spi_device_interface_config_t::input_delay_ns 设置为 0，SPI 主机驱动程序仍会运作，但设置精确值有助于：\n\n计算全双工传输事务的频率限制\n\n用半双工传输事务的 Dummy 位正确补偿时序\n\n可根据设备规格说明中 AC 特性章节的数据估计 SPI 时钟发射沿后的最大数据有效时间，或者使用示波器或逻辑分析仪测量该时间。\n\n请注意，实际 PCB 布局设计和过度负载可能会增加输入延迟。这意味着非最佳布线和/或总线上的负载电容很可能导致输入延迟值超过设备规格说明中给出的数值或在总线浮动时测量的数值。\n\n典型的延迟值如下表所示，以下数据由从机设备使用不同芯片测试所得：\n\n设备\n\n输入延迟 (ns)\n\n理想设备\n\n使用 IO_MUX 的 ESP32 从机设备\n\n50\n\n使用 GPIO_MATRIX 的 ESP32 从机设备\n\n75\n\nMISO 路径延迟（有效时间）由从机的 输入延迟 与主机的 GPIO 矩阵延迟 组成。该延迟决定了频率限制，超过这个频率的全双工传输将无法如半双工交易中使用的 Dummy 位一样工作。该频率限制的计算方法为：\n\nFreq limit [MHz] = 80 / (floor(MISO delay[ns]/12.5) + 1)\n\n频率限制与输入延迟间的关系如图所示。如果主机使用 GPIO 矩阵，应在 MISO 延迟上额外增加两个 APB 时钟周期。\n\n不同设备在不同 输入延迟 时间下对应的频率限制如下表所示。\n\n当主机驱动为 IO_MUX (0 ns) 时：\n\n输入延迟 (ns)\n\nMISO 通道延迟 (ns)\n\n频率限制 (MHz)\n\n80\n\n50\n\n50\n\n16\n\n75"
+        },
+        {
+          "chunkId": "S04#s73",
+          "score": 39.112,
+          "text": "ESP32 芯片具有 34 个物理 GPIO 管脚（GPIO0 ~ GPIO19、GPIO21 ~ GPIO23、GPIO25 ~ GPIO27 和 GPIO32 ~ GPIO39）。每个管脚都可用作一个通用 IO，或连接一个内部的外设信号。通过 IO MUX、RTC IO MUX 和 GPIO 交换矩阵，可配置外设模块的输入信号来源于任何的 IO 管脚，并且外设模块的输出信号也可连接到任意 IO 管脚。这些模块共同组成了芯片的 IO 控制。更多详细信息，请参阅 ESP32 技术参考手册 > IO MUX 和 GPIO 矩阵（GPIO、IO_MUX） [PDF]。\n\n下表提供了各管脚的详细信息，部分 GPIO 具有特殊的使用限制，具体可参考表中的注释列。\n\nGPIO\n\n模拟功能\n\nRTC GPIO\n\n注释\n\nGPIO0\n\nADC2_CH1\n\nRTC_GPIO11\n\nGPIO1\n\nTXD\n\nGPIO2\n\nADC2_CH2\n\nRTC_GPIO12\n\nGPIO3\n\nRXD\n\nGPIO4\n\nADC2_CH0\n\nRTC_GPIO10\n\nGPIO5\n\nGPIO6\n\nSPI0/1\n\nGPIO7\n\nSPI0/1\n\nGPIO8\n\nSPI0/1\n\nGPIO9\n\nSPI0/1\n\nGPIO10\n\nSPI0/1\n\nGPIO11\n\nSPI0/1\n\nGPIO12\n\nADC2_CH5\n\nRTC_GPIO15\n\nJTAG\n\nGPIO13\n\nADC2_CH4\n\nRTC_GPIO14\n\nJTAG\n\nGPIO14\n\nADC2_CH6\n\nRTC_GPIO16\n\nJTAG\n\nGPIO15\n\nADC2_CH3\n\nRTC_GPIO13\n\nJTAG\n\nGPIO16\n\nSPI0/1\n\nGPIO17\n\nSPI0/1\n\nGPIO18\n\nGPIO19\n\nGPIO21\n\nGPIO22\n\nGPIO23\n\nGPIO25\n\nADC2_CH8, DAC0\n\nRTC_GPIO6\n\nGPIO26\n\nADC2_CH9, DAC1\n\nRTC_GPIO7\n\nGPIO27\n\nADC2_CH7\n\nRTC_GPIO17\n\nGPIO32\n\nADC1_CH4\n\nRTC_GPIO9\n\nGPIO33\n\nADC1_CH5\n\nRTC_GPIO8\n\nGPIO34\n\nADC1_CH6\n\nRTC_GPIO4\n\nGPI\n\nGPIO35\n\nADC1_CH7\n\nRTC_GPIO5\n\nGPI\n\nGPIO36\n\nADC1_CH0\n\nRTC_GPIO0\n\nGPI\n\nGPIO37\n\nADC1_CH1\n\nRTC_GPIO1\n\nGPI\n\nGPIO38\n\nADC1_CH2\n\nRTC_GPIO2\n\nGPI\n\nGPIO39\n\nADC1_CH3\n\nRTC_GPIO3\n\nGPI\n\n备注\n\nStrapping 管脚：部分管脚被用作 Strapping 管脚。更多信息请参阅 ESP32 技术规格书 > 启动配置项 [PDF]。\n\nSPI0/1：GPIO6-11 和 GPIO16-17 通常连接到模组内集成的 SPI flash 和 PSRAM，因此不能用于其他用途。\n\nJTAG：GPIO12-15 通常用于在线调试。\n\nGPI：GPIO34-39 只能设置为输入模式，不具备软件使能的上拉或下拉功能。\n\nTXD & RXD 通常用于烧录和调试。\n\nADC2：使用 Wi-Fi 时不能使用 ADC2 管脚。因此，如果您在使用 Wi-Fi 时无法从 ADC2 GPIO 获取值，可以考虑使用 ADC1 GPIO 来解决该问题。更多详情请参考 ADC 连续转换模式下的硬件限制 以及 ADC 单次转换模式下的硬件限制。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s22"
+      ]
+    },
+    {
+      "questionId": "T03",
+      "set": "嵌入式开发",
+      "question": "在 ESP-IDF 堆内存 API 中，遍历堆块时的回调函数如何通过返回值来控制遍历是否继续？",
+      "referenceChunks": [
+        "S03#s63~2",
+        "S03#s71"
+      ],
+      "topk": [
+        {
+          "chunkId": "S03#s46",
+          "score": 19.413,
+          "text": "ESP-IDF 应用程序使用常见的计算机架构模式：由程序控制流动态分配的内存（即 栈）、由函数调用动态分配的内存（即 堆）以及在编译时分配的 静态内存。\n\n由于 ESP-IDF 是一个多线程 RTOS 环境，因此每个 RTOS 任务都有自己的栈，这些栈默认在创建任务时从堆中分配。有关栈静态分配的方法，请参阅 xTaskCreateStatic()。\n\nESP32 使用多种类型的 RAM，因此具备不同属性的堆，即基于属性的内存分配器允许应用程序按不同目的进行堆分配。\n\n多数情况下，可直接使用 C 标准函数库中的 malloc() 和 free() 函数实现堆分配。为充分利用各种内存类型及其特性，ESP-IDF 还具有基于内存属性的堆内存分配器。要配备具有特定属性的内存，如 DMA 存储器 或可执行内存，可以创建具备所需属性的 OR 掩码，将其传递给 heap_caps_malloc()。"
+        },
+        {
+          "chunkId": "S03#s47",
+          "score": 15.946,
+          "text": "ESP32 包含多种类型的 RAM：\n\nDRAM（数据 RAM）是连接到 CPU 数据总线上的内存，用于存储数据。这是作为堆访问最常见的一种内存。\n\nIRAM（指令 RAM）是连接到 CPU 指令总线上的内存，通常仅用于存储可执行数据（即指令）。如果作为通用内存访问，则所有访问必须为 32 位可访问内存。\n\nD/IRAM 是连接到 CPU 数据总线和指令总线的 RAM，因此可用作指令 RAM 或数据 RAM。\n\n有关内存类型的详细信息，请参阅 存储器类型。\n\n也可将外部 SPI RAM 连接到 ESP32。通过缓存将 片外 RAM 集成到 ESP32 的内存映射中，访问方式与 DRAM 类似。\n\n所有的 DRAM 内存都可以单字节访问，因此所有的 DRAM 堆都具有 MALLOC_CAP_8BIT 属性。要获取所有 DRAM 堆的剩余空间大小，请调用 heap_caps_get_free_size(MALLOC_CAP_8BIT)。\n\n如果占用了所有的 MALLOC_CAP_8BIT 堆空间，则可以用 MALLOC_CAP_IRAM_8BIT 代替。此时，若只以 32 位对齐的方式访问 IRAM 内存，或者启用了 CONFIG_ESP32_IRAM_AS_8BIT_ACCESSIBLE_MEMORY，则仍然可以将 IRAM 用作内部内存的“储备池”。\n\n备注\n\n此选项仅在单核 ESP32 配置（CONFIG_FREERTOS_UNICORE=y）下可用。与普通内存相比，CONFIG_ESP32_IRAM_AS_8BIT_ACCESSIBLE_MEMORY 选项有一个显著的缺点：对 MALLOC_CAP_IRAM_8BIT 内存的每次字节、半字或任意非对齐访问都会触发 LoadStore 或 Alignment 异常。虽然这些异常会通过软件处理以确保读写值的正确性，但每次访问都会产生约 167 个 CPU 周期的开销，如果频繁访问，可能导致严重的性能下降。因此，应避免在注重性能的代码段（如 ISR 例程或紧凑循环）中使用此类内存。建议重构代码，改用 32 位对齐（uint32_t）的访问方式。\n\n调用 malloc() 时，ESP-IDF malloc() 内部调用 heap_caps_malloc_default(size)，使用属性 MALLOC_CAP_DEFAULT 分配内存。该属性可实现字节寻址功能，即存储空间的最小编址单位为字节。\n\nMALLOC_CAP_DEFAULT 描述的是内存能力，而不是精确的分配策略。特别是，heap_caps_malloc(size, MALLOC_CAP_DEFAULT) 不一定遵循与 malloc() 相同的放置策略。\n\n例如，当 片外 RAM 被添加到基于能力的堆分配器后，heap_caps_malloc(size, MALLOC_CAP_DEFAULT) 可能返回片外 RAM，而 malloc() 是否优先或仅使用内部 RAM 则取决于具体配置。\n\nmalloc() 使用基于属性的分配系统，所以使用 heap_caps_malloc() 分配的内存可以通过调用标准的 free() 函数释放。"
+        },
+        {
+          "chunkId": "S14#s235",
+          "score": 12.843,
+          "text": "Software test fixtures 初始化测试功能。它们提供了一个固定的基线，以便测试可靠地执行并产生一致的、可重复的结果。初始化可以设置服务、状态或其他操作环境。在fixture函数中，每个函数的参数通常在test之后被命名为fixture。\n\npytest fixtures相对于传统的xUnit风格的setup/teardown函数提供了显著的改进：\n\n装置有明确的名称，通过声明它们在测试函数、模块、类或整个项目中的使用来激活。\n\n夹具以模块化的方式实现，因为每个夹具名称触发 夹具功能 可以使用其他固定装置。\n\n夹具管理从简单的单元扩展到复杂的功能测试，允许根据配置和组件选项参数化夹具和测试，或者跨功能、类、模块或整个测试会话范围重复使用夹具。\n\n无论使用多少夹具，拆卸逻辑都可以轻松、安全地进行管理，无需手动仔细处理错误或微观管理添加清理步骤的顺序。\n\n此外，pytest继续支持 经典的Xunit风格设置 . 您可以混合这两种样式，根据您的喜好，逐步从经典样式移动到新样式。你也可以从现有的 unittest.TestCase style 或 nose based 项目。\n\nFixtures 使用 @pytest.fixture 装饰者， described below . Pytest有有用的内置设备，下面列出以供参考：\n\ncapfd\n\n以文本形式捕获输出到文件描述符 1 和 2 .\n\ncapfdbinary\n\n以字节形式捕获输出到文件描述符 1 和 2 .\n\ncaplog\n\n控制日志记录和访问日志条目。\n\ncapsys\n\n捕获，作为文本，输出到 sys.stdout 和 sys.stderr .\n\ncapsysbinary\n\n以字节形式捕获输出到 sys.stdout 和 sys.stderr .\n\ncache\n\n跨pytest运行存储和检索值。\n\ndoctest_namespace\n\n提供注入到docstests命名空间中的dict。\n\nmonkeypatch\n\n临时修改类、函数、字典， os.environ ，以及其他对象。\n\npytestconfig\n\n访问配置值、pluginmanager和plugin hooks。\n\nrecord_property\n\n向测试添加额外属性。\n\nrecord_testsuite_property\n\n向测试套件添加额外属性。\n\nrecwarn\n\n记录测试函数发出的警告。\n\nrequest\n\n提供有关执行测试功能的信息。\n\ntestdir\n\n提供一个临时测试目录来帮助运行和测试pytest插件。\n\ntmp_path\n\n提供一个 pathlib.Path 对象指向每个测试函数唯一的临时目录。\n\ntmp_path_factory\n\n生成会话作用域的临时目录并返回 pathlib.Path 物体。\n\ntmpdir\n\n提供一个 py.path.local 对象指向每个测试函数唯一的临时目录；替换为 tmp_path .\n\ntmpdir_factory\n\n生成会话作用域的临时目录并返回 py.path.local 对象；替换为 tmp_path_factory ."
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T04",
+      "set": "嵌入式开发",
+      "question": "在 ESP-IDF 中，如果想知道某个已分配指针实际占用了多少字节，应该调用哪个函数？使用时需要注意什么？",
+      "referenceChunks": [
+        "S03#s61",
+        "S03#s61~9"
+      ],
+      "topk": [
+        {
+          "chunkId": "S03#32",
+          "score": 19.466,
+          "text": "如果某个内存结构体仅以 32 位为单位寻址，例如一个整数或指针数组，则可以使用 MALLOC_CAP_32BIT 标志分配。通过这一方式，分配器能够在无法调用 malloc() 的情况下提供 IRAM 内存，从而充分利用 ESP32 中的所有可用内存。\n\n请注意，在 ESP32 系列芯片上，不可使用 MALLOC_CAP_32BIT 存储浮点变量。因为 MALLOC_CAP_32BIT 可能返回指令 RAM，而 ESP32 上的浮点汇编指令无法访问指令 RAM。\n\n请注意，使用 MALLOC_CAP_32BIT 分配的内存 只能 通过 32 位读写访问，其他类型的访问将导致 LoadStoreError 异常。"
+        },
+        {
+          "chunkId": "S03#s46",
+          "score": 17.751,
+          "text": "ESP-IDF 应用程序使用常见的计算机架构模式：由程序控制流动态分配的内存（即 栈）、由函数调用动态分配的内存（即 堆）以及在编译时分配的 静态内存。\n\n由于 ESP-IDF 是一个多线程 RTOS 环境，因此每个 RTOS 任务都有自己的栈，这些栈默认在创建任务时从堆中分配。有关栈静态分配的方法，请参阅 xTaskCreateStatic()。\n\nESP32 使用多种类型的 RAM，因此具备不同属性的堆，即基于属性的内存分配器允许应用程序按不同目的进行堆分配。\n\n多数情况下，可直接使用 C 标准函数库中的 malloc() 和 free() 函数实现堆分配。为充分利用各种内存类型及其特性，ESP-IDF 还具有基于内存属性的堆内存分配器。要配备具有特定属性的内存，如 DMA 存储器 或可执行内存，可以创建具备所需属性的 OR 掩码，将其传递给 heap_caps_malloc()。"
+        },
+        {
+          "chunkId": "S03#s47",
+          "score": 17.344,
+          "text": "ESP32 包含多种类型的 RAM：\n\nDRAM（数据 RAM）是连接到 CPU 数据总线上的内存，用于存储数据。这是作为堆访问最常见的一种内存。\n\nIRAM（指令 RAM）是连接到 CPU 指令总线上的内存，通常仅用于存储可执行数据（即指令）。如果作为通用内存访问，则所有访问必须为 32 位可访问内存。\n\nD/IRAM 是连接到 CPU 数据总线和指令总线的 RAM，因此可用作指令 RAM 或数据 RAM。\n\n有关内存类型的详细信息，请参阅 存储器类型。\n\n也可将外部 SPI RAM 连接到 ESP32。通过缓存将 片外 RAM 集成到 ESP32 的内存映射中，访问方式与 DRAM 类似。\n\n所有的 DRAM 内存都可以单字节访问，因此所有的 DRAM 堆都具有 MALLOC_CAP_8BIT 属性。要获取所有 DRAM 堆的剩余空间大小，请调用 heap_caps_get_free_size(MALLOC_CAP_8BIT)。\n\n如果占用了所有的 MALLOC_CAP_8BIT 堆空间，则可以用 MALLOC_CAP_IRAM_8BIT 代替。此时，若只以 32 位对齐的方式访问 IRAM 内存，或者启用了 CONFIG_ESP32_IRAM_AS_8BIT_ACCESSIBLE_MEMORY，则仍然可以将 IRAM 用作内部内存的“储备池”。\n\n备注\n\n此选项仅在单核 ESP32 配置（CONFIG_FREERTOS_UNICORE=y）下可用。与普通内存相比，CONFIG_ESP32_IRAM_AS_8BIT_ACCESSIBLE_MEMORY 选项有一个显著的缺点：对 MALLOC_CAP_IRAM_8BIT 内存的每次字节、半字或任意非对齐访问都会触发 LoadStore 或 Alignment 异常。虽然这些异常会通过软件处理以确保读写值的正确性，但每次访问都会产生约 167 个 CPU 周期的开销，如果频繁访问，可能导致严重的性能下降。因此，应避免在注重性能的代码段（如 ISR 例程或紧凑循环）中使用此类内存。建议重构代码，改用 32 位对齐（uint32_t）的访问方式。\n\n调用 malloc() 时，ESP-IDF malloc() 内部调用 heap_caps_malloc_default(size)，使用属性 MALLOC_CAP_DEFAULT 分配内存。该属性可实现字节寻址功能，即存储空间的最小编址单位为字节。\n\nMALLOC_CAP_DEFAULT 描述的是内存能力，而不是精确的分配策略。特别是，heap_caps_malloc(size, MALLOC_CAP_DEFAULT) 不一定遵循与 malloc() 相同的放置策略。\n\n例如，当 片外 RAM 被添加到基于能力的堆分配器后，heap_caps_malloc(size, MALLOC_CAP_DEFAULT) 可能返回片外 RAM，而 malloc() 是否优先或仅使用内部 RAM 则取决于具体配置。\n\nmalloc() 使用基于属性的分配系统，所以使用 heap_caps_malloc() 分配的内存可以通过调用标准的 free() 函数释放。"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T05",
+      "set": "嵌入式开发",
+      "question": "使用 SPI Master 在 ESP32 上通过 GPIO matrix 连接从设备时，最高支持多少 MHz 的通信频率？如果频率不够用该怎么办？",
+      "referenceChunks": [
+        "S02#s41",
+        "S02#s41~6"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s27",
+          "score": 41.588,
+          "text": "如图所示， SCLK 发射沿之后、信号被内部寄存器锁存之前， MISO 线存在延迟。因此， MISO 管脚的设置时间是 SPI 时钟速度的限制因素。当延迟过长时，设置松弛度 < 0 ，违反了设置时序要求，读取可能有误。\n\n最大有效频率取决于：\n\nspi_device_interface_config_t::input_delay_ns - SCLK 上的一个时钟周期开始后 MISO 总线上的最大数据有效时间\n\n是否使用了 IO_MUX 管脚或 GPIO 矩阵\n\n使用 GPIO 矩阵时，最大有效频率降至现有 输入延迟 的 33 ~ 77%。使用 IO_MUX 管脚或 dummy 位 可以保留较高的频率，调用函数 spi_get_freq_limit() 能够获取主机的最大读取频率。\n\nDummy 位：在读取阶段开始之前，可以插入 Dummy 时钟，在此期间，主机不读取数据。设备能看到 Dummy 时钟并发出数据，但主机在读取阶段之前不会读取。这就弥补了主机 MISO 设置时间不足的问题，并使主机达到更高的读取频率。\n\n理想状态下，如果设备的速度足以使输入延迟控制在一个 APB 时钟周期 (12.5 ns) 以内，则在不同的条件下，主机读取（或读取和写入）的最大频率如下表所示：\n\n频率限制 (MHz)\n\n频率限制 (MHz)\n\n驱动是否使用 Dummy 位\n\n备注\n\nGPIO 矩阵\n\nIO_MUX 管脚\n\n26.6\n\n80\n\n40\n\n--\n\n半双工，禁用 DMA\n\n如果主机仅写入数据，可以通过设置 spi_device_interface_config_t::flags 中的 SPI_DEVICE_NO_DUMMY 位来禁用 Dummy 位 和频率检查机制。禁用 Dummy 位 和频率检查机制后，即便在使用 GPIO 矩阵的情况下，输出频率也可达 80 MHz。\n\nspi_device_interface_config_t::flags\n\n即使 spi_device_interface_config_t 结构体中的 spi_device_interface_config_t::input_delay_ns 设置为 0，SPI 主机驱动程序仍会运作，但设置精确值有助于：\n\n计算全双工传输事务的频率限制\n\n用半双工传输事务的 Dummy 位正确补偿时序\n\n可根据设备规格说明中 AC 特性章节的数据估计 SPI 时钟发射沿后的最大数据有效时间，或者使用示波器或逻辑分析仪测量该时间。\n\n请注意，实际 PCB 布局设计和过度负载可能会增加输入延迟。这意味着非最佳布线和/或总线上的负载电容很可能导致输入延迟值超过设备规格说明中给出的数值或在总线浮动时测量的数值。\n\n典型的延迟值如下表所示，以下数据由从机设备使用不同芯片测试所得：\n\n设备\n\n输入延迟 (ns)\n\n理想设备\n\n使用 IO_MUX 的 ESP32 从机设备\n\n50\n\n使用 GPIO_MATRIX 的 ESP32 从机设备\n\n75\n\nMISO 路径延迟（有效时间）由从机的 输入延迟 与主机的 GPIO 矩阵延迟 组成。该延迟决定了频率限制，超过这个频率的全双工传输将无法如半双工交易中使用的 Dummy 位一样工作。该频率限制的计算方法为：\n\nFreq limit [MHz] = 80 / (floor(MISO delay[ns]/12.5) + 1)\n\n频率限制与输入延迟间的关系如图所示。如果主机使用 GPIO 矩阵，应在 MISO 延迟上额外增加两个 APB 时钟周期。\n\n不同设备在不同 输入延迟 时间下对应的频率限制如下表所示。\n\n当主机驱动为 IO_MUX (0 ns) 时：\n\n输入延迟 (ns)\n\nMISO 通道延迟 (ns)\n\n频率限制 (MHz)\n\n80\n\n50\n\n50\n\n16\n\n75"
+        },
+        {
+          "chunkId": "S02#s22",
+          "score": 40.228,
+          "text": "ESP32 的多数外设信号都直接与之专用的 IO_MUX 管脚连接，但这些信号也可以通过 GPIO 交换矩阵传输到任何其他可用的管脚。只要有一个信号通过 GPIO 交换矩阵传输，那么所有的信号都将通由其传输。\n\nGPIO 交换矩阵提高了信号传输的灵活性，但也存在以下缺陷：\n\n加大了 MISO 信号的输入延迟，增加了 MISO 设置时序违反的可能性。如果需要高速运行 SPI，请使用专用的 IO_MUX 管脚。\n\n只能传输最大时钟频率为 40 MHz 的信号，而使用 IO_MUX 管脚时可以传输的最大时钟频率为 80 MHz。\n\n备注\n\n了解有关 MISO 输入延迟对最大时钟频率影响的更多信息，请参阅 时序影响因素。\n\nSPI 总线的 IO_MUX 管脚如下表所示。\n\n管脚名称\n\nGPIO 编号 (SPI2)\n\nGPIO 编号 (SPI3)\n\nCS0 [1]\n\n15\n\nSCLK\n\n14\n\n18\n\nMISO\n\n12\n\n19\n\nMOSI\n\n13\n\n23\n\nQUADWP\n\n22\n\nQUADHD\n\n21"
+        },
+        {
+          "chunkId": "S02#s25",
+          "score": 32.198,
+          "text": "GPSPI 外设的时钟源可以通过设置 spi_device_interface_config_t::clock_source 选择，可用的时钟源请参阅 spi_clock_source_t。\n\n默认情况下，驱动程序将把时钟源设置为 SPI_CLK_SRC_DEFAULT。这往往代表 GPSPI 可选时钟源中的最高频率，在不同的芯片上这一数值会有所不同。\n\n设备的实际时钟频率可能不完全等于所设置的数字，驱动会将其重新计算为与硬件兼容的最接近的数字，并且不超过时钟源的时钟频率。调用函数 spi_device_get_actual_freq() 以了解驱动计算的实际频率。\n\n设备的时钟频率可在传输过程中实时更改，可以通过设置 spi_transaction_t::override_freq_hz 实现，此操作将为该设备的该次及以后的传输使用新的时钟频率。若某次期望设置的时钟频率无法实现，驱动将打印警告并继续使用之前的时钟频率进行传输。\n\n写入或读取阶段的理论最大传输速度可根据下表计算：\n\n写入/读取阶段的线宽\n\n速度 (Bps)\n\n1-Line\n\nSPI 频率 / 8\n\n2-Line\n\nSPI 频率 / 4\n\n4-Line\n\nSPI 频率 / 2\n\n其他阶段（命令阶段、地址阶段、Dummy 阶段）的传输速度计算与此类似。\n\n时钟频率过高可能会限制部分功能的使用，请参阅 时序影响因素。"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T06",
+      "set": "嵌入式开发",
+      "question": "在多堆 API 中，如果需要释放一块通过对齐分配接口申请的内存，推荐使用哪个函数？另外如何查询某个堆的历史最低剩余空闲空间？",
+      "referenceChunks": [
+        "S03#s69",
+        "S03#s69~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S03#s47",
+          "score": 28.737,
+          "text": "ESP32 包含多种类型的 RAM：\n\nDRAM（数据 RAM）是连接到 CPU 数据总线上的内存，用于存储数据。这是作为堆访问最常见的一种内存。\n\nIRAM（指令 RAM）是连接到 CPU 指令总线上的内存，通常仅用于存储可执行数据（即指令）。如果作为通用内存访问，则所有访问必须为 32 位可访问内存。\n\nD/IRAM 是连接到 CPU 数据总线和指令总线的 RAM，因此可用作指令 RAM 或数据 RAM。\n\n有关内存类型的详细信息，请参阅 存储器类型。\n\n也可将外部 SPI RAM 连接到 ESP32。通过缓存将 片外 RAM 集成到 ESP32 的内存映射中，访问方式与 DRAM 类似。\n\n所有的 DRAM 内存都可以单字节访问，因此所有的 DRAM 堆都具有 MALLOC_CAP_8BIT 属性。要获取所有 DRAM 堆的剩余空间大小，请调用 heap_caps_get_free_size(MALLOC_CAP_8BIT)。\n\n如果占用了所有的 MALLOC_CAP_8BIT 堆空间，则可以用 MALLOC_CAP_IRAM_8BIT 代替。此时，若只以 32 位对齐的方式访问 IRAM 内存，或者启用了 CONFIG_ESP32_IRAM_AS_8BIT_ACCESSIBLE_MEMORY，则仍然可以将 IRAM 用作内部内存的“储备池”。\n\n备注\n\n此选项仅在单核 ESP32 配置（CONFIG_FREERTOS_UNICORE=y）下可用。与普通内存相比，CONFIG_ESP32_IRAM_AS_8BIT_ACCESSIBLE_MEMORY 选项有一个显著的缺点：对 MALLOC_CAP_IRAM_8BIT 内存的每次字节、半字或任意非对齐访问都会触发 LoadStore 或 Alignment 异常。虽然这些异常会通过软件处理以确保读写值的正确性，但每次访问都会产生约 167 个 CPU 周期的开销，如果频繁访问，可能导致严重的性能下降。因此，应避免在注重性能的代码段（如 ISR 例程或紧凑循环）中使用此类内存。建议重构代码，改用 32 位对齐（uint32_t）的访问方式。\n\n调用 malloc() 时，ESP-IDF malloc() 内部调用 heap_caps_malloc_default(size)，使用属性 MALLOC_CAP_DEFAULT 分配内存。该属性可实现字节寻址功能，即存储空间的最小编址单位为字节。\n\nMALLOC_CAP_DEFAULT 描述的是内存能力，而不是精确的分配策略。特别是，heap_caps_malloc(size, MALLOC_CAP_DEFAULT) 不一定遵循与 malloc() 相同的放置策略。\n\n例如，当 片外 RAM 被添加到基于能力的堆分配器后，heap_caps_malloc(size, MALLOC_CAP_DEFAULT) 可能返回片外 RAM，而 malloc() 是否优先或仅使用内部 RAM 则取决于具体配置。\n\nmalloc() 使用基于属性的分配系统，所以使用 heap_caps_malloc() 分配的内存可以通过调用标准的 free() 函数释放。"
+        },
+        {
+          "chunkId": "S03#s59",
+          "score": 27.385,
+          "text": "堆属性分配器对芯片内存区域的了解源于 SoC 组件，该组件包含芯片的内存布局信息以及每个区域的不同属性。各区域的功能为首要考虑因素，如会优先使用 DRAM 和 IRAM 特定区域而非用途更广的 D/IRAM 区域来分配内存。\n\n每个连续的内存区域都包含其自己的内存堆，由 multi_heap 函数创建。 multi_heap 允许将任何连续的内存区域作为堆使用。\n\n堆属性分配器通过对内存区域的了解初始化每个单独的堆，堆属性 API 中的分配函数将基于所需的属性、可用空间和每个区域使用的首选项为分配函数找到最合适的堆，随后为位于特定内存区域的堆调用 multi_heap_malloc()。\n\n调用 free() 查找对应释放地址的特定堆，随后在特定的 multi_heap 实例上调用 multi_heap_free()。"
+        },
+        {
+          "chunkId": "S03#s58",
+          "score": 25.307,
+          "text": "以下功能介绍详见 堆内存调试：\n\n堆信息 （释放内存空间等）\n\n堆分配与释放函数挂钩\n\n堆损坏检测\n\n堆跟踪 （检测、监控内存泄漏等）"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T07",
+      "set": "嵌入式开发",
+      "question": "在 ESP-IDF 里要申请一块带对齐要求、并且指定内存能力的内存，对齐参数有什么硬性约束？另外，如果想检查所有堆有没有被写坏、并且希望把具体出错信息打出来，该调哪个接口、返回值怎么读？",
+      "referenceChunks": [
+        "S03#s61~2",
+        "S03#s61~6"
+      ],
+      "topk": [
+        {
+          "chunkId": "S03#s47",
+          "score": 30.155,
+          "text": "ESP32 包含多种类型的 RAM：\n\nDRAM（数据 RAM）是连接到 CPU 数据总线上的内存，用于存储数据。这是作为堆访问最常见的一种内存。\n\nIRAM（指令 RAM）是连接到 CPU 指令总线上的内存，通常仅用于存储可执行数据（即指令）。如果作为通用内存访问，则所有访问必须为 32 位可访问内存。\n\nD/IRAM 是连接到 CPU 数据总线和指令总线的 RAM，因此可用作指令 RAM 或数据 RAM。\n\n有关内存类型的详细信息，请参阅 存储器类型。\n\n也可将外部 SPI RAM 连接到 ESP32。通过缓存将 片外 RAM 集成到 ESP32 的内存映射中，访问方式与 DRAM 类似。\n\n所有的 DRAM 内存都可以单字节访问，因此所有的 DRAM 堆都具有 MALLOC_CAP_8BIT 属性。要获取所有 DRAM 堆的剩余空间大小，请调用 heap_caps_get_free_size(MALLOC_CAP_8BIT)。\n\n如果占用了所有的 MALLOC_CAP_8BIT 堆空间，则可以用 MALLOC_CAP_IRAM_8BIT 代替。此时，若只以 32 位对齐的方式访问 IRAM 内存，或者启用了 CONFIG_ESP32_IRAM_AS_8BIT_ACCESSIBLE_MEMORY，则仍然可以将 IRAM 用作内部内存的“储备池”。\n\n备注\n\n此选项仅在单核 ESP32 配置（CONFIG_FREERTOS_UNICORE=y）下可用。与普通内存相比，CONFIG_ESP32_IRAM_AS_8BIT_ACCESSIBLE_MEMORY 选项有一个显著的缺点：对 MALLOC_CAP_IRAM_8BIT 内存的每次字节、半字或任意非对齐访问都会触发 LoadStore 或 Alignment 异常。虽然这些异常会通过软件处理以确保读写值的正确性，但每次访问都会产生约 167 个 CPU 周期的开销，如果频繁访问，可能导致严重的性能下降。因此，应避免在注重性能的代码段（如 ISR 例程或紧凑循环）中使用此类内存。建议重构代码，改用 32 位对齐（uint32_t）的访问方式。\n\n调用 malloc() 时，ESP-IDF malloc() 内部调用 heap_caps_malloc_default(size)，使用属性 MALLOC_CAP_DEFAULT 分配内存。该属性可实现字节寻址功能，即存储空间的最小编址单位为字节。\n\nMALLOC_CAP_DEFAULT 描述的是内存能力，而不是精确的分配策略。特别是，heap_caps_malloc(size, MALLOC_CAP_DEFAULT) 不一定遵循与 malloc() 相同的放置策略。\n\n例如，当 片外 RAM 被添加到基于能力的堆分配器后，heap_caps_malloc(size, MALLOC_CAP_DEFAULT) 可能返回片外 RAM，而 malloc() 是否优先或仅使用内部 RAM 则取决于具体配置。\n\nmalloc() 使用基于属性的分配系统，所以使用 heap_caps_malloc() 分配的内存可以通过调用标准的 free() 函数释放。"
+        },
+        {
+          "chunkId": "S02#s15",
+          "score": 22.975,
+          "text": "一般而言，需要传输到设备或由设备读取的数据将由 spi_transaction_t::rx_buffer 和 spi_transaction_t::tx_buffer 指向的内存块中读取或写入。如果传输时启用了 DMA，则缓冲区应：\n\n申请支持 DMA 的内存。具体操作请参阅 支持 DMA 的内存。\n\n32 位对齐（从 32 位边界开始，长度为 4 字节的倍数）。\n\n若未满足以上要求，传输事务效率将受到临时缓冲区分配和复制的影响。\n\n如果使用多条数据线传输，请在结构体 spi_device_interface_config_t 中的 flags 设置 SPI_DEVICE_HALFDUPLEX 标志信号。结构体 spi_transaction_t 中的 flags 应按照 传输线模式配置 中的描述设置。\n\n备注\n\n当启用 DMA 时，不支持同时具有读取阶段和写入阶段的半双工传输事务。有关细节和解决方法，请参阅 已知问题。"
+        },
+        {
+          "chunkId": "S14#s254~2",
+          "score": 21.529,
+          "text": "依赖项的布局方式意味着不清楚 user Fixture将在 driver 固定装置。但是没关系，因为这些都是原子操作，所以先运行哪个操作并不重要，因为测试的事件顺序仍然是 linearizable 。但是什么呢？ does 问题是，无论哪一个先运行，如果一个引发异常，而另一个不会引发异常，两个人都不会留下任何东西。如果 driver 在此之前执行 user 和 user 引发异常，驱动程序仍将退出，并且从未创建用户。如果 driver 如果是引发异常的人，那么驱动程序将永远不会启动，用户也永远不会被创建。"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T08",
+      "set": "嵌入式开发",
+      "question": "用 heap_caps_calloc 拿到的内存初值是什么？它和标准库 calloc 在 IDF 里是什么对应关系？还有，如果已经知道堆损坏发生在某个地址附近、想用开销更小的方式查，应该用哪个接口，什么情况下这种查法会不管用？",
+      "referenceChunks": [
+        "S03#s61~3",
+        "S03#s61~7"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s261",
+          "score": 32.557,
+          "text": "When a fixture requests another fixture, the other fixture is executed first.\nSo if fixture a requests fixture b, fixture b will execute first,\nbecause a depends on b and can't operate without it. Even if a\ndoesn't need the result of b, it can still request b if it needs to make\nsure it is executed after b.\n\n例如：\n\nimport pytest\n\n@pytest.fixture\ndef order():\nreturn []\n\n@pytest.fixture\ndef a(order):\norder.append(\"a\")\n\n@pytest.fixture\ndef b(a, order):\norder.append(\"b\")\n\n@pytest.fixture\ndef c(a, b, order):\norder.append(\"c\")\n\n@pytest.fixture\ndef d(c, b, order):\norder.append(\"d\")\n\n@pytest.fixture\ndef e(d, b, order):\norder.append(\"e\")\n\n@pytest.fixture\ndef f(e, order):\norder.append(\"f\")\n\n@pytest.fixture\ndef g(f, c, order):\norder.append(\"g\")\n\ndef test_order(g, order):\nassert order == [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\"]\n\n如果我们画出什么取决于什么，我们就会得到类似这样的东西：\n\n每个灯具提供的规则(关于每个灯具必须遵循哪些灯具)足够全面，可以将其展平为：\n\n必须通过这些请求提供足够的信息，以便pytest能够计算出清晰的线性依赖链，从而确定给定测试的操作顺序。如果有任何模棱两可的地方，并且操作顺序可以有多种解释，那么您应该假设pytest在任何时候都可以支持这些解释中的任何一种。\n\n例如，如果 d 没有要求 c ，即图表将如下所示：\n\n因为没有任何要求 c 以外 g 和 g 还要求 f ，现在还不清楚是否 c 应该走在前面/后面 f ， e 或 d 。唯一为其设置的规则 c 它必须在 b 以前 g .\n\nPytest不知道在哪里 c 应该在这种情况下，所以应该假设它可以在 g 和 b .\n\n这不一定是坏事，但要记住这一点。如果它们执行的顺序可能会影响测试的目标行为，或者可能会影响测试的结果，那么应该以允许pytest线性化/“扁平化”该顺序的方式明确地定义该顺序。"
+        },
+        {
+          "chunkId": "S14#s236",
+          "score": 28.515,
+          "text": "在我们深入了解固定器是什么之前，让我们先来看看什么是测试。\n\n最简单地说，测试的目的是查看特定行为的结果，并确保结果与您的预期一致。行为不是可以通过经验来衡量的，这就是为什么编写测试会很有挑战性的原因。\n\n“行为”是指某些系统 作为回应 特定的情况和/或刺激。但确切地说 how 或 why 做了一些事情并不像做了什么那么重要 what 已经完成了。\n\n您可以认为测试分为四个步骤：\n\nArrange\n\nAct\n\nAssert\n\nCleanup\n\n安排 是我们为考试做准备的地方。这意味着几乎所有的东西，除了“ act “它把多米诺骨牌排成一排，这样 act 可以在一个改变状态的步骤中完成它的事情。这可能意味着准备对象、启动/终止服务、向数据库中输入记录，甚至是定义要查询的URL、为尚不存在的用户生成一些凭据，或者只是等待某个过程完成。\n\nAct 是启动 行为 我们想测试一下。这一行为实现了被测系统(SUT)状态的改变，也是我们可以查看的改变后的状态，以便我们对行为做出判断。这通常采用函数/方法调用的形式。\n\n断言 是我们观察结果状态的地方，检查尘埃落定后它看起来是否像我们预期的那样。这是我们收集证据来证明行为是否符合我们预期的地方。这个 assert 在我们的测试中，我们在哪里进行测量/观察，并对其应用我们的判断。如果什么东西应该是绿色的，我们会说 assert thing == \"green\" .\n\n清理 是测试在其自身之后重新开始的位置，因此其他测试不会意外地受到它的影响。\n\n在它的核心，测试最终是 act 和 断言 步骤，使用 安排 仅提供上下文的步骤。 行为 存在于 act 和 断言 ."
+        },
+        {
+          "chunkId": "S14#s248",
+          "score": 24.555,
+          "text": "pytest会尽最大努力将给定测试的所有装置按线性顺序排列，这样它就可以看到哪个装置出现在第一、第二、第三个位置，依此类推。但是，如果较早的fixture出现问题并引发异常，pytest将停止执行该测试的fixture，并将该测试标记为有错误。\n\nWhen a test is marked as having an error, it doesn't mean the test failed,\nthough. It just means the test couldn't even be attempted because one of the\nthings it depends on had a problem.\n\n这就是为什么在给定的测试中尽可能多地减少不必要的依赖是一个好主意。这样，不相关的问题不会导致我们对哪些可能有问题，哪些可能没有问题有一个不完整的了解。\n\n这里有一个快速示例来帮助解释：\n\nimport pytest\n\n@pytest.fixture\ndef order():\nreturn []\n\n@pytest.fixture\ndef append_first(order):\norder.append(1)\n\n@pytest.fixture\ndef append_second(order, append_first):\norder.extend([2])\n\n@pytest.fixture(autouse=True)\ndef append_third(order, append_second):\norder += [3]\n\ndef test_order(order):\nassert order == [1, 2, 3]\n\n如果，不管出于什么原因， order.append(1) 如果出现错误并引发异常，我们将无法知道 order.extend([2]) 或 order += [3] 也会有问题。之后 append_first 抛出异常，pytest将不再为 test_order ，它甚至不会尝试运行 test_order 它本身。唯一可以运行的就是 order 和 append_first ."
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T09",
+      "set": "嵌入式开发",
+      "question": "heap_caps_get_minimum_free_size 返回的数值，和「这块内存历史上最少剩多少」是不是一回事？为什么？另外，如果我想遍历某个能力集合下的所有堆、并在每个块上做点事，用哪个接口、回调要带哪些参数？",
+      "referenceChunks": [
+        "S03#s61~10",
+        "S03#s61~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s248",
+          "score": 18.765,
+          "text": "pytest会尽最大努力将给定测试的所有装置按线性顺序排列，这样它就可以看到哪个装置出现在第一、第二、第三个位置，依此类推。但是，如果较早的fixture出现问题并引发异常，pytest将停止执行该测试的fixture，并将该测试标记为有错误。\n\nWhen a test is marked as having an error, it doesn't mean the test failed,\nthough. It just means the test couldn't even be attempted because one of the\nthings it depends on had a problem.\n\n这就是为什么在给定的测试中尽可能多地减少不必要的依赖是一个好主意。这样，不相关的问题不会导致我们对哪些可能有问题，哪些可能没有问题有一个不完整的了解。\n\n这里有一个快速示例来帮助解释：\n\nimport pytest\n\n@pytest.fixture\ndef order():\nreturn []\n\n@pytest.fixture\ndef append_first(order):\norder.append(1)\n\n@pytest.fixture\ndef append_second(order, append_first):\norder.extend([2])\n\n@pytest.fixture(autouse=True)\ndef append_third(order, append_second):\norder += [3]\n\ndef test_order(order):\nassert order == [1, 2, 3]\n\n如果，不管出于什么原因， order.append(1) 如果出现错误并引发异常，我们将无法知道 order.extend([2]) 或 order += [3] 也会有问题。之后 append_first 抛出异常，pytest将不再为 test_order ，它甚至不会尝试运行 test_order 它本身。唯一可以运行的就是 order 和 append_first ."
+        },
+        {
+          "chunkId": "S03#s47",
+          "score": 17.748,
+          "text": "ESP32 包含多种类型的 RAM：\n\nDRAM（数据 RAM）是连接到 CPU 数据总线上的内存，用于存储数据。这是作为堆访问最常见的一种内存。\n\nIRAM（指令 RAM）是连接到 CPU 指令总线上的内存，通常仅用于存储可执行数据（即指令）。如果作为通用内存访问，则所有访问必须为 32 位可访问内存。\n\nD/IRAM 是连接到 CPU 数据总线和指令总线的 RAM，因此可用作指令 RAM 或数据 RAM。\n\n有关内存类型的详细信息，请参阅 存储器类型。\n\n也可将外部 SPI RAM 连接到 ESP32。通过缓存将 片外 RAM 集成到 ESP32 的内存映射中，访问方式与 DRAM 类似。\n\n所有的 DRAM 内存都可以单字节访问，因此所有的 DRAM 堆都具有 MALLOC_CAP_8BIT 属性。要获取所有 DRAM 堆的剩余空间大小，请调用 heap_caps_get_free_size(MALLOC_CAP_8BIT)。\n\n如果占用了所有的 MALLOC_CAP_8BIT 堆空间，则可以用 MALLOC_CAP_IRAM_8BIT 代替。此时，若只以 32 位对齐的方式访问 IRAM 内存，或者启用了 CONFIG_ESP32_IRAM_AS_8BIT_ACCESSIBLE_MEMORY，则仍然可以将 IRAM 用作内部内存的“储备池”。\n\n备注\n\n此选项仅在单核 ESP32 配置（CONFIG_FREERTOS_UNICORE=y）下可用。与普通内存相比，CONFIG_ESP32_IRAM_AS_8BIT_ACCESSIBLE_MEMORY 选项有一个显著的缺点：对 MALLOC_CAP_IRAM_8BIT 内存的每次字节、半字或任意非对齐访问都会触发 LoadStore 或 Alignment 异常。虽然这些异常会通过软件处理以确保读写值的正确性，但每次访问都会产生约 167 个 CPU 周期的开销，如果频繁访问，可能导致严重的性能下降。因此，应避免在注重性能的代码段（如 ISR 例程或紧凑循环）中使用此类内存。建议重构代码，改用 32 位对齐（uint32_t）的访问方式。\n\n调用 malloc() 时，ESP-IDF malloc() 内部调用 heap_caps_malloc_default(size)，使用属性 MALLOC_CAP_DEFAULT 分配内存。该属性可实现字节寻址功能，即存储空间的最小编址单位为字节。\n\nMALLOC_CAP_DEFAULT 描述的是内存能力，而不是精确的分配策略。特别是，heap_caps_malloc(size, MALLOC_CAP_DEFAULT) 不一定遵循与 malloc() 相同的放置策略。\n\n例如，当 片外 RAM 被添加到基于能力的堆分配器后，heap_caps_malloc(size, MALLOC_CAP_DEFAULT) 可能返回片外 RAM，而 malloc() 是否优先或仅使用内部 RAM 则取决于具体配置。\n\nmalloc() 使用基于属性的分配系统，所以使用 heap_caps_malloc() 分配的内存可以通过调用标准的 free() 函数释放。"
+        },
+        {
+          "chunkId": "S03#32",
+          "score": 12.35,
+          "text": "如果某个内存结构体仅以 32 位为单位寻址，例如一个整数或指针数组，则可以使用 MALLOC_CAP_32BIT 标志分配。通过这一方式，分配器能够在无法调用 malloc() 的情况下提供 IRAM 内存，从而充分利用 ESP32 中的所有可用内存。\n\n请注意，在 ESP32 系列芯片上，不可使用 MALLOC_CAP_32BIT 存储浮点变量。因为 MALLOC_CAP_32BIT 可能返回指令 RAM，而 ESP32 上的浮点汇编指令无法访问指令 RAM。\n\n请注意，使用 MALLOC_CAP_32BIT 分配的内存 只能 通过 32 位读写访问，其他类型的访问将导致 LoadStoreError 异常。"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T10",
+      "set": "嵌入式开发",
+      "question": "在 ESP32 上给某个 IO 配内部上拉或下拉时要注意哪些坑：重复调用会怎样、有没有哪些引脚根本没有内部上下拉电阻？另外 gpio_hold 是做什么用的，开启后引脚还受不受后续配置改动影响？",
+      "referenceChunks": [
+        "S04#s78~3",
+        "S04#s78~7"
+      ],
+      "topk": [
+        {
+          "chunkId": "S04#s74",
+          "score": 27.2,
+          "text": "IO 可以有两种使用方式：\n\n作为简单的 GPIO 输入读取引脚上的电平，或作为简单的 GPIO 输出以输出所需的电平。\n\n作为外设信号的输入/输出。\n\nIDF 外设驱动内部会处理需要应用到引脚上的必要 IO 配置，以便它们可以用作外设信号的输入或输出。这意味着用户通常自己只需负责将 IO 配置为简单的输入或输出。gpio_config() 是一个一体化的 API，可用于配置 I/O 模式、内部上拉/下拉电阻等管脚设置，包括那些被 USB PHY 复用的引脚。\n\n在一些应用中，IO 管脚可以同时发挥双重作用。例如，输出 LEDC PWM 信号的 IO 也可以作为 GPIO 输入生成中断或 GPIO ETM 事件。这种双重用途的 IO 管脚在配置时需要特别注意。由于 gpio_config() 是一个会覆盖所有当前配置的 API ，因此必须先调用它将管脚模式设置为 gpio_mode_t::GPIO_MODE_INPUT，然后才能调用 LEDC 驱动 API 将输出信号连接到引脚上。作为替代方案，如果除了使管脚输入启用之外不需要其他额外配置，可以随时调用 gpio_input_enable() 以实现相同的目的。"
+        },
+        {
+          "chunkId": "S04#s75",
+          "score": 25.524,
+          "text": "GPIO 驱动提供了一个函数 gpio_dump_io_configuration() 用来输出指定管脚的实时配置状态，包括上下拉、输入输出使能、管脚映射等。例如，以下命令可用于输出 GPIO4，GPIO18 与 GPIO26 的配置状态：\n\ngpio_dump_io_configuration(stdout, (1ULL << 4) | (1ULL << 18) | (1ULL << 26));\n\n其输出信息如下：\n\n================IO DUMP Start================\nIO[4] -\nPullup: 1, Pulldown: 0, DriveCap: 2\nInputEn: 1, OutputEn: 0, OpenDrain: 0\nFuncSel: 1 (GPIO)\nGPIO Matrix SigIn ID: (simple GPIO input)\nSleepSelEn: 1\n\nIO[18] -\nPullup: 0, Pulldown: 0, DriveCap: 2\nInputEn: 0, OutputEn: 1, OpenDrain: 0\nFuncSel: 1 (GPIO)\nGPIO Matrix SigOut ID: 256 (simple GPIO output)\nSleepSelEn: 1\n\nIO[26] **RESERVED** -\nPullup: 1, Pulldown: 0, DriveCap: 2\nInputEn: 1, OutputEn: 0, OpenDrain: 0\nFuncSel: 0 (IOMUX)\nSleepSelEn: 1\n\n=================IO DUMP End==================\n\n如果你想要查看所有管脚的配置状态，可以使用命令\n\ngpio_dump_io_configuration(stdout, SOC_GPIO_VALID_GPIO_MASK);\n\n如果 IO 管脚通过 GPIO 交换矩阵连接到内部外设信号，输出信息打印中的外设信号 ID 定义可以在 soc/esp32/include/soc/gpio_sig_map.h 头文件中查看。**RESERVED** 字样则表示此 IO 用于连接 SPI flash 或 PSRAM，强烈建议不要重新配置这些管脚用于其他功能。\n\n请不要依赖技术参考手册中记录的 GPIO 默认配置状态，因为特殊用途的 GPIO 可能会在 app_main 之前被引导加载程序或应用程序启动阶段的代码更改。"
+        },
+        {
+          "chunkId": "S14#s248",
+          "score": 20.891,
+          "text": "pytest会尽最大努力将给定测试的所有装置按线性顺序排列，这样它就可以看到哪个装置出现在第一、第二、第三个位置，依此类推。但是，如果较早的fixture出现问题并引发异常，pytest将停止执行该测试的fixture，并将该测试标记为有错误。\n\nWhen a test is marked as having an error, it doesn't mean the test failed,\nthough. It just means the test couldn't even be attempted because one of the\nthings it depends on had a problem.\n\n这就是为什么在给定的测试中尽可能多地减少不必要的依赖是一个好主意。这样，不相关的问题不会导致我们对哪些可能有问题，哪些可能没有问题有一个不完整的了解。\n\n这里有一个快速示例来帮助解释：\n\nimport pytest\n\n@pytest.fixture\ndef order():\nreturn []\n\n@pytest.fixture\ndef append_first(order):\norder.append(1)\n\n@pytest.fixture\ndef append_second(order, append_first):\norder.extend([2])\n\n@pytest.fixture(autouse=True)\ndef append_third(order, append_second):\norder += [3]\n\ndef test_order(order):\nassert order == [1, 2, 3]\n\n如果，不管出于什么原因， order.append(1) 如果出现错误并引发异常，我们将无法知道 order.extend([2]) 或 order += [3] 也会有问题。之后 append_first 抛出异常，pytest将不再为 test_order ，它甚至不会尝试运行 test_order 它本身。唯一可以运行的就是 order 和 append_first ."
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T11",
+      "set": "嵌入式开发",
+      "question": "要把一个 IO 配成开漏输出，应该用哪个接口？如果还想单独设置它在睡眠期间的上拉下拉，用哪个函数？这个函数和普通模式下的上下拉配置在参数与返回值风格上有什么一致之处？",
+      "referenceChunks": [
+        "S04#s78~10",
+        "S04#s78~5"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s235",
+          "score": 32.275,
+          "text": "Software test fixtures 初始化测试功能。它们提供了一个固定的基线，以便测试可靠地执行并产生一致的、可重复的结果。初始化可以设置服务、状态或其他操作环境。在fixture函数中，每个函数的参数通常在test之后被命名为fixture。\n\npytest fixtures相对于传统的xUnit风格的setup/teardown函数提供了显著的改进：\n\n装置有明确的名称，通过声明它们在测试函数、模块、类或整个项目中的使用来激活。\n\n夹具以模块化的方式实现，因为每个夹具名称触发 夹具功能 可以使用其他固定装置。\n\n夹具管理从简单的单元扩展到复杂的功能测试，允许根据配置和组件选项参数化夹具和测试，或者跨功能、类、模块或整个测试会话范围重复使用夹具。\n\n无论使用多少夹具，拆卸逻辑都可以轻松、安全地进行管理，无需手动仔细处理错误或微观管理添加清理步骤的顺序。\n\n此外，pytest继续支持 经典的Xunit风格设置 . 您可以混合这两种样式，根据您的喜好，逐步从经典样式移动到新样式。你也可以从现有的 unittest.TestCase style 或 nose based 项目。\n\nFixtures 使用 @pytest.fixture 装饰者， described below . Pytest有有用的内置设备，下面列出以供参考：\n\ncapfd\n\n以文本形式捕获输出到文件描述符 1 和 2 .\n\ncapfdbinary\n\n以字节形式捕获输出到文件描述符 1 和 2 .\n\ncaplog\n\n控制日志记录和访问日志条目。\n\ncapsys\n\n捕获，作为文本，输出到 sys.stdout 和 sys.stderr .\n\ncapsysbinary\n\n以字节形式捕获输出到 sys.stdout 和 sys.stderr .\n\ncache\n\n跨pytest运行存储和检索值。\n\ndoctest_namespace\n\n提供注入到docstests命名空间中的dict。\n\nmonkeypatch\n\n临时修改类、函数、字典， os.environ ，以及其他对象。\n\npytestconfig\n\n访问配置值、pluginmanager和plugin hooks。\n\nrecord_property\n\n向测试添加额外属性。\n\nrecord_testsuite_property\n\n向测试套件添加额外属性。\n\nrecwarn\n\n记录测试函数发出的警告。\n\nrequest\n\n提供有关执行测试功能的信息。\n\ntestdir\n\n提供一个临时测试目录来帮助运行和测试pytest插件。\n\ntmp_path\n\n提供一个 pathlib.Path 对象指向每个测试函数唯一的临时目录。\n\ntmp_path_factory\n\n生成会话作用域的临时目录并返回 pathlib.Path 物体。\n\ntmpdir\n\n提供一个 py.path.local 对象指向每个测试函数唯一的临时目录；替换为 tmp_path .\n\ntmpdir_factory\n\n生成会话作用域的临时目录并返回 py.path.local 对象；替换为 tmp_path_factory ."
+        },
+        {
+          "chunkId": "S02#s13",
+          "score": 29.386,
+          "text": "ESP32 支持的线路模式如下。要使用这些模式，请在结构体 spi_transaction_t 中设置 flags，如 传输事务标志信号 一栏所示。要检查相应的 IO 管脚是否被设置，请在 spi_bus_config_t 中设置 flags，如 总线 IO 设置标志信号 一栏所示。\n\n模式\n\n命令位宽\n\n地址位宽\n\n数据位宽\n\n传输事务标志信号\n\n总线 IO 设置标志信号\n\n普通 SPI 模式\n\n双线输出模式\n\nSPI_TRANS_MODE_DIO\n\nSPICOMMON_BUSFLAG_DUAL\n\n双线 I/O 模式\n\nSPI_TRANS_MODE_DIO\nSPI_TRANS_MULTILINE_ADDR\n\nSPICOMMON_BUSFLAG_DUAL\n\n四线输出模式\n\nSPI_TRANS_MODE_QIO\n\nSPICOMMON_BUSFLAG_QUAD\n\n四线 I/O 模式\n\nSPI_TRANS_MODE_QIO\nSPI_TRANS_MULTILINE_ADDR\n\nSPICOMMON_BUSFLAG_QUAD"
+        },
+        {
+          "chunkId": "S04#s74",
+          "score": 28.977,
+          "text": "IO 可以有两种使用方式：\n\n作为简单的 GPIO 输入读取引脚上的电平，或作为简单的 GPIO 输出以输出所需的电平。\n\n作为外设信号的输入/输出。\n\nIDF 外设驱动内部会处理需要应用到引脚上的必要 IO 配置，以便它们可以用作外设信号的输入或输出。这意味着用户通常自己只需负责将 IO 配置为简单的输入或输出。gpio_config() 是一个一体化的 API，可用于配置 I/O 模式、内部上拉/下拉电阻等管脚设置，包括那些被 USB PHY 复用的引脚。\n\n在一些应用中，IO 管脚可以同时发挥双重作用。例如，输出 LEDC PWM 信号的 IO 也可以作为 GPIO 输入生成中断或 GPIO ETM 事件。这种双重用途的 IO 管脚在配置时需要特别注意。由于 gpio_config() 是一个会覆盖所有当前配置的 API ，因此必须先调用它将管脚模式设置为 gpio_mode_t::GPIO_MODE_INPUT，然后才能调用 LEDC 驱动 API 将输出信号连接到引脚上。作为替代方案，如果除了使管脚输入启用之外不需要其他额外配置，可以随时调用 gpio_input_enable() 以实现相同的目的。"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T12",
+      "set": "嵌入式开发",
+      "question": "SPI 主机驱动里「排队交给中断去执行」和「轮询发送」这两类事务，在接口用法和并发限制上分别有什么讲究？各自有没有明确的使用禁忌？",
+      "referenceChunks": [
+        "S02#s41~2",
+        "S02#s41~5"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s10",
+          "score": 33.228,
+          "text": "SPI 总线传输事务由五个阶段构成，详见下表（任意阶段均可跳过）。\n\n阶段名称\n\n描述\n\n命令阶段 (Command)\n\n在此阶段，主机向总线发送命令字段，长度为 0-16 位。\n\n地址阶段 (Address)\n\n在此阶段，主机向总线发送地址字段，长度为 0-64 位。\n\nDummy 阶段\n\n此阶段可自行配置，用于适配时序要求。\n\n写入阶段 (Write)\n\n此阶段主机向设备传输数据，这些数据在紧随命令阶段（可选）和地址阶段（可选）之后。从电平的角度来看，数据与命令没有区别。\n\n读取阶段 (Read)\n\n此阶段主机读取设备数据。\n\n传输事务属性由总线配置结构体 spi_bus_config_t、设备配置结构体 spi_device_interface_config_t 和传输事务配置结构体 spi_transaction_t 共同决定。\n\n一个 SPI 主机可以发送全双工传输事务，此时读取和写入阶段同步进行。传输事务总长度取决于以下结构体成员长度总和：\n\nspi_device_interface_config_t::command_bits\n\nspi_device_interface_config_t::address_bits\n\nspi_transaction_t::length\n\n而 spi_transaction_t::rxlength 则决定了接收到的数据包长度。\n\n在半双工传输事务中，读取和写入阶段独立进行（一次一个方向）。写入和读取阶段的长度由 spi_transaction_t::length 和 spi_transaction_t::rxlength 分别决定。\n\n并非每个 SPI 设备都要求命令和/或地址，因此命令阶段和地址阶段为可选项。这反映在设备的配置中：如果 spi_device_interface_config_t::command_bits 和/或 spi_device_interface_config_t::address_bits 被设置为零，则不会唤起命令或地址阶段。\n\n并非每个传输事务都需要写入和读取数据，因此读取和写入阶段也是可选项。如果将 spi_transaction_t::rx_buffer 设置为 NULL，且未设置 SPI_TRANS_USE_RXDATA，读取阶段将被跳过。如果将 spi_transaction_t::tx_buffer 设置为 NULL，且未设置 SPI_TRANS_USE_TXDATA，写入阶段将被跳过。\n\n主机驱动程序支持两种类型的传输事务：中断传输事务和轮询传输事务。用户可以选择在不同设备上使用不同的传输事务类型。若设备需要同时使用两种传输事务类型，请参阅 向同一设备发送混合传输事务的注意事项。"
+        },
+        {
+          "chunkId": "S02#s20",
+          "score": 32.095,
+          "text": "为避免代码过于复杂，请一次只向单个设备发送一种类型的传输事务（中断或轮询）。如有需要，可交替发送中断传输事务和轮询传输事务，详见下文。\n\n所有的轮询传输事务和中断传输事务完成后，方可发送轮询传输事务。\n\n由于未完成的轮询传输事务将阻塞其他传输事务，请务必在 spi_device_polling_start() 之后调用函数 spi_device_polling_end() 以允许其他事务或其他设备使用总线。如果在轮询过程中无需切换到其他任务，可调用函数 spi_device_polling_transmit() 启动传输事务，则该传输事务将自动结束。\n\nISR 会干扰飞行中的轮询传输事务，以适应中断传输事务。在调用 spi_device_polling_start() 前，需确保所有发送到 ISR 的中断传输事务已经完成。为此可持续调用 spi_device_get_trans_result()，直至全部传输事务返回。\n\n为更好地控制函数的调用顺序，只在单个任务中向同一设备发送混合传输事务。"
+        },
+        {
+          "chunkId": "S02#s17",
+          "score": 31.176,
+          "text": "通过调用函数 spi_bus_initialize() 初始化 SPI 总线。确保在结构体 spi_bus_config_t 中设置正确的 I/O 管脚。不需要的信号设置为 -1。\n\n通过调用函数 spi_bus_add_device() 注册连接到总线的设备。确保用参数 dev_config 配置设备可能需要的任何时序要求。完成上述操作后可获得设备句柄，以便在向设备发送传输事务时使用。\n\n要与设备交互，请在一个或多个 spi_transaction_t 结构体中填充所需的传输事务参数，随后使用轮询传输事务或中断传输事务发送这些结构体：\n\n中断传输事务\n\n调用函数 spi_device_queue_trans() 将传输事务添加到队列中，随后使用函数 spi_device_get_trans_result() 查询结果，或将所有请求输入 spi_device_transmit() 实现同步处理。\n\n轮询传输事务\n\n调用函数 spi_device_polling_transmit() 发送轮询传输事务。若有插入内容的需要，也可使用 spi_device_polling_start() 和 spi_device_polling_end() 发送传输事务。\n\n（可选）若要向设备发送背对背传输事务，请在发送传输事务前调用函数 spi_device_acquire_bus()，并在发送传输事务后调用函数 spi_device_release_bus()。\n\n（可选）要从总线上移除特定设备，请以设备句柄为参数调用函数 spi_bus_remove_device()。\n\n（可选）要复位（或重置）总线，请确保总线上未连接其他设备，并调用函数 spi_bus_free()。\n\nSPI 主机驱动程序的示例代码存放在 ESP-IDF 示例项目的 peripherals/spi_master 目录下。"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T13",
+      "set": "嵌入式开发",
+      "question": "从 SPI 事务结果接口取回结果时，对事务描述符的使用有什么约束、为什么？另外 SPI 主机频率上限意味着什么：超过上限之后会出现什么现象？",
+      "referenceChunks": [
+        "S02#s41~3",
+        "S02#s41~7"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s236",
+          "score": 37.113,
+          "text": "在我们深入了解固定器是什么之前，让我们先来看看什么是测试。\n\n最简单地说，测试的目的是查看特定行为的结果，并确保结果与您的预期一致。行为不是可以通过经验来衡量的，这就是为什么编写测试会很有挑战性的原因。\n\n“行为”是指某些系统 作为回应 特定的情况和/或刺激。但确切地说 how 或 why 做了一些事情并不像做了什么那么重要 what 已经完成了。\n\n您可以认为测试分为四个步骤：\n\nArrange\n\nAct\n\nAssert\n\nCleanup\n\n安排 是我们为考试做准备的地方。这意味着几乎所有的东西，除了“ act “它把多米诺骨牌排成一排，这样 act 可以在一个改变状态的步骤中完成它的事情。这可能意味着准备对象、启动/终止服务、向数据库中输入记录，甚至是定义要查询的URL、为尚不存在的用户生成一些凭据，或者只是等待某个过程完成。\n\nAct 是启动 行为 我们想测试一下。这一行为实现了被测系统(SUT)状态的改变，也是我们可以查看的改变后的状态，以便我们对行为做出判断。这通常采用函数/方法调用的形式。\n\n断言 是我们观察结果状态的地方，检查尘埃落定后它看起来是否像我们预期的那样。这是我们收集证据来证明行为是否符合我们预期的地方。这个 assert 在我们的测试中，我们在哪里进行测量/观察，并对其应用我们的判断。如果什么东西应该是绿色的，我们会说 assert thing == \"green\" .\n\n清理 是测试在其自身之后重新开始的位置，因此其他测试不会意外地受到它的影响。\n\n在它的核心，测试最终是 act 和 断言 步骤，使用 安排 仅提供上下文的步骤。 行为 存在于 act 和 断言 ."
+        },
+        {
+          "chunkId": "S02#s27",
+          "score": 34.171,
+          "text": "如图所示， SCLK 发射沿之后、信号被内部寄存器锁存之前， MISO 线存在延迟。因此， MISO 管脚的设置时间是 SPI 时钟速度的限制因素。当延迟过长时，设置松弛度 < 0 ，违反了设置时序要求，读取可能有误。\n\n最大有效频率取决于：\n\nspi_device_interface_config_t::input_delay_ns - SCLK 上的一个时钟周期开始后 MISO 总线上的最大数据有效时间\n\n是否使用了 IO_MUX 管脚或 GPIO 矩阵\n\n使用 GPIO 矩阵时，最大有效频率降至现有 输入延迟 的 33 ~ 77%。使用 IO_MUX 管脚或 dummy 位 可以保留较高的频率，调用函数 spi_get_freq_limit() 能够获取主机的最大读取频率。\n\nDummy 位：在读取阶段开始之前，可以插入 Dummy 时钟，在此期间，主机不读取数据。设备能看到 Dummy 时钟并发出数据，但主机在读取阶段之前不会读取。这就弥补了主机 MISO 设置时间不足的问题，并使主机达到更高的读取频率。\n\n理想状态下，如果设备的速度足以使输入延迟控制在一个 APB 时钟周期 (12.5 ns) 以内，则在不同的条件下，主机读取（或读取和写入）的最大频率如下表所示：\n\n频率限制 (MHz)\n\n频率限制 (MHz)\n\n驱动是否使用 Dummy 位\n\n备注\n\nGPIO 矩阵\n\nIO_MUX 管脚\n\n26.6\n\n80\n\n40\n\n--\n\n半双工，禁用 DMA\n\n如果主机仅写入数据，可以通过设置 spi_device_interface_config_t::flags 中的 SPI_DEVICE_NO_DUMMY 位来禁用 Dummy 位 和频率检查机制。禁用 Dummy 位 和频率检查机制后，即便在使用 GPIO 矩阵的情况下，输出频率也可达 80 MHz。\n\nspi_device_interface_config_t::flags\n\n即使 spi_device_interface_config_t 结构体中的 spi_device_interface_config_t::input_delay_ns 设置为 0，SPI 主机驱动程序仍会运作，但设置精确值有助于：\n\n计算全双工传输事务的频率限制\n\n用半双工传输事务的 Dummy 位正确补偿时序\n\n可根据设备规格说明中 AC 特性章节的数据估计 SPI 时钟发射沿后的最大数据有效时间，或者使用示波器或逻辑分析仪测量该时间。\n\n请注意，实际 PCB 布局设计和过度负载可能会增加输入延迟。这意味着非最佳布线和/或总线上的负载电容很可能导致输入延迟值超过设备规格说明中给出的数值或在总线浮动时测量的数值。\n\n典型的延迟值如下表所示，以下数据由从机设备使用不同芯片测试所得：\n\n设备\n\n输入延迟 (ns)\n\n理想设备\n\n使用 IO_MUX 的 ESP32 从机设备\n\n50\n\n使用 GPIO_MATRIX 的 ESP32 从机设备\n\n75\n\nMISO 路径延迟（有效时间）由从机的 输入延迟 与主机的 GPIO 矩阵延迟 组成。该延迟决定了频率限制，超过这个频率的全双工传输将无法如半双工交易中使用的 Dummy 位一样工作。该频率限制的计算方法为：\n\nFreq limit [MHz] = 80 / (floor(MISO delay[ns]/12.5) + 1)\n\n频率限制与输入延迟间的关系如图所示。如果主机使用 GPIO 矩阵，应在 MISO 延迟上额外增加两个 APB 时钟周期。\n\n不同设备在不同 输入延迟 时间下对应的频率限制如下表所示。\n\n当主机驱动为 IO_MUX (0 ns) 时：\n\n输入延迟 (ns)\n\nMISO 通道延迟 (ns)\n\n频率限制 (MHz)\n\n80\n\n50\n\n50\n\n16\n\n75"
+        },
+        {
+          "chunkId": "S02#s28",
+          "score": 33.162,
+          "text": "写入和读取阶段同时进行时，半双工传输事务与 DMA 不兼容。\n\n如需执行此类传输事务，可使用以下替代方案：\n\n执行全双工传输事务。\n\n将总线初始化函数的最后一个参数设置为 0 以禁用 DMA，即：\n\nret=spi_bus_initialize(SPI3_HOST, &buscfg, 0);\n\n此举可避免传输和接收超过 64 字节的数据。\n1. 尝试用命令和地址字段代替写入阶段。\n\n全双工传输事务与 Dummy 位 不兼容，因此存在频率限制，请参阅 Dummy 位加速方案。\n\nSPI 读取和写入阶段同时进行时，全双工模式和半双工模式下，spi_device_interface_config_t 和 spi_transaction_ext_t 中的 dummy_bits 均会失效。\n\n全双工传输事务模式中，命令阶段和地址阶段与 cs_ena_pretrans 不兼容。\n\n若启用了 DMA，则 RX 缓冲区应该以字对齐（从 32 位边界开始，字节长度为 4 的倍数）。否则 DMA 可能覆盖未对齐部分的数据。"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T14",
+      "set": "测试自动化",
+      "question": "pytest 里把 fixture 参数化之后，依赖它的测试会怎么执行？如果我不想用自动生成的用例 ID、而是自己指定名字，有哪几种写法、返回值需要注意什么？",
+      "referenceChunks": [
+        "S13#s223",
+        "S13#s223~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s238",
+          "score": 26.572,
+          "text": "所以固定装置就是我们 准备 对于一个测试，但是我们如何告诉pytest哪些测试和装置需要哪些装置呢？\n\n在基本级别上，测试函数通过将fixture声明为参数来请求fixture，如 test_my_fruit_in_basket(my_fruit, fruit_basket): 在前面的示例中。\n\n在基本级别上，pytest依赖于一个测试来告诉它它需要什么装置，所以我们必须将该信息构建到测试本身中。我们必须进行测试。“ 请求 它所依赖的装置，要做到这一点，我们必须将这些装置作为参数列在测试函数的“签名”中(这是 def test_something(blah, stuff, more): 线）。\n\n当pytest运行测试时，它会查看该测试函数签名中的参数，然后搜索与这些参数同名的fixture。一旦pytest找到它们，它就会运行这些装置，捕获它们返回的内容(如果有的话)，并将这些对象作为参数传递给测试函数。"
+        },
+        {
+          "chunkId": "S14#s278",
+          "score": 26.561,
+          "text": "Home\n\nInstall\n\nContents\n\nAPI Reference\n\nExamples\n\nCustomize\n\nChangelog\n\nContributing\n\nBackwards Compatibility\n\nPython 2.7 and 3.4 Support\n\nSponsor\n\npytest for Enterprise\n\nLicense\n\nContact Channels\n\nPytest夹具：显式、模块化、可扩展\n\n固定装置是什么？\n\n返回到固定装置\n\n“请求”装置\n\n快速实例\n\n装置可以 请求 其他固定装置\n\n固定装置是可重复使用的\n\n测试/夹具可以 请求 一次安装多个固定装置\n\n固定装置可以是 已请求 每个测试不止一次(缓存返回值)\n\n自动使用设备(您不必请求设备)\n\n范围：跨类、模块、包或会话共享fixture\n\n夹具范围\n\n动态范围\n\n夹具错误\n\n拆卸/清理(AKA灯具定稿)\n\n1. yield 设备(推荐)\n\n处理屈服夹具的错误\n\n2.直接添加finalizer\n\n安全拆卸\n\n安全夹具结构\n\n夹具可用性\n\nconftest.py ：跨多个文件共享装置\n\n来自第三方插件的装置\n\n共享测试数据\n\n卫浴装置实例化顺序\n\n首先执行作用域较高的装置\n\n相同顺序的装置基于依赖关系执行\n\n自动设备首先在其作用域内执行\n\n运行多个 assert 安全的报表\n\nfixtures可以反省请求的测试上下文\n\n使用标记将数据传递到装置\n\n工厂作为固定装置\n\n参数化夹具\n\n对参数化夹具使用标记\n\n模块化：使用fixture函数中的fixture\n\n按设备实例自动分组测试\n\n在类和模块中使用fixture usefixtures\n\n覆盖不同级别的设备\n\n覆盖文件夹（conftest）级别上的fixture\n\n覆盖测试模块级别上的夹具\n\n通过直接测试参数化覆盖夹具\n\n用非参数化夹具替代参数化夹具，反之亦然。\n\n使用其他项目的固定装置\n\nIndex"
+        },
+        {
+          "chunkId": "S14#s267~3",
+          "score": 26.51,
+          "text": "数字、字符串、布尔和 None 将在测试ID中使用它们通常的字符串表示形式。对于其他对象，pytest将根据参数名称生成字符串。可以使用 ids 关键字参数：\n\n# content of test_ids.py\nimport pytest\n\n@pytest.fixture(params=[0, 1], ids=[\"spam\", \"ham\"])\ndef a(request):\nreturn request.param\n\ndef test_a(a):\npass\n\ndef idfn(fixture_value):\nif fixture_value == 0:\nreturn \"eggs\"\nelse:\nreturn None\n\n@pytest.fixture(params=[0, 1], ids=idfn)\ndef b(request):\nreturn request.param\n\ndef test_b(b):\npass\n\n上面显示了如何 ids 可以是要使用的字符串列表，也可以是将使用fixture值调用的函数，然后必须返回要使用的字符串。在后一种情况下，如果函数返回 None 然后将使用pytest的自动生成的ID。\n\n运行上述测试将导致使用以下测试ID：\n\n$ pytest --collect-only\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-6.x.y, py-1.x.y, pluggy-0.x.y\ncachedir: $PYTHON_PREFIX/.pytest_cache\nrootdir: $REGENDOC_TMPDIR\ncollected 10 items\n\n<Module test_anothersmtp.py>\n<Function test_showhelo[smtp.gmail.com]>\n<Function test_showhelo[mail.python.org]>\n<Module test_ids.py>\n<Function test_a[spam]>\n<Function test_a[ham]>\n<Function test_b[eggs]>\n<Function test_b[1]>\n<Module test_module.py>\n<Function test_ehlo[smtp.gmail.com]>\n<Function test_noop[smtp.gmail.com]>\n<Function test_ehlo[mail.python.org]>\n<Function test_noop[mail.python.org]>\n\n======================= 10 tests collected in 0.12s ========================"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T15",
+      "set": "测试自动化",
+      "question": "fixture 之间能不能互相引用、这样做的价值是什么？另外，当同一个 fixture 在 conftest 与具体测试文件里都被定义时，哪一层生效、能不能只对个别用例覆盖？",
+      "referenceChunks": [
+        "S13#s225",
+        "S13#s231"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s273",
+          "score": 28.647,
+          "text": "假设测试文件结构为：\n\ntests/\n__init__.py\n\nconftest.py\n# content of tests/conftest.py\nimport pytest\n\n@pytest.fixture\ndef username():\nreturn 'username'\n\ntest_something.py\n# content of tests/test_something.py\ndef test_username(username):\nassert username == 'username'\n\nsubfolder/\n__init__.py\n\nconftest.py\n# content of tests/subfolder/conftest.py\nimport pytest\n\n@pytest.fixture\ndef username(username):\nreturn 'overridden-' + username\n\ntest_something.py\n# content of tests/subfolder/test_something.py\ndef test_username(username):\nassert username == 'overridden-username'\n\n如您所见，具有相同名称的fixture可以被某些测试文件夹级别覆盖。请注意 base 或 super 夹具可从 overriding 夹具很容易-在上面的例子中使用。"
+        },
+        {
+          "chunkId": "S14#s278",
+          "score": 25.403,
+          "text": "Home\n\nInstall\n\nContents\n\nAPI Reference\n\nExamples\n\nCustomize\n\nChangelog\n\nContributing\n\nBackwards Compatibility\n\nPython 2.7 and 3.4 Support\n\nSponsor\n\npytest for Enterprise\n\nLicense\n\nContact Channels\n\nPytest夹具：显式、模块化、可扩展\n\n固定装置是什么？\n\n返回到固定装置\n\n“请求”装置\n\n快速实例\n\n装置可以 请求 其他固定装置\n\n固定装置是可重复使用的\n\n测试/夹具可以 请求 一次安装多个固定装置\n\n固定装置可以是 已请求 每个测试不止一次(缓存返回值)\n\n自动使用设备(您不必请求设备)\n\n范围：跨类、模块、包或会话共享fixture\n\n夹具范围\n\n动态范围\n\n夹具错误\n\n拆卸/清理(AKA灯具定稿)\n\n1. yield 设备(推荐)\n\n处理屈服夹具的错误\n\n2.直接添加finalizer\n\n安全拆卸\n\n安全夹具结构\n\n夹具可用性\n\nconftest.py ：跨多个文件共享装置\n\n来自第三方插件的装置\n\n共享测试数据\n\n卫浴装置实例化顺序\n\n首先执行作用域较高的装置\n\n相同顺序的装置基于依赖关系执行\n\n自动设备首先在其作用域内执行\n\n运行多个 assert 安全的报表\n\nfixtures可以反省请求的测试上下文\n\n使用标记将数据传递到装置\n\n工厂作为固定装置\n\n参数化夹具\n\n对参数化夹具使用标记\n\n模块化：使用fixture函数中的fixture\n\n按设备实例自动分组测试\n\n在类和模块中使用fixture usefixtures\n\n覆盖不同级别的设备\n\n覆盖文件夹（conftest）级别上的fixture\n\n覆盖测试模块级别上的夹具\n\n通过直接测试参数化覆盖夹具\n\n用非参数化夹具替代参数化夹具，反之亦然。\n\n使用其他项目的固定装置\n\nIndex"
+        },
+        {
+          "chunkId": "S14#s277",
+          "score": 21.809,
+          "text": "通常，提供pytest支持的项目将使用 entry points ，所以只要将这些项目安装到环境中，就可以使用这些设备。\n\n如果要使用不使用入口点的项目中的装置，可以定义 pytest_plugins 穿着你的上衣 conftest.py 文件将该模块注册为插件。\n\n假设你有固定装置 mylibrary.fixtures 你想在你的 app/tests 目录。\n\n你需要做的就是定义 pytest_plugins 在里面 app/tests/conftest.py 指向那个模块。\n\npytest_plugins = \"mylibrary.fixtures\"\n\n这有效地记录了 mylibrary.fixtures 作为一个插件，使其所有的fixture和hook都可以在中进行测试 app/tests .\n\n注解\n\n有时用户会 进口 但是不建议使用其他项目中的fixture：将fixture导入模块将在pytest中将它们注册为 定义 在那个模块里。\n\n这会产生一些小的后果，比如多次出现在 pytest --help ，但事实并非如此 推荐 因为这种行为在将来的版本中可能会改变/停止工作。"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T16",
+      "set": "测试自动化",
+      "question": "有没有办法不改 fixture 代码、只用命令行选项就改变它的作用范围？如果有，那个 callable 是怎么被调用的？另外，同一个测试里需要多次创建同类数据时，fixture 该怎么写比较合适？",
+      "referenceChunks": [
+        "S14#s247",
+        "S14#s266"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s247",
+          "score": 29.587,
+          "text": "5.2 新版功能.\n\n在某些情况下，您可能希望在不更改代码的情况下更改fixture的范围。为此，传递一个 scope . callable必须返回一个具有有效范围的字符串，并且在fixture定义期间只执行一次。将使用两个关键字参数调用它- fixture_name 作为一根绳子 config 配置对象。\n\n这在处理需要时间进行设置的fixture时尤其有用，比如生成docker容器。您可以使用命令行参数来控制为不同环境生成的容器的范围。请参阅下面的示例。\n\ndef determine_scope(fixture_name, config):\nif config.getoption(\"--keep-containers\", None):\nreturn \"session\"\nreturn \"function\"\n\n@pytest.fixture(scope=determine_scope)\ndef docker_container():\nyield spawn_container()"
+        },
+        {
+          "chunkId": "S14#s277",
+          "score": 28.682,
+          "text": "通常，提供pytest支持的项目将使用 entry points ，所以只要将这些项目安装到环境中，就可以使用这些设备。\n\n如果要使用不使用入口点的项目中的装置，可以定义 pytest_plugins 穿着你的上衣 conftest.py 文件将该模块注册为插件。\n\n假设你有固定装置 mylibrary.fixtures 你想在你的 app/tests 目录。\n\n你需要做的就是定义 pytest_plugins 在里面 app/tests/conftest.py 指向那个模块。\n\npytest_plugins = \"mylibrary.fixtures\"\n\n这有效地记录了 mylibrary.fixtures 作为一个插件，使其所有的fixture和hook都可以在中进行测试 app/tests .\n\n注解\n\n有时用户会 进口 但是不建议使用其他项目中的fixture：将fixture导入模块将在pytest中将它们注册为 定义 在那个模块里。\n\n这会产生一些小的后果，比如多次出现在 pytest --help ，但事实并非如此 推荐 因为这种行为在将来的版本中可能会改变/停止工作。"
+        },
+        {
+          "chunkId": "S14#s246",
+          "score": 27.779,
+          "text": "fixture是在测试首次请求时创建的，并根据它们的 scope ：\n\nfunction ：默认范围，则在测试结束时销毁fixture。\n\nclass ：在课程中最后一次测试的拆卸过程中，夹具被破坏。\n\nmodule ：在模块中最后一次测试的拆卸过程中，夹具被破坏。\n\npackage ：在拆下包装中的最后一次试验时，夹具被破坏。\n\nsession ：夹具在测试会话结束时被销毁。\n\n注解\n\nPytest一次只缓存fixture的一个实例，这意味着当使用参数化fixture时，Pytest可以在给定范围内多次调用fixture。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S14#s247"
+      ]
+    },
+    {
+      "questionId": "T17",
+      "set": "AI框架与推理",
+      "question": "用 MindSpore Lite 的 benchmark 工具在 Windows 上做推理测试，运行前要做哪些环境准备、怎么指定要跑的模型？跑完之后输出里的平均误差是什么意思、如果不指定输入数据会怎样？",
+      "referenceChunks": [
+        "S05#s109",
+        "S05#s109~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s109~4",
+          "score": 67.719,
+          "text": "在输出信息中，InData 0行打印的是该次推理的输入数据（只打印了前20个），Data of node Default/head-MobileNetV2Head/Softmax-op204行打印的是相关输出节点（Default/head-MobileNetV2Head/Softmax-op204）的推理结果（只打印前50个值），可以直接观察它们跟标杆文件的差异，以获得直观感受。\nMean bias of node/tensor Default/head-MobileNetV2Head/Softmax-op204行，给出了Default/head-MobileNetV2Head/Softmax-op204输出张量与标杆数据对比的平均误差，该误差计算方法为benchmark工具自带的比较算法。\n在最后，Mean bias of all nodes/tensors给出了所有张量与标杆对比的平均误差，在本例中，只有1个输出张量，故总平均误差和Default/head-MobileNetV2Head/Softmax-op204张量误差一致。可以观察到，推理的总平均误差为0%。\n\n高级功能\n\n关于benchmark的更详细说明，以及关于如何使用benchmark来进行基准测试、耗时定量分析、误差分析、Dump数据等，可以参考benchmark。\n\n表4：benchmark参数定义\n\n参数名\n\n是否必选\n\n参数说明\n\n参数类型\n\n默认值\n\n--modelFile=<MODELPATH>\n\n必选\n\n指定需要进行基准测试的MindSpore Lite模型文件路径。\n\nString\n\nnull\n\n--numThreads=<NUMTHREADS>\n\n可选\n\n指定模型推理程序运行的线程数。\n\nInteger\n\n--inDataFile=<INDATAPATH>\n\n可选\n\n指定测试模型输入数据的文件路径，默认接收二进制格式数据文件。如果未设置，则使用随机输入。\n\nString\n\nnull\n\n--benchmarkDataFile=<CALIBDATAPATH>\n\n可选\n\n指定对比标杆数据（用于精度对比的数据）的文件路径，接收按规定格式排列的字符文本。\n\nString\n\nnull\n\n参数名和参数值之间用等号连接，中间不能有空格。"
+        },
+        {
+          "chunkId": "S05#s100~4",
+          "score": 64.68,
+          "text": "在输出信息中，InData 0行打印的是该次推理的输入数据（只打印了前20个），Data of node Default/head-MobileNetV2Head/Softmax-op204行打印的是相关输出节点（Default/head-MobileNetV2Head/Softmax-op204）的推理结果（只打印前50个值），可以直接观察它们跟标杆文件的差异，以获得直观感受。\nMean bias of node/tensor Default/head-MobileNetV2Head/Softmax-op204行，给出了Default/head-MobileNetV2Head/Softmax-op204输出张量与标杆数据对比的平均误差，该误差计算方法为benchmark工具自带的比较算法。\n在最后，Mean bias of all nodes/tensors给出了所有张量与标杆对比的平均误差，在本例中，只有1个输出张量，故总平均误差和Default/head-MobileNetV2Head/Softmax-op204张量误差一致。可以观察到，推理的总平均误差为0%。\n\n高级功能\n\n关于benchmark的更详细说明，以及关于如何使用benchmark来进行基准测试、耗时定量分析、误差分析、Dump数据等，可以参考benchmark。\n\n表2：benchmark参数定义\n\n参数名\n\n是否必选\n\n参数说明\n\n参数类型\n\n默认值\n\n--modelFile=<MODELPATH>\n\n必选\n\n指定需要进行基准测试的MindSpore Lite模型文件路径。\n\nString\n\nnull\n\n--numThreads=<NUMTHREADS>\n\n可选\n\n指定模型推理程序运行的线程数。\n\nInteger\n\n--inDataFile=<INDATAPATH>\n\n可选\n\n指定测试模型输入数据的文件路径，默认接收二进制格式数据文件。在精度测试中，该输入作为标杆输入。如果未设置，则使用随机输入。\n\nString\n\nnull\n\n--benchmarkDataFile=<CALIBDATAPATH>\n\n可选\n\n指定对比标杆数据（用于精度对比的数据）的文件路径，接收按规定格式排列的字符文本。\n\nString\n\nnull\n\n参数名和参数值之间用等号连接，中间不能有空格。"
+        },
+        {
+          "chunkId": "S05#s109",
+          "score": 54.465,
+          "text": "环境设置\n\n将运行benchmark推理时需要的动态链接库加入环境变量PATH。\n\nset PATH=%PACKAGE_ROOT_PATH%\\runtime\\lib;%PATH%\n\n其中%PACKAGE_ROOT_PATH%是发布件解压后的路径。\n\n进入benchmark工具所在目录\n\n执行如下命令，进入benchmark工具所在目录\n\ncd %PACKAGE_ROOT_PATH%\\tools\\benchmark\n\nbenchmark参数说明\n\n在使用benchmark.exe执行推理时，需设定相关参数。本例中用到的相关参数定义如下表4所示。\n\n执行推理，分析推理性能\n\n用户可使用上一节转换后的模型mobilenetv2.ms进行推理测试，将模型拷贝到benchmark工具所在目录后，使用如下命令执行推理：\n\ncall benchmark.exe --modelFile=mobilenetv2.ms\n\n通过modelFile指定要进行推理的模型，其他参数使用默认值。\n本例中，未指定输入数据，将生成随机数值作为输入。\n执行命令后，若推理成功，则会输出类似如下统计信息，该信息显示了推理时的并发线程数（NumThreads = 2），测试模型的单次推理最短耗时（6.677000 ms）、单次推理最长耗时（8.656000 ms）和平均推理耗时（7.291000 ms）等性能指标。性能值随环境不同而不同。\n由于未指定numThreads参数，默认采用2线程推理，用户可通过设置不同的线程数，以测试不同线程下的推理性能（线程数不是越高越好，到了一定程度后，由于线程切换的开销，推理时间将延长）。\n\nModelPath = mobilenetv2.ms\nModelType = MindIR\nInDataPath =\nConfigFilePath =\nInDataType = bin\nLoopCount = 10\nDeviceType = CPU\nAccuracyThreshold = 0.5\nCosineDistanceThreshold = -1.1\nWarmUpLoopCount = 3\nNumThreads = 2\nFp16Priority = 0\nEnableParallel = 0\ncalibDataPath =\ncpuBindMode = HIGHER_CPU\nCalibDataType = FLOAT\nstart unified benchmark run\nPrepareTime = 30.013 ms\nRunning warm up loops...\nRunning benchmark loops...\nModel = mobilenetv2.ms, NumThreads = 2, MinRunTime = 6.677000 ms, MaxRuntime = 8.656000 ms, AvgRunTime = 7.291000 ms\nRun Benchmark mobilenetv2.ms Success.\n\n执行推理，分析推理精度\n\n用户可以使用benchmark.exe工具测试MindSpore Lite的推理精度，使用如下命令测试模型的推理精度：\n\ncall benchmark.exe --modelFile=mobilenetv2.ms --inDataFile=input.bin --benchmarkDataFile=output.txt\n\n本例中通过modelFile指定要进行推理的模型。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s109~4",
+        "S05#s109"
+      ]
+    },
+    {
+      "questionId": "T18",
+      "set": "AI框架与推理",
+      "question": "用 MindSpore Lite 的 C++ 接口自己写推理程序时，编译环境有什么要求？代码里取输入张量、填数据、再执行预测大致是怎样的调用序列、失败时怎么判断？",
+      "referenceChunks": [
+        "S05#s110",
+        "S05#s110~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s101",
+          "score": 43.14,
+          "text": "在上一节，我们使用了官方推理测试工具进行了模型推理测试。在本节，我们将以使用MindSpore Lite的C++接口进行集成为例，演示如何使用MindSpore Lite的发布件，进行集成开发，编写自己的推理程序。\n\n环境要求\n\n系统环境：Linux x86_64，推荐使用Ubuntu\n\nC++编译依赖\n\nGCC >= 7.3.0\n\nCMake >= 3.22.3\n\n获得版本发布件\n\n用户可通过MindSpore Lite官网，获得MindSpore Lite发布件，点击此处查看各版本。\n在本例中，仍然采用了和前几节一样的发布件，用于本节集成开发，点击此处可直接下载。\n在本节简单的推理集成例子中，需要用到的发布件内容如下：\n\nmindspore-lite-{version}-linux-x64\n└── runtime\n│── include # MindSpore Lite集成开发的API头文件\n└── lib\n└── libmindspore-lite.so # MindSpore Lite推理框架的动态库\n\n构建工程目录\n\n本例的工程目录如下：\n\ndemo\n├── CMakeLists.txt # cmake工程管理文件\n├── main.cc # 用户代码\n├── build # 编译用目录\n├── model\n│ └── mobilenetv2.ms # 模型文件（之前转出的模型）\n└── runtime # 发布件的runtime目录\n├── include # MindSpore Lite集成开发的API头文件\n└── lib\n└── libmindspore-lite.so # MindSpore Lite推理框架的动态库\n\n新建一个demo文件夹，新建main.cc和CMakeLists.txt文件。\n新建build和model目录，将mobilenetv2.ms放到model内。\n将发布件中的runtime目录拷贝到demo中，runtime内的文件可以保持不动，也可以删除除libmindspore-lite.so和include文件夹外的其它库文件。\n\n构建cmake工程\n\n打开上一步创建的CMakeLists.txt，粘贴如下内容，其中每句话的含义见注释：\n\ncmake_minimum_required(VERSION 3.22.3) # cmake版本要求最低3.22.3\nproject(Demo) # 工程名为Demo\n\n# gcc 版本要求大于等于7.3.0\nif(CMAKE_CXX_COMPILER_ID STREQUAL \"GNU\" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 7.3.0)\nmessage(FATAL_ERROR \"GCC version ${CMAKE_CXX_COMPILER_VERSION} must not be less than 7.3.0\")\nendif()\n\ninclude_directories(${CMAKE_CURRENT_SOURCE_DIR}/runtime/) # 添加头文件寻找路径\n\nlink_directories(${CMAKE_CURRENT_SOURCE_DIR}/runtime/lib) # 添加库文件寻找路径\n\nadd_executable(demo main.cc) # 编译生成demo执行程序\n\n# 声明demo执行程序需要链接的库，mindspore-lite为MindSpore Lite推理框架的动态库\ntarget_link_libraries(\ndemo\nmindspore-lite\npthread\ndl\n)"
+        },
+        {
+          "chunkId": "S05#s110",
+          "score": 39.107,
+          "text": "在上一节，我们使用了官方推理测试工具进行了模型推理测试，在本节，我们将以使用MindSpore Lite的C++接口进行集成为例，演示如何使用MindSpore Lite的发布件，进行集成开发，编写自己的推理程序。\n\n环境要求\n\n系统环境：Windows 7，Windows 10；64位。\n\nMinGW 编译依赖\n\nCMake >= 3.22.3\n\n编译64位：MinGW-W64 x86_64 = GCC-7.3.0\n\n编译32位：MinGW-W64 i686 = GCC-7.3.0\n\n得到版本发布件\n\n用户可通过MindSpore Lite官网，获得MindSpore Lite发布件，点击此处查看各版本。\n在本例中，仍然采用了和前几节一样的发布件，用于本节集成开发，点击此处可直接下载。\n在本节简单的推理集成例子中，需要用到的发布件内容如下：\n\nmindspore-lite-{version}-win-x64\n└── runtime\n├── include\n└── lib\n├── libgcc_s_seh-1.dll # MinGW动态库\n├── libmindspore-lite.a # MindSpore Lite推理框架的静态库\n├── libmindspore-lite.dll # MindSpore Lite推理框架的动态库\n├── libmindspore-lite.dll.a # MindSpore Lite推理框架的动态库的链接文件\n├── libssp-0.dll # MinGW动态库\n├── libstdc++-6.dll # MinGW动态库\n└── libwinpthread-1.dll # MinGW动态库\n\n构建工程目录\n\n本例的工程目录如下：\n\ndemo\n├── CMakeLists.txt # cmake工程管理文件\n├── main.cc # 用户代码\n├── build # 编译用目录\n├── model\n│ └── mobilenetv2.ms # 模型文件（之前转出的模型）\n└── runtime # 发布件的runtime目录\n├── include # MindSpore Lite集成开发的API头文件\n└── lib\n└── libmindspore-lite.so # MindSpore Lite推理框架的动态库\n\n新建一个demo文件夹，新建main.cc和CMakeLists.txt文件。\n新建build和model目录，将mobilenetv2.ms放到model内。\n将发布件中的runtime目录拷贝到demo中，runtime内的文件可以保持不动，也可以删除除libmindspore-lite.so和include文件夹外的其它库文件。\n\n构建cmake工程\n\n打开上一步创建的CMakeLists.txt，粘贴如下内容，其中每句话的含义见注释：\n\ncmake_minimum_required(VERSION 3.22.3) # cmake版本要求最低3.22.3\nproject(Demo) # 工程名为Demo\n\n# gcc 版本要求大于等于7.3.0\nif(CMAKE_CXX_COMPILER_ID STREQUAL \"GNU\" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 7.3.0)\nmessage(FATAL_ERROR \"GCC version ${CMAKE_CXX_COMPILER_VERSION} must not be less than 7.3.0\")\nendif()\n\ninclude_directories(${CMAKE_CURRENT_SOURCE_DIR}/runtime/) # 添加头文件寻找路径"
+        },
+        {
+          "chunkId": "S05#s101~5",
+          "score": 33.657,
+          "text": "首先创建一个Model类对象model，Model类定义了MindSpore Lite中的模型，用于计算图管理。\n关于Model类的详细说明，可参考API文档。\n\nauto model = new (std::nothrow) mindspore::Model();\n\n接着调用Build接口传入模型，将模型编译至可在设备上运行的状态。\n在加载编译完模型之后，被解析的模型信息已记录在model变量中，原先的模型文件内存model_buf可以释放。\n由于model_buf是以char数组的方式申请的，故使用delete[]释放内存。\n\nauto build_ret = model->Build(model_buf, size, mindspore::kMindIR, context);\ndelete[](model_buf);\n\n(4) 传入数据\n\n在执行模型推理前，需要设置推理的输入数据。\n此例，通过Model.GetInputs接口，获取模型的所有输入张量。单个张量的格式为MSTensor。\n关于MSTensor张量的详细说明，请参考MSTensor的API说明。\n\nauto inputs = model->GetInputs();\n\n通过张量的MutableData接口，可以获取张量的数据内存指针。\n在本例中，模型的输入为浮点数格式，所以此处将指针强转为浮点指针。用户可根据自己模型的数据格式做不同处理，也可通过张量的DataType接口，得到该张量的数据类型。\n\nauto input_data = reinterpret_cast<float *>(tensor.MutableData());\n\n接着，通过数据指针，将我们要推理的数据传入张量内部。\n在本例中我们传入的是随机生成的0.1至1的浮点数据，且数据呈平均分布。\n在实际的推理中，用户在读取图片或音频等实际数据后，需进行算法特定的预处理操作，并将处理后的数据传入模型。\n\ntemplate <typename T, typename Distribution>\nvoid GenerateRandomData(int size, void *data, Distribution distribution) {\nstd::mt19937 random_engine;\nint elements_num = size / sizeof(T);\n(void)std::generate_n(static_cast<T *>(data), elements_num,\n[&distribution, &random_engine]() { return static_cast<T>(distribution(random_engine)); });\n}\n\n...\n\nGenerateRandomData<float>(tensor.DataSize(), input_data, std::uniform_real_distribution<float>(0.1f, 1.0f));\n\n(5) 执行推理\n\n首先申请一个放置模型推理输出张量的数组outputs，然后调用模型推理接口Predict，将输入张量和输出张量作为参数。\n在推理成功后，输出张量被保存在outputs内。\n\nstd::vector<MSTensor> outputs;\nauto status = model->Predict(inputs, &outputs);\n\n(6) 推理结果核验\n\n通过MutableData得到输出张量的数据指针。\n本例中，将它强转为浮点指针，用户可以根据自己模型的数据类型进行对应类型的转换，也可通过张量的DataType接口得到数据类型。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s110"
+      ]
+    },
+    {
+      "questionId": "T19",
+      "set": "AI框架与推理",
+      "question": "在 Linux 上把 MindSpore Lite 集成进自己的工程时，如果要链接静态库应该加什么链接选项？程序跑起来后想直观看看输出对不对，一般怎么处理输出张量？",
+      "referenceChunks": [
+        "S05#s101~2",
+        "S05#s101~6"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s101",
+          "score": 29.319,
+          "text": "在上一节，我们使用了官方推理测试工具进行了模型推理测试。在本节，我们将以使用MindSpore Lite的C++接口进行集成为例，演示如何使用MindSpore Lite的发布件，进行集成开发，编写自己的推理程序。\n\n环境要求\n\n系统环境：Linux x86_64，推荐使用Ubuntu\n\nC++编译依赖\n\nGCC >= 7.3.0\n\nCMake >= 3.22.3\n\n获得版本发布件\n\n用户可通过MindSpore Lite官网，获得MindSpore Lite发布件，点击此处查看各版本。\n在本例中，仍然采用了和前几节一样的发布件，用于本节集成开发，点击此处可直接下载。\n在本节简单的推理集成例子中，需要用到的发布件内容如下：\n\nmindspore-lite-{version}-linux-x64\n└── runtime\n│── include # MindSpore Lite集成开发的API头文件\n└── lib\n└── libmindspore-lite.so # MindSpore Lite推理框架的动态库\n\n构建工程目录\n\n本例的工程目录如下：\n\ndemo\n├── CMakeLists.txt # cmake工程管理文件\n├── main.cc # 用户代码\n├── build # 编译用目录\n├── model\n│ └── mobilenetv2.ms # 模型文件（之前转出的模型）\n└── runtime # 发布件的runtime目录\n├── include # MindSpore Lite集成开发的API头文件\n└── lib\n└── libmindspore-lite.so # MindSpore Lite推理框架的动态库\n\n新建一个demo文件夹，新建main.cc和CMakeLists.txt文件。\n新建build和model目录，将mobilenetv2.ms放到model内。\n将发布件中的runtime目录拷贝到demo中，runtime内的文件可以保持不动，也可以删除除libmindspore-lite.so和include文件夹外的其它库文件。\n\n构建cmake工程\n\n打开上一步创建的CMakeLists.txt，粘贴如下内容，其中每句话的含义见注释：\n\ncmake_minimum_required(VERSION 3.22.3) # cmake版本要求最低3.22.3\nproject(Demo) # 工程名为Demo\n\n# gcc 版本要求大于等于7.3.0\nif(CMAKE_CXX_COMPILER_ID STREQUAL \"GNU\" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 7.3.0)\nmessage(FATAL_ERROR \"GCC version ${CMAKE_CXX_COMPILER_VERSION} must not be less than 7.3.0\")\nendif()\n\ninclude_directories(${CMAKE_CURRENT_SOURCE_DIR}/runtime/) # 添加头文件寻找路径\n\nlink_directories(${CMAKE_CURRENT_SOURCE_DIR}/runtime/lib) # 添加库文件寻找路径\n\nadd_executable(demo main.cc) # 编译生成demo执行程序\n\n# 声明demo执行程序需要链接的库，mindspore-lite为MindSpore Lite推理框架的动态库\ntarget_link_libraries(\ndemo\nmindspore-lite\npthread\ndl\n)"
+        },
+        {
+          "chunkId": "S05#s110",
+          "score": 27.769,
+          "text": "在上一节，我们使用了官方推理测试工具进行了模型推理测试，在本节，我们将以使用MindSpore Lite的C++接口进行集成为例，演示如何使用MindSpore Lite的发布件，进行集成开发，编写自己的推理程序。\n\n环境要求\n\n系统环境：Windows 7，Windows 10；64位。\n\nMinGW 编译依赖\n\nCMake >= 3.22.3\n\n编译64位：MinGW-W64 x86_64 = GCC-7.3.0\n\n编译32位：MinGW-W64 i686 = GCC-7.3.0\n\n得到版本发布件\n\n用户可通过MindSpore Lite官网，获得MindSpore Lite发布件，点击此处查看各版本。\n在本例中，仍然采用了和前几节一样的发布件，用于本节集成开发，点击此处可直接下载。\n在本节简单的推理集成例子中，需要用到的发布件内容如下：\n\nmindspore-lite-{version}-win-x64\n└── runtime\n├── include\n└── lib\n├── libgcc_s_seh-1.dll # MinGW动态库\n├── libmindspore-lite.a # MindSpore Lite推理框架的静态库\n├── libmindspore-lite.dll # MindSpore Lite推理框架的动态库\n├── libmindspore-lite.dll.a # MindSpore Lite推理框架的动态库的链接文件\n├── libssp-0.dll # MinGW动态库\n├── libstdc++-6.dll # MinGW动态库\n└── libwinpthread-1.dll # MinGW动态库\n\n构建工程目录\n\n本例的工程目录如下：\n\ndemo\n├── CMakeLists.txt # cmake工程管理文件\n├── main.cc # 用户代码\n├── build # 编译用目录\n├── model\n│ └── mobilenetv2.ms # 模型文件（之前转出的模型）\n└── runtime # 发布件的runtime目录\n├── include # MindSpore Lite集成开发的API头文件\n└── lib\n└── libmindspore-lite.so # MindSpore Lite推理框架的动态库\n\n新建一个demo文件夹，新建main.cc和CMakeLists.txt文件。\n新建build和model目录，将mobilenetv2.ms放到model内。\n将发布件中的runtime目录拷贝到demo中，runtime内的文件可以保持不动，也可以删除除libmindspore-lite.so和include文件夹外的其它库文件。\n\n构建cmake工程\n\n打开上一步创建的CMakeLists.txt，粘贴如下内容，其中每句话的含义见注释：\n\ncmake_minimum_required(VERSION 3.22.3) # cmake版本要求最低3.22.3\nproject(Demo) # 工程名为Demo\n\n# gcc 版本要求大于等于7.3.0\nif(CMAKE_CXX_COMPILER_ID STREQUAL \"GNU\" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 7.3.0)\nmessage(FATAL_ERROR \"GCC version ${CMAKE_CXX_COMPILER_VERSION} must not be less than 7.3.0\")\nendif()\n\ninclude_directories(${CMAKE_CURRENT_SOURCE_DIR}/runtime/) # 添加头文件寻找路径"
+        },
+        {
+          "chunkId": "S05#s101~5",
+          "score": 27.239,
+          "text": "首先创建一个Model类对象model，Model类定义了MindSpore Lite中的模型，用于计算图管理。\n关于Model类的详细说明，可参考API文档。\n\nauto model = new (std::nothrow) mindspore::Model();\n\n接着调用Build接口传入模型，将模型编译至可在设备上运行的状态。\n在加载编译完模型之后，被解析的模型信息已记录在model变量中，原先的模型文件内存model_buf可以释放。\n由于model_buf是以char数组的方式申请的，故使用delete[]释放内存。\n\nauto build_ret = model->Build(model_buf, size, mindspore::kMindIR, context);\ndelete[](model_buf);\n\n(4) 传入数据\n\n在执行模型推理前，需要设置推理的输入数据。\n此例，通过Model.GetInputs接口，获取模型的所有输入张量。单个张量的格式为MSTensor。\n关于MSTensor张量的详细说明，请参考MSTensor的API说明。\n\nauto inputs = model->GetInputs();\n\n通过张量的MutableData接口，可以获取张量的数据内存指针。\n在本例中，模型的输入为浮点数格式，所以此处将指针强转为浮点指针。用户可根据自己模型的数据格式做不同处理，也可通过张量的DataType接口，得到该张量的数据类型。\n\nauto input_data = reinterpret_cast<float *>(tensor.MutableData());\n\n接着，通过数据指针，将我们要推理的数据传入张量内部。\n在本例中我们传入的是随机生成的0.1至1的浮点数据，且数据呈平均分布。\n在实际的推理中，用户在读取图片或音频等实际数据后，需进行算法特定的预处理操作，并将处理后的数据传入模型。\n\ntemplate <typename T, typename Distribution>\nvoid GenerateRandomData(int size, void *data, Distribution distribution) {\nstd::mt19937 random_engine;\nint elements_num = size / sizeof(T);\n(void)std::generate_n(static_cast<T *>(data), elements_num,\n[&distribution, &random_engine]() { return static_cast<T>(distribution(random_engine)); });\n}\n\n...\n\nGenerateRandomData<float>(tensor.DataSize(), input_data, std::uniform_real_distribution<float>(0.1f, 1.0f));\n\n(5) 执行推理\n\n首先申请一个放置模型推理输出张量的数组outputs，然后调用模型推理接口Predict，将输入张量和输出张量作为参数。\n在推理成功后，输出张量被保存在outputs内。\n\nstd::vector<MSTensor> outputs;\nauto status = model->Predict(inputs, &outputs);\n\n(6) 推理结果核验\n\n通过MutableData得到输出张量的数据指针。\n本例中，将它强转为浮点指针，用户可以根据自己模型的数据类型进行对应类型的转换，也可通过张量的DataType接口得到数据类型。"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T20",
+      "set": "职业能力",
+      "question": "O*NET 收录的软件质量保证分析师与测试员这个职业，在数据库和操作系统这两类软件上分别常用到哪些工具？能不能举出被标为热门技术的例子？",
+      "referenceChunks": [
+        "S16#s298~2",
+        "S16#s298~5"
+      ],
+      "topk": [
+        {
+          "chunkId": "S15#s282",
+          "score": 38.452,
+          "text": "测试之家（TesterHome）由一线测试工程师发起和运营，社区的主旨是公益，开源，分享，落地。\n社区以推进国内软件测试开源为己任，不遗余力的引入和输出国内外测试工具，紧跟流行技术，是软件测试行业的风向标。\n\n众人拾柴火焰高，期待更多人加入测试之家，一起为中国软件测试做贡献。\n\n注册\n登录\n\n最新帖子\n\n做为一个 10 几年的测试，目前已经全职开发 2 年。随便唠唠~\n\nFun_Fox\n\n作为一个测试，我做了个统一管理面试信息的小程序：Offer 时光机\n\n红衣娃娃\n\niPhone Duo 发布后，折叠态 App 测试矩阵应该怎么设计？\n\n无缺智测\n\n最近火爆出圈的，FDE 到底是个什么岗位？\n\n狂师\n\n【AI 时代下 - 精准测试新范式】用 AI + Git 自动生成提测变更日志\n\nFun_Fox\n\n关于下午茶福利适用范围的调整通知： 经与集团于 9 月 4 日确认，自 2026 年 9 月起，劳务派遣人员不享受我司下午茶福利，相关福利由其签约的第三方公司另行安排。因此，后续的下午茶接龙活动劳务派遣同事请不必再参与接龙,感谢各位的配合！@ 所有人\n\n逍遥子\n\n14\n\n查看更多...\n\n精华帖子\n\n面向 AI、面向企业级的远程真机平台\n\ncodeskyblue\n\n12\n\n六万字长文：科普 AI 产品测试人员，都在如何测试全品类 AI 产品\n\n孙高飞\n\n2025，我们这样评测 AI\n\n小志\n\n12\n\n【开源】全新一代 Aomaker 发布！——重塑接口自动化测试的工程范式\n\n古一\n\n26\n\n专栏文章 质量保障系统的落地实践 (八)-AI 赋能测试岗位\n\n困学\n\n10\n\nhmdriver2 发布：开启鸿蒙 NEXT 自动化新时代\n\ncodematrixer\n\n34\n\n故障演练体系建设\n\n货拉拉质量星火\n\n作为测试新人，期望在自动化测试工程师发展，怎么系统的学习语言及实践\n\n-Serendipity-\n\n34\n\n鸿蒙应用怎么测试？这个工具包请收藏！\n\nTesterHome小助手\n\n为什么放弃精准测试平台？\n\nsimonpatrick\n\n53\n\n我的 2025 年总结\n\n啊木森\n\n11\n\n火爆全网的 Agent Skills，普通人到底该怎么用？-- 详细教程\n\n狂师\n\n大模型稳定性测评：从理念到实现的完整技术方案\n\nandyguo\n\n13\n\n关于一些副业的小小见解\n\n无敌测试大王\n\n66\n\n测试技艺 | 在 AI 极速发展下重塑\n\n张昊翔\n\n30\n\nNico，从零开始干掉 Appium，移动端自动化测试框架实现（一）\n\nhank.huang\n\n39\n\n大家好，希望各位前辈给予新人一些职业发展的建议\n\n茯苓山楂\n\n41\n\n基于 AI 大模型的精准测试分享\n\nAMEAME\n\n37\n\n2024 年测试求职手册\n\n5t5\n\n128\n\n一个基于多接口的业务自动化测试框架\n\n陆压\n\n14\n\n查看更多精华帖...\n\n热门节点\n\nAppium\n招聘\n问答\nAI测试\n测试基础\n接口测试\n匿名职言\n自动化工具\n新手区\n研发效能\n灌水\nBug 曝光台\n通用技术\n职业经验\n性能测试工具\nSelenium\nPython\n违规处理区\n其他测试框架\nMacaca\n活动沙龙\n测试管理\n持续集成\niOS 测试\n京东质量社区\n移动性能测试\nSTF\n求职\nMTSC\nUiAutomator\n鸿蒙\nWeTest腾讯质量开发平台\nJava\n性能常识\n游戏测试\n\n热门城市\n\n北京\n上海\n深圳\n杭州\n广州\n成都\n南京\n武汉\n西安\n苏州\n重庆\n长沙市\n\n公众号\n\n个人号助手\n\nHi-CC精准测试质管平台\n\nHi-CC 前端覆盖率实时展示\n\nHi-CC 精准测试工具\n\n最新招聘\n\n【杭州】蚂蚁数字科技 - AI 产品质量工程师\n\n【北京】乐信圣文 APP测试组长/主测试/AI 测开"
+        },
+        {
+          "chunkId": "S18#s343",
+          "score": 22.101,
+          "text": "技能人员职业资格证书全国联网查询系统\n\n职业技能等级证书全国联网查询系统\n\n应急管理部特种作业人员证书查询链接\n\n市场监管总局特种设备安全管理和作业人员证书查询链接\n\n住建部建筑施工特种作业人员证书查询链接\n\n应用系统\n\n职业分类系统\n\n职业标准系统\n\n相关政策\n\n文件系统\n\n国家职业资格\n\n目录清单系统\n\n职业资格鉴定\n\n机构公示查询系统\n\n技能人员职业资格\n\n证书数据交换系统\n\n职业技能等级评价\n\n机构公示查询系统\n\n职业技能等级\n\n证书数据交换系统\n\n\"X证书\"\n\n接收工作专栏\n\n办事指南\n留言板\n\n投诉信箱\n\n投诉信箱\n\n欢迎您访问投诉信箱:\n\n为加强技能人才评价工作的质量监管，方便您反映技能人才评价工作中出现的违规问题，我们特开设了投诉信箱。\n\n本信箱接受反映技能人才评价中,超备案范围开展评价不执行职业技能标准(或规范)开展评价、未评价就发证等违规问题。我们将及时对您反映的问题进行处理，并对实名反映的问题反馈处理结果。\n\n请如实反映问题，如存在蓄意诽谤、歪曲事实造成不良后果的，相关责任由反映人承担。\n\n如果您希望保护个人隐私，请在留言中声明，我们将充分尊重您的意愿并妥善处理。\n\n重点提示:\n\n如果您要反映人力资源和社会保障方面的其他个人诉求，请按信访条例的规定向人社部门信访机构反映。\n\n如您要咨询人力资源和社会保障方面的政策法规，请拨打当地12333咨询服务电话或通过其他渠道咨询。\n\n如果您要反映人力资源和社会保障部门相关工作人员的违纪违规问题，请向纪检监察部门反映。\n\n如果您要查询评价机构和技能人员证书情况，请您登录技能人才评价工作网(网址:http://www.osta.org.cn/)\n\n已阅读\n\n我要投诉\n\n退 出\n\n政策指导单位：人力资源和社会保障部职业能力建设司\n网站声明\n\n版权所有：中国就业培训技术指导中心 人力资源和社会保障部职业技能鉴定中心\n\n技术支持单位：北京航天情报与信息研究所 电话支持：010-84661145 网站标识码：bm15000011\n\n京ICP备2021025080号-2 京公网安备11010502045509号\n\n关闭\n\n技能人才评价工作网常见问题解答\n重要政策举措及实施效果\n技能人才评价工作网政府网站工作年度报表（2025年度）\n警惕「招转培，培转贷」陷阱！\n\n关闭"
+        },
+        {
+          "chunkId": "S21#s349~4",
+          "score": 21.073,
+          "text": "街电67W 15000mAh三合一移动电源集充电器、充电宝、伸缩线于一体，15000mAh可登机，支持PD/PPS/UFCS/QC等协议，智显屏可看功率、电量及循环，蓝牙小程序可换壁纸并OTA。拆解显示三串亿纬21700电芯，充电器用必易微KP22084+KP40613，移动电源用南芯SC2016AD，配CW1573、武汉芯源MCU与宜源MOS，结构紧凑、用料扎实。\n\n充电头网\n\n220\n\n1小时前\n\n拆解\n拆解报告\n\n2026中国智能算力进展：面向AI产业的算存运力一体化\n\n2026中国算力大会显示，我国在用标准机架1556万架、智能算力2185EFLOPS、存力超2000EB，算力发展从规模扩张转向体系协同与高效应用。政策围绕算网融合、芯片创新、应用赋能推进；河北、运营商及产业链通过智算中心、液冷、空芯光纤、算力平台互联互通等实践，加速算力向产业价值转化。\n\n通信世界网\n\n180\n\n1小时前\n\n算力\n\n【总编视点】手机弹窗广告乱象泛滥：治理亟需重典破局\n\n近期，荣耀手机用户集中吐槽的APP肆意弹窗、无差别推送广告乱象，已然不是个别机型、个别软件的偶发问题，而是移动互联网行业沉疴复发的典型缩影。从开机锁屏、桌面弹窗到应用跳转、后台推送，各类广告无孔不入、肆意刷屏，无视用户权限、侵扰使用体验、透支行业口碑。看似是细碎的用户体验问题，实则暴露了当下移动应用生态的规则失效、企业失责与监管疲软。面对愈演愈烈的弹窗广告乱象，温和整治早已形同虚设，唯有乱世用重典、从严立规矩、完善硬制度，才能彻底斩断行业灰色利益链条，重塑良性的终端应用生态。\n\n通信世界网\n\n118\n\n1小时前\n\n智能手机\n荣耀\n\n芯片知识科普：第3章 芯片设计流程：从想法到图纸\n\n本文科普芯片设计全流程：芯片不像软件可“先发布再修”，须在流片前把错误找全。流程涵盖需求、架构、RTL、验证、综合、布局布线、版图与流片测试，依托五层抽象、Verilog和EDA，验证占约七成时间。最终交付GDSII版图，并介绍流片成本、fabless/Foundry/IDM及SoC/IP复用模式。\n\n半导体综研\n\n113\n\n1小时前\n\n芯片设计\n\n韩国Sanil投资建设154kV变压器工厂\n\n三一电气第二季度业绩改善，销售额和利润增长明显。证券公司预测其数据中心订单将持续扩张，目标价分别为27万至30万韩元。公司计划收购第三家工厂，进军超高压变压器市场，预计产能将在2028年达到1.2万亿韩元。\n\n中都百晓生\n\n123\n\n1小时前\n\n数据中心\n变压器\n\n晶能微、翠展微披露SiC项目进度\n\n国内多家公司加速SiC模块项目的投产，晶能微温岭车规级SiC封测基地二期项目进入收尾冲刺阶段，翠展微在湖南岳阳开工新建6条SiC模块封测线，聚焦车规级功率模块生产与封测。\n\n行家说三代半\n\n195\n\n1小时前\n\nSiC\n车规级SiC\n\n2026年上半年中国CDU水泵出货量TOP10榜单发布\n\n在数据中心算力密度飙升的今天，液冷技术已成为突破散热瓶颈的核心方案，而冷却分配单元（CDU）中的水泵作为液冷系统的 “心脏”，其性能直接决定散热效率与能耗水平。\n\nMIR睿工业\n\n136\n\n1小时前\n\n液冷\n散热\n\n查看更多文章\n\n热门专题\n更多\n\n每周必看\n更多\n\n•2026.09.1534期\n\n新易盛光模块拆解；国产车规MCU ASIL-D全景分析\n\n•2026.09.0833期\n\n无人机开始有自己的射频芯片了？；存储器变局！HBM拐点将至\n\n•2026.09.0132期\n\n无人机到底需要几颗“大脑”？；国产机器人关节模组BOM拆解\n\n热门作者\n换一换\n\n曹顺程\n\n新易盛光模块拆解：含“美”量很高\n\n夏珍\n\n为什么大模型能效的尽头是“通信与存储”？\n\n芝能汽车\n\n发改委鼓励汽车行业兼并重组，中国汽车行业重组大猜想"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T21",
+      "set": "职业能力",
+      "question": "这个职业在分析与科学计算软件、图形图像软件上分别用到什么？其中哪些被标为热门技术？",
+      "referenceChunks": [
+        "S16#s298",
+        "S16#s298~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S15#s282",
+          "score": 23.892,
+          "text": "测试之家（TesterHome）由一线测试工程师发起和运营，社区的主旨是公益，开源，分享，落地。\n社区以推进国内软件测试开源为己任，不遗余力的引入和输出国内外测试工具，紧跟流行技术，是软件测试行业的风向标。\n\n众人拾柴火焰高，期待更多人加入测试之家，一起为中国软件测试做贡献。\n\n注册\n登录\n\n最新帖子\n\n做为一个 10 几年的测试，目前已经全职开发 2 年。随便唠唠~\n\nFun_Fox\n\n作为一个测试，我做了个统一管理面试信息的小程序：Offer 时光机\n\n红衣娃娃\n\niPhone Duo 发布后，折叠态 App 测试矩阵应该怎么设计？\n\n无缺智测\n\n最近火爆出圈的，FDE 到底是个什么岗位？\n\n狂师\n\n【AI 时代下 - 精准测试新范式】用 AI + Git 自动生成提测变更日志\n\nFun_Fox\n\n关于下午茶福利适用范围的调整通知： 经与集团于 9 月 4 日确认，自 2026 年 9 月起，劳务派遣人员不享受我司下午茶福利，相关福利由其签约的第三方公司另行安排。因此，后续的下午茶接龙活动劳务派遣同事请不必再参与接龙,感谢各位的配合！@ 所有人\n\n逍遥子\n\n14\n\n查看更多...\n\n精华帖子\n\n面向 AI、面向企业级的远程真机平台\n\ncodeskyblue\n\n12\n\n六万字长文：科普 AI 产品测试人员，都在如何测试全品类 AI 产品\n\n孙高飞\n\n2025，我们这样评测 AI\n\n小志\n\n12\n\n【开源】全新一代 Aomaker 发布！——重塑接口自动化测试的工程范式\n\n古一\n\n26\n\n专栏文章 质量保障系统的落地实践 (八)-AI 赋能测试岗位\n\n困学\n\n10\n\nhmdriver2 发布：开启鸿蒙 NEXT 自动化新时代\n\ncodematrixer\n\n34\n\n故障演练体系建设\n\n货拉拉质量星火\n\n作为测试新人，期望在自动化测试工程师发展，怎么系统的学习语言及实践\n\n-Serendipity-\n\n34\n\n鸿蒙应用怎么测试？这个工具包请收藏！\n\nTesterHome小助手\n\n为什么放弃精准测试平台？\n\nsimonpatrick\n\n53\n\n我的 2025 年总结\n\n啊木森\n\n11\n\n火爆全网的 Agent Skills，普通人到底该怎么用？-- 详细教程\n\n狂师\n\n大模型稳定性测评：从理念到实现的完整技术方案\n\nandyguo\n\n13\n\n关于一些副业的小小见解\n\n无敌测试大王\n\n66\n\n测试技艺 | 在 AI 极速发展下重塑\n\n张昊翔\n\n30\n\nNico，从零开始干掉 Appium，移动端自动化测试框架实现（一）\n\nhank.huang\n\n39\n\n大家好，希望各位前辈给予新人一些职业发展的建议\n\n茯苓山楂\n\n41\n\n基于 AI 大模型的精准测试分享\n\nAMEAME\n\n37\n\n2024 年测试求职手册\n\n5t5\n\n128\n\n一个基于多接口的业务自动化测试框架\n\n陆压\n\n14\n\n查看更多精华帖...\n\n热门节点\n\nAppium\n招聘\n问答\nAI测试\n测试基础\n接口测试\n匿名职言\n自动化工具\n新手区\n研发效能\n灌水\nBug 曝光台\n通用技术\n职业经验\n性能测试工具\nSelenium\nPython\n违规处理区\n其他测试框架\nMacaca\n活动沙龙\n测试管理\n持续集成\niOS 测试\n京东质量社区\n移动性能测试\nSTF\n求职\nMTSC\nUiAutomator\n鸿蒙\nWeTest腾讯质量开发平台\nJava\n性能常识\n游戏测试\n\n热门城市\n\n北京\n上海\n深圳\n杭州\n广州\n成都\n南京\n武汉\n西安\n苏州\n重庆\n长沙市\n\n公众号\n\n个人号助手\n\nHi-CC精准测试质管平台\n\nHi-CC 前端覆盖率实时展示\n\nHi-CC 精准测试工具\n\n最新招聘\n\n【杭州】蚂蚁数字科技 - AI 产品质量工程师\n\n【北京】乐信圣文 APP测试组长/主测试/AI 测开"
+        },
+        {
+          "chunkId": "S22#s354",
+          "score": 21.168,
+          "text": "手把手教你快速上手阿里云产品，助你轻松开启云上之旅。\n\n了解云计算\n\n了解云计算基础概念及核心优势，全面认识云计算如何帮助您完成数字化转型。\n\n文字链接\n\n了解阿里云\n\n了解阿里云，以及阿里云能为您带来哪些价值。\n\n文字链接\n\n免费试用\n\n160 多款云产品支持免费试用，帮助您立即开启云上实践之旅。\n\n文字链接\n\n技术解决方案\n\n了解热门技术问题背后的解决方案，并动手体验和学习。\n\n文字链接\n\n云采用框架\n\n提供清晰的路径与方法论，帮助您规划、实施和优化上云的每一步。\n\n文字链接\n\n云卓越架构\n\n用云、管云的技术指导和最佳实践。\n\n文字链接"
+        },
+        {
+          "chunkId": "S21#s349~4",
+          "score": 16.506,
+          "text": "街电67W 15000mAh三合一移动电源集充电器、充电宝、伸缩线于一体，15000mAh可登机，支持PD/PPS/UFCS/QC等协议，智显屏可看功率、电量及循环，蓝牙小程序可换壁纸并OTA。拆解显示三串亿纬21700电芯，充电器用必易微KP22084+KP40613，移动电源用南芯SC2016AD，配CW1573、武汉芯源MCU与宜源MOS，结构紧凑、用料扎实。\n\n充电头网\n\n220\n\n1小时前\n\n拆解\n拆解报告\n\n2026中国智能算力进展：面向AI产业的算存运力一体化\n\n2026中国算力大会显示，我国在用标准机架1556万架、智能算力2185EFLOPS、存力超2000EB，算力发展从规模扩张转向体系协同与高效应用。政策围绕算网融合、芯片创新、应用赋能推进；河北、运营商及产业链通过智算中心、液冷、空芯光纤、算力平台互联互通等实践，加速算力向产业价值转化。\n\n通信世界网\n\n180\n\n1小时前\n\n算力\n\n【总编视点】手机弹窗广告乱象泛滥：治理亟需重典破局\n\n近期，荣耀手机用户集中吐槽的APP肆意弹窗、无差别推送广告乱象，已然不是个别机型、个别软件的偶发问题，而是移动互联网行业沉疴复发的典型缩影。从开机锁屏、桌面弹窗到应用跳转、后台推送，各类广告无孔不入、肆意刷屏，无视用户权限、侵扰使用体验、透支行业口碑。看似是细碎的用户体验问题，实则暴露了当下移动应用生态的规则失效、企业失责与监管疲软。面对愈演愈烈的弹窗广告乱象，温和整治早已形同虚设，唯有乱世用重典、从严立规矩、完善硬制度，才能彻底斩断行业灰色利益链条，重塑良性的终端应用生态。\n\n通信世界网\n\n118\n\n1小时前\n\n智能手机\n荣耀\n\n芯片知识科普：第3章 芯片设计流程：从想法到图纸\n\n本文科普芯片设计全流程：芯片不像软件可“先发布再修”，须在流片前把错误找全。流程涵盖需求、架构、RTL、验证、综合、布局布线、版图与流片测试，依托五层抽象、Verilog和EDA，验证占约七成时间。最终交付GDSII版图，并介绍流片成本、fabless/Foundry/IDM及SoC/IP复用模式。\n\n半导体综研\n\n113\n\n1小时前\n\n芯片设计\n\n韩国Sanil投资建设154kV变压器工厂\n\n三一电气第二季度业绩改善，销售额和利润增长明显。证券公司预测其数据中心订单将持续扩张，目标价分别为27万至30万韩元。公司计划收购第三家工厂，进军超高压变压器市场，预计产能将在2028年达到1.2万亿韩元。\n\n中都百晓生\n\n123\n\n1小时前\n\n数据中心\n变压器\n\n晶能微、翠展微披露SiC项目进度\n\n国内多家公司加速SiC模块项目的投产，晶能微温岭车规级SiC封测基地二期项目进入收尾冲刺阶段，翠展微在湖南岳阳开工新建6条SiC模块封测线，聚焦车规级功率模块生产与封测。\n\n行家说三代半\n\n195\n\n1小时前\n\nSiC\n车规级SiC\n\n2026年上半年中国CDU水泵出货量TOP10榜单发布\n\n在数据中心算力密度飙升的今天，液冷技术已成为突破散热瓶颈的核心方案，而冷却分配单元（CDU）中的水泵作为液冷系统的 “心脏”，其性能直接决定散热效率与能耗水平。\n\nMIR睿工业\n\n136\n\n1小时前\n\n液冷\n散热\n\n查看更多文章\n\n热门专题\n更多\n\n每周必看\n更多\n\n•2026.09.1534期\n\n新易盛光模块拆解；国产车规MCU ASIL-D全景分析\n\n•2026.09.0833期\n\n无人机开始有自己的射频芯片了？；存储器变局！HBM拐点将至\n\n•2026.09.0132期\n\n无人机到底需要几颗“大脑”？；国产机器人关节模组BOM拆解\n\n热门作者\n换一换\n\n曹顺程\n\n新易盛光模块拆解：含“美”量很高\n\n夏珍\n\n为什么大模型能效的尽头是“通信与存储”？\n\n芝能汽车\n\n发改委鼓励汽车行业兼并重组，中国汽车行业重组大猜想"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    }
+  ]
+}
