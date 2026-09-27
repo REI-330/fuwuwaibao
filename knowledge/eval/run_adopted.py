@@ -86,8 +86,13 @@ def load_env():
                 os.environ.setdefault(k.strip(), v.strip().strip('"'))
 
 
-def llm(prompt, timeout=180, max_tokens=300, attempts=4):
-    """带退避重试：端点对突发调用会直接拒（实测），必须重试。"""
+def llm(prompt, timeout=180, max_tokens=3000, attempts=4):
+    """带退避重试：端点对突发调用会直接拒（实测），必须重试。
+
+    max_tokens 默认给 3000 而不是 300：端点现役的 deepseek-v4.1-flash 是推理模型，
+    思维链也吃这个额度。实测给 1200 时 34 题里有 3 题返回空 content / 无 content 字段，
+    被误判成"模型没给出可用编号"而重试到失败。
+    """
     base = os.environ["DEEPEVAL_BASE_URL"].rstrip("/")
     body = json.dumps({"model": os.environ["DEEPEVAL_MODEL"], "temperature": 0,
                        "max_tokens": max_tokens,
@@ -206,7 +211,9 @@ def main():
                     if picked:
                         err = None
                         break
-                    err = "模型没给出可用编号"
+                    # 报错必须带上原始返回：只写"没给出可用编号"时，明明是模型答对了、
+                    # 只是解析没吃上，也看不出来（D18 就踩过这个）。
+                    err = f"模型没给出可用编号（原始返回前 200 字：{(out or '')[:200]!r}）"
                 except Exception as e:
                     err = f"{type(e).__name__} {e}"
                 if attempt < args.retries:
@@ -284,7 +291,10 @@ def main():
         rows.append({"split": "ALL", **s})
         return rows
 
-    print(f"\n配置：BM25+向量加权融合 α_bm25={args.alpha}；重排候选 10（读缓存 {os.path.basename(args.rerank_cache)}）")
+    # 候选数必须从缓存里读：写死 10 会在用 30 的缓存时谎报配置（真跑过一次才发现）。
+    cache_cands = sorted({len(v.get("candidates") or []) for v in rerank.values() if v.get("picked")})
+    print(f"\n配置：BM25+向量加权融合 α_bm25={args.alpha}；"
+          f"重排候选 {cache_cands or '(缓存为空)'}（读缓存 {os.path.basename(args.rerank_cache)}）")
     fusion_rows = grouped(fusion_q, f"档位 FUSION(α={args.alpha})")
     rerank_rows = grouped(rerank_q, "档位 FUSION+RERANK（已采纳配置）")
 

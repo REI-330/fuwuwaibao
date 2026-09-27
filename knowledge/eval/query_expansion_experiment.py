@@ -171,6 +171,9 @@ def main():
     ap.add_argument("--reuse-expansions", action="store_true",
                     help="复用已有的 expanded-queries*.json / bm25-full-expanded*.json，不再调 LLM（同一份扩展可复现分析）")
     ap.add_argument("--tag", default="", help="结果文件名后缀，如 dev → query-expansion-dev.json")
+    ap.add_argument("--emit-only", action="store_true",
+                    help="只生成增强后的题集与 BM25 产物就退出，**不算任何指标**"
+                         "——为冻结题集准备配置时用，避免正式跑之前先看到分数")
     ap.add_argument("--save-best", action="store_true")
     args = ap.parse_args()
     load_env()
@@ -194,8 +197,9 @@ def main():
             "  → 现役语料为 1757 段（中文化后），请显式指定 TEI_MODEL=Qwen3-Embedding-0.6B-onnx-int8；"
             "默认的 Qwen3-Embedding-0.6B 是 494 段时代留下的旧缓存。")
 
-    # 两种展开方式不共用产物文件：否则跑完 term-map 会把 LLM 那版覆盖掉（上次就是这么丢的）。
-    sfx = "" if args.expand_with == "llm" else "-termmap"
+    # 产物文件名必须同时区分「展开方式」和「题集」：早先只用 -termmap 做后缀，
+    # 结果在 test 上跑一次就把 dev 的增强 BM25 覆盖掉了（换题集时静默错位）。
+    sfx = f"-{args.tag}" if args.tag else ("" if args.expand_with == "llm" else "-termmap")
     out_exp = os.path.join(RUNS, f"expanded-queries{sfx}.json")
     bm_out = os.path.join(RUNS, f"bm25-full-expanded{sfx}.json")
 
@@ -266,17 +270,22 @@ def main():
                 print(f"   {q['questionId']} ← " + "、".join(f"{x['matchedKey']}→{x['en']}" for x in f))
 
     # 2) 用扩展查询重跑 BM25（复用 lib/graph.mjs，不另写实现）
+    tmp_q = os.path.join(RUNS, f"_expanded_questions{sfx}.json")
     if args.reuse_expansions:
         print("\n== 2) 复用扩展 BM25 产物 ==")
         print("   " + os.path.relpath(bm_out, ROOT))
     else:
         print("\n== 2) 扩展查询上的 BM25 ==")
-        tmp_q = os.path.join(RUNS, f"_expanded_questions{sfx}.json")
         doc = {"questions": [dict(q, question=expanded[q["questionId"]]) for q in qs]}
         json.dump(doc, open(tmp_q, "w", encoding="utf-8"), ensure_ascii=False)
         rc = subprocess.call(["node", "knowledge/pipeline/bm25-full.mjs",
                               "--questions", tmp_q, "--out", bm_out], cwd=ROOT)
         print("   node 退出码:", rc)
+
+    if args.emit_only:
+        print(f"\n--emit-only：增强题集 {os.path.relpath(tmp_q, ROOT)} 与 BM25 产物已就绪，"
+              f"**不计算指标**（冻结题集正式跑之前只看这些）")
+        return 0
 
     # 3) 基线 & 扩展后的完整排序
     def rankings(queries):
