@@ -1,0 +1,48 @@
+{
+  "schema": "career-graph-source-swap/v1",
+  "generatedAt": "2026-09-27T00:00:00Z",
+  "swap": { "from": "S13", "to": "S14" },
+  "rationale": "S13 是 pytest 官方英文页 docs.pytest.org/en/stable/how-to/fixtures.html，S14 是同一页的中文镜像 osgeo.cn/pytest/fixture.html，两者是同内容的中英两版。移除 S13 不丢知识，且让语料少 50 段纯英文（中文占比 0.000）。",
+  "whyNotMechanical": "不能按序号机械对齐：S13 切出 34 个章节、S14 切出 47 个；S14 多出「导航」「固定装置是什么？」「返回到固定装置」「夹具错误」「夹具可用性」「共享测试数据」「卫浴装置实例化顺序」等章节，且层级深度错位（3/2、2/3、4/2 混杂）。按序号硬映射会把引用指到不相干章节，属于静默错数据，因此改为人工建立语义对照表。",
+  "matchMethod": "人工按章节语义对应（同一文档、同一顺序、标题为中英互译）。",
+  "sections": [
+    { "s13": "How to use fixtures", "s14": "Pytest夹具：显式、模块化、可扩展" },
+    { "s13": "\u201cRequesting\u201d fixtures", "s14": "\u201c请求\u201d装置", "note": "S14 该节下另拆出「固定装置是什么？」「返回到固定装置」两个子节，S13 无对应" },
+    { "s13": "Quick example", "s14": "快速实例" },
+    { "s13": "Fixtures can request other fixtures", "s14": "装置可以 请求 其他固定装置" },
+    { "s13": "Fixtures are reusable", "s14": "固定装置是可重复使用的" },
+    { "s13": "A test/fixture can request more than one fixture at a time", "s14": "测试/夹具可以 请求 一次安装多个固定装置" },
+    { "s13": "Fixtures can be requested more than once per test", "s14": "固定装置可以是 已请求 每个测试不止一次(缓存返回值)" },
+    { "s13": "Autouse fixtures (fixtures you don\u2019t have to request)", "s14": "自动使用设备(您不必请求设备)" },
+    { "s13": "Scope: sharing fixtures across classes, modules, packages or sessions", "s14": "范围：跨类、模块、包或会话共享fixture" },
+    { "s13": "Teardown/Cleanup (AKA Fixture finalization)", "s14": "拆卸/清理(AKA灯具定稿)", "note": "S14 该节下另拆「1」「2」小节" },
+    { "s13": "Safe teardowns", "s14": "安全拆卸" },
+    { "s13": "Running multiple assert statements safely", "s14": "运行多个 assert 安全的报表" },
+    { "s13": "Fixtures can introspect the requesting test context", "s14": "fixtures可以反省请求的测试上下文" },
+    { "s13": "Using markers to pass data to fixtures", "s14": "使用标记将数据传递到装置" },
+    { "s13": "Factories as fixtures", "s14": "工厂作为固定装置" },
+    { "s13": "Parametrizing fixtures", "s14": "参数化夹具", "note": "「对参数化夹具使用标记」在 S14 为独立子节，S13 无独立对应" },
+    { "s13": "Using marks with parametrized fixtures", "s14": "对参数化夹具使用标记" },
+    { "s13": "Modularity: using fixtures from a fixture function", "s14": "模块化：使用fixture函数中的fixture" },
+    { "s13": "Automatic grouping of tests by fixture instances", "s14": "按设备实例自动分组测试" },
+    { "s13": "Use fixtures in classes and modules with usefixtures", "s14": "在类和模块中使用fixture usefixtures" },
+    { "s13": "Overriding fixtures on various levels", "s14": "覆盖不同级别的设备" },
+    { "s13": "Using fixtures from other projects", "s14": "使用其他项目的固定装置" }
+  ],
+  "unmatchedInS14": [
+    "导航",
+    "固定装置是什么？",
+    "返回到固定装置",
+    "夹具错误",
+    "夹具可用性",
+    "共享测试数据",
+    "卫浴装置实例化顺序"
+  ],
+  "applyRule": "对每条指向 S13 的 sourceRefs：按其所在章节找到本表对应章节，改写为目标章节在 S14 下的首个 chunkId；同一章节下若原引用是该节的第 n 个 chunk，则尽量取 S14 同节的第 n 个 chunk，取不到就取该节首个并记录到 report。映射失败的引用不猜，列入待办并让 09 步报错，由人工决定改挂还是删边。",
+  "affected": {
+    "corpus": { "chunks": 50, "cjkRatio": 0.0, "note": "S13 全 50 段中文占比 0.000" },
+    "candidatesJsonl": { "sourceRefsToS13": 26 },
+    "graph": { "nodeRefs": 9, "edgeRefs": 17, "edgesTouchingS13": 11 },
+    "questions": { "dev": 0, "test": 2, "note": "另有 2 道题的参考段涉及 S13" }
+  }
+}
