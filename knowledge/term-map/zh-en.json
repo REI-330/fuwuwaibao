@@ -1,0 +1,1391 @@
+{
+  "schema": "career-graph-term-map/v1",
+  "generatedAt": "2026-09-27T23:28:42+0800",
+  "model": "deepseek-v4.1-flash",
+  "note": "英文术语源自语料（inventory.json）；中文译名由 LLM 一次性离线生成，只看术语不看题集。",
+  "terms": [
+    {
+      "en": "Computer Hardware Engineers",
+      "kind": "occupation",
+      "sources": [
+        "S17"
+      ],
+      "zh": "计算机硬件工程师",
+      "zh_short": [
+        "硬件工程师",
+        "计算机硬件"
+      ]
+    },
+    {
+      "en": "How to use fixtures¶",
+      "kind": "occupation",
+      "sources": [
+        "S13"
+      ],
+      "zh": "如何使用夹具",
+      "zh_short": [
+        "夹具用法",
+        "使用夹具"
+      ]
+    },
+    {
+      "en": "Software Quality Assurance Analysts and Testers",
+      "kind": "occupation",
+      "sources": [
+        "S16"
+      ],
+      "zh": "软件质量保证分析师和测试员",
+      "zh_short": [
+        "软件测试员",
+        "质量保证分析师"
+      ]
+    },
+    {
+      "en": "WebDriver",
+      "kind": "occupation",
+      "sources": [
+        "S11"
+      ],
+      "zh": "WebDriver",
+      "zh_short": [
+        "WebDriver"
+      ]
+    },
+    {
+      "en": "Abilities",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "能力",
+      "zh_short": [
+        "能力"
+      ]
+    },
+    {
+      "en": "Apprenticeship Opportunities",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "学徒机会",
+      "zh_short": [
+        "学徒机会",
+        "实习机会"
+      ]
+    },
+    {
+      "en": "Automatic grouping of tests by fixture instances¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ],
+      "zh": "按夹具实例自动分组测试",
+      "zh_short": [
+        "测试自动分组",
+        "夹具实例分组"
+      ]
+    },
+    {
+      "en": "Autouse fixtures (fixtures you don’t have to request)¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ],
+      "zh": "自动使用夹具（无需请求的夹具）",
+      "zh_short": [
+        "自动使用夹具",
+        "自动夹具"
+      ]
+    },
+    {
+      "en": "Detailed Work Activities",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "详细工作活动",
+      "zh_short": [
+        "工作活动",
+        "详细活动"
+      ]
+    },
+    {
+      "en": "Education",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "教育",
+      "zh_short": [
+        "教育"
+      ]
+    },
+    {
+      "en": "Essential Skills",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "基本技能",
+      "zh_short": [
+        "基本技能",
+        "核心技能"
+      ]
+    },
+    {
+      "en": "Factories as fixtures¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ],
+      "zh": "将工厂作为夹具",
+      "zh_short": [
+        "工厂夹具",
+        "工厂作为夹具"
+      ]
+    },
+    {
+      "en": "Fixtures can introspect the requesting test context¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ],
+      "zh": "夹具可以内省请求的测试上下文",
+      "zh_short": [
+        "夹具内省",
+        "测试上下文内省"
+      ]
+    },
+    {
+      "en": "Interests",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "兴趣",
+      "zh_short": [
+        "兴趣"
+      ]
+    },
+    {
+      "en": "Job Openings on the Web",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "网络职位空缺",
+      "zh_short": [
+        "网络职位",
+        "职位空缺"
+      ]
+    },
+    {
+      "en": "Job Zone",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "职业区域",
+      "zh_short": [
+        "职业区域",
+        "工作区域"
+      ]
+    },
+    {
+      "en": "Knowledge",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "知识",
+      "zh_short": [
+        "知识"
+      ]
+    },
+    {
+      "en": "Modularity: using fixtures from a fixture function¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ],
+      "zh": "模块化：从夹具函数使用夹具",
+      "zh_short": [
+        "夹具模块化",
+        "夹具函数"
+      ]
+    },
+    {
+      "en": "Overriding fixtures on various levels¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ],
+      "zh": "在不同层级覆盖夹具",
+      "zh_short": [
+        "覆盖夹具",
+        "夹具覆盖"
+      ]
+    },
+    {
+      "en": "Parametrizing fixtures¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ],
+      "zh": "参数化夹具",
+      "zh_short": [
+        "参数化夹具",
+        "夹具参数化"
+      ]
+    },
+    {
+      "en": "Professional Associations",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "专业协会",
+      "zh_short": [
+        "专业协会",
+        "行业协会"
+      ]
+    },
+    {
+      "en": "Related Occupations",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "相关职业",
+      "zh_short": [
+        "相关职业"
+      ]
+    },
+    {
+      "en": "Running multiple assert statements safely¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ],
+      "zh": "安全运行多个断言语句",
+      "zh_short": [
+        "多断言运行",
+        "安全断言"
+      ]
+    },
+    {
+      "en": "Safe teardowns¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ],
+      "zh": "安全拆卸",
+      "zh_short": [
+        "安全拆卸",
+        "安全清理"
+      ]
+    },
+    {
+      "en": "Scope: sharing fixtures across classes, modules, packages or session¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ],
+      "zh": "作用域：跨类、模块、包或会话共享夹具",
+      "zh_short": [
+        "夹具作用域",
+        "共享夹具"
+      ]
+    },
+    {
+      "en": "See the easy-read overview for Computer Hardware Engineers at My Next Move",
+      "kind": "section",
+      "sources": [
+        "S17"
+      ],
+      "zh": "在My Next Move查看计算机硬件工程师的易读概览",
+      "zh_short": [
+        "硬件工程师概览",
+        "易读概览"
+      ]
+    },
+    {
+      "en": "See the easy-read overview for Computer Hardware Engineers at My Next Move for Veterans",
+      "kind": "section",
+      "sources": [
+        "S17"
+      ],
+      "zh": "在My Next Move for Veterans查看计算机硬件工程师的易读概览",
+      "zh_short": [
+        "退伍军人硬件工程师概览",
+        "易读概览"
+      ]
+    },
+    {
+      "en": "See the easy-read overview for Software Quality Assurance Analysts & Testers at My Next Move",
+      "kind": "section",
+      "sources": [
+        "S16"
+      ],
+      "zh": "在My Next Move查看软件质量保证分析师和测试员的易读概览",
+      "zh_short": [
+        "软件测试员概览",
+        "易读概览"
+      ]
+    },
+    {
+      "en": "See the easy-read overview for Software Quality Assurance Analysts & Testers at My Next Move for Veterans",
+      "kind": "section",
+      "sources": [
+        "S16"
+      ],
+      "zh": "在My Next Move for Veterans查看软件质量保证分析师和测试员的易读概览",
+      "zh_short": [
+        "退伍军人软件测试员概览",
+        "易读概览"
+      ]
+    },
+    {
+      "en": "Software Skills",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "软件技能",
+      "zh_short": [
+        "软件技能"
+      ]
+    },
+    {
+      "en": "Support the Selenium Project",
+      "kind": "section",
+      "sources": [
+        "S11"
+      ],
+      "zh": "支持 Selenium 项目",
+      "zh_short": [
+        "Selenium 项目支持"
+      ]
+    },
+    {
+      "en": "Tasks",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "工作任务",
+      "zh_short": [
+        "任务"
+      ]
+    },
+    {
+      "en": "Teardown/Cleanup (AKA Fixture finalization)¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ],
+      "zh": "拆卸/清理（又称夹具终结）",
+      "zh_short": [
+        "拆卸清理",
+        "夹具终结"
+      ]
+    },
+    {
+      "en": "Training & Credentials",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "培训与资质",
+      "zh_short": [
+        "培训",
+        "资质"
+      ]
+    },
+    {
+      "en": "Transferable Skills",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "可迁移技能",
+      "zh_short": [
+        "可迁移技能"
+      ]
+    },
+    {
+      "en": "Use fixtures in classes and modules with usefixtures¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ],
+      "zh": "使用 usefixtures 在类和模块中使用夹具",
+      "zh_short": [
+        "usefixtures 夹具"
+      ]
+    },
+    {
+      "en": "Using fixtures from other projects¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ],
+      "zh": "使用其他项目中的夹具",
+      "zh_short": [
+        "跨项目夹具"
+      ]
+    },
+    {
+      "en": "Using markers to pass data to fixtures¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ],
+      "zh": "使用标记向夹具传递数据",
+      "zh_short": [
+        "标记传数据",
+        "夹具标记"
+      ]
+    },
+    {
+      "en": "Using marks with parametrized fixtures¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ],
+      "zh": "将标记与参数化夹具一起使用",
+      "zh_short": [
+        "参数化夹具标记"
+      ]
+    },
+    {
+      "en": "Ver la perspectiva general fácil de leer para Analistas y Probadores de Control de Calidad de Software en Mi Próximo Paso",
+      "kind": "section",
+      "sources": [
+        "S16"
+      ],
+      "zh": "查看“我的下一步”中软件质量分析师与测试人员的易读概览",
+      "zh_short": [
+        "软件质量分析师概览",
+        "软件测试人员概览"
+      ]
+    },
+    {
+      "en": "Ver la perspectiva general fácil de leer para Ingenieros de Computadoras en Mi Próximo Paso",
+      "kind": "section",
+      "sources": [
+        "S17"
+      ],
+      "zh": "查看“我的下一步”中计算机工程师的易读概览",
+      "zh_short": [
+        "计算机工程师概览"
+      ]
+    },
+    {
+      "en": "Wages & Employment Trends",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "工资与就业趋势",
+      "zh_short": [
+        "工资",
+        "就业趋势"
+      ]
+    },
+    {
+      "en": "Work Activities",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "工作活动",
+      "zh_short": [
+        "工作活动"
+      ]
+    },
+    {
+      "en": "Work Context",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "工作环境",
+      "zh_short": [
+        "工作环境"
+      ]
+    },
+    {
+      "en": "Work Styles",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "工作风格",
+      "zh_short": [
+        "工作风格"
+      ]
+    },
+    {
+      "en": "“Requesting” fixtures¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ],
+      "zh": "“请求”夹具",
+      "zh_short": [
+        "请求夹具"
+      ]
+    },
+    {
+      "en": "Access software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "访问软件",
+      "zh_short": [
+        "访问软件"
+      ]
+    },
+    {
+      "en": "Accounting software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "会计软件",
+      "zh_short": [
+        "会计软件"
+      ]
+    },
+    {
+      "en": "Administration software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "管理软件",
+      "zh_short": [
+        "管理软件"
+      ]
+    },
+    {
+      "en": "Analytical or scientific software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "分析或科学软件",
+      "zh_short": [
+        "分析软件",
+        "科学软件"
+      ]
+    },
+    {
+      "en": "Application server software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "应用服务器软件",
+      "zh_short": [
+        "应用服务器软件"
+      ]
+    },
+    {
+      "en": "Backup or archival software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "备份或归档软件",
+      "zh_short": [
+        "备份软件",
+        "归档软件"
+      ]
+    },
+    {
+      "en": "Business intelligence and data analysis software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "商业智能与数据分析软件",
+      "zh_short": [
+        "商业智能软件",
+        "数据分析软件"
+      ]
+    },
+    {
+      "en": "Cloud-based data access and sharing software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "基于云的数据访问与共享软件",
+      "zh_short": [
+        "云数据访问软件",
+        "云数据共享软件"
+      ]
+    },
+    {
+      "en": "Cloud-based management software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "基于云的管理软件",
+      "zh_short": [
+        "云管理软件"
+      ]
+    },
+    {
+      "en": "Clustering software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "集群软件",
+      "zh_short": [
+        "集群软件"
+      ]
+    },
+    {
+      "en": "Communications server software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "通信服务器软件",
+      "zh_short": [
+        "通信服务器软件"
+      ]
+    },
+    {
+      "en": "Compiler and decompiler software",
+      "kind": "software_category",
+      "sources": [
+        "S17"
+      ],
+      "zh": "编译与反编译软件",
+      "zh_short": [
+        "编译软件",
+        "反编译软件"
+      ]
+    },
+    {
+      "en": "Computer aided design CAD software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "计算机辅助设计（CAD）软件",
+      "zh_short": [
+        "CAD 软件",
+        "计算机辅助设计软件"
+      ]
+    },
+    {
+      "en": "Computer based training software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "计算机辅助培训软件",
+      "zh_short": [
+        "计算机培训软件",
+        "CBT软件"
+      ]
+    },
+    {
+      "en": "Configuration management software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "配置管理软件",
+      "zh_short": [
+        "配置管理软件"
+      ]
+    },
+    {
+      "en": "Content workflow software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "内容工作流软件",
+      "zh_short": [
+        "内容工作流软件"
+      ]
+    },
+    {
+      "en": "Customer relationship management CRM software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "客户关系管理软件",
+      "zh_short": [
+        "客户关系管理软件",
+        "CRM软件"
+      ]
+    },
+    {
+      "en": "Data base management system software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "数据库管理系统软件",
+      "zh_short": [
+        "数据库管理系统",
+        "数据库软件"
+      ]
+    },
+    {
+      "en": "Data base reporting software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "数据库报表软件",
+      "zh_short": [
+        "数据库报表软件",
+        "报表软件"
+      ]
+    },
+    {
+      "en": "Data base user interface and query software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "数据库用户界面与查询软件",
+      "zh_short": [
+        "数据库查询软件",
+        "数据库界面软件"
+      ]
+    },
+    {
+      "en": "Data mining software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "数据挖掘软件",
+      "zh_short": [
+        "数据挖掘软件"
+      ]
+    },
+    {
+      "en": "Desktop communications software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "桌面通信软件",
+      "zh_short": [
+        "桌面通信软件"
+      ]
+    },
+    {
+      "en": "Desktop publishing software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "桌面出版软件",
+      "zh_short": [
+        "桌面出版软件"
+      ]
+    },
+    {
+      "en": "Development environment software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "开发环境软件",
+      "zh_short": [
+        "开发环境软件",
+        "开发环境"
+      ]
+    },
+    {
+      "en": "Device drivers or system software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "设备驱动程序或系统软件",
+      "zh_short": [
+        "设备驱动软件",
+        "系统软件"
+      ]
+    },
+    {
+      "en": "Document management software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "文档管理软件",
+      "zh_short": [
+        "文档管理软件"
+      ]
+    },
+    {
+      "en": "Electronic mail software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "电子邮件软件",
+      "zh_short": [
+        "电子邮件软件",
+        "邮件软件"
+      ]
+    },
+    {
+      "en": "Enterprise application integration software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "企业应用集成软件",
+      "zh_short": [
+        "企业应用集成软件",
+        "应用集成软件"
+      ]
+    },
+    {
+      "en": "Enterprise resource planning ERP software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "企业资源计划软件",
+      "zh_short": [
+        "企业资源计划软件",
+        "ERP软件"
+      ]
+    },
+    {
+      "en": "Enterprise system management software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "企业系统管理软件",
+      "zh_short": [
+        "企业系统管理软件"
+      ]
+    },
+    {
+      "en": "Expert system software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "专家系统软件",
+      "zh_short": [
+        "专家系统软件"
+      ]
+    },
+    {
+      "en": "File versioning software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "文件版本管理软件",
+      "zh_short": [
+        "文件版本管理软件",
+        "版本管理软件"
+      ]
+    },
+    {
+      "en": "Filesystem software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "文件系统软件",
+      "zh_short": [
+        "文件系统软件"
+      ]
+    },
+    {
+      "en": "Financial analysis software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "财务分析软件",
+      "zh_short": [
+        "财务分析软件"
+      ]
+    },
+    {
+      "en": "Graphical user interface development software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "图形用户界面开发软件",
+      "zh_short": [
+        "图形界面开发软件",
+        "GUI开发软件"
+      ]
+    },
+    {
+      "en": "Graphics or photo imaging software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "图形或照片成像软件",
+      "zh_short": [
+        "图形图像软件",
+        "图像处理软件"
+      ]
+    },
+    {
+      "en": "Human resources software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "人力资源软件",
+      "zh_short": [
+        "人力资源软件",
+        "HR软件"
+      ]
+    },
+    {
+      "en": "Industrial control software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "工业控制软件",
+      "zh_short": [
+        "工业控制软件",
+        "工控软件"
+      ]
+    },
+    {
+      "en": "Information retrieval or search software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "信息检索或搜索软件",
+      "zh_short": [
+        "信息检索软件",
+        "搜索软件"
+      ]
+    },
+    {
+      "en": "Instant messaging software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "即时通信软件",
+      "zh_short": [
+        "即时通信软件",
+        "即时通讯软件"
+      ]
+    },
+    {
+      "en": "Internet browser software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "互联网浏览器软件",
+      "zh_short": [
+        "浏览器软件",
+        "浏览器"
+      ]
+    },
+    {
+      "en": "Internet protocol IP multimedia subsystem software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "互联网协议IP多媒体子系统软件",
+      "zh_short": [
+        "IP多媒体子系统软件",
+        "IMS软件"
+      ]
+    },
+    {
+      "en": "Medical software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "医疗软件",
+      "zh_short": [
+        "医疗软件",
+        "医学软件"
+      ]
+    },
+    {
+      "en": "Metadata management software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "元数据管理软件",
+      "zh_short": [
+        "元数据管理软件",
+        "元数据管理"
+      ]
+    },
+    {
+      "en": "Network conferencing software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "网络会议软件",
+      "zh_short": [
+        "网络会议软件",
+        "网络会议"
+      ]
+    },
+    {
+      "en": "Network monitoring software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "网络监控软件",
+      "zh_short": [
+        "网络监控软件",
+        "网络监控"
+      ]
+    },
+    {
+      "en": "Network operation system software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "网络操作系统软件",
+      "zh_short": [
+        "网络操作系统软件",
+        "网络操作系统"
+      ]
+    },
+    {
+      "en": "Network security and virtual private network VPN equipment software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "网络安全与虚拟专用网（VPN）设备软件",
+      "zh_short": [
+        "网络安全软件",
+        "VPN设备软件",
+        "虚拟专用网软件"
+      ]
+    },
+    {
+      "en": "Object or component oriented development software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "面向对象或组件开发软件",
+      "zh_short": [
+        "面向对象开发软件",
+        "组件开发软件"
+      ]
+    },
+    {
+      "en": "Object oriented data base management software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "面向对象数据库管理软件",
+      "zh_short": [
+        "面向对象数据库软件",
+        "对象数据库管理软件"
+      ]
+    },
+    {
+      "en": "Office suite software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "办公套件软件",
+      "zh_short": [
+        "办公套件软件",
+        "办公软件"
+      ]
+    },
+    {
+      "en": "Operating system software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "操作系统软件",
+      "zh_short": [
+        "操作系统软件",
+        "操作系统"
+      ]
+    },
+    {
+      "en": "Pattern design software",
+      "kind": "software_category",
+      "sources": [
+        "S17"
+      ],
+      "zh": "图案设计软件",
+      "zh_short": [
+        "图案设计软件",
+        "图案设计"
+      ]
+    },
+    {
+      "en": "Platform interconnectivity software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "平台互连软件",
+      "zh_short": [
+        "平台互连软件",
+        "平台互联软件"
+      ]
+    },
+    {
+      "en": "Portal server software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "门户服务器软件",
+      "zh_short": [
+        "门户服务器软件",
+        "门户服务器"
+      ]
+    },
+    {
+      "en": "Presentation software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "演示文稿软件",
+      "zh_short": [
+        "演示文稿软件",
+        "演示软件"
+      ]
+    },
+    {
+      "en": "Process mapping and design software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "流程映射与设计软件",
+      "zh_short": [
+        "流程映射软件",
+        "流程设计软件"
+      ]
+    },
+    {
+      "en": "Program testing software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "程序测试软件",
+      "zh_short": [
+        "程序测试软件",
+        "测试软件"
+      ]
+    },
+    {
+      "en": "Project management software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "项目管理软件",
+      "zh_short": [
+        "项目管理软件",
+        "项目管理"
+      ]
+    },
+    {
+      "en": "Requirements analysis and system architecture software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "需求分析与系统架构软件",
+      "zh_short": [
+        "需求分析软件",
+        "系统架构软件"
+      ]
+    },
+    {
+      "en": "Spreadsheet software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "zh": "电子表格软件",
+      "zh_short": [
+        "电子表格软件",
+        "电子表格"
+      ]
+    },
+    {
+      "en": "Storage networking software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "存储网络软件",
+      "zh_short": [
+        "存储网络软件",
+        "存储网络"
+      ]
+    },
+    {
+      "en": "Transaction security and virus protection software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "事务安全与病毒防护软件",
+      "zh_short": [
+        "事务安全软件",
+        "病毒防护软件"
+      ]
+    },
+    {
+      "en": "Transaction server software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "事务服务器软件",
+      "zh_short": [
+        "事务服务器软件",
+        "事务服务器"
+      ]
+    },
+    {
+      "en": "Video conferencing software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "视频会议软件",
+      "zh_short": [
+        "视频会议软件",
+        "视频会议"
+      ]
+    },
+    {
+      "en": "Video creation and editing software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "视频创作与编辑软件",
+      "zh_short": [
+        "视频创作软件",
+        "视频编辑软件"
+      ]
+    },
+    {
+      "en": "Web page creation and editing software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "网页创建与编辑软件",
+      "zh_short": [
+        "网页创建软件",
+        "网页编辑软件"
+      ]
+    },
+    {
+      "en": "Web platform development software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "Web平台开发软件",
+      "zh_short": [
+        "Web平台开发软件",
+        "网页平台开发软件"
+      ]
+    },
+    {
+      "en": "Word processing software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ],
+      "zh": "文字处理软件",
+      "zh_short": [
+        "文字处理软件",
+        "文字处理"
+      ]
+    }
+  ],
+  "unmapped": [
+    "GPIO & RTC GPIO"
+  ]
+}

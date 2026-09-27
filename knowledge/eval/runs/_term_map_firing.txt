@@ -1,0 +1,12 @@
+# 术语词典命中干跑：只看展开出什么，不算指标
+# 复跑：见 查询扩展与跨语言缺口-20260927.md；机读版在 runs/expanded-queries-termmap.json 的 fired 字段
+
+## test（32 题）
+  T20 [xl] ← 软件测试员 → Software Quality Assurance Analysts and Testers、数据库软件 → Data base management system software、操作系统软件 → Operating system software
+  T21 [xl] ← 图形图像软件 → Graphics or photo imaging software
+  命中 2/32
+
+## dev（34 题）
+  N12 [xl] ← 软件测试员 → Software Quality Assurance Analysts and Testers、工作活动 → Detailed Work Activities、工作活动 → Work Activities
+  N13 [xl] ← 计算机硬件工程师 → Computer Hardware Engineers、工作活动 → Detailed Work Activities、工作活动 → Work Activities
+  命中 2/34

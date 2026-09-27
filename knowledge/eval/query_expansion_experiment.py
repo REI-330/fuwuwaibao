@@ -22,6 +22,9 @@
 
   # 已有一份扩展结果时，只重算指标、不再调 LLM（结果落盘 query-expansion-<tag>.json）
   python knowledge/eval/query_expansion_experiment.py --reuse-expansions --tag dev-reuse
+
+  # 用语料内双语术语词典做确定性展开（零 LLM）；产物是 expanded-queries-termmap.json
+  python knowledge/eval/query_expansion_experiment.py --expand-with term-map --tag dev-termmap
 """
 import argparse
 import json
@@ -116,6 +119,42 @@ def minmax(d):
     return {k: 0.0 for k in d} if hi - lo < 1e-12 else {k: (v - lo) / (hi - lo) for k, v in d.items()}
 
 
+TERM_MAP = os.path.join(K, "term-map", "zh-en.json")
+# 只认长度 ≥3 的中文键：短到 2 个字的键（"能力""教育"）几乎每道题都命中，只会往查询里灌噪声。
+TERM_KEY_MIN = 3
+
+
+def norm_zh(s):
+    """中文归一化：去掉通用中心词「软件」。
+
+    语料的类别标签是 `Data base ... software`，而人提问会写成「在数据库和操作系统这两类
+    软件上」——「数据库软件」不是原文的子串。不归一化就永远匹配不上，词典形同虚设。
+    """
+    return (s or "").replace("软件", "").strip()
+
+
+def term_map_expand(question, terms, kinds):
+    """确定性展开：词典里任一中文字面（标准译名或短词）出现在问题里 → 追加对应英文术语。
+
+    零 LLM 调用、零随机性；这是"术语对不上"的直接解法（见 term-map/README 与
+    `knowledge/evaluations/查询扩展与跨语言缺口-20260927.md`）。
+    """
+    q = norm_zh(question)
+    hits, fired, seen = [], [], set()
+    for t in terms:
+        if t["kind"] not in kinds:
+            continue
+        for key in [t["zh"]] + list(t.get("zh_short") or []):
+            k = norm_zh(key)
+            if len(k) >= TERM_KEY_MIN and k in q:
+                fired.append({"en": t["en"], "kind": t["kind"], "matchedKey": key})
+                if t["en"] not in seen:
+                    seen.add(t["en"])
+                    hits.append(t["en"])
+                break
+    return hits, fired
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--topk", type=int, default=3)
@@ -124,8 +163,13 @@ def main():
                     help="题集文件；用 questions-dev.json 可看 zh/xl 分层（本脚本原先把题集写死为 questions-v2.json）")
     ap.add_argument("--bm25-baseline", default=os.path.join(RUNS, "bm25-full.json"),
                     help="基线 BM25 完整排序产物；换题集时必须同步换（如 q1024-dev-bm25-full.json）")
+    ap.add_argument("--expand-with", choices=["llm", "term-map"], default="llm",
+                    help="term-map = 用语料内双语术语词典做确定性展开（零 LLM 调用、零随机性）")
+    ap.add_argument("--term-map", default=TERM_MAP, help="术语词典路径（build_term_map.py 产出）")
+    ap.add_argument("--term-kinds", default="occupation,software_category,section",
+                    help="启用哪些类型的术语：occupation / software_category / section")
     ap.add_argument("--reuse-expansions", action="store_true",
-                    help="复用已有的 expanded-queries.json / bm25-full-expanded.json，不再调 LLM（同一份扩展可复现分析）")
+                    help="复用已有的 expanded-queries*.json / bm25-full-expanded*.json，不再调 LLM（同一份扩展可复现分析）")
     ap.add_argument("--tag", default="", help="结果文件名后缀，如 dev → query-expansion-dev.json")
     ap.add_argument("--save-best", action="store_true")
     args = ap.parse_args()
@@ -150,19 +194,40 @@ def main():
             "  → 现役语料为 1757 段（中文化后），请显式指定 TEI_MODEL=Qwen3-Embedding-0.6B-onnx-int8；"
             "默认的 Qwen3-Embedding-0.6B 是 494 段时代留下的旧缓存。")
 
-    out_exp = os.path.join(RUNS, "expanded-queries.json")
-    bm_out = os.path.join(RUNS, "bm25-full-expanded.json")
+    # 两种展开方式不共用产物文件：否则跑完 term-map 会把 LLM 那版覆盖掉（上次就是这么丢的）。
+    sfx = "" if args.expand_with == "llm" else "-termmap"
+    out_exp = os.path.join(RUNS, f"expanded-queries{sfx}.json")
+    bm_out = os.path.join(RUNS, f"bm25-full-expanded{sfx}.json")
 
-    # 1) LLM 查询扩展
+    # 1) 生成扩展查询
     exp_time = 0.0
+    fired_log = {}
     if args.reuse_expansions:
         print("== 1) 复用已有扩展查询（不调 LLM）==")
         doc_exp = json.load(open(out_exp, encoding="utf-8"))
         expanded = doc_exp["queries"]
+        fired_log = doc_exp.get("fired", {})
         missing = [q["questionId"] for q in qs if q["questionId"] not in expanded]
         if missing:
-            raise SystemExit(f"expanded-queries.json 里没有这些题，无法复用：{missing}")
-        print(f"   {len(qs)} 题，来自 {doc_exp.get('generatedAt')}（模型 {doc_exp.get('model')}）")
+            raise SystemExit(f"{os.path.basename(out_exp)} 里没有这些题，无法复用：{missing}")
+        print(f"   {len(qs)} 题，来自 {doc_exp.get('generatedAt')}（{doc_exp.get('model')}）")
+    elif args.expand_with == "term-map":
+        print("== 1) 语料内双语术语词典展开（零 LLM 调用）==")
+        doc_tm = json.load(open(args.term_map, encoding="utf-8"))
+        kinds = {x.strip() for x in args.term_kinds.split(",") if x.strip()}
+        print(f"   词典 {os.path.relpath(args.term_map, ROOT)}：{len(doc_tm['terms'])} 条"
+              f"（{doc_tm.get('model')} 译），启用 {sorted(kinds)}")
+        expanded = {}
+        for q in qs:
+            terms, fired = term_map_expand(q["question"], doc_tm["terms"], kinds)
+            expanded[q["questionId"]] = " ".join([q["question"]] + terms) if terms else q["question"]
+            fired_log[q["questionId"]] = fired
+        n_fire = sum(1 for v in fired_log.values() if v)
+        print(f"   {n_fire}/{len(qs)} 题命中术语（其余题查询不扩展）")
+        json.dump({"generatedAt": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+                   "model": f"term-map:{os.path.relpath(args.term_map, ROOT)}",
+                   "kinds": sorted(kinds), "queries": expanded, "fired": fired_log},
+                  open(out_exp, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     else:
         print("== 1) LLM 查询扩展 ==")
         expanded = {}
@@ -194,6 +259,11 @@ def main():
             no_new.append(q["questionId"])
     print(f"   新增英文词：{sum(added)/len(added):.1f} 个/题（中位 {sorted(added)[len(added)//2]}）；"
           f"零新增 {len(no_new)}/{len(qs)} 题 {no_new[:12]}")
+    if fired_log:
+        for q in qs:
+            f = fired_log.get(q["questionId"]) or []
+            if f:
+                print(f"   {q['questionId']} ← " + "、".join(f"{x['matchedKey']}→{x['en']}" for x in f))
 
     # 2) 用扩展查询重跑 BM25（复用 lib/graph.mjs，不另写实现）
     if args.reuse_expansions:
@@ -201,7 +271,7 @@ def main():
         print("   " + os.path.relpath(bm_out, ROOT))
     else:
         print("\n== 2) 扩展查询上的 BM25 ==")
-        tmp_q = os.path.join(RUNS, "_expanded_questions.json")
+        tmp_q = os.path.join(RUNS, f"_expanded_questions{sfx}.json")
         doc = {"questions": [dict(q, question=expanded[q["questionId"]]) for q in qs]}
         json.dump(doc, open(tmp_q, "w", encoding="utf-8"), ensure_ascii=False)
         rc = subprocess.call(["node", "knowledge/pipeline/bm25-full.mjs",
@@ -343,7 +413,9 @@ def main():
         "bm25Baseline": os.path.relpath(args.bm25_baseline, ROOT),
         "topk": args.topk, "alphaBm25": args.alpha, "teiModel": TEI_MODEL,
         "expansion": {
-            "model": os.environ.get("DEEPEVAL_MODEL"),
+            "mode": args.expand_with,
+            "termKinds": sorted(x.strip() for x in args.term_kinds.split(",") if x.strip()),
+            "model": os.environ.get("DEEPEVAL_MODEL") if args.expand_with == "llm" else args.term_map,
             "reused": args.reuse_expansions,
             "secondsPerQuestion": round(exp_time / len(qs), 2),
             "meanNewEnglishTerms": round(sum(added) / len(added), 3),

@@ -1,0 +1,853 @@
+{
+  "schema": "career-graph-term-inventory/v1",
+  "generatedAt": "2026-09-27T23:27:15+0800",
+  "corpus": "knowledge\\chunks\\chunks.jsonl",
+  "items": [
+    {
+      "en": "Computer Hardware Engineers",
+      "kind": "occupation",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "en": "GPIO & RTC GPIO",
+      "kind": "occupation",
+      "sources": [
+        "S04"
+      ]
+    },
+    {
+      "en": "How to use fixtures¶",
+      "kind": "occupation",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "Software Quality Assurance Analysts and Testers",
+      "kind": "occupation",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "WebDriver",
+      "kind": "occupation",
+      "sources": [
+        "S11"
+      ]
+    },
+    {
+      "en": "Abilities",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Apprenticeship Opportunities",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Automatic grouping of tests by fixture instances¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "Autouse fixtures (fixtures you don’t have to request)¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "Detailed Work Activities",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Education",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Essential Skills",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Factories as fixtures¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "Fixtures can introspect the requesting test context¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "Interests",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Job Openings on the Web",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Job Zone",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Knowledge",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Modularity: using fixtures from a fixture function¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "Overriding fixtures on various levels¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "Parametrizing fixtures¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "Professional Associations",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Related Occupations",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Running multiple assert statements safely¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "Safe teardowns¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "Scope: sharing fixtures across classes, modules, packages or session¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "See the easy-read overview for Computer Hardware Engineers at My Next Move",
+      "kind": "section",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "en": "See the easy-read overview for Computer Hardware Engineers at My Next Move for Veterans",
+      "kind": "section",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "en": "See the easy-read overview for Software Quality Assurance Analysts & Testers at My Next Move",
+      "kind": "section",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "See the easy-read overview for Software Quality Assurance Analysts & Testers at My Next Move for Veterans",
+      "kind": "section",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Software Skills",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Support the Selenium Project",
+      "kind": "section",
+      "sources": [
+        "S11"
+      ]
+    },
+    {
+      "en": "Tasks",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Teardown/Cleanup (AKA Fixture finalization)¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "Training & Credentials",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Transferable Skills",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Use fixtures in classes and modules with usefixtures¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "Using fixtures from other projects¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "Using markers to pass data to fixtures¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "Using marks with parametrized fixtures¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "Ver la perspectiva general fácil de leer para Analistas y Probadores de Control de Calidad de Software en Mi Próximo Paso",
+      "kind": "section",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Ver la perspectiva general fácil de leer para Ingenieros de Computadoras en Mi Próximo Paso",
+      "kind": "section",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "en": "Wages & Employment Trends",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Work Activities",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Work Context",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Work Styles",
+      "kind": "section",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "“Requesting” fixtures¶",
+      "kind": "section",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "en": "Access software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Accounting software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Administration software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Analytical or scientific software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Application server software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Backup or archival software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Business intelligence and data analysis software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Cloud-based data access and sharing software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Cloud-based management software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Clustering software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Communications server software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Compiler and decompiler software",
+      "kind": "software_category",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "en": "Computer aided design CAD software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Computer based training software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Configuration management software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Content workflow software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Customer relationship management CRM software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Data base management system software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Data base reporting software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Data base user interface and query software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Data mining software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Desktop communications software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Desktop publishing software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Development environment software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Device drivers or system software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Document management software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Electronic mail software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Enterprise application integration software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Enterprise resource planning ERP software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Enterprise system management software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Expert system software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "File versioning software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Filesystem software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Financial analysis software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Graphical user interface development software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Graphics or photo imaging software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Human resources software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Industrial control software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Information retrieval or search software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Instant messaging software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Internet browser software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Internet protocol IP multimedia subsystem software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Medical software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Metadata management software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Network conferencing software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Network monitoring software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Network operation system software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Network security and virtual private network VPN equipment software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Object or component oriented development software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Object oriented data base management software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Office suite software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Operating system software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Pattern design software",
+      "kind": "software_category",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "en": "Platform interconnectivity software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Portal server software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Presentation software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Process mapping and design software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Program testing software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Project management software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Requirements analysis and system architecture software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Spreadsheet software",
+      "kind": "software_category",
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "en": "Storage networking software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Transaction security and virus protection software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Transaction server software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Video conferencing software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Video creation and editing software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Web page creation and editing software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Web platform development software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "en": "Word processing software",
+      "kind": "software_category",
+      "sources": [
+        "S16"
+      ]
+    }
+  ]
+}
