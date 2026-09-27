@@ -1,0 +1,13 @@
+--- S16#s291~2 | sectionPath Software Quality Assurance Analysts and Testers > Tasks | title None
+    Conduct software compatibility tests with programs, hardware, operating systems, or network environments. Related occupations Investigate customer problems referred by technical support. Related occupations Review software documen
+--- S16#s292 | sectionPath Software Quality Assurance Analysts and Testers > Work Activities | title None
+    Working with Computers — Using computers and computer systems (including hardware and software) to program, write software, set up functions, enter data, or process information. Related occupations Getting Information — Observing,
+--- S16#s298~2 | sectionPath Software Quality Assurance Analysts and Testers > Software Skills | title None
+    Configuration management software — Chef Hot Technology ; Perforce Helix software; Puppet Hot Technology ; Visible Razor; 6 more Related occupations Content workflow software — Emerald Software Group Emerald Green Office; Twiki; W
+--- S16#s298~5 | sectionPath Software Quality Assurance Analysts and Testers > Software Skills | title None
+    Related occupations Object oriented data base management software — Hibernate ORM Hot Technology ; PostgreSQL Hot Technology Related occupations Office suite software — LibreOffice; Microsoft Office software Related occupations Op
+--- S16#s298 | sectionPath Software Quality Assurance Analysts and Testers > Software Skills | title None
+    Access software — Citrix cloud computing software; PuTTY Related occupations Accounting software — Tax software Related occupations Administration software — Software distribution management software Related occupations Analytical
+S16#s320~2 缺失
+--- S17#s320~2 | sectionPath Computer Hardware Engineers > Tasks | title None
+    Evaluate factors such as reporting formats required, cost constraints, and need for security restrictions to determine hardware configuration. Related occupations Provide training and support to system designers and users. Related

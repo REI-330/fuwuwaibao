@@ -1,0 +1,1048 @@
+{
+  "schema": "career-graph-bm25-full/v1",
+  "tokenizer": "segmenter",
+  "topN": 50,
+  "corpus": 1757,
+  "perQuestion": [
+    {
+      "questionId": "N12",
+      "question": "软件质量保证分析师与测试员 Software Quality Assurance Analysts and Testers 主要任务 工作活动 Tasks Work Activities",
+      "referenceChunks": [
+        "S16#s291~2",
+        "S16#s292"
+      ],
+      "ranking": [
+        {
+          "rank": 1,
+          "chunkId": "S16#s293~2",
+          "score": 51.181
+        },
+        {
+          "rank": 2,
+          "chunkId": "S16#s291~3",
+          "score": 48.02
+        },
+        {
+          "rank": 3,
+          "chunkId": "S16#s292~3",
+          "score": 45.849
+        },
+        {
+          "rank": 4,
+          "chunkId": "S16#s292~2",
+          "score": 44.212
+        },
+        {
+          "rank": 5,
+          "chunkId": "S16#s294~2",
+          "score": 42.108
+        },
+        {
+          "rank": 6,
+          "chunkId": "S16#s292",
+          "score": 40.463
+        },
+        {
+          "rank": 7,
+          "chunkId": "S16#s294",
+          "score": 39.952
+        },
+        {
+          "rank": 8,
+          "chunkId": "S16#s305",
+          "score": 39.671
+        },
+        {
+          "rank": 9,
+          "chunkId": "S16#s304~2",
+          "score": 39.116
+        },
+        {
+          "rank": 10,
+          "chunkId": "S16#s293",
+          "score": 38.909
+        },
+        {
+          "rank": 11,
+          "chunkId": "S16#s283",
+          "score": 38.771
+        },
+        {
+          "rank": 12,
+          "chunkId": "S16#s304",
+          "score": 37.774
+        },
+        {
+          "rank": 13,
+          "chunkId": "S16#s310",
+          "score": 37.726
+        },
+        {
+          "rank": 14,
+          "chunkId": "S16#s296",
+          "score": 37.447
+        },
+        {
+          "rank": 15,
+          "chunkId": "S16#s284",
+          "score": 37.313
+        },
+        {
+          "rank": 16,
+          "chunkId": "S16#s307",
+          "score": 37.271
+        },
+        {
+          "rank": 17,
+          "chunkId": "S16#s291",
+          "score": 36.982
+        },
+        {
+          "rank": 18,
+          "chunkId": "S16#s285",
+          "score": 36.935
+        },
+        {
+          "rank": 19,
+          "chunkId": "S16#s290",
+          "score": 36.724
+        },
+        {
+          "rank": 20,
+          "chunkId": "S16#s287",
+          "score": 36.683
+        },
+        {
+          "rank": 21,
+          "chunkId": "S16#s309",
+          "score": 36.419
+        },
+        {
+          "rank": 22,
+          "chunkId": "S16#s297",
+          "score": 36.239
+        },
+        {
+          "rank": 23,
+          "chunkId": "S16#s291~2",
+          "score": 36.194
+        },
+        {
+          "rank": 24,
+          "chunkId": "S16#s308",
+          "score": 35.735
+        },
+        {
+          "rank": 25,
+          "chunkId": "S16#s302",
+          "score": 35.275
+        },
+        {
+          "rank": 26,
+          "chunkId": "S16#s295",
+          "score": 34.944
+        },
+        {
+          "rank": 27,
+          "chunkId": "S16#s300",
+          "score": 33.398
+        },
+        {
+          "rank": 28,
+          "chunkId": "S16#s306",
+          "score": 32.554
+        },
+        {
+          "rank": 29,
+          "chunkId": "S16#s301",
+          "score": 32.233
+        },
+        {
+          "rank": 30,
+          "chunkId": "S16#s286",
+          "score": 32.028
+        },
+        {
+          "rank": 31,
+          "chunkId": "S16#s298",
+          "score": 30.921
+        },
+        {
+          "rank": 32,
+          "chunkId": "S16#s298~5",
+          "score": 30.748
+        },
+        {
+          "rank": 33,
+          "chunkId": "S16#s299",
+          "score": 30.556
+        },
+        {
+          "rank": 34,
+          "chunkId": "S16#s298~3",
+          "score": 30.375
+        },
+        {
+          "rank": 35,
+          "chunkId": "S16#s298~6",
+          "score": 30.361
+        },
+        {
+          "rank": 36,
+          "chunkId": "S16#s298~4",
+          "score": 30.281
+        },
+        {
+          "rank": 37,
+          "chunkId": "S16#s298~2",
+          "score": 29.853
+        },
+        {
+          "rank": 38,
+          "chunkId": "S16#s303~2",
+          "score": 27.843
+        },
+        {
+          "rank": 39,
+          "chunkId": "S16#s303",
+          "score": 27.004
+        },
+        {
+          "rank": 40,
+          "chunkId": "S17#s321~3",
+          "score": 23.831
+        },
+        {
+          "rank": 41,
+          "chunkId": "S17#s321",
+          "score": 22.203
+        },
+        {
+          "rank": 42,
+          "chunkId": "S17#s323",
+          "score": 21.184
+        },
+        {
+          "rank": 43,
+          "chunkId": "S17#s321~2",
+          "score": 18.573
+        },
+        {
+          "rank": 44,
+          "chunkId": "S17#s321~4",
+          "score": 18.528
+        },
+        {
+          "rank": 45,
+          "chunkId": "S17#s322",
+          "score": 18.299
+        },
+        {
+          "rank": 46,
+          "chunkId": "S26#s1517",
+          "score": 16.79
+        },
+        {
+          "rank": 47,
+          "chunkId": "S17#s333~2",
+          "score": 15.77
+        },
+        {
+          "rank": 48,
+          "chunkId": "S17#s320",
+          "score": 15.651
+        },
+        {
+          "rank": 49,
+          "chunkId": "S26#s1217",
+          "score": 14.228
+        },
+        {
+          "rank": 50,
+          "chunkId": "S17#s320~2",
+          "score": 13.718
+        }
+      ]
+    },
+    {
+      "questionId": "N13",
+      "question": "计算机硬件工程师 Computer Hardware Engineers 日常任务 工作活动 Tasks Work Activities",
+      "referenceChunks": [
+        "S17#s320~2",
+        "S17#s321"
+      ],
+      "ranking": [
+        {
+          "rank": 1,
+          "chunkId": "S17#s321~4",
+          "score": 33.338
+        },
+        {
+          "rank": 2,
+          "chunkId": "S17#s323",
+          "score": 31.596
+        },
+        {
+          "rank": 3,
+          "chunkId": "S17#s322",
+          "score": 30.743
+        },
+        {
+          "rank": 4,
+          "chunkId": "S17#s321~3",
+          "score": 29.799
+        },
+        {
+          "rank": 5,
+          "chunkId": "S17#s321",
+          "score": 28.833
+        },
+        {
+          "rank": 6,
+          "chunkId": "S17#s321~2",
+          "score": 27.942
+        },
+        {
+          "rank": 7,
+          "chunkId": "S17#s323~2",
+          "score": 27.431
+        },
+        {
+          "rank": 8,
+          "chunkId": "S17#s333~2",
+          "score": 26.246
+        },
+        {
+          "rank": 9,
+          "chunkId": "S17#s320",
+          "score": 26.208
+        },
+        {
+          "rank": 10,
+          "chunkId": "S17#s320~2",
+          "score": 25.698
+        },
+        {
+          "rank": 11,
+          "chunkId": "S16#s293~2",
+          "score": 25.375
+        },
+        {
+          "rank": 12,
+          "chunkId": "S17#s339",
+          "score": 23.819
+        },
+        {
+          "rank": 13,
+          "chunkId": "S17#s334",
+          "score": 21.996
+        },
+        {
+          "rank": 14,
+          "chunkId": "S17#s333",
+          "score": 21.039
+        },
+        {
+          "rank": 15,
+          "chunkId": "S17#s312",
+          "score": 20.868
+        },
+        {
+          "rank": 16,
+          "chunkId": "S17#s337",
+          "score": 20.595
+        },
+        {
+          "rank": 17,
+          "chunkId": "S17#s313",
+          "score": 20.237
+        },
+        {
+          "rank": 18,
+          "chunkId": "S17#s324",
+          "score": 20.085
+        },
+        {
+          "rank": 19,
+          "chunkId": "S17#s314",
+          "score": 20.043
+        },
+        {
+          "rank": 20,
+          "chunkId": "S17#s325",
+          "score": 19.988
+        },
+        {
+          "rank": 21,
+          "chunkId": "S17#s336",
+          "score": 19.846
+        },
+        {
+          "rank": 22,
+          "chunkId": "S17#s319",
+          "score": 19.567
+        },
+        {
+          "rank": 23,
+          "chunkId": "S17#s316",
+          "score": 19.385
+        },
+        {
+          "rank": 24,
+          "chunkId": "S17#s338",
+          "score": 19.163
+        },
+        {
+          "rank": 25,
+          "chunkId": "S17#s340",
+          "score": 19.022
+        },
+        {
+          "rank": 26,
+          "chunkId": "S17#s331",
+          "score": 18.946
+        },
+        {
+          "rank": 27,
+          "chunkId": "S16#s308",
+          "score": 18.812
+        },
+        {
+          "rank": 28,
+          "chunkId": "S17#s326",
+          "score": 18.757
+        },
+        {
+          "rank": 29,
+          "chunkId": "S17#s329",
+          "score": 18.568
+        },
+        {
+          "rank": 30,
+          "chunkId": "S16#s292",
+          "score": 17.592
+        },
+        {
+          "rank": 31,
+          "chunkId": "S16#s293",
+          "score": 17.532
+        },
+        {
+          "rank": 32,
+          "chunkId": "S17#s327~2",
+          "score": 17.444
+        },
+        {
+          "rank": 33,
+          "chunkId": "S17#s315",
+          "score": 16.88
+        },
+        {
+          "rank": 34,
+          "chunkId": "S17#s335",
+          "score": 16.88
+        },
+        {
+          "rank": 35,
+          "chunkId": "S17#s330",
+          "score": 16.256
+        },
+        {
+          "rank": 36,
+          "chunkId": "S16#s292~2",
+          "score": 15.41
+        },
+        {
+          "rank": 37,
+          "chunkId": "S17#s328",
+          "score": 15.389
+        },
+        {
+          "rank": 38,
+          "chunkId": "S17#s327",
+          "score": 14.735
+        },
+        {
+          "rank": 39,
+          "chunkId": "S17#s332~2",
+          "score": 14.507
+        },
+        {
+          "rank": 40,
+          "chunkId": "S16#s304",
+          "score": 14.143
+        },
+        {
+          "rank": 41,
+          "chunkId": "S17#s332",
+          "score": 13.392
+        },
+        {
+          "rank": 42,
+          "chunkId": "S16#s292~3",
+          "score": 13.244
+        },
+        {
+          "rank": 43,
+          "chunkId": "S16#s294",
+          "score": 12.977
+        },
+        {
+          "rank": 44,
+          "chunkId": "S26#s792",
+          "score": 12.222
+        },
+        {
+          "rank": 45,
+          "chunkId": "S21#s349~5",
+          "score": 11.611
+        },
+        {
+          "rank": 46,
+          "chunkId": "S26#s1271",
+          "score": 11.588
+        },
+        {
+          "rank": 47,
+          "chunkId": "S26#s505",
+          "score": 11.159
+        },
+        {
+          "rank": 48,
+          "chunkId": "S16#s310",
+          "score": 11.148
+        },
+        {
+          "rank": 49,
+          "chunkId": "S16#s291~2",
+          "score": 11.004
+        },
+        {
+          "rank": 50,
+          "chunkId": "S26#s788",
+          "score": 10.915
+        }
+      ]
+    },
+    {
+      "questionId": "T20",
+      "question": "软件质量保证分析师与测试员 Software Quality Assurance Analysts and Testers 数据库软件 操作系统软件 Database Software Operating System Software 热门技术 Hot Technology",
+      "referenceChunks": [
+        "S16#s298~2",
+        "S16#s298~5"
+      ],
+      "ranking": [
+        {
+          "rank": 1,
+          "chunkId": "S16#s298~5",
+          "score": 75.944
+        },
+        {
+          "rank": 2,
+          "chunkId": "S16#s298~4",
+          "score": 74.625
+        },
+        {
+          "rank": 3,
+          "chunkId": "S16#s298~3",
+          "score": 71.515
+        },
+        {
+          "rank": 4,
+          "chunkId": "S16#s298~2",
+          "score": 69.627
+        },
+        {
+          "rank": 5,
+          "chunkId": "S16#s298~6",
+          "score": 67.28
+        },
+        {
+          "rank": 6,
+          "chunkId": "S16#s298",
+          "score": 65.209
+        },
+        {
+          "rank": 7,
+          "chunkId": "S16#s283",
+          "score": 64.128
+        },
+        {
+          "rank": 8,
+          "chunkId": "S17#s327",
+          "score": 57.906
+        },
+        {
+          "rank": 9,
+          "chunkId": "S16#s293~2",
+          "score": 55.652
+        },
+        {
+          "rank": 10,
+          "chunkId": "S16#s308",
+          "score": 55.214
+        },
+        {
+          "rank": 11,
+          "chunkId": "S16#s291~2",
+          "score": 53.548
+        },
+        {
+          "rank": 12,
+          "chunkId": "S16#s291",
+          "score": 53.283
+        },
+        {
+          "rank": 13,
+          "chunkId": "S16#s310",
+          "score": 51.118
+        },
+        {
+          "rank": 14,
+          "chunkId": "S16#s291~3",
+          "score": 50.891
+        },
+        {
+          "rank": 15,
+          "chunkId": "S16#s287",
+          "score": 50.417
+        },
+        {
+          "rank": 16,
+          "chunkId": "S16#s284",
+          "score": 50.206
+        },
+        {
+          "rank": 17,
+          "chunkId": "S16#s296",
+          "score": 50.168
+        },
+        {
+          "rank": 18,
+          "chunkId": "S16#s290",
+          "score": 49.992
+        },
+        {
+          "rank": 19,
+          "chunkId": "S16#s307",
+          "score": 49.932
+        },
+        {
+          "rank": 20,
+          "chunkId": "S16#s285",
+          "score": 49.705
+        },
+        {
+          "rank": 21,
+          "chunkId": "S16#s304~2",
+          "score": 49.418
+        },
+        {
+          "rank": 22,
+          "chunkId": "S16#s297",
+          "score": 48.883
+        },
+        {
+          "rank": 23,
+          "chunkId": "S16#s304",
+          "score": 48.874
+        },
+        {
+          "rank": 24,
+          "chunkId": "S16#s309",
+          "score": 48.619
+        },
+        {
+          "rank": 25,
+          "chunkId": "S16#s301",
+          "score": 48.554
+        },
+        {
+          "rank": 26,
+          "chunkId": "S16#s294~2",
+          "score": 47.684
+        },
+        {
+          "rank": 27,
+          "chunkId": "S16#s293",
+          "score": 47.626
+        },
+        {
+          "rank": 28,
+          "chunkId": "S16#s302",
+          "score": 47.258
+        },
+        {
+          "rank": 29,
+          "chunkId": "S16#s295",
+          "score": 46.698
+        },
+        {
+          "rank": 30,
+          "chunkId": "S16#s305",
+          "score": 44.797
+        },
+        {
+          "rank": 31,
+          "chunkId": "S16#s286",
+          "score": 44.634
+        },
+        {
+          "rank": 32,
+          "chunkId": "S16#s300",
+          "score": 44.524
+        },
+        {
+          "rank": 33,
+          "chunkId": "S16#s306",
+          "score": 43.335
+        },
+        {
+          "rank": 34,
+          "chunkId": "S16#s292~3",
+          "score": 43.257
+        },
+        {
+          "rank": 35,
+          "chunkId": "S16#s292",
+          "score": 40.72
+        },
+        {
+          "rank": 36,
+          "chunkId": "S16#s299",
+          "score": 40.517
+        },
+        {
+          "rank": 37,
+          "chunkId": "S17#s327~2",
+          "score": 40.47
+        },
+        {
+          "rank": 38,
+          "chunkId": "S16#s292~2",
+          "score": 37.691
+        },
+        {
+          "rank": 39,
+          "chunkId": "S16#s303~2",
+          "score": 36.762
+        },
+        {
+          "rank": 40,
+          "chunkId": "S16#s294",
+          "score": 35.865
+        },
+        {
+          "rank": 41,
+          "chunkId": "S16#s303",
+          "score": 35.636
+        },
+        {
+          "rank": 42,
+          "chunkId": "S17#s333~2",
+          "score": 25.608
+        },
+        {
+          "rank": 43,
+          "chunkId": "S26#s1071",
+          "score": 23.291
+        },
+        {
+          "rank": 44,
+          "chunkId": "S26#s1392",
+          "score": 22.037
+        },
+        {
+          "rank": 45,
+          "chunkId": "S15#s282",
+          "score": 20.857
+        },
+        {
+          "rank": 46,
+          "chunkId": "S26#s1077",
+          "score": 20.638
+        },
+        {
+          "rank": 47,
+          "chunkId": "S26#s1018",
+          "score": 20.426
+        },
+        {
+          "rank": 48,
+          "chunkId": "S26#s1368",
+          "score": 20.285
+        },
+        {
+          "rank": 49,
+          "chunkId": "S26#s578",
+          "score": 19.55
+        },
+        {
+          "rank": 50,
+          "chunkId": "S17#s330",
+          "score": 19.382
+        }
+      ]
+    },
+    {
+      "questionId": "T21",
+      "question": "软件质量保证分析师与测试员 Software Quality Assurance Analysts and Testers 分析与科学计算软件 图形图像软件 Analytical or Scientific Software Graphics or Photo Imaging Software 热门技术 Hot Technology",
+      "referenceChunks": [
+        "S16#s298",
+        "S16#s298~4"
+      ],
+      "ranking": [
+        {
+          "rank": 1,
+          "chunkId": "S16#s298~4",
+          "score": 90.172
+        },
+        {
+          "rank": 2,
+          "chunkId": "S16#s298",
+          "score": 83.363
+        },
+        {
+          "rank": 3,
+          "chunkId": "S16#s298~2",
+          "score": 69.001
+        },
+        {
+          "rank": 4,
+          "chunkId": "S17#s327",
+          "score": 68.666
+        },
+        {
+          "rank": 5,
+          "chunkId": "S16#s298~5",
+          "score": 64.971
+        },
+        {
+          "rank": 6,
+          "chunkId": "S16#s298~3",
+          "score": 64.179
+        },
+        {
+          "rank": 7,
+          "chunkId": "S16#s283",
+          "score": 63.735
+        },
+        {
+          "rank": 8,
+          "chunkId": "S16#s298~6",
+          "score": 63.482
+        },
+        {
+          "rank": 9,
+          "chunkId": "S16#s304~2",
+          "score": 59.641
+        },
+        {
+          "rank": 10,
+          "chunkId": "S16#s304",
+          "score": 58.585
+        },
+        {
+          "rank": 11,
+          "chunkId": "S16#s294~2",
+          "score": 56.706
+        },
+        {
+          "rank": 12,
+          "chunkId": "S16#s284",
+          "score": 56.463
+        },
+        {
+          "rank": 13,
+          "chunkId": "S16#s306",
+          "score": 56.086
+        },
+        {
+          "rank": 14,
+          "chunkId": "S16#s309",
+          "score": 56.062
+        },
+        {
+          "rank": 15,
+          "chunkId": "S16#s285",
+          "score": 55.81
+        },
+        {
+          "rank": 16,
+          "chunkId": "S16#s293~2",
+          "score": 55.646
+        },
+        {
+          "rank": 17,
+          "chunkId": "S16#s302",
+          "score": 54.486
+        },
+        {
+          "rank": 18,
+          "chunkId": "S16#s291",
+          "score": 53.761
+        },
+        {
+          "rank": 19,
+          "chunkId": "S16#s292~3",
+          "score": 53.578
+        },
+        {
+          "rank": 20,
+          "chunkId": "S16#s291~2",
+          "score": 53.505
+        },
+        {
+          "rank": 21,
+          "chunkId": "S16#s293",
+          "score": 52.682
+        },
+        {
+          "rank": 22,
+          "chunkId": "S16#s292",
+          "score": 51.311
+        },
+        {
+          "rank": 23,
+          "chunkId": "S16#s305",
+          "score": 51.214
+        },
+        {
+          "rank": 24,
+          "chunkId": "S16#s310",
+          "score": 51.118
+        },
+        {
+          "rank": 25,
+          "chunkId": "S16#s291~3",
+          "score": 50.891
+        },
+        {
+          "rank": 26,
+          "chunkId": "S16#s287",
+          "score": 50.417
+        },
+        {
+          "rank": 27,
+          "chunkId": "S16#s296",
+          "score": 50.168
+        },
+        {
+          "rank": 28,
+          "chunkId": "S16#s290",
+          "score": 49.992
+        },
+        {
+          "rank": 29,
+          "chunkId": "S16#s307",
+          "score": 49.932
+        },
+        {
+          "rank": 30,
+          "chunkId": "S16#s295",
+          "score": 49.679
+        },
+        {
+          "rank": 31,
+          "chunkId": "S16#s299",
+          "score": 48.982
+        },
+        {
+          "rank": 32,
+          "chunkId": "S16#s297",
+          "score": 48.883
+        },
+        {
+          "rank": 33,
+          "chunkId": "S16#s301",
+          "score": 48.554
+        },
+        {
+          "rank": 34,
+          "chunkId": "S16#s308",
+          "score": 48.399
+        },
+        {
+          "rank": 35,
+          "chunkId": "S16#s300",
+          "score": 48.207
+        },
+        {
+          "rank": 36,
+          "chunkId": "S16#s292~2",
+          "score": 47.704
+        },
+        {
+          "rank": 37,
+          "chunkId": "S16#s303~2",
+          "score": 46.934
+        },
+        {
+          "rank": 38,
+          "chunkId": "S16#s294",
+          "score": 45.478
+        },
+        {
+          "rank": 39,
+          "chunkId": "S16#s286",
+          "score": 44.634
+        },
+        {
+          "rank": 40,
+          "chunkId": "S16#s303",
+          "score": 44.463
+        },
+        {
+          "rank": 41,
+          "chunkId": "S17#s327~2",
+          "score": 40.47
+        },
+        {
+          "rank": 42,
+          "chunkId": "S17#s333~2",
+          "score": 34.355
+        },
+        {
+          "rank": 43,
+          "chunkId": "S17#s321",
+          "score": 28.599
+        },
+        {
+          "rank": 44,
+          "chunkId": "S26#s1597",
+          "score": 22.449
+        },
+        {
+          "rank": 45,
+          "chunkId": "S26#s1606",
+          "score": 21.451
+        },
+        {
+          "rank": 46,
+          "chunkId": "S17#s312",
+          "score": 21.222
+        },
+        {
+          "rank": 47,
+          "chunkId": "S17#s320",
+          "score": 20.993
+        },
+        {
+          "rank": 48,
+          "chunkId": "S26#s631",
+          "score": 20.976
+        },
+        {
+          "rank": 49,
+          "chunkId": "S26#s1426",
+          "score": 20.924
+        },
+        {
+          "rank": 50,
+          "chunkId": "S17#s333",
+          "score": 20.886
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,294 @@
+{
+  "schema": "career-graph-query-expansion-experiment/v1",
+  "generatedAt": "2026-09-27T23:18:11+0800",
+  "questions": "knowledge\\evaluations\\questions-dev.json",
+  "bm25Baseline": "knowledge\\eval\\runs\\q1024-dev-bm25-full.json",
+  "topk": 3,
+  "alphaBm25": 0.35,
+  "teiModel": "Qwen3-Embedding-0.6B-onnx-int8",
+  "expansion": {
+    "model": "deepseek-v4.1-flash",
+    "reused": true,
+    "secondsPerQuestion": 0.0,
+    "meanNewEnglishTerms": 10.059,
+    "noNewEnglishTerms": [],
+    "queries": {
+      "N01": "FreeRTOS IoT 设备 device 官方认证 certified 开发板 development board 验证 validation 技术问题 technical issue 文档 documentation 支持 support 社区 community 论坛 forum",
+      "N02": "ESP32 SPI 四线 I/O 模式 quad I/O mode 怎么设置 configure 命令阶段 command phase 地址阶段 address phase 长度 length 修改 结构体 struct 标志位 flag",
+      "N03": "ESP-IDF MALLOC_CAP_32BIT 分配 allocate 内存 memory 能不能存浮点变量 float variable 中断服务程序 ISR interrupt service routine 调用堆函数 heap function 有什么限制 restrictions",
+      "N04": "ESP32 RTC GPIO 在哪些情况下能用 use cases 另外 gpio_config 和 gpio_reset_pin 这两个函数各自负责什么 function difference",
+      "N05": "MindSpore Lite benchmark 工具 tool 测 mobilenetv2 输入数据文件 input data file 规格 format 准备 prepare 输出 output 误差信息 error metrics 理解 interpret",
+      "N06": "飞桨 PaddlePaddle 手写数字识别 handwritten digit recognition 数据集 dataset 下载 download 加载 load 网络 network 模型 model 构建 build 打印 print 结构 structure",
+      "N07": "飞桨 PaddlePaddle 从 Python list 列表造 Tensor 张量用哪个接口 paddle.to_tensor 指定形状 shape 全 0 zeros 全 1 ones 怎么创建",
+      "N08": "YOLO26 导出 export 部署格式 deployment format 适用场景 use case NVIDIA Hailo Ambarella 华为昇腾 Ascend 加速器 accelerator 接入 integrate",
+      "N09": "YOLO26 检测模型 detection model 预训练 pretrained 数据集 dataset 预测 inference 典型代码 example code 框坐标 bounding box coordinates 格式 format",
+      "N10": "YOLO26 分割模型 segmentation model 精度指标 metrics 怎么看 用 model.val() 做验证 validation 时能拿到哪些指标 metrics",
+      "N11": "pytest fixture yield 清理 teardown 和 addfinalizer 挂清理函数 cleanup function 有什么差别 difference 各自有什么坑 pitfalls",
+      "N12": "软件质量保证 software quality assurance 分析师 analyst 与测试员 tester 岗位 role 主要任务 main tasks 工作活动 work activities 包括哪些内容",
+      "N13": "计算机硬件工程师(Computer Hardware Engineer) 日常(daily) 要完成哪些任务(tasks) 和工作活动(work activities) 工作职责(job responsibilities) hardware engineer daily tasks work activities",
+      "N14": "全国标准信息公共服务平台 National Standards Information Public Service Platform 收录 现行有效 强制性国家标准 mandatory national standards 推荐性国家标准 recommended national standards 数量 可在线阅读下载 online reading and download 比例 proportion",
+      "D01": "ESP32 SPI 主机 master 驱动 driver 启用 enable DMA 数据传输 data transfer 缓冲区 buffer 要求 requirement 不满足 fail 影响 impact",
+      "D02": "SPI 设备 device 混合 mixing 中断传输 interrupt transfer 轮询传输 polling transfer 关键注意事项 key considerations",
+      "D03": "ESP-IDF SPI 主机 master 驱动 driver 轮询传输 polling transfer 中断传输 interrupt transfer 单字节传输 single-byte transfer 延迟 latency 差异 difference DMA 启用 enable 不启用 disable 影响 impact",
+      "D04": "ESP-IDF 动态添加 add 新内存区域 memory region 到堆管理器 heap manager 调用哪个函数 function 注意事项 notes",
+      "D05": "芯片 chip Deep-sleep 模式(mode) 数字 GPIO(digital GPIO) 保持电平状态(hold level state) 每次睡眠(each sleep) 关闭(disable) 功能(function) ESP32 gpio_hold_en gpio_hold_dis gpio_deep_sleep_hold_en gpio_deep_sleep_hold_dis",
+      "D06": "ESP32-WROVER 深度睡眠 deep sleep 前 minimize 最小化 RTC IO 漏电流 leakage current 官方推荐 recommended 操作 RTC GPIO 唤醒 wakeup 触发方式 trigger mode",
+      "D07": "MindSpore Lite 转换 convert .ms 模型 图片分类 image classification 输入张量 input tensor 要求 requirements benchmark 跑通 run 输入数据文件 input data file 准备 prepare",
+      "D08": "MindSpore Lite 发布件 release package 解压 extract 后 模型转换 converter 和 基准测试 benchmark 工具在哪个目录 directory 层级 layer Windows 上转换 convert Caffe 模型 model 时 模型结构文件 model structure file prototxt 和 权值文件 weight file caffemodel 分别传给哪个参数 parameter",
+      "D09": "converter_lite 把模型转成 .ms 时 --fmk 参数可以填哪些原始格式 framework 哪个参数只有转 Caffe 模型时才必须传 --modelFile 命令行里参数名和参数值之间写法有什么硬性要求 command line argument syntax",
+      "D10": "C++ 集成 MindSpore Lite 推理 inference CPU 跑 context 设备信息 device info 怎么配 configure Build 编译 compile 模型 model 后 模型文件 model file 内存 memory 还要保留 retain 吗 输入数据 input data 从哪个接口 API 写进张量 tensor",
+      "D11": "Windows 编译 compile 运行 run MindSpore Lite 推理 inference demo 发布件 release 包 runtime\\lib 目录 directory 除了框架自身库还要带哪些动态库 dynamic library DLL 依赖 dependencies libmindspore-lite.dll libgcc_s_seh-1.dll libstdc++-6.dll libwinpthread-1.dll demo 跑起来前环境变量 environment variable PATH 怎么设置 set 推理时输入输出张量 input output tensor 怎么传给接口 MSTensor SetData GetOutputs Predict",
+      "D12": "飞桨 PaddlePaddle 手动创建 Tensor 张量的常见方法 create Tensor manually paddle.to_tensor paddle.zeros paddle.ones；若参数 parameter 不参与梯度回传 backpropagation、不参与训练更新 trainable，应设置 Tensor 哪个属性 attribute stop_gradient，默认值 default value 是什么",
+      "D13": "图片 image 样本 sample 和文本 text 样本 sample 分别转成 Tensor 张量用什么方法 method；Tensor 张量逐元素 element-wise 算术 arithmetic 运算符 operator 和方法 method 两种写法怎么对应 mapping",
+      "D14": "不自己写数据转 Tensor 的代码，也能正常把模型训练起来吗？框架是怎么做到的？另外要判断两个 Tensor 的元素是否相等或比较大小，有哪些现成方法？ 不写 data to Tensor 转换代码 也能正常 train 训练模型吗 framework 框架怎么做到 automatic data conversion 自动数据转换 判断两个 Tensor 元素是否相等 equal 或比较大小 compare 有哪些现成方法 built-in methods torch.eq torch.equal torch.gt torch.lt",
+      "D15": "写测试 test 时如果有一批夹具 fixture 是几乎每个测试都要用的，怎么才能免去逐个在参数 parameter 里声明的麻烦？另外要在同一套页面测试 page test 里验证登录失败 login failure 的场景 scenario，一般怎么改测试数据 test data 才不影响其他测试 test isolation？",
+      "D16": "pytest fixture 夹具 依赖 dependency 同一个底层夹具 shared fixture 执行几次 execution count autouse 自动使用 fixture 请求 request 另一个夹具 是否也会自动执行 auto-execute",
+      "D17": "两个测试 test 请求同一个夹具 fixture 会共用同一份数据 shared data 吗 夹具 fixture 之间能不能靠请求参数 request parameter 强制执行先后顺序 execution order",
+      "D18": "pytest 怎么知道某个测试需要哪些夹具 fixture 依赖解析 dependency resolution 第三方插件 third-party plugin 提供的 fixture 会不会因为目录层级 directory hierarchy 被排除在外 excluded",
+      "D19": "ESP32 SPI 总线 bus 信号线 signal line 共用 shared 独占 exclusive 片选 CS chip select 时钟频率 clock frequency 实际 actual 测量 measure 查询 check",
+      "D20": "ESP32 SPI 主机 host 驱动 driver 线程安全 thread-safe 什么情况下 not thread-safe 解决办法 workaround 连续发送 many small packets 小包 提高整体传输速度 throughput speed up"
+    }
+  },
+  "table": {
+    "基线 / bm25": {
+      "hit": 25,
+      "n": 34,
+      "rate": 0.7353,
+      "prec": 0.3529,
+      "fails": [
+        "N06",
+        "N10",
+        "N12",
+        "N13",
+        "D04",
+        "D05",
+        "D07",
+        "D15",
+        "D17"
+      ]
+    },
+    "基线 / vector": {
+      "hit": 27,
+      "n": 34,
+      "rate": 0.7941,
+      "prec": 0.3529,
+      "fails": [
+        "N08",
+        "N12",
+        "D07",
+        "D14",
+        "D15",
+        "D17",
+        "D18"
+      ]
+    },
+    "基线 / hybrid": {
+      "hit": 29,
+      "n": 34,
+      "rate": 0.8529,
+      "prec": 0.402,
+      "fails": [
+        "N12",
+        "N13",
+        "D04",
+        "D07",
+        "D17"
+      ]
+    },
+    "扩展后 / bm25": {
+      "hit": 27,
+      "n": 34,
+      "rate": 0.7941,
+      "prec": 0.3627,
+      "fails": [
+        "N09",
+        "N12",
+        "N13",
+        "D07",
+        "D15",
+        "D16",
+        "D17"
+      ]
+    },
+    "扩展后 / vector": {
+      "hit": 29,
+      "n": 34,
+      "rate": 0.8529,
+      "prec": 0.3627,
+      "fails": [
+        "N05",
+        "N12",
+        "D07",
+        "D15",
+        "D17"
+      ]
+    },
+    "扩展后 / hybrid": {
+      "hit": 28,
+      "n": 34,
+      "rate": 0.8235,
+      "prec": 0.3922,
+      "fails": [
+        "N12",
+        "N13",
+        "D07",
+        "D15",
+        "D16",
+        "D17"
+      ]
+    },
+    "扩展BM25+基线向量 / bm25": {
+      "hit": 27,
+      "n": 34,
+      "rate": 0.7941,
+      "prec": 0.3627,
+      "fails": [
+        "N09",
+        "N12",
+        "N13",
+        "D07",
+        "D15",
+        "D16",
+        "D17"
+      ]
+    },
+    "扩展BM25+基线向量 / vector": {
+      "hit": 27,
+      "n": 34,
+      "rate": 0.7941,
+      "prec": 0.3529,
+      "fails": [
+        "N08",
+        "N12",
+        "D07",
+        "D14",
+        "D15",
+        "D17",
+        "D18"
+      ]
+    },
+    "扩展BM25+基线向量 / hybrid": {
+      "hit": 30,
+      "n": 34,
+      "rate": 0.8824,
+      "prec": 0.3922,
+      "fails": [
+        "N12",
+        "D07",
+        "D15",
+        "D17"
+      ]
+    }
+  },
+  "best": "扩展BM25+基线向量 / hybrid",
+  "layers": {
+    "基线": {
+      "xl": {
+        "bm25": {
+          "hit": 8,
+          "n": 14,
+          "rate": 0.5714
+        },
+        "hybrid": {
+          "hit": 11,
+          "n": 14,
+          "rate": 0.7857
+        },
+        "vector": {
+          "hit": 13,
+          "n": 14,
+          "rate": 0.9286
+        }
+      },
+      "zh": {
+        "bm25": {
+          "hit": 17,
+          "n": 20,
+          "rate": 0.85
+        },
+        "hybrid": {
+          "hit": 18,
+          "n": 20,
+          "rate": 0.9
+        },
+        "vector": {
+          "hit": 14,
+          "n": 20,
+          "rate": 0.7
+        }
+      }
+    },
+    "扩展后": {
+      "xl": {
+        "bm25": {
+          "hit": 11,
+          "n": 14,
+          "rate": 0.7857
+        },
+        "hybrid": {
+          "hit": 12,
+          "n": 14,
+          "rate": 0.8571
+        },
+        "vector": {
+          "hit": 13,
+          "n": 14,
+          "rate": 0.9286
+        }
+      },
+      "zh": {
+        "bm25": {
+          "hit": 16,
+          "n": 20,
+          "rate": 0.8
+        },
+        "hybrid": {
+          "hit": 16,
+          "n": 20,
+          "rate": 0.8
+        },
+        "vector": {
+          "hit": 16,
+          "n": 20,
+          "rate": 0.8
+        }
+      }
+    },
+    "混BM25+基向量": {
+      "xl": {
+        "bm25": {
+          "hit": 11,
+          "n": 14,
+          "rate": 0.7857
+        },
+        "hybrid": {
+          "hit": 13,
+          "n": 14,
+          "rate": 0.9286
+        },
+        "vector": {
+          "hit": 13,
+          "n": 14,
+          "rate": 0.9286
+        }
+      },
+      "zh": {
+        "bm25": {
+          "hit": 16,
+          "n": 20,
+          "rate": 0.8
+        },
+        "hybrid": {
+          "hit": 17,
+          "n": 20,
+          "rate": 0.85
+        },
+        "vector": {
+          "hit": 14,
+          "n": 20,
+          "rate": 0.7
+        }
+      }
+    }
+  }
+}

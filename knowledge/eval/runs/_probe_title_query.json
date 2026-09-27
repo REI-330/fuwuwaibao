@@ -1,0 +1,29 @@
+{
+  "_comment": "诊断用探针：不做验收，只回答『把英文职业标题原样写进查询，BM25 能不能命中 sectionPath』。题号借用真实题集以便沿用 referenceChunks。",
+  "questions": [
+    {
+      "questionId": "N12",
+      "question": "软件质量保证分析师与测试员 Software Quality Assurance Analysts and Testers 主要任务 工作活动 Tasks Work Activities",
+      "referenceChunks": ["S16#s291~2", "S16#s292"],
+      "answerable": true
+    },
+    {
+      "questionId": "N13",
+      "question": "计算机硬件工程师 Computer Hardware Engineers 日常任务 工作活动 Tasks Work Activities",
+      "referenceChunks": ["S17#s320~2", "S17#s321"],
+      "answerable": true
+    },
+    {
+      "questionId": "T20",
+      "question": "软件质量保证分析师与测试员 Software Quality Assurance Analysts and Testers 数据库软件 操作系统软件 Database Software Operating System Software 热门技术 Hot Technology",
+      "referenceChunks": ["S16#s298~2", "S16#s298~5"],
+      "answerable": true
+    },
+    {
+      "questionId": "T21",
+      "question": "软件质量保证分析师与测试员 Software Quality Assurance Analysts and Testers 分析与科学计算软件 图形图像软件 Analytical or Scientific Software Graphics or Photo Imaging Software 热门技术 Hot Technology",
+      "referenceChunks": ["S16#s298", "S16#s298~4"],
+      "answerable": true
+    }
+  ]
+}
