@@ -279,6 +279,39 @@
       "direction": "X-policy",
       "tags": ["云计算", "部署", "运维"],
       "scopeZh": "支持：云上部署与运维的能力项名称。不支持：跨云厂商的等价性结论。"
+    },
+    {
+      "sourceId": "S23",
+      "title": "pytest 中文文档：测试中断言的编写和报告",
+      "publisher": "pytest（pytest-dev）/ 中文镜像：OSGeo 中国中心",
+      "url": "https://www.osgeo.cn/pytest/assert.html",
+      "publishedAt": null,
+      "license": "community-mirror",
+      "direction": "D4-test-dev",
+      "tags": ["断言", "测试失败报告", "pytest"],
+      "scopeZh": "支持：断言写法与失败报告解读的能力项。不支持：作为官方版本引用；该页为 pytest 6.2 中文镜像。"
+    },
+    {
+      "sourceId": "S24",
+      "title": "pytest 中文文档：MonkeyPatching/Mocking 模块和环境",
+      "publisher": "pytest（pytest-dev）/ 中文镜像：OSGeo 中国中心",
+      "url": "https://www.osgeo.cn/pytest/monkeypatch.html",
+      "publishedAt": null,
+      "license": "community-mirror",
+      "direction": "D4-test-dev",
+      "tags": ["monkeypatch", "打桩", "测试隔离"],
+      "scopeZh": "支持：依赖替换与打桩的能力项与限制。不支持：作为官方版本引用。"
+    },
+    {
+      "sourceId": "S25",
+      "title": "pytest 中文文档：跳过和 xfail —— 处理无法成功的测试",
+      "publisher": "pytest（pytest-dev）/ 中文镜像：OSGeo 中国中心",
+      "url": "https://www.osgeo.cn/pytest/skipping.html",
+      "publishedAt": null,
+      "license": "community-mirror",
+      "direction": "D4-test-dev",
+      "tags": ["skip", "xfail", "用例治理"],
+      "scopeZh": "支持：用例跳过与预期失败标记的语义与使用场景。不支持：作为官方版本引用。"
     }
   ]
 }
