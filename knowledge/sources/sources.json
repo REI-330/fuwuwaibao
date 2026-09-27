@@ -1,6 +1,6 @@
 {
   "schema": "career-graph-sources/v1",
-  "generatedAt": "2026-09-27T10:24:24.320Z",
+  "generatedAt": "2026-09-27T10:54:37.209Z",
   "note": "L0 证据层的来源登记表。sha256 / chunkCount 由步骤 02 / 03 回填。status 走向：registered → fetched | fetched-thin | duplicate-content | fetch-failed → chunked。",
   "contractFields": [
     "sourceId",
@@ -63,7 +63,7 @@
       "D4-test-dev": 5,
       "X-policy": 7
     },
-    "sources": 25,
+    "sources": 26,
     "fetched": 22,
     "fetchedThin": 0,
     "duplicateContent": 0,
@@ -72,13 +72,13 @@
     "metaRefreshFollowed": 0,
     "unprunedFallback": 1,
     "totalBytes": 4553319,
-    "sourcesWithChunks": 25,
-    "chunks": 537,
-    "splitSections": 80,
-    "skippedSections": 44,
-    "droppedTooShort": 22,
+    "sourcesWithChunks": 26,
+    "chunks": 1757,
+    "splitSections": 90,
+    "skippedSections": 313,
+    "droppedTooShort": 59,
     "charRangeMismatch": 115,
-    "totalChars": 455848,
+    "totalChars": 845251,
     "longestChunk": 1600
   },
   "rejected": [],
@@ -658,6 +658,28 @@
       "byteSize": 40750,
       "charset": "utf-8",
       "fetchedAt": "2026-09-27T10:22:26.225Z"
+    },
+    {
+      "sourceId": "S26",
+      "title": "国家职业技能标准（IT / 电子 / 自动化类职业，工作要求表）",
+      "publisher": "人力资源和社会保障部 职业技能鉴定中心（osta.org.cn）",
+      "url": "https://www.osta.org.cn/",
+      "publishedAt": null,
+      "collectedAt": "2026-09-27T10:54:26.157Z",
+      "license": "public-policy",
+      "scopeZh": "支持：职业功能、工作内容、技能要求与相关知识（纯中文叙述），用于岗位能力项的权威依据。不支持：具体企业的岗位职责与薪资结论。",
+      "sha256": "844a8761fa5414beca2b25c4758fb0c98fcca99c4fac57c65daa8eccfeff273d",
+      "chunkCount": 1220,
+      "direction": "X-policy",
+      "tags": [
+        "国家职业技能标准",
+        "职业功能",
+        "技能要求",
+        "相关知识"
+      ],
+      "status": "chunked",
+      "sourceKind": "synthesized-from-tables",
+      "note": "由步骤 12 从 import/raw/osta-standards/tables.jsonl 重组生成；序号列与正文列在 PDF 抽取时交错，重组规则见脚本头部注释。"
     }
   ],
   "bySourceChunks": {
@@ -685,6 +707,7 @@
     "S22": 5,
     "S23": 11,
     "S24": 12,
-    "S25": 20
+    "S25": 20,
+    "S26": 1220
   }
 }

@@ -1,12 +1,12 @@
 {
   "schema": "career-graph-eval-results/v1",
   "step": "11",
-  "generatedAt": "2026-09-27T09:49:22.880Z",
+  "generatedAt": "2026-09-27T10:54:48.665Z",
   "kbVersion": "2026.09.15",
   "graphVersion": "0.1.0",
   "note": "逐题 × 5 档配置的原始命中结果。检索用 10 的同一套零依赖 BM25（lib/graph.mjs），不调模型，所以只有检索耗时；「引用支持度」需人工判定，本文件不冒充。失败案例原样保留。",
   "corpus": {
-    "chunks": 494,
+    "chunks": 1757,
     "nodes": 63,
     "edges": 226,
     "wikiPages": 38
@@ -64,66 +64,66 @@
     {
       "id": "A-bm25-only",
       "label": "BM25 only",
-      "threshold": 12.701,
+      "threshold": 14.069,
       "metrics": {
-        "hitRate": "2/18",
-        "hitRateValue": 0.111,
-        "meanPrecisionAt3": 0.056,
-        "insufficientDataHandling": "6/6",
-        "insufficientDataHandlingValue": 1,
-        "elapsedMs": 14
+        "hitRate": "1/18",
+        "hitRateValue": 0.056,
+        "meanPrecisionAt3": 0.037,
+        "insufficientDataHandling": "5/6",
+        "insufficientDataHandlingValue": 0.833,
+        "elapsedMs": 44
       }
     },
     {
       "id": "B-graph-1hop",
       "label": "+ 图遍历（一跳邻居）",
-      "threshold": 356.788,
+      "threshold": 436.984,
       "metrics": {
         "hitRate": "6/18",
         "hitRateValue": 0.333,
-        "meanPrecisionAt3": 0.185,
+        "meanPrecisionAt3": 0.222,
         "insufficientDataHandling": "4/6",
         "insufficientDataHandlingValue": 0.667,
-        "elapsedMs": 96
+        "elapsedMs": 297
       }
     },
     {
       "id": "C-wiki-reviewed",
       "label": "+ wiki 页（reviewed）",
-      "threshold": 356.788,
+      "threshold": 436.984,
       "metrics": {
         "hitRate": "6/18",
         "hitRateValue": 0.333,
-        "meanPrecisionAt3": 0.185,
+        "meanPrecisionAt3": 0.222,
         "insufficientDataHandling": "4/6",
         "insufficientDataHandlingValue": 0.667,
-        "elapsedMs": 100
+        "elapsedMs": 313
       }
     },
     {
       "id": "D-wiki-with-draft",
       "label": "+ wiki 页（含 llm-draft 降权）",
-      "threshold": 356.788,
+      "threshold": 436.984,
       "metrics": {
         "hitRate": "6/18",
         "hitRateValue": 0.333,
-        "meanPrecisionAt3": 0.185,
+        "meanPrecisionAt3": 0.222,
         "insufficientDataHandling": "4/6",
         "insufficientDataHandlingValue": 0.667,
-        "elapsedMs": 97
+        "elapsedMs": 328
       }
     },
     {
       "id": "E-full",
       "label": "全量",
-      "threshold": 356.788,
+      "threshold": 436.984,
       "metrics": {
         "hitRate": "6/18",
         "hitRateValue": 0.333,
-        "meanPrecisionAt3": 0.185,
+        "meanPrecisionAt3": 0.222,
         "insufficientDataHandling": "4/6",
         "insufficientDataHandlingValue": 0.667,
-        "elapsedMs": 91
+        "elapsedMs": 314
       }
     }
   ],
@@ -132,14 +132,14 @@
       "id": "A-bm25-only",
       "label": "BM25 only",
       "purpose": "基线：只看问题文本的 chunk 级 BM25。",
-      "threshold": 12.701,
+      "threshold": 14.069,
       "metrics": {
-        "hitRate": "2/18",
-        "hitRateValue": 0.111,
-        "meanPrecisionAt3": 0.056,
-        "insufficientDataHandling": "6/6",
-        "insufficientDataHandlingValue": 1,
-        "elapsedMs": 14
+        "hitRate": "1/18",
+        "hitRateValue": 0.056,
+        "meanPrecisionAt3": 0.037,
+        "insufficientDataHandling": "5/6",
+        "insufficientDataHandlingValue": 0.833,
+        "elapsedMs": 44
       },
       "perQuestion": [
         {
@@ -159,16 +159,16 @@
           ],
           "top3": [
             {
-              "chunkId": "S05#s101",
-              "score": 12.701
-            },
-            {
               "chunkId": "S08#s148~2",
-              "score": 12.491
+              "score": 14.744
             },
             {
-              "chunkId": "S05#s110",
-              "score": 11.578
+              "chunkId": "S26#s1617",
+              "score": 14.345
+            },
+            {
+              "chunkId": "S08#s147",
+              "score": 13.887
             }
           ],
           "hit": false,
@@ -191,15 +191,15 @@
           "top3": [
             {
               "chunkId": "S21#s349",
-              "score": 14.175
+              "score": 14.962
             },
             {
               "chunkId": "S21#s349~5",
-              "score": 11.947
+              "score": 13.232
             },
             {
               "chunkId": "S14#s238",
-              "score": 9.509
+              "score": 12.713
             }
           ],
           "hit": false,
@@ -223,16 +223,16 @@
           ],
           "top3": [
             {
-              "chunkId": "S05#s110",
-              "score": 12.371
+              "chunkId": "S14#s238",
+              "score": 10.648
             },
             {
-              "chunkId": "S15#s282",
-              "score": 12.368
+              "chunkId": "S26#s1086",
+              "score": 9.659
             },
             {
-              "chunkId": "S05#s101",
-              "score": 12.304
+              "chunkId": "S14#s248",
+              "score": 9.238
             }
           ],
           "hit": false,
@@ -258,15 +258,15 @@
           "top3": [
             {
               "chunkId": "S15#s282",
-              "score": 18.022
+              "score": 19.154
             },
             {
               "chunkId": "S08#s148~2",
-              "score": 12.958
+              "score": 16.039
             },
             {
               "chunkId": "S21#s349~3",
-              "score": 11.985
+              "score": 14.383
             }
           ],
           "hit": false,
@@ -287,16 +287,16 @@
           ],
           "top3": [
             {
+              "chunkId": "S26#s1616",
+              "score": 18.825
+            },
+            {
               "chunkId": "S08#s148~2",
-              "score": 15.991
+              "score": 16.358
             },
             {
-              "chunkId": "S15#s282",
-              "score": 15.624
-            },
-            {
-              "chunkId": "S05#s101",
-              "score": 15.482
+              "chunkId": "S26#s1617",
+              "score": 15.792
             }
           ],
           "hit": false,
@@ -328,15 +328,15 @@
           "top3": [
             {
               "chunkId": "S21#s349",
-              "score": 22.197
-            },
-            {
-              "chunkId": "S21#s349~5",
-              "score": 19.524
+              "score": 24.982
             },
             {
               "chunkId": "S21#s349~3",
-              "score": 18.696
+              "score": 21.303
+            },
+            {
+              "chunkId": "S21#s349~5",
+              "score": 21.107
             }
           ],
           "hit": false,
@@ -357,15 +357,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 14.021
+              "score": 17.742
             },
             {
               "chunkId": "S08#s145",
-              "score": 11.75
+              "score": 14.541
             },
             {
-              "chunkId": "S18#s343",
-              "score": 11.069
+              "chunkId": "S05#s96~2",
+              "score": 13.815
             }
           ],
           "hit": false,
@@ -388,23 +388,21 @@
           ],
           "top3": [
             {
-              "chunkId": "S18#s343",
-              "score": 11.069
-            },
-            {
-              "chunkId": "S02#s7",
-              "score": 10.103
+              "chunkId": "S26#s1602",
+              "score": 14.069
             },
             {
               "chunkId": "S02#s29",
-              "score": 9.967
+              "score": 12.388
+            },
+            {
+              "chunkId": "S26#s601",
+              "score": 12.325
             }
           ],
-          "hit": true,
-          "precisionAt3": 0.333,
-          "hits": [
-            "S02#s7"
-          ]
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
         },
         {
           "questionId": "Q09",
@@ -425,15 +423,15 @@
           "top3": [
             {
               "chunkId": "S15#s282",
-              "score": 16.175
-            },
-            {
-              "chunkId": "S14#s278",
-              "score": 14.006
+              "score": 13.926
             },
             {
               "chunkId": "S14#s261",
-              "score": 12.297
+              "score": 13.784
+            },
+            {
+              "chunkId": "S26#s1143",
+              "score": 12.655
             }
           ],
           "hit": false,
@@ -460,16 +458,16 @@
           ],
           "top3": [
             {
-              "chunkId": "S18#s343",
-              "score": 11.069
-            },
-            {
               "chunkId": "S21#s349",
-              "score": 10.454
+              "score": 11.065
             },
             {
-              "chunkId": "S08#s148",
-              "score": 5.847
+              "chunkId": "S26#s560",
+              "score": 8.228
+            },
+            {
+              "chunkId": "S26#s555",
+              "score": 8.119
             }
           ],
           "hit": false,
@@ -492,15 +490,15 @@
           "top3": [
             {
               "chunkId": "S08#s148~2",
-              "score": 12.958
-            },
-            {
-              "chunkId": "S18#s343",
-              "score": 11.069
+              "score": 16.039
             },
             {
               "chunkId": "S21#s349~3",
-              "score": 9.788
+              "score": 12.303
+            },
+            {
+              "chunkId": "S08#s147",
+              "score": 12.182
             }
           ],
           "hit": false,
@@ -524,16 +522,16 @@
           ],
           "top3": [
             {
-              "chunkId": "S21#s349~3",
-              "score": 13.957
-            },
-            {
               "chunkId": "S08#s148~2",
-              "score": 13.014
+              "score": 15.438
             },
             {
-              "chunkId": "S01#s6",
-              "score": 12.685
+              "chunkId": "S21#s349~3",
+              "score": 14.751
+            },
+            {
+              "chunkId": "S26#s1617",
+              "score": 14.345
             }
           ],
           "hit": false,
@@ -554,15 +552,15 @@
           "top3": [
             {
               "chunkId": "S08#s148~2",
-              "score": 25.449
+              "score": 30.783
             },
             {
               "chunkId": "S21#s349~3",
-              "score": 22.653
+              "score": 26.423
             },
             {
               "chunkId": "S08#s147",
-              "score": 21.203
+              "score": 26.069
             }
           ],
           "hit": false,
@@ -582,15 +580,15 @@
           "top3": [
             {
               "chunkId": "S05#s101",
-              "score": 20.323
-            },
-            {
-              "chunkId": "S05#s110",
-              "score": 18.713
+              "score": 20.345
             },
             {
               "chunkId": "S21#s349~5",
-              "score": 18.109
+              "score": 18.488
+            },
+            {
+              "chunkId": "S05#s110",
+              "score": 18.485
             }
           ],
           "hit": false,
@@ -610,16 +608,16 @@
           ],
           "top3": [
             {
-              "chunkId": "S21#s349~5",
-              "score": 22.749
+              "chunkId": "S15#s282",
+              "score": 25.97
             },
             {
-              "chunkId": "S15#s282",
-              "score": 22.682
+              "chunkId": "S21#s349~5",
+              "score": 25.167
             },
             {
               "chunkId": "S21#s349",
-              "score": 19.602
+              "score": 22.725
             }
           ],
           "hit": false,
@@ -640,15 +638,15 @@
           "top3": [
             {
               "chunkId": "S08#s148~3",
-              "score": 12.695
-            },
-            {
-              "chunkId": "S18#s343",
-              "score": 11.069
+              "score": 13.704
             },
             {
               "chunkId": "S19#s344~2",
-              "score": 8.803
+              "score": 10.78
+            },
+            {
+              "chunkId": "S19#s344~3",
+              "score": 8.653
             }
           ],
           "hit": false,
@@ -669,15 +667,15 @@
           "top3": [
             {
               "chunkId": "S15#s282",
-              "score": 22.172
+              "score": 18.479
+            },
+            {
+              "chunkId": "S26#s1039",
+              "score": 12.976
             },
             {
               "chunkId": "S21#s349~5",
-              "score": 13.022
-            },
-            {
-              "chunkId": "S21#s349~2",
-              "score": 11.967
+              "score": 12.252
             }
           ],
           "hit": false,
@@ -695,15 +693,15 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 40.428
+              "score": 38.395
             },
             {
               "chunkId": "S11#s172",
-              "score": 21.966
+              "score": 19.949
             },
             {
-              "chunkId": "S18#s343",
-              "score": 15.17
+              "chunkId": "S14#s236",
+              "score": 12.418
             }
           ],
           "hit": true,
@@ -721,15 +719,15 @@
           "top3": [
             {
               "chunkId": "S07#2.3",
-              "score": 8.77
+              "score": 11.054
             },
             {
               "chunkId": "S14#s242",
-              "score": 8.195
+              "score": 10.205
             },
             {
-              "chunkId": "S15#s282",
-              "score": 8.053
+              "chunkId": "S26#s668",
+              "score": 8.116
             }
           ],
           "hit": null,
@@ -743,16 +741,16 @@
           "referenceChunks": [],
           "top3": [
             {
-              "chunkId": "S15#s282",
-              "score": 12.326
-            },
-            {
               "chunkId": "S01#s2",
-              "score": 11.555
+              "score": 15.104
             },
             {
               "chunkId": "S14#s238",
-              "score": 11.017
+              "score": 14.937
+            },
+            {
+              "chunkId": "S15#s282",
+              "score": 12.776
             }
           ],
           "hit": null,
@@ -767,15 +765,15 @@
           "top3": [
             {
               "chunkId": "S14#s261",
-              "score": 6.944
+              "score": 8.107
             },
             {
               "chunkId": "S05#s103",
-              "score": 5.753
+              "score": 7.353
             },
             {
               "chunkId": "S05#s94",
-              "score": 5.753
+              "score": 7.353
             }
           ],
           "hit": null,
@@ -789,16 +787,16 @@
           "referenceChunks": [],
           "top3": [
             {
+              "chunkId": "S26#s1143",
+              "score": 11.493
+            },
+            {
               "chunkId": "S14#s242",
-              "score": 8.195
+              "score": 10.205
             },
             {
               "chunkId": "S18#s343",
-              "score": 7.885
-            },
-            {
-              "chunkId": "S10#s171",
-              "score": 5.983
+              "score": 9.558
             }
           ],
           "hit": null,
@@ -812,16 +810,16 @@
           "referenceChunks": [],
           "top3": [
             {
+              "chunkId": "S26#s1455",
+              "score": 9.063
+            },
+            {
+              "chunkId": "S26#s1451",
+              "score": 8.875
+            },
+            {
               "chunkId": "S14#s278",
-              "score": 5.478
-            },
-            {
-              "chunkId": "S07#3.5",
-              "score": 5.239
-            },
-            {
-              "chunkId": "S14#s266",
-              "score": 5.232
+              "score": 8.76
             }
           ],
           "hit": null,
@@ -835,16 +833,16 @@
           "referenceChunks": [],
           "top3": [
             {
-              "chunkId": "S18#s343",
-              "score": 10.171
-            },
-            {
               "chunkId": "S14#s242",
-              "score": 8.195
+              "score": 10.205
             },
             {
-              "chunkId": "S14#s236",
-              "score": 4.753
+              "chunkId": "S18#s343",
+              "score": 10.158
+            },
+            {
+              "chunkId": "S26#s647",
+              "score": 10.13
             }
           ],
           "hit": null,
@@ -857,14 +855,14 @@
       "id": "B-graph-1hop",
       "label": "+ 图遍历（一跳邻居）",
       "purpose": "图结构是否带来增益：用节点索引定位种子，把一跳邻居的词面并进查询。",
-      "threshold": 356.788,
+      "threshold": 436.984,
       "metrics": {
         "hitRate": "6/18",
         "hitRateValue": 0.333,
-        "meanPrecisionAt3": 0.185,
+        "meanPrecisionAt3": 0.222,
         "insufficientDataHandling": "4/6",
         "insufficientDataHandlingValue": 0.667,
-        "elapsedMs": 96
+        "elapsedMs": 297
       },
       "perQuestion": [
         {
@@ -885,22 +883,20 @@
           "top3": [
             {
               "chunkId": "S02#s15",
-              "score": 438.386
+              "score": 540.299
             },
             {
               "chunkId": "S02#s24",
-              "score": 386.517
+              "score": 496.485
             },
             {
-              "chunkId": "S02#s10",
-              "score": 383.49
+              "chunkId": "S02#s19",
+              "score": 476.636
             }
           ],
-          "hit": true,
-          "precisionAt3": 0.333,
-          "hits": [
-            "S02#s10"
-          ]
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
         },
         {
           "questionId": "Q02",
@@ -918,15 +914,15 @@
           "top3": [
             {
               "chunkId": "S09#s160",
-              "score": 536.452
+              "score": 629.18
             },
             {
               "chunkId": "S10#s171",
-              "score": 511.606
+              "score": 597.98
             },
             {
               "chunkId": "S08#s147~2",
-              "score": 442.371
+              "score": 526.326
             }
           ],
           "hit": false,
@@ -951,22 +947,23 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 326.58
+              "score": 345.419
             },
             {
               "chunkId": "S12#s180",
-              "score": 316
+              "score": 335.15
             },
             {
-              "chunkId": "S15#s282",
-              "score": 283.324
+              "chunkId": "S12#s181",
+              "score": 275.913
             }
           ],
           "hit": true,
-          "precisionAt3": 0.667,
+          "precisionAt3": 1,
           "hits": [
             "S11#s176",
-            "S12#s180"
+            "S12#s180",
+            "S12#s181"
           ]
         },
         {
@@ -988,15 +985,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 586.804
+              "score": 713.457
             },
             {
               "chunkId": "S08#s150",
-              "score": 521.165
+              "score": 634.338
             },
             {
               "chunkId": "S08#s145",
-              "score": 474.711
+              "score": 588.972
             }
           ],
           "hit": false,
@@ -1018,15 +1015,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 635.48
+              "score": 760.746
             },
             {
               "chunkId": "S08#s150",
-              "score": 574.129
+              "score": 684.692
             },
             {
-              "chunkId": "S08#s148",
-              "score": 526.549
+              "chunkId": "S08#s145",
+              "score": 610.83
             }
           ],
           "hit": false,
@@ -1058,15 +1055,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 708.536
+              "score": 881.422
             },
             {
               "chunkId": "S09#s160",
-              "score": 704.245
+              "score": 861.058
             },
             {
               "chunkId": "S08#s147~2",
-              "score": 670.808
+              "score": 818.484
             }
           ],
           "hit": false,
@@ -1087,15 +1084,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 356.788
+              "score": 436.984
             },
             {
               "chunkId": "S08#s145",
-              "score": 311.055
+              "score": 381.829
             },
             {
               "chunkId": "S08#s150",
-              "score": 308.292
+              "score": 367.638
             }
           ],
           "hit": false,
@@ -1118,21 +1115,23 @@
           ],
           "top3": [
             {
-              "chunkId": "S08#s147",
-              "score": 265.273
-            },
-            {
               "chunkId": "S02#s15",
-              "score": 258.435
+              "score": 321.869
             },
             {
-              "chunkId": "S21#s349~3",
-              "score": 241.827
+              "chunkId": "S08#s147",
+              "score": 290.658
+            },
+            {
+              "chunkId": "S03#s46",
+              "score": 283.115
             }
           ],
-          "hit": false,
-          "precisionAt3": 0,
-          "hits": []
+          "hit": true,
+          "precisionAt3": 0.333,
+          "hits": [
+            "S03#s46"
+          ]
         },
         {
           "questionId": "Q09",
@@ -1153,20 +1152,21 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 326.58
+              "score": 345.419
             },
             {
               "chunkId": "S12#s180",
-              "score": 290.959
+              "score": 306.762
             },
             {
-              "chunkId": "S15#s282",
-              "score": 266.276
+              "chunkId": "S11#s172",
+              "score": 243.101
             }
           ],
           "hit": true,
-          "precisionAt3": 0.667,
+          "precisionAt3": 1,
           "hits": [
+            "S11#s172",
             "S11#s176",
             "S12#s180"
           ]
@@ -1192,15 +1192,15 @@
           "top3": [
             {
               "chunkId": "S09#s160",
-              "score": 530.452
+              "score": 621.131
             },
             {
               "chunkId": "S10#s171",
-              "score": 504.118
+              "score": 594.004
             },
             {
               "chunkId": "S08#s147~2",
-              "score": 437.426
+              "score": 524.332
             }
           ],
           "hit": false,
@@ -1223,15 +1223,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 605.88
+              "score": 746.454
             },
             {
               "chunkId": "S08#s150",
-              "score": 532.902
+              "score": 656.228
             },
             {
               "chunkId": "S08#s145",
-              "score": 491.678
+              "score": 612.294
             }
           ],
           "hit": true,
@@ -1258,15 +1258,15 @@
           "top3": [
             {
               "chunkId": "S02#s15",
-              "score": 381.946
+              "score": 476.032
             },
             {
               "chunkId": "S02#s24",
-              "score": 329.809
+              "score": 423.088
             },
             {
               "chunkId": "S02#s28",
-              "score": 319.128
+              "score": 408.769
             }
           ],
           "hit": false,
@@ -1287,15 +1287,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 665.594
+              "score": 803.567
             },
             {
               "chunkId": "S08#s150",
-              "score": 586.787
+              "score": 705.497
             },
             {
-              "chunkId": "S08#s148",
-              "score": 555.296
+              "chunkId": "S08#s145",
+              "score": 643.049
             }
           ],
           "hit": false,
@@ -1315,15 +1315,15 @@
           "top3": [
             {
               "chunkId": "S09#s160",
-              "score": 577.927
+              "score": 673.392
             },
             {
               "chunkId": "S10#s171",
-              "score": 565.23
+              "score": 662.84
             },
             {
               "chunkId": "S08#s147",
-              "score": 508.501
+              "score": 602.584
             }
           ],
           "hit": false,
@@ -1344,15 +1344,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 708.536
+              "score": 881.422
             },
             {
               "chunkId": "S09#s160",
-              "score": 704.245
+              "score": 861.058
             },
             {
               "chunkId": "S08#s147~2",
-              "score": 670.808
+              "score": 818.484
             }
           ],
           "hit": false,
@@ -1373,15 +1373,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 386.159
+              "score": 471.927
             },
             {
               "chunkId": "S08#s145",
-              "score": 384.28
+              "score": 462.416
             },
             {
               "chunkId": "S08#s146",
-              "score": 359.597
+              "score": 439.542
             }
           ],
           "hit": true,
@@ -1405,15 +1405,15 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 309.672
-            },
-            {
-              "chunkId": "S15#s282",
-              "score": 294.173
+              "score": 335.046
             },
             {
               "chunkId": "S12#s180",
-              "score": 288.351
+              "score": 309.497
+            },
+            {
+              "chunkId": "S12#s181",
+              "score": 257.076
             }
           ],
           "hit": false,
@@ -1431,15 +1431,15 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 456.695
+              "score": 472.42
             },
             {
               "chunkId": "S11#s172",
-              "score": 275.388
+              "score": 289.261
             },
             {
               "chunkId": "S12#s180",
-              "score": 161.437
+              "score": 170.511
             }
           ],
           "hit": true,
@@ -1457,15 +1457,15 @@
           "top3": [
             {
               "chunkId": "S02#s15",
-              "score": 387.958
+              "score": 479.808
             },
             {
               "chunkId": "S02#s24",
-              "score": 358.67
+              "score": 448.623
             },
             {
-              "chunkId": "S02#s17",
-              "score": 342.865
+              "chunkId": "S02#s28",
+              "score": 418.317
             }
           ],
           "hit": null,
@@ -1480,15 +1480,15 @@
           "top3": [
             {
               "chunkId": "S02#s15",
-              "score": 387.958
+              "score": 479.808
             },
             {
               "chunkId": "S02#s24",
-              "score": 358.67
+              "score": 448.623
             },
             {
-              "chunkId": "S02#s17",
-              "score": 345.301
+              "chunkId": "S02#s28",
+              "score": 418.317
             }
           ],
           "hit": null,
@@ -1503,15 +1503,15 @@
           "top3": [
             {
               "chunkId": "S14#s261",
-              "score": 6.944
+              "score": 8.107
             },
             {
               "chunkId": "S05#s103",
-              "score": 5.753
+              "score": 7.353
             },
             {
               "chunkId": "S05#s94",
-              "score": 5.753
+              "score": 7.353
             }
           ],
           "hit": null,
@@ -1526,15 +1526,15 @@
           "top3": [
             {
               "chunkId": "S12#s180",
-              "score": 213.287
+              "score": 236.914
             },
             {
               "chunkId": "S12#s187",
-              "score": 167.331
+              "score": 192.162
             },
             {
-              "chunkId": "S15#s282",
-              "score": 157.413
+              "chunkId": "S02#s12",
+              "score": 179.939
             }
           ],
           "hit": null,
@@ -1548,16 +1548,16 @@
           "referenceChunks": [],
           "top3": [
             {
+              "chunkId": "S26#s1455",
+              "score": 9.063
+            },
+            {
+              "chunkId": "S26#s1451",
+              "score": 8.875
+            },
+            {
               "chunkId": "S14#s278",
-              "score": 5.478
-            },
-            {
-              "chunkId": "S07#3.5",
-              "score": 5.239
-            },
-            {
-              "chunkId": "S14#s266",
-              "score": 5.232
+              "score": 8.76
             }
           ],
           "hit": null,
@@ -1572,15 +1572,15 @@
           "top3": [
             {
               "chunkId": "S18#s343",
-              "score": 205.256
+              "score": 104.943
             },
             {
-              "chunkId": "S15#s282",
-              "score": 27.697
+              "chunkId": "S26#s520",
+              "score": 48.209
             },
             {
-              "chunkId": "S22#s356",
-              "score": 26.449
+              "chunkId": "S26#s443",
+              "score": 47.426
             }
           ],
           "hit": null,
@@ -1593,14 +1593,14 @@
       "id": "C-wiki-reviewed",
       "label": "+ wiki 页（reviewed）",
       "purpose": "Wiki 层是否带来增益：对 reviewed 页引用的 chunk 加权。",
-      "threshold": 356.788,
+      "threshold": 436.984,
       "metrics": {
         "hitRate": "6/18",
         "hitRateValue": 0.333,
-        "meanPrecisionAt3": 0.185,
+        "meanPrecisionAt3": 0.222,
         "insufficientDataHandling": "4/6",
         "insufficientDataHandlingValue": 0.667,
-        "elapsedMs": 100
+        "elapsedMs": 313
       },
       "perQuestion": [
         {
@@ -1621,22 +1621,20 @@
           "top3": [
             {
               "chunkId": "S02#s15",
-              "score": 438.386
+              "score": 540.299
             },
             {
               "chunkId": "S02#s24",
-              "score": 386.517
+              "score": 496.485
             },
             {
-              "chunkId": "S02#s10",
-              "score": 383.49
+              "chunkId": "S02#s19",
+              "score": 476.636
             }
           ],
-          "hit": true,
-          "precisionAt3": 0.333,
-          "hits": [
-            "S02#s10"
-          ]
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
         },
         {
           "questionId": "Q02",
@@ -1654,15 +1652,15 @@
           "top3": [
             {
               "chunkId": "S09#s160",
-              "score": 536.452
+              "score": 629.18
             },
             {
               "chunkId": "S10#s171",
-              "score": 511.606
+              "score": 597.98
             },
             {
               "chunkId": "S08#s147~2",
-              "score": 442.371
+              "score": 526.326
             }
           ],
           "hit": false,
@@ -1687,22 +1685,23 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 327.08
+              "score": 345.919
             },
             {
               "chunkId": "S12#s180",
-              "score": 316
+              "score": 335.15
             },
             {
-              "chunkId": "S15#s282",
-              "score": 283.324
+              "chunkId": "S12#s181",
+              "score": 276.413
             }
           ],
           "hit": true,
-          "precisionAt3": 0.667,
+          "precisionAt3": 1,
           "hits": [
             "S11#s176",
-            "S12#s180"
+            "S12#s180",
+            "S12#s181"
           ]
         },
         {
@@ -1724,15 +1723,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 586.804
+              "score": 713.457
             },
             {
               "chunkId": "S08#s150",
-              "score": 521.165
+              "score": 634.338
             },
             {
               "chunkId": "S08#s145",
-              "score": 475.211
+              "score": 589.472
             }
           ],
           "hit": false,
@@ -1754,15 +1753,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 635.48
+              "score": 760.746
             },
             {
               "chunkId": "S08#s150",
-              "score": 574.129
+              "score": 684.692
             },
             {
-              "chunkId": "S08#s148",
-              "score": 526.549
+              "chunkId": "S08#s145",
+              "score": 611.33
             }
           ],
           "hit": false,
@@ -1794,15 +1793,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 708.536
+              "score": 881.422
             },
             {
               "chunkId": "S09#s160",
-              "score": 704.245
+              "score": 861.058
             },
             {
               "chunkId": "S08#s147~2",
-              "score": 670.808
+              "score": 818.484
             }
           ],
           "hit": false,
@@ -1823,15 +1822,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 356.788
+              "score": 436.984
             },
             {
               "chunkId": "S08#s145",
-              "score": 311.555
+              "score": 382.329
             },
             {
               "chunkId": "S08#s150",
-              "score": 308.292
+              "score": 367.638
             }
           ],
           "hit": false,
@@ -1854,21 +1853,23 @@
           ],
           "top3": [
             {
-              "chunkId": "S08#s147",
-              "score": 265.273
-            },
-            {
               "chunkId": "S02#s15",
-              "score": 258.435
+              "score": 321.869
             },
             {
-              "chunkId": "S21#s349~3",
-              "score": 241.827
+              "chunkId": "S08#s147",
+              "score": 290.658
+            },
+            {
+              "chunkId": "S03#s46",
+              "score": 283.115
             }
           ],
-          "hit": false,
-          "precisionAt3": 0,
-          "hits": []
+          "hit": true,
+          "precisionAt3": 0.333,
+          "hits": [
+            "S03#s46"
+          ]
         },
         {
           "questionId": "Q09",
@@ -1889,20 +1890,21 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 327.08
+              "score": 345.919
             },
             {
               "chunkId": "S12#s180",
-              "score": 290.959
+              "score": 306.762
             },
             {
-              "chunkId": "S15#s282",
-              "score": 266.276
+              "chunkId": "S11#s172",
+              "score": 243.601
             }
           ],
           "hit": true,
-          "precisionAt3": 0.667,
+          "precisionAt3": 1,
           "hits": [
+            "S11#s172",
             "S11#s176",
             "S12#s180"
           ]
@@ -1928,15 +1930,15 @@
           "top3": [
             {
               "chunkId": "S09#s160",
-              "score": 530.452
+              "score": 621.131
             },
             {
               "chunkId": "S10#s171",
-              "score": 504.118
+              "score": 594.004
             },
             {
               "chunkId": "S08#s147~2",
-              "score": 437.426
+              "score": 524.332
             }
           ],
           "hit": false,
@@ -1959,15 +1961,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 605.88
+              "score": 746.454
             },
             {
               "chunkId": "S08#s150",
-              "score": 532.902
+              "score": 656.228
             },
             {
               "chunkId": "S08#s145",
-              "score": 492.178
+              "score": 612.794
             }
           ],
           "hit": true,
@@ -1994,15 +1996,15 @@
           "top3": [
             {
               "chunkId": "S02#s15",
-              "score": 381.946
+              "score": 476.032
             },
             {
               "chunkId": "S02#s24",
-              "score": 329.809
+              "score": 423.088
             },
             {
               "chunkId": "S02#s28",
-              "score": 319.128
+              "score": 408.769
             }
           ],
           "hit": false,
@@ -2023,15 +2025,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 665.594
+              "score": 803.567
             },
             {
               "chunkId": "S08#s150",
-              "score": 586.787
+              "score": 705.497
             },
             {
-              "chunkId": "S08#s148",
-              "score": 555.296
+              "chunkId": "S08#s145",
+              "score": 643.549
             }
           ],
           "hit": false,
@@ -2051,15 +2053,15 @@
           "top3": [
             {
               "chunkId": "S09#s160",
-              "score": 577.927
+              "score": 673.392
             },
             {
               "chunkId": "S10#s171",
-              "score": 565.23
+              "score": 662.84
             },
             {
               "chunkId": "S08#s147",
-              "score": 508.501
+              "score": 602.584
             }
           ],
           "hit": false,
@@ -2080,15 +2082,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 708.536
+              "score": 881.422
             },
             {
               "chunkId": "S09#s160",
-              "score": 704.245
+              "score": 861.058
             },
             {
               "chunkId": "S08#s147~2",
-              "score": 670.808
+              "score": 818.484
             }
           ],
           "hit": false,
@@ -2109,15 +2111,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 386.159
+              "score": 471.927
             },
             {
               "chunkId": "S08#s145",
-              "score": 384.78
+              "score": 462.916
             },
             {
               "chunkId": "S08#s146",
-              "score": 360.097
+              "score": 440.042
             }
           ],
           "hit": true,
@@ -2141,15 +2143,15 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 310.172
-            },
-            {
-              "chunkId": "S15#s282",
-              "score": 294.173
+              "score": 335.546
             },
             {
               "chunkId": "S12#s180",
-              "score": 288.351
+              "score": 309.497
+            },
+            {
+              "chunkId": "S12#s181",
+              "score": 257.576
             }
           ],
           "hit": false,
@@ -2167,15 +2169,15 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 457.195
+              "score": 472.92
             },
             {
               "chunkId": "S11#s172",
-              "score": 275.888
+              "score": 289.761
             },
             {
               "chunkId": "S12#s180",
-              "score": 161.937
+              "score": 171.011
             }
           ],
           "hit": true,
@@ -2193,15 +2195,15 @@
           "top3": [
             {
               "chunkId": "S02#s15",
-              "score": 387.958
+              "score": 479.808
             },
             {
               "chunkId": "S02#s24",
-              "score": 358.67
+              "score": 448.623
             },
             {
-              "chunkId": "S02#s17",
-              "score": 342.865
+              "chunkId": "S02#s28",
+              "score": 418.317
             }
           ],
           "hit": null,
@@ -2216,15 +2218,15 @@
           "top3": [
             {
               "chunkId": "S02#s15",
-              "score": 387.958
+              "score": 479.808
             },
             {
               "chunkId": "S02#s24",
-              "score": 358.67
+              "score": 448.623
             },
             {
-              "chunkId": "S02#s17",
-              "score": 345.301
+              "chunkId": "S02#s28",
+              "score": 418.317
             }
           ],
           "hit": null,
@@ -2239,15 +2241,15 @@
           "top3": [
             {
               "chunkId": "S14#s261",
-              "score": 6.944
+              "score": 8.107
             },
             {
               "chunkId": "S05#s103",
-              "score": 5.753
+              "score": 7.353
             },
             {
               "chunkId": "S05#s94",
-              "score": 5.753
+              "score": 7.353
             }
           ],
           "hit": null,
@@ -2262,15 +2264,15 @@
           "top3": [
             {
               "chunkId": "S12#s180",
-              "score": 213.787
+              "score": 237.414
             },
             {
               "chunkId": "S12#s187",
-              "score": 167.831
+              "score": 192.662
             },
             {
-              "chunkId": "S15#s282",
-              "score": 157.413
+              "chunkId": "S02#s12",
+              "score": 179.939
             }
           ],
           "hit": null,
@@ -2284,16 +2286,16 @@
           "referenceChunks": [],
           "top3": [
             {
+              "chunkId": "S26#s1455",
+              "score": 9.063
+            },
+            {
+              "chunkId": "S26#s1451",
+              "score": 8.875
+            },
+            {
               "chunkId": "S14#s278",
-              "score": 5.478
-            },
-            {
-              "chunkId": "S07#3.5",
-              "score": 5.239
-            },
-            {
-              "chunkId": "S14#s266",
-              "score": 5.232
+              "score": 8.76
             }
           ],
           "hit": null,
@@ -2308,15 +2310,15 @@
           "top3": [
             {
               "chunkId": "S18#s343",
-              "score": 205.256
+              "score": 104.943
             },
             {
-              "chunkId": "S15#s282",
-              "score": 27.697
+              "chunkId": "S26#s520",
+              "score": 48.209
             },
             {
-              "chunkId": "S22#s356",
-              "score": 26.449
+              "chunkId": "S26#s443",
+              "score": 47.426
             }
           ],
           "hit": null,
@@ -2329,14 +2331,14 @@
       "id": "D-wiki-with-draft",
       "label": "+ wiki 页（含 llm-draft 降权）",
       "purpose": "降权策略是否有效：reviewed 页 ×1.0、llm-draft 页 ×0.6。",
-      "threshold": 356.788,
+      "threshold": 436.984,
       "metrics": {
         "hitRate": "6/18",
         "hitRateValue": 0.333,
-        "meanPrecisionAt3": 0.185,
+        "meanPrecisionAt3": 0.222,
         "insufficientDataHandling": "4/6",
         "insufficientDataHandlingValue": 0.667,
-        "elapsedMs": 97
+        "elapsedMs": 328
       },
       "perQuestion": [
         {
@@ -2357,22 +2359,20 @@
           "top3": [
             {
               "chunkId": "S02#s15",
-              "score": 438.386
+              "score": 540.299
             },
             {
               "chunkId": "S02#s24",
-              "score": 386.517
+              "score": 496.485
             },
             {
-              "chunkId": "S02#s10",
-              "score": 383.79
+              "chunkId": "S02#s19",
+              "score": 476.636
             }
           ],
-          "hit": true,
-          "precisionAt3": 0.333,
-          "hits": [
-            "S02#s10"
-          ]
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
         },
         {
           "questionId": "Q02",
@@ -2390,15 +2390,15 @@
           "top3": [
             {
               "chunkId": "S09#s160",
-              "score": 536.452
+              "score": 629.18
             },
             {
               "chunkId": "S10#s171",
-              "score": 511.606
+              "score": 597.98
             },
             {
               "chunkId": "S08#s147~2",
-              "score": 442.371
+              "score": 526.326
             }
           ],
           "hit": false,
@@ -2423,22 +2423,23 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 327.08
+              "score": 345.919
             },
             {
               "chunkId": "S12#s180",
-              "score": 316.3
+              "score": 335.45
             },
             {
-              "chunkId": "S15#s282",
-              "score": 283.324
+              "chunkId": "S12#s181",
+              "score": 276.413
             }
           ],
           "hit": true,
-          "precisionAt3": 0.667,
+          "precisionAt3": 1,
           "hits": [
             "S11#s176",
-            "S12#s180"
+            "S12#s180",
+            "S12#s181"
           ]
         },
         {
@@ -2460,15 +2461,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 586.804
+              "score": 713.457
             },
             {
               "chunkId": "S08#s150",
-              "score": 521.165
+              "score": 634.338
             },
             {
               "chunkId": "S08#s145",
-              "score": 475.211
+              "score": 589.472
             }
           ],
           "hit": false,
@@ -2490,15 +2491,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 635.48
+              "score": 760.746
             },
             {
               "chunkId": "S08#s150",
-              "score": 574.129
+              "score": 684.692
             },
             {
-              "chunkId": "S08#s148",
-              "score": 526.549
+              "chunkId": "S08#s145",
+              "score": 611.33
             }
           ],
           "hit": false,
@@ -2530,15 +2531,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 708.536
+              "score": 881.422
             },
             {
               "chunkId": "S09#s160",
-              "score": 704.245
+              "score": 861.058
             },
             {
               "chunkId": "S08#s147~2",
-              "score": 670.808
+              "score": 818.484
             }
           ],
           "hit": false,
@@ -2559,15 +2560,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 356.788
+              "score": 436.984
             },
             {
               "chunkId": "S08#s145",
-              "score": 311.555
+              "score": 382.329
             },
             {
               "chunkId": "S08#s150",
-              "score": 308.292
+              "score": 367.638
             }
           ],
           "hit": false,
@@ -2590,21 +2591,23 @@
           ],
           "top3": [
             {
-              "chunkId": "S08#s147",
-              "score": 265.273
-            },
-            {
               "chunkId": "S02#s15",
-              "score": 258.435
+              "score": 321.869
             },
             {
-              "chunkId": "S21#s349~3",
-              "score": 241.827
+              "chunkId": "S08#s147",
+              "score": 290.658
+            },
+            {
+              "chunkId": "S03#s46",
+              "score": 283.415
             }
           ],
-          "hit": false,
-          "precisionAt3": 0,
-          "hits": []
+          "hit": true,
+          "precisionAt3": 0.333,
+          "hits": [
+            "S03#s46"
+          ]
         },
         {
           "questionId": "Q09",
@@ -2625,20 +2628,21 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 327.08
+              "score": 345.919
             },
             {
               "chunkId": "S12#s180",
-              "score": 291.259
+              "score": 307.062
             },
             {
-              "chunkId": "S15#s282",
-              "score": 266.276
+              "chunkId": "S11#s172",
+              "score": 243.601
             }
           ],
           "hit": true,
-          "precisionAt3": 0.667,
+          "precisionAt3": 1,
           "hits": [
+            "S11#s172",
             "S11#s176",
             "S12#s180"
           ]
@@ -2664,15 +2668,15 @@
           "top3": [
             {
               "chunkId": "S09#s160",
-              "score": 530.452
+              "score": 621.131
             },
             {
               "chunkId": "S10#s171",
-              "score": 504.118
+              "score": 594.004
             },
             {
               "chunkId": "S08#s147~2",
-              "score": 437.426
+              "score": 524.332
             }
           ],
           "hit": false,
@@ -2695,15 +2699,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 605.88
+              "score": 746.454
             },
             {
               "chunkId": "S08#s150",
-              "score": 532.902
+              "score": 656.228
             },
             {
               "chunkId": "S08#s145",
-              "score": 492.178
+              "score": 612.794
             }
           ],
           "hit": true,
@@ -2730,15 +2734,15 @@
           "top3": [
             {
               "chunkId": "S02#s15",
-              "score": 381.946
+              "score": 476.032
             },
             {
               "chunkId": "S02#s24",
-              "score": 329.809
+              "score": 423.088
             },
             {
               "chunkId": "S02#s28",
-              "score": 319.128
+              "score": 408.769
             }
           ],
           "hit": false,
@@ -2759,15 +2763,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 665.594
+              "score": 803.567
             },
             {
               "chunkId": "S08#s150",
-              "score": 586.787
+              "score": 705.497
             },
             {
-              "chunkId": "S08#s148",
-              "score": 555.296
+              "chunkId": "S08#s145",
+              "score": 643.549
             }
           ],
           "hit": false,
@@ -2787,15 +2791,15 @@
           "top3": [
             {
               "chunkId": "S09#s160",
-              "score": 577.927
+              "score": 673.392
             },
             {
               "chunkId": "S10#s171",
-              "score": 565.23
+              "score": 662.84
             },
             {
               "chunkId": "S08#s147",
-              "score": 508.501
+              "score": 602.584
             }
           ],
           "hit": false,
@@ -2816,15 +2820,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 708.536
+              "score": 881.422
             },
             {
               "chunkId": "S09#s160",
-              "score": 704.245
+              "score": 861.058
             },
             {
               "chunkId": "S08#s147~2",
-              "score": 670.808
+              "score": 818.484
             }
           ],
           "hit": false,
@@ -2845,15 +2849,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 386.159
+              "score": 471.927
             },
             {
               "chunkId": "S08#s145",
-              "score": 384.78
+              "score": 462.916
             },
             {
               "chunkId": "S08#s146",
-              "score": 360.097
+              "score": 440.042
             }
           ],
           "hit": true,
@@ -2877,15 +2881,15 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 310.172
-            },
-            {
-              "chunkId": "S15#s282",
-              "score": 294.173
+              "score": 335.546
             },
             {
               "chunkId": "S12#s180",
-              "score": 288.651
+              "score": 309.797
+            },
+            {
+              "chunkId": "S12#s181",
+              "score": 257.576
             }
           ],
           "hit": false,
@@ -2903,15 +2907,15 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 457.195
+              "score": 472.92
             },
             {
               "chunkId": "S11#s172",
-              "score": 275.888
+              "score": 289.761
             },
             {
               "chunkId": "S12#s180",
-              "score": 161.937
+              "score": 171.011
             }
           ],
           "hit": true,
@@ -2929,15 +2933,15 @@
           "top3": [
             {
               "chunkId": "S02#s15",
-              "score": 387.958
+              "score": 479.808
             },
             {
               "chunkId": "S02#s24",
-              "score": 358.67
+              "score": 448.623
             },
             {
-              "chunkId": "S02#s17",
-              "score": 343.165
+              "chunkId": "S02#s28",
+              "score": 418.317
             }
           ],
           "hit": null,
@@ -2952,15 +2956,15 @@
           "top3": [
             {
               "chunkId": "S02#s15",
-              "score": 387.958
+              "score": 479.808
             },
             {
               "chunkId": "S02#s24",
-              "score": 358.67
+              "score": 448.623
             },
             {
-              "chunkId": "S02#s17",
-              "score": 345.601
+              "chunkId": "S02#s28",
+              "score": 418.317
             }
           ],
           "hit": null,
@@ -2975,15 +2979,15 @@
           "top3": [
             {
               "chunkId": "S14#s261",
-              "score": 6.944
+              "score": 8.107
             },
             {
               "chunkId": "S05#s103",
-              "score": 5.753
+              "score": 7.353
             },
             {
               "chunkId": "S05#s94",
-              "score": 5.753
+              "score": 7.353
             }
           ],
           "hit": null,
@@ -2998,15 +3002,15 @@
           "top3": [
             {
               "chunkId": "S12#s180",
-              "score": 213.787
+              "score": 237.414
             },
             {
               "chunkId": "S12#s187",
-              "score": 167.831
+              "score": 192.662
             },
             {
-              "chunkId": "S15#s282",
-              "score": 157.413
+              "chunkId": "S02#s12",
+              "score": 179.939
             }
           ],
           "hit": null,
@@ -3020,16 +3024,16 @@
           "referenceChunks": [],
           "top3": [
             {
+              "chunkId": "S26#s1455",
+              "score": 9.063
+            },
+            {
+              "chunkId": "S26#s1451",
+              "score": 8.875
+            },
+            {
               "chunkId": "S14#s278",
-              "score": 5.478
-            },
-            {
-              "chunkId": "S07#3.5",
-              "score": 5.239
-            },
-            {
-              "chunkId": "S14#s266",
-              "score": 5.232
+              "score": 8.76
             }
           ],
           "hit": null,
@@ -3044,15 +3048,15 @@
           "top3": [
             {
               "chunkId": "S18#s343",
-              "score": 205.256
+              "score": 104.943
             },
             {
-              "chunkId": "S15#s282",
-              "score": 27.697
+              "chunkId": "S26#s520",
+              "score": 48.209
             },
             {
-              "chunkId": "S22#s356",
-              "score": 26.449
+              "chunkId": "S26#s443",
+              "score": 47.426
             }
           ],
           "hit": null,
@@ -3065,14 +3069,14 @@
       "id": "E-full",
       "label": "全量",
       "purpose": "完整链路：图遍历 + 全部 wiki 页加权 + 别名/描述扩展。",
-      "threshold": 356.788,
+      "threshold": 436.984,
       "metrics": {
         "hitRate": "6/18",
         "hitRateValue": 0.333,
-        "meanPrecisionAt3": 0.185,
+        "meanPrecisionAt3": 0.222,
         "insufficientDataHandling": "4/6",
         "insufficientDataHandlingValue": 0.667,
-        "elapsedMs": 91
+        "elapsedMs": 314
       },
       "perQuestion": [
         {
@@ -3093,22 +3097,20 @@
           "top3": [
             {
               "chunkId": "S02#s15",
-              "score": 438.386
+              "score": 540.299
             },
             {
               "chunkId": "S02#s24",
-              "score": 386.517
+              "score": 496.485
             },
             {
-              "chunkId": "S02#s10",
-              "score": 383.79
+              "chunkId": "S02#s19",
+              "score": 476.636
             }
           ],
-          "hit": true,
-          "precisionAt3": 0.333,
-          "hits": [
-            "S02#s10"
-          ]
+          "hit": false,
+          "precisionAt3": 0,
+          "hits": []
         },
         {
           "questionId": "Q02",
@@ -3126,15 +3128,15 @@
           "top3": [
             {
               "chunkId": "S09#s160",
-              "score": 536.452
+              "score": 629.18
             },
             {
               "chunkId": "S10#s171",
-              "score": 511.606
+              "score": 597.98
             },
             {
               "chunkId": "S08#s147~2",
-              "score": 442.371
+              "score": 526.326
             }
           ],
           "hit": false,
@@ -3159,22 +3161,23 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 327.08
+              "score": 345.919
             },
             {
               "chunkId": "S12#s180",
-              "score": 316.3
+              "score": 335.45
             },
             {
-              "chunkId": "S15#s282",
-              "score": 283.324
+              "chunkId": "S12#s181",
+              "score": 276.413
             }
           ],
           "hit": true,
-          "precisionAt3": 0.667,
+          "precisionAt3": 1,
           "hits": [
             "S11#s176",
-            "S12#s180"
+            "S12#s180",
+            "S12#s181"
           ]
         },
         {
@@ -3196,15 +3199,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 586.804
+              "score": 713.457
             },
             {
               "chunkId": "S08#s150",
-              "score": 521.165
+              "score": 634.338
             },
             {
               "chunkId": "S08#s145",
-              "score": 475.211
+              "score": 589.472
             }
           ],
           "hit": false,
@@ -3226,15 +3229,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 635.48
+              "score": 760.746
             },
             {
               "chunkId": "S08#s150",
-              "score": 574.129
+              "score": 684.692
             },
             {
-              "chunkId": "S08#s148",
-              "score": 526.549
+              "chunkId": "S08#s145",
+              "score": 611.33
             }
           ],
           "hit": false,
@@ -3266,15 +3269,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 708.536
+              "score": 881.422
             },
             {
               "chunkId": "S09#s160",
-              "score": 704.245
+              "score": 861.058
             },
             {
               "chunkId": "S08#s147~2",
-              "score": 670.808
+              "score": 818.484
             }
           ],
           "hit": false,
@@ -3295,15 +3298,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 356.788
+              "score": 436.984
             },
             {
               "chunkId": "S08#s145",
-              "score": 311.555
+              "score": 382.329
             },
             {
               "chunkId": "S08#s150",
-              "score": 308.292
+              "score": 367.638
             }
           ],
           "hit": false,
@@ -3326,21 +3329,23 @@
           ],
           "top3": [
             {
-              "chunkId": "S08#s147",
-              "score": 265.273
-            },
-            {
               "chunkId": "S02#s15",
-              "score": 258.435
+              "score": 321.869
             },
             {
-              "chunkId": "S21#s349~3",
-              "score": 241.827
+              "chunkId": "S08#s147",
+              "score": 290.658
+            },
+            {
+              "chunkId": "S03#s46",
+              "score": 283.415
             }
           ],
-          "hit": false,
-          "precisionAt3": 0,
-          "hits": []
+          "hit": true,
+          "precisionAt3": 0.333,
+          "hits": [
+            "S03#s46"
+          ]
         },
         {
           "questionId": "Q09",
@@ -3361,20 +3366,21 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 327.08
+              "score": 345.919
             },
             {
               "chunkId": "S12#s180",
-              "score": 291.259
+              "score": 307.062
             },
             {
-              "chunkId": "S15#s282",
-              "score": 266.276
+              "chunkId": "S11#s172",
+              "score": 243.601
             }
           ],
           "hit": true,
-          "precisionAt3": 0.667,
+          "precisionAt3": 1,
           "hits": [
+            "S11#s172",
             "S11#s176",
             "S12#s180"
           ]
@@ -3400,15 +3406,15 @@
           "top3": [
             {
               "chunkId": "S09#s160",
-              "score": 530.452
+              "score": 621.131
             },
             {
               "chunkId": "S10#s171",
-              "score": 504.118
+              "score": 594.004
             },
             {
               "chunkId": "S08#s147~2",
-              "score": 437.426
+              "score": 524.332
             }
           ],
           "hit": false,
@@ -3431,15 +3437,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 605.88
+              "score": 746.454
             },
             {
               "chunkId": "S08#s150",
-              "score": 532.902
+              "score": 656.228
             },
             {
               "chunkId": "S08#s145",
-              "score": 492.178
+              "score": 612.794
             }
           ],
           "hit": true,
@@ -3466,15 +3472,15 @@
           "top3": [
             {
               "chunkId": "S02#s15",
-              "score": 381.946
+              "score": 476.032
             },
             {
               "chunkId": "S02#s24",
-              "score": 329.809
+              "score": 423.088
             },
             {
               "chunkId": "S02#s28",
-              "score": 319.128
+              "score": 408.769
             }
           ],
           "hit": false,
@@ -3495,15 +3501,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 665.594
+              "score": 803.567
             },
             {
               "chunkId": "S08#s150",
-              "score": 586.787
+              "score": 705.497
             },
             {
-              "chunkId": "S08#s148",
-              "score": 555.296
+              "chunkId": "S08#s145",
+              "score": 643.549
             }
           ],
           "hit": false,
@@ -3523,15 +3529,15 @@
           "top3": [
             {
               "chunkId": "S09#s160",
-              "score": 577.927
+              "score": 673.392
             },
             {
               "chunkId": "S10#s171",
-              "score": 565.23
+              "score": 662.84
             },
             {
               "chunkId": "S08#s147",
-              "score": 508.501
+              "score": 602.584
             }
           ],
           "hit": false,
@@ -3552,15 +3558,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 708.536
+              "score": 881.422
             },
             {
               "chunkId": "S09#s160",
-              "score": 704.245
+              "score": 861.058
             },
             {
               "chunkId": "S08#s147~2",
-              "score": 670.808
+              "score": 818.484
             }
           ],
           "hit": false,
@@ -3581,15 +3587,15 @@
           "top3": [
             {
               "chunkId": "S08#s147",
-              "score": 386.159
+              "score": 471.927
             },
             {
               "chunkId": "S08#s145",
-              "score": 384.78
+              "score": 462.916
             },
             {
               "chunkId": "S08#s146",
-              "score": 360.097
+              "score": 440.042
             }
           ],
           "hit": true,
@@ -3613,15 +3619,15 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 310.172
-            },
-            {
-              "chunkId": "S15#s282",
-              "score": 294.173
+              "score": 335.546
             },
             {
               "chunkId": "S12#s180",
-              "score": 288.651
+              "score": 309.797
+            },
+            {
+              "chunkId": "S12#s181",
+              "score": 257.576
             }
           ],
           "hit": false,
@@ -3639,15 +3645,15 @@
           "top3": [
             {
               "chunkId": "S11#s176",
-              "score": 457.195
+              "score": 472.92
             },
             {
               "chunkId": "S11#s172",
-              "score": 275.888
+              "score": 289.761
             },
             {
               "chunkId": "S12#s180",
-              "score": 161.937
+              "score": 171.011
             }
           ],
           "hit": true,
@@ -3665,15 +3671,15 @@
           "top3": [
             {
               "chunkId": "S02#s15",
-              "score": 387.958
+              "score": 479.808
             },
             {
               "chunkId": "S02#s24",
-              "score": 358.67
+              "score": 448.623
             },
             {
-              "chunkId": "S02#s17",
-              "score": 343.165
+              "chunkId": "S02#s28",
+              "score": 418.317
             }
           ],
           "hit": null,
@@ -3688,15 +3694,15 @@
           "top3": [
             {
               "chunkId": "S02#s15",
-              "score": 387.958
+              "score": 479.808
             },
             {
               "chunkId": "S02#s24",
-              "score": 358.67
+              "score": 448.623
             },
             {
-              "chunkId": "S02#s17",
-              "score": 345.601
+              "chunkId": "S02#s28",
+              "score": 418.317
             }
           ],
           "hit": null,
@@ -3711,15 +3717,15 @@
           "top3": [
             {
               "chunkId": "S14#s261",
-              "score": 6.944
+              "score": 8.107
             },
             {
               "chunkId": "S05#s103",
-              "score": 5.753
+              "score": 7.353
             },
             {
               "chunkId": "S05#s94",
-              "score": 5.753
+              "score": 7.353
             }
           ],
           "hit": null,
@@ -3734,15 +3740,15 @@
           "top3": [
             {
               "chunkId": "S12#s180",
-              "score": 213.787
+              "score": 237.414
             },
             {
               "chunkId": "S12#s187",
-              "score": 167.831
+              "score": 192.662
             },
             {
-              "chunkId": "S15#s282",
-              "score": 157.413
+              "chunkId": "S02#s12",
+              "score": 179.939
             }
           ],
           "hit": null,
@@ -3756,16 +3762,16 @@
           "referenceChunks": [],
           "top3": [
             {
+              "chunkId": "S26#s1455",
+              "score": 9.063
+            },
+            {
+              "chunkId": "S26#s1451",
+              "score": 8.875
+            },
+            {
               "chunkId": "S14#s278",
-              "score": 5.478
-            },
-            {
-              "chunkId": "S07#3.5",
-              "score": 5.239
-            },
-            {
-              "chunkId": "S14#s266",
-              "score": 5.232
+              "score": 8.76
             }
           ],
           "hit": null,
@@ -3780,15 +3786,15 @@
           "top3": [
             {
               "chunkId": "S18#s343",
-              "score": 205.256
+              "score": 104.943
             },
             {
-              "chunkId": "S15#s282",
-              "score": 27.697
+              "chunkId": "S26#s520",
+              "score": 48.209
             },
             {
-              "chunkId": "S22#s356",
-              "score": 26.449
+              "chunkId": "S26#s443",
+              "score": 47.426
             }
           ],
           "hit": null,

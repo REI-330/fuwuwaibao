@@ -43,11 +43,26 @@ def test_export_path_resolves_and_is_real_delivery(store: GraphStore) -> None:
 
 
 def test_export_counts_match_meta(store: GraphStore) -> None:
+    """:meta.counts 必须与实际数组长度一致；规模本身不写死（语料会扩容）。
+
+    2026-09-27：语料从 494 段扩到 1757 段（新增 osgeo.cn pytest 中文三章 + 国家职业技能标准
+    重组稿 S26）。原先这里写死 chunks == 494 / sources == 22，语料一扩容就变成假失败，
+    所以改为「自洽断言」——检查 meta.counts 与真实数组长度、以及与逐来源登记数之和是否一致。
+    """
     counts = store.counts
-    assert counts["nodes"] == 63
-    assert counts["edges"] == 226
-    assert counts["chunks"] == 494
-    assert counts["sources"] == 22
+    assert counts["nodes"] == len(store.nodes_of_kind("occupation")) + len(store.nodes_of_kind("skill")) + len(
+        store.nodes_of_kind("knowledge")
+    ) + len(store.nodes_of_kind("task")) + len(store.nodes_of_kind("tool")) + len(store.nodes_of_kind("trend")) + len(
+        store.nodes_of_kind("credential")
+    ) + len(store.nodes_of_kind("domain"))
+    assert counts["sources"] == len(store.raw.get("sources", []))
+    assert counts["chunks"] == len(store.raw.get("chunks", []))
+    assert counts["edges"] == len(store.raw.get("edges", []))
+    # 逐来源登记数之和必须等于导出里的 chunk 总数（sources[].chunkCount × chunks[] 自洽）
+    registered = sum(source.get("chunkCount") or 0 for source in store.raw.get("sources", []))
+    assert registered == counts["chunks"], f"来源登记的 chunkCount 之和 {registered} ≠ 导出 chunks {counts['chunks']}"
+    # 规模下限：语料至少要有来源与分块，避免空导出被当成合法
+    assert counts["chunks"] > 0 and counts["sources"] > 0
 
 
 def test_occupation_ids_are_four(store: GraphStore) -> None:

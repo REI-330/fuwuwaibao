@@ -2,10 +2,30 @@
   "schema": "career-graph-taxonomy/v2",
   "note": "步骤 04–11 共用的唯一词表。kind 与 edge type 的字面量必须与前端 lib/client/career-graph.ts 的 GraphNode.kind / GraphEdge.type 以及设计文档 §3.1/§3.2 完全一致；改这里就等于改契约，必须同步前端联合类型。v2 起，步骤 05/07/09/10/11 的 KIND_ORDER / EDGE_ORDER / EDGE_TYPE_FIELDS 全部由本文件派生（lib/graph.mjs 里的三份手抄副本已删除），因此这里再加类型不必再去改六处代码。",
   "nodeKinds": [
-    { "id": "occupation", "labelZh": "职业", "prefix": "occupation:", "idExample": "occupation:AI001" },
-    { "id": "skill", "labelZh": "技能", "prefix": "skill:", "idExample": "skill:SK215" },
-    { "id": "knowledge", "labelZh": "学习单元", "prefix": "knowledge:", "idExample": "knowledge:AI001:stage1" },
-    { "id": "task", "labelZh": "训练任务", "prefix": "task:", "idExample": "task:T0042" },
+    {
+      "id": "occupation",
+      "labelZh": "职业",
+      "prefix": "occupation:",
+      "idExample": "occupation:AI001"
+    },
+    {
+      "id": "skill",
+      "labelZh": "技能",
+      "prefix": "skill:",
+      "idExample": "skill:SK215"
+    },
+    {
+      "id": "knowledge",
+      "labelZh": "学习单元",
+      "prefix": "knowledge:",
+      "idExample": "knowledge:AI001:stage1"
+    },
+    {
+      "id": "task",
+      "labelZh": "训练任务",
+      "prefix": "task:",
+      "idExample": "task:T0042"
+    },
     {
       "id": "project",
       "labelZh": "实践项目",
@@ -13,9 +33,24 @@
       "idExample": "project:autoware",
       "note": "v2 新增。可落到具体代码库/工程上的实践载体（开源工程、官方示例工程）。与 tool 的区别：tool 是随职业列出的工具名，project 是一个能真的克隆、编译、跑起来的工程；与 task 的区别：task 是可评分的训练任务，project 是任务所依附的真实工程。"
     },
-    { "id": "tool", "labelZh": "工具", "prefix": "tool:", "idExample": "tool:freertos" },
-    { "id": "trend", "labelZh": "趋势信号", "prefix": "trend:", "idExample": "trend:edge-ai-2026" },
-    { "id": "credential", "labelZh": "认证", "prefix": "credential:", "idExample": "credential:cert-embedded" },
+    {
+      "id": "tool",
+      "labelZh": "工具",
+      "prefix": "tool:",
+      "idExample": "tool:freertos"
+    },
+    {
+      "id": "trend",
+      "labelZh": "趋势信号",
+      "prefix": "trend:",
+      "idExample": "trend:edge-ai-2026"
+    },
+    {
+      "id": "credential",
+      "labelZh": "认证",
+      "prefix": "credential:",
+      "idExample": "credential:cert-embedded"
+    },
     {
       "id": "standard",
       "labelZh": "标准与职业分类",
@@ -23,106 +58,186 @@
       "idExample": "standard:onet-17-2061.00",
       "note": "v2 新增。可被引用的标准/职业分类条目本身（O*NET SOC 职业条目、GB/T 国家标准、行业标准），用来把「我们编的职业」对回「公开标准里的职业」。与 credential 的区别：credential 是人去考的证书，standard 是文本规范。"
     },
-    { "id": "domain", "labelZh": "能力域", "prefix": "domain:", "idExample": "domain:embedded" }
+    {
+      "id": "domain",
+      "labelZh": "能力域",
+      "prefix": "domain:",
+      "idExample": "domain:embedded"
+    }
   ],
   "edgeTypes": [
     {
       "id": "requires",
       "labelZh": "职业要求技能",
-      "from": ["occupation"],
-      "to": ["skill"],
-      "fields": ["targetLevel", "importance"],
+      "from": [
+        "occupation"
+      ],
+      "to": [
+        "skill"
+      ],
+      "fields": [
+        "targetLevel",
+        "importance"
+      ],
       "acyclic": false
     },
     {
       "id": "specifies",
       "labelZh": "标准规定技能",
-      "from": ["standard"],
-      "to": ["skill", "domain", "tool"],
-      "fields": ["importance", "level"],
+      "from": [
+        "standard"
+      ],
+      "to": [
+        "skill",
+        "domain",
+        "tool"
+      ],
+      "fields": [
+        "importance",
+        "level"
+      ],
       "acyclic": false,
       "note": "v2 新增。与 requires 的区别必须写死在实现里：requires 是【我们编的职业】要求什么，每条都有指回自己 chunk 的 sourceRefs；specifies 是【公开标准条目】规定什么，出处是标准本身（standardRef），没有 chunk。外部职业库（O*NET / 职业分类大典）全靠这条边把职业挂到技能上，所以它只出现在知识库的 external 层，不会出现在 exports/career-graph.json 里。importance 统一归一到 0–1（O*NET 的 IM 是 0–5，除以 5），level 保留各标准自己的分级原值。"
     },
     {
       "id": "prerequisite",
       "labelZh": "先修",
-      "from": ["skill"],
-      "to": ["skill"],
+      "from": [
+        "skill"
+      ],
+      "to": [
+        "skill"
+      ],
       "fields": [],
       "acyclic": true
     },
     {
       "id": "belongs_to",
       "labelZh": "技能归属能力域",
-      "from": ["skill"],
-      "to": ["domain"],
+      "from": [
+        "skill"
+      ],
+      "to": [
+        "domain"
+      ],
       "fields": [],
       "acyclic": false
     },
     {
       "id": "trains",
       "labelZh": "任务训练技能",
-      "from": ["task"],
-      "to": ["skill"],
-      "fields": ["deliverable", "assessmentPoints"],
+      "from": [
+        "task"
+      ],
+      "to": [
+        "skill"
+      ],
+      "fields": [
+        "deliverable",
+        "assessmentPoints"
+      ],
       "acyclic": false
     },
     {
       "id": "uses",
       "labelZh": "职业使用工具",
-      "from": ["occupation", "standard"],
-      "to": ["tool"],
-      "fields": ["inDemand"],
+      "from": [
+        "occupation",
+        "standard"
+      ],
+      "to": [
+        "tool"
+      ],
+      "fields": [
+        "inDemand"
+      ],
       "acyclic": false
     },
     {
       "id": "learning_unit",
       "labelZh": "职业学习单元",
-      "from": ["occupation"],
-      "to": ["knowledge"],
-      "fields": ["position"],
+      "from": [
+        "occupation"
+      ],
+      "to": [
+        "knowledge"
+      ],
+      "fields": [
+        "position"
+      ],
       "acyclic": false,
       "note": "补上设计文档 §10 开放问题（L413）里「knowledge 节点没有任何入边」的缺口。字面量必须与前端 lib/client/career-graph.ts 的 RELATION_LABELS.learning_unit（『学习单元』）一致，该文案前端早已存在，只是词表里一直没有对应边类型。"
     },
     {
       "id": "transitions_to",
       "labelZh": "职业迁移路径",
-      "from": ["occupation"],
-      "to": ["occupation"],
-      "fields": ["horizon", "deltaSkills"],
+      "from": [
+        "occupation"
+      ],
+      "to": [
+        "occupation"
+      ],
+      "fields": [
+        "horizon",
+        "deltaSkills"
+      ],
       "acyclic": true
     },
     {
       "id": "emerging_in",
       "labelZh": "趋势催生技能",
-      "from": ["trend"],
-      "to": ["skill"],
-      "fields": ["year", "direction"],
+      "from": [
+        "trend"
+      ],
+      "to": [
+        "skill"
+      ],
+      "fields": [
+        "year",
+        "direction"
+      ],
       "acyclic": false
     },
     {
       "id": "certifies",
       "labelZh": "认证覆盖技能",
-      "from": ["credential"],
-      "to": ["skill"],
-      "fields": ["level"],
+      "from": [
+        "credential"
+      ],
+      "to": [
+        "skill"
+      ],
+      "fields": [
+        "level"
+      ],
       "acyclic": false,
       "note": "v2 新增。v1 的 credential 节点只有 evidenced_by 边、在图上是孤岛，考了一张证能证明你掌握了什么无从表达。level 用 1–5 表示该认证对这项技能的要求强度，与 requires.targetLevel 同一口径（没有可核验依据就不写这个字段）。"
     },
     {
       "id": "aligned_with",
       "labelZh": "职业对齐标准",
-      "from": ["occupation"],
-      "to": ["standard"],
-      "fields": ["code", "alignment"],
+      "from": [
+        "occupation"
+      ],
+      "to": [
+        "standard"
+      ],
+      "fields": [
+        "code",
+        "alignment"
+      ],
       "acyclic": false,
       "note": "v2 新增。把自建职业对回公开标准：code 写标准里的编号（如 15-2051.00），alignment 只能取 full / partial / related 三值，表示「这个标准条目与本职业是不是同一件事」——不许含糊其辞地说『对标』。"
     },
     {
       "id": "practiced_in",
       "labelZh": "技能在实践中练",
-      "from": ["skill"],
-      "to": ["project"],
+      "from": [
+        "skill"
+      ],
+      "to": [
+        "project"
+      ],
       "fields": [],
       "acyclic": false,
       "note": "v2 新增。指向能真正克隆下来编译的工程，而不是「某篇教程」。没有可核验的工程地址就不要连。"
@@ -130,28 +245,45 @@
     {
       "id": "related_to",
       "labelZh": "相关技能（非先修）",
-      "from": ["skill"],
-      "to": ["skill"],
-      "fields": ["strength"],
+      "from": [
+        "skill"
+      ],
+      "to": [
+        "skill"
+      ],
+      "fields": [
+        "strength"
+      ],
       "acyclic": false,
       "note": "v2 新增。跨方向的弱关联。与 prerequisite 的区别必须写死在实现里：related_to 不进先修闭包、不参与学习顺序的拓扑排序（MCP get_skill_gap 只走 prerequisite），只在页面上作为「一起出现」的提示。strength 取 strong / weak。"
     },
     {
       "id": "evidenced_by",
       "labelZh": "依据原文",
-      "from": ["*"],
-      "to": ["chunk"],
+      "from": [
+        "*"
+      ],
+      "to": [
+        "chunk"
+      ],
       "fields": [],
       "acyclic": false,
       "note": "to 不是节点 id，统一写成 chunk:<chunkId>；这类边没有 x/y，可视化时按设计文档 §3.2 过滤。"
     }
   ],
-  "annotatedByValues": ["human", "llm-reviewed", "llm-draft"],
+  "annotatedByValues": [
+    "human",
+    "llm-reviewed",
+    "llm-draft"
+  ],
   "factTimeFields": [
     {
       "id": "asOf",
       "labelZh": "事实所指时间",
-      "appliesTo": ["node", "edge"],
+      "appliesTo": [
+        "node",
+        "edge"
+      ],
       "format": "YYYY 或 YYYY-MM-DD",
       "whenRequired": "trend 节点的 asOf、emerging_in 边的 asOf 与它自己的 year 必须一致；回答「哪一年的结论」时用得到。",
       "note": "种子文件里手写。写不出可核验的时间就不写这个字段，绝不用构建日期顶上 —— 那是「我们什么时候算的」，不是「这件事发生在什么时候」。"
@@ -159,7 +291,10 @@
     {
       "id": "updatedAt",
       "labelZh": "抽取写入时间",
-      "appliesTo": ["node", "edge"],
+      "appliesTo": [
+        "node",
+        "edge"
+      ],
       "format": "YYYY-MM-DD",
       "whenRequired": "由步骤 04 按运行日期自动写入，人手不要填。",
       "note": "与来源侧的 publishedAt / collectedAt 合成双时间戳：来源什么时候发布的、事实指的是什么时候、我们什么时候抽的，三件事各自有字段，谁也冒充不了谁。"
@@ -167,17 +302,36 @@
   ],
   "scaleTargets": {
     "occupations": 4,
-    "skillNodes": [20, 40],
-    "sources": [15, 25],
-    "wikiPages": [30, 40],
-    "evaluationQuestions": 24
+    "skillNodes": [
+      20,
+      40
+    ],
+    "sources": [
+      15,
+      40
+    ],
+    "wikiPages": [
+      30,
+      40
+    ],
+    "evaluationQuestions": 24,
+    "note": "2026-09-27 调整：为把语料换成中文主体，新增 4 份中文来源（S23-S25 为 osgeo.cn 的 pytest 中文文档，S26 为国家职业技能标准重组稿），来源数 22 → 26，区间上限由 25 放宽到 40。同期语料由 494 段扩到 1757 段、中文词项占比由 43.4% 升到 82.7%。"
   },
   "scaleTargetsV2": {
     "note": "v2 扩库目标（设计文档 §13）。步骤 09-13 目前只读 scaleTargets，等第 3/4 步的数据真的到位后再由它取代，避免出现「目标改了、数据没跟上、检查却已经绿了」的假绿灯。",
     "occupations": 10,
-    "skillNodes": [90, 120],
-    "sources": [35, 50],
-    "wikiPages": [120, 160],
+    "skillNodes": [
+      90,
+      120
+    ],
+    "sources": [
+      35,
+      50
+    ],
+    "wikiPages": [
+      120,
+      160
+    ],
     "evaluationQuestions": 40
   }
 }

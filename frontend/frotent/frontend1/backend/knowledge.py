@@ -111,6 +111,11 @@ class GraphStore:
     def counts(self) -> Dict[str, Any]:
         return self.meta.get("counts", {})
 
+    @property
+    def raw(self) -> Dict[str, Any]:
+        """只读的原始导出（测试与诊断用）。调用方不得就地修改。"""
+        return self._raw
+
     def node(self, node_id: str) -> Optional[Dict[str, Any]]:
         return self._nodes.get(node_id)
 

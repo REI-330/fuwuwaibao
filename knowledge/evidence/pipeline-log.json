@@ -1,14 +1,14 @@
 {
   "schema": "career-graph-pipeline-log/v1",
-  "updatedAt": "2026-09-27T09:54:45.362Z",
+  "updatedAt": "2026-09-27T10:55:12.425Z",
   "steps": [
     {
       "step": "01",
       "title": "来源登记",
       "command": "node knowledge/pipeline/01-register-sources.mjs",
-      "startedAt": "2026-09-15T09:56:51.001Z",
-      "finishedAt": "2026-09-15T09:56:51.011Z",
-      "durationMs": 10,
+      "startedAt": "2026-09-27T10:22:09.886Z",
+      "finishedAt": "2026-09-27T10:22:09.897Z",
+      "durationMs": 11,
       "inputs": [
         "knowledge/pipeline/sources.candidates.json"
       ],
@@ -16,28 +16,28 @@
         "knowledge/sources/sources.json"
       ],
       "counts": {
-        "candidates": 22,
-        "registered": 22,
+        "candidates": 25,
+        "registered": 25,
         "rejected": 0,
         "duplicates": 0,
-        "missingPublishedAt": 22
+        "missingPublishedAt": 25
       },
       "notes": [
-        "候选 22 条，登记 22 条，拒绝 0 条，按 sourceId/url 去重 0 条。",
-        "publishedAt 缺失 22/22 条：公开文档站多无明确定版日期，按设计 §2.1 留 null、不猜。",
+        "候选 25 条，登记 25 条，拒绝 0 条，按 sourceId/url 去重 0 条。",
+        "publishedAt 缺失 25/25 条：公开文档站多无明确定版日期，按设计 §2.1 留 null、不猜。",
         "sha256 全部为 null：字节哈希必须来自真实抓取，由步骤 02 回填。",
         "非契约字段 direction / tags / status / byteSize / charset / fetchedAt / notes 仅存在于中间产物，导出时由步骤 11 剥除。"
       ],
       "node": "v22.22.2",
-      "runCount": 3
+      "runCount": 4
     },
     {
       "step": "02",
       "title": "抓取与去重",
       "command": "node knowledge/pipeline/02-fetch-sources.mjs",
-      "startedAt": "2026-09-15T09:56:51.087Z",
-      "finishedAt": "2026-09-15T09:57:22.939Z",
-      "durationMs": 31852,
+      "startedAt": "2026-09-27T10:22:26.225Z",
+      "finishedAt": "2026-09-27T10:22:48.808Z",
+      "durationMs": 22583,
       "inputs": [
         "knowledge/sources/sources.json"
       ],
@@ -47,34 +47,34 @@
         "knowledge/sources/sources.json"
       ],
       "counts": {
-        "sources": 22,
-        "fetched": 22,
+        "sources": 25,
+        "fetched": 25,
         "fetchedThin": 0,
         "duplicateContent": 0,
         "fetchFailed": 0,
-        "distinctSha256": 22,
+        "distinctSha256": 25,
         "metaRefreshFollowed": 0,
         "unprunedFallback": 1,
-        "totalBytes": 4553319
+        "totalBytes": 4714441
       },
       "notes": [
-        "抓取 22 条：正常 22，正文过薄 0，内容重复 0，失败 0。",
-        "内容去重后不同正文 22 份，合计 4553319 字节。",
+        "抓取 25 条：正常 25，正文过薄 0，内容重复 0，失败 0。",
+        "内容去重后不同正文 25 份，合计 4714441 字节。",
         "其中 0 条命中「200 但只是 meta refresh 跳转页」，已跟随一跳取真实正文。",
         "其中 1 条剪枝后正文过薄，已改用无剪枝抽取并取更长结果。",
         "insufficient-text 判定阈值：blocks < 4 或纯文本 < 300 字符。",
         "无剪枝回退采纳门槛（更严）：blocks ≥ 16 且纯文本 ≥ 900 字符，避免把只剩菜单的门户首页当成正常来源。"
       ],
       "node": "v22.22.2",
-      "runCount": 4
+      "runCount": 5
     },
     {
       "step": "03",
       "title": "主题分块",
       "command": "node knowledge/pipeline/03-chunk-topics.mjs",
-      "startedAt": "2026-09-15T09:57:23.012Z",
-      "finishedAt": "2026-09-15T09:57:23.049Z",
-      "durationMs": 37,
+      "startedAt": "2026-09-27T10:54:37.209Z",
+      "finishedAt": "2026-09-27T10:54:37.292Z",
+      "durationMs": 83,
       "inputs": [
         "knowledge/sources/sources.json"
       ],
@@ -83,25 +83,25 @@
         "knowledge/sources/sources.json"
       ],
       "counts": {
-        "sources": 22,
-        "sourcesWithChunks": 22,
-        "chunks": 494,
-        "splitSections": 78,
-        "skippedSections": 43,
-        "droppedTooShort": 20,
-        "charRangeMismatch": 0,
-        "totalChars": 433699,
+        "sources": 26,
+        "sourcesWithChunks": 26,
+        "chunks": 1757,
+        "splitSections": 90,
+        "skippedSections": 313,
+        "droppedTooShort": 59,
+        "charRangeMismatch": 115,
+        "totalChars": 845251,
         "longestChunk": 1600
       },
       "notes": [
-        "从 22 个来源切出 494 个 chunk，合计 433699 字符，最长 1600 字符。",
-        "超长小节按段落边界切开 78 处；丢弃过短片段 20 个（阈值 40 字符）。",
-        "charRange 硬校验（docText.slice(start,end) === chunk.text）：不一致 0 处。",
-        "空小节 43 处（只有标题没有正文），未成块。",
+        "从 26 个来源切出 1757 个 chunk，合计 845251 字符，最长 1600 字符。",
+        "超长小节按段落边界切开 90 处；丢弃过短片段 59 个（阈值 40 字符）。",
+        "charRange 硬校验（docText.slice(start,end) === chunk.text）：不一致 115 处。",
+        "空小节 313 处（只有标题没有正文），未成块。",
         "全部来源都有 raw 产物。"
       ],
       "node": "v22.22.2",
-      "runCount": 2
+      "runCount": 4
     },
     {
       "step": "04",
@@ -344,9 +344,9 @@
       "step": "09",
       "title": "完整性校验",
       "command": "node knowledge/pipeline/09-integrity-check.mjs",
-      "startedAt": "2026-09-27T09:54:45.341Z",
-      "finishedAt": "2026-09-27T09:54:45.362Z",
-      "durationMs": 21,
+      "startedAt": "2026-09-27T10:55:12.392Z",
+      "finishedAt": "2026-09-27T10:55:12.425Z",
+      "durationMs": 33,
       "inputs": [
         "knowledge/extract/accepted.jsonl",
         "knowledge/chunks/chunks.jsonl",
@@ -371,15 +371,15 @@
         "标注分布：llm-reviewed 115，llm-draft 174"
       ],
       "node": "v22.22.2",
-      "runCount": 19
+      "runCount": 21
     },
     {
       "step": "10",
       "title": "布局与索引",
       "command": "node knowledge/pipeline/10-layout-index.mjs",
-      "startedAt": "2026-09-27T09:49:22.573Z",
-      "finishedAt": "2026-09-27T09:49:22.796Z",
-      "durationMs": 223,
+      "startedAt": "2026-09-27T10:54:48.007Z",
+      "finishedAt": "2026-09-27T10:54:48.558Z",
+      "durationMs": 551,
       "inputs": [
         "knowledge/extract/accepted.jsonl",
         "knowledge/chunks/chunks.jsonl",
@@ -399,25 +399,25 @@
         "requires": 28,
         "requiresWithWeight": 28,
         "nodeDocs": 63,
-        "chunkDocs": 494,
+        "chunkDocs": 1757,
         "aliasKeys": 161
       },
       "notes": [
         "确定性布局：8 条色带 / 15 行，行距 54px，x ∈ [105, 945]，y ∈ [29, 785]，全部落在 1050×820 内；无随机数、与运行时间无关。",
         "weight 按 WEIGHT_RULE 只写 requires：28/28 条 = importance（同一份数字）。",
-        "检索索引：节点 BM25（449 个词） + chunk BM25（494 篇） + 别名倒排 161 条。",
+        "检索索引：节点 BM25（449 个词） + chunk BM25（1757 篇） + 别名倒排 161 条。",
         "本步不改 annotatedBy：llm-draft → llm-reviewed 的唯一通道仍是第 06 步（设计文档 L251）。"
       ],
       "node": "v22.22.2",
-      "runCount": 9
+      "runCount": 10
     },
     {
       "step": "11",
       "title": "版本化导出与效果评测",
       "command": "node knowledge/pipeline/11-export-eval.mjs",
-      "startedAt": "2026-09-27T09:49:22.880Z",
-      "finishedAt": "2026-09-27T09:49:23.438Z",
-      "durationMs": 558,
+      "startedAt": "2026-09-27T10:54:48.665Z",
+      "finishedAt": "2026-09-27T10:54:50.443Z",
+      "durationMs": 1778,
       "inputs": [
         "knowledge/graph/graph.json",
         "knowledge/chunks/chunks.jsonl",
@@ -433,8 +433,8 @@
         "knowledge/evaluations/report.md"
       ],
       "counts": {
-        "sources": 22,
-        "chunks": 494,
+        "sources": 26,
+        "chunks": 1757,
         "nodes": 63,
         "edges": 226,
         "renderableEdges": 117,
@@ -451,11 +451,45 @@
         "引用完整性：节点/边/wiki 页共 327 条记录的 chunk 引用全部能在同一份 chunks[] 里查到，悬空 0 处。",
         "weight 按 WEIGHT_RULE 只出现在 requires 上；weight 的值来自第 10 步，未在本步重算或改写。",
         "本步不碰 annotatedBy：human 0 / llm-reviewed 115 / llm-draft 174，llm-draft → llm-reviewed 的唯一通道仍是第 06 步（L251）。",
-        "评测 24 题（occupation-requirement 6，skill-gap-prerequisite 6，scenario-advice 6，out-of-scope 6），消融 5 档：BM25 only 命中 2/18；+ 图遍历（一跳邻居） 命中 6/18；+ wiki 页（reviewed） 命中 6/18；+ wiki 页（含 llm-draft 降权） 命中 6/18；全量 命中 6/18。",
+        "评测 24 题（occupation-requirement 6，skill-gap-prerequisite 6，scenario-advice 6，out-of-scope 6），消融 5 档：BM25 only 命中 1/18；+ 图遍历（一跳邻居） 命中 6/18；+ wiki 页（reviewed） 命中 6/18；+ wiki 页（含 llm-draft 降权） 命中 6/18；全量 命中 6/18。",
         "评测只报检索中间态（Top-3 + 分值 + 耗时），不调模型；「引用支持度」需人工判定，报告已明确标注为未做（§7 L262 / L276）。"
       ],
       "node": "v22.22.2",
-      "runCount": 30
+      "runCount": 31
+    },
+    {
+      "step": "12",
+      "title": "技能标准入库",
+      "command": "node knowledge/pipeline/12-import-osta-standards.mjs",
+      "startedAt": "2026-09-27T10:54:26.165Z",
+      "finishedAt": "2026-09-27T10:54:26.165Z",
+      "durationMs": 0,
+      "inputs": [
+        "knowledge/import/raw/osta-standards/tables.jsonl",
+        "knowledge/import/build/dadian.jsonl"
+      ],
+      "outputs": [
+        "knowledge/raw/S26.html",
+        "knowledge/raw/S26.blocks.json",
+        "knowledge/raw/S26.txt",
+        "knowledge/sources/sources.json"
+      ],
+      "counts": {
+        "tableRows": 43642,
+        "vocationsMatched": 92,
+        "rowsSelected": 2694,
+        "vocationsCovered": 30,
+        "skillItems": 7370,
+        "knowledgeItems": 7164,
+        "blocks": 16077
+      },
+      "notes": [
+        "职业筛选：命中关键词的 92 个职业 → tables 命中 2694 行，覆盖 30 个职业",
+        "重组：技能要求 7370 条 / 相关知识 7164 条",
+        "切点回退（条目数与序号数不符，整段保留不猜）：技能 584 行 / 知识 1384 行",
+        "产出 sha256 844a8761fa54，正文 421525 字符"
+      ],
+      "node": "v22.22.2"
     }
   ]
 }
