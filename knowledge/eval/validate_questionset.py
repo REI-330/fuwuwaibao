@@ -123,6 +123,13 @@ def check_set(name, path, chunks, pos, cited, min_gap, refs_per_q, expect_split)
 
 
 def main():
+    # Windows 控制台默认编码是 GBK，遇到 ✓ / ✗ / ⚠ 这类符号会抛 UnicodeEncodeError，
+    # 让「校验已经通过」看起来像失败。这里只把不可编码字符降级成 ?，不影响中文输出。
+    try:
+        sys.stdout.reconfigure(errors="replace")
+    except (AttributeError, ValueError):
+        pass
+
     ap = argparse.ArgumentParser()
     ap.add_argument("--set", help="单个题集文件")
     ap.add_argument("--dev", help="开发集文件")
