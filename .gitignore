@@ -34,3 +34,6 @@ Thumbs.db
 .idea/
 .vscode/
 *.log
+
+# 由管线生成、可重跑得到（导出里已内嵌 evaluationQuestions，无需入库）
+knowledge/evaluations/questions.json

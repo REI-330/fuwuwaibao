@@ -177,16 +177,16 @@
       "name": "现状（自建栈 494 段）",
       "note": "返回 3 段",
       "main": {
-        "exact3": 6,
-        "center3": 6,
-        "center10": 12,
-        "cover3": 6
+        "exact3": 7,
+        "center3": 7,
+        "center10": 16,
+        "cover3": 7
       },
       "held": {
-        "exact3": 3,
-        "center3": 3,
-        "center10": 4,
-        "cover3": 3
+        "exact3": 2,
+        "center3": 2,
+        "center10": 10,
+        "cover3": 2
       }
     },
     {
@@ -194,53 +194,53 @@
       "note": "返回 3 个子块",
       "main": {
         "exact3": 0,
-        "center3": 9,
-        "center10": 13,
-        "cover3": 9,
+        "center3": 6,
+        "center10": 11,
+        "cover3": 6,
         "avgBudget": 3
       },
       "held": {
         "exact3": 0,
-        "center3": 3,
-        "center10": 4,
-        "cover3": 3,
+        "center3": 1,
+        "center10": 9,
+        "cover3": 1,
         "avgBudget": 3
       }
     },
     {
       "name": "② ① + 父块返回（3 个父块）",
-      "note": "实际返回 ~32 个子块",
+      "note": "实际返回 ~30 个子块",
       "main": {
         "exact3": 0,
-        "center3": 15,
-        "center10": 15,
-        "cover3": 14,
-        "avgBudget": 30.6
+        "center3": 12,
+        "center10": 12,
+        "cover3": 12,
+        "avgBudget": 30.5
       },
       "held": {
         "exact3": 0,
-        "center3": 6,
-        "center10": 6,
-        "cover3": 5,
-        "avgBudget": 32.8
+        "center3": 5,
+        "center10": 5,
+        "cover3": 4,
+        "avgBudget": 30.4
       }
     },
     {
       "name": "③ 对照：直接多返回同等数量子块",
-      "note": "同样 ~32 个子块，但无父子结构",
+      "note": "同样 ~30 个子块，但无父子结构",
       "main": {
         "exact3": 0,
-        "center3": 15,
-        "center10": 13,
-        "cover3": 15,
-        "avgBudget": 32
+        "center3": 20,
+        "center10": 11,
+        "cover3": 17,
+        "avgBudget": 30
       },
       "held": {
         "exact3": 0,
-        "center3": 7,
-        "center10": 4,
+        "center3": 12,
+        "center10": 9,
         "cover3": 7,
-        "avgBudget": 32
+        "avgBudget": 30
       }
     }
   ],
