@@ -1,0 +1,3 @@
+# 原始快照按字节算 sha256，禁止 git 做行尾转换（否则 checkout 后哈希全变）
+knowledge/raw/** -text
+knowledge/import/** -text
