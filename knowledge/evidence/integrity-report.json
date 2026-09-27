@@ -1,7 +1,7 @@
 {
   "schema": "career-graph-integrity/v1",
   "step": "09",
-  "generatedAt": "2026-09-27T10:55:12.392Z",
+  "generatedAt": "2026-09-27T11:02:11.785Z",
   "note": "第 09 步产物：设计文档 §3.3 三条硬约束 + 页面契约的机器校验结果。硬约束失败即构建失败（退出码 1）。",
   "inputs": [
     "knowledge/extract/accepted.jsonl",
@@ -43,8 +43,8 @@
     }
   },
   "summary": {
-    "checks": 13,
-    "hardChecks": 12,
+    "checks": 14,
+    "hardChecks": 13,
     "hardFailed": 0,
     "pending": 0,
     "warned": 0,
@@ -171,6 +171,17 @@
       "observed": "0 处",
       "detail": [],
       "note": "职业节点 4（目标 4）；技能节点 25（目标 [20,40]）；Wiki 页 38（目标 [30,40]）；来源 26（目标 [15,40]）"
+    },
+    {
+      "id": "09-14",
+      "title": "边级依据可核验：按边类型要求实体名出现在依据段里",
+      "level": "hard",
+      "status": "pass",
+      "observed": "0 处",
+      "detail": [
+        "已豁免 11 条"
+      ],
+      "note": "requires 26/28；prerequisite 15/24；belongs_to 24/25(仅警告)；trains 12/12；uses 8/8；emerging_in 4/8(仅警告)；已显式豁免 11 条（review/evidence-waivers.json）"
     }
   ]
 }

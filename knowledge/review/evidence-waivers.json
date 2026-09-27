@@ -1,0 +1,150 @@
+{
+  "schema": "career-graph-evidence-waivers/v1",
+  "generatedAt": "2026-09-27T00:00:00Z",
+  "note": "边级依据可核验（09-14 硬约束）的显式豁免清单。每条必须写明根因与理由，进版本控制，不得静默跳过。升级路径：为这些技能补别名（收录依据段里的具体说法）后，逐条从本清单移除。",
+  "waivers": [
+    {
+      "edgeId": "e-0001",
+      "type": "requires",
+      "missingSide": "to",
+      "missingLabel": "C 语言与内存模型",
+      "sourceRefs": [
+        "S03#s46"
+      ],
+      "rootCause": "alias-gap",
+      "reason": "技能「C 语言与内存模型」是概括性命名，依据段用具体说法（如 API/功能名），未逐字出现该名称。已裁定为已知缺口，待补别名后移出豁免清单。",
+      "waivedBy": "pending-human-review",
+      "waivedAt": "2026-09-27"
+    },
+    {
+      "edgeId": "e-0021",
+      "type": "requires",
+      "missingSide": "to",
+      "missingLabel": "C 语言与内存模型",
+      "sourceRefs": [
+        "S03#s46"
+      ],
+      "rootCause": "alias-gap",
+      "reason": "技能「C 语言与内存模型」是概括性命名，依据段用具体说法（如 API/功能名），未逐字出现该名称。已裁定为已知缺口，待补别名后移出豁免清单。",
+      "waivedBy": "pending-human-review",
+      "waivedAt": "2026-09-27"
+    },
+    {
+      "edgeId": "e-0029",
+      "type": "prerequisite",
+      "missingSide": "from",
+      "missingLabel": "C 语言与内存模型",
+      "sourceRefs": [
+        "S02#s7"
+      ],
+      "rootCause": "alias-gap",
+      "reason": "技能「C 语言与内存模型」是概括性命名，依据段用具体说法（如 API/功能名），未逐字出现该名称。已裁定为已知缺口，待补别名后移出豁免清单。",
+      "waivedBy": "pending-human-review",
+      "waivedAt": "2026-09-27"
+    },
+    {
+      "edgeId": "e-0030",
+      "type": "prerequisite",
+      "missingSide": "from",
+      "missingLabel": "C 语言与内存模型",
+      "sourceRefs": [
+        "S04#s74"
+      ],
+      "rootCause": "alias-gap",
+      "reason": "技能「C 语言与内存模型」是概括性命名，依据段用具体说法（如 API/功能名），未逐字出现该名称。已裁定为已知缺口，待补别名后移出豁免清单。",
+      "waivedBy": "pending-human-review",
+      "waivedAt": "2026-09-27"
+    },
+    {
+      "edgeId": "e-0031",
+      "type": "prerequisite",
+      "missingSide": "from",
+      "missingLabel": "C 语言与内存模型",
+      "sourceRefs": [
+        "S03#s53"
+      ],
+      "rootCause": "alias-gap",
+      "reason": "技能「C 语言与内存模型」是概括性命名，依据段用具体说法（如 API/功能名），未逐字出现该名称。已裁定为已知缺口，待补别名后移出豁免清单。",
+      "waivedBy": "pending-human-review",
+      "waivedAt": "2026-09-27"
+    },
+    {
+      "edgeId": "e-0032",
+      "type": "prerequisite",
+      "missingSide": "from",
+      "missingLabel": "C 语言与内存模型",
+      "sourceRefs": [
+        "S03#s46"
+      ],
+      "rootCause": "alias-gap",
+      "reason": "技能「C 语言与内存模型」是概括性命名，依据段用具体说法（如 API/功能名），未逐字出现该名称。已裁定为已知缺口，待补别名后移出豁免清单。",
+      "waivedBy": "pending-human-review",
+      "waivedAt": "2026-09-27"
+    },
+    {
+      "edgeId": "e-0036",
+      "type": "prerequisite",
+      "missingSide": "from",
+      "missingLabel": "微控制器外设驱动",
+      "sourceRefs": [
+        "S05#s96"
+      ],
+      "rootCause": "alias-gap",
+      "reason": "技能「微控制器外设驱动」是概括性命名，依据段用具体说法（如 API/功能名），未逐字出现该名称。已裁定为已知缺口，待补别名后移出豁免清单。",
+      "waivedBy": "pending-human-review",
+      "waivedAt": "2026-09-27"
+    },
+    {
+      "edgeId": "e-0043",
+      "type": "prerequisite",
+      "missingSide": "from",
+      "missingLabel": "模型导出与格式转换",
+      "sourceRefs": [
+        "S05#s97"
+      ],
+      "rootCause": "alias-gap",
+      "reason": "技能「模型导出与格式转换」是概括性命名，依据段用具体说法（如 API/功能名），未逐字出现该名称。已裁定为已知缺口，待补别名后移出豁免清单。",
+      "waivedBy": "pending-human-review",
+      "waivedAt": "2026-09-27"
+    },
+    {
+      "edgeId": "e-0049",
+      "type": "prerequisite",
+      "missingSide": "from",
+      "missingLabel": "Python 测试框架 pytest",
+      "sourceRefs": [
+        "S11#s172"
+      ],
+      "rootCause": "alias-gap",
+      "reason": "技能「Python 测试框架 pytest」是概括性命名，依据段用具体说法（如 API/功能名），未逐字出现该名称。已裁定为已知缺口，待补别名后移出豁免清单。",
+      "waivedBy": "pending-human-review",
+      "waivedAt": "2026-09-27"
+    },
+    {
+      "edgeId": "e-0044",
+      "type": "prerequisite",
+      "missingSide": "from",
+      "missingLabel": "模型量化与部署",
+      "sourceRefs": [
+        "S05#s98"
+      ],
+      "rootCause": "alias-gap",
+      "reason": "技能「模型量化与部署」是概括性命名，依据段用具体说法（如 API/功能名），未逐字出现该名称。已裁定为已知缺口，待补别名后移出豁免清单。",
+      "waivedBy": "pending-human-review",
+      "waivedAt": "2026-09-27"
+    },
+    {
+      "edgeId": "e-0046",
+      "type": "prerequisite",
+      "missingSide": "from",
+      "missingLabel": "模型量化与部署",
+      "sourceRefs": [
+        "S08#s145"
+      ],
+      "rootCause": "alias-gap",
+      "reason": "技能「模型量化与部署」是概括性命名，依据段用具体说法（如 API/功能名），未逐字出现该名称。已裁定为已知缺口，待补别名后移出豁免清单。",
+      "waivedBy": "pending-human-review",
+      "waivedAt": "2026-09-27"
+    }
+  ]
+}

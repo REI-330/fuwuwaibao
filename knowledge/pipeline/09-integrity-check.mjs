@@ -30,6 +30,7 @@ import { resolve } from "node:path";
 import { ACCEPTED_FILE, ADJUDICATION_FILE, CHUNKS_FILE, GRAPH_FILE, INTEGRITY_FILE, TAXONOMY_FILE, WIKI_DIR, WIKI_INDEX_FILE, relPath } from "./lib/paths.mjs";
 import { fail, logLine, nowIso, readJson, readJsonl, recordStep, writeJson } from "./lib/log.mjs";
 import { DEFAULT_CANVAS, EDGE_ORDER, KIND_ORDER, WEIGHT_RULE, chunkIdOf, describeCounts, isChunkTarget, loadAccepted } from "./lib/graph.mjs";
+import { EDGE_EVIDENCE_RULES, edgeKey, loadWaivers, missingEntities } from "./lib/evidence.mjs";
 
 const STEP = "09";
 const TITLE = "完整性校验";
@@ -482,6 +483,44 @@ check("09-13", "规模落在 taxonomy.scaleTargets 区间内", "warn", () => {
     ...summarize(violations.map((item) => `${item.label}=${item.value}，目标 ${JSON.stringify(item.target)}`), "（规模偏离）"),
     note: items.map((item) => `${item.label} ${item.value}（目标 ${JSON.stringify(item.target)}）`).join("；"),
     status: violations.length === 0 ? "pass" : "warn",
+  };
+});
+
+// ---------- 14：边级依据可核验（hard，支持显式豁免） ----------
+
+check("09-14", "边级依据可核验：按边类型要求实体名出现在依据段里", "hard", () => {
+  const nodeById = new Map(nodes.map((item) => [item.id, item]));
+  const chunkById = new Map(chunks.map((item) => [item.chunkId, item]));
+  const waivers = loadWaivers();
+  const violations = [];
+  const waived = [];
+  const perType = new Map();
+  for (const edge of edges) {
+    const rule = EDGE_EVIDENCE_RULES[edge.type];
+    if (!rule || rule.level === "skip" || rule.mustAppear.length === 0) continue;
+    const stat = perType.get(edge.type) ?? { checked: 0, failed: 0, hard: rule.level === "hard" };
+    stat.checked += 1;
+    const missing = missingEntities(edge, rule.mustAppear, nodeById, chunkById);
+    if (missing.length === 0) {
+      perType.set(edge.type, stat);
+      continue;
+    }
+    stat.failed += 1;
+    perType.set(edge.type, stat);
+    const key = edgeKey(edge);
+    if (waivers.has(key)) {
+      waived.push(`${key} — ${String(waivers.get(key).reason ?? "未写理由").slice(0, 50)}`);
+      continue;
+    }
+    if (rule.level === "hard") violations.push(`${key} [${edge.type}] 依据段里查不到 ${missing.join("、")}`);
+  }
+  const note = [...perType.entries()]
+    .map(([type, stat]) => `${type} ${stat.checked - stat.failed}/${stat.checked}${stat.hard ? "" : "(仅警告)"}`)
+    .join("；");
+  return {
+    ...summarize(violations, "（依据不足）"),
+    detail: [...violations.slice(0, 20), ...(waived.length ? [`已豁免 ${waived.length} 条`] : [])],
+    note: `${note}${waived.length ? `；已显式豁免 ${waived.length} 条（review/evidence-waivers.json）` : ""}`,
   };
 });
 
