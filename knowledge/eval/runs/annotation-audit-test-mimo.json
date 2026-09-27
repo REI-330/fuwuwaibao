@@ -1,0 +1,522 @@
+{
+  "schema": "career-graph-annotation-audit/v1",
+  "questions": "knowledge\\evaluations\\questions-test.json",
+  "rerankCache": "knowledge\\eval\\runs\\q1024-c30-test-rerank-cache.json",
+  "judgeModel": "mimo-v2.6-pro",
+  "note": "A=标注段，B=模型选段；组序按题号哈希交换以避免位置偏好。本审计只出结论，不改题集。",
+  "summary": {
+    "total": 32,
+    "failed": 6,
+    "bOnFailed": [
+      "T05",
+      "T10",
+      "T12",
+      "T13",
+      "T15"
+    ],
+    "bOnHit": [
+      "T02",
+      "T03",
+      "T04",
+      "T06",
+      "T07",
+      "T08",
+      "T09",
+      "T11",
+      "T14",
+      "T16",
+      "T17",
+      "T18",
+      "T22",
+      "T23",
+      "T24",
+      "T25",
+      "T26",
+      "T27",
+      "T28",
+      "T30",
+      "T31",
+      "T32"
+    ]
+  },
+  "rows": [
+    {
+      "questionId": "T01",
+      "hit": true,
+      "verdict": "A",
+      "referenceChunks": [
+        "S02#s19",
+        "S02#s43~2"
+      ],
+      "picked": [
+        "S02#s19"
+      ],
+      "raw": "判定: B | 理由: B 组在 A 组基础上补充了 Macros 章节片段，涉及格式转换宏（如 SPI_SWAP_DATA_*）所在的 API 参考位置，更接近回答\"应该用哪些宏\"这一问，而 A 组完全未涉及宏。"
+    },
+    {
+      "questionId": "T02",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S02#s22",
+        "S02#s42~4"
+      ],
+      "picked": [
+        "S02#s22",
+        "S02#s27",
+        "S02#s27~2"
+      ],
+      "raw": "判定: B | 理由: B 组除包含 GPIO 矩阵 40 MHz 与 IO_MUX 80 MHz 的频率限制外，还补充了时序影响因素的详细说明，而 A 组第二条片段是无关的 API 结构体内容，且两组均未给出 SPI2 MISO 专用管脚的具体 GPIO 编号。"
+    },
+    {
+      "questionId": "T03",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S03#s63~2",
+        "S03#s71"
+      ],
+      "picked": [
+        "S03#s71",
+        "S03#s61~10",
+        "S03#s62"
+      ],
+      "raw": "判定: A | 理由: A 组包含 multi_heap_walker_cb_t 的 bool 返回值签名及遍历函数的 walker_func 回调说明，能体现返回值控制遍历继续与否，而 B 组大部分是无关的宏定义且片段截断未含返回值语义。"
+    },
+    {
+      "questionId": "T04",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S03#s61",
+        "S03#s61~9"
+      ],
+      "picked": [
+        "S03#s61~9",
+        "S03#s69~4",
+        "S03#s67"
+      ],
+      "raw": "判定: B | 理由: B 组包含 heap_caps_get_allocated_size 相关的块大小说明及多堆 API 的 size 查询函数，能回答\"查询已分配指针占用字节数\"的问题，而 A 组仅涉及分配失败回调，与问题无关。"
+    },
+    {
+      "questionId": "T05",
+      "hit": false,
+      "verdict": "B",
+      "referenceChunks": [
+        "S02#s41",
+        "S02#s41~6"
+      ],
+      "picked": [
+        "S02#s22",
+        "S02#s27",
+        "S02#s27~2"
+      ],
+      "raw": "判定: A | 理由: A 组明确给出 GPIO 矩阵最高 40 MHz、IO_MUX 可达 80 MHz 并建议高速时改用 IO_MUX 管脚，直接回答了频率上限与应对办法，而 B 组仅为 API 函数签名与返回值，与问题无关。"
+    },
+    {
+      "questionId": "T06",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S03#s69",
+        "S03#s69~4"
+      ],
+      "picked": [
+        "S03#s69",
+        "S03#s69~4",
+        "S03#s61~4"
+      ],
+      "raw": "判定: B | 理由: B 组额外提供了 heap_caps_get_minimum_free_size 这一查询历史最低剩余空闲空间的接口，覆盖更完整，而两组都缺少释放对齐内存的 multi_heap_aligned_free 信息。"
+    },
+    {
+      "questionId": "T07",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S03#s61~2",
+        "S03#s61~6"
+      ],
+      "picked": [
+        "S03#s63",
+        "S03#s61~6",
+        "S03#s61~7"
+      ],
+      "raw": "判定: A | 理由: A 组同时包含对齐硬性约束（alignment 必须是 2 的幂）相关宏说明与 heap_caps_check_integrity_all 的调用及返回值含义，B 组缺少对齐约束内容。"
+    },
+    {
+      "questionId": "T08",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S03#s61~3",
+        "S03#s61~7"
+      ],
+      "picked": [
+        "S03#s61~7",
+        "S03#s61~3",
+        "S03#s61~6"
+      ],
+      "raw": "判定: B | 理由: B 组额外包含 heap_caps_check_integrity/multi_heap_check 的说明片段，能回答\"用哪个接口查堆损坏\"这一子问题，而 A 组缺少该内容。"
+    },
+    {
+      "questionId": "T09",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S03#s61~4",
+        "S03#s61~10"
+      ],
+      "picked": [
+        "S03#s61~4",
+        "S03#s61~10",
+        "S03#s71"
+      ],
+      "raw": "判定: A | 理由: A 组额外包含 multi_heap_walker_cb_t 回调的完整签名（block_ptr、block_size、block_used、user_data），能回答\"回调要带哪些参数\"，而 B 组缺少该片段。"
+    },
+    {
+      "questionId": "T10",
+      "hit": false,
+      "verdict": "B",
+      "referenceChunks": [
+        "S04#s78~3",
+        "S04#s78~7"
+      ],
+      "picked": [
+        "S04#s78",
+        "S04#s78~10",
+        "S04#s78~9"
+      ],
+      "raw": "判定: A | 理由: A 组包含 gpio_config 覆盖配置、睡眠态上下拉限制（仅支持输入输出的引脚才有内部上下拉）以及 gpio_hold_en 使能后才生效等关键信息，能覆盖问题的三个要点，而 B 组仅是 API 签名片段，未涉及重复调用、无上下拉引脚和 gpio_hold 的语义。"
+    },
+    {
+      "questionId": "T11",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S04#s78~5",
+        "S04#s78~10"
+      ],
+      "picked": [
+        "S04#s78~10",
+        "S04#s78~3",
+        "S04#s78"
+      ],
+      "raw": "判定: B | 理由: B 组同时包含 gpio_config（开漏输出配置）、gpio_sleep_set_pull_mode（睡眠上下拉）和 gpio_set_pull_mode（普通上下拉），可完整回答三问，而 A 组缺少开漏输出接口和普通上下拉函数。"
+    },
+    {
+      "questionId": "T12",
+      "hit": false,
+      "verdict": "B",
+      "referenceChunks": [
+        "S02#s41~2",
+        "S02#s41~5"
+      ],
+      "picked": [
+        "S02#s20",
+        "S02#s11",
+        "S02#s12"
+      ],
+      "raw": "判定: A | 理由: A 组完整覆盖了中断事务的队列/ISR 用法、轮询事务的阻塞与 acquire_bus 建议以及混合传输的使用禁忌，而 B 组仅是 API 返回值片段，无法回答并发限制与禁忌。"
+    },
+    {
+      "questionId": "T13",
+      "hit": false,
+      "verdict": "B",
+      "referenceChunks": [
+        "S02#s41~3",
+        "S02#s41~7"
+      ],
+      "picked": [
+        "S02#s42~3",
+        "S02#s27",
+        "S02#s22"
+      ],
+      "raw": "判定: B | 理由: B 组同时覆盖了事务描述符在完成前不可修改的约束（含原因：需读取结果/复用缓冲）以及频率上限的含义与超限后果（设置时序违反、读取错误），而 A 组仅涉及等待完成与 dummy 位补偿，未回答频率上限问题。"
+    },
+    {
+      "questionId": "T14",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S13#s223",
+        "S13#s223~4"
+      ],
+      "picked": [
+        "S14#s267",
+        "S14#s267~3",
+        "S13#s223~4"
+      ],
+      "raw": "判定: A | 理由: A 组同时覆盖了参数化 fixture 导致依赖测试重复执行的机制、ids 列表与函数两种自定义 ID 写法及 idfn 返回 None 回退默认 ID 的注意事项，而 B 组缺少 ids 列表写法和返回值说明。"
+    },
+    {
+      "questionId": "T15",
+      "hit": false,
+      "verdict": "B",
+      "referenceChunks": [
+        "S13#s225",
+        "S13#s231"
+      ],
+      "picked": [
+        "S14#s269",
+        "S14#s274",
+        "S14#s256"
+      ],
+      "raw": "判定: B | 理由: B 组同时覆盖了 fixture 互相引用的模块化价值、conftest 与测试文件同名 fixture 的覆盖机制（模块级覆盖）以及 conftest 的作用域可见性，而 A 组缺少 conftest 可见性与覆盖生效层级的完整说明。"
+    },
+    {
+      "questionId": "T16",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S14#s247",
+        "S14#s266"
+      ],
+      "picked": [
+        "S14#s247",
+        "S14#s266",
+        "S13#s211"
+      ],
+      "raw": "判定: A | 理由: A 组额外包含英文原文片段，明确说明 callable 以 fixture_name 和 config 两个关键字参数调用，而 B 组缺少该关键信息。"
+    },
+    {
+      "questionId": "T17",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S05#s109",
+        "S05#s109~4"
+      ],
+      "picked": [
+        "S05#s109",
+        "S05#s109~3",
+        "S05#s109~4"
+      ],
+      "raw": "判定: B | 理由: B组额外包含benchmark参数配置示例（ModelPath指定模型、InDataPath指定输入数据），能回答\"怎么指定要跑的模型\"和\"不指定输入数据会怎样\"，而A组缺少这部分关键内容。"
+    },
+    {
+      "questionId": "T18",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S05#s110",
+        "S05#s110~4"
+      ],
+      "picked": [
+        "S05#s101",
+        "S05#s101~4",
+        "S05#s110~4"
+      ],
+      "raw": "判定: A | 理由: A 组同时包含 Linux 环境要求（GCC/CMake 版本）和 GetInputs→MutableData 填数据→Predict→检查 status 的完整调用序列及失败判断，而 B 组缺少预测执行与错误判断环节。"
+    },
+    {
+      "questionId": "T19",
+      "hit": true,
+      "verdict": "A",
+      "referenceChunks": [
+        "S05#s101~2",
+        "S05#s101~6"
+      ],
+      "picked": [
+        "S05#s101~2",
+        "S05#s101~6",
+        "S05#s110~2"
+      ],
+      "raw": "判定: A | 理由: A组两条片段完整覆盖了静态库链接选项和打印输出张量两个问题，B组多出的Windows篇片段与Linux问题无关且冗余。"
+    },
+    {
+      "questionId": "T20",
+      "hit": false,
+      "verdict": "A",
+      "referenceChunks": [
+        "S16#s298~2",
+        "S16#s298~5"
+      ],
+      "picked": [
+        "S16#s283",
+        "S16#s293~2",
+        "S16#s291~2"
+      ],
+      "raw": "判定: A | 理由: A 组直接列出了数据库（Hibernate ORM、PostgreSQL）和操作系统（Google Android）类别的具体工具并标注了 Hot Technology，而 B 组只有职业描述和任务条目，未涉及具体工具。"
+    },
+    {
+      "questionId": "T21",
+      "hit": true,
+      "verdict": "A",
+      "referenceChunks": [
+        "S16#s298",
+        "S16#s298~4"
+      ],
+      "picked": [
+        "S16#s298",
+        "S16#s298~2",
+        "S26#s997"
+      ],
+      "raw": "判定: B | 理由: B组同时包含分析与科学计算软件（IBM SPSS）和图形图像软件（Adobe Creative Cloud、Illustrator、SketchUp Pro等，且标有Hot Technology），而A组缺少图形图像软件部分。"
+    },
+    {
+      "questionId": "T22",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S07#2.3",
+        "S07#4.1"
+      ],
+      "picked": [
+        "S07#2.3",
+        "S07#4.1",
+        "S07#s125"
+      ],
+      "raw": "判定: B | 理由: B 组在 A 组基础上多了一段章节概览片段，虽对答案核心无增量，但两组均完整回答了问题，B 组信息更全。"
+    },
+    {
+      "questionId": "T23",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S07#3.1~2",
+        "S07#s141"
+      ],
+      "picked": [
+        "S07#3.1~2",
+        "S07#s141",
+        "S07#3.1"
+      ],
+      "raw": "判定: A | 理由: A 组额外提供了 shape/ndim/axis/size 等基础概念的片段，对理解 reshape 形状参数更完整，而 B 组缺少该片段。"
+    },
+    {
+      "questionId": "T24",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S07#3.3",
+        "S07#s142"
+      ],
+      "picked": [
+        "S07#3.3",
+        "S07#s142",
+        "S07#s124"
+      ],
+      "raw": "判定: B | 理由: B 组额外包含 Tensor 概念介绍片段，补充了 Tensor 支持 CPU/GPU/AI 芯片等设备的背景，而两组对设备位置、固定内存利弊及 Numpy 共享内存问题的覆盖相同。"
+    },
+    {
+      "questionId": "T25",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S06#s115",
+        "S06#3.4.1"
+      ],
+      "picked": [
+        "S06#s115",
+        "S06#3.4.1",
+        "S06#3.1"
+      ],
+      "raw": "判定: A | 理由: A组包含S06#3.1片段说明了数据集加载方式，而B组缺少该片段，但两组核心信息（数据集规模、分辨率、安装库、保存文件）均来自相同片段，A组信息更完整。"
+    },
+    {
+      "questionId": "T26",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S06#3.3.1",
+        "S06#3.4.2"
+      ],
+      "picked": [
+        "S06#3.3.1",
+        "S06#3.4.2",
+        "S07#2.5"
+      ],
+      "raw": "判定: B | 理由: B 组额外提供了 S07#2.5 片段，解释了高层 API 会自动将非 Tensor 数据转为 Tensor，从而能回答\"为什么推理前要给图片增加维度\"这一问题，而 A 组缺少该解释。"
+    },
+    {
+      "questionId": "T27",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S14#s240",
+        "S14#s259"
+      ],
+      "picked": [
+        "S14#s259",
+        "S14#s260",
+        "S14#s261"
+      ],
+      "raw": "判定: A | 理由: A组包含s259的三因素总述及s260/s261对作用域优先和依赖关系的具体说明，完整覆盖问题所问的排序依据及名字/定义位置/顺序不影响的结论，而B组缺少后两个片段。"
+    },
+    {
+      "questionId": "T28",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S14#s237",
+        "S14#s255"
+      ],
+      "picked": [
+        "S14#s255",
+        "S14#s237",
+        "S14#s238"
+      ],
+      "raw": "判定: B | 理由: B组同时覆盖了fixture定义（是什么）和作用域可见性（类内vs模块顶层），而A组缺少\"请求装置\"片段对请求机制的补充，但两组核心内容其实相同，B组多出的s238片段更完整地回答了\"如何请求\"这一子问题。"
+    },
+    {
+      "questionId": "T29",
+      "hit": true,
+      "verdict": "A",
+      "referenceChunks": [
+        "S14#s236",
+        "S14#s254"
+      ],
+      "picked": [
+        "S14#s236",
+        "S14#s254~2",
+        "S14#s253"
+      ],
+      "raw": "判定: B | 理由: B组的s254片段直接给出了安全夹具结构的原则（每个夹具只做一个状态更改操作并与拆卸代码捆绑），而A组的s254~2片段只讨论了依赖顺序问题，未回答结构原则。"
+    },
+    {
+      "questionId": "T30",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S14#s235",
+        "S14#s253"
+      ],
+      "picked": [
+        "S14#s235",
+        "S14#s254",
+        "S14#s253"
+      ],
+      "raw": "判定: A | 理由: A组额外包含s254关于\"每个夹具只做一个状态更改并绑定拆卸\"的安全夹具结构建议，能回答第二问的坑，而B组只到s253的泛泛警告。"
+    },
+    {
+      "questionId": "T31",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S02#s18",
+        "S02#s27"
+      ],
+      "picked": [
+        "S02#s18",
+        "S02#s22",
+        "S02#s27"
+      ],
+      "raw": "判定: B | 理由: B 组额外包含 GPIO 矩阵与 IO_MUX 管脚章节，明确说明了 GPIO 矩阵导致频率下降的原因（MISO 输入延迟增大、40 MHz 上限）及弥补办法（改用专用 IO_MUX 管脚），而 A 组只说明频率下降现象未给出解决办法。"
+    },
+    {
+      "questionId": "T32",
+      "hit": true,
+      "verdict": "B",
+      "referenceChunks": [
+        "S02#s21",
+        "S02#s28"
+      ],
+      "picked": [
+        "S02#s21",
+        "S02#s28",
+        "S02#s26"
+      ],
+      "raw": "判定: A | 理由: A 组额外包含 S02#s26 缓存缺失片段，能补充说明缓存被禁用/缓存缺失的机制与 IRAM 配置，覆盖问题中\"什么情况下缓存会被禁用\"的细节，而 B 组缺少该片段。"
+    }
+  ]
+}
