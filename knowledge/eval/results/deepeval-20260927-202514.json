@@ -1,0 +1,169 @@
+{
+  "schema": "career-graph-deepeval/v1",
+  "judge": {
+    "model": "deepseek-v4-flash",
+    "base_url": "https://forum.u3552374.nyat.app:49420/v1"
+  },
+  "levels": {
+    "BM25": {
+      "n": 2,
+      "summary": {
+        "contextual_precision": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "contextual_recall": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "contextual_relevancy": {
+          "mean": 0.4348,
+          "n": 2
+        },
+        "faithfulness": {
+          "mean": 0.9285,
+          "n": 2
+        },
+        "answer_relevancy": {
+          "mean": 0.8407,
+          "n": 2
+        }
+      },
+      "elapsedSec": 69.5,
+      "perQuestion": [
+        {
+          "questionId": "N01",
+          "set": "main",
+          "category": "嵌入式开发",
+          "retrieved_chunk_ids": [
+            "S01#s6",
+            "S01#s5",
+            "S22#s354"
+          ],
+          "answer": "根据检索片段，关于 FreeRTOS 官方认证、可直接用于验证的现成开发板，片段[2]列出了以下硬件平台：\n\n- ATECC608A Zero Touch 配置套件适用于 AWS IoT\n- Cypress CYW943907AEVAL1F 开发工具包\n- Cypress CYW954907AEVAL1F 开发工具包\n- 赛普拉斯套件 CY8CKIT-064S0S2-4343W\n- Espressif ESP32-DevKitC\n- Espressif ESP-WROVER-KIT\n- Espressif ESP-WROOM-32SE\n- Espressif ESP32-S2-Saola-1\n- Infineon XMC4800 IoT 连接工具包\n- Marvell MW320 AWS IoT 入门套件\n- Marvell MW322 AWS IoT 入门套件\n- MediaTek mt7697hx 开发套件\n- Microchip Curiosity PIC32MZEF Bundle\n- 北欧 n RF52840-DK\n- NuMaker-IoT-M487\n- NXP LPC54018 IoT Module\n- OPTIGA Trust X 安全解决方案\n- Renesas RX65N RSK IoT Module\n- STMicroelectronicsSTM32L4 发现工具包 IoT 节点\n- 德州仪器 CC3220SF-LAUNCHXL\n- Microsoft Windows 7 或更高版本，至少双核处理器以及有线以太网连接\n- Xilinx Avnet MicroZed 工业物联网套件\n\n片段[2]还提到，AWS 合作伙伴设备目录中也列出了取得认证的设备；有关新设备资格鉴定的信息，请参阅 FreeRTOS 资格认证指南。\n\n关于遇到技术问题该去哪些地方找文档和支持，片段[1]提到：\n\n- 其他 FreeRTOS 文档：freertos.org\n- 如果 FreeRTOS 工程团队对 FreeRTOS 有疑问，可以在 FreeRTOS 页面上打开一个问题（GitHub）\n- FreeRTOS 的技术问题：FreeRTOS 社区论坛\n- 将设备连接至 AWS IoT 的更多信息：《AWS IoT Core 开发者指南》中的设备配置\n- AWS 技术支持：Supp AWS ort（片段原文如此）\n- AWS 账单、账户服务、活动、滥用行为或其他问题：“联系我们”页面\n\n另外，片段[2]提到“AWS 合作伙伴设备目录中也列出了取得认证的设备”，并指向 FreeRTOS 资格认证指南。片段[3]内容为阿里云相关，与问题无关。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.2609,
+            "faithfulness": 1.0,
+            "answer_relevancy": 0.8065
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the relevant nodes are ranked higher than the irrelevant node. The first node provides information about where to find documentation and support for FreeRTOS, and the second node lists qualified hardware platforms, both directly addressing the input. The third node, which is about Alibaba Cloud products and services, is irrelevant and is correctly ranked lower than the re",
+            "contextual_recall": "The score is 1.00 because every sentence in the expected output is directly supported by the 1st node in retrieval context, with no unsupported statements.",
+            "contextual_relevancy": "The score is 0.26 because most of the retrieval context is irrelevant, such as statements about AWS IoT, billing, and feedback prompts, but it does contain some relevant information about FreeRTOS certified boards and support resources, including '以下硬件平台符合 FreeRTOS 的条件：...' and '有关 FreeRTOS 的技术问题，请访问 FreeRTOS 社区论坛。'",
+            "faithfulness": "The score is 1.00 because there are no contradictions, indicating that the actual output is perfectly faithful to the retrieval context. Great job!",
+            "answer_relevancy": "The score is 0.81 because the response includes several irrelevant statements, such as details about system requirements, device catalogs, qualification processes, AWS support, billing, and Alibaba Cloud, which do not directly address the user's questions about certified development boards and FreeRTOS technical support. However, the response still provides some relevant information, which is why "
+          },
+          "elapsedSec": 57.4
+        },
+        {
+          "questionId": "N02",
+          "set": "main",
+          "category": "嵌入式开发",
+          "retrieved_chunk_ids": [
+            "S02#s13",
+            "S02#s14",
+            "S02#s10"
+          ],
+          "answer": "根据检索片段，ESP32 上配置四线 I/O 模式及修改命令/地址阶段长度的设置如下：\n\n**1. 四线 I/O 模式配置**\n\n- 在 `spi_transaction_t` 的 `flags` 中设置：`SPI_TRANS_MODE_QIO` 和 `SPI_TRANS_MULTILINE_ADDR`。\n- 在 `spi_bus_config_t` 的 `flags` 中设置：`SPICOMMON_BUSFLAG_QUAD`，用于检查相应的 IO 管脚是否被设置。\n\n**2. 修改命令阶段和地址阶段的长度**\n\n- 默认长度通过调用 `spi_bus_add_device()` 在 `spi_device_interface_config_t` 中设置。\n- 如需更改，需声明结构体 `spi_transaction_ext_t`，在 `spi_transaction_ext_t::base` 中设置标志信号 `SPI_TRANS_VARIABLE_CMD` 和/或 `SPI_TRANS_VARIABLE_ADDR`，随后按正常步骤完成余下配置。\n- 设置后，各阶段长度将等于 `spi_transaction_ext_t::command_bits` 和 `spi_transaction_ext_t::address_bits` 中设置的长度。\n- 如果未设置 `SPI_TRANS_VARIABLE_CMD` 和 `SPI_TRANS_VARIABLE_ADDR`，驱动程序将在设备初始化期间自动将这些阶段的长度设置为默认值。\n\n**3. 命令/地址阶段线数与数据阶段保持一致**\n\n- 在 `spi_transaction_t` 的 `flags` 成员变量中设置 `SPI_TRANS_MULTILINE_CMD` 和/或 `SPI_TRANS_MULTILINE_ADDR`。\n\n以上内容均依据检索片段，未涉及片段之外的信息。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.6087,
+            "faithfulness": 0.8571,
+            "answer_relevancy": 0.875
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the relevant nodes are ranked higher than the irrelevant node. The first node provides the exact flags for quad I/O mode, and the second node explains how to change command and address phase lengths, both directly answering the input. The third node is irrelevant because it only describes SPI transaction phases without the specific flags or structures needed, and it is co",
+            "contextual_recall": "The score is 1.00 because every sentence in the expected output is fully supported by the 1st and 2nd nodes in retrieval context, with exact matches for all details.",
+            "contextual_relevancy": "The score is 0.61 because while the context effectively addresses the query by explaining that \"四线 I/O 模式 使用 SPI_TRANS_MODE_QIO 和 SPI_TRANS_MULTILINE_ADDR\" and detailing how to alter command/address lengths by declaring \"spi_transaction_ext_t\" with flags \"SPI_TRANS_VARIABLE_CMD 和/或 SPI_TRANS_VARIABLE_ADDR\", it also contains considerable irrelevant content regarding unrelated modes like \"'普通 SPI 模式",
+            "faithfulness": "The score is 0.86 because the actual output incorrectly states that the SPICOMMON_BUSFLAG_QUAD flag must be set in spi_bus_config_t's flags and is used to check if IO pins are set, while the retrieval context only mentions that this flag corresponds to the four-line I/O mode without specifying its placement or purpose.",
+            "answer_relevancy": "The score is 0.88 because the response is largely relevant and addresses the core question about configuring SPI in quad I/O mode and modifying command/address lengths, but it includes an irrelevant meta-comment about the source of information that detracts from the technical focus."
+          },
+          "elapsedSec": 69.5
+        }
+      ]
+    },
+    "VECTOR": {
+      "n": 2,
+      "summary": {
+        "contextual_precision": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "contextual_recall": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "contextual_relevancy": {
+          "mean": 0.4268,
+          "n": 2
+        },
+        "faithfulness": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "answer_relevancy": {
+          "mean": 0.9706,
+          "n": 2
+        }
+      },
+      "elapsedSec": 66.2,
+      "perQuestion": [
+        {
+          "questionId": "N01",
+          "set": "main",
+          "category": "嵌入式开发",
+          "retrieved_chunk_ids": [
+            "S01#s6",
+            "S01#s5",
+            "S01#s2"
+          ],
+          "answer": "**现成开发板（官方认证/合格）**：根据片段[2]，符合 FreeRTOS 条件的硬件平台包括：\n\n- ATECC608A Zero Touch 配置套件适用于 AWS IoT\n- Cypress CYW943907AEVAL1F 开发工具包\n- Cypress CYW954907AEVAL1F 开发工具包\n- 赛普拉斯套件 CY8CKIT-064S0S2-4343W\n- Espressif ESP32-DevKitC\n- Espressif ESP-WROVER-KIT\n- Espressif ESP-WROOM-32SE\n- Espressif ESP32-S2-Saola-1\n- Infineon XMC4800 IoT 连接工具包\n- Marvell MW320 AWS IoT 入门套件\n- Marvell MW322 AWS IoT 入门套件\n- MediaTek mt7697hx 开发套件\n- Microchip Curiosity PIC32MZEF Bundle\n- 北欧 n RF52840-DK\n- NuMaker-IoT-M487\n- NXP LPC54018 IoT Module\n- OPTIGA Trust X 安全解决方案\n- Renesas RX65N RSK IoT Module\n- STMicroelectronicsSTM32L4 发现工具包 IoT 节点\n- 德州仪器 CC3220SF-LAUNCHXL\n- Microsoft Windows 7 或更高版本，至少双核处理器以及有线以太网连接\n- Xilinx Avnet MicroZed 工业物联网套件\n\n片段[2]还提到，AWS 合作伙伴设备目录中也列出了取得认证的设备；有关新设备资格鉴定的信息，请参阅 FreeRTOS 资格认证指南。\n\n**遇到技术问题时的文档和支持渠道**：根据片段[1]和[3]：\n\n- 其他 FreeRTOS 文档：freertos.org\n- 如果 FreeRTOS 工程团队对 FreeRTOS 有疑问，可以在 FreeRTOS 页面上打开一个问题（GitHub）\n- FreeRTOS 技术问题：访问 FreeRTOS 社区论坛\n- 将设备连接至 AWS IoT 的更多信息：《AWS IoT Core 开发者指南》中的设备配置\n- AWS 技术支持：参阅 Supp AWS ort（片段原文如此）\n- AWS 账单、账户服务、活动、滥用行为或其他问题：参阅“联系我们”页面\n- 源代码、贡献更改或改进、报告问题：https://github.com/FreeRTOS/FreeRTOS\n- FreeRTOS 文档（《FreeRTOS 用户指南》、《FreeRTOS 移植指南》和《FreeRTOS 资格认证指南》）的 markdown 源代码：https://github.com/awsdocs/aws-freertos-docs\n\n资料不足的部分：片段未说明这些开发板具体的“验证”流程细节，也未提供各支持渠道的完整网址或联系方式。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.4091,
+            "faithfulness": 1.0,
+            "answer_relevancy": 0.9412
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the relevant nodes are ranked higher than the irrelevant node. The first node provides documentation and support resources, and the second node lists certified development boards, both directly answering the input. The third node is irrelevant and is correctly ranked last, so no relevant nodes are ranked below it.",
+            "contextual_recall": "The score is 1.00 because every sentence in the expected output is directly supported by the retrieval context, with sentences 1-25 matching the 2nd node and sentences 26-39 matching the 1st node. Great job!",
+            "contextual_relevancy": "The score is 0.41 because the retrieval context contains some relevant statements about FreeRTOS documentation, support, and qualified boards, such as '有关其他 FreeRTOS 文档，请参阅 freertos.org' and '以下硬件平台符合 FreeRTOS 的条件：...', but it is largely irrelevant, with many statements about AWS IoT, AWS support, billing, and feedback prompts that do not address the input's questions about officially certified de",
+            "faithfulness": "The score is 1.00 because there are no contradictions, indicating that the actual output is perfectly faithful to the retrieval context. Great job!",
+            "answer_relevancy": "The score is 0.94 because the response is highly relevant, directly addressing the official certified development boards and support channels for FreeRTOS IoT development. However, it includes minor irrelevant statements about host system requirements and AWS billing/account issues, which slightly detract from perfect relevance."
+          },
+          "elapsedSec": 66.2
+        },
+        {
+          "questionId": "N02",
+          "set": "main",
+          "category": "嵌入式开发",
+          "retrieved_chunk_ids": [
+            "S02#s13",
+            "S02#s14",
+            "S02#s19"
+          ],
+          "answer": "根据检索片段，ESP32 上配置四线 I/O 模式及修改命令/地址阶段长度的设置如下：\n\n**1. 四线 I/O 模式设置**\n\n- 在 `spi_transaction_t` 中设置 flags：`SPI_TRANS_MODE_QIO` 和 `SPI_TRANS_MULTILINE_ADDR`（传输事务标志信号）。\n- 在 `spi_bus_config_t` 中设置 flags：`SPICOMMON_BUSFLAG_QUAD`（总线 IO 设置标志信号）。\n\n**2. 修改命令阶段和地址阶段的长度**\n\n- 默认长度通过调用 `spi_bus_add_device()` 在 `spi_device_interface_config_t` 中设置。\n- 如需更改，需声明结构体 `spi_transaction_ext_t`，在 `spi_transaction_ext_t::base` 中设置标志信号 `SPI_TRANS_VARIABLE_CMD` 和/或 `SPI_TRANS_VARIABLE_ADDR`，随后按正常步骤完成余下配置。\n- 这样各阶段长度将等于 `spi_transaction_ext_t::command_bits` 和 `spi_transaction_ext_t::address_bits` 中设置的长度。\n- 若未设置 `SPI_TRANS_VARIABLE_CMD` 和 `SPI_TRANS_VARIABLE_ADDR`，驱动程序将在设备初始化期间自动将这些阶段的长度设置为默认值。\n\n**3. 命令/地址阶段线数与数据阶段保持一致**\n\n- 在 `spi_transaction_t` 的 flags 成员变量中设置 `SPI_TRANS_MULTILINE_CMD` 和/或 `SPI_TRANS_MULTILINE_ADDR`。",
+          "scores": {
+            "contextual_precision": 1.0,
+            "contextual_recall": 1.0,
+            "contextual_relevancy": 0.4444,
+            "faithfulness": 1.0,
+            "answer_relevancy": 1.0
+          },
+          "reasons": {
+            "contextual_precision": "The score is 1.00 because the relevant nodes are ranked higher than the irrelevant node. The first node provides the table of line modes and flags for quad I/O mode, and the second node explains how to change command and address phase lengths using spi_transaction_ext_t and flags, both directly addressing the input. The third node, which discusses data bit lengths and endianness, is irrelevant and",
+            "contextual_recall": "The score is 1.00 because every sentence in the expected output is directly supported by content from node 1 and node 2 in the retrieval context, with no unsupported statements.",
+            "contextual_relevancy": "The score is 0.44 because the retrieval context contains some relevant statements about setting SPI_TRANS_MODE_QIO and SPI_TRANS_MULTILINE_ADDR for four-line I/O mode, and using spi_transaction_ext_t with SPI_TRANS_VARIABLE_CMD and SPI_TRANS_VARIABLE_ADDR to change command/address phase lengths, but it is largely irrelevant as it includes modes like '普通 SPI 模式', '双线输出模式', '双线 I/O 模式', '四线输出模式' tha",
+            "faithfulness": "The score is 1.00 because there are no contradictions, indicating that the actual output is perfectly faithful to the retrieval context. Great job!",
+            "answer_relevancy": "The score is 1.00 because the response directly and accurately addresses how to configure SPI to 4-line I/O mode on the ESP32 and specifies the exact structures and flags needed, without any irrelevant information!"
+          },
+          "elapsedSec": 59.2
+        }
+      ]
+    }
+  }
+}

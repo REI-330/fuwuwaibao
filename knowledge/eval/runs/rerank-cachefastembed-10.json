@@ -1,0 +1,7 @@
+{
+  "generatedAt": "2026-09-27T20:21:25+0800",
+  "model": "qwen3.8-max",
+  "candidatesPerQuestion": 10,
+  "perQuestionSec": 60.2,
+  "picks": {}
+}

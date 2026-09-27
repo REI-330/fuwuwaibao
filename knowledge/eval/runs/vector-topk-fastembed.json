@@ -1,0 +1,417 @@
+{
+  "schema": "career-graph-vector-retrieval/v1",
+  "generatedAt": "2026-09-27T20:02:02+0800",
+  "retriever": {
+    "type": "dense-vector",
+    "service": "http://127.0.0.1:8090/v1/embeddings",
+    "model": "BAAI/bge-small-zh-v1.5",
+    "dtype": "float32",
+    "dim": 512,
+    "metric": "cosine（点积；TEI 输出已 L2 归一化）",
+    "topk": 3,
+    "rayonThreads": "unknown"
+  },
+  "corpus": {
+    "chunks": 1757
+  },
+  "metrics": {
+    "main": {
+      "hitRate": "10/14",
+      "hitRateValue": 0.7143,
+      "meanPrecisionAtK": 0.2857
+    }
+  },
+  "timing": {
+    "embedCorpusSec": 12.5,
+    "querySec": 1.1,
+    "perQueryMs": 75.8
+  },
+  "perQuestion": [
+    {
+      "questionId": "N01",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "用 FreeRTOS 开发 IoT 设备时，官方认证过哪些现成开发板可以直接拿来做验证？遇到技术问题该去哪些地方找文档和支持？",
+      "referenceChunks": [
+        "S01#s5",
+        "S01#s6"
+      ],
+      "topk": [
+        {
+          "chunkId": "S01#s6",
+          "score": 0.662785
+        },
+        {
+          "chunkId": "S26#s1385",
+          "score": 0.629337
+        },
+        {
+          "chunkId": "S21#s349",
+          "score": 0.625683
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S01#s6"
+      ]
+    },
+    {
+      "questionId": "N02",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "ESP32 上要把 SPI 配成四线 I/O 模式该怎么设置，另外命令阶段和地址阶段的长度如果要改，具体动哪些结构体和标志位？",
+      "referenceChunks": [
+        "S02#s13",
+        "S02#s14"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s13",
+          "score": 0.713808
+        },
+        {
+          "chunkId": "S02#s14",
+          "score": 0.696545
+        },
+        {
+          "chunkId": "S02#s10",
+          "score": 0.634702
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s13",
+        "S02#s14"
+      ]
+    },
+    {
+      "questionId": "N03",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "ESP-IDF 里 MALLOC_CAP_32BIT 分配的内存能不能拿来存浮点变量？在中断服务程序里调用堆函数有什么限制？",
+      "referenceChunks": [
+        "S03#32",
+        "S03#s57"
+      ],
+      "topk": [
+        {
+          "chunkId": "S03#32",
+          "score": 0.744649
+        },
+        {
+          "chunkId": "S03#s48",
+          "score": 0.732411
+        },
+        {
+          "chunkId": "S03#s57",
+          "score": 0.713464
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S03#32",
+        "S03#s57"
+      ]
+    },
+    {
+      "questionId": "N04",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "ESP32 的 RTC GPIO 在哪些情况下能用，另外 gpio_config 和 gpio_reset_pin 这两个函数各自负责什么？",
+      "referenceChunks": [
+        "S04#s73~2",
+        "S04#s78"
+      ],
+      "topk": [
+        {
+          "chunkId": "S04#s79",
+          "score": 0.715995
+        },
+        {
+          "chunkId": "S04#s74",
+          "score": 0.708452
+        },
+        {
+          "chunkId": "S04#s75",
+          "score": 0.693881
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "N05",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "用 MindSpore Lite 的 benchmark 工具测 mobilenetv2 时，输入数据文件要按什么规格准备，跑完输出里那些误差信息该怎么理解？",
+      "referenceChunks": [
+        "S05#s100~2",
+        "S05#s100~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s100~2",
+          "score": 0.706442
+        },
+        {
+          "chunkId": "S05#s109~2",
+          "score": 0.700818
+        },
+        {
+          "chunkId": "S05#s109",
+          "score": 0.678769
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s100~2"
+      ]
+    },
+    {
+      "questionId": "N06",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "用飞桨做手写数字识别，数据集的下载和加载是怎么写的？网络部分用的是哪个模型、怎么构建并打印出结构？",
+      "referenceChunks": [
+        "S06#3.1",
+        "S06#3.2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S06#3.2",
+          "score": 0.749291
+        },
+        {
+          "chunkId": "S06#s112",
+          "score": 0.738233
+        },
+        {
+          "chunkId": "S06#s115",
+          "score": 0.738039
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S06#3.2"
+      ]
+    },
+    {
+      "questionId": "N07",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "飞桨里从 Python 列表造 Tensor 用哪个接口，如果要造指定形状、内容全是 0 或全是 1 的 Tensor 又该怎么做？",
+      "referenceChunks": [
+        "S07#2.1",
+        "S07#2.2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S06#3.2",
+          "score": 0.632735
+        },
+        {
+          "chunkId": "S07#s125",
+          "score": 0.627339
+        },
+        {
+          "chunkId": "S07#2.2",
+          "score": 0.627137
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S07#2.2"
+      ]
+    },
+    {
+      "questionId": "N08",
+      "set": "main",
+      "category": "计算机视觉",
+      "question": "YOLO26 能导出成哪些部署格式，它们分别适合什么场景？除 NVIDIA 之外，像 Hailo、Ambarella、华为昇腾这类加速器要怎么接？",
+      "referenceChunks": [
+        "S08#s147",
+        "S08#s147~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S08#s147",
+          "score": 0.741256
+        },
+        {
+          "chunkId": "S08#s150",
+          "score": 0.730195
+        },
+        {
+          "chunkId": "S08#s149",
+          "score": 0.686472
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S08#s147"
+      ]
+    },
+    {
+      "questionId": "N09",
+      "set": "main",
+      "category": "计算机视觉",
+      "question": "YOLO26 的检测模型是在什么数据集上预训练的，跑一次预测的典型代码长什么样、结果里能取到哪些框坐标形式？",
+      "referenceChunks": [
+        "S09#s153",
+        "S09#s157"
+      ],
+      "topk": [
+        {
+          "chunkId": "S10#s163",
+          "score": 0.722487
+        },
+        {
+          "chunkId": "S09#s160",
+          "score": 0.722382
+        },
+        {
+          "chunkId": "S09#s153",
+          "score": 0.717619
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S09#s153"
+      ]
+    },
+    {
+      "questionId": "N10",
+      "set": "main",
+      "category": "计算机视觉",
+      "question": "YOLO26 的分割模型精度指标怎么看，用 model.val() 做验证时能拿到哪些指标？",
+      "referenceChunks": [
+        "S10#s163",
+        "S10#s166"
+      ],
+      "topk": [
+        {
+          "chunkId": "S06#3.3.2",
+          "score": 0.696555
+        },
+        {
+          "chunkId": "S10#s171",
+          "score": 0.677737
+        },
+        {
+          "chunkId": "S09#s156",
+          "score": 0.668748
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "N11",
+      "set": "main",
+      "category": "测试自动化",
+      "question": "pytest 的 fixture 里，用 yield 做清理和用 addfinalizer 挂清理函数有什么差别？各自有什么坑？",
+      "referenceChunks": [
+        "S14#1",
+        "S14#2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#1",
+          "score": 0.642182
+        },
+        {
+          "chunkId": "S14#s237",
+          "score": 0.627614
+        },
+        {
+          "chunkId": "S13#s227~2",
+          "score": 0.621762
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S14#1"
+      ]
+    },
+    {
+      "questionId": "N12",
+      "set": "main",
+      "category": "职业能力",
+      "question": "软件质量保证分析师与测试员这个岗位，主要任务和工作活动包括哪些内容？",
+      "referenceChunks": [
+        "S16#s291~2",
+        "S16#s292"
+      ],
+      "topk": [
+        {
+          "chunkId": "S26#s1387",
+          "score": 0.689423
+        },
+        {
+          "chunkId": "S26#s1386",
+          "score": 0.643043
+        },
+        {
+          "chunkId": "S26#s1002",
+          "score": 0.641036
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "N13",
+      "set": "main",
+      "category": "职业能力",
+      "question": "计算机硬件工程师日常要完成哪些任务和工作活动？",
+      "referenceChunks": [
+        "S17#s320~2",
+        "S17#s321"
+      ],
+      "topk": [
+        {
+          "chunkId": "S26#s1387",
+          "score": 0.647206
+        },
+        {
+          "chunkId": "S26#s788",
+          "score": 0.622398
+        },
+        {
+          "chunkId": "S26#s1385",
+          "score": 0.619852
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "N14",
+      "set": "main",
+      "category": "标准与政策",
+      "question": "全国标准信息公共服务平台目前收录了多少现行有效的强制性国家标准和推荐性国家标准，其中可在线阅读下载的比例是怎样的？",
+      "referenceChunks": [
+        "S20#s345",
+        "S20#s346"
+      ],
+      "topk": [
+        {
+          "chunkId": "S20#s345",
+          "score": 0.697175
+        },
+        {
+          "chunkId": "S26#s931",
+          "score": 0.584354
+        },
+        {
+          "chunkId": "S26#s634",
+          "score": 0.57037
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S20#s345"
+      ]
+    }
+  ]
+}
