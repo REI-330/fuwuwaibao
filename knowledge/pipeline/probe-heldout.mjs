@@ -10,10 +10,14 @@
  * 「系统与这份评测集口径一致」，不是检索能力。
  *
  * 这个探针做两件事：
- *   ① **强制校验**：heldout-questions.json 里每条参考答案都必须是非引用段落，
+ *   ① **强制校验**：题集里每条参考答案都必须是非引用段落，
  *      只要有一条落在引用集合里，直接报错退出 —— 题库被污染了就不能出分。
  *   ② **同一批题上跑两种策略**：正常的查询扩展，以及那个「对引用集合加权」的泄漏策略。
  *      如果泄漏策略在留出集上不再领先，就证明它在主评测集上的优势确实来自同源。
+ *
+ * 题库：默认读现役 `evaluations/questions-test.json`，可用 `--questions <path>` 覆盖。
+ * （历史上读的是 `heldout-questions.json`，该文件已被删除；现役 test 集是在同一套
+ *   反泄漏硬规则下生成的，校验逻辑保持不变。）
  *
  * 借鉴来源：Tencent/WeKnora 的 `dataset/qa_dataset.py`（采样 → 生成 → 查看三段式）。
  * 差别在于它用 GPT 生成答案、数据来自 MS MARCO；我们**不外接 LLM**，
@@ -42,10 +46,24 @@ const cited = new Set();
 for (const node of graph.nodes) for (const ref of node.sourceRefs ?? []) cited.add(ref);
 for (const edge of graph.edges) for (const ref of edge.sourceRefs ?? []) cited.add(ref);
 
-// ---------- 校验题库 ----------
+// ---------- 题库（默认现役冻结留出集，可 --questions 覆盖） ----------
 
-const heldout = JSON.parse(readFileSync(resolve(KNOWLEDGE, "evaluations", "heldout-questions.json"), "utf8"));
-const questions = heldout.questions;
+function parseArgs(argv) {
+  const out = {};
+  for (let i = 0; i < argv.length; i += 1) if (argv[i] === "--questions") out.questions = argv[++i];
+  return out;
+}
+
+function loadQuestionSet(path) {
+  const raw = JSON.parse(readFileSync(path, "utf8"));
+  const list = Array.isArray(raw) ? raw : (raw.questions ?? []);
+  if (list.length === 0) throw new Error(`题库为空或字段结构不符：${path}`);
+  return list.filter((q) => q.answerable !== false);
+}
+
+const args = parseArgs(process.argv.slice(2));
+const questionsPath = resolve(args.questions ?? resolve(KNOWLEDGE, "evaluations", "questions-test.json"));
+const questions = loadQuestionSet(questionsPath);
 
 const violations = [];
 for (const question of questions) {
@@ -60,6 +78,7 @@ if (violations.length > 0) {
   process.exit(1);
 }
 console.log(`留出集校验通过：${questions.length} 题，${questions.reduce((sum, q) => sum + q.referenceChunks.length, 0)} 段参考答案，全部不在引用集合里。`);
+console.log(`题库文件：${questionsPath}`);
 console.log(`对照：全语料 ${chunks.length} 段，被图引用 ${cited.size} 段（题目只从剩下的 ${chunks.length - cited.size} 段里出）。`);
 console.log(`分词器：${TOKENIZER_MODE}\n`);
 

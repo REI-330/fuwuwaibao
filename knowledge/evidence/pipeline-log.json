@@ -1,6 +1,6 @@
 {
   "schema": "career-graph-pipeline-log/v1",
-  "updatedAt": "2026-09-27T09:49:23.438Z",
+  "updatedAt": "2026-09-27T09:54:45.362Z",
   "steps": [
     {
       "step": "01",
@@ -344,9 +344,9 @@
       "step": "09",
       "title": "完整性校验",
       "command": "node knowledge/pipeline/09-integrity-check.mjs",
-      "startedAt": "2026-09-27T09:49:22.434Z",
-      "finishedAt": "2026-09-27T09:49:22.479Z",
-      "durationMs": 45,
+      "startedAt": "2026-09-27T09:54:45.341Z",
+      "finishedAt": "2026-09-27T09:54:45.362Z",
+      "durationMs": 21,
       "inputs": [
         "knowledge/extract/accepted.jsonl",
         "knowledge/chunks/chunks.jsonl",
@@ -371,7 +371,7 @@
         "标注分布：llm-reviewed 115，llm-draft 174"
       ],
       "node": "v22.22.2",
-      "runCount": 18
+      "runCount": 19
     },
     {
       "step": "10",

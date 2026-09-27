@@ -25,9 +25,11 @@
  * 换分块 = 换掉评测标注（参考答案是旧 chunk 的 id），所以靠**字符位置对齐**：
  * 新旧分块都在 `raw/<来源>.txt` 的同一套坐标里（旧 chunk 的 `charRange` 与
  * `blocks.json` 的 `ranges` 对齐一致，已核对）。判据用**尺寸中立**的「检索段中点落在参考段内」，
- * 另附「覆盖/落入」两列暴露偏差方向。两套评测集都跑：
- *   · 主集 18 题 —— 参考答案全部来自图的引用集合（有同源缺陷，只能看相对变化）
- *   · 留出集 8 题 —— 参考答案全部不在引用集合里（无泄漏，看绝对水平）
+ * 另附「覆盖/落入」两列暴露偏差方向。两套题集都跑，**默认接现役题集**
+ * （`--main` 缺省 questions-dev.json、`--heldout` 缺省 questions-test.json）：
+ *   · 主集（dev 34 题）—— 参考答案同样不在图的引用集合里，可反复跑、用于调参
+ *   · 留出集（test 32 题）—— 冻结集，只跑一次；**改动配置后不得再用它验收**
+ * 历史数字（18 题主集 / 8 题留出集）出自已删除的旧题集，不可复算，只有相对参考价值。
  */
 import { readdirSync, readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
@@ -249,10 +251,31 @@ const oldChunks = readFileSync(resolve(KNOWLEDGE, "chunks", "chunks.jsonl"), "ut
   .split("\n").filter(Boolean).map((line) => JSON.parse(line));
 const oldById = new Map(oldChunks.map((chunk) => [chunk.chunkId, chunk]));
 
-const mainSet = JSON.parse(readFileSync(resolve(KNOWLEDGE, "evaluations", "questions.json"), "utf8"));
-const mainQuestions = (Array.isArray(mainSet) ? mainSet : mainSet.questions).filter((q) => q.answerable);
-const heldoutSet = JSON.parse(readFileSync(resolve(KNOWLEDGE, "evaluations", "heldout-questions.json"), "utf8"));
-const heldoutQuestions = heldoutSet.questions;
+// 两套题集都可覆盖：--main / --heldout 传路径。
+// 历史上的 questions.json（24 题主集，可由第 11 步重新生成）与
+// heldout-questions.json（8 题留出集，已删除、不在任何步骤产出里）都不再作为默认输入。
+function parseSetArgs(argv) {
+  const out = {};
+  for (let i = 0; i < argv.length; i += 1) {
+    if (argv[i] === "--main") out.main = argv[++i];
+    else if (argv[i] === "--heldout") out.heldout = argv[++i];
+  }
+  return out;
+}
+const setArgs = parseSetArgs(process.argv.slice(2));
+const mainPath = resolve(setArgs.main ?? resolve(KNOWLEDGE, "evaluations", "questions-dev.json"));
+const heldPath = resolve(setArgs.heldout ?? resolve(KNOWLEDGE, "evaluations", "questions-test.json"));
+function readSet(path) {
+  const raw = JSON.parse(readFileSync(path, "utf8"));
+  const list = Array.isArray(raw) ? raw : (raw.questions ?? []);
+  if (list.length === 0) throw new Error(`题库为空或字段结构不符：${path}`);
+  return list.filter((q) => q.answerable !== false);
+}
+const mainQuestions = readSet(mainPath);
+const heldoutQuestions = readSet(heldPath);
+console.log(`主集：${mainPath}（${mainQuestions.length} 题）`);
+console.log(`留出集：${heldPath}（${heldoutQuestions.length} 题）`);
+console.log("");
 
 /** 尺寸中立：给定字符区间，中点是否落在某条参考答案段内（先比来源，charRange 是按来源各自计数的）。 */
 function centerHits(span, sourceId, referenceIds, ratio) {
@@ -339,7 +362,9 @@ const rows = [
   { name: "③ 对照：直接多返回同等数量子块", main: runStack(mainQuestions, { useParent: false, topN: budget }), held: runStack(heldoutQuestions, { useParent: false, topN: budget }), note: `同样 ~${budget} 个子块，但无父子结构` },
 ];
 
-console.log("方案".padEnd(34) + "主集(18)@3  留出集(8)@3   主集@10   留出集@10   返回量");
+const mainLabel = `主集(${mainQuestions.length})@3`;
+const heldLabel = `留出集(${heldoutQuestions.length})@3`;
+console.log("方案".padEnd(34) + `${mainLabel}   ${heldLabel}   主集@10   留出集@10   返回量`);
 console.log("-".repeat(100));
 for (const row of rows) {
   const p = (v, n) => `${String(v).padStart(2)}/${n}`;
