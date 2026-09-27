@@ -1,0 +1,484 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>跳过和xfail：处理无法成功的测试 &#8212; pytest documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments_pytest.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="参数化夹具和测试功能" href="parametrize.html" />
+    <link rel="prev" title="模块和测试文件的Doctest集成" href="doctest.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  
+<script data-ad-client="ca-pub-1466963416408457" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="parametrize.html" title="参数化夹具和测试功能"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="doctest.html" title="模块和测试文件的Doctest集成"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="contents.html">pytest-6.2</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">跳过和xfail：处理无法成功的测试</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="skip-and-xfail-dealing-with-tests-that-cannot-succeed">
+<span id="skipping"></span><span id="skip-and-xfail"></span><h1>跳过和xfail：处理无法成功的测试<a class="headerlink" href="#skip-and-xfail-dealing-with-tests-that-cannot-succeed" title="永久链接至标题">¶</a></h1>
+<p>您可以标记不能在某些平台上运行或预期会失败的测试函数，以便pytest可以相应地处理它们，并在保留测试套件的同时提供测试会话的摘要 <em>绿色</em> .</p>
+<p>A <strong>skip</strong> 意味着您希望只有在满足某些条件时测试才能通过，否则pytest应该跳过运行测试。常见的例子是跳过非Windows平台上的仅限Windows的测试，或者跳过依赖于当前不可用的外部资源（例如数据库）的测试。</p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1466963416408457"
+     data-ad-slot="8850786025"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>安 <strong>X失效</strong> 意味着您希望某个测试由于某种原因而失败。一个常见的例子是对尚未实现的特性或尚未修复的错误的测试。当测试通过时，尽管预期会失败（标记为 <code class="docutils literal notranslate"><span class="pre">pytest.mark.xfail</span></code> 这是一个 <strong>XPASS</strong> 并将在测试总结中报告。</p>
+<p><code class="docutils literal notranslate"><span class="pre">pytest</span></code> 计数和列表 <em>skip</em> 和 <em>X失效</em> 单独测试。默认情况下，不会显示有关跳过的/xfailed测试的详细信息，以避免混淆输出。你可以使用 <code class="docutils literal notranslate"><span class="pre">-r</span></code> 查看与测试进度中显示的“短”字母对应的详细信息的选项：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest -rxXs  <span class="c1"># show extra info on xfailed, xpassed, and skipped tests</span>
+</pre></div>
+</div>
+<p>有关 <code class="docutils literal notranslate"><span class="pre">-r</span></code> 可以通过运行找到选项 <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">-h</span></code> .</p>
+<p>（见 <a class="reference internal" href="customize.html#how-to-change-command-line-options-defaults"><span class="std std-ref">内置配置文件选项</span></a> ）</p>
+<div class="section" id="skipping-test-functions">
+<span id="condition-booleans"></span><span id="skip"></span><span id="skipif"></span><h2>跳过测试函数<a class="headerlink" href="#skipping-test-functions" title="永久链接至标题">¶</a></h2>
+<p>跳过测试函数的最简单方法是用 <code class="docutils literal notranslate"><span class="pre">skip</span></code> 可以传递可选 <code class="docutils literal notranslate"><span class="pre">reason</span></code> ：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">&quot;no way of currently testing this&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_the_unknown</span><span class="p">():</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>或者，也可以通过调用 <code class="docutils literal notranslate"><span class="pre">pytest.skip(reason)</span></code> 功能：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_function</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">valid_config</span><span class="p">():</span>
+        <span class="n">pytest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="s2">&quot;unsupported configuration&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>当无法在导入期间评估跳过条件时，命令式方法非常有用。</p>
+<p>也可以跳过整个模块，使用 <code class="docutils literal notranslate"><span class="pre">pytest.skip(reason,</span> <span class="pre">allow_module_level=True)</span></code> 在模块级别：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;win&quot;</span><span class="p">):</span>
+    <span class="n">pytest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="s2">&quot;skipping windows-only tests&quot;</span><span class="p">,</span> <span class="n">allow_module_level</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>参考文献</strong> ： <a class="reference internal" href="reference.html#pytest-mark-skip-ref"><span class="std std-ref">pytest.mark.skip</span></a></p>
+<div class="section" id="id1">
+<h3><code class="docutils literal notranslate"><span class="pre">skipif</span></code><a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
+<p>如果您希望有条件地跳过某些内容，则可以使用 <code class="docutils literal notranslate"><span class="pre">skipif</span></code> 相反。以下是在python3.6之前的解释器上运行时将测试函数标记为跳过的示例：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skipif</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;requires python3.7 or higher&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_function</span><span class="p">():</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>如果条件评估为 <code class="docutils literal notranslate"><span class="pre">True</span></code> 在收集期间，将跳过测试函数，使用时在摘要中显示指定的原因 <code class="docutils literal notranslate"><span class="pre">-rs</span></code> .</p>
+<p>你可以分享 <code class="docutils literal notranslate"><span class="pre">skipif</span></code> 模块之间的标记。考虑这个测试模块：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># content of test_mymodule.py</span>
+<span class="kn">import</span> <span class="nn">mymodule</span>
+
+<span class="n">minversion</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skipif</span><span class="p">(</span>
+    <span class="n">mymodule</span><span class="o">.</span><span class="n">__versioninfo__</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;at least mymodule-1.1 required&quot;</span>
+<span class="p">)</span>
+
+
+<span class="nd">@minversion</span>
+<span class="k">def</span> <span class="nf">test_function</span><span class="p">():</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>您可以导入标记并在另一个测试模块中重用它：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># test_myothermodule.py</span>
+<span class="kn">from</span> <span class="nn">test_mymodule</span> <span class="kn">import</span> <span class="n">minversion</span>
+
+
+<span class="nd">@minversion</span>
+<span class="k">def</span> <span class="nf">test_anotherfunction</span><span class="p">():</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>对于较大的测试套件，最好有一个文件定义标记，然后在整个测试套件中一致地应用这些标记。</p>
+<p>或者，您可以使用 <a class="reference internal" href="historical-notes.html#string-conditions"><span class="std std-ref">condition strings</span></a> 而不是布尔值，但是它们不容易在模块之间共享，因此主要是出于向后兼容性的原因才支持它们。</p>
+<p><strong>参考文献</strong> ： <a class="reference internal" href="reference.html#pytest-mark-skipif-ref"><span class="std std-ref">pytest.mark.skipif</span></a></p>
+</div>
+<div class="section" id="skip-all-test-functions-of-a-class-or-module">
+<h3>跳过类或模块的所有测试函数<a class="headerlink" href="#skip-all-test-functions-of-a-class-or-module" title="永久链接至标题">¶</a></h3>
+<p>你可以使用 <code class="docutils literal notranslate"><span class="pre">skipif</span></code> 类上的标记（作为任何其他标记）：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skipif</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;win32&quot;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;does not run on windows&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">TestPosixCalls</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&quot;will not be setup or run under &#39;win32&#39; platform&quot;</span>
+</pre></div>
+</div>
+<p>如果条件是 <code class="docutils literal notranslate"><span class="pre">True</span></code> ，此标记将为该类的每个测试方法生成跳过结果。</p>
+<p>如果要跳过模块的所有测试功能，可以使用 <a class="reference internal" href="reference.html#globalvar-pytestmark"><code class="xref std std-globalvar docutils literal notranslate"><span class="pre">pytestmark</span></code></a> 全球的：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># test_module.py</span>
+<span class="n">pytestmark</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skipif</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>中频倍数 <code class="docutils literal notranslate"><span class="pre">skipif</span></code> 修饰符应用于测试函数，如果任何跳过条件为真，则将跳过它。</p>
+</div>
+<div class="section" id="skipping-files-or-directories">
+<h3>跳过文件或目录<a class="headerlink" href="#skipping-files-or-directories" title="永久链接至标题">¶</a></h3>
+<p>有时可能需要跳过整个文件或目录，例如，如果测试依赖于特定于Python版本的功能或包含不希望运行pytest的代码。在这种情况下，必须从集合中排除文件和目录。参照 <a class="reference internal" href="example/pythoncollection.html#customizing-test-collection"><span class="std std-ref">自定义测试集合</span></a> 更多信息。</p>
+</div>
+<div class="section" id="skipping-on-a-missing-import-dependency">
+<h3>跳过缺少的导入依赖项<a class="headerlink" href="#skipping-on-a-missing-import-dependency" title="永久链接至标题">¶</a></h3>
+<p>您可以使用 <a class="reference internal" href="reference.html#pytest-importorskip-ref"><span class="std std-ref">pytest.importorskip</span></a> 在模块级，在测试或测试设置功能内。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">docutils</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">importorskip</span><span class="p">(</span><span class="s2">&quot;docutils&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>如果 <code class="docutils literal notranslate"><span class="pre">docutils</span></code> 无法在此处导入，这将导致跳过测试结果。也可以根据库的版本号跳过：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">docutils</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">importorskip</span><span class="p">(</span><span class="s2">&quot;docutils&quot;</span><span class="p">,</span> <span class="n">minversion</span><span class="o">=</span><span class="s2">&quot;0.3&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>版本将从指定的模块中读取 <code class="docutils literal notranslate"><span class="pre">__version__</span></code> 属性。</p>
+</div>
+<div class="section" id="summary">
+<h3>总结<a class="headerlink" href="#summary" title="永久链接至标题">¶</a></h3>
+<p>以下是如何在不同情况下跳过模块中的测试的快速指南：</p>
+<ol class="arabic simple">
+<li><p>无条件跳过模块中的所有测试：</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pytestmark</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="s2">&quot;all tests still WIP&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>根据某些条件跳过模块中的所有测试：</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pytestmark</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skipif</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;win32&quot;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;tests for linux only&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>如果缺少某些导入，则跳过模块中的所有测试：</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pexpect</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">importorskip</span><span class="p">(</span><span class="s2">&quot;pexpect&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="xfail-mark-test-functions-as-expected-to-fail">
+<span id="xfail"></span><h2>xfail：将测试功能标记为预期失败<a class="headerlink" href="#xfail-mark-test-functions-as-expected-to-fail" title="永久链接至标题">¶</a></h2>
+<p>你可以使用 <code class="docutils literal notranslate"><span class="pre">xfail</span></code> 标记以指示预期测试失败：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">xfail</span>
+<span class="k">def</span> <span class="nf">test_function</span><span class="p">():</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>此测试将运行，但失败时不会报告回溯。相反，终端报告会将其列在“预期失败”中 (<code class="docutils literal notranslate"><span class="pre">XFAIL</span></code> ）或“意外通过” (<code class="docutils literal notranslate"><span class="pre">XPASS</span></code> 部分。</p>
+<p>或者，也可以将测试标记为 <code class="docutils literal notranslate"><span class="pre">XFAIL</span></code> 必须从测试或其设置功能中：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_function</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">valid_config</span><span class="p">():</span>
+        <span class="n">pytest</span><span class="o">.</span><span class="n">xfail</span><span class="p">(</span><span class="s2">&quot;failing configuration (but should work)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_function2</span><span class="p">():</span>
+    <span class="kn">import</span> <span class="nn">slow_module</span>
+
+    <span class="k">if</span> <span class="n">slow_module</span><span class="o">.</span><span class="n">slow_function</span><span class="p">():</span>
+        <span class="n">pytest</span><span class="o">.</span><span class="n">xfail</span><span class="p">(</span><span class="s2">&quot;slow_module taking too long&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>这两个示例说明了您不希望在模块级别检查条件的情况，也就是说，在这种情况下，条件将被评估为标记。</p>
+<p>这将使 <code class="docutils literal notranslate"><span class="pre">test_function</span></code>  <code class="docutils literal notranslate"><span class="pre">XFAIL</span></code> . 注意，在 <a class="reference internal" href="reference.html#pytest.xfail" title="pytest.xfail"><code class="xref py py-func docutils literal notranslate"><span class="pre">pytest.xfail()</span></code></a> 呼叫，与标记不同。这是因为它是通过引发一个已知的异常在内部实现的。</p>
+<p><strong>参考文献</strong> ： <a class="reference internal" href="reference.html#pytest-mark-xfail-ref"><span class="std std-ref">pytest.mark.xfail</span></a></p>
+<div class="section" id="condition-parameter">
+<h3><code class="docutils literal notranslate"><span class="pre">condition</span></code> 参数<a class="headerlink" href="#condition-parameter" title="永久链接至标题">¶</a></h3>
+<p>如果测试只在特定条件下失败，则可以将该条件作为第一个参数通过：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">xfail</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;win32&quot;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;bug in a 3rd party library&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_function</span><span class="p">():</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>请注意，您还必须传递一个原因（请参阅 <a class="reference internal" href="reference.html#pytest-mark-xfail-ref"><span class="std std-ref">pytest.mark.xfail</span></a> ）</p>
+</div>
+<div class="section" id="reason-parameter">
+<h3><code class="docutils literal notranslate"><span class="pre">reason</span></code> 参数<a class="headerlink" href="#reason-parameter" title="永久链接至标题">¶</a></h3>
+<p>可以使用 <code class="docutils literal notranslate"><span class="pre">reason</span></code> 参数：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">xfail</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">&quot;known parser issue&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_function</span><span class="p">():</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="raises-parameter">
+<h3><code class="docutils literal notranslate"><span class="pre">raises</span></code> 参数<a class="headerlink" href="#raises-parameter" title="永久链接至标题">¶</a></h3>
+<p>如果要更具体地说明测试失败的原因，可以在 <code class="docutils literal notranslate"><span class="pre">raises</span></code> 参数。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">xfail</span><span class="p">(</span><span class="n">raises</span><span class="o">=</span><span class="ne">RuntimeError</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_function</span><span class="p">():</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>如果测试失败，则报告为常规失败，除非 <code class="docutils literal notranslate"><span class="pre">raises</span></code> .</p>
+</div>
+<div class="section" id="run-parameter">
+<h3><code class="docutils literal notranslate"><span class="pre">run</span></code> 参数<a class="headerlink" href="#run-parameter" title="永久链接至标题">¶</a></h3>
+<p>如果测试应标记为xfail并报告为xfail，但不应执行，则使用 <code class="docutils literal notranslate"><span class="pre">run</span></code> 参数AS <code class="docutils literal notranslate"><span class="pre">False</span></code> ：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">xfail</span><span class="p">(</span><span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_function</span><span class="p">():</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>这对于Xfailing测试特别有用，这些测试会使解释器崩溃，应该稍后进行调查。</p>
+</div>
+<div class="section" id="strict-parameter">
+<span id="xfail-strict-tutorial"></span><h3><code class="docutils literal notranslate"><span class="pre">strict</span></code> 参数<a class="headerlink" href="#strict-parameter" title="永久链接至标题">¶</a></h3>
+<p>两个 <code class="docutils literal notranslate"><span class="pre">XFAIL</span></code> 和 <code class="docutils literal notranslate"><span class="pre">XPASS</span></code> 默认情况下不要让测试套件失败。您可以通过设置 <code class="docutils literal notranslate"><span class="pre">strict</span></code> 仅关键字参数到 <code class="docutils literal notranslate"><span class="pre">True</span></code> ：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">xfail</span><span class="p">(</span><span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_function</span><span class="p">():</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>这将使 <code class="docutils literal notranslate"><span class="pre">XPASS</span></code> 此测试的（“意外通过”）结果将使测试套件失败。</p>
+<p>您可以更改 <code class="docutils literal notranslate"><span class="pre">strict</span></code> 参数使用 <code class="docutils literal notranslate"><span class="pre">xfail_strict</span></code> ini选项：</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[pytest]</span>
+<span class="na">xfail_strict</span><span class="o">=</span><span class="s">true</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ignoring-xfail">
+<h3>忽略x失败<a class="headerlink" href="#ignoring-xfail" title="永久链接至标题">¶</a></h3>
+<p>通过在命令行上指定：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest --runxfail
+</pre></div>
+</div>
+<p>您可以强制运行和报告 <code class="docutils literal notranslate"><span class="pre">xfail</span></code> 将测试标记为完全没有标记。这也导致 <a class="reference internal" href="reference.html#pytest.xfail" title="pytest.xfail"><code class="xref py py-func docutils literal notranslate"><span class="pre">pytest.xfail()</span></code></a> 不产生效果。</p>
+</div>
+<div class="section" id="examples">
+<h3>实例<a class="headerlink" href="#examples" title="永久链接至标题">¶</a></h3>
+<p>下面是一个简单的测试文件，有几种用法：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="n">xfail</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">xfail</span>
+
+
+<span class="nd">@xfail</span>
+<span class="k">def</span> <span class="nf">test_hello</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="mi">0</span>
+
+
+<span class="nd">@xfail</span><span class="p">(</span><span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_hello2</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="mi">0</span>
+
+
+<span class="nd">@xfail</span><span class="p">(</span><span class="s2">&quot;hasattr(os, &#39;sep&#39;)&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_hello3</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="mi">0</span>
+
+
+<span class="nd">@xfail</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">&quot;bug 110&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_hello4</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="mi">0</span>
+
+
+<span class="nd">@xfail</span><span class="p">(</span><span class="s1">&#39;pytest.__version__[0] != &quot;17&quot;&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_hello5</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="mi">0</span>
+
+
+<span class="k">def</span> <span class="nf">test_hello6</span><span class="p">():</span>
+    <span class="n">pytest</span><span class="o">.</span><span class="n">xfail</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
+
+
+<span class="nd">@xfail</span><span class="p">(</span><span class="n">raises</span><span class="o">=</span><span class="ne">IndexError</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_hello7</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>使用“报告xfail”选项运行它可以得到以下输出：</p>
+<div class="highlight-pytest notranslate"><div class="highlight"><pre><span></span>example $ pytest -rx xfail_demo.py
+<span class=" -Color -Color-Bold">=========================== test session starts ============================</span>
+platform linux -- Python 3.x.y, pytest-6.x.y, py-1.x.y, pluggy-0.x.y
+cachedir: $PYTHON_PREFIX/.pytest_cache
+rootdir: $REGENDOC_TMPDIR/example
+collected 7 items
+
+xfail_demo.py <span class=" -Color -Color-Yellow">xxxxxxx</span>                                                <span class=" -Color -Color-Yellow">[100%]</span>
+
+========================= short test summary info ==========================
+XFAIL xfail_demo.py::test_hello
+XFAIL xfail_demo.py::test_hello2
+  reason: [NOTRUN]
+XFAIL xfail_demo.py::test_hello3
+  condition: hasattr(os, &#39;sep&#39;)
+XFAIL xfail_demo.py::test_hello4
+  bug 110
+XFAIL xfail_demo.py::test_hello5
+  condition: pytest.__version__[0] != &quot;17&quot;
+XFAIL xfail_demo.py::test_hello6
+  reason: reason
+XFAIL xfail_demo.py::test_hello7
+<span class=" -Color -Color-Yellow">============================ </span><span class=" -Color -Color-Bold -Color-Bold-Yellow">7 xfailed</span><span class=" -Color -Color-Yellow"> in 0.12s ============================</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="skip-xfail-with-parametrize">
+<span id="id2"></span><h2>跳过/xfail，参数化<a class="headerlink" href="#skip-xfail-with-parametrize" title="永久链接至标题">¶</a></h2>
+<p>当使用参数化时，可以对单个测试实例应用诸如skip和xfail之类的标记：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span>
+    <span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="s2">&quot;expected&quot;</span><span class="p">),</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="n">pytest</span><span class="o">.</span><span class="n">param</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">marks</span><span class="o">=</span><span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">xfail</span><span class="p">),</span>
+        <span class="n">pytest</span><span class="o">.</span><span class="n">param</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">marks</span><span class="o">=</span><span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">xfail</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">&quot;some bug&quot;</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="n">pytest</span><span class="o">.</span><span class="n">param</span><span class="p">(</span>
+            <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="n">marks</span><span class="o">=</span><span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skipif</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;py2k&quot;</span><span class="p">)</span>
+        <span class="p">),</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_increment</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">expected</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+            <p class="logo"><a href="contents.html">
+              <img class="logo" src="_static/pytest_logo_curves.svg" alt="Logo"/>
+            </a></p>
+  
+
+<div id="searchbox" style="display: none" role="search">
+  <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel"
+        placeholder="Search"/>
+      <input type="submit" value="去" />
+    </form>
+  </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="contents.html">目录</a></h3>
+
+<ul>
+  <li><a href="index.html">Home</a></li>
+  <li><a href="getting-started.html">Install</a></li>
+  <li><a href="contents.html">Contents</a></li>
+  <li><a href="reference.html">API Reference</a></li>
+  <li><a href="example/index.html">Examples</a></li>
+  <li><a href="customize.html">Customize</a></li>
+  <li><a href="changelog.html">Changelog</a></li>
+  <li><a href="contributing.html">Contributing</a></li>
+  <li><a href="backwards-compatibility.html">Backwards Compatibility</a></li>
+  <li><a href="py27-py34-deprecation.html">Python 2.7 and 3.4 Support</a></li>
+  <li><a href="sponsor.html">Sponsor</a></li>
+  <li><a href="tidelift.html">pytest for Enterprise</a></li>
+  <li><a href="license.html">License</a></li>
+  <li><a href="contact.html">Contact Channels</a></li>
+</ul>
+  <hr>
+  <ul>
+<li><a class="reference internal" href="#">跳过和xfail：处理无法成功的测试</a><ul>
+<li><a class="reference internal" href="#skipping-test-functions">跳过测试函数</a><ul>
+<li><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">skipif</span></code></a></li>
+<li><a class="reference internal" href="#skip-all-test-functions-of-a-class-or-module">跳过类或模块的所有测试函数</a></li>
+<li><a class="reference internal" href="#skipping-files-or-directories">跳过文件或目录</a></li>
+<li><a class="reference internal" href="#skipping-on-a-missing-import-dependency">跳过缺少的导入依赖项</a></li>
+<li><a class="reference internal" href="#summary">总结</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#xfail-mark-test-functions-as-expected-to-fail">xfail：将测试功能标记为预期失败</a><ul>
+<li><a class="reference internal" href="#condition-parameter"><code class="docutils literal notranslate"><span class="pre">condition</span></code> 参数</a></li>
+<li><a class="reference internal" href="#reason-parameter"><code class="docutils literal notranslate"><span class="pre">reason</span></code> 参数</a></li>
+<li><a class="reference internal" href="#raises-parameter"><code class="docutils literal notranslate"><span class="pre">raises</span></code> 参数</a></li>
+<li><a class="reference internal" href="#run-parameter"><code class="docutils literal notranslate"><span class="pre">run</span></code> 参数</a></li>
+<li><a class="reference internal" href="#strict-parameter"><code class="docutils literal notranslate"><span class="pre">strict</span></code> 参数</a></li>
+<li><a class="reference internal" href="#ignoring-xfail">忽略x失败</a></li>
+<li><a class="reference internal" href="#examples">实例</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#skip-xfail-with-parametrize">跳过/xfail，参数化</a></li>
+</ul>
+</li>
+</ul>
+
+
+<hr>
+<a href="genindex.html">Index</a>
+<hr><h3>Related Topics</h3>
+<ul>
+  <li><a href="contents.html">Documentation overview</a><ul>
+      <li>Previous: <a href="doctest.html" title="上一章">模块和测试文件的Doctest集成</a></li>
+      <li>Next: <a href="parametrize.html" title="下一章">参数化夹具和测试功能</a></li>
+  </ul></li>
+</ul><h3>Useful Links</h3>
+<ul>
+  <li><a href="https://pypi.org/project/pytest/">pytest @ PyPI</a></li>
+  <li><a href="https://github.com/pytest-dev/pytest/">pytest @ GitHub</a></li>
+  <li><a href="http://plugincompat.herokuapp.com/">3rd party plugins</a></li>
+  <li><a href="https://github.com/pytest-dev/pytest/issues">Issue Tracker</a></li>
+  <li><a href="https://media.readthedocs.org/pdf/pytest/latest/pytest.pdf">PDF Documentation</a>
+</ul>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; 版权所有 2015–2020, holger krekel and pytest-dev team.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

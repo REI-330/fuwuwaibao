@@ -1,0 +1,328 @@
+导航
+
+索引
+
+模块 |
+
+下一页 |
+
+上一页 |
+
+pytest-6.2 »
+
+测试中断言的编写和报告
+
+测试中断言的编写和报告¶
+
+断言 assert 陈述¶
+
+pytest 允许您使用标准的python assert 用于验证Python测试中的期望和值。例如，您可以编写以下内容：
+
+# content of test_assert1.py
+def f():
+return 3
+
+def test_function():
+assert f() == 4
+
+断言函数返回某个值。如果此断言失败，您将看到函数调用的返回值：
+
+$ pytest test_assert1.py
+=========================== test session starts ============================
+platform linux -- Python 3.x.y, pytest-6.x.y, py-1.x.y, pluggy-0.x.y
+cachedir: $PYTHON_PREFIX/.pytest_cache
+rootdir: $REGENDOC_TMPDIR
+collected 1 item
+
+test_assert1.py F [100%]
+
+================================= FAILURES =================================
+______________________________ test_function _______________________________
+
+def test_function():
+> assert f() == 4
+E assert 3 == 4
+E + where 3 = f()
+
+test_assert1.py:6: AssertionError
+========================= short test summary info ==========================
+FAILED test_assert1.py::test_function - assert 3 == 4
+============================ 1 failed in 0.12s =============================
+
+pytest 支持显示最常见的子表达式的值，包括调用、属性、比较以及二进制和一元运算符。（见 用pytest演示python失败报告 ）这允许您在不丢失自省信息的情况下使用不带样板代码的惯用python构造。
+
+但是，如果使用如下断言指定消息：
+
+assert a % 2 == 0, "value was odd, should be even"
+
+然后根本不进行断言内省，消息将简单地显示在回溯中。
+
+见 断言自省详细信息 有关断言内省的更多信息。
+
+关于预期异常的断言¶
+
+为了编写有关引发的异常的断言，可以使用 pytest.raises() 作为这样的上下文管理器：
+
+import pytest
+
+def test_zero_division():
+with pytest.raises(ZeroDivisionError):
+1 / 0
+
+如果您需要访问实际的异常信息，可以使用：
+
+def test_recursion_depth():
+with pytest.raises(RuntimeError) as excinfo:
+
+def f():
+f()
+
+f()
+assert "maximum recursion" in str(excinfo.value)
+
+excinfo 是一个 ExceptionInfo 实例，它是引发的实际异常的包装。感兴趣的主要特征是 .type ， .value 和 .traceback .
+
+你可以通过 match 上下文管理器的关键字参数，用于测试正则表达式是否匹配异常的字符串表示形式（类似于 TestCase.assertRaisesRegexp 方法从 unittest ）：
+
+import pytest
+
+def myfunc():
+raise ValueError("Exception 123 raised")
+
+def test_match():
+with pytest.raises(ValueError, match=r".* 123 .*"):
+myfunc()
+
+的regexp参数 match 方法与 re.search 函数，因此在上面的示例中 match='123' 也会起作用的。
+
+有另一种形式的 pytest.raises() 函数，其中传递的函数将用给定的 *args 和 **kwargs 并断言引发了给定的异常：
+
+pytest.raises(ExpectedException, func, *args, **kwargs)
+
+如果出现故障，如 不例外 或 错误例外 .
+
+请注意，也可以将“引发”参数指定为 pytest.mark.xfail ，它检查测试是否以比引发任何异常更具体的方式失败：
+
+@pytest.mark.xfail(raises=IndexError)
+def test_f():
+f()
+
+使用 pytest.raises() 对于测试自己的代码故意引发的异常的情况，可能会更好，而使用 @pytest.mark.xfail 使用check函数可能更适合记录未修复的错误（测试描述了“应该”发生的情况）或依赖项中的错误。
+
+关于预期警告的断言¶
+
+您可以使用 pytest.warns .
+
+利用上下文相关的比较¶
+
+pytest 对遇到比较时提供上下文敏感信息具有丰富的支持。例如：
+
+# content of test_assert2.py
+
+def test_set_comparison():
+set1 = set("1308")
+set2 = set("8035")
+assert set1 == set2
+
+如果运行此模块：
+
+$ pytest test_assert2.py
+=========================== test session starts ============================
+platform linux -- Python 3.x.y, pytest-6.x.y, py-1.x.y, pluggy-0.x.y
+cachedir: $PYTHON_PREFIX/.pytest_cache
+rootdir: $REGENDOC_TMPDIR
+collected 1 item
+
+test_assert2.py F [100%]
+
+================================= FAILURES =================================
+___________________________ test_set_comparison ____________________________
+
+def test_set_comparison():
+set1 = set("1308")
+set2 = set("8035")
+> assert set1 == set2
+E AssertionError: assert {'0', '1', '3', '8'} == {'0', '3', '5', '8'}
+E Extra items in the left set:
+E '1'
+E Extra items in the right set:
+E '5'
+E Use -v to get the full diff
+
+test_assert2.py:6: AssertionError
+========================= short test summary info ==========================
+FAILED test_assert2.py::test_set_comparison - AssertionError: assert {'0'...
+============================ 1 failed in 0.12s =============================
+
+对一些情况进行特殊比较：
+
+比较长字符串：显示上下文差异
+
+比较长序列：第一个失败指数
+
+比较听写：不同的条目
+
+见 reporting demo 更多的例子。
+
+为失败的断言定义自己的解释¶
+
+可以通过执行 pytest_assertrepr_compare 钩子。
+
+pytest_assertrepr_compare(config: Config, op: str, left: object, right: object) → Optional[List[str]][源代码]
+
+返回失败的断言表达式中比较的说明。
+
+如果没有自定义解释，则返回None，否则返回字符串列表。字符串将由换行符连接，但任何换行符 in 字符串将被转义。请注意，除第一行外，所有行都将稍微缩进，其目的是将第一行作为摘要。
+
+参数
+
+config (_pytest.config.Config) -- pytest配置对象。
+
+例如，考虑在 conftest.py 提供替代解释的文件 Foo 物体：
+
+# content of conftest.py
+from test_foocompare import Foo
+
+def pytest_assertrepr_compare(op, left, right):
+if isinstance(left, Foo) and isinstance(right, Foo) and op == "==":
+return [
+"Comparing Foo instances:",
+" vals: {} != {}".format(left.val, right.val),
+]
+
+现在，考虑到这个测试模块：
+
+# content of test_foocompare.py
+class Foo:
+def __init__(self, val):
+self.val = val
+
+def __eq__(self, other):
+return self.val == other.val
+
+def test_compare():
+f1 = Foo(1)
+f2 = Foo(2)
+assert f1 == f2
+
+您可以运行测试模块并在conftest文件中定义自定义输出：
+
+$ pytest -q test_foocompare.py
+F [100%]
+================================= FAILURES =================================
+_______________________________ test_compare _______________________________
+
+def test_compare():
+f1 = Foo(1)
+f2 = Foo(2)
+> assert f1 == f2
+E assert Comparing Foo instances:
+E vals: 1 != 2
+
+test_foocompare.py:12: AssertionError
+========================= short test summary info ==========================
+FAILED test_foocompare.py::test_compare - assert Comparing Foo instances:
+1 failed in 0.12s
+
+断言自省详细信息¶
+
+通过在运行断言语句之前重写它们，可以获得有关失败断言的报告详细信息。重写的断言语句将自省信息放入断言失败消息中。 pytest 只重写由其测试收集过程直接发现的测试模块，因此 支持模块中的断言（本身不是测试模块）将不会被重写 .
+
+您可以通过调用 register_assert_rewrite 在导入它之前（一个很好的地方是在您的根目录中 conftest.py ）
+
+为了进一步了解情况，本杰明·彼得森写道 Behind the scenes of pytest's new assertion rewriting .
+
+断言重写将文件缓存在磁盘上¶
+
+pytest 将重写的模块写回磁盘进行缓存。您可以禁用此行为（例如，为了避免过时 .pyc 通过将文件添加到 conftest.py 文件：
+
+import sys
+
+sys.dont_write_bytecode = True
+
+请注意，您仍然可以获得断言内省的好处，唯一的变化是 .pyc 文件不会缓存在磁盘上。
+
+此外，如果重写无法写入新的缓存，则它将自动跳过缓存。 .pyc 文件，即只读文件系统或压缩文件中的文件。
+
+禁用断言重写¶
+
+pytest 使用导入挂钩在导入时重写测试模块以写入新的 pyc 文件夹。大多数时候这是透明的。但是，如果您自己操作进口机械，进口钩可能会干扰。
+
+如果是这种情况，您有两个选择：
+
+通过添加字符串禁用特定模块的重写 PYTEST_DONT_REWRITE 到它的docstring。
+
+通过使用禁用所有模块的重写 --assert=plain .
+
+目录
+
+Home
+
+Install
+
+Contents
+
+API Reference
+
+Examples
+
+Customize
+
+Changelog
+
+Contributing
+
+Backwards Compatibility
+
+Python 2.7 and 3.4 Support
+
+Sponsor
+
+pytest for Enterprise
+
+License
+
+Contact Channels
+
+测试中断言的编写和报告
+
+断言 assert 陈述
+
+关于预期异常的断言
+
+关于预期警告的断言
+
+利用上下文相关的比较
+
+为失败的断言定义自己的解释
+
+断言自省详细信息
+
+断言重写将文件缓存在磁盘上
+
+禁用断言重写
+
+Index
+
+Related Topics
+
+Documentation overview
+
+Previous: 在现有测试套件中使用pytest
+
+Next: Pytest夹具：显式、模块化、可扩展
+
+Useful Links
+
+pytest @ PyPI
+
+pytest @ GitHub
+
+3rd party plugins
+
+Issue Tracker
+
+PDF Documentation
+
+© 版权所有 2015–2020, holger krekel and pytest-dev team.
+Created using Sphinx 3.4.3.

@@ -1,0 +1,1004 @@
+{
+  "schema": "career-graph-raw-blocks/v1",
+  "sourceId": "S23",
+  "url": "https://www.osgeo.cn/pytest/assert.html",
+  "finalUrl": "https://osgeo.cn/pytest/assert.html",
+  "fetchedAt": "2026-09-27T10:22:26.225Z",
+  "httpStatus": 200,
+  "contentType": "text/html",
+  "charset": "utf-8",
+  "byteSize": 32099,
+  "sha256": "7b549fd2fefa5003e83ee1ceb41d1fc4d8befdb8d2ff0ea87b4bea692be4f281",
+  "title": "测试中断言的编写和报告 — pytest documentation",
+  "hops": [
+    {
+      "url": "https://www.osgeo.cn/pytest/assert.html",
+      "finalUrl": "https://osgeo.cn/pytest/assert.html",
+      "httpStatus": 200,
+      "bytes": 32099,
+      "charset": "utf-8"
+    }
+  ],
+  "flags": [],
+  "extractionPass": "pruned",
+  "prunedBlockCount": 108,
+  "prunedTextLength": 6262,
+  "blockCount": 108,
+  "textLength": 6262,
+  "ranges": [
+    [
+      0,
+      2
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      8,
+      12
+    ],
+    [
+      14,
+      19
+    ],
+    [
+      21,
+      26
+    ],
+    [
+      28,
+      40
+    ],
+    [
+      42,
+      53
+    ],
+    [
+      55,
+      67
+    ],
+    [
+      69,
+      82
+    ],
+    [
+      84,
+      145
+    ],
+    [
+      147,
+      231
+    ],
+    [
+      233,
+      264
+    ],
+    [
+      266,
+      1016
+    ],
+    [
+      1018,
+      1122
+    ],
+    [
+      1124,
+      1140
+    ],
+    [
+      1142,
+      1192
+    ],
+    [
+      1194,
+      1219
+    ],
+    [
+      1221,
+      1244
+    ],
+    [
+      1246,
+      1256
+    ],
+    [
+      1258,
+      1306
+    ],
+    [
+      1308,
+      1393
+    ],
+    [
+      1395,
+      1415
+    ],
+    [
+      1417,
+      1557
+    ],
+    [
+      1559,
+      1640
+    ],
+    [
+      1642,
+      1738
+    ],
+    [
+      1740,
+      1889
+    ],
+    [
+      1891,
+      1953
+    ],
+    [
+      1955,
+      2024
+    ],
+    [
+      2026,
+      2081
+    ],
+    [
+      2083,
+      2104
+    ],
+    [
+      2106,
+      2167
+    ],
+    [
+      2169,
+      2224
+    ],
+    [
+      2226,
+      2341
+    ],
+    [
+      2343,
+      2353
+    ],
+    [
+      2355,
+      2375
+    ],
+    [
+      2377,
+      2388
+    ],
+    [
+      2390,
+      2423
+    ],
+    [
+      2425,
+      2539
+    ],
+    [
+      2541,
+      2549
+    ],
+    [
+      2551,
+      3513
+    ],
+    [
+      3515,
+      3527
+    ],
+    [
+      3529,
+      3543
+    ],
+    [
+      3545,
+      3558
+    ],
+    [
+      3560,
+      3570
+    ],
+    [
+      3572,
+      3595
+    ],
+    [
+      3597,
+      3611
+    ],
+    [
+      3613,
+      3649
+    ],
+    [
+      3651,
+      3757
+    ],
+    [
+      3759,
+      3776
+    ],
+    [
+      3778,
+      3868
+    ],
+    [
+      3870,
+      3872
+    ],
+    [
+      3874,
+      3919
+    ],
+    [
+      3921,
+      3957
+    ],
+    [
+      3959,
+      4218
+    ],
+    [
+      4220,
+      4233
+    ],
+    [
+      4235,
+      4433
+    ],
+    [
+      4435,
+      4465
+    ],
+    [
+      4467,
+      4980
+    ],
+    [
+      4982,
+      4991
+    ],
+    [
+      4993,
+      5107
+    ],
+    [
+      5109,
+      5177
+    ],
+    [
+      5179,
+      5254
+    ],
+    [
+      5256,
+      5270
+    ],
+    [
+      5272,
+      5342
+    ],
+    [
+      5344,
+      5386
+    ],
+    [
+      5388,
+      5430
+    ],
+    [
+      5432,
+      5484
+    ],
+    [
+      5486,
+      5493
+    ],
+    [
+      5495,
+      5567
+    ],
+    [
+      5569,
+      5584
+    ],
+    [
+      5586,
+      5636
+    ],
+    [
+      5638,
+      5668
+    ],
+    [
+      5670,
+      5672
+    ],
+    [
+      5674,
+      5678
+    ],
+    [
+      5680,
+      5687
+    ],
+    [
+      5689,
+      5697
+    ],
+    [
+      5699,
+      5712
+    ],
+    [
+      5714,
+      5722
+    ],
+    [
+      5724,
+      5733
+    ],
+    [
+      5735,
+      5744
+    ],
+    [
+      5746,
+      5758
+    ],
+    [
+      5760,
+      5783
+    ],
+    [
+      5785,
+      5811
+    ],
+    [
+      5813,
+      5820
+    ],
+    [
+      5822,
+      5843
+    ],
+    [
+      5845,
+      5852
+    ],
+    [
+      5854,
+      5870
+    ],
+    [
+      5872,
+      5883
+    ],
+    [
+      5885,
+      5897
+    ],
+    [
+      5899,
+      5908
+    ],
+    [
+      5910,
+      5919
+    ],
+    [
+      5921,
+      5931
+    ],
+    [
+      5933,
+      5946
+    ],
+    [
+      5948,
+      5956
+    ],
+    [
+      5958,
+      5971
+    ],
+    [
+      5973,
+      5979
+    ],
+    [
+      5981,
+      5986
+    ],
+    [
+      5988,
+      6002
+    ],
+    [
+      6004,
+      6026
+    ],
+    [
+      6028,
+      6054
+    ],
+    [
+      6056,
+      6081
+    ],
+    [
+      6083,
+      6095
+    ],
+    [
+      6097,
+      6110
+    ],
+    [
+      6112,
+      6127
+    ],
+    [
+      6129,
+      6146
+    ],
+    [
+      6148,
+      6161
+    ],
+    [
+      6163,
+      6180
+    ],
+    [
+      6182,
+      6262
+    ]
+  ],
+  "blocks": [
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "导航"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "索引"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "模块 |"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "下一页 |"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "上一页 |"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest-6.2 »"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "测试中断言的编写和报告"
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "text": "测试中断言的编写和报告¶"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "断言 assert 陈述¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest 允许您使用标准的python assert 用于验证Python测试中的期望和值。例如，您可以编写以下内容："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of test_assert1.py\ndef f():\nreturn 3\n\ndef test_function():\nassert f() == 4"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "断言函数返回某个值。如果此断言失败，您将看到函数调用的返回值："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest test_assert1.py\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-6.x.y, py-1.x.y, pluggy-0.x.y\ncachedir: $PYTHON_PREFIX/.pytest_cache\nrootdir: $REGENDOC_TMPDIR\ncollected 1 item\n\ntest_assert1.py F [100%]\n\n================================= FAILURES =================================\n______________________________ test_function _______________________________\n\ndef test_function():\n> assert f() == 4\nE assert 3 == 4\nE + where 3 = f()\n\ntest_assert1.py:6: AssertionError\n========================= short test summary info ==========================\nFAILED test_assert1.py::test_function - assert 3 == 4\n============================ 1 failed in 0.12s ============================="
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest 支持显示最常见的子表达式的值，包括调用、属性、比较以及二进制和一元运算符。（见 用pytest演示python失败报告 ）这允许您在不丢失自省信息的情况下使用不带样板代码的惯用python构造。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "但是，如果使用如下断言指定消息："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "assert a % 2 == 0, \"value was odd, should be even\""
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "然后根本不进行断言内省，消息将简单地显示在回溯中。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "见 断言自省详细信息 有关断言内省的更多信息。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "关于预期异常的断言¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "为了编写有关引发的异常的断言，可以使用 pytest.raises() 作为这样的上下文管理器："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "import pytest\n\ndef test_zero_division():\nwith pytest.raises(ZeroDivisionError):\n1 / 0"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果您需要访问实际的异常信息，可以使用："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "def test_recursion_depth():\nwith pytest.raises(RuntimeError) as excinfo:\n\ndef f():\nf()\n\nf()\nassert \"maximum recursion\" in str(excinfo.value)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "excinfo 是一个 ExceptionInfo 实例，它是引发的实际异常的包装。感兴趣的主要特征是 .type ， .value 和 .traceback ."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "你可以通过 match 上下文管理器的关键字参数，用于测试正则表达式是否匹配异常的字符串表示形式（类似于 TestCase.assertRaisesRegexp 方法从 unittest ）："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "import pytest\n\ndef myfunc():\nraise ValueError(\"Exception 123 raised\")\n\ndef test_match():\nwith pytest.raises(ValueError, match=r\".* 123 .*\"):\nmyfunc()"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "的regexp参数 match 方法与 re.search 函数，因此在上面的示例中 match='123' 也会起作用的。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "有另一种形式的 pytest.raises() 函数，其中传递的函数将用给定的 *args 和 **kwargs 并断言引发了给定的异常："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest.raises(ExpectedException, func, *args, **kwargs)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果出现故障，如 不例外 或 错误例外 ."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "请注意，也可以将“引发”参数指定为 pytest.mark.xfail ，它检查测试是否以比引发任何异常更具体的方式失败："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "@pytest.mark.xfail(raises=IndexError)\ndef test_f():\nf()"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "使用 pytest.raises() 对于测试自己的代码故意引发的异常的情况，可能会更好，而使用 @pytest.mark.xfail 使用check函数可能更适合记录未修复的错误（测试描述了“应该”发生的情况）或依赖项中的错误。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "关于预期警告的断言¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "您可以使用 pytest.warns ."
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "利用上下文相关的比较¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest 对遇到比较时提供上下文敏感信息具有丰富的支持。例如："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of test_assert2.py\n\ndef test_set_comparison():\nset1 = set(\"1308\")\nset2 = set(\"8035\")\nassert set1 == set2"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果运行此模块："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest test_assert2.py\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-6.x.y, py-1.x.y, pluggy-0.x.y\ncachedir: $PYTHON_PREFIX/.pytest_cache\nrootdir: $REGENDOC_TMPDIR\ncollected 1 item\n\ntest_assert2.py F [100%]\n\n================================= FAILURES =================================\n___________________________ test_set_comparison ____________________________\n\ndef test_set_comparison():\nset1 = set(\"1308\")\nset2 = set(\"8035\")\n> assert set1 == set2\nE AssertionError: assert {'0', '1', '3', '8'} == {'0', '3', '5', '8'}\nE Extra items in the left set:\nE '1'\nE Extra items in the right set:\nE '5'\nE Use -v to get the full diff\n\ntest_assert2.py:6: AssertionError\n========================= short test summary info ==========================\nFAILED test_assert2.py::test_set_comparison - AssertionError: assert {'0'...\n============================ 1 failed in 0.12s ============================="
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "对一些情况进行特殊比较："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "比较长字符串：显示上下文差异"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "比较长序列：第一个失败指数"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "比较听写：不同的条目"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "见 reporting demo 更多的例子。"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "为失败的断言定义自己的解释¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "可以通过执行 pytest_assertrepr_compare 钩子。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest_assertrepr_compare(config: Config, op: str, left: object, right: object) → Optional[List[str]][源代码]"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "返回失败的断言表达式中比较的说明。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果没有自定义解释，则返回None，否则返回字符串列表。字符串将由换行符连接，但任何换行符 in 字符串将被转义。请注意，除第一行外，所有行都将稍微缩进，其目的是将第一行作为摘要。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参数"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "config (_pytest.config.Config) -- pytest配置对象。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "例如，考虑在 conftest.py 提供替代解释的文件 Foo 物体："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of conftest.py\nfrom test_foocompare import Foo\n\ndef pytest_assertrepr_compare(op, left, right):\nif isinstance(left, Foo) and isinstance(right, Foo) and op == \"==\":\nreturn [\n\"Comparing Foo instances:\",\n\" vals: {} != {}\".format(left.val, right.val),\n]"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "现在，考虑到这个测试模块："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of test_foocompare.py\nclass Foo:\ndef __init__(self, val):\nself.val = val\n\ndef __eq__(self, other):\nreturn self.val == other.val\n\ndef test_compare():\nf1 = Foo(1)\nf2 = Foo(2)\nassert f1 == f2"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "您可以运行测试模块并在conftest文件中定义自定义输出："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "$ pytest -q test_foocompare.py\nF [100%]\n================================= FAILURES =================================\n_______________________________ test_compare _______________________________\n\ndef test_compare():\nf1 = Foo(1)\nf2 = Foo(2)\n> assert f1 == f2\nE assert Comparing Foo instances:\nE vals: 1 != 2\n\ntest_foocompare.py:12: AssertionError\n========================= short test summary info ==========================\nFAILED test_foocompare.py::test_compare - assert Comparing Foo instances:\n1 failed in 0.12s"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "断言自省详细信息¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过在运行断言语句之前重写它们，可以获得有关失败断言的报告详细信息。重写的断言语句将自省信息放入断言失败消息中。 pytest 只重写由其测试收集过程直接发现的测试模块，因此 支持模块中的断言（本身不是测试模块）将不会被重写 ."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "您可以通过调用 register_assert_rewrite 在导入它之前（一个很好的地方是在您的根目录中 conftest.py ）"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "为了进一步了解情况，本杰明·彼得森写道 Behind the scenes of pytest's new assertion rewriting ."
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "断言重写将文件缓存在磁盘上¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest 将重写的模块写回磁盘进行缓存。您可以禁用此行为（例如，为了避免过时 .pyc 通过将文件添加到 conftest.py 文件："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "import sys\n\nsys.dont_write_bytecode = True"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "请注意，您仍然可以获得断言内省的好处，唯一的变化是 .pyc 文件不会缓存在磁盘上。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "此外，如果重写无法写入新的缓存，则它将自动跳过缓存。 .pyc 文件，即只读文件系统或压缩文件中的文件。"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "禁用断言重写¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest 使用导入挂钩在导入时重写测试模块以写入新的 pyc 文件夹。大多数时候这是透明的。但是，如果您自己操作进口机械，进口钩可能会干扰。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果是这种情况，您有两个选择："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过添加字符串禁用特定模块的重写 PYTEST_DONT_REWRITE 到它的docstring。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过使用禁用所有模块的重写 --assert=plain ."
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "目录"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Home"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Install"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Contents"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "API Reference"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Examples"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Customize"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Changelog"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Contributing"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Backwards Compatibility"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Python 2.7 and 3.4 Support"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Sponsor"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest for Enterprise"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "License"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Contact Channels"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "测试中断言的编写和报告"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "断言 assert 陈述"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "关于预期异常的断言"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "关于预期警告的断言"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "利用上下文相关的比较"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "为失败的断言定义自己的解释"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "断言自省详细信息"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "断言重写将文件缓存在磁盘上"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "禁用断言重写"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Index"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Related Topics"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Documentation overview"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Previous: 在现有测试套件中使用pytest"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Next: Pytest夹具：显式、模块化、可扩展"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Useful Links"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest @ PyPI"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest @ GitHub"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "3rd party plugins"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Issue Tracker"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "PDF Documentation"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "© 版权所有 2015–2020, holger krekel and pytest-dev team.\nCreated using Sphinx 3.4.3."
+    }
+  ]
+}

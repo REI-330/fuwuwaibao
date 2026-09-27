@@ -1,6 +1,6 @@
 {
   "schema": "career-graph-sources/v1",
-  "generatedAt": "2026-09-15T09:57:23.012Z",
+  "generatedAt": "2026-09-27T10:24:24.320Z",
   "note": "L0 证据层的来源登记表。sha256 / chunkCount 由步骤 02 / 03 回填。status 走向：registered → fetched | fetched-thin | duplicate-content | fetch-failed → chunked。",
   "contractFields": [
     "sourceId",
@@ -63,7 +63,7 @@
       "D4-test-dev": 5,
       "X-policy": 7
     },
-    "sources": 22,
+    "sources": 25,
     "fetched": 22,
     "fetchedThin": 0,
     "duplicateContent": 0,
@@ -72,13 +72,13 @@
     "metaRefreshFollowed": 0,
     "unprunedFallback": 1,
     "totalBytes": 4553319,
-    "sourcesWithChunks": 22,
-    "chunks": 494,
-    "splitSections": 78,
-    "skippedSections": 43,
-    "droppedTooShort": 20,
-    "charRangeMismatch": 0,
-    "totalChars": 433699,
+    "sourcesWithChunks": 25,
+    "chunks": 537,
+    "splitSections": 80,
+    "skippedSections": 44,
+    "droppedTooShort": 22,
+    "charRangeMismatch": 115,
+    "totalChars": 455848,
     "longestChunk": 1600
   },
   "rejected": [],
@@ -589,6 +589,75 @@
       "byteSize": 308203,
       "charset": "utf-8",
       "fetchedAt": "2026-09-15T09:56:51.087Z"
+    },
+    {
+      "sourceId": "S23",
+      "title": "pytest 中文文档：测试中断言的编写和报告",
+      "publisher": "pytest（pytest-dev）/ 中文镜像：OSGeo 中国中心",
+      "url": "https://www.osgeo.cn/pytest/assert.html",
+      "publishedAt": null,
+      "collectedAt": "2026-09-27",
+      "license": "community-mirror",
+      "scopeZh": "支持：断言写法与失败报告解读的能力项。不支持：作为官方版本引用；该页为 pytest 6.2 中文镜像。",
+      "sha256": "7b549fd2fefa5003e83ee1ceb41d1fc4d8befdb8d2ff0ea87b4bea692be4f281",
+      "chunkCount": 11,
+      "direction": "D4-test-dev",
+      "tags": [
+        "断言",
+        "测试失败报告",
+        "pytest"
+      ],
+      "status": "chunked",
+      "notes": [],
+      "byteSize": 32099,
+      "charset": "utf-8",
+      "fetchedAt": "2026-09-27T10:22:26.225Z"
+    },
+    {
+      "sourceId": "S24",
+      "title": "pytest 中文文档：MonkeyPatching/Mocking 模块和环境",
+      "publisher": "pytest（pytest-dev）/ 中文镜像：OSGeo 中国中心",
+      "url": "https://www.osgeo.cn/pytest/monkeypatch.html",
+      "publishedAt": null,
+      "collectedAt": "2026-09-27",
+      "license": "community-mirror",
+      "scopeZh": "支持：依赖替换与打桩的能力项与限制。不支持：作为官方版本引用。",
+      "sha256": "fa6cb01901b29f88046d186fc5200e3136a03276882a312f703e509318846680",
+      "chunkCount": 12,
+      "direction": "D4-test-dev",
+      "tags": [
+        "monkeypatch",
+        "打桩",
+        "测试隔离"
+      ],
+      "status": "chunked",
+      "notes": [],
+      "byteSize": 45314,
+      "charset": "utf-8",
+      "fetchedAt": "2026-09-27T10:22:26.225Z"
+    },
+    {
+      "sourceId": "S25",
+      "title": "pytest 中文文档：跳过和 xfail —— 处理无法成功的测试",
+      "publisher": "pytest（pytest-dev）/ 中文镜像：OSGeo 中国中心",
+      "url": "https://www.osgeo.cn/pytest/skipping.html",
+      "publishedAt": null,
+      "collectedAt": "2026-09-27",
+      "license": "community-mirror",
+      "scopeZh": "支持：用例跳过与预期失败标记的语义与使用场景。不支持：作为官方版本引用。",
+      "sha256": "099eacb784cd551fbfc1eff90ce47f1d4098008d149963822dfd2f23b91a936e",
+      "chunkCount": 20,
+      "direction": "D4-test-dev",
+      "tags": [
+        "skip",
+        "xfail",
+        "用例治理"
+      ],
+      "status": "chunked",
+      "notes": [],
+      "byteSize": 40750,
+      "charset": "utf-8",
+      "fetchedAt": "2026-09-27T10:22:26.225Z"
     }
   ],
   "bySourceChunks": {
@@ -613,6 +682,9 @@
     "S19": 3,
     "S20": 4,
     "S21": 6,
-    "S22": 5
+    "S22": 5,
+    "S23": 11,
+    "S24": 12,
+    "S25": 20
   }
 }

@@ -1,0 +1,394 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>测试中断言的编写和报告 &#8212; pytest documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments_pytest.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="Pytest夹具：显式、模块化、可扩展" href="fixture.html" />
+    <link rel="prev" title="在现有测试套件中使用pytest" href="existingtestsuite.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  
+<script data-ad-client="ca-pub-1466963416408457" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="fixture.html" title="Pytest夹具：显式、模块化、可扩展"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="existingtestsuite.html" title="在现有测试套件中使用pytest"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="contents.html">pytest-6.2</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">测试中断言的编写和报告</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-writing-and-reporting-of-assertions-in-tests">
+<h1>测试中断言的编写和报告<a class="headerlink" href="#the-writing-and-reporting-of-assertions-in-tests" title="永久链接至标题">¶</a></h1>
+<div class="section" id="asserting-with-the-assert-statement">
+<span id="assert"></span><span id="assert-with-the-assert-statement"></span><span id="assertfeedback"></span><h2>断言 <code class="docutils literal notranslate"><span class="pre">assert</span></code> 陈述<a class="headerlink" href="#asserting-with-the-assert-statement" title="永久链接至标题">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">pytest</span></code> 允许您使用标准的python <code class="docutils literal notranslate"><span class="pre">assert</span></code> 用于验证Python测试中的期望和值。例如，您可以编写以下内容：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># content of test_assert1.py</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+    <span class="k">return</span> <span class="mi">3</span>
+
+
+<span class="k">def</span> <span class="nf">test_function</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">f</span><span class="p">()</span> <span class="o">==</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>断言函数返回某个值。如果此断言失败，您将看到函数调用的返回值：</p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1466963416408457"
+     data-ad-slot="8850786025"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="highlight-pytest notranslate"><div class="highlight"><pre><span></span>$ pytest test_assert1.py
+<span class=" -Color -Color-Bold">=========================== test session starts ============================</span>
+platform linux -- Python 3.x.y, pytest-6.x.y, py-1.x.y, pluggy-0.x.y
+cachedir: $PYTHON_PREFIX/.pytest_cache
+rootdir: $REGENDOC_TMPDIR
+collected 1 item
+
+test_assert1.py <span class=" -Color -Color-Red">F</span>                                                    <span class=" -Color -Color-Red">[100%]</span>
+
+================================= FAILURES =================================
+<span class=" -Color -Color-Bold -Color-Bold-Red">______________________________ test_function _______________________________</span>
+
+    def test_function():
+&gt;       assert f() == 4
+<span class=" -Color -Color-Bold -Color-Bold-Red">E       assert 3 == 4</span>
+<span class=" -Color -Color-Bold -Color-Bold-Red">E        +  where 3 = f()</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Red">test_assert1.py</span>:6: AssertionError
+========================= short test summary info ==========================
+FAILED test_assert1.py::test_function - assert 3 == 4
+<span class=" -Color -Color-Red">============================ </span><span class=" -Color -Color-Bold -Color-Bold-Red">1 failed</span><span class=" -Color -Color-Red"> in 0.12s =============================</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pytest</span></code> 支持显示最常见的子表达式的值，包括调用、属性、比较以及二进制和一元运算符。（见 <a class="reference internal" href="example/reportingdemo.html#tbreportdemo"><span class="std std-ref">用pytest演示python失败报告</span></a> ）这允许您在不丢失自省信息的情况下使用不带样板代码的惯用python构造。</p>
+<p>但是，如果使用如下断言指定消息：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">a</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;value was odd, should be even&quot;</span>
+</pre></div>
+</div>
+<p>然后根本不进行断言内省，消息将简单地显示在回溯中。</p>
+<p>见 <a class="reference internal" href="#assert-details"><span class="std std-ref">断言自省详细信息</span></a> 有关断言内省的更多信息。</p>
+</div>
+<div class="section" id="assertions-about-expected-exceptions">
+<span id="assertraises"></span><h2>关于预期异常的断言<a class="headerlink" href="#assertions-about-expected-exceptions" title="永久链接至标题">¶</a></h2>
+<p>为了编写有关引发的异常的断言，可以使用 <a class="reference internal" href="reference.html#pytest.raises" title="pytest.raises"><code class="xref py py-func docutils literal notranslate"><span class="pre">pytest.raises()</span></code></a> 作为这样的上下文管理器：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+
+<span class="k">def</span> <span class="nf">test_zero_division</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ZeroDivisionError</span><span class="p">):</span>
+        <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>如果您需要访问实际的异常信息，可以使用：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_recursion_depth</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">excinfo</span><span class="p">:</span>
+
+        <span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+            <span class="n">f</span><span class="p">()</span>
+
+        <span class="n">f</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="s2">&quot;maximum recursion&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">excinfo</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">excinfo</span></code> 是一个 <code class="docutils literal notranslate"><span class="pre">ExceptionInfo</span></code> 实例，它是引发的实际异常的包装。感兴趣的主要特征是 <code class="docutils literal notranslate"><span class="pre">.type</span></code> ， <code class="docutils literal notranslate"><span class="pre">.value</span></code> 和 <code class="docutils literal notranslate"><span class="pre">.traceback</span></code> .</p>
+<p>你可以通过 <code class="docutils literal notranslate"><span class="pre">match</span></code> 上下文管理器的关键字参数，用于测试正则表达式是否匹配异常的字符串表示形式（类似于 <code class="docutils literal notranslate"><span class="pre">TestCase.assertRaisesRegexp</span></code> 方法从 <code class="docutils literal notranslate"><span class="pre">unittest</span></code> ）：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+
+<span class="k">def</span> <span class="nf">myfunc</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Exception 123 raised&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">test_match</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;.* 123 .*&quot;</span><span class="p">):</span>
+        <span class="n">myfunc</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>的regexp参数 <code class="docutils literal notranslate"><span class="pre">match</span></code> 方法与 <code class="docutils literal notranslate"><span class="pre">re.search</span></code> 函数，因此在上面的示例中 <code class="docutils literal notranslate"><span class="pre">match='123'</span></code> 也会起作用的。</p>
+<p>有另一种形式的 <a class="reference internal" href="reference.html#pytest.raises" title="pytest.raises"><code class="xref py py-func docutils literal notranslate"><span class="pre">pytest.raises()</span></code></a> 函数，其中传递的函数将用给定的 <code class="docutils literal notranslate"><span class="pre">*args</span></code> 和 <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> 并断言引发了给定的异常：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">ExpectedException</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>如果出现故障，如 <em>不例外</em> 或 <em>错误例外</em> .</p>
+<p>请注意，也可以将“引发”参数指定为 <code class="docutils literal notranslate"><span class="pre">pytest.mark.xfail</span></code> ，它检查测试是否以比引发任何异常更具体的方式失败：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">xfail</span><span class="p">(</span><span class="n">raises</span><span class="o">=</span><span class="ne">IndexError</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_f</span><span class="p">():</span>
+    <span class="n">f</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>使用 <a class="reference internal" href="reference.html#pytest.raises" title="pytest.raises"><code class="xref py py-func docutils literal notranslate"><span class="pre">pytest.raises()</span></code></a> 对于测试自己的代码故意引发的异常的情况，可能会更好，而使用 <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.xfail</span></code> 使用check函数可能更适合记录未修复的错误（测试描述了“应该”发生的情况）或依赖项中的错误。</p>
+</div>
+<div class="section" id="assertions-about-expected-warnings">
+<span id="assertwarns"></span><h2>关于预期警告的断言<a class="headerlink" href="#assertions-about-expected-warnings" title="永久链接至标题">¶</a></h2>
+<p>您可以使用 <a class="reference internal" href="warnings.html#warns"><span class="std std-ref">pytest.warns</span></a> .</p>
+</div>
+<div class="section" id="making-use-of-context-sensitive-comparisons">
+<span id="newreport"></span><h2>利用上下文相关的比较<a class="headerlink" href="#making-use-of-context-sensitive-comparisons" title="永久链接至标题">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">pytest</span></code> 对遇到比较时提供上下文敏感信息具有丰富的支持。例如：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># content of test_assert2.py</span>
+
+
+<span class="k">def</span> <span class="nf">test_set_comparison</span><span class="p">():</span>
+    <span class="n">set1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s2">&quot;1308&quot;</span><span class="p">)</span>
+    <span class="n">set2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s2">&quot;8035&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">set1</span> <span class="o">==</span> <span class="n">set2</span>
+</pre></div>
+</div>
+<p>如果运行此模块：</p>
+<div class="highlight-pytest notranslate"><div class="highlight"><pre><span></span>$ pytest test_assert2.py
+<span class=" -Color -Color-Bold">=========================== test session starts ============================</span>
+platform linux -- Python 3.x.y, pytest-6.x.y, py-1.x.y, pluggy-0.x.y
+cachedir: $PYTHON_PREFIX/.pytest_cache
+rootdir: $REGENDOC_TMPDIR
+collected 1 item
+
+test_assert2.py <span class=" -Color -Color-Red">F</span>                                                    <span class=" -Color -Color-Red">[100%]</span>
+
+================================= FAILURES =================================
+<span class=" -Color -Color-Bold -Color-Bold-Red">___________________________ test_set_comparison ____________________________</span>
+
+    def test_set_comparison():
+        set1 = set(&quot;1308&quot;)
+        set2 = set(&quot;8035&quot;)
+&gt;       assert set1 == set2
+<span class=" -Color -Color-Bold -Color-Bold-Red">E       AssertionError: assert {&#39;0&#39;, &#39;1&#39;, &#39;3&#39;, &#39;8&#39;} == {&#39;0&#39;, &#39;3&#39;, &#39;5&#39;, &#39;8&#39;}</span>
+<span class=" -Color -Color-Bold -Color-Bold-Red">E         Extra items in the left set:</span>
+<span class=" -Color -Color-Bold -Color-Bold-Red">E         &#39;1&#39;</span>
+<span class=" -Color -Color-Bold -Color-Bold-Red">E         Extra items in the right set:</span>
+<span class=" -Color -Color-Bold -Color-Bold-Red">E         &#39;5&#39;</span>
+<span class=" -Color -Color-Bold -Color-Bold-Red">E         Use -v to get the full diff</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Red">test_assert2.py</span>:6: AssertionError
+========================= short test summary info ==========================
+FAILED test_assert2.py::test_set_comparison - AssertionError: assert {&#39;0&#39;...
+<span class=" -Color -Color-Red">============================ </span><span class=" -Color -Color-Bold -Color-Bold-Red">1 failed</span><span class=" -Color -Color-Red"> in 0.12s =============================</span>
+</pre></div>
+</div>
+<p>对一些情况进行特殊比较：</p>
+<ul class="simple">
+<li><p>比较长字符串：显示上下文差异</p></li>
+<li><p>比较长序列：第一个失败指数</p></li>
+<li><p>比较听写：不同的条目</p></li>
+</ul>
+<p>见 <a class="reference internal" href="example/reportingdemo.html#tbreportdemo"><span class="std std-ref">reporting demo</span></a> 更多的例子。</p>
+</div>
+<div class="section" id="defining-your-own-explanation-for-failed-assertions">
+<h2>为失败的断言定义自己的解释<a class="headerlink" href="#defining-your-own-explanation-for-failed-assertions" title="永久链接至标题">¶</a></h2>
+<p>可以通过执行 <code class="docutils literal notranslate"><span class="pre">pytest_assertrepr_compare</span></code> 钩子。</p>
+<dl class="py function">
+<dt>
+<code class="sig-name descname">pytest_assertrepr_compare</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span><span class="p">:</span> <span class="n">Config</span></em>, <em class="sig-param"><span class="n">op</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">left</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(在 Python v3.9)">object</a></span></em>, <em class="sig-param"><span class="n">right</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(在 Python v3.9)">object</a></span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span>List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(在 Python v3.9)">str</a><span class="p">]</span><span class="p">]</span><a class="reference internal" href="_modules/_pytest/hookspec.html#pytest_assertrepr_compare"><span class="viewcode-link">[源代码]</span></a></dt>
+<dd><p>返回失败的断言表达式中比较的说明。</p>
+<p>如果没有自定义解释，则返回None，否则返回字符串列表。字符串将由换行符连接，但任何换行符 <em>in</em> 字符串将被转义。请注意，除第一行外，所有行都将稍微缩进，其目的是将第一行作为摘要。</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>config</strong> (<a class="reference internal" href="reference.html#pytest.config.Config" title="_pytest.config.Config"><em>_pytest.config.Config</em></a>) -- pytest配置对象。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>例如，考虑在 <a class="reference internal" href="fixture.html#conftest-py"><span class="std std-ref">conftest.py</span></a> 提供替代解释的文件 <code class="docutils literal notranslate"><span class="pre">Foo</span></code> 物体：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># content of conftest.py</span>
+<span class="kn">from</span> <span class="nn">test_foocompare</span> <span class="kn">import</span> <span class="n">Foo</span>
+
+
+<span class="k">def</span> <span class="nf">pytest_assertrepr_compare</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">Foo</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">Foo</span><span class="p">)</span> <span class="ow">and</span> <span class="n">op</span> <span class="o">==</span> <span class="s2">&quot;==&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="s2">&quot;Comparing Foo instances:&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;   vals: </span><span class="si">{}</span><span class="s2"> != </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">left</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">right</span><span class="o">.</span><span class="n">val</span><span class="p">),</span>
+        <span class="p">]</span>
+</pre></div>
+</div>
+<p>现在，考虑到这个测试模块：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># content of test_foocompare.py</span>
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">val</span>
+
+
+<span class="k">def</span> <span class="nf">test_compare</span><span class="p">():</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">f2</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">f1</span> <span class="o">==</span> <span class="n">f2</span>
+</pre></div>
+</div>
+<p>您可以运行测试模块并在conftest文件中定义自定义输出：</p>
+<div class="highlight-pytest notranslate"><div class="highlight"><pre><span></span>$ pytest -q test_foocompare.py
+<span class=" -Color -Color-Red">F</span>                                                                    <span class=" -Color -Color-Red">[100%]</span>
+================================= FAILURES =================================
+<span class=" -Color -Color-Bold -Color-Bold-Red">_______________________________ test_compare _______________________________</span>
+
+    def test_compare():
+        f1 = Foo(1)
+        f2 = Foo(2)
+&gt;       assert f1 == f2
+<span class=" -Color -Color-Bold -Color-Bold-Red">E       assert Comparing Foo instances:</span>
+<span class=" -Color -Color-Bold -Color-Bold-Red">E            vals: 1 != 2</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Red">test_foocompare.py</span>:12: AssertionError
+========================= short test summary info ==========================
+FAILED test_foocompare.py::test_compare - assert Comparing Foo instances:
+<span class=" -Color -Color-Bold -Color-Bold-Red">1 failed</span><span class=" -Color -Color-Red"> in 0.12s</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="assertion-introspection-details">
+<span id="assert-introspection"></span><span id="assert-details"></span><h2>断言自省详细信息<a class="headerlink" href="#assertion-introspection-details" title="永久链接至标题">¶</a></h2>
+<p>通过在运行断言语句之前重写它们，可以获得有关失败断言的报告详细信息。重写的断言语句将自省信息放入断言失败消息中。 <code class="docutils literal notranslate"><span class="pre">pytest</span></code> 只重写由其测试收集过程直接发现的测试模块，因此 <strong>支持模块中的断言（本身不是测试模块）将不会被重写</strong> .</p>
+<p>您可以通过调用 <a class="reference external" href="https://docs.pytest.org/en/stable/writing_plugins.html#assertion-rewriting">register_assert_rewrite</a> 在导入它之前（一个很好的地方是在您的根目录中 <code class="docutils literal notranslate"><span class="pre">conftest.py</span></code> ）</p>
+<p>为了进一步了解情况，本杰明·彼得森写道 <a class="reference external" href="http://pybites.blogspot.com/2011/07/behind-scenes-of-pytests-new-assertion.html">Behind the scenes of pytest's new assertion rewriting</a> .</p>
+<div class="section" id="assertion-rewriting-caches-files-on-disk">
+<h3>断言重写将文件缓存在磁盘上<a class="headerlink" href="#assertion-rewriting-caches-files-on-disk" title="永久链接至标题">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">pytest</span></code> 将重写的模块写回磁盘进行缓存。您可以禁用此行为（例如，为了避免过时 <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> 通过将文件添加到 <code class="docutils literal notranslate"><span class="pre">conftest.py</span></code> 文件：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">dont_write_bytecode</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>请注意，您仍然可以获得断言内省的好处，唯一的变化是 <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> 文件不会缓存在磁盘上。</p>
+<p>此外，如果重写无法写入新的缓存，则它将自动跳过缓存。 <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> 文件，即只读文件系统或压缩文件中的文件。</p>
+</div>
+<div class="section" id="disabling-assert-rewriting">
+<h3>禁用断言重写<a class="headerlink" href="#disabling-assert-rewriting" title="永久链接至标题">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">pytest</span></code> 使用导入挂钩在导入时重写测试模块以写入新的 <code class="docutils literal notranslate"><span class="pre">pyc</span></code> 文件夹。大多数时候这是透明的。但是，如果您自己操作进口机械，进口钩可能会干扰。</p>
+<p>如果是这种情况，您有两个选择：</p>
+<ul class="simple">
+<li><p>通过添加字符串禁用特定模块的重写 <code class="docutils literal notranslate"><span class="pre">PYTEST_DONT_REWRITE</span></code> 到它的docstring。</p></li>
+<li><p>通过使用禁用所有模块的重写 <code class="docutils literal notranslate"><span class="pre">--assert=plain</span></code> .</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+            <p class="logo"><a href="contents.html">
+              <img class="logo" src="_static/pytest_logo_curves.svg" alt="Logo"/>
+            </a></p>
+  
+
+<div id="searchbox" style="display: none" role="search">
+  <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel"
+        placeholder="Search"/>
+      <input type="submit" value="去" />
+    </form>
+  </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><h3><a href="contents.html">目录</a></h3>
+
+<ul>
+  <li><a href="index.html">Home</a></li>
+  <li><a href="getting-started.html">Install</a></li>
+  <li><a href="contents.html">Contents</a></li>
+  <li><a href="reference.html">API Reference</a></li>
+  <li><a href="example/index.html">Examples</a></li>
+  <li><a href="customize.html">Customize</a></li>
+  <li><a href="changelog.html">Changelog</a></li>
+  <li><a href="contributing.html">Contributing</a></li>
+  <li><a href="backwards-compatibility.html">Backwards Compatibility</a></li>
+  <li><a href="py27-py34-deprecation.html">Python 2.7 and 3.4 Support</a></li>
+  <li><a href="sponsor.html">Sponsor</a></li>
+  <li><a href="tidelift.html">pytest for Enterprise</a></li>
+  <li><a href="license.html">License</a></li>
+  <li><a href="contact.html">Contact Channels</a></li>
+</ul>
+  <hr>
+  <ul>
+<li><a class="reference internal" href="#">测试中断言的编写和报告</a><ul>
+<li><a class="reference internal" href="#asserting-with-the-assert-statement">断言 <code class="docutils literal notranslate"><span class="pre">assert</span></code> 陈述</a></li>
+<li><a class="reference internal" href="#assertions-about-expected-exceptions">关于预期异常的断言</a></li>
+<li><a class="reference internal" href="#assertions-about-expected-warnings">关于预期警告的断言</a></li>
+<li><a class="reference internal" href="#making-use-of-context-sensitive-comparisons">利用上下文相关的比较</a></li>
+<li><a class="reference internal" href="#defining-your-own-explanation-for-failed-assertions">为失败的断言定义自己的解释</a></li>
+<li><a class="reference internal" href="#assertion-introspection-details">断言自省详细信息</a><ul>
+<li><a class="reference internal" href="#assertion-rewriting-caches-files-on-disk">断言重写将文件缓存在磁盘上</a></li>
+<li><a class="reference internal" href="#disabling-assert-rewriting">禁用断言重写</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<hr>
+<a href="genindex.html">Index</a>
+<hr><h3>Related Topics</h3>
+<ul>
+  <li><a href="contents.html">Documentation overview</a><ul>
+      <li>Previous: <a href="existingtestsuite.html" title="上一章">在现有测试套件中使用pytest</a></li>
+      <li>Next: <a href="fixture.html" title="下一章">Pytest夹具：显式、模块化、可扩展</a></li>
+  </ul></li>
+</ul><h3>Useful Links</h3>
+<ul>
+  <li><a href="https://pypi.org/project/pytest/">pytest @ PyPI</a></li>
+  <li><a href="https://github.com/pytest-dev/pytest/">pytest @ GitHub</a></li>
+  <li><a href="http://plugincompat.herokuapp.com/">3rd party plugins</a></li>
+  <li><a href="https://github.com/pytest-dev/pytest/issues">Issue Tracker</a></li>
+  <li><a href="https://media.readthedocs.org/pdf/pytest/latest/pytest.pdf">PDF Documentation</a>
+</ul>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; 版权所有 2015–2020, holger krekel and pytest-dev team.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

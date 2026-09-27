@@ -1,0 +1,1328 @@
+{
+  "schema": "career-graph-raw-blocks/v1",
+  "sourceId": "S25",
+  "url": "https://www.osgeo.cn/pytest/skipping.html",
+  "finalUrl": "https://osgeo.cn/pytest/skipping.html",
+  "fetchedAt": "2026-09-27T10:22:26.225Z",
+  "httpStatus": 200,
+  "contentType": "text/html",
+  "charset": "utf-8",
+  "byteSize": 40750,
+  "sha256": "099eacb784cd551fbfc1eff90ce47f1d4098008d149963822dfd2f23b91a936e",
+  "title": "跳过和xfail：处理无法成功的测试 — pytest documentation",
+  "hops": [
+    {
+      "url": "https://www.osgeo.cn/pytest/skipping.html",
+      "finalUrl": "https://osgeo.cn/pytest/skipping.html",
+      "httpStatus": 200,
+      "bytes": 40750,
+      "charset": "utf-8"
+    }
+  ],
+  "flags": [],
+  "extractionPass": "pruned",
+  "prunedBlockCount": 144,
+  "prunedTextLength": 6715,
+  "blockCount": 144,
+  "textLength": 6715,
+  "ranges": [
+    [
+      0,
+      2
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      8,
+      12
+    ],
+    [
+      14,
+      19
+    ],
+    [
+      21,
+      26
+    ],
+    [
+      28,
+      40
+    ],
+    [
+      42,
+      60
+    ],
+    [
+      62,
+      81
+    ],
+    [
+      83,
+      153
+    ],
+    [
+      155,
+      263
+    ],
+    [
+      265,
+      378
+    ],
+    [
+      380,
+      484
+    ],
+    [
+      486,
+      555
+    ],
+    [
+      557,
+      585
+    ],
+    [
+      587,
+      600
+    ],
+    [
+      602,
+      609
+    ],
+    [
+      611,
+      646
+    ],
+    [
+      648,
+      736
+    ],
+    [
+      738,
+      772
+    ],
+    [
+      774,
+      858
+    ],
+    [
+      860,
+      886
+    ],
+    [
+      888,
+      952
+    ],
+    [
+      954,
+      1086
+    ],
+    [
+      1088,
+      1111
+    ],
+    [
+      1113,
+      1120
+    ],
+    [
+      1122,
+      1191
+    ],
+    [
+      1193,
+      1315
+    ],
+    [
+      1317,
+      1364
+    ],
+    [
+      1366,
+      1396
+    ],
+    [
+      1398,
+      1592
+    ],
+    [
+      1594,
+      1615
+    ],
+    [
+      1617,
+      1722
+    ],
+    [
+      1724,
+      1766
+    ],
+    [
+      1768,
+      1838
+    ],
+    [
+      1840,
+      1865
+    ],
+    [
+      1867,
+      1881
+    ],
+    [
+      1883,
+      1912
+    ],
+    [
+      1914,
+      2089
+    ],
+    [
+      2091,
+      2124
+    ],
+    [
+      2126,
+      2161
+    ],
+    [
+      2163,
+      2216
+    ],
+    [
+      2218,
+      2258
+    ],
+    [
+      2260,
+      2268
+    ],
+    [
+      2270,
+      2365
+    ],
+    [
+      2367,
+      2378
+    ],
+    [
+      2380,
+      2423
+    ],
+    [
+      2425,
+      2467
+    ],
+    [
+      2469,
+      2513
+    ],
+    [
+      2515,
+      2575
+    ],
+    [
+      2577,
+      2605
+    ],
+    [
+      2607,
+      2610
+    ],
+    [
+      2612,
+      2637
+    ],
+    [
+      2639,
+      2653
+    ],
+    [
+      2655,
+      2707
+    ],
+    [
+      2709,
+      2726
+    ],
+    [
+      2728,
+      2815
+    ],
+    [
+      2817,
+      2838
+    ],
+    [
+      2840,
+      2880
+    ],
+    [
+      2882,
+      2901
+    ],
+    [
+      2903,
+      2927
+    ],
+    [
+      2929,
+      2972
+    ],
+    [
+      2974,
+      3038
+    ],
+    [
+      3040,
+      3072
+    ],
+    [
+      3074,
+      3173
+    ],
+    [
+      3175,
+      3292
+    ],
+    [
+      3294,
+      3341
+    ],
+    [
+      3343,
+      3422
+    ],
+    [
+      3424,
+      3448
+    ],
+    [
+      3450,
+      3463
+    ],
+    [
+      3465,
+      3496
+    ],
+    [
+      3498,
+      3603
+    ],
+    [
+      3605,
+      3643
+    ],
+    [
+      3645,
+      3655
+    ],
+    [
+      3657,
+      3672
+    ],
+    [
+      3674,
+      3746
+    ],
+    [
+      3748,
+      3758
+    ],
+    [
+      3760,
+      3791
+    ],
+    [
+      3793,
+      3857
+    ],
+    [
+      3859,
+      3886
+    ],
+    [
+      3888,
+      3895
+    ],
+    [
+      3897,
+      3946
+    ],
+    [
+      3948,
+      4002
+    ],
+    [
+      4004,
+      4043
+    ],
+    [
+      4045,
+      4055
+    ],
+    [
+      4057,
+      4118
+    ],
+    [
+      4120,
+      4176
+    ],
+    [
+      4178,
+      4211
+    ],
+    [
+      4213,
+      4250
+    ],
+    [
+      4252,
+      4278
+    ],
+    [
+      4280,
+      4286
+    ],
+    [
+      4288,
+      4298
+    ],
+    [
+      4300,
+      4317
+    ],
+    [
+      4319,
+      4375
+    ],
+    [
+      4377,
+      4380
+    ],
+    [
+      4382,
+      4401
+    ],
+    [
+      4403,
+      4811
+    ],
+    [
+      4813,
+      4838
+    ],
+    [
+      4840,
+      5637
+    ],
+    [
+      5639,
+      5652
+    ],
+    [
+      5654,
+      5691
+    ],
+    [
+      5693,
+      6062
+    ],
+    [
+      6064,
+      6066
+    ],
+    [
+      6068,
+      6072
+    ],
+    [
+      6074,
+      6081
+    ],
+    [
+      6083,
+      6091
+    ],
+    [
+      6093,
+      6106
+    ],
+    [
+      6108,
+      6116
+    ],
+    [
+      6118,
+      6127
+    ],
+    [
+      6129,
+      6138
+    ],
+    [
+      6140,
+      6152
+    ],
+    [
+      6154,
+      6177
+    ],
+    [
+      6179,
+      6205
+    ],
+    [
+      6207,
+      6214
+    ],
+    [
+      6216,
+      6237
+    ],
+    [
+      6239,
+      6246
+    ],
+    [
+      6248,
+      6264
+    ],
+    [
+      6266,
+      6284
+    ],
+    [
+      6286,
+      6292
+    ],
+    [
+      6294,
+      6300
+    ],
+    [
+      6302,
+      6315
+    ],
+    [
+      6317,
+      6324
+    ],
+    [
+      6326,
+      6336
+    ],
+    [
+      6338,
+      6340
+    ],
+    [
+      6342,
+      6360
+    ],
+    [
+      6362,
+      6374
+    ],
+    [
+      6376,
+      6385
+    ],
+    [
+      6387,
+      6396
+    ],
+    [
+      6398,
+      6404
+    ],
+    [
+      6406,
+      6415
+    ],
+    [
+      6417,
+      6422
+    ],
+    [
+      6424,
+      6426
+    ],
+    [
+      6428,
+      6440
+    ],
+    [
+      6442,
+      6447
+    ],
+    [
+      6449,
+      6463
+    ],
+    [
+      6465,
+      6487
+    ],
+    [
+      6489,
+      6516
+    ],
+    [
+      6518,
+      6534
+    ],
+    [
+      6536,
+      6548
+    ],
+    [
+      6550,
+      6563
+    ],
+    [
+      6565,
+      6580
+    ],
+    [
+      6582,
+      6599
+    ],
+    [
+      6601,
+      6614
+    ],
+    [
+      6616,
+      6633
+    ],
+    [
+      6635,
+      6715
+    ]
+  ],
+  "blocks": [
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "导航"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "索引"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "模块 |"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "下一页 |"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "上一页 |"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest-6.2 »"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跳过和xfail：处理无法成功的测试"
+    },
+    {
+      "kind": "heading",
+      "level": 1,
+      "text": "跳过和xfail：处理无法成功的测试¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "您可以标记不能在某些平台上运行或预期会失败的测试函数，以便pytest可以相应地处理它们，并在保留测试套件的同时提供测试会话的摘要 绿色 ."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "A skip 意味着您希望只有在满足某些条件时测试才能通过，否则pytest应该跳过运行测试。常见的例子是跳过非Windows平台上的仅限Windows的测试，或者跳过依赖于当前不可用的外部资源（例如数据库）的测试。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "安 X失效 意味着您希望某个测试由于某种原因而失败。一个常见的例子是对尚未实现的特性或尚未修复的错误的测试。当测试通过时，尽管预期会失败（标记为 pytest.mark.xfail 这是一个 XPASS 并将在测试总结中报告。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest 计数和列表 skip 和 X失效 单独测试。默认情况下，不会显示有关跳过的/xfailed测试的详细信息，以避免混淆输出。你可以使用 -r 查看与测试进度中显示的“短”字母对应的详细信息的选项："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest -rxXs # show extra info on xfailed, xpassed, and skipped tests"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "有关 -r 可以通过运行找到选项 pytest -h ."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "（见 内置配置文件选项 ）"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "跳过测试函数¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跳过测试函数的最简单方法是用 skip 可以传递可选 reason ："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "@pytest.mark.skip(reason=\"no way of currently testing this\")\ndef test_the_unknown():\n..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "或者，也可以通过调用 pytest.skip(reason) 功能："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "def test_function():\nif not valid_config():\npytest.skip(\"unsupported configuration\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "当无法在导入期间评估跳过条件时，命令式方法非常有用。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "也可以跳过整个模块，使用 pytest.skip(reason, allow_module_level=True) 在模块级别："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "import sys\nimport pytest\n\nif not sys.platform.startswith(\"win\"):\npytest.skip(\"skipping windows-only tests\", allow_module_level=True)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参考文献 ： pytest.mark.skip"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "skipif¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果您希望有条件地跳过某些内容，则可以使用 skipif 相反。以下是在python3.6之前的解释器上运行时将测试函数标记为跳过的示例："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "import sys\n\n@pytest.mark.skipif(sys.version_info < (3, 7), reason=\"requires python3.7 or higher\")\ndef test_function():\n..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果条件评估为 True 在收集期间，将跳过测试函数，使用时在摘要中显示指定的原因 -rs ."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "你可以分享 skipif 模块之间的标记。考虑这个测试模块："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# content of test_mymodule.py\nimport mymodule\n\nminversion = pytest.mark.skipif(\nmymodule.__versioninfo__ < (1, 1), reason=\"at least mymodule-1.1 required\"\n)\n\n@minversion\ndef test_function():\n..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "您可以导入标记并在另一个测试模块中重用它："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# test_myothermodule.py\nfrom test_mymodule import minversion\n\n@minversion\ndef test_anotherfunction():\n..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "对于较大的测试套件，最好有一个文件定义标记，然后在整个测试套件中一致地应用这些标记。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "或者，您可以使用 condition strings 而不是布尔值，但是它们不容易在模块之间共享，因此主要是出于向后兼容性的原因才支持它们。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参考文献 ： pytest.mark.skipif"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "跳过类或模块的所有测试函数¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "你可以使用 skipif 类上的标记（作为任何其他标记）："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "@pytest.mark.skipif(sys.platform == \"win32\", reason=\"does not run on windows\")\nclass TestPosixCalls:\ndef test_function(self):\n\"will not be setup or run under 'win32' platform\""
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果条件是 True ，此标记将为该类的每个测试方法生成跳过结果。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果要跳过模块的所有测试功能，可以使用 pytestmark 全球的："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "# test_module.py\npytestmark = pytest.mark.skipif(...)"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "中频倍数 skipif 修饰符应用于测试函数，如果任何跳过条件为真，则将跳过它。"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "跳过文件或目录¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "有时可能需要跳过整个文件或目录，例如，如果测试依赖于特定于Python版本的功能或包含不希望运行pytest的代码。在这种情况下，必须从集合中排除文件和目录。参照 自定义测试集合 更多信息。"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "跳过缺少的导入依赖项¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "您可以使用 pytest.importorskip 在模块级，在测试或测试设置功能内。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "docutils = pytest.importorskip(\"docutils\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果 docutils 无法在此处导入，这将导致跳过测试结果。也可以根据库的版本号跳过："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "docutils = pytest.importorskip(\"docutils\", minversion=\"0.3\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "版本将从指定的模块中读取 __version__ 属性。"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "总结¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "以下是如何在不同情况下跳过模块中的测试的快速指南："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "无条件跳过模块中的所有测试："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytestmark = pytest.mark.skip(\"all tests still WIP\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "根据某些条件跳过模块中的所有测试："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytestmark = pytest.mark.skipif(sys.platform == \"win32\", reason=\"tests for linux only\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果缺少某些导入，则跳过模块中的所有测试："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pexpect = pytest.importorskip(\"pexpect\")"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "xfail：将测试功能标记为预期失败¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "你可以使用 xfail 标记以指示预期测试失败："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "@pytest.mark.xfail\ndef test_function():\n..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "此测试将运行，但失败时不会报告回溯。相反，终端报告会将其列在“预期失败”中 (XFAIL ）或“意外通过” (XPASS 部分。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "或者，也可以将测试标记为 XFAIL 必须从测试或其设置功能中："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "def test_function():\nif not valid_config():\npytest.xfail(\"failing configuration (but should work)\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "def test_function2():\nimport slow_module\n\nif slow_module.slow_function():\npytest.xfail(\"slow_module taking too long\")"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "这两个示例说明了您不希望在模块级别检查条件的情况，也就是说，在这种情况下，条件将被评估为标记。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "这将使 test_function XFAIL . 注意，在 pytest.xfail() 呼叫，与标记不同。这是因为它是通过引发一个已知的异常在内部实现的。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "参考文献 ： pytest.mark.xfail"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "condition 参数¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果测试只在特定条件下失败，则可以将该条件作为第一个参数通过："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "@pytest.mark.xfail(sys.platform == \"win32\", reason=\"bug in a 3rd party library\")\ndef test_function():\n..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "请注意，您还必须传递一个原因（请参阅 pytest.mark.xfail ）"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "reason 参数¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "可以使用 reason 参数："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "@pytest.mark.xfail(reason=\"known parser issue\")\ndef test_function():\n..."
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "raises 参数¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果要更具体地说明测试失败的原因，可以在 raises 参数。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "@pytest.mark.xfail(raises=RuntimeError)\ndef test_function():\n..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果测试失败，则报告为常规失败，除非 raises ."
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "run 参数¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "如果测试应标记为xfail并报告为xfail，但不应执行，则使用 run 参数AS False ："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "@pytest.mark.xfail(run=False)\ndef test_function():\n..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "这对于Xfailing测试特别有用，这些测试会使解释器崩溃，应该稍后进行调查。"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "strict 参数¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "两个 XFAIL 和 XPASS 默认情况下不要让测试套件失败。您可以通过设置 strict 仅关键字参数到 True ："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "@pytest.mark.xfail(strict=True)\ndef test_function():\n..."
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "这将使 XPASS 此测试的（“意外通过”）结果将使测试套件失败。"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "您可以更改 strict 参数使用 xfail_strict ini选项："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "[pytest]\nxfail_strict=true"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "忽略x失败¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "通过在命令行上指定："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest --runxfail"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "您可以强制运行和报告 xfail 将测试标记为完全没有标记。这也导致 pytest.xfail() 不产生效果。"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "实例¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "下面是一个简单的测试文件，有几种用法："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "import pytest\n\nxfail = pytest.mark.xfail\n\n@xfail\ndef test_hello():\nassert 0\n\n@xfail(run=False)\ndef test_hello2():\nassert 0\n\n@xfail(\"hasattr(os, 'sep')\")\ndef test_hello3():\nassert 0\n\n@xfail(reason=\"bug 110\")\ndef test_hello4():\nassert 0\n\n@xfail('pytest.__version__[0] != \"17\"')\ndef test_hello5():\nassert 0\n\ndef test_hello6():\npytest.xfail(\"reason\")\n\n@xfail(raises=IndexError)\ndef test_hello7():\nx = []\nx[1] = 1"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "使用“报告xfail”选项运行它可以得到以下输出："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "example $ pytest -rx xfail_demo.py\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-6.x.y, py-1.x.y, pluggy-0.x.y\ncachedir: $PYTHON_PREFIX/.pytest_cache\nrootdir: $REGENDOC_TMPDIR/example\ncollected 7 items\n\nxfail_demo.py xxxxxxx [100%]\n\n========================= short test summary info ==========================\nXFAIL xfail_demo.py::test_hello\nXFAIL xfail_demo.py::test_hello2\nreason: [NOTRUN]\nXFAIL xfail_demo.py::test_hello3\ncondition: hasattr(os, 'sep')\nXFAIL xfail_demo.py::test_hello4\nbug 110\nXFAIL xfail_demo.py::test_hello5\ncondition: pytest.__version__[0] != \"17\"\nXFAIL xfail_demo.py::test_hello6\nreason: reason\nXFAIL xfail_demo.py::test_hello7\n============================ 7 xfailed in 0.12s ============================"
+    },
+    {
+      "kind": "heading",
+      "level": 2,
+      "text": "跳过/xfail，参数化¶"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "当使用参数化时，可以对单个测试实例应用诸如skip和xfail之类的标记："
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "import sys\nimport pytest\n\n@pytest.mark.parametrize(\n(\"n\", \"expected\"),\n[\n(1, 2),\npytest.param(1, 0, marks=pytest.mark.xfail),\npytest.param(1, 3, marks=pytest.mark.xfail(reason=\"some bug\")),\n(2, 3),\n(3, 4),\n(4, 5),\npytest.param(\n10, 11, marks=pytest.mark.skipif(sys.version_info >= (3, 0), reason=\"py2k\")\n),\n],\n)\ndef test_increment(n, expected):\nassert n + 1 == expected"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "目录"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Home"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Install"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Contents"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "API Reference"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Examples"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Customize"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Changelog"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Contributing"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Backwards Compatibility"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Python 2.7 and 3.4 Support"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Sponsor"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest for Enterprise"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "License"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Contact Channels"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跳过和xfail：处理无法成功的测试"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跳过测试函数"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "skipif"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跳过类或模块的所有测试函数"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跳过文件或目录"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跳过缺少的导入依赖项"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "总结"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "xfail：将测试功能标记为预期失败"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "condition 参数"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "reason 参数"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "raises 参数"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "run 参数"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "strict 参数"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "忽略x失败"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "实例"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "跳过/xfail，参数化"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Index"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Related Topics"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Documentation overview"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Previous: 模块和测试文件的Doctest集成"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Next: 参数化夹具和测试功能"
+    },
+    {
+      "kind": "heading",
+      "level": 3,
+      "text": "Useful Links"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest @ PyPI"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "pytest @ GitHub"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "3rd party plugins"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "Issue Tracker"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "PDF Documentation"
+    },
+    {
+      "kind": "text",
+      "level": 0,
+      "text": "© 版权所有 2015–2020, holger krekel and pytest-dev team.\nCreated using Sphinx 3.4.3."
+    }
+  ]
+}

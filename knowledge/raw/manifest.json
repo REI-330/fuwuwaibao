@@ -2,15 +2,15 @@
   "schema": "career-graph-raw-manifest/v1",
   "generatedAt": "2026-09-15T09:56:51.087Z",
   "counts": {
-    "sources": 22,
-    "fetched": 22,
+    "sources": 25,
+    "fetched": 25,
     "fetchedThin": 0,
     "duplicateContent": 0,
     "fetchFailed": 0,
-    "distinctSha256": 22,
+    "distinctSha256": 25,
     "metaRefreshFollowed": 0,
     "unprunedFallback": 1,
-    "totalBytes": 4553319
+    "totalBytes": 4671482
   },
   "failures": [],
   "documents": [
@@ -538,6 +538,78 @@
           "finalUrl": "https://help.aliyun.com/zh",
           "httpStatus": 200,
           "bytes": 308203,
+          "charset": "utf-8"
+        }
+      ]
+    },
+    {
+      "sourceId": "S23",
+      "url": "https://www.osgeo.cn/pytest/assert.html",
+      "finalUrl": "https://osgeo.cn/pytest/assert.html",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "charset": "utf-8",
+      "bytes": 32099,
+      "sha256": "7b549fd2fefa5003e83ee1ceb41d1fc4d8befdb8d2ff0ea87b4bea692be4f281",
+      "extractionPass": "pruned",
+      "blockCount": 108,
+      "textLength": 6262,
+      "flags": [],
+      "duplicateOf": null,
+      "hops": [
+        {
+          "url": "https://www.osgeo.cn/pytest/assert.html",
+          "finalUrl": "https://osgeo.cn/pytest/assert.html",
+          "httpStatus": 200,
+          "bytes": 32099,
+          "charset": "utf-8"
+        }
+      ]
+    },
+    {
+      "sourceId": "S24",
+      "url": "https://www.osgeo.cn/pytest/monkeypatch.html",
+      "finalUrl": "https://osgeo.cn/pytest/monkeypatch.html",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "charset": "utf-8",
+      "bytes": 45314,
+      "sha256": "fa6cb01901b29f88046d186fc5200e3136a03276882a312f703e509318846680",
+      "extractionPass": "pruned",
+      "blockCount": 95,
+      "textLength": 9870,
+      "flags": [],
+      "duplicateOf": null,
+      "hops": [
+        {
+          "url": "https://www.osgeo.cn/pytest/monkeypatch.html",
+          "finalUrl": "https://osgeo.cn/pytest/monkeypatch.html",
+          "httpStatus": 200,
+          "bytes": 45314,
+          "charset": "utf-8"
+        }
+      ]
+    },
+    {
+      "sourceId": "S25",
+      "url": "https://www.osgeo.cn/pytest/skipping.html",
+      "finalUrl": "https://osgeo.cn/pytest/skipping.html",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "charset": "utf-8",
+      "bytes": 40750,
+      "sha256": "099eacb784cd551fbfc1eff90ce47f1d4098008d149963822dfd2f23b91a936e",
+      "extractionPass": "pruned",
+      "blockCount": 144,
+      "textLength": 6715,
+      "flags": [],
+      "duplicateOf": null,
+      "hops": [
+        {
+          "url": "https://www.osgeo.cn/pytest/skipping.html",
+          "finalUrl": "https://osgeo.cn/pytest/skipping.html",
+          "httpStatus": 200,
+          "bytes": 40750,
           "charset": "utf-8"
         }
       ]
