@@ -1,0 +1,1107 @@
+{
+  "schema": "career-graph-adopted-retrieval/v1",
+  "generatedAt": "2026-09-27T20:55:54+0800",
+  "questions": "knowledge\\evaluations\\questions-dev.json",
+  "retriever": {
+    "type": "fusion+llm-rerank",
+    "alpha_bm25": 0.35,
+    "topk": 3,
+    "rerankCandidates": 10,
+    "rerankCache": "knowledge\\eval\\runs\\q1024-dev-rerank-cache.json",
+    "components": [
+      "bm25 (lib/graph.mjs)",
+      "dense (TEI Qwen3-Embedding-0.6B)",
+      "LLM listwise rerank (claude-sonnet-4.6)"
+    ]
+  },
+  "metrics": [
+    {
+      "split": "dev",
+      "n": 34,
+      "hit": 30,
+      "hitRate": 0.8824,
+      "hitAt1": 0.7059,
+      "refsInSlots": 48,
+      "slots": 102,
+      "precisionAtK": 0.4706
+    },
+    {
+      "split": "ALL",
+      "n": 34,
+      "hit": 30,
+      "hitRate": 0.8824,
+      "hitAt1": 0.7059,
+      "refsInSlots": 48,
+      "slots": 102,
+      "precisionAtK": 0.4706
+    }
+  ],
+  "refusedQuestions": 15,
+  "refusalMetric": "empty（本集无拒答题或阈值未定）",
+  "perQuestion": [
+    {
+      "questionId": "N01",
+      "split": "dev",
+      "set": "嵌入式开发",
+      "question": "用 FreeRTOS 开发 IoT 设备时，官方认证过哪些现成开发板可以直接拿来做验证？遇到技术问题该去哪些地方找文档和支持？",
+      "referenceChunks": [
+        "S01#s5",
+        "S01#s6"
+      ],
+      "topk": [
+        {
+          "chunkId": "S01#s5",
+          "score": null,
+          "text": "以下硬件平台符合 FreeRTOS 的条件：\n\nATECC608A Zero Touch 配置套件适用于 AWS IoT\n\nCypress CYW943907AEVAL1F 开发工具包\n\nCypress CYW954907AEVAL1F 开发工具包\n\n赛普拉斯套件 CY8CKIT-064S0S2-4343W\n\nEspressif ESP32-DevKitC\n\nEspressif ESP-WROVER-KIT\n\nEspressif ESP-WROOM-32SE\n\nEspressif ESP32-S2-Saola-1\n\nInfineon XMC4800 IoT 连接工具包\n\nMarvell MW320 AWS IoT 入门套件\n\nMarvell MW322 AWS IoT 入门套件\n\nMediaTek mt7697hx 开发套件\n\nMicrochip Curiosity PIC32MZEF Bundle\n\n北欧 n RF52840-DK\n\nNuMaker-IoT-M487\n\nNXP LPC54018 IoT Module\n\nOPTIGA Trust X 安全解决方案\n\nRenesas RX65N RSK IoT Module\n\nSTMicroelectronicsSTM32L4 发现工具包 IoT 节点\n\n德州仪器 CC3220SF-LAUNCHXL\n\nMicrosoft Windows 7 或更高版本，至少双核处理器以及有线以太网连接\n\nXilinx Avnet MicroZed 工业物联网套件\n\nAWS 合作伙伴设备目录中也列出了取得认证的设备。\n\n有关新设备资格鉴定的信息，请参阅 FreeRTOS 资格认证指南。"
+        },
+        {
+          "chunkId": "S01#s6",
+          "score": null,
+          "text": "这些资源可能对您很有用。\n\n有关其他 FreeRTOS 文档，请参阅 freertos.org。\n\n如果 FreeRTOS 工程团队对 FreeRTOS 有疑问，可以在 FreeRTOS 页面上打开一个问题。 GitHub\n\n有关 FreeRTOS 的技术问题，请访问 FreeRTOS 社区论坛。\n\n有关将设备连接至的更多信息 AWS IoT，请参阅《AWS IoT Core 开发者指南》中的设备配置。\n\n有关技术支持 AWS，请参阅 Supp AWS ort。\n\n有关 AWS 账单、账户服务、活动、滥用行为或其他问题的问题 AWS，请参阅 “联系我们” 页面。\n\n文档惯例\n\n此页面对您有帮助吗？- 是\n\n感谢您对我们工作的肯定！\n\n如果不耽误您的时间，请告诉我们做得好的地方，让我们做得更好。\n\n此页面对您有帮助吗？- 否\n\n感谢您告诉我们本页内容还需要完善。很抱歉让您失望了。\n\n如果不耽误您的时间，请告诉我们如何改进文档。"
+        },
+        {
+          "chunkId": "S01#s2",
+          "score": null,
+          "text": "与世界领先的芯片公司合作开发了 15 年，现在每 170 秒有一次下载，FreeRTOS 是面向微控制器和小型微处理器的市场领先的实时操作系统 (RTOS)。根据 MIT 开源许可免费分发，FreeRTOS 包含一个内核和一组持续增加的库，可广泛应用于各个行业领域。FreeRTOS 的设计非常注重可靠性和易用性。\n\nFreeRTOS 包含用于连接、安全性和空中下载 (OTA) 更新的库。FreeRTOS 还包括演示应用程序，可在合格的主板上显示 FreeRTOS 功能。\n\nFreeRTOS 是一个开源项目。您可以下载源代码、贡献更改或改进，或者在网站上报告问题， GitHub 网址为https://github.com/FreeRTOS/FreeRTOS。\n\n我们根据 MIT 开源许可证发布 FreeRTOS 代码，以便您可以在商业和个人项目中使用这些代码。\n\n我们也欢迎您对 FreeRTOS 文档（《FreeRTOS 用户指南》、《FreeRTOS 移植指南》和《FreeRTOS 资格认证指南》）提供意见或建议。要查看文档的 markdown 源代码，请参阅https://github.com/awsdocs/aws-freertos-docs。它是在知识共享 (CC BY-ND) 许可下发布的。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S01#s5",
+        "S01#s6"
+      ]
+    },
+    {
+      "questionId": "N02",
+      "split": "dev",
+      "set": "嵌入式开发",
+      "question": "ESP32 上要把 SPI 配成四线 I/O 模式该怎么设置，另外命令阶段和地址阶段的长度如果要改，具体动哪些结构体和标志位？",
+      "referenceChunks": [
+        "S02#s13",
+        "S02#s14"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s13",
+          "score": null,
+          "text": "ESP32 支持的线路模式如下。要使用这些模式，请在结构体 spi_transaction_t 中设置 flags，如 传输事务标志信号 一栏所示。要检查相应的 IO 管脚是否被设置，请在 spi_bus_config_t 中设置 flags，如 总线 IO 设置标志信号 一栏所示。\n\n模式\n\n命令位宽\n\n地址位宽\n\n数据位宽\n\n传输事务标志信号\n\n总线 IO 设置标志信号\n\n普通 SPI 模式\n\n双线输出模式\n\nSPI_TRANS_MODE_DIO\n\nSPICOMMON_BUSFLAG_DUAL\n\n双线 I/O 模式\n\nSPI_TRANS_MODE_DIO\nSPI_TRANS_MULTILINE_ADDR\n\nSPICOMMON_BUSFLAG_DUAL\n\n四线输出模式\n\nSPI_TRANS_MODE_QIO\n\nSPICOMMON_BUSFLAG_QUAD\n\n四线 I/O 模式\n\nSPI_TRANS_MODE_QIO\nSPI_TRANS_MULTILINE_ADDR\n\nSPICOMMON_BUSFLAG_QUAD"
+        },
+        {
+          "chunkId": "S02#s14",
+          "score": null,
+          "text": "在命令阶段和地址阶段，spi_transaction_t::cmd 和 spi_transaction_t::addr 将被发送到总线，该过程中无数据读取。命令阶段和地址阶段的默认长度通过调用 spi_bus_add_device() 在 spi_device_interface_config_t 中设置。如果 spi_transaction_t::flags 中的标志信号 SPI_TRANS_VARIABLE_CMD 和 SPI_TRANS_VARIABLE_ADDR 未设置，则驱动程序将在设备初始化期间自动将这些阶段的长度设置为默认值。\n\n如需更改命令阶段和地址阶段的长度，可通过以下步骤实现：声明结构体 spi_transaction_ext_t，在 spi_transaction_ext_t::base 中设置标志信号 SPI_TRANS_VARIABLE_CMD 和/或 SPI_TRANS_VARIABLE_ADDR，随后按正常步骤完成余下配置。这样一来，各阶段的长度将等于结构体 spi_transaction_ext_t 中设置的 spi_transaction_ext_t::command_bits 和 spi_transaction_ext_t::address_bits 长度。\n\n如果需要命令阶段和地址阶段的线数与数据阶段保持一致，则应在结构体 spi_transaction_t 中将 SPI_TRANS_MULTILINE_CMD 和/或 SPI_TRANS_MULTILINE_ADDR 设置进该结构体的 flags 成员变量。请参阅 传输线模式配置。"
+        },
+        {
+          "chunkId": "S02#s42",
+          "score": null,
+          "text": "struct spi_device_interface_config_t\n\nThis is a configuration for a SPI slave device that is connected to one of the SPI buses.\n\nPublic Members\n\nuint8_t command_bits\n\nDefault amount of bits in command phase (0-16), used when SPI_TRANS_VARIABLE_CMD is not used, otherwise ignored.\n\nuint8_t address_bits\n\nDefault amount of bits in address phase (0-64), used when SPI_TRANS_VARIABLE_ADDR is not used, otherwise ignored.\n\nuint8_t dummy_bits\n\nAmount of dummy bits to insert between address and data phase.\n\nuint8_t mode\n\nSPI mode, representing a pair of (CPOL, CPHA) configuration:\n\n0: (0, 0)\n\n1: (0, 1)\n\n2: (1, 0)\n\n3: (1, 1)\n\nspi_clock_source_t clock_source\n\nSelect SPI clock source, SPI_CLK_SRC_DEFAULT by default.\n\nuint16_t duty_cycle_pos\n\nDuty cycle of positive clock, in 1/256th increments (128 = 50%/50% duty). Setting this to 0 (=not setting it) is equivalent to setting this to 128.\n\nuint16_t cs_ena_pretrans\n\nAmount of SPI bit-cycles the cs should be activated before the transmission (0-16). This only works on half-duplex transactions.\n\nuint8_t cs_ena_posttrans\n\nAmount of SPI bit-cycles the cs should stay active after the transmission (0-16)\n\nint clock_speed_hz\n\nSPI clock speed in Hz. Derived from clock_source.\n\nint input_delay_ns"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s13",
+        "S02#s14"
+      ]
+    },
+    {
+      "questionId": "N03",
+      "split": "dev",
+      "set": "嵌入式开发",
+      "question": "ESP-IDF 里 MALLOC_CAP_32BIT 分配的内存能不能拿来存浮点变量？在中断服务程序里调用堆函数有什么限制？",
+      "referenceChunks": [
+        "S03#32",
+        "S03#s57"
+      ],
+      "topk": [
+        {
+          "chunkId": "S03#32",
+          "score": null,
+          "text": "如果某个内存结构体仅以 32 位为单位寻址，例如一个整数或指针数组，则可以使用 MALLOC_CAP_32BIT 标志分配。通过这一方式，分配器能够在无法调用 malloc() 的情况下提供 IRAM 内存，从而充分利用 ESP32 中的所有可用内存。\n\n请注意，在 ESP32 系列芯片上，不可使用 MALLOC_CAP_32BIT 存储浮点变量。因为 MALLOC_CAP_32BIT 可能返回指令 RAM，而 ESP32 上的浮点汇编指令无法访问指令 RAM。\n\n请注意，使用 MALLOC_CAP_32BIT 分配的内存 只能 通过 32 位读写访问，其他类型的访问将导致 LoadStoreError 异常。"
+        },
+        {
+          "chunkId": "S03#s56",
+          "score": null,
+          "text": "堆函数是线程安全的，因此可不受限制，在不同任务中同时调用多个堆函数。\n\n从中断处理程序 (ISR) 上下文中调用 malloc、 free 和相关函数虽然在技术层面可行（请参阅 从 ISR 调用堆相关函数），但不建议使用此种方法，因为调用堆函数可能会延迟其他中断。建议重构应用程序，将 ISR 使用的任何 buffer 预先分配到 ISR 之外。之后可能会删除从 ISR 调用堆函数的功能。"
+        },
+        {
+          "chunkId": "S03#s57",
+          "score": null,
+          "text": "堆组件中的以下函数可以在中断处理程序 (ISR) 中调用：\n\nheap_caps_malloc()\n\nheap_caps_malloc_default()\n\nheap_caps_realloc_default()\n\nheap_caps_malloc_prefer()\n\nheap_caps_realloc_prefer()\n\nheap_caps_calloc_prefer()\n\nheap_caps_free()\n\nheap_caps_realloc()\n\nheap_caps_calloc()\n\nheap_caps_aligned_alloc()\n\nheap_caps_aligned_free()\n\n备注\n\n不建议使用此种方法。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S03#32",
+        "S03#s57"
+      ]
+    },
+    {
+      "questionId": "N04",
+      "split": "dev",
+      "set": "嵌入式开发",
+      "question": "ESP32 的 RTC GPIO 在哪些情况下能用，另外 gpio_config 和 gpio_reset_pin 这两个函数各自负责什么？",
+      "referenceChunks": [
+        "S04#s73~2",
+        "S04#s78"
+      ],
+      "topk": [
+        {
+          "chunkId": "S04#s73~2",
+          "score": null,
+          "text": "使用 ADC 或睡眠模式下使用 Wi-Fi 和蓝牙时，请不要使用 GPIO36 和 GPIO39 的中断。有关问题的详细描述，请参考 ESP32 ECO 和 Bug 解决方法 > 中的 GPIO-3.11 节。\n\n当 GPIO 连接到 RTC 低功耗和模拟子系统时，ESP32 芯片还单独支持 RTC GPIO。可在以下情况时使用这些管脚功能：\n\n当 GPIO 连接到 RTC 低功耗、模拟子系统、低功耗外设时，ESP32 芯片还单独支持 RTC GPIO。可在以下情况时使用这些管脚功能：\n\n处于 Deep-sleep 模式时\n\n超低功耗协处理器 (ULP-FSM) 运行时\n\n使用 ADC/DAC 等模拟功能时"
+        },
+        {
+          "chunkId": "S04#s78",
+          "score": null,
+          "text": "esp_err_t gpio_config(const gpio_config_t *pGPIOConfig)\n\nGPIO common configuration.\n\nConfigure GPIO's Mode,pull-up,PullDown,IntrType\n\n备注\n\nThis function always overwrite all the current IO configurations\n\n参数:\n\npGPIOConfig -- Pointer to GPIO configure struct\n\n返回:\n\nESP_OK success\n\nESP_ERR_INVALID_ARG Parameter error\n\nesp_err_t gpio_reset_pin(gpio_num_t gpio_num)\n\nReset a GPIO to a certain state (select gpio function, enable pullup and disable input and output).\n\n参数:\n\ngpio_num -- GPIO number.\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG Parameter error\n\nesp_err_t gpio_set_intr_type(gpio_num_t gpio_num, gpio_int_type_t intr_type)\n\nGPIO set interrupt trigger type.\n\n参数:\n\ngpio_num -- GPIO number. If you want to set the trigger type of e.g. of GPIO16, gpio_num should be GPIO_NUM_16 (16);\n\nintr_type -- Interrupt type, select from gpio_int_type_t\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG Parameter error\n\nesp_err_t gpio_intr_enable(gpio_num_t gpio_num)\n\nEnable GPIO module interrupt signal.\n\n备注\n\nESP32: Please do not use the interrupt of GPIO36 and GPIO39 when using ADC or Wi-Fi and Bluetooth with sleep mode enabled. Please refer to the comments of adc1_get_raw. Please refer to GPIO-3.11 of ESP32 ECO and Workarounds for Bugs for the description of this issue.\n\n参数:\n\ngpio_num -- GPIO number. If you want to enable an interrupt on e.g. GPIO16, gpio_num should be GPIO_NUM_16 (16);\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG Parameter error\n\nesp_err_t gpio_intr_disable(gpio_num_t gpio_num)\n\nDisable GPIO module interrupt signal.\n\n备注"
+        },
+        {
+          "chunkId": "S04#s74",
+          "score": null,
+          "text": "IO 可以有两种使用方式：\n\n作为简单的 GPIO 输入读取引脚上的电平，或作为简单的 GPIO 输出以输出所需的电平。\n\n作为外设信号的输入/输出。\n\nIDF 外设驱动内部会处理需要应用到引脚上的必要 IO 配置，以便它们可以用作外设信号的输入或输出。这意味着用户通常自己只需负责将 IO 配置为简单的输入或输出。gpio_config() 是一个一体化的 API，可用于配置 I/O 模式、内部上拉/下拉电阻等管脚设置，包括那些被 USB PHY 复用的引脚。\n\n在一些应用中，IO 管脚可以同时发挥双重作用。例如，输出 LEDC PWM 信号的 IO 也可以作为 GPIO 输入生成中断或 GPIO ETM 事件。这种双重用途的 IO 管脚在配置时需要特别注意。由于 gpio_config() 是一个会覆盖所有当前配置的 API ，因此必须先调用它将管脚模式设置为 gpio_mode_t::GPIO_MODE_INPUT，然后才能调用 LEDC 驱动 API 将输出信号连接到引脚上。作为替代方案，如果除了使管脚输入启用之外不需要其他额外配置，可以随时调用 gpio_input_enable() 以实现相同的目的。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S04#s73~2",
+        "S04#s78"
+      ]
+    },
+    {
+      "questionId": "N05",
+      "split": "dev",
+      "set": "AI框架与推理",
+      "question": "用 MindSpore Lite 的 benchmark 工具测 mobilenetv2 时，输入数据文件要按什么规格准备，跑完输出里那些误差信息该怎么理解？",
+      "referenceChunks": [
+        "S05#s100~2",
+        "S05#s100~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s100~2",
+          "score": null,
+          "text": "通过inDataFile指定模型的输入数据文件input.bin。\n在之前的Netron打开模型，我们已经知道mobilenetv2.ms模型接收float32的1x224x224x3张量。\nbenchmark的inDataFile选项默认接收二进制格式数据文件，input.bin文件按顺保存了150528个float32的二进制数值，跟模型要求的1x224x224x3数据量一致，且格式均为float32。\n\n通常输入数据文件可以采用以下方式生成：\n\n保存训练输入：将模型训练数据集内的数据进行前处理，将前处理后的数据保存。\n\n随机生成：通过随机生成的方式，生成指定范围内的随机数据。\n\n本例采用随机生成数作为输入，用户可以通过运行以下Python脚本，或点击此处下载本例中的input.bin文件，并将它放到benchmark目录内。\n\nimport numpy as np\nnp.random.seed(1)\nt = np.random.rand(1,224,224,3)\nt.astype(np.float32).tofile(\"input.bin\")\n\n在提供了输入数据之后，用户还需提供用于跟推理结果进行对比的标杆数据，以进行精度误差分析。\n本例通过benchmarkDataFile指定模型的输出标杆文件output.txt。标杆文件的格式需如下所示：\n\n[输出节点1名称] [输出节点1形状的维度长度] [输出节点1形状的第一维值] ... [输出节点1形状的第n维值]\n[节点1数据1] [节点1数据2] ...\n[输出节点2名称] [输出节点2形状的维度长度] [输出节点2形状的第一维值] ... [输出节点2形状的第n维值]\n[节点2数据1] [节点2数据2] ...\n\n通常标杆文件可以采用以下方式生成：\n\n跟其他框架进行对比：使用其它深度学习模型推理框架，并使用相同输入，将推理结果按照上面的要求格式保存。\n\n跟模型训练时进行对比：在训练框架中，将经过前处理后的数据保存作为inDataFile指定的输入数据。并将模型推理后，还未经过后处理的输出数据按标杆格式进行保存，作为标杆。\n\n跟不同设备或数据类型推理对比：使用不同的数据类型（例如FP16）或者设备（例如GPU/Kirin NPU）进行推理，得到该环境下标杆。\n\n跟理论值进行对比：针对一些简单模型，用户也可以根据对模型的理解，手动构造对应输入的输出标杆。\n\n提供的标杆数据必须和模型输出拥有相同的数据大小，才能跟模型输出进行对比，以得到推理精度误差量。\n在之前的Netron打开模型章节，我们已经知道mobilenetv2.ms模型，输出的节点名为Default/head-MobileNetV2Head/Softmax-op204，该节点输出的形状为1x1000（如图2中所示），故节点形状的维度长度为2，节点形状的第一维值为1，节点形状的第二维值为1000。\n本例采用跟其他框架进行对比的方式生成标杆，将之前得到的input.bin文件，通过其他框架生成推理后的数据，并按照标杆格式保存文件。\n得到标杆数据如下所示：\n\nDefault/head-MobileNetV2Head/Softmax-op204 2 1 1000\n4.75662418466527e-05 0.00044544308912009 ...\n\n标杆中第二行的数据，就是采用其他框架对相同的输入（input.bin）得到的推理输出，用户可以点击此处下载本例中的output.txt文件，并将它放到benchmark目录内。\n在执行benchmark命令后，若推理成功，则会输出类似如下统计信息："
+        },
+        {
+          "chunkId": "S05#s100~4",
+          "score": null,
+          "text": "在输出信息中，InData 0行打印的是该次推理的输入数据（只打印了前20个），Data of node Default/head-MobileNetV2Head/Softmax-op204行打印的是相关输出节点（Default/head-MobileNetV2Head/Softmax-op204）的推理结果（只打印前50个值），可以直接观察它们跟标杆文件的差异，以获得直观感受。\nMean bias of node/tensor Default/head-MobileNetV2Head/Softmax-op204行，给出了Default/head-MobileNetV2Head/Softmax-op204输出张量与标杆数据对比的平均误差，该误差计算方法为benchmark工具自带的比较算法。\n在最后，Mean bias of all nodes/tensors给出了所有张量与标杆对比的平均误差，在本例中，只有1个输出张量，故总平均误差和Default/head-MobileNetV2Head/Softmax-op204张量误差一致。可以观察到，推理的总平均误差为0%。\n\n高级功能\n\n关于benchmark的更详细说明，以及关于如何使用benchmark来进行基准测试、耗时定量分析、误差分析、Dump数据等，可以参考benchmark。\n\n表2：benchmark参数定义\n\n参数名\n\n是否必选\n\n参数说明\n\n参数类型\n\n默认值\n\n--modelFile=<MODELPATH>\n\n必选\n\n指定需要进行基准测试的MindSpore Lite模型文件路径。\n\nString\n\nnull\n\n--numThreads=<NUMTHREADS>\n\n可选\n\n指定模型推理程序运行的线程数。\n\nInteger\n\n--inDataFile=<INDATAPATH>\n\n可选\n\n指定测试模型输入数据的文件路径，默认接收二进制格式数据文件。在精度测试中，该输入作为标杆输入。如果未设置，则使用随机输入。\n\nString\n\nnull\n\n--benchmarkDataFile=<CALIBDATAPATH>\n\n可选\n\n指定对比标杆数据（用于精度对比的数据）的文件路径，接收按规定格式排列的字符文本。\n\nString\n\nnull\n\n参数名和参数值之间用等号连接，中间不能有空格。"
+        },
+        {
+          "chunkId": "S05#s109~2",
+          "score": null,
+          "text": "通过inDataFile指定模型的输入数据文件input.bin。\n在之前的Netron打开模型，我们已经知道mobilenetv2.ms模型接收float32的1x224x224x3张量。\nbenchmark的inDataFile选项默认接收二进制格式数据文件，input.bin文件按顺保存了150528个float32的二进制数值，跟模型要求的1x224x224x3数据量一致，且格式均为float32。\n\n通常输入数据文件可以采用以下方式生成：\n\n将模型训练数据集内的数据进行前处理，将前处理后的数据保存。\n\n通过随机生成的方式，生成指定范围内的随机数据。\n\n本例采用随机生成数作为输入，用户可以通过运行以下Python脚本，或点击此处下载本例中的input.bin文件，并将它放到benchmark目录内。\n\nimport numpy as np\nnp.random.seed(1)\nt = np.random.rand(1,224,224,3)\nt.astype(np.float32).tofile(\"input.bin\")\n\n在提供了输入数据之后，用户还需提供用于跟推理结果进行对比的标杆数据，以进行精度误差分析。\n本例通过benchmarkDataFile指定模型的输出标杆文件output.txt。标杆文件的格式需如下所示：\n\n[输出节点1名称] [输出节点1形状的维度长度] [输出节点1形状的第一维值] ... [输出节点1形状的第n维值]\n[节点1数据1] [节点1数据2] ...\n[输出节点2名称] [输出节点2形状的维度长度] [输出节点2形状的第一维值] ... [输出节点2形状的第n维值]\n[节点2数据1] [节点2数据2] ...\n\n通常标杆文件可以采用以下方式生成：\n\n跟其他框架进行对比：使用其它深度学习模型推理框架，并使用相同输入，将推理结果按照上面的要求格式保存。\n\n跟模型训练时进行对比：在训练框架中，将经过前处理后的数据保存作为inDataFile指定的输入数据。并将模型推理后，还未经过后处理的输出数据按标杆格式进行保存，作为标杆。\n\n跟不同设备或数据类型推理对比：使用不同的数据类型（例如FP16）或者设备（例如GPU/Kirin NPU）进行推理，得到该环境下标杆。\n\n跟理论值进行对比：针对一些简单模型，用户也可以根据对模型的理解，手动构造对应输入的输出标杆。\n\n提供的标杆数据必须和模型输出拥有相同的数据大小，才能跟模型输出进行对比，以得到推理精度误差量。\n在之前的Netron打开模型章节，我们已经知道mobilenetv2.ms模型，输出的节点名为Default/head-MobileNetV2Head/Softmax-op204，该节点输出的形状为1x1000（如图2中所示），故节点形状的维度长度为2，节点形状的第一维值为1，节点形状的第二维值为1000。\n本例采用跟其他框架进行对比的方式生成标杆，将之前得到的input.bin文件，通过其他框架生成推理后的数据，并按照标杆格式保存文件。\n得到标杆数据如下所示：\n\nDefault/head-MobileNetV2Head/Softmax-op204 2 1 1000\n4.75662418466527e-05 0.00044544308912009 ...\n\n标杆中第二行的数据，就是采用其他框架对相同的输入（input.bin）得到的推理输出，用户可以点击此处下载本例中的output.txt文件，并将它放到benchmark目录内。\n在执行benchmark命令后，若推理成功，则会输出类似如下统计信息："
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s100~2",
+        "S05#s100~4"
+      ]
+    },
+    {
+      "questionId": "N06",
+      "split": "dev",
+      "set": "AI框架与推理",
+      "question": "用飞桨做手写数字识别，数据集的下载和加载是怎么写的？网络部分用的是哪个模型、怎么构建并打印出结构？",
+      "referenceChunks": [
+        "S06#3.1",
+        "S06#3.2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S06#3.1",
+          "score": null,
+          "text": "飞桨在 paddle.vision.datasets 下内置了计算机视觉（Computer Vision，CV）领域常见的数据集，如 MNIST、Cifar10、Cifar100、FashionMNIST 和 VOC2012 等。在本任务中，先后加载了 MNIST 训练集（mode='train'）和测试集（mode='test'），训练集用于训练模型，测试集用于评估模型效果。\n\n[2]:\n\nimport paddle\nfrom paddle.vision.transforms import Normalize\n\ntransform = Normalize(mean=[127.5], std=[127.5], data_format=\"CHW\")\n# 下载数据集并初始化 DataSet\ntrain_dataset = paddle.vision.datasets.MNIST(mode=\"train\", transform=transform)\ntest_dataset = paddle.vision.datasets.MNIST(mode=\"test\", transform=transform)\n\n# 打印数据集里图片数量\nprint(\n\"{} images in train_dataset, {} images in test_dataset\".format(\nlen(train_dataset), len(test_dataset)\n)\n)\n\n60000 images in train_dataset, 10000 images in test_dataset\n\n飞桨除了内置了 CV 领域常见的数据集，还在 paddle.text 下内置了自然语言处理（Natural Language Processing，NLP）领域常见的数据集，并提供了自定义数据集与加载功能的 paddle.io.Dataset 和 paddle.io.DataLoader API，详细使用方法可参考『数据集定义与加载』 章节。\n\n另外在 paddle.vision.transforms 下提供了一些常用的图像变换操作，如对图像的翻转、裁剪、调整亮度等处理，可实现数据增强，以增加训练样本的多样性，提升模型的泛化能力。本任务在初始化 MNIST 数据集时通过 transform 字段传入了 Normalize 变换对图像进行归一化，对图像进行归一化可以加快模型训练的收敛速度。该功能的具体使用方法可参考『数据预处理』 章节。\n\n更多参考： * 数据集定义与加载 * 数据预处理"
+        },
+        {
+          "chunkId": "S06#3.2",
+          "score": null,
+          "text": "飞桨的模型组网有多种方式，既可以直接使用飞桨内置的模型，也可以自定义组网。\n\n『手写数字识别任务』比较简单，普通的神经网络就能达到很高的精度，在本任务中使用了飞桨内置的 LeNet 作为模型。飞桨在 paddle.vision.models 下内置了 CV 领域的一些经典模型，LeNet 就是其中之一，调用很方便，只需一行代码即可完成 LeNet 的网络构建和初始化。num_classes 字段中定义分类的类别数，因为需要对 0 ~ 9 的十类数字进行分类，所以设置为 10。\n\n另外通过 paddle.summary 可方便地打印网络的基础结构和参数信息。\n\n[3]:\n\n# 模型组网并初始化网络\nlenet = paddle.vision.models.LeNet(num_classes=10)\n\n# 可视化模型组网结构和参数\npaddle.summary(lenet, (1, 1, 28, 28))\n\n---------------------------------------------------------------------------\nLayer (type) Input Shape Output Shape Param #\n===========================================================================\nConv2D-1 [[1, 1, 28, 28]] [1, 6, 28, 28] 60\nReLU-1 [[1, 6, 28, 28]] [1, 6, 28, 28] 0\nMaxPool2D-1 [[1, 6, 28, 28]] [1, 6, 14, 14] 0\nConv2D-2 [[1, 6, 14, 14]] [1, 16, 10, 10] 2,416\nReLU-2 [[1, 16, 10, 10]] [1, 16, 10, 10] 0\nMaxPool2D-2 [[1, 16, 10, 10]] [1, 16, 5, 5] 0\nLinear-1 [[1, 400]] [1, 120] 48,120\nLinear-2 [[1, 120]] [1, 84] 10,164\nLinear-3 [[1, 84]] [1, 10] 850\n===========================================================================\nTotal params: 61,610\nTrainable params: 61,610\nNon-trainable params: 0\n---------------------------------------------------------------------------\nInput size (MB): 0.00\nForward/backward pass size (MB): 0.11\nParams size (MB): 0.24\nEstimated Total Size (MB): 0.35\n---------------------------------------------------------------------------\n\n[3]:\n\n{'total_params': 61610, 'trainable_params': 61610}\n\n通过飞桨的 paddle.nn.Sequential 和 paddle.nn.Layer API 可以更灵活方便的组建自定义的神经网络，详细使用方法可参考『模型组网』章节。\n\n更多参考： * 模型组网"
+        },
+        {
+          "chunkId": "S06#s115",
+          "score": null,
+          "text": "『手写数字识别』是深度学习里的 Hello World 任务，用于对 0 ~ 9 的十类数字进行分类，即输入手写数字的图片，可识别出这个图片中的数字。\n\n本任务用到的数据集为 MNIST 手写数字数据集，用于训练和测试模型。该数据集包含 60000 张训练图片、 10000 张测试图片、以及对应的分类标签文件，每张图片上是一个 0 ~ 9 的手写数字，分辨率为 28 * 28。部分图像和对应的分类标签如下图所示。\n\n图 1：MNIST 数据集样例\n\n开始之前，需要使用下面的命令安装 Python 的 matplotlib 库和 numpy 库，matplotlib 库用于可视化图片，numpy 库用于处理数据。\n\n[3]:\n\n# 使用 pip 工具安装 matplotlib 和 numpy\n! python3 -m pip install matplotlib numpy -i https://mirror.baidu.com/pypi/simple\n\n下面是手写数字识别任务的完整代码，如果想直接运行代码，可以拷贝下面的完整代码到一个Python文件中运行。\n\n[5]:\n\nimport paddle\nimport numpy as np\nfrom paddle.vision.transforms import Normalize\n\ntransform = Normalize(mean=[127.5], std=[127.5], data_format=\"CHW\")\n# 下载数据集并初始化 DataSet\ntrain_dataset = paddle.vision.datasets.MNIST(mode=\"train\", transform=transform)\ntest_dataset = paddle.vision.datasets.MNIST(mode=\"test\", transform=transform)\n\n# 模型组网并初始化网络\nlenet = paddle.vision.models.LeNet(num_classes=10)\nmodel = paddle.Model(lenet)\n\n# 模型训练的配置准备，准备损失函数，优化器和评价指标\nmodel.prepare(\npaddle.optimizer.Adam(parameters=model.parameters()),\npaddle.nn.CrossEntropyLoss(),\npaddle.metric.Accuracy(),\n)\n\n# 模型训练\nmodel.fit(train_dataset, epochs=5, batch_size=64, verbose=1)\n# 模型评估\nmodel.evaluate(test_dataset, batch_size=64, verbose=1)\n\n# 保存模型\nmodel.save(\"./output/mnist\")\n# 加载模型\nmodel.load(\"output/mnist\")\n\n# 从测试集中取出一张图片\nimg, label = test_dataset[0]\n# 将图片shape从1*28*28变为1*1*28*28，增加一个batch维度，以匹配模型输入格式要求\nimg_batch = np.expand_dims(img.astype(\"float32\"), axis=0)"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S06#3.1",
+        "S06#3.2"
+      ]
+    },
+    {
+      "questionId": "N07",
+      "split": "dev",
+      "set": "AI框架与推理",
+      "question": "飞桨里从 Python 列表造 Tensor 用哪个接口，如果要造指定形状、内容全是 0 或全是 1 的 Tensor 又该怎么做？",
+      "referenceChunks": [
+        "S07#2.1",
+        "S07#2.2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S07#2.1",
+          "score": null,
+          "text": "与 Numpy 创建数组方式类似，通过给定 Python 序列（如列表 list、元组 tuple），可使用 paddle.to_tensor 创建任意维度的 Tensor。示例如下：\n\n2.1.1 创建类似向量（vector）的 1 维 Tensor：\n\nimport paddle # 后面的示例代码默认已导入 paddle 模块\nndim_1_Tensor = paddle.to_tensor([2.0, 3.0, 4.0])\nprint(ndim_1_Tensor)\n\nTensor(shape=[3], dtype=float32, place=Place(gpu:0), stop_gradient=True,\n[2., 3., 4.])\n\n特殊地，如果仅输入单个标量（scalar）数据（例如 float/int/bool 类型的单个元素），则会创建形状为 [1] 的 Tensor，即 0 维 Tensor：\n\npaddle.to_tensor(2)\npaddle.to_tensor([2])\n\n# 上述两种创建方式完全一致，形状均为 [1]，输出如下：\nTensor(shape=[1], dtype=int64, place=Place(gpu:0), stop_gradient=True,\n[2])\n\n2.1.2 创建类似矩阵（matrix）的 2 维 Tensor：\n\nndim_2_Tensor = paddle.to_tensor([[1.0, 2.0, 3.0],\n[4.0, 5.0, 6.0]])\nprint(ndim_2_Tensor)\n\nTensor(shape=[2, 3], dtype=float32, place=Place(gpu:0), stop_gradient=True,\n[[1., 2., 3.],\n[4., 5., 6.]])\n\n2.1.3 创建 3 维 Tensor：\n\nndim_3_Tensor = paddle.to_tensor([[[1, 2, 3, 4, 5],\n[6, 7, 8, 9, 10]],\n[[11, 12, 13, 14, 15],\n[16, 17, 18, 19, 20]]])\nprint(ndim_3_Tensor)\n\nTensor(shape=[2, 2, 5], dtype=int64, place=Place(gpu:0), stop_gradient=True,\n[[[1 , 2 , 3 , 4 , 5 ],\n[6 , 7 , 8 , 9 , 10]],\n\n[[11, 12, 13, 14, 15],\n[16, 17, 18, 19, 20]]])\n\n上述不同维度的 Tensor 可视化的表示如下图所示：\n\n图 1 不同维度的 Tensor 可视化表示\n\n需要注意的是，Tensor 必须形如矩形，即在任何一个维度上，元素的数量必须相等，否则会抛出异常，示例如下：\n\nndim_2_Tensor = paddle.to_tensor([[1.0, 2.0],\n[4.0, 5.0, 6.0]])\n\nValueError:\nFailed to convert input data to a regular ndarray :\n- Usually this means the input data contains nested lists with different lengths.\n\n说明：\n\n飞桨也支持将 Tensor 转换为 Python 序列数据，可通过 paddle.tolist 实现，飞桨实际的转换处理过程是 Python 序列 <-> Numpy 数组 <-> Tensor。\n\n基于给定数据创建 Tensor 时，飞桨是通过拷贝方式创建，与原始数据不共享内存。"
+        },
+        {
+          "chunkId": "S07#2.2",
+          "score": null,
+          "text": "如果要创建一个指定形状的 Tensor，可以使用 paddle.zeros、paddle.ones、paddle.full 实现。\n\npaddle.zeros([m, n]) # 创建数据全为 0，形状为 [m, n] 的 Tensor\npaddle.ones([m, n]) # 创建数据全为 1，形状为 [m, n] 的 Tensor\npaddle.full([m, n], 10) # 创建数据全为 10，形状为 [m, n] 的 Tensor\n\n例如，paddle.ones([2,3])输出如下：\n\nTensor(shape=[2, 3], dtype=float32, place=Place(gpu:0), stop_gradient=True,\n[[1., 1., 1.],\n[1., 1., 1.]])"
+        },
+        {
+          "chunkId": "S07#s125",
+          "score": null,
+          "text": "飞桨可基于给定数据手动创建 Tensor，并提供了多种方式，如：\n\n2.1 指定数据创建\n\n2.2 指定形状创建\n\n2.3 指定区间创建\n\n另外在常见深度学习任务中，数据样本可能是图片（image）、文本（text）、语音（audio）等多种类型，在送入神经网络训练或推理前均需要创建为 Tensor。飞桨提供了将这类数据手动创建为 Tensor 的方法，如：\n\n2.4 指定图像、文本数据创建\n\n由于这些操作在整个深度学习任务流程中比较常见且固定，飞桨在一些 API 中封装了 Tensor 自动创建的操作，从而无须手动转 Tensor。\n\n2.5 自动创建 Tensor 的功能介绍\n\n如果你熟悉 Numpy，已经使用 Numpy 数组创建好数据，飞桨可以很方便地将 Numpy 数组转为 Tensor，具体介绍如：\n\n六、Tensor 与 Numpy 数组相互转换"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S07#2.1",
+        "S07#2.2"
+      ]
+    },
+    {
+      "questionId": "N08",
+      "split": "dev",
+      "set": "计算机视觉",
+      "question": "YOLO26 能导出成哪些部署格式，它们分别适合什么场景？除 NVIDIA 之外，像 Hailo、Ambarella、华为昇腾这类加速器要怎么接？",
+      "referenceChunks": [
+        "S08#s147",
+        "S08#s147~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S08#s147",
+          "score": null,
+          "text": "下面简要介绍每种格式及其适用场景。有关完整的导出流程，请参阅导出文档；有关并列比较标准，请查看对比表。\n\nPyTorch (.pt)：原生训练和推理格式，灵活性最高，并可通过 NVIDIA CUDA 或 AMD ROCm 实现 GPU 加速——非常适合研究和原型开发，无需执行导出步骤。\n\nTorchScript (torchscript)：将模型序列化，使其能够在无需 Python 的 C++ 运行时中运行，适用于无法使用 Python 的生产系统。\n\nONNX (onnx)：与框架无关的交换格式，可通过 ONNX Runtime 提供广泛的跨平台和硬件支持。\n\nOpenVINO (openvino)：Intel 提供的工具包，可在 Intel CPU、集成 GPU 和 NPU 上实现优化推理，常用于物联网和边缘计算。\n\nTensorRT (engine)：NVIDIA 的高性能运行时，通过 FP16 和 INT8 优化提供顶级 GPU 推理性能。\n\nCoreML (coreml)：Apple 面向 iOS、macOS、watchOS 和 tvOS 的设备端格式，使用 Apple Neural Engine。\n\nTF SavedModel (saved_model)：TensorFlow 的标准格式，可通过 TensorFlow Serving 实现可扩展的服务器端服务。\n\nTF GraphDef (pb)：一种冻结的静态图 TensorFlow 格式，适用于需要固定计算图的环境。\n\nTF Edge TPU (edgetpu)：将 .tflite 模型编译为适用于 Google Coral Edge TPU 加速器的格式。\n\nLiteRT (litert)：Google 的设备端运行时（前身为 TensorFlow Lite），可使用单个 .tflite 模型进行移动端、嵌入式设备和浏览器推理，支持 FP32 和 INT8，并可通过 LiteRT.js 在浏览器中执行。\n\nPaddlePaddle (paddle)：百度的深度学习框架，在中国广泛使用，并支持多种硬件。\n\nMNN (mnn)：轻量、高性能的推理引擎，针对移动端和嵌入式 ARM 及 x86-64 系统进行了优化。\n\nNCNN (ncnn)：高性能、轻量级的推理框架，针对移动 ARM 设备进行了优化。\n\nSony IMX500 (imx)：用于 Sony IMX500 智能视觉传感器的导出格式，支持芯片上处理，例如 Raspberry Pi AI Camera。\n\nRockchip RKNN (rknn)：面向嵌入式开发板上的 Rockchip NPU，支持 FP16 和 INT8 量化。\n\nExecuTorch (executorch)：PyTorch 原生设备端运行时，可通过 XNNPACK 用于移动端（iOS 和 Android）及嵌入式系统。\n\nAxelera AI (axelera)：面向 Axelera 的 Metis AIPU（最高 856 TOPS），通过 PCIe 或 M.2 实现高吞吐量边缘推理。\n\nDEEPX (deepx)：面向 DEEPX NPU 硬件，使用 INT8 量化进行嵌入式边缘推理。\n\nQualcomm QNN (qnn)：通过 Qualcomm AI 技术栈，在 Snapdragon Hexagon NPU、Adreno GPU 和 CPU 上执行设备端推理。\n\nCore AI (coreai): 苹果公司针对 iOS 27 和 macOS 27 推出的全新 .aimodel 格式，计划支持 CPU、GPU 和 Apple Neural Engine；导出操作需要在搭载 Apple silicon 的 macOS 26 或更高版本上进行。"
+        },
+        {
+          "chunkId": "S08#s147~2",
+          "score": null,
+          "text": "Hailo 集成可将 YOLO 检测、分割、语义分割、深度估计、分类、姿态和 OBB 模型直接导出为 Hailo HEF；有关经过验证的模型和目标，请参阅其兼容性表。Ambarella 集成采用 ONNX 优先的工作流，使用 Ambarella 的 CVflow 工具链将 ONNX 导出结果编译为 AmbaPB 格式，用于 CV72 等 CVflow® SoC，并可选择使用 SpongeTorch 进行压缩感知训练。Huawei Ascend 集成使用 CANN ATC 编译器将 ONNX 导出结果编译为 .om 离线格式，以便在 Ascend AI Processors 上进行 FP16 推理。"
+        },
+        {
+          "chunkId": "S08#s150",
+          "score": null,
+          "text": "Ultralytics YOLO26 支持多种部署格式，每种格式都针对特定环境和硬件平台而设计。主要格式包括：\n\nPyTorch，适用于研究和原型开发，并提供出色的 Python 集成支持。\n\nTorchScript，适用于无法使用 Python 的生产环境。\n\nONNX，用于跨平台兼容性和硬件加速。\n\nOpenVINO，用于在 Intel 硬件上实现优化性能。\n\nTensorRT，用于在 NVIDIA GPU 上实现高速推理。\n\n每种格式都有独特的优势。有关详细操作流程，请参阅我们的导出流程文档。\n\n要提升 Intel CPU 上的推理速度，你可以使用 Intel 的 OpenVINO 工具包部署 YOLO26 模型。OpenVINO 通过优化模型以高效利用 Intel 硬件，可显著提升性能。\n\n使用 model.export() 函数将 YOLO26 模型转换为 OpenVINO 格式。\n\n请参阅Intel OpenVINO 导出文档中的详细设置指南。\n\n如需了解更多信息，请查看我们的博客文章。\n\n是的，YOLO26 模型可以使用适用于 Android 的 LiteRT（此前称为 TensorFlow Lite）和 NCNN 部署到移动设备，也可以使用适用于 iOS 的 CoreML 或 LiteRT。LiteRT 是 Google 面向移动和嵌入式设备的端侧运行时，可在 Android、iOS 和浏览器上运行同一模型，从而实现高效的端侧推理。\n\n示例\n\n# Export command for NCNN format\nmodel.export(format=\"ncnn\")\n\n如需详细了解如何将模型部署到移动设备，请参阅我们的 LiteRT 集成指南。\n\n为 YOLO26 选择部署格式时，请考虑以下因素：\n\n性能：TensorRT 等格式可在 NVIDIA GPU 上提供卓越的速度，而 OpenVINO 针对 Intel 硬件进行了优化。\n\n兼容性：ONNX 在不同平台之间具有广泛的兼容性。\n\n集成便捷性：CoreML 或 LiteRT 等格式分别针对 iOS 和 Android 等特定生态系统进行了适配。\n\n社区支持：PyTorch 和 TensorFlow 等格式拥有丰富的社区资源和支持。\n\n如需进行比较分析，请参阅我们的导出格式文档。\n\n要在 Web 应用中部署 YOLO26 模型，你可以使用 LiteRT.js（LiteRT 的 Web 运行时），直接在浏览器和 Node.js 中运行机器学习模型。这种方式无需后端基础设施，并可提供实时性能。\n\n将 YOLO26 模型导出为 LiteRT 格式。\n\n使用 LiteRT.js 将导出的模型集成到你的 Web 应用中。\n\n如需分步说明，请参阅我们的 LiteRT 集成指南。\n\n贡献者\n\nGLglenn-jocher23RAraimbekovm3JEJESUSROYETH3AMambitious-octopus2LAlakshanthad1PDpderrenger1RIRizwanMunawar1LEleonnil1WAwangzhaode1MAMatthewNoyce1\n\n创建时间 2023年11月12日更新时间 上周"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S08#s147",
+        "S08#s147~2"
+      ]
+    },
+    {
+      "questionId": "N09",
+      "split": "dev",
+      "set": "计算机视觉",
+      "question": "YOLO26 的检测模型是在什么数据集上预训练的，跑一次预测的典型代码长什么样、结果里能取到哪些框坐标形式？",
+      "referenceChunks": [
+        "S09#s153",
+        "S09#s157"
+      ],
+      "topk": [
+        {
+          "chunkId": "S09#s153",
+          "score": null,
+          "text": "这里展示了 YOLO26 预训练 Detect 模型。Detect、Segment 和 Pose 模型在 COCO 数据集上进行预训练，Semantic 模型在 Cityscapes 上进行预训练，Classify 模型则在 ImageNet 数据集上进行预训练。\n\n模型首次使用时会自动从最新的 Ultralytics 发行版下载。\n\n模型\n\n尺寸\n\n（像素）\n\nmAPval\n\n50-95\n\nmAPval\n\n50-95(e2e)\n\n速度\n\nCPU ONNX\n\n（毫秒）\n\n速度\n\nT4 TensorRT10\n\n（毫秒）\n\n参数量\n\n（M）\n\nFLOPs\n\n（B）\n\nYOLO26n\n\n640\n\n40.9\n\n40.1\n\n38.9 ± 0.7\n\n1.7 ± 0.0\n\n2.4\n\n5.5\n\nYOLO26s\n\n640\n\n48.6\n\n47.8\n\n87.2 ± 0.9\n\n2.5 ± 0.0\n\n9.5\n\n20.9\n\nYOLO26m\n\n640\n\n53.1\n\n52.5\n\n220.0 ± 1.4\n\n4.7 ± 0.1\n\n20.4\n\n68.4\n\nYOLO26l\n\n640\n\n55.0\n\n54.4\n\n286.2 ± 2.0\n\n6.2 ± 0.2\n\n24.8\n\n86.8\n\nYOLO26x\n\n640\n\n57.5\n\n56.9\n\n525.8 ± 4.0\n\n11.8 ± 0.2\n\n55.7\n\n194.4\n\nmAPval 数值适用于在 COCO val2017 数据集上使用单模型单尺度进行评估的结果。\n\n可以通过运行 yolo val detect data=coco.yaml device=0 来复现。添加 nms=False 来复现 e2e 列。\n\n速度是在使用 Amazon EC2 P4d 实例处理 COCO val 图像时的平均值。\n\n通过 yolo val detect data=coco.yaml batch=1 device=0|cpu nms=False 复现\n\nParams 和 FLOPs 数值适用于在进行卷积与批归一化折叠以及移除未使用的检测分支之后的融合模型。预训练检查点保留完整的训练架构，可能会显示更高的数值。\n\n查看unreleased YOLO27 preview以获取初步的COCO检测结果。"
+        },
+        {
+          "chunkId": "S09#s157",
+          "score": null,
+          "text": "使用训练好的 YOLO26n 模型对图像运行预测。\n\n示例\n\nfrom ultralytics import YOLO\n\n# Load a model\nmodel = YOLO(\"yolo26n.pt\") # load an official model\nmodel = YOLO(\"path/to/best.pt\") # load a custom model\n\n# Predict with the model\nresults = model(\"https://ultralytics.com/images/bus.jpg\") # predict on an image\n\n# Access the results\nfor result in results:\nxywh = result.boxes.xywh # center-x, center-y, width, height\nxywhn = result.boxes.xywhn # normalized\nxyxy = result.boxes.xyxy # top-left-x, top-left-y, bottom-right-x, bottom-right-y\nxyxyn = result.boxes.xyxyn # normalized\nnames = [result.names[cls.item()] for cls in result.boxes.cls.int()] # class name of each box\nconfs = result.boxes.conf # confidence score of each box\n\n请在预测页面查看完整的 predict 模式详情。"
+        },
+        {
+          "chunkId": "S09#s158",
+          "score": null,
+          "text": "目标检测会为每张图像返回一个 Results 对象。主要的预测字段是 result.boxes，其中包含\n每个检测对象的框坐标、类别 ID 和置信度分数。\n\n属性\n\n类型\n\n形状\n\n描述\n\nresult.boxes\n\nBoxes\n\n(N)\n\n检测框。\n\nresult.boxes.data\n\ntorch.float32\n\n(N,6/7)\n\n原始 [x1,y1,x2,y2,conf,cls]，以及可选的跟踪 ID。\n\nresult.boxes.xyxy\n\ntorch.float32\n\n(N,4)\n\nxyxy 像素框。\n\nresult.boxes.conf\n\ntorch.float32\n\n(N,)\n\n置信度分数。\n\nresult.boxes.cls\n\ntorch.float32\n\n(N,)\n\n类别 ID；转换为 int 以获取名称。\n\n有关每项任务中任务专用的 Results 字段，请参阅按任务划分的预测结果部分。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S09#s153",
+        "S09#s157"
+      ]
+    },
+    {
+      "questionId": "N10",
+      "split": "dev",
+      "set": "计算机视觉",
+      "question": "YOLO26 的分割模型精度指标怎么看，用 model.val() 做验证时能拿到哪些指标？",
+      "referenceChunks": [
+        "S10#s163",
+        "S10#s166"
+      ],
+      "topk": [
+        {
+          "chunkId": "S10#s166",
+          "score": null,
+          "text": "在 COCO8-seg 数据集上验证训练好的 YOLO26n-seg 模型的准确率。无需提供参数，因为 model 会将其训练用的 data 和参数保留为模型属性。\n\n示例\n\nfrom ultralytics import YOLO\n\n# Load a model\nmodel = YOLO(\"yolo26n-seg.pt\") # load an official model\nmodel = YOLO(\"path/to/best.pt\") # load a custom model\n\n# Validate the model\nmetrics = model.val() # no arguments needed, dataset and settings remembered\nmetrics.box.map # map50-95(B)\nmetrics.box.map50 # map50(B)\nmetrics.box.map75 # map75(B)\nmetrics.box.maps # a list containing mAP50-95(B) for each category\nmetrics.box.image_metrics # per-image metrics dictionary for det with precision, recall, F1, TP, FP, and FN\nmetrics.seg.map # map50-95(M)\nmetrics.seg.map50 # map50(M)\nmetrics.seg.map75 # map75(M)\nmetrics.seg.maps # a list containing mAP50-95(M) for each category\nmetrics.seg.image_metrics # per-image metrics dictionary for seg with precision, recall, F1, TP, FP, and FN"
+        },
+        {
+          "chunkId": "S10#s163",
+          "score": null,
+          "text": "这里展示了 YOLO26 预训练 Segment 模型。Detect、Segment 和 Pose 模型在 COCO 数据集上进行预训练，语义模型在 Cityscapes 上进行预训练，而 Classify 模型在 ImageNet 数据集上进行预训练。\n\n首次使用时，模型 会自动从最新的 Ultralytics 发布版本 下载。\n\n模型\n\n尺寸\n\n（像素）\n\nmAP框\n\n50-95(e2e)\n\nmAP掩码\n\n50-95(e2e)\n\n速度\n\nCPU ONNX\n\n（毫秒）\n\n速度\n\nT4 TensorRT10\n\n（毫秒）\n\n参数量\n\n（M）\n\nFLOPs\n\n（B）\n\nYOLO26n-seg\n\n640\n\n39.6\n\n33.9\n\n53.3 ± 0.5\n\n2.1 ± 0.0\n\n2.7\n\n9.3\n\nYOLO26s-seg\n\n640\n\n47.3\n\n40.0\n\n118.4 ± 0.9\n\n3.3 ± 0.0\n\n10.4\n\n34.5\n\nYOLO26m-seg\n\n640\n\n52.5\n\n44.1\n\n328.2 ± 2.4\n\n6.7 ± 0.1\n\n23.6\n\n121.7\n\nYOLO26l-seg\n\n640\n\n54.4\n\n45.5\n\n387.0 ± 3.7\n\n8.0 ± 0.1\n\n28.0\n\n140.1\n\nYOLO26x-seg\n\n640\n\n56.5\n\n47.0\n\n787.0 ± 6.8\n\n16.4 ± 0.1\n\n62.8\n\n314.0\n\nmAPval 值基于 COCO val2017 数据集上的单模型、单尺度评估。\n\n通过 yolo val segment data=coco.yaml device=0 nms=False 复现\n\n速度是在使用 Amazon EC2 P4d 实例处理 COCO val 图像时的平均值。\n\n通过 yolo val segment data=coco.yaml batch=1 device=0|cpu nms=False 复现\n\nParams 和 FLOPs 数值适用于在进行卷积与批归一化折叠以及移除未使用的检测分支之后的融合模型。预训练检查点保留完整的训练架构，可能会显示更高的数值。\n\n这些检查点可分割 COCO 的 80 个类别。若要在无需重新训练的情况下分割该列表之外的类别，请参阅 YOLOE，它可以将类别作为文本提示、视觉示例或内置词汇表输入。\n\n请参阅unreleased YOLO27 preview以获取初步的COCO边界框和掩码结果。"
+        },
+        {
+          "chunkId": "S10#s162",
+          "score": null,
+          "text": "实例分割比目标检测更进一步，它不仅要识别图像中的各个对象，还要将它们从图像的其余部分中分割出来。\n\n实例分割模型的输出是一组用于勾勒图像中每个对象的掩码或轮廓，同时还会为每个对象提供类别标签和置信度分数。当你不仅需要知道图像中对象的位置，还需要知道它们的确切形状时，实例分割就非常有用。\n\nWatch: Run Segmentation with Pretrained Ultralytics YOLO Model in Python.\n\n提示\n\nYOLO26 Segment 模型使用 -seg 后缀，即 yolo26n-seg.pt，并在 COCO 上进行预训练。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S10#s166",
+        "S10#s163"
+      ]
+    },
+    {
+      "questionId": "N11",
+      "split": "dev",
+      "set": "测试自动化",
+      "question": "pytest 的 fixture 里，用 yield 做清理和用 addfinalizer 挂清理函数有什么差别？各自有什么坑？",
+      "referenceChunks": [
+        "S14#1",
+        "S14#2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S13#s216~2",
+          "score": null,
+          "text": "This is so because yield fixtures use addfinalizer behind the scenes: when the fixture executes, addfinalizer registers a function that resumes the generator, which in turn calls the teardown code."
+        },
+        {
+          "chunkId": "S14#2",
+          "score": null,
+          "text": "虽然Year固定器被认为是更干净、更直接的选择，但是还有另一个选择，那就是将“终结器”功能直接添加到测试的 request-context 对象。它带来了与屈服装置类似的结果，但需要更多的冗长。\n\n为了使用此方法，我们必须请求 request-context 对象(就像我们请求另一个fixture一样)，我们需要为其添加teardown代码，然后将包含该teardown代码的可调用对象传递给它的 addfinalizer 方法。\n\n不过，我们必须小心，因为pytest将在添加终结器后运行该终结器，即使该fixture在添加终结器后引发异常。因此，为了确保我们不会在不需要运行终结器代码的时候运行终结器代码，我们只需要在fixture完成需要拆除的操作之后才添加终结器。\n\n下面是前面的示例使用 addfinalizer 方法：\n\nimport pytest\n\nfrom emaillib import Email, MailAdminClient\n\n@pytest.fixture\ndef mail_admin():\nreturn MailAdminClient()\n\n@pytest.fixture\ndef sending_user(mail_admin):\nuser = mail_admin.create_user()\nyield user\nadmin_client.delete_user(user)\n\n@pytest.fixture\ndef receiving_user(mail_admin, request):\nuser = mail_admin.create_user()\n\ndef delete_user():\nadmin_client.delete_user(user)\n\nrequest.addfinalizer(delete_user)\nreturn user\n\n@pytest.fixture\ndef email(sending_user, receiving_user, request):\n_email = Email(subject=\"Hey!\", body=\"How's it going?\")\nsending_user.send_email(_email, receiving_user)\n\ndef empty_mailbox():\nreceiving_user.delete_email(_email)\n\nrequest.addfinalizer(empty_mailbox)\nreturn _email\n\ndef test_email_received(receiving_user, email):\nassert email in receiving_user.inbox\n\n它比屈服固定装置长一点，也稍微复杂一点，但它确实为你在紧要关头提供了一些细微的差别。"
+        },
+        {
+          "chunkId": "S14#s251",
+          "score": null,
+          "text": "如果屈服装置在屈服前引发异常，pytest将不会在该屈服装置的异常之后尝试运行teardown代码。 yield 声明。但是，对于已经为该测试成功运行的每个灯具，pytest仍然会像往常一样尝试拆卸它们。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S14#2"
+      ]
+    },
+    {
+      "questionId": "N12",
+      "split": "dev",
+      "set": "职业能力",
+      "question": "软件质量保证分析师与测试员这个岗位，主要任务和工作活动包括哪些内容？",
+      "referenceChunks": [
+        "S16#s291~2",
+        "S16#s292"
+      ],
+      "topk": [
+        {
+          "chunkId": "S16#s283",
+          "score": null,
+          "text": "15-1253.00\n\nBright Outlook\n\nUpdated 2026\n\nDevelop and execute software tests to identify software problems and their causes. Test system modifications to prepare for implementation. Document software and application defects using a bug tracking system and report defects to software or web developers. Create and maintain databases of known defects. May participate in software design reviews to provide input on functional requirements, operational characteristics, product designs, and schedules.\n\nSample of reported job titles:\nAutomation Tester, Information Technology Analyst (IT Analyst), Quality Assurance Analyst (QA Analyst), Quality Assurance Engineer (QA Engineer), Quality Engineer, Software Quality Assurance Analyst (SQA Analyst), Software Quality Assurance Engineer (SQA Engineer), Software Quality Engineer, Software Test Engineer, Test Engineer"
+        },
+        {
+          "chunkId": "S26#s1432",
+          "score": null,
+          "text": "技能要求：能对测试过程制定规划\n\n技能要求：能实施测试过程监督\n\n技能要求：能对汇总缺陷进行缺陷分析\n\n技能要求：能用测试管理工具进行测试过程管控\n\n技能要求：能组织测试结果复盘会议\n\n相关知识：测试过程规划制定方法\n\n相关知识：测试过程监督方法缺陷分析方法\n\n相关知识：测试管理工具使用方法\n\n相关知识：测试结果复盘方法"
+        },
+        {
+          "chunkId": "S26#s1426",
+          "score": null,
+          "text": "技能要求：能理解项目产品/需求文档中对业务和功\n\n技能要求：能的描述能识别需要进行测试的系统模块或功\n\n技能要求：能点能提取测试要点并寻找关键测试场景\n\n技能要求：能根据需求重要性确定测试任务优先级\n\n相关知识：测试理论和方法测试对象提取方法"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "N13",
+      "split": "dev",
+      "set": "职业能力",
+      "question": "计算机硬件工程师日常要完成哪些任务和工作活动？",
+      "referenceChunks": [
+        "S17#s320~2",
+        "S17#s321"
+      ],
+      "topk": [
+        {
+          "chunkId": "S17#s320",
+          "score": null,
+          "text": "Update knowledge and skills to keep up with rapid advancements in computer technology.\n\nRelated occupations\n\nDesign and develop computer hardware and support peripherals, including central processing units (CPUs), support logic, microprocessors, custom integrated circuits, and printers and disk drives.\n\nRelated occupations\n\nConfer with engineering staff and consult specifications to evaluate interface between hardware and software and operational and performance requirements of overall system.\n\nRelated occupations\n\nBuild, test, and modify product prototypes, using working models or theoretical models constructed with computer simulation.\n\nRelated occupations\n\nWrite detailed functional specifications that document the hardware development process and support hardware introduction.\n\nRelated occupations\n\nTest and verify hardware and support peripherals to ensure that they meet specifications and requirements, by recording and analyzing test data.\n\nRelated occupations\n\nDirect technicians, engineering designers or other technical support personnel as needed.\n\nRelated occupations\n\nProvide technical support to designers, marketing and sales departments, suppliers, engineers and other team members throughout the product development and implementation process.\n\nRelated occupations\n\nSelect hardware and material, assuring compliance with specifications and product requirements.\n\nRelated occupations\n\nStore, retrieve, and manipulate data for analysis of system capabilities and requirements.\n\nRelated occupations\n\nAnalyze user needs and recommend appropriate hardware.\n\nRelated occupations"
+        },
+        {
+          "chunkId": "S17#s320~2",
+          "score": null,
+          "text": "Evaluate factors such as reporting formats required, cost constraints, and need for security restrictions to determine hardware configuration.\n\nRelated occupations\n\nProvide training and support to system designers and users.\n\nRelated occupations\n\nMonitor functioning of equipment and make necessary modifications to ensure system operates in conformance with specifications.\n\nRelated occupations\n\nSpecify power supply requirements and configuration, drawing on system performance expectations and design specifications.\n\nRelated occupations\n\nAssemble and modify existing pieces of equipment to meet special needs.\n\nRelated occupations\n\nAnalyze information to determine, recommend, and plan layout, including type of computers and peripheral equipment modifications.\n\nRelated occupations\n\nRecommend purchase of equipment to control dust, temperature, and humidity in area of system installation.\n\nRelated occupations\n\nFind occupations related to multiple tasks\n\nback to top"
+        },
+        {
+          "chunkId": "S17#s312",
+          "score": null,
+          "text": "17-2061.00\n\nBright Outlook\n\nUpdated 2026\n\nResearch, design, develop, or test computer or computer-related equipment for commercial, industrial, military, or scientific use. May supervise the manufacturing and installation of computer or computer-related equipment and components.\n\nSample of reported job titles:\nDesign Engineer, Engineer, Field Service Engineer, Hardware Design Engineer, Hardware Engineer, Physical Design Engineer, Project Engineer, Staff Engineer, Systems Integration Engineer"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S17#s320~2"
+      ]
+    },
+    {
+      "questionId": "N14",
+      "split": "dev",
+      "set": "标准与政策",
+      "question": "全国标准信息公共服务平台目前收录了多少现行有效的强制性国家标准和推荐性国家标准，其中可在线阅读下载的比例是怎样的？",
+      "referenceChunks": [
+        "S20#s345",
+        "S20#s346"
+      ],
+      "topk": [
+        {
+          "chunkId": "S20#s345",
+          "score": null,
+          "text": "全国标准信息公共服务平台\n\n首页\n\n国家标准\n\n强制性国家标准\n\n推荐性国家标准\n\n指导性技术文件\n\n国家标准外文版(National standards in foreign language version)\n\n2026-08-25 关于公开2026年第34号中国国家标准公告中国家标准全文的通知\n\n2026-08-25 关于公开2026年第33号中国国家标准公告中国家标准全文的通知\n\n2026-08-25 关于公开2026年第32号中国国家标准公告中国家标准全文的通知\n\n2026-07-28 关于公开2026年第31号中国国家标准公告中国家标准全文的通知\n\n2026-07-28 关于公开2026年第30号中国国家标准公告中国家标准全文的通知\n\n查看更多\n\n国家标准动态\n\nGB强制性国家标准\n\n本系统收录现行有效强制性国家标准2,031项。其中非采标1,691项可在线阅读和下载，采标340项只可在线阅读。\n\nGB/T推荐性国家标准\n\n本系统收录现行有效推荐性国家标准47,164项。其中非采标31,144项可在线阅读和下载，采标16,020项只提供标准题录信息。\n\nGB/Z指导性技术文件\n\n本系统收录现行有效指导性技术文件742项。其中非采标283项可在线阅读和下载，采标459项只提供标准题录信息。\n\nNational standards in foreign language version国家标准外文版\n\n本系统收录国家标准外文版2,638项。\nThis system includes 2,638 National standards in foreign language version\n\nGB/T\n人工智能\n7258\nGB\n安全\n消防\n30041\n光伏\n压力容器\n30871\n建筑\n6441\n建筑设计防火规范\n食品\n电动汽车\n1589\n50016\nGB50016\n电池\nGB 50016"
+        },
+        {
+          "chunkId": "S20#s348",
+          "score": null,
+          "text": "国家市场监督管理总局\n\n国家标准化管理委员会\n\n国家市场监督管理总局国家标准技术审评中心"
+        },
+        {
+          "chunkId": "S20#s347",
+          "score": null,
+          "text": "主管：国家市场监督管理总局 国家标准化管理委员会\n\n主办：国家市场监督管理总局国家标准技术审评中心\n\n技术支持：北京中标赛宇科技有限公司\n\n支持电话：010-82261056\n\n备案号：京ICP备18022388号-1"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S20#s345"
+      ]
+    },
+    {
+      "questionId": "D01",
+      "split": "dev",
+      "set": "嵌入式开发",
+      "question": "在 ESP32 SPI 主机驱动中，启用 DMA 进行数据传输时，对缓冲区有哪些具体要求？如果不满足这些要求会有什么影响？",
+      "referenceChunks": [
+        "S02#s15",
+        "S02#s43~3"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s15",
+          "score": null,
+          "text": "一般而言，需要传输到设备或由设备读取的数据将由 spi_transaction_t::rx_buffer 和 spi_transaction_t::tx_buffer 指向的内存块中读取或写入。如果传输时启用了 DMA，则缓冲区应：\n\n申请支持 DMA 的内存。具体操作请参阅 支持 DMA 的内存。\n\n32 位对齐（从 32 位边界开始，长度为 4 字节的倍数）。\n\n若未满足以上要求，传输事务效率将受到临时缓冲区分配和复制的影响。\n\n如果使用多条数据线传输，请在结构体 spi_device_interface_config_t 中的 flags 设置 SPI_DEVICE_HALFDUPLEX 标志信号。结构体 spi_transaction_t 中的 flags 应按照 传输线模式配置 中的描述设置。\n\n备注\n\n当启用 DMA 时，不支持同时具有读取阶段和写入阶段的半双工传输事务。有关细节和解决方法，请参阅 已知问题。"
+        },
+        {
+          "chunkId": "S02#s43~3",
+          "score": null,
+          "text": "The data lines used at address phase is the same as data phase (otherwise, only one data line is used at address phase)\n\nSPI_TRANS_DMA_BUFFER_ALIGN_MANUAL\n\nBy default driver will automatically re-alloc dma buffer if it doesn't meet hardware alignment or dma_capable requirements, this flag is for you to disable this feature, you will need to take care of the alignment otherwise driver will return you error ESP_ERR_INVALID_ARG.\n\nSPI_TRANS_DMA_USE_PSRAM\n\nUse PSRAM for DMA buffer directly, has speed limit, but no temp buffer and save memory.\n\nSPI_TRANS_DDRCLK\n\nUse DDRCLK (double clock edge) for current transaction.\n\nSPI_TRANS_DMA_RX_FAIL\n\nRX transaction data lose flag, indicate DMA RX overflow.\n\nSPI_TRANS_DMA_TX_FAIL\n\nTX transaction data lose flag, indicate DMA TX underflow."
+        },
+        {
+          "chunkId": "S02#s28",
+          "score": null,
+          "text": "写入和读取阶段同时进行时，半双工传输事务与 DMA 不兼容。\n\n如需执行此类传输事务，可使用以下替代方案：\n\n执行全双工传输事务。\n\n将总线初始化函数的最后一个参数设置为 0 以禁用 DMA，即：\n\nret=spi_bus_initialize(SPI3_HOST, &buscfg, 0);\n\n此举可避免传输和接收超过 64 字节的数据。\n1. 尝试用命令和地址字段代替写入阶段。\n\n全双工传输事务与 Dummy 位 不兼容，因此存在频率限制，请参阅 Dummy 位加速方案。\n\nSPI 读取和写入阶段同时进行时，全双工模式和半双工模式下，spi_device_interface_config_t 和 spi_transaction_ext_t 中的 dummy_bits 均会失效。\n\n全双工传输事务模式中，命令阶段和地址阶段与 cs_ena_pretrans 不兼容。\n\n若启用了 DMA，则 RX 缓冲区应该以字对齐（从 32 位边界开始，字节长度为 4 的倍数）。否则 DMA 可能覆盖未对齐部分的数据。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s15",
+        "S02#s43~3"
+      ]
+    },
+    {
+      "questionId": "D02",
+      "split": "dev",
+      "set": "嵌入式开发",
+      "question": "在同一个 SPI 设备上混合使用中断传输和轮询传输时，有哪些关键注意事项？",
+      "referenceChunks": [
+        "S02#s20",
+        "S02#s42~3"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s20",
+          "score": null,
+          "text": "为避免代码过于复杂，请一次只向单个设备发送一种类型的传输事务（中断或轮询）。如有需要，可交替发送中断传输事务和轮询传输事务，详见下文。\n\n所有的轮询传输事务和中断传输事务完成后，方可发送轮询传输事务。\n\n由于未完成的轮询传输事务将阻塞其他传输事务，请务必在 spi_device_polling_start() 之后调用函数 spi_device_polling_end() 以允许其他事务或其他设备使用总线。如果在轮询过程中无需切换到其他任务，可调用函数 spi_device_polling_transmit() 启动传输事务，则该传输事务将自动结束。\n\nISR 会干扰飞行中的轮询传输事务，以适应中断传输事务。在调用 spi_device_polling_start() 前，需确保所有发送到 ISR 的中断传输事务已经完成。为此可持续调用 spi_device_get_trans_result()，直至全部传输事务返回。\n\n为更好地控制函数的调用顺序，只在单个任务中向同一设备发送混合传输事务。"
+        },
+        {
+          "chunkId": "S02#s12",
+          "score": null,
+          "text": "轮询传输事务不依赖于中断，程序将不断轮询 SPI 主机的状态位，直到传输事务完成。\n\n所有执行中断传输事务的任务都可能被队列阻塞。在此情况下，用户需要等待 ISR 和传输事务传输完成。轮询传输事务节省了原本用于队列处理和上下文切换的时间，减少了传输事务持续时间。传输事务类型的缺点是在这些事务进行期间，CPU 将被占用而处于忙碌状态。\n\n传输事务完成后，spi_device_polling_end() 程序需要至少 1 µs 的时间来解除阻塞其他任务。此处强烈建议调用函数 spi_device_acquire_bus() 和 spi_device_release_bus() 来打包一系列轮询传输事务以避免开销。详情请参阅 获取总线。"
+        },
+        {
+          "chunkId": "S02#s24",
+          "score": null,
+          "text": "传输事务持续时间包括设置 SPI 外设寄存器，将数据复制到 FIFO 或设置 DMA 链接，以及 SPI 传输事务时间。\n\n中断传输事务允许附加额外的开销，以适应 FreeRTOS 队列的成本以及任务与 ISR 切换所需的时间。\n\n对于 中断传输事务，CPU 可以在传输事务进行过程中切换到其他任务，这能够节约 CPU 时间，会延长传输事务持续时间，请参阅 中断传输事务。对于 轮询传输事务，它不会阻塞任务，但允许在传输事务进行时轮询。详情请参阅 轮询传输事务。\n\n如果 DMA 被启用，每个传输事务设置链接列表需要约 2 µs。当主机传输数据时，它会自动从链接列表中读取数据。如果不启用 DMA，CPU 必须自己从 FIFO 中写入和读取每个字节。这一过程时长通常不到 2 µs，但写入和读取的传输事务长度都被限制在 64 字节。\n\n单个字节数据的典型传输事务持续时间如下。\n\n使用 DMA 的中断传输事务：28 µs。\n\n使用 CPU 的中断传输事务：25 µs。\n\n使用 DMA 的轮询传输事务：10 µs。\n\n使用 CPU 的轮询传输事务：8 µs。\n\n请注意，以上数据测试时，CONFIG_SPI_MASTER_ISR_IN_IRAM 选项处于启用状态，SPI 传输事务相关的代码放置在 IRAM 中。若关闭此选项（例如为了节省 IRAM），可能影响传输事务持续时间。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s20"
+      ]
+    },
+    {
+      "questionId": "D03",
+      "split": "dev",
+      "set": "嵌入式开发",
+      "question": "使用 ESP-IDF SPI 主机驱动时，轮询传输和中断传输在单字节传输延迟上有多大差异？启用 DMA 和不启用 DMA 对这两种模式分别有什么影响？",
+      "referenceChunks": [
+        "S02#s24",
+        "S02#s42~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s12",
+          "score": null,
+          "text": "轮询传输事务不依赖于中断，程序将不断轮询 SPI 主机的状态位，直到传输事务完成。\n\n所有执行中断传输事务的任务都可能被队列阻塞。在此情况下，用户需要等待 ISR 和传输事务传输完成。轮询传输事务节省了原本用于队列处理和上下文切换的时间，减少了传输事务持续时间。传输事务类型的缺点是在这些事务进行期间，CPU 将被占用而处于忙碌状态。\n\n传输事务完成后，spi_device_polling_end() 程序需要至少 1 µs 的时间来解除阻塞其他任务。此处强烈建议调用函数 spi_device_acquire_bus() 和 spi_device_release_bus() 来打包一系列轮询传输事务以避免开销。详情请参阅 获取总线。"
+        },
+        {
+          "chunkId": "S02#s24",
+          "score": null,
+          "text": "传输事务持续时间包括设置 SPI 外设寄存器，将数据复制到 FIFO 或设置 DMA 链接，以及 SPI 传输事务时间。\n\n中断传输事务允许附加额外的开销，以适应 FreeRTOS 队列的成本以及任务与 ISR 切换所需的时间。\n\n对于 中断传输事务，CPU 可以在传输事务进行过程中切换到其他任务，这能够节约 CPU 时间，会延长传输事务持续时间，请参阅 中断传输事务。对于 轮询传输事务，它不会阻塞任务，但允许在传输事务进行时轮询。详情请参阅 轮询传输事务。\n\n如果 DMA 被启用，每个传输事务设置链接列表需要约 2 µs。当主机传输数据时，它会自动从链接列表中读取数据。如果不启用 DMA，CPU 必须自己从 FIFO 中写入和读取每个字节。这一过程时长通常不到 2 µs，但写入和读取的传输事务长度都被限制在 64 字节。\n\n单个字节数据的典型传输事务持续时间如下。\n\n使用 DMA 的中断传输事务：28 µs。\n\n使用 CPU 的中断传输事务：25 µs。\n\n使用 DMA 的轮询传输事务：10 µs。\n\n使用 CPU 的轮询传输事务：8 µs。\n\n请注意，以上数据测试时，CONFIG_SPI_MASTER_ISR_IN_IRAM 选项处于启用状态，SPI 传输事务相关的代码放置在 IRAM 中。若关闭此选项（例如为了节省 IRAM），可能影响传输事务持续时间。"
+        },
+        {
+          "chunkId": "S02#s26",
+          "score": null,
+          "text": "默认配置只将 ISR 置于 IRAM 中。其他 SPI 相关功能，包括驱动本身和回调都可能发生缓存缺失，需等待代码从 flash 中读取。为避免缓存缺失，可参考 CONFIG_SPI_MASTER_IN_IRAM，将整个 SPI 驱动置入 IRAM，并将整个回调及其 callee 函数一起置入 IRAM。\n\n备注\n\nSPI 驱动是基于 FreeRTOS 的 API 实现的，在使用 CONFIG_SPI_MASTER_IN_IRAM 时，应启用 CONFIG_FREERTOS_IN_IRAM。\n\n单个中断传输事务传输 n 字节的总成本为 20+8n/Fspi[MHz] [µs]，故传输速度为 n/(20+8n/Fspi)。8 MHz 时钟速度的传输速度见下表。\n\n频率 (MHz)\n\n传输事务间隔 (µs)\n\n传输事务长度 (bytes)\n\n传输时长 (µs)\n\n传输速度 (KBps)\n\n25\n\n26\n\n38.5\n\n25\n\n33\n\n242.4\n\n25\n\n16\n\n41\n\n490.2\n\n25\n\n64\n\n89\n\n719.1\n\n25\n\n128\n\n153\n\n836.6\n\n传输事务长度较短时将提高传输事务间隔成本，因此应尽可能将几个短传输事务压缩成一个传输事务，以提升传输速度。\n\n注意，ISR 在 flash 操作期间默认处于禁用状态。要在 flash 操作期间继续发送传输事务，请启用 CONFIG_SPI_MASTER_ISR_IN_IRAM，并在 spi_bus_config_t::intr_flags 中设置 ESP_INTR_FLAG_IRAM。此时，flash 操作前列队的传输事务将由 ISR 并行处理。此外，每个设备的回调和它们的 callee 函数都应该在 IRAM 中，避免回调因缓存丢失而崩溃。详情请参阅 IRAM 安全中断处理程序。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s24"
+      ]
+    },
+    {
+      "questionId": "D04",
+      "split": "dev",
+      "set": "嵌入式开发",
+      "question": "在 ESP-IDF 中，如果我想在系统运行过程中动态添加一块新的内存区域到堆管理器，应该调用哪个函数？调用时有什么需要注意的地方？",
+      "referenceChunks": [
+        "S03#s66",
+        "S03#s69~5"
+      ],
+      "topk": [
+        {
+          "chunkId": "S03#s66~3",
+          "score": null,
+          "text": "caps -- Ordered array of capability masks for the new region, in order of priority. Must have length SOC_MEMORY_TYPE_NO_PRIOS. Does not need to remain valid after the call returns.\n\nstart -- Start address of new region.\n\nend -- End address of new region.\n\n返回:\n\nESP_OK on success\n\nESP_ERR_INVALID_ARG if a parameter is invalid\n\nESP_ERR_NO_MEM if no memory to register new heap.\n\nESP_ERR_INVALID_SIZE if the memory region is too small to fit a heap\n\nESP_FAIL if region overlaps the start and/or end of an existing region"
+        },
+        {
+          "chunkId": "S03#s66",
+          "score": null,
+          "text": "void heap_caps_init(void)\n\nInitialize the capability-aware heap allocator.\n\nThis is called once in the IDF startup code. Do not call it at other times.\n\nvoid heap_caps_enable_nonos_stack_heaps(void)\n\nEnable heap(s) in memory regions where the startup stacks are located.\n\nOn startup, the pro/app CPUs have a certain memory region they use as stack, so we cannot do allocations in the regions these stack frames are. When FreeRTOS is completely started, they do not use that memory anymore and heap(s) there can be enabled.\n\nesp_err_t heap_caps_add_region(intptr_t start, intptr_t end)\n\nAdd a region of memory to the collection of heaps at runtime.\n\nMost memory regions are defined in soc_memory_layout.c for the SoC, and are registered via heap_caps_init(). Some regions can't be used immediately and are later enabled via heap_caps_enable_nonos_stack_heaps().\n\nCall this function to add a region of memory to the heap at some later time.\n\nThis function does not consider any of the \"reserved\" regions or other data in soc_memory_layout, caller needs to consider this themselves.\n\nAll memory within the region specified by start & end parameters must be otherwise unused.\n\nThe capabilities of the newly registered memory will be determined by the start address, as looked up in the regions specified in soc_memory_layout.c.\n\nUse heap_caps_add_region_with_caps() to register a region with custom capabilities.\n\n备注\n\nPlease refer to following example for memory regions allowed for addition to heap based on an existing region (address range for demonstration purpose only):"
+        },
+        {
+          "chunkId": "S03#s59",
+          "score": null,
+          "text": "堆属性分配器对芯片内存区域的了解源于 SoC 组件，该组件包含芯片的内存布局信息以及每个区域的不同属性。各区域的功能为首要考虑因素，如会优先使用 DRAM 和 IRAM 特定区域而非用途更广的 D/IRAM 区域来分配内存。\n\n每个连续的内存区域都包含其自己的内存堆，由 multi_heap 函数创建。 multi_heap 允许将任何连续的内存区域作为堆使用。\n\n堆属性分配器通过对内存区域的了解初始化每个单独的堆，堆属性 API 中的分配函数将基于所需的属性、可用空间和每个区域使用的首选项为分配函数找到最合适的堆，随后为位于特定内存区域的堆调用 multi_heap_malloc()。\n\n调用 free() 查找对应释放地址的特定堆，随后在特定的 multi_heap 实例上调用 multi_heap_free()。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S03#s66"
+      ]
+    },
+    {
+      "questionId": "D05",
+      "split": "dev",
+      "set": "嵌入式开发",
+      "question": "芯片处于 Deep-sleep 模式时，如何让数字 GPIO 在每次睡眠过程中都保持电平状态，以及怎样关闭这一功能？",
+      "referenceChunks": [
+        "S04#s78~2",
+        "S04#s78~9"
+      ],
+      "topk": [
+        {
+          "chunkId": "S04#s78~8",
+          "score": null,
+          "text": "For ESP32/S2/C3/S3/C2, this function cannot be used to hold the state of a digital GPIO during Deep-sleep. Even if this function is enabled, the digital GPIO will be reset to its default state when the chip wakes up from Deep-sleep. If you want to hold the state of a digital GPIO during Deep-sleep, please call gpio_deep_sleep_hold_en.\n\n参数:\n\ngpio_num -- GPIO number, only support output-capable GPIOs\n\n返回:\n\nESP_OK Success\n\nESP_ERR_NOT_SUPPORTED Not support pad hold function\n\nesp_err_t gpio_hold_dis(gpio_num_t gpio_num)\n\nDisable gpio pad hold function.\n\nWhen the chip is woken up from peripheral power-down sleep, the gpio will be set to the default mode, so, the gpio will output the default level if this function is called. If you don't want the level changes, the gpio should be configured to a known state before this function is called. e.g. If you hold gpio18 high during Deep-sleep, after the chip is woken up and gpio_hold_dis is called, gpio18 will output low level(because gpio18 is input mode by default). If you don't want this behavior, you should configure gpio18 as output mode and set it to high level before calling gpio_hold_dis.\n\n参数:\n\ngpio_num -- GPIO number, only support output-capable GPIOs\n\n返回:\n\nESP_OK Success\n\nESP_ERR_NOT_SUPPORTED Not support pad hold function\n\nvoid gpio_deep_sleep_hold_en(void)\n\nEnable all digital gpio pads hold function during Deep-sleep.\n\nEnabling this feature makes all digital gpio pads be at the holding state during Deep-sleep. The state of each pad holds is its active configuration (not pad's sleep configuration!).\n\nNote:"
+        },
+        {
+          "chunkId": "S04#s78~9",
+          "score": null,
+          "text": "For digital IO, this API takes effect only if the corresponding digital IO pad hold function has been enabled. You can enable the GPIO pad hold function by calling gpio_hold_en. has been enabled. You can call gpio_hold_en to enable the gpio pad hold function.\n\nThough this API targets all digital IOs, the pad hold feature only works when the chip is in Deep-sleep mode. When the chip is in active mode, the digital GPIO state can be changed freely even if you have called this function, except for IOs that are already held by gpio_hold_en.\n\nAfter this API is being called, the digital gpio Deep-sleep hold feature will work during every sleep process. You should call gpio_deep_sleep_hold_dis to disable this feature.\n\nvoid gpio_deep_sleep_hold_dis(void)\n\nDisable all digital gpio pads hold function during Deep-sleep.\n\nesp_err_t gpio_sleep_sel_en(gpio_num_t gpio_num)\n\nSOC_GPIO_SUPPORT_HOLD_SINGLE_IO_IN_DSLP.\n\nEnable SLP_SEL to change GPIO status automantically in lightsleep.\n\n参数:\n\ngpio_num -- GPIO number of the pad.\n\n返回:\n\nESP_OK Success\n\nesp_err_t gpio_sleep_sel_dis(gpio_num_t gpio_num)\n\nDisable SLP_SEL to change GPIO status automantically in lightsleep.\n\n参数:\n\ngpio_num -- GPIO number of the pad.\n\n返回:\n\nESP_OK Success\n\nesp_err_t gpio_sleep_set_direction(gpio_num_t gpio_num, gpio_mode_t mode)\n\nGPIO set direction at sleep.\n\nConfigure GPIO direction,such as output_only,input_only,output_and_input\n\n参数:\n\ngpio_num -- Configure GPIO pins number, it should be GPIO number. If you want to set direction of e.g. GPIO16, gpio_num should be GPIO_NUM_16 (16);\n\nmode -- GPIO direction\n\n返回:"
+        },
+        {
+          "chunkId": "S04#s87~2",
+          "score": null,
+          "text": "esp_err_t rtc_gpio_set_direction_in_sleep(gpio_num_t gpio_num, rtc_gpio_mode_t mode)\n\nRTC GPIO set direction in deep sleep mode or disable sleep status (default). In some application scenarios, IO needs to have another states during deep sleep.\n\nNOTE: ESP32 supports INPUT_ONLY mode. The rest targets support INPUT_ONLY, OUTPUT_ONLY, INPUT_OUTPUT mode.\n\n参数:\n\ngpio_num -- GPIO number (e.g. GPIO_NUM_12)\n\nmode -- RTC GPIO direction\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG The IO is not an RTC IO\n\nesp_err_t rtc_gpio_pullup_en(gpio_num_t gpio_num)\n\nRTC GPIO pullup enable.\n\nThis function only works for RTC IOs. In general, call gpio_pullup_en, which will work both for normal GPIOs and RTC IOs.\n\n参数:\n\ngpio_num -- GPIO number (e.g. GPIO_NUM_12)\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG The IO is not an RTC IO\n\nesp_err_t rtc_gpio_pulldown_en(gpio_num_t gpio_num)\n\nRTC GPIO pulldown enable.\n\nThis function only works for RTC IOs. In general, call gpio_pulldown_en, which will work both for normal GPIOs and RTC IOs.\n\n参数:\n\ngpio_num -- GPIO number (e.g. GPIO_NUM_12)\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG The IO is not an RTC IO\n\nesp_err_t rtc_gpio_pullup_dis(gpio_num_t gpio_num)\n\nRTC GPIO pullup disable.\n\nThis function only works for RTC IOs. In general, call gpio_pullup_dis, which will work both for normal GPIOs and RTC IOs.\n\n参数:\n\ngpio_num -- GPIO number (e.g. GPIO_NUM_12)\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG The IO is not an RTC IO\n\nesp_err_t rtc_gpio_pulldown_dis(gpio_num_t gpio_num)\n\nRTC GPIO pulldown disable."
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S04#s78~9"
+      ]
+    },
+    {
+      "questionId": "D06",
+      "split": "dev",
+      "set": "嵌入式开发",
+      "question": "进入深度睡眠前，如何最小化 RTC IO 的漏电流？以 ESP32-WROVER 模组为例，官方推荐怎么操作？另外，通过 RTC GPIO 从睡眠中唤醒支持哪些触发方式？",
+      "referenceChunks": [
+        "S04#s87~2",
+        "S04#s87~5"
+      ],
+      "topk": [
+        {
+          "chunkId": "S04#s87~5",
+          "score": null,
+          "text": "esp_err_t rtc_gpio_isolate(gpio_num_t gpio_num)\n\nHelper function to disconnect internal circuits from an RTC IO This function disables input, output, pullup, pulldown, and enables hold feature for an RTC IO. Use this function if an RTC IO needs to be disconnected from internal circuits in deep sleep, to minimize leakage current.\n\nIn particular, for ESP32-WROVER module, call rtc_gpio_isolate(GPIO_NUM_12) before entering deep sleep, to reduce deep sleep current.\n\n参数:\n\ngpio_num -- GPIO number (e.g. GPIO_NUM_12).\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG The IO is not an RTC IO\n\nesp_err_t rtc_gpio_wakeup_enable(gpio_num_t gpio_num, gpio_int_type_t intr_type)\n\nEnable wakeup from sleep mode using specific GPIO.\n\n参数:\n\ngpio_num -- GPIO number\n\nintr_type -- Wakeup trigger type:\n\nAlways supported: GPIO_INTR_HIGH_LEVEL, GPIO_INTR_LOW_LEVEL\n\nIf SOC_RTC_GPIO_EDGE_WAKEUP_SUPPORTED: GPIO_INTR_POSEDGE, GPIO_INTR_NEGEDGE, GPIO_INTR_ANYEDGE\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG The IO is not an RTC IO, or intr_type is not supported by the target.\n\nesp_err_t rtc_gpio_wakeup_disable(gpio_num_t gpio_num)\n\nDisable wakeup from sleep mode using specific GPIO.\n\n参数:\n\ngpio_num -- GPIO number\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG The IO is not an RTC IO"
+        },
+        {
+          "chunkId": "S04#s87~2",
+          "score": null,
+          "text": "esp_err_t rtc_gpio_set_direction_in_sleep(gpio_num_t gpio_num, rtc_gpio_mode_t mode)\n\nRTC GPIO set direction in deep sleep mode or disable sleep status (default). In some application scenarios, IO needs to have another states during deep sleep.\n\nNOTE: ESP32 supports INPUT_ONLY mode. The rest targets support INPUT_ONLY, OUTPUT_ONLY, INPUT_OUTPUT mode.\n\n参数:\n\ngpio_num -- GPIO number (e.g. GPIO_NUM_12)\n\nmode -- RTC GPIO direction\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG The IO is not an RTC IO\n\nesp_err_t rtc_gpio_pullup_en(gpio_num_t gpio_num)\n\nRTC GPIO pullup enable.\n\nThis function only works for RTC IOs. In general, call gpio_pullup_en, which will work both for normal GPIOs and RTC IOs.\n\n参数:\n\ngpio_num -- GPIO number (e.g. GPIO_NUM_12)\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG The IO is not an RTC IO\n\nesp_err_t rtc_gpio_pulldown_en(gpio_num_t gpio_num)\n\nRTC GPIO pulldown enable.\n\nThis function only works for RTC IOs. In general, call gpio_pulldown_en, which will work both for normal GPIOs and RTC IOs.\n\n参数:\n\ngpio_num -- GPIO number (e.g. GPIO_NUM_12)\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG The IO is not an RTC IO\n\nesp_err_t rtc_gpio_pullup_dis(gpio_num_t gpio_num)\n\nRTC GPIO pullup disable.\n\nThis function only works for RTC IOs. In general, call gpio_pullup_dis, which will work both for normal GPIOs and RTC IOs.\n\n参数:\n\ngpio_num -- GPIO number (e.g. GPIO_NUM_12)\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG The IO is not an RTC IO\n\nesp_err_t rtc_gpio_pulldown_dis(gpio_num_t gpio_num)\n\nRTC GPIO pulldown disable."
+        },
+        {
+          "chunkId": "S04#s73~2",
+          "score": null,
+          "text": "使用 ADC 或睡眠模式下使用 Wi-Fi 和蓝牙时，请不要使用 GPIO36 和 GPIO39 的中断。有关问题的详细描述，请参考 ESP32 ECO 和 Bug 解决方法 > 中的 GPIO-3.11 节。\n\n当 GPIO 连接到 RTC 低功耗和模拟子系统时，ESP32 芯片还单独支持 RTC GPIO。可在以下情况时使用这些管脚功能：\n\n当 GPIO 连接到 RTC 低功耗、模拟子系统、低功耗外设时，ESP32 芯片还单独支持 RTC GPIO。可在以下情况时使用这些管脚功能：\n\n处于 Deep-sleep 模式时\n\n超低功耗协处理器 (ULP-FSM) 运行时\n\n使用 ADC/DAC 等模拟功能时"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S04#s87~5",
+        "S04#s87~2"
+      ]
+    },
+    {
+      "questionId": "D07",
+      "split": "dev",
+      "set": "AI框架与推理",
+      "question": "MindSpore Lite 转出来的 .ms 图片分类模型对输入张量有什么要求？如果手头没有真实图片、只想先用 benchmark 跑通一遍，输入数据文件该怎么准备？",
+      "referenceChunks": [
+        "S05#s109~2",
+        "S05#s97~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s97~2",
+          "score": null,
+          "text": "mobilenetv2.ms模型的理解。\n\n通过对模型的查看，可以知道mobilenetv2.ms模型定义了如下计算：\n对格式为float32[1,224,224,3]的输入张量x进行不断卷积，最后通过MatMulFusion全连接层的矩阵乘法操作，并执行Softmax运算，得到1x1000的输出张量，该输出张量名为Default/head-MobileNetV2Head/Softmax-op204。\n\n本例提供的mobilenetv2.ms模型为1000分类的图片分类模型，具体的分类类别本处不做叙述，但通过对模型的查看，可以知道该模型不包含对图片的前处理操作，接收1x224x224x3的float32数值，并得到1x1000的float32输出。\n故在使用该模型进行推理时，用户需自行编码完成图片的前处理操作，将处理后的数据，传递给推理框架，进行前向推理，并对推理得到的1x1000的输出进行后处理。"
+        },
+        {
+          "chunkId": "S05#s100~4",
+          "score": null,
+          "text": "在输出信息中，InData 0行打印的是该次推理的输入数据（只打印了前20个），Data of node Default/head-MobileNetV2Head/Softmax-op204行打印的是相关输出节点（Default/head-MobileNetV2Head/Softmax-op204）的推理结果（只打印前50个值），可以直接观察它们跟标杆文件的差异，以获得直观感受。\nMean bias of node/tensor Default/head-MobileNetV2Head/Softmax-op204行，给出了Default/head-MobileNetV2Head/Softmax-op204输出张量与标杆数据对比的平均误差，该误差计算方法为benchmark工具自带的比较算法。\n在最后，Mean bias of all nodes/tensors给出了所有张量与标杆对比的平均误差，在本例中，只有1个输出张量，故总平均误差和Default/head-MobileNetV2Head/Softmax-op204张量误差一致。可以观察到，推理的总平均误差为0%。\n\n高级功能\n\n关于benchmark的更详细说明，以及关于如何使用benchmark来进行基准测试、耗时定量分析、误差分析、Dump数据等，可以参考benchmark。\n\n表2：benchmark参数定义\n\n参数名\n\n是否必选\n\n参数说明\n\n参数类型\n\n默认值\n\n--modelFile=<MODELPATH>\n\n必选\n\n指定需要进行基准测试的MindSpore Lite模型文件路径。\n\nString\n\nnull\n\n--numThreads=<NUMTHREADS>\n\n可选\n\n指定模型推理程序运行的线程数。\n\nInteger\n\n--inDataFile=<INDATAPATH>\n\n可选\n\n指定测试模型输入数据的文件路径，默认接收二进制格式数据文件。在精度测试中，该输入作为标杆输入。如果未设置，则使用随机输入。\n\nString\n\nnull\n\n--benchmarkDataFile=<CALIBDATAPATH>\n\n可选\n\n指定对比标杆数据（用于精度对比的数据）的文件路径，接收按规定格式排列的字符文本。\n\nString\n\nnull\n\n参数名和参数值之间用等号连接，中间不能有空格。"
+        },
+        {
+          "chunkId": "S05#s107",
+          "score": null,
+          "text": "用户需要集成发布件内的mindspore-lite库文件，并通过MindSpore Lite头文件中声明的API接口，来进行模型推理。\n在进行集成前，用户也可以直接使用随发布件发布的benchmark基准测试工具（位于mindspore-lite-{version}-win-x64/tools/benchmark），来进行推理测试。\nbenchmark工具是已集成mindspore-lite库的可执行程序，通过命令参数的形式，实现包括推理在内的多种功能。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s97~2"
+      ]
+    },
+    {
+      "questionId": "D08",
+      "split": "dev",
+      "set": "AI框架与推理",
+      "question": "MindSpore Lite 的发布件解压以后，模型转换和基准测试这两类工具放在哪一层目录里？在 Windows 上转换一个 Caffe 模型时，模型结构文件和权值文件要分别传给哪个参数？",
+      "referenceChunks": [
+        "S05#s105",
+        "S05#s95"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s105",
+          "score": null,
+          "text": "解压刚刚下载的发布件，在位于mindspore-lite-{version}-win-x64\\tools\\converter\\converter目录，可以找到converter_lite.exe工具。\nconverter_lite.exe模型转换工具提供了离线转换模型功能，支持MindSpore、CAFFE、TensorFlow Lite、TensorFlow、ONNX类型的模型转换。\n模型转换步骤如下：\n\n环境设置\n\n将转换工具需要的动态链接库加入环境变量PATH。\n\nset PATH=%PACKAGE_ROOT_PATH%\\tools\\converter\\lib;%PATH%\n\n进入转换工具所在目录\n\n执行如下命令，进入转换工具所在目录。\n\ncd %PACKAGE_ROOT_PATH%\\tools\\converter\\converter\n\n转换参数说明\n\n在使用converter_lite.exe执行转换时，需设定相关参数。本例中用到的相关参数定义如下表3所示。\n\n下面以各种类型模型的转换命令为例，说明各参数的使用方法。\n\n以Caffe模型lenet.prototxt为例，执行转换命令。\n\ncall converter_lite.exe --fmk=CAFFE --modelFile=lenet.prototxt --weightFile=lenet.caffemodel --outputFile=lenet\n\n在转换Caffe模型时，将fmk配置为CAFFE（--fmk=CAFFE），同时分别通过modelFile和weightFile参数传入模型结构（lenet.prototxt）、模型权值（lenet.caffemodel）两个文件。\n同时通过outputFile，指定转换后输出的模型名，因未指定路径，生成的模型默认在当前路径，并带有.ms后缀，即lenet.ms。\n\n以MindSpore、TensorFlow Lite、TensorFlow和ONNX模型为例，执行转换命令。\n\nMindSpore模型lenet.mindir。\n\ncall converter_lite.exe --fmk=MINDIR --modelFile=lenet.mindir --outputFile=lenet\n\nTensorFlow Lite模型lenet.tflite。\n\ncall converter_lite.exe --fmk=TFLITE --modelFile=lenet.tflite --outputFile=lenet\n\nTensorFlow模型lenet.pb。\n\ncall converter_lite.exe --fmk=TF --modelFile=lenet.pb --outputFile=lenet\n\nONNX模型lenet.onnx。\n\ncall converter_lite.exe --fmk=ONNX --modelFile=lenet.onnx --outputFile=lenet\n\n在转换各种模型时，将fmk配置为模型类型对应的标志符号，同时通过modelFile参数传入模型文件。\n通过outputFile，指定转换后输出的模型名，因未指定路径，生成的模型默认在当前路径，并带有.ms后缀，即lenet.ms。\n\n执行转换\n\n用户可使用自己的模型进行测试，也可使用我们提供的MindSpore模型进行测试，下载链接点击此处。\n以下载的模型为例，将模型mobilenetv2.mindir拷贝到转换工具所在目录，根据上述转换参数的说明，可以知道该模型的转换命令如下："
+        },
+        {
+          "chunkId": "S05#s107",
+          "score": null,
+          "text": "用户需要集成发布件内的mindspore-lite库文件，并通过MindSpore Lite头文件中声明的API接口，来进行模型推理。\n在进行集成前，用户也可以直接使用随发布件发布的benchmark基准测试工具（位于mindspore-lite-{version}-win-x64/tools/benchmark），来进行推理测试。\nbenchmark工具是已集成mindspore-lite库的可执行程序，通过命令参数的形式，实现包括推理在内的多种功能。"
+        },
+        {
+          "chunkId": "S05#s104",
+          "score": null,
+          "text": "用户可在MindSpore Lite官网下载页面，得到各版本的MindSpore Lite发布件。\n在本例中，我们选择的是软件系统为Windows、底层架构为x86_64的CPU发布件，以1.6.0版本为例，用户可点击此处直接下载。\n每个发布件的包结构会有不同。本例中，Windows发布件的包结构如下：\n\nmindspore-lite-{version}-win-x64\n├── runtime\n│ ├── include\n│ └── lib\n│ ├── libgcc_s_seh-1.dll # MinGW动态库\n│ ├── libmindspore-lite.a # MindSpore Lite推理框架的静态库\n│ ├── libmindspore-lite.dll # MindSpore Lite推理框架的动态库\n│ ├── libmindspore-lite.dll.a # MindSpore Lite推理框架的动态库的链接文件\n│ ├── libssp-0.dll # MinGW动态库\n│ ├── libstdc++-6.dll # MinGW动态库\n│ └── libwinpthread-1.dll # MinGW动态库\n└── tools\n├── benchmark # 基准测试工具目录\n└── converter # 模型转换工具目录"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s105"
+      ]
+    },
+    {
+      "questionId": "D09",
+      "split": "dev",
+      "set": "AI框架与推理",
+      "question": "用 converter_lite 把模型转成 .ms 时，--fmk 参数可以填哪些原始格式？哪个参数只有转 Caffe 模型时才必须传？命令行里参数名和参数值之间写法有什么硬性要求？",
+      "referenceChunks": [
+        "S05#s105~2",
+        "S05#s96~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s96",
+          "score": null,
+          "text": "解压刚刚下载的发布件，在位于mindspore-lite-{version}-linux-x64/tools/converter/converter目录，可以找到converter_lite工具。\nconverter_lite模型转换工具提供了离线转换模型功能，支持MindSpore、CAFFE、TensorFlow Lite、TensorFlow、ONNX类型的模型转换。\n模型转换步骤如下：\n\n环境设置\n\n将转换工具需要的动态链接库加入环境变量LD_LIBRARY_PATH。\n\nexport LD_LIBRARY_PATH=${PACKAGE_ROOT_PATH}/tools/converter/lib:${LD_LIBRARY_PATH}\n\n${PACKAGE_ROOT_PATH}是发布件解压后的路径。\n\n进入转换工具所在目录\n\n执行如下命令，进入转换工具所在目录。\n\ncd ${PACKAGE_ROOT_PATH}/tools/converter/converter\n\n${PACKAGE_ROOT_PATH}是发布件解压后的路径。\n\n转换参数说明\n\n在使用converter_lite执行转换时，需设定相关参数。本例中用到的相关参数定义如下表1所示。\n\n下面以各种类型模型的转换命令为例，说明各参数的使用方法。\n\n以Caffe模型lenet.prototxt为例，执行转换命令。\n\n./converter_lite --fmk=CAFFE --modelFile=lenet.prototxt --weightFile=lenet.caffemodel --outputFile=lenet\n\n在转换Caffe模型时，将fmk配置为CAFFE（--fmk=CAFFE），同时分别通过modelFile和weightFile参数传入模型结构（lenet.prototxt）、模型权值（lenet.caffemodel）两个文件。\n同时通过outputFile，指定转换后输出的模型名，因未指定路径，生成的模型默认在当前路径，并带有.ms后缀，即lenet.ms。\n\n以MindSpore、TensorFlow Lite、TensorFlow和ONNX模型为例，执行转换命令。\n\nMindSpore模型lenet.mindir。\n\n./converter_lite --fmk=MINDIR --modelFile=lenet.mindir --outputFile=lenet\n\nTensorFlow Lite模型lenet.tflite。\n\n./converter_lite --fmk=TFLITE --modelFile=lenet.tflite --outputFile=lenet\n\nTensorFlow模型lenet.pb。\n\n./converter_lite --fmk=TF --modelFile=lenet.pb --outputFile=lenet\n\nONNX模型lenet.onnx。\n\n./converter_lite --fmk=ONNX --modelFile=lenet.onnx --outputFile=lenet\n\n在转换各种模型时，将fmk配置为模型类型对应的标志符号，同时通过modelFile参数传入模型文件。\n通过outputFile，指定转换后输出的模型名，因未指定路径，生成的模型默认在当前路径，并带有.ms后缀，即lenet.ms。\n\n执行转换\n\n用户可使用自己的模型进行测试，也可使用我们提供的MindSpore模型进行测试，下载链接点击此处。\n以下载的模型为例，将模型mobilenetv2.mindir拷贝到转换工具所在目录，根据上述转换参数的说明，可以知道该模型的转换命令如下："
+        },
+        {
+          "chunkId": "S05#s105",
+          "score": null,
+          "text": "解压刚刚下载的发布件，在位于mindspore-lite-{version}-win-x64\\tools\\converter\\converter目录，可以找到converter_lite.exe工具。\nconverter_lite.exe模型转换工具提供了离线转换模型功能，支持MindSpore、CAFFE、TensorFlow Lite、TensorFlow、ONNX类型的模型转换。\n模型转换步骤如下：\n\n环境设置\n\n将转换工具需要的动态链接库加入环境变量PATH。\n\nset PATH=%PACKAGE_ROOT_PATH%\\tools\\converter\\lib;%PATH%\n\n进入转换工具所在目录\n\n执行如下命令，进入转换工具所在目录。\n\ncd %PACKAGE_ROOT_PATH%\\tools\\converter\\converter\n\n转换参数说明\n\n在使用converter_lite.exe执行转换时，需设定相关参数。本例中用到的相关参数定义如下表3所示。\n\n下面以各种类型模型的转换命令为例，说明各参数的使用方法。\n\n以Caffe模型lenet.prototxt为例，执行转换命令。\n\ncall converter_lite.exe --fmk=CAFFE --modelFile=lenet.prototxt --weightFile=lenet.caffemodel --outputFile=lenet\n\n在转换Caffe模型时，将fmk配置为CAFFE（--fmk=CAFFE），同时分别通过modelFile和weightFile参数传入模型结构（lenet.prototxt）、模型权值（lenet.caffemodel）两个文件。\n同时通过outputFile，指定转换后输出的模型名，因未指定路径，生成的模型默认在当前路径，并带有.ms后缀，即lenet.ms。\n\n以MindSpore、TensorFlow Lite、TensorFlow和ONNX模型为例，执行转换命令。\n\nMindSpore模型lenet.mindir。\n\ncall converter_lite.exe --fmk=MINDIR --modelFile=lenet.mindir --outputFile=lenet\n\nTensorFlow Lite模型lenet.tflite。\n\ncall converter_lite.exe --fmk=TFLITE --modelFile=lenet.tflite --outputFile=lenet\n\nTensorFlow模型lenet.pb。\n\ncall converter_lite.exe --fmk=TF --modelFile=lenet.pb --outputFile=lenet\n\nONNX模型lenet.onnx。\n\ncall converter_lite.exe --fmk=ONNX --modelFile=lenet.onnx --outputFile=lenet\n\n在转换各种模型时，将fmk配置为模型类型对应的标志符号，同时通过modelFile参数传入模型文件。\n通过outputFile，指定转换后输出的模型名，因未指定路径，生成的模型默认在当前路径，并带有.ms后缀，即lenet.ms。\n\n执行转换\n\n用户可使用自己的模型进行测试，也可使用我们提供的MindSpore模型进行测试，下载链接点击此处。\n以下载的模型为例，将模型mobilenetv2.mindir拷贝到转换工具所在目录，根据上述转换参数的说明，可以知道该模型的转换命令如下："
+        },
+        {
+          "chunkId": "S05#s94",
+          "score": null,
+          "text": "将用户的模型转换为MindSpore Lite的模型文件。该操作主要包括以下步骤：\n\n下载发布件\n\n在Windows和Linux的发布件中，都含有转换工具，用户可根据自己的平台，下载使用任一个发布件。\n通过发布件内的converter_lite工具，将非ms模型转换为MindSpore Lite使用的ms模型。\n该操作与平台无关，无论在哪个平台上执行转换，可得到相同的转换后模型文件。\n\n转换模型\n\n使用发布件内的converter_lite转换工具完成模型转换。"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "D10",
+      "split": "dev",
+      "set": "AI框架与推理",
+      "question": "在 C++ 里集成 MindSpore Lite 做推理：想用 CPU 跑的时候，context 的设备信息要怎么配？调 Build 编译完模型后，之前读进来的模型文件内存还要保留吗？输入数据又是从哪个接口写进张量的？",
+      "referenceChunks": [
+        "S05#s101~5",
+        "S05#s110~5"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s110~5",
+          "score": null,
+          "text": "接着，通过Context::MutableDeviceInfo接口，得到context对象的设备管理列表。\n\nauto &device_list = context->MutableDeviceInfo();\n\n在本例中，由于使用CPU进行推理，故需申请一个CPUDeviceInfo类的对象device_info。\n\nauto device_info = std::make_shared<mindspore::CPUDeviceInfo>();\n\n因为采用了CPU的默认设置，所以不需对device_info对象做任何设置，直接添加到context的设备管理列表。\n\ndevice_list.push_back(device_info);\n\n(3) 加载模型\n\n首先创建一个Model类对象model，Model类定义了MindSpore Lite中的模型，用于计算图管理。\n关于Model类的详细说明，可参考API文档。\n\nauto model = new (std::nothrow) mindspore::Model();\n\n接着调用Build接口传入模型，将模型编译至可在设备上运行的状态。\n在加载编译完模型之后，被解析的模型信息已记录在model变量中，原先的模型文件内存model_buf可以释放。\n由于model_buf是以char数组的方式申请的，故使用delete[]释放内存。\n\nauto build_ret = model->Build(model_buf, size, mindspore::kMindIR, context);\ndelete[](model_buf);\n\n(4) 传入数据\n\n在执行模型推理前，需要设置推理的输入数据。\n此例，通过Model.GetInputs接口，获取模型的所有输入张量。单个张量的格式为MSTensor。\n关于MSTensor张量的详细说明，请参考MSTensor的API说明。\n\nauto inputs = model->GetInputs();\n\n通过张量的MutableData接口，可以获取张量的数据内存指针。\n在本例中，模型的输入为浮点数格式，所以此处将指针强转为浮点指针。用户可根据自己模型的数据格式做不同处理，也可通过张量的DataType接口，得到该张量的数据类型。\n\nauto input_data = reinterpret_cast<float *>(tensor.MutableData());\n\n接着，通过数据指针，将我们要推理的数据传入张量内部。\n在本例中我们传入的是随机生成的0.1至1的浮点数据，且数据呈平均分布。\n在实际的推理中，用户在读取图片或音频等实际数据后，需进行算法特定的预处理操作，并将处理后的数据传入模型。\n\ntemplate <typename T, typename Distribution>\nvoid GenerateRandomData(int size, void *data, Distribution distribution) {\nstd::mt19937 random_engine;\nint elements_num = size / sizeof(T);\n(void)std::generate_n(static_cast<T *>(data), elements_num,\n[&distribution, &random_engine]() { return static_cast<T>(distribution(random_engine)); });\n}\n\n..."
+        },
+        {
+          "chunkId": "S05#s101~5",
+          "score": null,
+          "text": "首先创建一个Model类对象model，Model类定义了MindSpore Lite中的模型，用于计算图管理。\n关于Model类的详细说明，可参考API文档。\n\nauto model = new (std::nothrow) mindspore::Model();\n\n接着调用Build接口传入模型，将模型编译至可在设备上运行的状态。\n在加载编译完模型之后，被解析的模型信息已记录在model变量中，原先的模型文件内存model_buf可以释放。\n由于model_buf是以char数组的方式申请的，故使用delete[]释放内存。\n\nauto build_ret = model->Build(model_buf, size, mindspore::kMindIR, context);\ndelete[](model_buf);\n\n(4) 传入数据\n\n在执行模型推理前，需要设置推理的输入数据。\n此例，通过Model.GetInputs接口，获取模型的所有输入张量。单个张量的格式为MSTensor。\n关于MSTensor张量的详细说明，请参考MSTensor的API说明。\n\nauto inputs = model->GetInputs();\n\n通过张量的MutableData接口，可以获取张量的数据内存指针。\n在本例中，模型的输入为浮点数格式，所以此处将指针强转为浮点指针。用户可根据自己模型的数据格式做不同处理，也可通过张量的DataType接口，得到该张量的数据类型。\n\nauto input_data = reinterpret_cast<float *>(tensor.MutableData());\n\n接着，通过数据指针，将我们要推理的数据传入张量内部。\n在本例中我们传入的是随机生成的0.1至1的浮点数据，且数据呈平均分布。\n在实际的推理中，用户在读取图片或音频等实际数据后，需进行算法特定的预处理操作，并将处理后的数据传入模型。\n\ntemplate <typename T, typename Distribution>\nvoid GenerateRandomData(int size, void *data, Distribution distribution) {\nstd::mt19937 random_engine;\nint elements_num = size / sizeof(T);\n(void)std::generate_n(static_cast<T *>(data), elements_num,\n[&distribution, &random_engine]() { return static_cast<T>(distribution(random_engine)); });\n}\n\n...\n\nGenerateRandomData<float>(tensor.DataSize(), input_data, std::uniform_real_distribution<float>(0.1f, 1.0f));\n\n(5) 执行推理\n\n首先申请一个放置模型推理输出张量的数组outputs，然后调用模型推理接口Predict，将输入张量和输出张量作为参数。\n在推理成功后，输出张量被保存在outputs内。\n\nstd::vector<MSTensor> outputs;\nauto status = model->Predict(inputs, &outputs);\n\n(6) 推理结果核验\n\n通过MutableData得到输出张量的数据指针。\n本例中，将它强转为浮点指针，用户可以根据自己模型的数据类型进行对应类型的转换，也可通过张量的DataType接口得到数据类型。"
+        },
+        {
+          "chunkId": "S05#s110~4",
+          "score": null,
+          "text": "// Get Input\nauto inputs = model->GetInputs();\nfor (auto tensor : inputs) {\nauto input_data = reinterpret_cast<float *>(tensor.MutableData());\nif (input_data == nullptr) {\nstd::cerr << \"MallocData for inTensor failed.\" << std::endl;\ndelete model;\nreturn -1;\n}\nGenerateRandomData<float>(tensor.DataSize(), input_data, std::uniform_real_distribution<float>(0.1f, 1.0f));\n}\n\n// Predict\nstd::vector<MSTensor> outputs;\nauto status = model->Predict(inputs, &outputs);\nif (status != mindspore::kSuccess) {\nstd::cerr << \"Inference error.\" << std::endl;\ndelete model;\nreturn -1;\n}\n\n// Get Output Tensor Data.\nstd::cout << \"\\n------- print outputs ----------\" << std::endl;\nfor (auto tensor : outputs) {\nstd::cout << \"out tensor name is:\" << tensor.Name() << \"\\nout tensor size is:\" << tensor.DataSize()\n<< \"\\nout tensor elements num is:\" << tensor.ElementNum() << std::endl;\nauto out_data = reinterpret_cast<float *>(tensor.MutableData());\nstd::cout << \"output data is:\";\nfor (int i = 0; i < tensor.ElementNum(); i++) {\nstd::cout << out_data[i] << \" \";\n}\nstd::cout << std::endl;\n}\nstd::cout << \"------- print end ----------\\n\" << std::endl;\n\n// Delete model.\ndelete model;\nreturn mindspore::kSuccess;\n}\n\n代码功能解析如下：\n\n(1) 读取模型文件到buf\n\n通过调用ReadFile函数，将模型文件读入到model_buf内存，用size变量保存模型的大小。\n\nchar *model_buf = ReadFile(model_path.c_str(), &size);\n\n(2) 初始化Context配置\n\nContext保存了模型推理时所需的相关配置，包括算子偏好、线程数、自动并发以及推理处理器相关的其他配置。\n关于Context的详细说明，请参考Context的API接口说明。\n在MindSpore Lite加载模型时，必须提供一个Context类的对象，所以在本例中，首先申请了一个Context类的对象context。\n\nauto context = std::make_shared<mindspore::Context>();"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s110~5",
+        "S05#s101~5"
+      ]
+    },
+    {
+      "questionId": "D11",
+      "split": "dev",
+      "set": "AI框架与推理",
+      "question": "在 Windows 上编译并运行 MindSpore Lite 的推理 demo：发布件的 runtime\\lib 目录里除了框架自身的库，还必须一起带哪些动态库？demo 跑起来前环境变量要怎么设？推理时输入和输出张量分别怎么传给接口？",
+      "referenceChunks": [
+        "S05#s104",
+        "S05#s110~6"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s110",
+          "score": null,
+          "text": "在上一节，我们使用了官方推理测试工具进行了模型推理测试，在本节，我们将以使用MindSpore Lite的C++接口进行集成为例，演示如何使用MindSpore Lite的发布件，进行集成开发，编写自己的推理程序。\n\n环境要求\n\n系统环境：Windows 7，Windows 10；64位。\n\nMinGW 编译依赖\n\nCMake >= 3.22.3\n\n编译64位：MinGW-W64 x86_64 = GCC-7.3.0\n\n编译32位：MinGW-W64 i686 = GCC-7.3.0\n\n得到版本发布件\n\n用户可通过MindSpore Lite官网，获得MindSpore Lite发布件，点击此处查看各版本。\n在本例中，仍然采用了和前几节一样的发布件，用于本节集成开发，点击此处可直接下载。\n在本节简单的推理集成例子中，需要用到的发布件内容如下：\n\nmindspore-lite-{version}-win-x64\n└── runtime\n├── include\n└── lib\n├── libgcc_s_seh-1.dll # MinGW动态库\n├── libmindspore-lite.a # MindSpore Lite推理框架的静态库\n├── libmindspore-lite.dll # MindSpore Lite推理框架的动态库\n├── libmindspore-lite.dll.a # MindSpore Lite推理框架的动态库的链接文件\n├── libssp-0.dll # MinGW动态库\n├── libstdc++-6.dll # MinGW动态库\n└── libwinpthread-1.dll # MinGW动态库\n\n构建工程目录\n\n本例的工程目录如下：\n\ndemo\n├── CMakeLists.txt # cmake工程管理文件\n├── main.cc # 用户代码\n├── build # 编译用目录\n├── model\n│ └── mobilenetv2.ms # 模型文件（之前转出的模型）\n└── runtime # 发布件的runtime目录\n├── include # MindSpore Lite集成开发的API头文件\n└── lib\n└── libmindspore-lite.so # MindSpore Lite推理框架的动态库\n\n新建一个demo文件夹，新建main.cc和CMakeLists.txt文件。\n新建build和model目录，将mobilenetv2.ms放到model内。\n将发布件中的runtime目录拷贝到demo中，runtime内的文件可以保持不动，也可以删除除libmindspore-lite.so和include文件夹外的其它库文件。\n\n构建cmake工程\n\n打开上一步创建的CMakeLists.txt，粘贴如下内容，其中每句话的含义见注释：\n\ncmake_minimum_required(VERSION 3.22.3) # cmake版本要求最低3.22.3\nproject(Demo) # 工程名为Demo\n\n# gcc 版本要求大于等于7.3.0\nif(CMAKE_CXX_COMPILER_ID STREQUAL \"GNU\" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 7.3.0)\nmessage(FATAL_ERROR \"GCC version ${CMAKE_CXX_COMPILER_VERSION} must not be less than 7.3.0\")\nendif()\n\ninclude_directories(${CMAKE_CURRENT_SOURCE_DIR}/runtime/) # 添加头文件寻找路径"
+        },
+        {
+          "chunkId": "S05#s101",
+          "score": null,
+          "text": "在上一节，我们使用了官方推理测试工具进行了模型推理测试。在本节，我们将以使用MindSpore Lite的C++接口进行集成为例，演示如何使用MindSpore Lite的发布件，进行集成开发，编写自己的推理程序。\n\n环境要求\n\n系统环境：Linux x86_64，推荐使用Ubuntu\n\nC++编译依赖\n\nGCC >= 7.3.0\n\nCMake >= 3.22.3\n\n获得版本发布件\n\n用户可通过MindSpore Lite官网，获得MindSpore Lite发布件，点击此处查看各版本。\n在本例中，仍然采用了和前几节一样的发布件，用于本节集成开发，点击此处可直接下载。\n在本节简单的推理集成例子中，需要用到的发布件内容如下：\n\nmindspore-lite-{version}-linux-x64\n└── runtime\n│── include # MindSpore Lite集成开发的API头文件\n└── lib\n└── libmindspore-lite.so # MindSpore Lite推理框架的动态库\n\n构建工程目录\n\n本例的工程目录如下：\n\ndemo\n├── CMakeLists.txt # cmake工程管理文件\n├── main.cc # 用户代码\n├── build # 编译用目录\n├── model\n│ └── mobilenetv2.ms # 模型文件（之前转出的模型）\n└── runtime # 发布件的runtime目录\n├── include # MindSpore Lite集成开发的API头文件\n└── lib\n└── libmindspore-lite.so # MindSpore Lite推理框架的动态库\n\n新建一个demo文件夹，新建main.cc和CMakeLists.txt文件。\n新建build和model目录，将mobilenetv2.ms放到model内。\n将发布件中的runtime目录拷贝到demo中，runtime内的文件可以保持不动，也可以删除除libmindspore-lite.so和include文件夹外的其它库文件。\n\n构建cmake工程\n\n打开上一步创建的CMakeLists.txt，粘贴如下内容，其中每句话的含义见注释：\n\ncmake_minimum_required(VERSION 3.22.3) # cmake版本要求最低3.22.3\nproject(Demo) # 工程名为Demo\n\n# gcc 版本要求大于等于7.3.0\nif(CMAKE_CXX_COMPILER_ID STREQUAL \"GNU\" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 7.3.0)\nmessage(FATAL_ERROR \"GCC version ${CMAKE_CXX_COMPILER_VERSION} must not be less than 7.3.0\")\nendif()\n\ninclude_directories(${CMAKE_CURRENT_SOURCE_DIR}/runtime/) # 添加头文件寻找路径\n\nlink_directories(${CMAKE_CURRENT_SOURCE_DIR}/runtime/lib) # 添加库文件寻找路径\n\nadd_executable(demo main.cc) # 编译生成demo执行程序\n\n# 声明demo执行程序需要链接的库，mindspore-lite为MindSpore Lite推理框架的动态库\ntarget_link_libraries(\ndemo\nmindspore-lite\npthread\ndl\n)"
+        },
+        {
+          "chunkId": "S05#s104",
+          "score": null,
+          "text": "用户可在MindSpore Lite官网下载页面，得到各版本的MindSpore Lite发布件。\n在本例中，我们选择的是软件系统为Windows、底层架构为x86_64的CPU发布件，以1.6.0版本为例，用户可点击此处直接下载。\n每个发布件的包结构会有不同。本例中，Windows发布件的包结构如下：\n\nmindspore-lite-{version}-win-x64\n├── runtime\n│ ├── include\n│ └── lib\n│ ├── libgcc_s_seh-1.dll # MinGW动态库\n│ ├── libmindspore-lite.a # MindSpore Lite推理框架的静态库\n│ ├── libmindspore-lite.dll # MindSpore Lite推理框架的动态库\n│ ├── libmindspore-lite.dll.a # MindSpore Lite推理框架的动态库的链接文件\n│ ├── libssp-0.dll # MinGW动态库\n│ ├── libstdc++-6.dll # MinGW动态库\n│ └── libwinpthread-1.dll # MinGW动态库\n└── tools\n├── benchmark # 基准测试工具目录\n└── converter # 模型转换工具目录"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s104"
+      ]
+    },
+    {
+      "questionId": "D12",
+      "split": "dev",
+      "set": "AI框架与推理",
+      "question": "飞桨里手动创建 Tensor 有哪些常见途径？另外，如果某个参数在设计网络时不想让它参与梯度回传、不参与训练更新，应该动 Tensor 的哪个属性？它默认是什么值？",
+      "referenceChunks": [
+        "S07#3.5",
+        "S07#s125"
+      ],
+      "topk": [
+        {
+          "chunkId": "S07#s125",
+          "score": null,
+          "text": "飞桨可基于给定数据手动创建 Tensor，并提供了多种方式，如：\n\n2.1 指定数据创建\n\n2.2 指定形状创建\n\n2.3 指定区间创建\n\n另外在常见深度学习任务中，数据样本可能是图片（image）、文本（text）、语音（audio）等多种类型，在送入神经网络训练或推理前均需要创建为 Tensor。飞桨提供了将这类数据手动创建为 Tensor 的方法，如：\n\n2.4 指定图像、文本数据创建\n\n由于这些操作在整个深度学习任务流程中比较常见且固定，飞桨在一些 API 中封装了 Tensor 自动创建的操作，从而无须手动转 Tensor。\n\n2.5 自动创建 Tensor 的功能介绍\n\n如果你熟悉 Numpy，已经使用 Numpy 数组创建好数据，飞桨可以很方便地将 Numpy 数组转为 Tensor，具体介绍如：\n\n六、Tensor 与 Numpy 数组相互转换"
+        },
+        {
+          "chunkId": "S07#3.5",
+          "score": null,
+          "text": "stop_gradient 表示是否停止计算梯度，默认值为 True，表示停止计算梯度，梯度不再回传。在设计网络时，如不需要对某些参数进行训练更新，可以将参数的 stop_gradient 设置为 True。可参考以下代码直接设置 stop_gradient 的值。\n\neg = paddle.to_tensor(1)\nprint(\"Tensor stop_gradient:\", eg.stop_gradient)\neg.stop_gradient = False\nprint(\"Tensor stop_gradient:\", eg.stop_gradient)\n\nTensor stop_gradient: True\nTensor stop_gradient: False"
+        },
+        {
+          "chunkId": "S07#2.1",
+          "score": null,
+          "text": "与 Numpy 创建数组方式类似，通过给定 Python 序列（如列表 list、元组 tuple），可使用 paddle.to_tensor 创建任意维度的 Tensor。示例如下：\n\n2.1.1 创建类似向量（vector）的 1 维 Tensor：\n\nimport paddle # 后面的示例代码默认已导入 paddle 模块\nndim_1_Tensor = paddle.to_tensor([2.0, 3.0, 4.0])\nprint(ndim_1_Tensor)\n\nTensor(shape=[3], dtype=float32, place=Place(gpu:0), stop_gradient=True,\n[2., 3., 4.])\n\n特殊地，如果仅输入单个标量（scalar）数据（例如 float/int/bool 类型的单个元素），则会创建形状为 [1] 的 Tensor，即 0 维 Tensor：\n\npaddle.to_tensor(2)\npaddle.to_tensor([2])\n\n# 上述两种创建方式完全一致，形状均为 [1]，输出如下：\nTensor(shape=[1], dtype=int64, place=Place(gpu:0), stop_gradient=True,\n[2])\n\n2.1.2 创建类似矩阵（matrix）的 2 维 Tensor：\n\nndim_2_Tensor = paddle.to_tensor([[1.0, 2.0, 3.0],\n[4.0, 5.0, 6.0]])\nprint(ndim_2_Tensor)\n\nTensor(shape=[2, 3], dtype=float32, place=Place(gpu:0), stop_gradient=True,\n[[1., 2., 3.],\n[4., 5., 6.]])\n\n2.1.3 创建 3 维 Tensor：\n\nndim_3_Tensor = paddle.to_tensor([[[1, 2, 3, 4, 5],\n[6, 7, 8, 9, 10]],\n[[11, 12, 13, 14, 15],\n[16, 17, 18, 19, 20]]])\nprint(ndim_3_Tensor)\n\nTensor(shape=[2, 2, 5], dtype=int64, place=Place(gpu:0), stop_gradient=True,\n[[[1 , 2 , 3 , 4 , 5 ],\n[6 , 7 , 8 , 9 , 10]],\n\n[[11, 12, 13, 14, 15],\n[16, 17, 18, 19, 20]]])\n\n上述不同维度的 Tensor 可视化的表示如下图所示：\n\n图 1 不同维度的 Tensor 可视化表示\n\n需要注意的是，Tensor 必须形如矩形，即在任何一个维度上，元素的数量必须相等，否则会抛出异常，示例如下：\n\nndim_2_Tensor = paddle.to_tensor([[1.0, 2.0],\n[4.0, 5.0, 6.0]])\n\nValueError:\nFailed to convert input data to a regular ndarray :\n- Usually this means the input data contains nested lists with different lengths.\n\n说明：\n\n飞桨也支持将 Tensor 转换为 Python 序列数据，可通过 paddle.tolist 实现，飞桨实际的转换处理过程是 Python 序列 <-> Numpy 数组 <-> Tensor。\n\n基于给定数据创建 Tensor 时，飞桨是通过拷贝方式创建，与原始数据不共享内存。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S07#s125",
+        "S07#3.5"
+      ]
+    },
+    {
+      "questionId": "D13",
+      "split": "dev",
+      "set": "AI框架与推理",
+      "question": "把图片样本和文本样本分别转成 Tensor 该用什么办法？另外 Tensor 的逐元素算术既可以用运算符也可以用方法，这两种写法是怎么对应的？",
+      "referenceChunks": [
+        "S07#2.4",
+        "S07#4.2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S07#2.4",
+          "score": null,
+          "text": "在常见深度学习任务中，数据样本可能是图片（image）、文本（text）、语音（audio）等多种类型，在送入神经网络训练或推理前，这些数据和对应的标签均需要创建为 Tensor。以下是图像场景和 NLP 场景中手动转换 Tensor 方法的介绍。\n\n对于图像场景，可使用 paddle.vision.transforms.ToTensor 直接将 PIL.Image 格式的数据转为 Tensor，使用 paddle.to_tensor 将图像的标签（Label，通常是 Python 或 Numpy 格式的数据）转为 Tensor。\n\n对于文本场景，需将文本数据解码为数字后，再通过 paddle.to_tensor 转为 Tensor。不同文本任务标签形式不一样，有的任务标签也是文本，有的则是数字，均需最终通过 paddle.to_tensor 转为 Tensor。\n\n下面以图像场景为例介绍，以下示例代码中将随机生成的图片转换为 Tensor。\n\nimport numpy as np\nfrom PIL import Image\nimport paddle.vision.transforms as T\nimport paddle.vision.transforms.functional as F\n\nfake_img = Image.fromarray((np.random.rand(224, 224, 3) * 255.).astype(np.uint8)) # 创建随机图片\ntransform = T.ToTensor()\ntensor = transform(fake_img) # 使用 ToTensor()将图片转换为 Tensor\nprint(tensor)\n\nTensor(shape=[3, 224, 224], dtype=float32, place=Place(gpu:0), stop_gradient=True,\n[[[0.78039223, 0.72941178, 0.34117648, ..., 0.76470596, 0.57647061, 0.94901967],\n...,\n[0.49803925, 0.72941178, 0.80392164, ..., 0.08627451, 0.97647065, 0.43137258]]])\n\n说明：\n\n实际编码时，由于飞桨数据加载的 paddle.io.DataLoader API 能够将原始 paddle.io.Dataset 定义的数据自动转换为 Tensor，所以可以不做手动转换。具体如下节介绍。"
+        },
+        {
+          "chunkId": "S07#s125",
+          "score": null,
+          "text": "飞桨可基于给定数据手动创建 Tensor，并提供了多种方式，如：\n\n2.1 指定数据创建\n\n2.2 指定形状创建\n\n2.3 指定区间创建\n\n另外在常见深度学习任务中，数据样本可能是图片（image）、文本（text）、语音（audio）等多种类型，在送入神经网络训练或推理前均需要创建为 Tensor。飞桨提供了将这类数据手动创建为 Tensor 的方法，如：\n\n2.4 指定图像、文本数据创建\n\n由于这些操作在整个深度学习任务流程中比较常见且固定，飞桨在一些 API 中封装了 Tensor 自动创建的操作，从而无须手动转 Tensor。\n\n2.5 自动创建 Tensor 的功能介绍\n\n如果你熟悉 Numpy，已经使用 Numpy 数组创建好数据，飞桨可以很方便地将 Numpy 数组转为 Tensor，具体介绍如：\n\n六、Tensor 与 Numpy 数组相互转换"
+        },
+        {
+          "chunkId": "S07#s142",
+          "score": null,
+          "text": "如果你已熟悉 Numpy，通过以下要点，可以方便地理解和迁移到 Tensor 的使用上：\n\nTensor 的很多基础操作 API 和 Numpy 在功能、用法上基本保持一致。如前文中介绍的指定数据、形状、区间创建 Tensor，Tensor 的形状、数据类型属性，Tensor 的各种操作，以及 Tensor 的广播，可以很方便地在 Numpy 中找到相似操作。\n\n但是，Tensor 也有一些独有的属性和操作，而 Numpy 中没有对应概念或功能，这是为了更好地支持深度学习任务。如前文中介绍的通过图像、文本等原始数据手动或自动创建 Tensor 的功能，能够更便捷地处理数据，Tensor 的设备位置属性，可以很方便地将 Tensor 迁移到 GPU 或各种 AI 加速硬件上，Tensor 的 stop_gradient 属性，也是 Tensor 独有的，以便更好地支持深度学习任务。\n\n如果已有 Numpy 数组，可使用 paddle.to_tensor 创建任意维度的 Tensor，创建的 Tensor 与原 Numpy 数组具有相同的形状与数据类型。\n\ntensor_temp = paddle.to_tensor(np.array([1.0, 2.0]))\nprint(tensor_temp)\n\nTensor(shape=[2], dtype=float64, place=Place(gpu:0), stop_gradient=True,\n[1., 2.])\n\n注意：\n\n基于 Numpy 数组创建 Tensor 时，飞桨是通过拷贝方式创建，与原始数据不共享内存。\n\n相对应地，飞桨也支持将 Tensor 转换为 Numpy 数组，可通过 Tensor.numpy 方法实现。\n\ntensor_to_convert = paddle.to_tensor([1.,2.])\ntensor_to_convert.numpy()\n\narray([1., 2.], dtype=float32)"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S07#2.4"
+      ]
+    },
+    {
+      "questionId": "D14",
+      "split": "dev",
+      "set": "AI框架与推理",
+      "question": "不自己写数据转 Tensor 的代码，也能正常把模型训练起来吗？框架是怎么做到的？另外要判断两个 Tensor 的元素是否相等或比较大小，有哪些现成方法？",
+      "referenceChunks": [
+        "S07#2.5",
+        "S07#4.3"
+      ],
+      "topk": [
+        {
+          "chunkId": "S07#2.5",
+          "score": null,
+          "text": "除了手动创建 Tensor 外，实际在飞桨框架中有一些 API 封装了 Tensor 创建的操作，从而无需用户手动创建 Tensor。例如 paddle.io.DataLoader 能够基于原始 Dataset，返回读取 Dataset 数据的迭代器，迭代器返回的数据中的每个元素都是一个 Tensor。另外在一些高层 API，如 paddle.Model.fit 、paddle.Model.predict ，如果传入的数据不是 Tensor，会自动转为 Tensor 再进行模型训练或推理。\n\n说明：\n\npaddle.Model.fit、paddle.Model.predict 等高层 API 支持传入 Dataset 或 DataLoader，如果传入的是 Dataset，那么会用 DataLoader 封装转为 Tensor 数据；如果传入的是 DataLoader，则直接从 DataLoader 迭代读取 Tensor 数据送入模型训练或推理。因此即使没有写将数据转为 Tensor 的代码，也能正常执行，提升了编程效率和容错性。\n\n以下示例代码中，分别打印了原始数据集的数据，和送入 DataLoader 后返回的数据，可以看到数据结构由 Python list 转为了 Tensor。\n\nimport paddle\n\nfrom paddle.vision.transforms import Compose, Normalize\n\ntransform = Compose([Normalize(mean=[127.5],\nstd=[127.5],\ndata_format='CHW')])\n\ntest_dataset = paddle.vision.datasets.MNIST(mode='test', transform=transform)\nprint(test_dataset[0][1]) # 打印原始数据集的第一个数据的 label\nloader = paddle.io.DataLoader(test_dataset)\nfor data in enumerate(loader):\nx, label = data[1]\nprint(label) # 打印由 DataLoader 返回的迭代器中的第一个数据的 label\nbreak\n\n[7] # 原始数据中 label 为 Python list\nTensor(shape=[1, 1], dtype=int64, place=Place(gpu_pinned), stop_gradient=True,\n[[7]]) # 由 DataLoader 转换后，label 为 Tensor"
+        },
+        {
+          "chunkId": "S07#4.3",
+          "score": null,
+          "text": "x.isfinite() #判断 Tensor 中元素是否是有限的数字，即不包括 inf 与 nan\nx.equal_all(y) #判断两个 Tensor 的全部元素是否相等，并返回形状为[]的布尔类 0-D Tensor\nx.equal(y) #判断两个 Tensor 的每个元素是否相等，并返回形状相同的布尔类 Tensor\nx.not_equal(y) #判断两个 Tensor 的每个元素是否不相等\nx.less_than(y) #判断 Tensor x 的元素是否小于 Tensor y 的对应元素\nx.less_equal(y) #判断 Tensor x 的元素是否小于或等于 Tensor y 的对应元素\nx.greater_than(y) #判断 Tensor x 的元素是否大于 Tensor y 的对应元素\nx.greater_equal(y) #判断 Tensor x 的元素是否大于或等于 Tensor y 的对应元素\nx.allclose(y) #判断 Tensor x 的全部元素是否与 Tensor y 的全部元素接近，并返回形状为[]的布尔类 0-D Tensor\n\n同样地，飞桨框架对 Python 逻辑比较相关的魔法函数进行了重写，以下操作与上述结果相同。\n\nx == y -> x.equal(y) #判断两个 Tensor 的每个元素是否相等\nx != y -> x.not_equal(y) #判断两个 Tensor 的每个元素是否不相等\nx < y -> x.less_than(y) #判断 Tensor x 的元素是否小于 Tensor y 的对应元素\nx <= y -> x.less_equal(y) #判断 Tensor x 的元素是否小于或等于 Tensor y 的对应元素\nx > y -> x.greater_than(y) #判断 Tensor x 的元素是否大于 Tensor y 的对应元素\nx >= y -> x.greater_equal(y) #判断 Tensor x 的元素是否大于或等于 Tensor y 的对应元素\n\n以下操作仅针对 bool 型 Tensor：\n\nx.logical_and(y) #对两个布尔类型 Tensor 逐元素进行逻辑与操作\nx.logical_or(y) #对两个布尔类型 Tensor 逐元素进行逻辑或操作\nx.logical_xor(y) #对两个布尔类型 Tensor 逐元素进行逻辑异或操作\nx.logical_not(y) #对两个布尔类型 Tensor 逐元素进行逻辑非操作"
+        },
+        {
+          "chunkId": "S07#s125",
+          "score": null,
+          "text": "飞桨可基于给定数据手动创建 Tensor，并提供了多种方式，如：\n\n2.1 指定数据创建\n\n2.2 指定形状创建\n\n2.3 指定区间创建\n\n另外在常见深度学习任务中，数据样本可能是图片（image）、文本（text）、语音（audio）等多种类型，在送入神经网络训练或推理前均需要创建为 Tensor。飞桨提供了将这类数据手动创建为 Tensor 的方法，如：\n\n2.4 指定图像、文本数据创建\n\n由于这些操作在整个深度学习任务流程中比较常见且固定，飞桨在一些 API 中封装了 Tensor 自动创建的操作，从而无须手动转 Tensor。\n\n2.5 自动创建 Tensor 的功能介绍\n\n如果你熟悉 Numpy，已经使用 Numpy 数组创建好数据，飞桨可以很方便地将 Numpy 数组转为 Tensor，具体介绍如：\n\n六、Tensor 与 Numpy 数组相互转换"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S07#2.5",
+        "S07#4.3"
+      ]
+    },
+    {
+      "questionId": "D15",
+      "split": "dev",
+      "set": "测试自动化",
+      "question": "写测试时如果有一批夹具是几乎每个测试都要用的，怎么才能免去逐个在参数里声明的麻烦？另外要在同一套页面测试里验证登录失败的场景，一般怎么改测试数据才不影响其他测试？",
+      "referenceChunks": [
+        "S14#s244",
+        "S14#s263~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s238",
+          "score": null,
+          "text": "所以固定装置就是我们 准备 对于一个测试，但是我们如何告诉pytest哪些测试和装置需要哪些装置呢？\n\n在基本级别上，测试函数通过将fixture声明为参数来请求fixture，如 test_my_fruit_in_basket(my_fruit, fruit_basket): 在前面的示例中。\n\n在基本级别上，pytest依赖于一个测试来告诉它它需要什么装置，所以我们必须将该信息构建到测试本身中。我们必须进行测试。“ 请求 它所依赖的装置，要做到这一点，我们必须将这些装置作为参数列在测试函数的“签名”中(这是 def test_something(blah, stuff, more): 线）。\n\n当pytest运行测试时，它会查看该测试函数签名中的参数，然后搜索与这些参数同名的fixture。一旦pytest找到它们，它就会运行这些装置，捕获它们返回的内容(如果有的话)，并将这些对象作为参数传递给测试函数。"
+        },
+        {
+          "chunkId": "S14#s235",
+          "score": null,
+          "text": "Software test fixtures 初始化测试功能。它们提供了一个固定的基线，以便测试可靠地执行并产生一致的、可重复的结果。初始化可以设置服务、状态或其他操作环境。在fixture函数中，每个函数的参数通常在test之后被命名为fixture。\n\npytest fixtures相对于传统的xUnit风格的setup/teardown函数提供了显著的改进：\n\n装置有明确的名称，通过声明它们在测试函数、模块、类或整个项目中的使用来激活。\n\n夹具以模块化的方式实现，因为每个夹具名称触发 夹具功能 可以使用其他固定装置。\n\n夹具管理从简单的单元扩展到复杂的功能测试，允许根据配置和组件选项参数化夹具和测试，或者跨功能、类、模块或整个测试会话范围重复使用夹具。\n\n无论使用多少夹具，拆卸逻辑都可以轻松、安全地进行管理，无需手动仔细处理错误或微观管理添加清理步骤的顺序。\n\n此外，pytest继续支持 经典的Xunit风格设置 . 您可以混合这两种样式，根据您的喜好，逐步从经典样式移动到新样式。你也可以从现有的 unittest.TestCase style 或 nose based 项目。\n\nFixtures 使用 @pytest.fixture 装饰者， described below . Pytest有有用的内置设备，下面列出以供参考：\n\ncapfd\n\n以文本形式捕获输出到文件描述符 1 和 2 .\n\ncapfdbinary\n\n以字节形式捕获输出到文件描述符 1 和 2 .\n\ncaplog\n\n控制日志记录和访问日志条目。\n\ncapsys\n\n捕获，作为文本，输出到 sys.stdout 和 sys.stderr .\n\ncapsysbinary\n\n以字节形式捕获输出到 sys.stdout 和 sys.stderr .\n\ncache\n\n跨pytest运行存储和检索值。\n\ndoctest_namespace\n\n提供注入到docstests命名空间中的dict。\n\nmonkeypatch\n\n临时修改类、函数、字典， os.environ ，以及其他对象。\n\npytestconfig\n\n访问配置值、pluginmanager和plugin hooks。\n\nrecord_property\n\n向测试添加额外属性。\n\nrecord_testsuite_property\n\n向测试套件添加额外属性。\n\nrecwarn\n\n记录测试函数发出的警告。\n\nrequest\n\n提供有关执行测试功能的信息。\n\ntestdir\n\n提供一个临时测试目录来帮助运行和测试pytest插件。\n\ntmp_path\n\n提供一个 pathlib.Path 对象指向每个测试函数唯一的临时目录。\n\ntmp_path_factory\n\n生成会话作用域的临时目录并返回 pathlib.Path 物体。\n\ntmpdir\n\n提供一个 py.path.local 对象指向每个测试函数唯一的临时目录；替换为 tmp_path .\n\ntmpdir_factory\n\n生成会话作用域的临时目录并返回 py.path.local 对象；替换为 tmp_path_factory ."
+        },
+        {
+          "chunkId": "S14#s240",
+          "score": null,
+          "text": "pytest最大的优势之一是其极其灵活的夹具系统。它允许我们将复杂的测试需求归结为更简单、更有组织的功能，在这些功能中，我们只需要让每个功能描述它们所依赖的东西。我们将更深入地介绍这一点，但现在，这里有一个快速示例来演示装置如何使用其他装置：\n\n# contents of test_append.py\nimport pytest\n\n# Arrange\n@pytest.fixture\ndef first_entry():\nreturn \"a\"\n\n# Arrange\n@pytest.fixture\ndef order(first_entry):\nreturn [first_entry]\n\ndef test_string(order):\n# Act\norder.append(\"b\")\n\n# Assert\nassert order == [\"a\", \"b\"]\n\n请注意，这与上面的示例相同，但几乎没有更改。火柴里的固定装置 请求 固定装置就像测试一样。尽管如此， 请求 规则适用于进行测试的夹具。下面是如果我们手动完成此示例的工作方式：\n\ndef first_entry():\nreturn \"a\"\n\ndef order(first_entry):\nreturn [first_entry]\n\ndef test_string(order):\n# Act\norder.append(\"b\")\n\n# Assert\nassert order == [\"a\", \"b\"]\n\nentry = first_entry()\nthe_list = order(first_entry=entry)\ntest_string(order=the_list)"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "D16",
+      "split": "dev",
+      "set": "测试自动化",
+      "question": "在同一个测试里，好几个夹具都依赖同一个底层夹具，那这个被依赖的夹具会被执行几次？另外某个自动使用的夹具内部又请求了另一个夹具，那个被请求的夹具是不是在别处也会跟着自动执行？",
+      "referenceChunks": [
+        "S14#s243",
+        "S14#s262~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s243",
+          "score": null,
+          "text": "固定装置也可以 已请求 在同一测试期间多次执行，pytest不会为该测试再次执行它们。这意味着我们可以 请求 依赖于它们的多个装置中的装置(甚至在测试本身中也是如此)，而这些装置没有多次执行。\n\n# contents of test_append.py\nimport pytest\n\n# Arrange\n@pytest.fixture\ndef first_entry():\nreturn \"a\"\n\n# Arrange\n@pytest.fixture\ndef order():\nreturn []\n\n# Act\n@pytest.fixture\ndef append_first(order, first_entry):\nreturn order.append(first_entry)\n\ndef test_string_only(append_first, order, first_entry):\n# Assert\nassert order == [first_entry]\n\n如果A 已请求 每执行一次装置，就会执行一次 已请求 在测试期间，此测试将失败，因为 append_first 和 test_string_only 会看到 order 作为空列表(即 [] )，但由于 order 在第一次调用它之后被缓存(连同执行它可能具有的任何副作用)，测试和 append_first 都引用了相同的对象，测试看到了效果 append_first 带在那个物体上。"
+        },
+        {
+          "chunkId": "S14#s262",
+          "score": null,
+          "text": "假定自动装置应用于可以引用它们的每个测试，因此它们在该作用域中的其他装置之前执行。自动设备所请求的设备本身实际上变成了自动设备，用于实际的自动设备所适用的测试。\n\nSo if fixture a is autouse and fixture b is not, but fixture a\nrequests fixture b, then fixture b will effectively be an autouse\nfixture as well, but only for the tests that a applies to.\n\n在最后一个示例中，图形变得不清楚是否 d 没有要求 c 。但是如果 c 是自动的，那么 b 和 a 实际上也是自动使用，因为 c 就看他们了。因此，它们将全部移到该范围内的非自动装置之上。\n\n因此，如果测试文件如下所示：\n\nimport pytest\n\n@pytest.fixture\ndef order():\nreturn []\n\n@pytest.fixture\ndef a(order):\norder.append(\"a\")\n\n@pytest.fixture\ndef b(a, order):\norder.append(\"b\")\n\n@pytest.fixture(autouse=True)\ndef c(b, order):\norder.append(\"c\")\n\n@pytest.fixture\ndef d(b, order):\norder.append(\"d\")\n\n@pytest.fixture\ndef e(d, order):\norder.append(\"e\")\n\n@pytest.fixture\ndef f(e, order):\norder.append(\"f\")\n\n@pytest.fixture\ndef g(f, c, order):\norder.append(\"g\")\n\ndef test_order_and_g(g, order):\nassert order == [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\"]\n\n图表将如下所示：\n\n因为 c 现在可以放在上面 d 在图形中，pytest可以再次将图形线性化为：\n\n在这个例子中， c 使 b 和 a 还可以有效地自动切换固定装置。\n\n不过，要小心自动使用，因为自动使用固定装置将自动为每个可以到达它的测试执行，即使他们没有请求它。例如，请考虑以下文件：\n\nimport pytest\n\n@pytest.fixture(scope=\"class\")\ndef order():\nreturn []\n\n@pytest.fixture(scope=\"class\", autouse=True)\ndef c1(order):\norder.append(\"c1\")\n\n@pytest.fixture(scope=\"class\")\ndef c2(order):\norder.append(\"c2\")\n\n@pytest.fixture(scope=\"class\")\ndef c3(order, c1):\norder.append(\"c3\")\n\nclass TestClassWithC1Request:\ndef test_order(self, order, c1, c3):\nassert order == [\"c1\", \"c3\"]\n\nclass TestClassWithoutC1Request:\ndef test_order(self, order, c2):\nassert order == [\"c1\", \"c2\"]"
+        },
+        {
+          "chunkId": "S14#s262~2",
+          "score": null,
+          "text": "Even though nothing in TestClassWithC1Request is requesting c1, it still\nis executed for the tests inside it anyway:\n\n但是，仅仅因为一个自动设备请求了非自动设备，这并不意味着非自动设备成为它可以应用到的所有上下文中的自动设备。它只能有效地成为实际自动使用装置(请求非自动装置的装置)可以应用的上下文的自动使用装置。\n\n例如，查看此测试文件：\n\nimport pytest\n\n@pytest.fixture\ndef order():\nreturn []\n\n@pytest.fixture\ndef c1(order):\norder.append(\"c1\")\n\n@pytest.fixture\ndef c2(order):\norder.append(\"c2\")\n\nclass TestClassWithAutouse:\n@pytest.fixture(autouse=True)\ndef c3(self, order, c2):\norder.append(\"c3\")\n\ndef test_req(self, order, c1):\nassert order == [\"c2\", \"c3\", \"c1\"]\n\ndef test_no_req(self, order):\nassert order == [\"c2\", \"c3\"]\n\nclass TestClassWithoutAutouse:\ndef test_req(self, order, c1):\nassert order == [\"c1\"]\n\ndef test_no_req(self, order):\nassert order == []\n\n它会分解成这样的东西：\n\n为了 test_req 和 test_no_req 里面 TestClassWithAutouse ， c3 有效地使 c2 一个自动开关装置，这就是为什么 c2 和 c3 在未被请求的情况下为这两个测试执行，以及为什么 c2 和 c3 都是在执行之前执行的 c1 对于 test_req .\n\n如果这使得 c2 一个 实际的 自动按键固定装置，然后 c2 也会为内部的测试执行 TestClassWithoutAutouse ，因为它们可以引用 c2 如果他们愿意的话。但事实并非如此，因为从 TestClassWithoutAutouse 测验， c2 不是自动装置，因为他们看不见 c3 ."
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S14#s243",
+        "S14#s262~2"
+      ]
+    },
+    {
+      "questionId": "D17",
+      "split": "dev",
+      "set": "测试自动化",
+      "question": "两个不同的测试都请求了同一个夹具，它们会共用同一份数据吗？另外夹具之间能不能靠请求参数来强制执行先后顺序？",
+      "referenceChunks": [
+        "S14#s241",
+        "S14#s261"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s243",
+          "score": null,
+          "text": "固定装置也可以 已请求 在同一测试期间多次执行，pytest不会为该测试再次执行它们。这意味着我们可以 请求 依赖于它们的多个装置中的装置(甚至在测试本身中也是如此)，而这些装置没有多次执行。\n\n# contents of test_append.py\nimport pytest\n\n# Arrange\n@pytest.fixture\ndef first_entry():\nreturn \"a\"\n\n# Arrange\n@pytest.fixture\ndef order():\nreturn []\n\n# Act\n@pytest.fixture\ndef append_first(order, first_entry):\nreturn order.append(first_entry)\n\ndef test_string_only(append_first, order, first_entry):\n# Assert\nassert order == [first_entry]\n\n如果A 已请求 每执行一次装置，就会执行一次 已请求 在测试期间，此测试将失败，因为 append_first 和 test_string_only 会看到 order 作为空列表(即 [] )，但由于 order 在第一次调用它之后被缓存(连同执行它可能具有的任何副作用)，测试和 append_first 都引用了相同的对象，测试看到了效果 append_first 带在那个物体上。"
+        },
+        {
+          "chunkId": "S14#s246",
+          "score": null,
+          "text": "fixture是在测试首次请求时创建的，并根据它们的 scope ：\n\nfunction ：默认范围，则在测试结束时销毁fixture。\n\nclass ：在课程中最后一次测试的拆卸过程中，夹具被破坏。\n\nmodule ：在模块中最后一次测试的拆卸过程中，夹具被破坏。\n\npackage ：在拆下包装中的最后一次试验时，夹具被破坏。\n\nsession ：夹具在测试会话结束时被销毁。\n\n注解\n\nPytest一次只缓存fixture的一个实例，这意味着当使用参数化fixture时，Pytest可以在给定范围内多次调用fixture。"
+        },
+        {
+          "chunkId": "S14#s262",
+          "score": null,
+          "text": "假定自动装置应用于可以引用它们的每个测试，因此它们在该作用域中的其他装置之前执行。自动设备所请求的设备本身实际上变成了自动设备，用于实际的自动设备所适用的测试。\n\nSo if fixture a is autouse and fixture b is not, but fixture a\nrequests fixture b, then fixture b will effectively be an autouse\nfixture as well, but only for the tests that a applies to.\n\n在最后一个示例中，图形变得不清楚是否 d 没有要求 c 。但是如果 c 是自动的，那么 b 和 a 实际上也是自动使用，因为 c 就看他们了。因此，它们将全部移到该范围内的非自动装置之上。\n\n因此，如果测试文件如下所示：\n\nimport pytest\n\n@pytest.fixture\ndef order():\nreturn []\n\n@pytest.fixture\ndef a(order):\norder.append(\"a\")\n\n@pytest.fixture\ndef b(a, order):\norder.append(\"b\")\n\n@pytest.fixture(autouse=True)\ndef c(b, order):\norder.append(\"c\")\n\n@pytest.fixture\ndef d(b, order):\norder.append(\"d\")\n\n@pytest.fixture\ndef e(d, order):\norder.append(\"e\")\n\n@pytest.fixture\ndef f(e, order):\norder.append(\"f\")\n\n@pytest.fixture\ndef g(f, c, order):\norder.append(\"g\")\n\ndef test_order_and_g(g, order):\nassert order == [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\"]\n\n图表将如下所示：\n\n因为 c 现在可以放在上面 d 在图形中，pytest可以再次将图形线性化为：\n\n在这个例子中， c 使 b 和 a 还可以有效地自动切换固定装置。\n\n不过，要小心自动使用，因为自动使用固定装置将自动为每个可以到达它的测试执行，即使他们没有请求它。例如，请考虑以下文件：\n\nimport pytest\n\n@pytest.fixture(scope=\"class\")\ndef order():\nreturn []\n\n@pytest.fixture(scope=\"class\", autouse=True)\ndef c1(order):\norder.append(\"c1\")\n\n@pytest.fixture(scope=\"class\")\ndef c2(order):\norder.append(\"c2\")\n\n@pytest.fixture(scope=\"class\")\ndef c3(order, c1):\norder.append(\"c3\")\n\nclass TestClassWithC1Request:\ndef test_order(self, order, c1, c3):\nassert order == [\"c1\", \"c3\"]\n\nclass TestClassWithoutC1Request:\ndef test_order(self, order, c2):\nassert order == [\"c1\", \"c2\"]"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "D18",
+      "split": "dev",
+      "set": "测试自动化",
+      "question": "pytest 是怎么知道某个测试需要哪些夹具的？如果夹具不是自己写的、而是某个第三方插件提供的，会不会因为目录层级的关系被排除在外？",
+      "referenceChunks": [
+        "S14#s238",
+        "S14#s257"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s257",
+          "score": null,
+          "text": "不过，不必在此结构中定义装置即可用于测试。它们也可以由安装的第三方插件提供，这就是许多最火爆的插件的运行方式。只要安装了这些插件，就可以从测试套件中的任何位置请求它们提供的夹具。\n\n因为它们是从测试套件的结构之外提供的，所以第三方插件并不能真正提供这样的范围 conftest.py 测试套件中的文件和目录可以做到这一点。因此，pytest将如前所述通过作用域搜索跳出的装置，仅到达插件中定义的装置 last .\n\n例如，给定以下文件结构：\n\ntests/\n__init__.py\n\nconftest.py\n# content of tests/conftest.py\nimport pytest\n\n@pytest.fixture\ndef order():\nreturn []\n\nsubpackage/\n__init__.py\n\nconftest.py\n# content of tests/subpackage/conftest.py\nimport pytest\n\n@pytest.fixture(autouse=True)\ndef mid(order, b_fix):\norder.append(\"mid subpackage\")\n\ntest_subpackage.py\n# content of tests/subpackage/test_subpackage.py\nimport pytest\n\n@pytest.fixture\ndef inner(order, mid, a_fix):\norder.append(\"inner subpackage\")\n\ndef test_order(order, inner):\nassert order == [\"b_fix\", \"mid subpackage\", \"a_fix\", \"inner subpackage\"]\n\n如果 plugin_a 已安装，并提供夹具 a_fix 和 plugin_b 已安装，并提供夹具 b_fix ，则测试对灯具的搜索将如下所示：\n\npytest将仅搜索 a_fix 和 b_fix 在插件中，先在里面的作用域中搜索它们 tests/ ."
+        },
+        {
+          "chunkId": "S14#s256",
+          "score": null,
+          "text": "这个 conftest.py 文件用作为整个目录提供装置的方法。中定义的装置 conftest.py 可以由该包中的任何测试使用，而无需导入它们(pytest会自动发现它们)。\n\n您可以有多个包含测试的嵌套目录/包，并且每个目录都可以有自己的目录 conftest.py 具有自己的灯具，添加到由提供的灯具上 conftest.py 父目录中的文件。\n\n例如，假设测试文件结构如下：\n\ntests/\n__init__.py\n\nconftest.py\n# content of tests/conftest.py\nimport pytest\n\n@pytest.fixture\ndef order():\nreturn []\n\n@pytest.fixture\ndef top(order, innermost):\norder.append(\"top\")\n\ntest_top.py\n# content of tests/test_top.py\nimport pytest\n\n@pytest.fixture\ndef innermost(order):\norder.append(\"innermost top\")\n\ndef test_order(order, top):\nassert order == [\"innermost top\", \"top\"]\n\nsubpackage/\n__init__.py\n\nconftest.py\n# content of tests/subpackage/conftest.py\nimport pytest\n\n@pytest.fixture\ndef mid(order):\norder.append(\"mid subpackage\")\n\ntest_subpackage.py\n# content of tests/subpackage/test_subpackage.py\nimport pytest\n\n@pytest.fixture\ndef innermost(order, mid):\norder.append(\"innermost subpackage\")\n\ndef test_order(order, top):\nassert order == [\"mid subpackage\", \"innermost subpackage\", \"top\"]\n\n作用域的边界可以按如下方式可视化：\n\n这些目录成为它们自己的作用域，其中在 conftest.py 该目录中的文件将对整个范围可用。\n\n测试可以向上搜索(在圆圈外)，但不能向下(在圆圈内)继续搜索。所以 tests/subpackage/test_subpackage.py::test_order 将能够找到 innermost 中定义的装置 tests/subpackage/test_subpackage.py ，而是在 tests/test_top.py 对它是不可用的，因为它必须向下一层(在圆圈内)才能找到它。\n\n测试发现的第一个夹具是要使用的夹具，因此 fixtures can be overriden 如果您需要更改或扩展特定范围的操作。\n\n您也可以使用 conftest.py 要实现的文件 local per-directory plugins ."
+        },
+        {
+          "chunkId": "S14#s277",
+          "score": null,
+          "text": "通常，提供pytest支持的项目将使用 entry points ，所以只要将这些项目安装到环境中，就可以使用这些设备。\n\n如果要使用不使用入口点的项目中的装置，可以定义 pytest_plugins 穿着你的上衣 conftest.py 文件将该模块注册为插件。\n\n假设你有固定装置 mylibrary.fixtures 你想在你的 app/tests 目录。\n\n你需要做的就是定义 pytest_plugins 在里面 app/tests/conftest.py 指向那个模块。\n\npytest_plugins = \"mylibrary.fixtures\"\n\n这有效地记录了 mylibrary.fixtures 作为一个插件，使其所有的fixture和hook都可以在中进行测试 app/tests .\n\n注解\n\n有时用户会 进口 但是不建议使用其他项目中的fixture：将fixture导入模块将在pytest中将它们注册为 定义 在那个模块里。\n\n这会产生一些小的后果，比如多次出现在 pytest --help ，但事实并非如此 推荐 因为这种行为在将来的版本中可能会改变/停止工作。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S14#s257"
+      ]
+    },
+    {
+      "questionId": "D19",
+      "split": "dev",
+      "set": "嵌入式开发",
+      "question": "ESP32 的一条 SPI 总线上，哪些信号线是所有设备共用、哪些是每个设备独占？另外主机设定好的时钟频率和实际跑出来的频率一定一致吗，怎么查实际值？",
+      "referenceChunks": [
+        "S02#s25",
+        "S02#s8"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s8",
+          "score": null,
+          "text": "下表为 SPI 主机驱动的相关术语。\n\n术语\n\n定义\n\n主机 (Host)\n\nESP32 内置的 SPI 控制器外设。用作 SPI 主机，在总线上发起 SPI 传输。\n\n设备 (Device)\n\nSPI 从机设备。一条 SPI 总线与一或多个设备连接。每个设备共享 MOSI、MISO 和 SCLK 信号，但只有当主机向设备的专属 CS 线发出信号时，设备才会在总线上处于激活状态。\n\n总线 (Bus)\n\n信号总线，由连接到同一主机的所有设备共用。一般来说，每条总线包括以下线：MISO、MOSI、SCLK、一条或多条 CS 线，以及可选的 QUADWP 和 QUADHD。因此，除每个设备都有单独的 CS 线外，所有设备都连接在相同的线下。多个设备也可以菊花链的方式共享一条 CS 线。\n\nMOSI\n\n主机输出，从机输入，也写作 D。数据从主机发送至设备。在 Octal/OPI 模式下也表示为 data0 信号。\n\nMISO\n\n主机输入，从机输出，也写作 Q。数据从设备发送至主机。在 Octal/OPI 模式下也表示为 data1 信号。\n\nSCLK\n\n串行时钟。由主机产生的振荡信号，使数据位的传输保持同步。\n\nCS\n\n片选。允许主机选择连接到总线上的单个设备，以便发送或接收数据。\n\nQUADWP\n\n写保护信号。只用于 4 位 (qio/qout) 传输。在 Octal/OPI 模式下也表示为 data2 信号。\n\nQUADHD\n\n保持信号。只用于 4 位 (qio/qout) 传输。在 Octal/OPI 模式下也表示为 data3 信号。\n\nDATA4\n\n在 Octal/OPI 模式下表示为 data4 信号。\n\nDATA5\n\n在 Octal/OPI 模式下表示为 data5 信号。\n\nDATA6\n\n在 Octal/OPI 模式下表示为 data6 信号。\n\nDATA7\n\n在 Octal/OPI 模式下表示为 data7 信号。\n\n断言 (Assertion)\n\n指激活一条线路的操作。\n\n去断言 (De-assertion)\n\n指将线路恢复到非活动状态（回到空闲状态）的操作。\n\n传输事务 (Transaction)\n\n即主机断言设备的 CS 线，向设备发送数据/从设备读取数据，接着去断言 CS 线的过程。传输事务为原子操作，不可打断。\n\n发射沿 (Launch Edge)\n\n源寄存器将信号 发射 到线路上的时钟边沿。\n\n锁存沿 (Latch Edge)\n\n目的寄存器 锁存 信号的时钟边沿。"
+        },
+        {
+          "chunkId": "S02#s25",
+          "score": null,
+          "text": "GPSPI 外设的时钟源可以通过设置 spi_device_interface_config_t::clock_source 选择，可用的时钟源请参阅 spi_clock_source_t。\n\n默认情况下，驱动程序将把时钟源设置为 SPI_CLK_SRC_DEFAULT。这往往代表 GPSPI 可选时钟源中的最高频率，在不同的芯片上这一数值会有所不同。\n\n设备的实际时钟频率可能不完全等于所设置的数字，驱动会将其重新计算为与硬件兼容的最接近的数字，并且不超过时钟源的时钟频率。调用函数 spi_device_get_actual_freq() 以了解驱动计算的实际频率。\n\n设备的时钟频率可在传输过程中实时更改，可以通过设置 spi_transaction_t::override_freq_hz 实现，此操作将为该设备的该次及以后的传输使用新的时钟频率。若某次期望设置的时钟频率无法实现，驱动将打印警告并继续使用之前的时钟频率进行传输。\n\n写入或读取阶段的理论最大传输速度可根据下表计算：\n\n写入/读取阶段的线宽\n\n速度 (Bps)\n\n1-Line\n\nSPI 频率 / 8\n\n2-Line\n\nSPI 频率 / 4\n\n4-Line\n\nSPI 频率 / 2\n\n其他阶段（命令阶段、地址阶段、Dummy 阶段）的传输速度计算与此类似。\n\n时钟频率过高可能会限制部分功能的使用，请参阅 时序影响因素。"
+        },
+        {
+          "chunkId": "S02#s27",
+          "score": null,
+          "text": "如图所示， SCLK 发射沿之后、信号被内部寄存器锁存之前， MISO 线存在延迟。因此， MISO 管脚的设置时间是 SPI 时钟速度的限制因素。当延迟过长时，设置松弛度 < 0 ，违反了设置时序要求，读取可能有误。\n\n最大有效频率取决于：\n\nspi_device_interface_config_t::input_delay_ns - SCLK 上的一个时钟周期开始后 MISO 总线上的最大数据有效时间\n\n是否使用了 IO_MUX 管脚或 GPIO 矩阵\n\n使用 GPIO 矩阵时，最大有效频率降至现有 输入延迟 的 33 ~ 77%。使用 IO_MUX 管脚或 dummy 位 可以保留较高的频率，调用函数 spi_get_freq_limit() 能够获取主机的最大读取频率。\n\nDummy 位：在读取阶段开始之前，可以插入 Dummy 时钟，在此期间，主机不读取数据。设备能看到 Dummy 时钟并发出数据，但主机在读取阶段之前不会读取。这就弥补了主机 MISO 设置时间不足的问题，并使主机达到更高的读取频率。\n\n理想状态下，如果设备的速度足以使输入延迟控制在一个 APB 时钟周期 (12.5 ns) 以内，则在不同的条件下，主机读取（或读取和写入）的最大频率如下表所示：\n\n频率限制 (MHz)\n\n频率限制 (MHz)\n\n驱动是否使用 Dummy 位\n\n备注\n\nGPIO 矩阵\n\nIO_MUX 管脚\n\n26.6\n\n80\n\n40\n\n--\n\n半双工，禁用 DMA\n\n如果主机仅写入数据，可以通过设置 spi_device_interface_config_t::flags 中的 SPI_DEVICE_NO_DUMMY 位来禁用 Dummy 位 和频率检查机制。禁用 Dummy 位 和频率检查机制后，即便在使用 GPIO 矩阵的情况下，输出频率也可达 80 MHz。\n\nspi_device_interface_config_t::flags\n\n即使 spi_device_interface_config_t 结构体中的 spi_device_interface_config_t::input_delay_ns 设置为 0，SPI 主机驱动程序仍会运作，但设置精确值有助于：\n\n计算全双工传输事务的频率限制\n\n用半双工传输事务的 Dummy 位正确补偿时序\n\n可根据设备规格说明中 AC 特性章节的数据估计 SPI 时钟发射沿后的最大数据有效时间，或者使用示波器或逻辑分析仪测量该时间。\n\n请注意，实际 PCB 布局设计和过度负载可能会增加输入延迟。这意味着非最佳布线和/或总线上的负载电容很可能导致输入延迟值超过设备规格说明中给出的数值或在总线浮动时测量的数值。\n\n典型的延迟值如下表所示，以下数据由从机设备使用不同芯片测试所得：\n\n设备\n\n输入延迟 (ns)\n\n理想设备\n\n使用 IO_MUX 的 ESP32 从机设备\n\n50\n\n使用 GPIO_MATRIX 的 ESP32 从机设备\n\n75\n\nMISO 路径延迟（有效时间）由从机的 输入延迟 与主机的 GPIO 矩阵延迟 组成。该延迟决定了频率限制，超过这个频率的全双工传输将无法如半双工交易中使用的 Dummy 位一样工作。该频率限制的计算方法为：\n\nFreq limit [MHz] = 80 / (floor(MISO delay[ns]/12.5) + 1)\n\n频率限制与输入延迟间的关系如图所示。如果主机使用 GPIO 矩阵，应在 MISO 延迟上额外增加两个 APB 时钟周期。\n\n不同设备在不同 输入延迟 时间下对应的频率限制如下表所示。\n\n当主机驱动为 IO_MUX (0 ns) 时：\n\n输入延迟 (ns)\n\nMISO 通道延迟 (ns)\n\n频率限制 (MHz)\n\n80\n\n50\n\n50\n\n16\n\n75"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s8",
+        "S02#s25"
+      ]
+    },
+    {
+      "questionId": "D20",
+      "split": "dev",
+      "set": "嵌入式开发",
+      "question": "ESP32 的 SPI 主机驱动在什么情况下会变得不是线程安全的、有哪些解决办法？另外如果需要连续发送很多个小包，怎样提高整体传输速度？",
+      "referenceChunks": [
+        "S02#s26",
+        "S02#s9"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s9",
+          "score": null,
+          "text": "SPI 主机驱动程序负责管理主机与设备间的通信，具有以下特性：\n\n支持多线程环境使用\n\n读写数据过程中 DMA 透明传输\n\n同一信号总线上不同设备的数据可自动时分复用，请参阅 SPI 总线锁。\n\n警告\n\nSPI 主机驱动允许总线上连接多个设备（共享单个 ESP32 SPI 外设）。每个设备仅由一个任务访问时，驱动程序线程安全。反之，若多个任务尝试访问同一 SPI 设备，则驱动程序 非线程安全。此时，建议执行以下任一操作：\n\n重构应用程序，确保每个 SPI 外设在同一时间仅由一个任务访问。使用 spi_bus_config_t::isr_cpu_id 将 SPI ISR 注册到与 SPI 外设相关任务相同的内核，以确保线程安全。\n\n使用 xSemaphoreCreateMutex 为共享设备添加互斥锁。"
+        },
+        {
+          "chunkId": "S02#s16",
+          "score": null,
+          "text": "若需连续发送专门的 SPI 传输事务以提高效率，可采用获取总线的方式。获取总线后，与其他设备间的传输事务（包括轮询传输事务或中断传输事务）将处于待处理状态，直到总线被释放。要获取和释放总线，请调用函数 spi_device_acquire_bus() 和 spi_device_release_bus()。"
+        },
+        {
+          "chunkId": "S02#s26",
+          "score": null,
+          "text": "默认配置只将 ISR 置于 IRAM 中。其他 SPI 相关功能，包括驱动本身和回调都可能发生缓存缺失，需等待代码从 flash 中读取。为避免缓存缺失，可参考 CONFIG_SPI_MASTER_IN_IRAM，将整个 SPI 驱动置入 IRAM，并将整个回调及其 callee 函数一起置入 IRAM。\n\n备注\n\nSPI 驱动是基于 FreeRTOS 的 API 实现的，在使用 CONFIG_SPI_MASTER_IN_IRAM 时，应启用 CONFIG_FREERTOS_IN_IRAM。\n\n单个中断传输事务传输 n 字节的总成本为 20+8n/Fspi[MHz] [µs]，故传输速度为 n/(20+8n/Fspi)。8 MHz 时钟速度的传输速度见下表。\n\n频率 (MHz)\n\n传输事务间隔 (µs)\n\n传输事务长度 (bytes)\n\n传输时长 (µs)\n\n传输速度 (KBps)\n\n25\n\n26\n\n38.5\n\n25\n\n33\n\n242.4\n\n25\n\n16\n\n41\n\n490.2\n\n25\n\n64\n\n89\n\n719.1\n\n25\n\n128\n\n153\n\n836.6\n\n传输事务长度较短时将提高传输事务间隔成本，因此应尽可能将几个短传输事务压缩成一个传输事务，以提升传输速度。\n\n注意，ISR 在 flash 操作期间默认处于禁用状态。要在 flash 操作期间继续发送传输事务，请启用 CONFIG_SPI_MASTER_ISR_IN_IRAM，并在 spi_bus_config_t::intr_flags 中设置 ESP_INTR_FLAG_IRAM。此时，flash 操作前列队的传输事务将由 ISR 并行处理。此外，每个设备的回调和它们的 callee 函数都应该在 IRAM 中，避免回调因缓存丢失而崩溃。详情请参阅 IRAM 安全中断处理程序。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s9",
+        "S02#s26"
+      ]
+    }
+  ]
+}

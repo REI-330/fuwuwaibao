@@ -1,0 +1,50 @@
+{
+  "questions": "knowledge\\evaluations\\questions-dev.json",
+  "tag": "q1024-dev-",
+  "levels": [
+    {
+      "label": "BM25",
+      "n": 34,
+      "hit": 25,
+      "hitRate": 0.7353,
+      "hitAt1": 0.5588,
+      "refsInSlots": 36,
+      "slots": 102,
+      "precisionAtK": 0.3529,
+      "path": "knowledge\\eval\\runs\\q1024-dev-bm25-topk.json"
+    },
+    {
+      "label": "VECTOR",
+      "n": 34,
+      "hit": 31,
+      "hitRate": 0.9118,
+      "hitAt1": 0.5588,
+      "refsInSlots": 41,
+      "slots": 102,
+      "precisionAtK": 0.402,
+      "path": "knowledge\\eval\\runs\\q1024-dev-vector-topk.json"
+    },
+    {
+      "label": "FUSION α=0.35",
+      "n": 34,
+      "hit": 29,
+      "hitRate": 0.8529,
+      "hitAt1": 0.5588,
+      "refsInSlots": 41,
+      "slots": 102,
+      "precisionAtK": 0.402,
+      "path": "knowledge\\eval\\runs\\q1024-dev-fusion-a035-topk.json"
+    },
+    {
+      "label": "FUSION+RERANK",
+      "n": 34,
+      "hit": 30,
+      "hitRate": 0.8824,
+      "hitAt1": 0.7059,
+      "refsInSlots": 48,
+      "slots": 102,
+      "precisionAtK": 0.4706,
+      "path": "knowledge\\eval\\runs\\q1024-dev-adopted-a035-topk.json"
+    }
+  ]
+}

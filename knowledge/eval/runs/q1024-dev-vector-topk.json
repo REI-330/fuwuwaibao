@@ -1,0 +1,987 @@
+{
+  "schema": "career-graph-vector-retrieval/v1",
+  "generatedAt": "2026-09-27T20:55:02+0800",
+  "retriever": {
+    "type": "dense-vector",
+    "service": "http://127.0.0.1:8090/v1/embeddings",
+    "model": "Qwen3-Embedding-0.6B(int8,onnx)",
+    "dtype": "int8",
+    "dim": 1024,
+    "metric": "cosine（点积；TEI 输出已 L2 归一化）",
+    "topk": 3,
+    "rayonThreads": "unknown"
+  },
+  "corpus": {
+    "chunks": 1757
+  },
+  "metrics": {
+    "main": {
+      "hitRate": "31/34",
+      "hitRateValue": 0.9118,
+      "meanPrecisionAtK": 0.402
+    }
+  },
+  "timing": {
+    "embedCorpusSec": 0,
+    "querySec": 4.7,
+    "perQueryMs": 139.4
+  },
+  "perQuestion": [
+    {
+      "questionId": "N01",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "用 FreeRTOS 开发 IoT 设备时，官方认证过哪些现成开发板可以直接拿来做验证？遇到技术问题该去哪些地方找文档和支持？",
+      "referenceChunks": [
+        "S01#s5",
+        "S01#s6"
+      ],
+      "topk": [
+        {
+          "chunkId": "S01#s5",
+          "score": 0.687062
+        },
+        {
+          "chunkId": "S01#s6",
+          "score": 0.683556
+        },
+        {
+          "chunkId": "S01#s2",
+          "score": 0.64852
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S01#s5",
+        "S01#s6"
+      ]
+    },
+    {
+      "questionId": "N02",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "ESP32 上要把 SPI 配成四线 I/O 模式该怎么设置，另外命令阶段和地址阶段的长度如果要改，具体动哪些结构体和标志位？",
+      "referenceChunks": [
+        "S02#s13",
+        "S02#s14"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s13",
+          "score": 0.762423
+        },
+        {
+          "chunkId": "S02#s36",
+          "score": 0.676448
+        },
+        {
+          "chunkId": "S02#s14",
+          "score": 0.672488
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s13",
+        "S02#s14"
+      ]
+    },
+    {
+      "questionId": "N03",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "ESP-IDF 里 MALLOC_CAP_32BIT 分配的内存能不能拿来存浮点变量？在中断服务程序里调用堆函数有什么限制？",
+      "referenceChunks": [
+        "S03#32",
+        "S03#s57"
+      ],
+      "topk": [
+        {
+          "chunkId": "S03#32",
+          "score": 0.723335
+        },
+        {
+          "chunkId": "S03#s46",
+          "score": 0.697056
+        },
+        {
+          "chunkId": "S03#s63",
+          "score": 0.647543
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S03#32"
+      ]
+    },
+    {
+      "questionId": "N04",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "ESP32 的 RTC GPIO 在哪些情况下能用，另外 gpio_config 和 gpio_reset_pin 这两个函数各自负责什么？",
+      "referenceChunks": [
+        "S04#s73~2",
+        "S04#s78"
+      ],
+      "topk": [
+        {
+          "chunkId": "S04#s78",
+          "score": 0.706254
+        },
+        {
+          "chunkId": "S04#s73~2",
+          "score": 0.705941
+        },
+        {
+          "chunkId": "S04#s87~3",
+          "score": 0.699076
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S04#s78",
+        "S04#s73~2"
+      ]
+    },
+    {
+      "questionId": "N05",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "用 MindSpore Lite 的 benchmark 工具测 mobilenetv2 时，输入数据文件要按什么规格准备，跑完输出里那些误差信息该怎么理解？",
+      "referenceChunks": [
+        "S05#s100~2",
+        "S05#s100~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s109~4",
+          "score": 0.694915
+        },
+        {
+          "chunkId": "S05#s100~4",
+          "score": 0.68767
+        },
+        {
+          "chunkId": "S05#s100~3",
+          "score": 0.672557
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s100~4"
+      ]
+    },
+    {
+      "questionId": "N06",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "用飞桨做手写数字识别，数据集的下载和加载是怎么写的？网络部分用的是哪个模型、怎么构建并打印出结构？",
+      "referenceChunks": [
+        "S06#3.1",
+        "S06#3.2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S06#s112",
+          "score": 0.736035
+        },
+        {
+          "chunkId": "S06#s115",
+          "score": 0.660567
+        },
+        {
+          "chunkId": "S06#3.2",
+          "score": 0.629279
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S06#3.2"
+      ]
+    },
+    {
+      "questionId": "N07",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "飞桨里从 Python 列表造 Tensor 用哪个接口，如果要造指定形状、内容全是 0 或全是 1 的 Tensor 又该怎么做？",
+      "referenceChunks": [
+        "S07#2.1",
+        "S07#2.2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S07#2.2",
+          "score": 0.757263
+        },
+        {
+          "chunkId": "S07#2.1",
+          "score": 0.727596
+        },
+        {
+          "chunkId": "S07#s125",
+          "score": 0.703577
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S07#2.2",
+        "S07#2.1"
+      ]
+    },
+    {
+      "questionId": "N08",
+      "set": "main",
+      "category": "计算机视觉",
+      "question": "YOLO26 能导出成哪些部署格式，它们分别适合什么场景？除 NVIDIA 之外，像 Hailo、Ambarella、华为昇腾这类加速器要怎么接？",
+      "referenceChunks": [
+        "S08#s147",
+        "S08#s147~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S08#s149",
+          "score": 0.726136
+        },
+        {
+          "chunkId": "S08#s150",
+          "score": 0.724017
+        },
+        {
+          "chunkId": "S08#s145",
+          "score": 0.66701
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "N09",
+      "set": "main",
+      "category": "计算机视觉",
+      "question": "YOLO26 的检测模型是在什么数据集上预训练的，跑一次预测的典型代码长什么样、结果里能取到哪些框坐标形式？",
+      "referenceChunks": [
+        "S09#s153",
+        "S09#s157"
+      ],
+      "topk": [
+        {
+          "chunkId": "S09#s157",
+          "score": 0.757651
+        },
+        {
+          "chunkId": "S09#s160",
+          "score": 0.744224
+        },
+        {
+          "chunkId": "S09#s153",
+          "score": 0.739734
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S09#s157",
+        "S09#s153"
+      ]
+    },
+    {
+      "questionId": "N10",
+      "set": "main",
+      "category": "计算机视觉",
+      "question": "YOLO26 的分割模型精度指标怎么看，用 model.val() 做验证时能拿到哪些指标？",
+      "referenceChunks": [
+        "S10#s163",
+        "S10#s166"
+      ],
+      "topk": [
+        {
+          "chunkId": "S09#s156",
+          "score": 0.750736
+        },
+        {
+          "chunkId": "S10#s166",
+          "score": 0.71164
+        },
+        {
+          "chunkId": "S10#s163",
+          "score": 0.688802
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S10#s166",
+        "S10#s163"
+      ]
+    },
+    {
+      "questionId": "N11",
+      "set": "main",
+      "category": "测试自动化",
+      "question": "pytest 的 fixture 里，用 yield 做清理和用 addfinalizer 挂清理函数有什么差别？各自有什么坑？",
+      "referenceChunks": [
+        "S14#1",
+        "S14#2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S13#s216~2",
+          "score": 0.684343
+        },
+        {
+          "chunkId": "S14#2",
+          "score": 0.676694
+        },
+        {
+          "chunkId": "S13#s216",
+          "score": 0.648956
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S14#2"
+      ]
+    },
+    {
+      "questionId": "N12",
+      "set": "main",
+      "category": "职业能力",
+      "question": "软件质量保证分析师与测试员这个岗位，主要任务和工作活动包括哪些内容？",
+      "referenceChunks": [
+        "S16#s291~2",
+        "S16#s292"
+      ],
+      "topk": [
+        {
+          "chunkId": "S16#s283",
+          "score": 0.531237
+        },
+        {
+          "chunkId": "S26#s1432",
+          "score": 0.519459
+        },
+        {
+          "chunkId": "S16#s310",
+          "score": 0.518655
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "N13",
+      "set": "main",
+      "category": "职业能力",
+      "question": "计算机硬件工程师日常要完成哪些任务和工作活动？",
+      "referenceChunks": [
+        "S17#s320~2",
+        "S17#s321"
+      ],
+      "topk": [
+        {
+          "chunkId": "S17#s320",
+          "score": 0.555449
+        },
+        {
+          "chunkId": "S17#s320~2",
+          "score": 0.54633
+        },
+        {
+          "chunkId": "S26#s1265",
+          "score": 0.50962
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S17#s320~2"
+      ]
+    },
+    {
+      "questionId": "N14",
+      "set": "main",
+      "category": "标准与政策",
+      "question": "全国标准信息公共服务平台目前收录了多少现行有效的强制性国家标准和推荐性国家标准，其中可在线阅读下载的比例是怎样的？",
+      "referenceChunks": [
+        "S20#s345",
+        "S20#s346"
+      ],
+      "topk": [
+        {
+          "chunkId": "S20#s345",
+          "score": 0.614789
+        },
+        {
+          "chunkId": "S20#s348",
+          "score": 0.48463
+        },
+        {
+          "chunkId": "S26#s931",
+          "score": 0.479821
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S20#s345"
+      ]
+    },
+    {
+      "questionId": "D01",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "在 ESP32 SPI 主机驱动中，启用 DMA 进行数据传输时，对缓冲区有哪些具体要求？如果不满足这些要求会有什么影响？",
+      "referenceChunks": [
+        "S02#s15",
+        "S02#s43~3"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s15",
+          "score": 0.766209
+        },
+        {
+          "chunkId": "S02#s39",
+          "score": 0.694692
+        },
+        {
+          "chunkId": "S02#s43~3",
+          "score": 0.690241
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s15",
+        "S02#s43~3"
+      ]
+    },
+    {
+      "questionId": "D02",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "在同一个 SPI 设备上混合使用中断传输和轮询传输时，有哪些关键注意事项？",
+      "referenceChunks": [
+        "S02#s20",
+        "S02#s42~3"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s20",
+          "score": 0.73854
+        },
+        {
+          "chunkId": "S02#s12",
+          "score": 0.721241
+        },
+        {
+          "chunkId": "S02#s16",
+          "score": 0.699027
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s20"
+      ]
+    },
+    {
+      "questionId": "D03",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "使用 ESP-IDF SPI 主机驱动时，轮询传输和中断传输在单字节传输延迟上有多大差异？启用 DMA 和不启用 DMA 对这两种模式分别有什么影响？",
+      "referenceChunks": [
+        "S02#s24",
+        "S02#s42~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s24",
+          "score": 0.765592
+        },
+        {
+          "chunkId": "S02#s15",
+          "score": 0.689013
+        },
+        {
+          "chunkId": "S02#s28",
+          "score": 0.670642
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s24"
+      ]
+    },
+    {
+      "questionId": "D04",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "在 ESP-IDF 中，如果我想在系统运行过程中动态添加一块新的内存区域到堆管理器，应该调用哪个函数？调用时有什么需要注意的地方？",
+      "referenceChunks": [
+        "S03#s66",
+        "S03#s69~5"
+      ],
+      "topk": [
+        {
+          "chunkId": "S03#s66~3",
+          "score": 0.720258
+        },
+        {
+          "chunkId": "S03#s66",
+          "score": 0.717628
+        },
+        {
+          "chunkId": "S03#s66~2",
+          "score": 0.669818
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S03#s66"
+      ]
+    },
+    {
+      "questionId": "D05",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "芯片处于 Deep-sleep 模式时，如何让数字 GPIO 在每次睡眠过程中都保持电平状态，以及怎样关闭这一功能？",
+      "referenceChunks": [
+        "S04#s78~2",
+        "S04#s78~9"
+      ],
+      "topk": [
+        {
+          "chunkId": "S04#s78~8",
+          "score": 0.748563
+        },
+        {
+          "chunkId": "S04#s78~9",
+          "score": 0.738605
+        },
+        {
+          "chunkId": "S04#s87~2",
+          "score": 0.688878
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S04#s78~9"
+      ]
+    },
+    {
+      "questionId": "D06",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "进入深度睡眠前，如何最小化 RTC IO 的漏电流？以 ESP32-WROVER 模组为例，官方推荐怎么操作？另外，通过 RTC GPIO 从睡眠中唤醒支持哪些触发方式？",
+      "referenceChunks": [
+        "S04#s87~2",
+        "S04#s87~5"
+      ],
+      "topk": [
+        {
+          "chunkId": "S04#s87~5",
+          "score": 0.723976
+        },
+        {
+          "chunkId": "S04#s73~2",
+          "score": 0.711991
+        },
+        {
+          "chunkId": "S04#s87~2",
+          "score": 0.693233
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S04#s87~5",
+        "S04#s87~2"
+      ]
+    },
+    {
+      "questionId": "D07",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "MindSpore Lite 转出来的 .ms 图片分类模型对输入张量有什么要求？如果手头没有真实图片、只想先用 benchmark 跑通一遍，输入数据文件该怎么准备？",
+      "referenceChunks": [
+        "S05#s109~2",
+        "S05#s97~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s97~2",
+          "score": 0.623549
+        },
+        {
+          "chunkId": "S05#s103",
+          "score": 0.610643
+        },
+        {
+          "chunkId": "S05#s92",
+          "score": 0.609905
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s97~2"
+      ]
+    },
+    {
+      "questionId": "D08",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "MindSpore Lite 的发布件解压以后，模型转换和基准测试这两类工具放在哪一层目录里？在 Windows 上转换一个 Caffe 模型时，模型结构文件和权值文件要分别传给哪个参数？",
+      "referenceChunks": [
+        "S05#s105",
+        "S05#s95"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s105",
+          "score": 0.720577
+        },
+        {
+          "chunkId": "S05#s105~2",
+          "score": 0.705398
+        },
+        {
+          "chunkId": "S05#s94",
+          "score": 0.691785
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s105"
+      ]
+    },
+    {
+      "questionId": "D09",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "用 converter_lite 把模型转成 .ms 时，--fmk 参数可以填哪些原始格式？哪个参数只有转 Caffe 模型时才必须传？命令行里参数名和参数值之间写法有什么硬性要求？",
+      "referenceChunks": [
+        "S05#s105~2",
+        "S05#s96~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s96~2",
+          "score": 0.754938
+        },
+        {
+          "chunkId": "S05#s105~2",
+          "score": 0.743471
+        },
+        {
+          "chunkId": "S05#s105",
+          "score": 0.727545
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s96~2",
+        "S05#s105~2"
+      ]
+    },
+    {
+      "questionId": "D10",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "在 C++ 里集成 MindSpore Lite 做推理：想用 CPU 跑的时候，context 的设备信息要怎么配？调 Build 编译完模型后，之前读进来的模型文件内存还要保留吗？输入数据又是从哪个接口写进张量的？",
+      "referenceChunks": [
+        "S05#s101~5",
+        "S05#s110~5"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s110~5",
+          "score": 0.747002
+        },
+        {
+          "chunkId": "S05#s101~4",
+          "score": 0.703079
+        },
+        {
+          "chunkId": "S05#s101",
+          "score": 0.696352
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s110~5"
+      ]
+    },
+    {
+      "questionId": "D11",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "在 Windows 上编译并运行 MindSpore Lite 的推理 demo：发布件的 runtime\\lib 目录里除了框架自身的库，还必须一起带哪些动态库？demo 跑起来前环境变量要怎么设？推理时输入和输出张量分别怎么传给接口？",
+      "referenceChunks": [
+        "S05#s104",
+        "S05#s110~6"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s110",
+          "score": 0.746063
+        },
+        {
+          "chunkId": "S05#s104",
+          "score": 0.688223
+        },
+        {
+          "chunkId": "S05#s101",
+          "score": 0.68786
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s104"
+      ]
+    },
+    {
+      "questionId": "D12",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "飞桨里手动创建 Tensor 有哪些常见途径？另外，如果某个参数在设计网络时不想让它参与梯度回传、不参与训练更新，应该动 Tensor 的哪个属性？它默认是什么值？",
+      "referenceChunks": [
+        "S07#3.5",
+        "S07#s125"
+      ],
+      "topk": [
+        {
+          "chunkId": "S07#s143",
+          "score": 0.731398
+        },
+        {
+          "chunkId": "S07#s124",
+          "score": 0.731069
+        },
+        {
+          "chunkId": "S07#s125",
+          "score": 0.712199
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S07#s125"
+      ]
+    },
+    {
+      "questionId": "D13",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "把图片样本和文本样本分别转成 Tensor 该用什么办法？另外 Tensor 的逐元素算术既可以用运算符也可以用方法，这两种写法是怎么对应的？",
+      "referenceChunks": [
+        "S07#2.4",
+        "S07#4.2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S07#s143",
+          "score": 0.726679
+        },
+        {
+          "chunkId": "S07#s125",
+          "score": 0.717036
+        },
+        {
+          "chunkId": "S07#2.4",
+          "score": 0.710052
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S07#2.4"
+      ]
+    },
+    {
+      "questionId": "D14",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "不自己写数据转 Tensor 的代码，也能正常把模型训练起来吗？框架是怎么做到的？另外要判断两个 Tensor 的元素是否相等或比较大小，有哪些现成方法？",
+      "referenceChunks": [
+        "S07#2.5",
+        "S07#4.3"
+      ],
+      "topk": [
+        {
+          "chunkId": "S07#2.5",
+          "score": 0.719792
+        },
+        {
+          "chunkId": "S07#s125",
+          "score": 0.717637
+        },
+        {
+          "chunkId": "S07#s124",
+          "score": 0.70734
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S07#2.5"
+      ]
+    },
+    {
+      "questionId": "D15",
+      "set": "main",
+      "category": "测试自动化",
+      "question": "写测试时如果有一批夹具是几乎每个测试都要用的，怎么才能免去逐个在参数里声明的麻烦？另外要在同一套页面测试里验证登录失败的场景，一般怎么改测试数据才不影响其他测试？",
+      "referenceChunks": [
+        "S14#s244",
+        "S14#s263~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s266",
+          "score": 0.606956
+        },
+        {
+          "chunkId": "S14#s263",
+          "score": 0.603156
+        },
+        {
+          "chunkId": "S14#s263~2",
+          "score": 0.59772
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S14#s263~2"
+      ]
+    },
+    {
+      "questionId": "D16",
+      "set": "main",
+      "category": "测试自动化",
+      "question": "在同一个测试里，好几个夹具都依赖同一个底层夹具，那这个被依赖的夹具会被执行几次？另外某个自动使用的夹具内部又请求了另一个夹具，那个被请求的夹具是不是在别处也会跟着自动执行？",
+      "referenceChunks": [
+        "S14#s243",
+        "S14#s262~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s262~2",
+          "score": 0.663386
+        },
+        {
+          "chunkId": "S14#s243",
+          "score": 0.621161
+        },
+        {
+          "chunkId": "S14#s262",
+          "score": 0.599633
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S14#s262~2",
+        "S14#s243"
+      ]
+    },
+    {
+      "questionId": "D17",
+      "set": "main",
+      "category": "测试自动化",
+      "question": "两个不同的测试都请求了同一个夹具，它们会共用同一份数据吗？另外夹具之间能不能靠请求参数来强制执行先后顺序？",
+      "referenceChunks": [
+        "S14#s241",
+        "S14#s261"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s262~2",
+          "score": 0.604167
+        },
+        {
+          "chunkId": "S14#s266",
+          "score": 0.598645
+        },
+        {
+          "chunkId": "S14#s243",
+          "score": 0.594699
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "D18",
+      "set": "main",
+      "category": "测试自动化",
+      "question": "pytest 是怎么知道某个测试需要哪些夹具的？如果夹具不是自己写的、而是某个第三方插件提供的，会不会因为目录层级的关系被排除在外？",
+      "referenceChunks": [
+        "S14#s238",
+        "S14#s257"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s257",
+          "score": 0.625785
+        },
+        {
+          "chunkId": "S14#s256",
+          "score": 0.600507
+        },
+        {
+          "chunkId": "S14#s234",
+          "score": 0.599797
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S14#s257"
+      ]
+    },
+    {
+      "questionId": "D19",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "ESP32 的一条 SPI 总线上，哪些信号线是所有设备共用、哪些是每个设备独占？另外主机设定好的时钟频率和实际跑出来的频率一定一致吗，怎么查实际值？",
+      "referenceChunks": [
+        "S02#s25",
+        "S02#s8"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s43",
+          "score": 0.670487
+        },
+        {
+          "chunkId": "S02#s8",
+          "score": 0.669378
+        },
+        {
+          "chunkId": "S02#s13",
+          "score": 0.634763
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s8"
+      ]
+    },
+    {
+      "questionId": "D20",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "ESP32 的 SPI 主机驱动在什么情况下会变得不是线程安全的、有哪些解决办法？另外如果需要连续发送很多个小包，怎样提高整体传输速度？",
+      "referenceChunks": [
+        "S02#s26",
+        "S02#s9"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s9",
+          "score": 0.666356
+        },
+        {
+          "chunkId": "S02#s7",
+          "score": 0.63811
+        },
+        {
+          "chunkId": "S02#s16",
+          "score": 0.620395
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s9"
+      ]
+    }
+  ]
+}
