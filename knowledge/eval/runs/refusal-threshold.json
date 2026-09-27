@@ -1,6 +1,6 @@
 {
   "tunedOn": "knowledge\\evaluations\\questions-dev.json",
-  "threshold": 0.595,
+  "threshold": 0.615,
   "curve": [
     {
       "threshold": 0.3,
@@ -36,118 +36,230 @@
     },
     {
       "threshold": 0.32,
-      "rejectionRate": 0.0667,
+      "rejectionRate": 0.0,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5333,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.325,
-      "rejectionRate": 0.0667,
+      "rejectionRate": 0.0,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5333,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.33,
-      "rejectionRate": 0.0667,
+      "rejectionRate": 0.0,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5333,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.335,
-      "rejectionRate": 0.0667,
+      "rejectionRate": 0.0,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5333,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.34,
-      "rejectionRate": 0.0667,
+      "rejectionRate": 0.0,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5333,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.345,
-      "rejectionRate": 0.0667,
+      "rejectionRate": 0.0,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5333,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.35,
-      "rejectionRate": 0.0667,
+      "rejectionRate": 0.0,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5333,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.355,
-      "rejectionRate": 0.0667,
+      "rejectionRate": 0.0,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5333,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.36,
-      "rejectionRate": 0.0667,
+      "rejectionRate": 0.0,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5333,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.365,
-      "rejectionRate": 0.0667,
+      "rejectionRate": 0.0,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5333,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.37,
-      "rejectionRate": 0.0667,
+      "rejectionRate": 0.0,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5333,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.375,
-      "rejectionRate": 0.0667,
+      "rejectionRate": 0.0,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5333,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.38,
-      "rejectionRate": 0.0667,
+      "rejectionRate": 0.0,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5333,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.385,
-      "rejectionRate": 0.0667,
+      "rejectionRate": 0.0,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5333,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.39,
+      "rejectionRate": 0.0,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.395,
+      "rejectionRate": 0.0,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.4,
+      "rejectionRate": 0.0,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.405,
+      "rejectionRate": 0.0,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.41,
+      "rejectionRate": 0.0,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.415,
+      "rejectionRate": 0.0,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.42,
+      "rejectionRate": 0.0,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.425,
+      "rejectionRate": 0.0,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.43,
+      "rejectionRate": 0.0,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.435,
+      "rejectionRate": 0.0,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.44,
+      "rejectionRate": 0.0,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.445,
+      "rejectionRate": 0.0,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.45,
+      "rejectionRate": 0.0,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.455,
+      "rejectionRate": 0.0,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.46,
       "rejectionRate": 0.0667,
       "falseRejectRate": 0.0,
       "balancedAccuracy": 0.5333,
@@ -155,7 +267,7 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.395,
+      "threshold": 0.465,
       "rejectionRate": 0.1333,
       "falseRejectRate": 0.0,
       "balancedAccuracy": 0.5667,
@@ -163,7 +275,7 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.4,
+      "threshold": 0.47,
       "rejectionRate": 0.1333,
       "falseRejectRate": 0.0,
       "balancedAccuracy": 0.5667,
@@ -171,7 +283,7 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.405,
+      "threshold": 0.475,
       "rejectionRate": 0.1333,
       "falseRejectRate": 0.0,
       "balancedAccuracy": 0.5667,
@@ -179,39 +291,7 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.41,
-      "rejectionRate": 0.1333,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5667,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.415,
-      "rejectionRate": 0.1333,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5667,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.42,
-      "rejectionRate": 0.1333,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5667,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.425,
-      "rejectionRate": 0.1333,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.5667,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.43,
+      "threshold": 0.48,
       "rejectionRate": 0.2,
       "falseRejectRate": 0.0,
       "balancedAccuracy": 0.6,
@@ -219,15 +299,7 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.435,
-      "rejectionRate": 0.2,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.6,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.44,
+      "threshold": 0.485,
       "rejectionRate": 0.2667,
       "falseRejectRate": 0.0,
       "balancedAccuracy": 0.6333,
@@ -235,103 +307,79 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.445,
-      "rejectionRate": 0.3333,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.6667,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.45,
-      "rejectionRate": 0.3333,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.6667,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.455,
-      "rejectionRate": 0.4,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.7,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.46,
-      "rejectionRate": 0.4,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.7,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.465,
-      "rejectionRate": 0.4667,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.7333,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.47,
-      "rejectionRate": 0.4667,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.7333,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.475,
-      "rejectionRate": 0.4667,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.7333,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.48,
-      "rejectionRate": 0.4667,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.7333,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.485,
-      "rejectionRate": 0.4667,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.7333,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
       "threshold": 0.49,
-      "rejectionRate": 0.5333,
+      "rejectionRate": 0.2667,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.7667,
+      "balancedAccuracy": 0.6333,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.495,
-      "rejectionRate": 0.5333,
+      "rejectionRate": 0.2667,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.7667,
+      "balancedAccuracy": 0.6333,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.5,
-      "rejectionRate": 0.5333,
+      "rejectionRate": 0.2667,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.7667,
+      "balancedAccuracy": 0.6333,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.505,
+      "rejectionRate": 0.3333,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.6667,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.51,
+      "rejectionRate": 0.4667,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.7333,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.515,
+      "rejectionRate": 0.4667,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.7333,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.52,
+      "rejectionRate": 0.4667,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.7333,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.525,
+      "rejectionRate": 0.4667,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.7333,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.53,
+      "rejectionRate": 0.4667,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.7333,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.535,
       "rejectionRate": 0.5333,
       "falseRejectRate": 0.0,
       "balancedAccuracy": 0.7667,
@@ -339,63 +387,23 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.51,
-      "rejectionRate": 0.6,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.8,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.515,
-      "rejectionRate": 0.6,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.8,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.52,
-      "rejectionRate": 0.6,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.8,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.525,
-      "rejectionRate": 0.6,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.8,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.53,
-      "rejectionRate": 0.6667,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.8333,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.535,
-      "rejectionRate": 0.6667,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.8333,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
       "threshold": 0.54,
-      "rejectionRate": 0.6667,
+      "rejectionRate": 0.6,
       "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.8333,
+      "balancedAccuracy": 0.8,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.545,
+      "rejectionRate": 0.6,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.8,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.55,
       "rejectionRate": 0.7333,
       "falseRejectRate": 0.0,
       "balancedAccuracy": 0.8667,
@@ -403,71 +411,39 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.55,
-      "rejectionRate": 0.8667,
-      "falseRejectRate": 0.0,
-      "balancedAccuracy": 0.9333,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
       "threshold": 0.555,
-      "rejectionRate": 0.8667,
-      "falseRejectRate": 0.0294,
-      "balancedAccuracy": 0.9186,
+      "rejectionRate": 0.7333,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.8667,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.56,
-      "rejectionRate": 0.8667,
-      "falseRejectRate": 0.0294,
-      "balancedAccuracy": 0.9186,
+      "rejectionRate": 0.7333,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.8667,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.565,
-      "rejectionRate": 0.8667,
-      "falseRejectRate": 0.0294,
-      "balancedAccuracy": 0.9186,
+      "rejectionRate": 0.8,
+      "falseRejectRate": 0.0,
+      "balancedAccuracy": 0.9,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.57,
-      "rejectionRate": 0.8667,
+      "rejectionRate": 0.8,
       "falseRejectRate": 0.0294,
-      "balancedAccuracy": 0.9186,
+      "balancedAccuracy": 0.8853,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.575,
-      "rejectionRate": 0.8667,
-      "falseRejectRate": 0.0294,
-      "balancedAccuracy": 0.9186,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.58,
-      "rejectionRate": 0.8667,
-      "falseRejectRate": 0.0294,
-      "balancedAccuracy": 0.9186,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.585,
-      "rejectionRate": 0.8667,
-      "falseRejectRate": 0.0294,
-      "balancedAccuracy": 0.9186,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.59,
       "rejectionRate": 0.9333,
       "falseRejectRate": 0.0294,
       "balancedAccuracy": 0.952,
@@ -475,199 +451,127 @@
       "nAnswerable": 34
     },
     {
+      "threshold": 0.58,
+      "rejectionRate": 0.9333,
+      "falseRejectRate": 0.0588,
+      "balancedAccuracy": 0.9373,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.585,
+      "rejectionRate": 0.9333,
+      "falseRejectRate": 0.0588,
+      "balancedAccuracy": 0.9373,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.59,
+      "rejectionRate": 0.9333,
+      "falseRejectRate": 0.0588,
+      "balancedAccuracy": 0.9373,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
       "threshold": 0.595,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.0294,
-      "balancedAccuracy": 0.9853,
+      "rejectionRate": 0.9333,
+      "falseRejectRate": 0.0588,
+      "balancedAccuracy": 0.9373,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.6,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.0294,
-      "balancedAccuracy": 0.9853,
+      "rejectionRate": 0.9333,
+      "falseRejectRate": 0.0588,
+      "balancedAccuracy": 0.9373,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.605,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.0294,
-      "balancedAccuracy": 0.9853,
+      "rejectionRate": 0.9333,
+      "falseRejectRate": 0.0588,
+      "balancedAccuracy": 0.9373,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.61,
-      "rejectionRate": 1.0,
+      "rejectionRate": 0.9333,
       "falseRejectRate": 0.0588,
-      "balancedAccuracy": 0.9706,
+      "balancedAccuracy": 0.9373,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.615,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.0588,
-      "balancedAccuracy": 0.9706,
+      "falseRejectRate": 0.0882,
+      "balancedAccuracy": 0.9559,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.62,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.0588,
-      "balancedAccuracy": 0.9706,
+      "falseRejectRate": 0.0882,
+      "balancedAccuracy": 0.9559,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.625,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.0588,
-      "balancedAccuracy": 0.9706,
+      "falseRejectRate": 0.0882,
+      "balancedAccuracy": 0.9559,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.63,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.0588,
-      "balancedAccuracy": 0.9706,
+      "falseRejectRate": 0.0882,
+      "balancedAccuracy": 0.9559,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.635,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.0588,
-      "balancedAccuracy": 0.9706,
+      "falseRejectRate": 0.1471,
+      "balancedAccuracy": 0.9265,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.64,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.0588,
-      "balancedAccuracy": 0.9706,
+      "falseRejectRate": 0.1471,
+      "balancedAccuracy": 0.9265,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.645,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.0882,
-      "balancedAccuracy": 0.9559,
+      "falseRejectRate": 0.1471,
+      "balancedAccuracy": 0.9265,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.65,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.0882,
-      "balancedAccuracy": 0.9559,
+      "falseRejectRate": 0.1471,
+      "balancedAccuracy": 0.9265,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.655,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.0882,
-      "balancedAccuracy": 0.9559,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.66,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.1176,
-      "balancedAccuracy": 0.9412,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.665,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.1176,
-      "balancedAccuracy": 0.9412,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.67,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.1176,
-      "balancedAccuracy": 0.9412,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.675,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.1176,
-      "balancedAccuracy": 0.9412,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.68,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.1176,
-      "balancedAccuracy": 0.9412,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.685,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.1471,
-      "balancedAccuracy": 0.9265,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.69,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.1471,
-      "balancedAccuracy": 0.9265,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.695,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.1471,
-      "balancedAccuracy": 0.9265,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.7,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.1765,
-      "balancedAccuracy": 0.9118,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.705,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.1765,
-      "balancedAccuracy": 0.9118,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.71,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.1765,
-      "balancedAccuracy": 0.9118,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.715,
       "rejectionRate": 1.0,
       "falseRejectRate": 0.2059,
       "balancedAccuracy": 0.8971,
@@ -675,7 +579,39 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.72,
+      "threshold": 0.66,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 0.2059,
+      "balancedAccuracy": 0.8971,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.665,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 0.2059,
+      "balancedAccuracy": 0.8971,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.67,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 0.2059,
+      "balancedAccuracy": 0.8971,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.675,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 0.2059,
+      "balancedAccuracy": 0.8971,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.68,
       "rejectionRate": 1.0,
       "falseRejectRate": 0.2353,
       "balancedAccuracy": 0.8824,
@@ -683,7 +619,7 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.725,
+      "threshold": 0.685,
       "rejectionRate": 1.0,
       "falseRejectRate": 0.2353,
       "balancedAccuracy": 0.8824,
@@ -691,7 +627,7 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.73,
+      "threshold": 0.69,
       "rejectionRate": 1.0,
       "falseRejectRate": 0.2353,
       "balancedAccuracy": 0.8824,
@@ -699,7 +635,7 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.735,
+      "threshold": 0.695,
       "rejectionRate": 1.0,
       "falseRejectRate": 0.2353,
       "balancedAccuracy": 0.8824,
@@ -707,7 +643,7 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.74,
+      "threshold": 0.7,
       "rejectionRate": 1.0,
       "falseRejectRate": 0.2647,
       "balancedAccuracy": 0.8676,
@@ -715,15 +651,7 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.745,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.2647,
-      "balancedAccuracy": 0.8676,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.75,
+      "threshold": 0.705,
       "rejectionRate": 1.0,
       "falseRejectRate": 0.2941,
       "balancedAccuracy": 0.8529,
@@ -731,7 +659,7 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.755,
+      "threshold": 0.71,
       "rejectionRate": 1.0,
       "falseRejectRate": 0.3235,
       "balancedAccuracy": 0.8382,
@@ -739,63 +667,23 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.76,
+      "threshold": 0.715,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.3529,
-      "balancedAccuracy": 0.8235,
+      "falseRejectRate": 0.4118,
+      "balancedAccuracy": 0.7941,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
-      "threshold": 0.765,
+      "threshold": 0.72,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.3529,
-      "balancedAccuracy": 0.8235,
+      "falseRejectRate": 0.4412,
+      "balancedAccuracy": 0.7794,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
-      "threshold": 0.77,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.3529,
-      "balancedAccuracy": 0.8235,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.775,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.3824,
-      "balancedAccuracy": 0.8088,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.78,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.4706,
-      "balancedAccuracy": 0.7647,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.785,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.4706,
-      "balancedAccuracy": 0.7647,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.79,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.5,
-      "balancedAccuracy": 0.75,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.795,
+      "threshold": 0.725,
       "rejectionRate": 1.0,
       "falseRejectRate": 0.5294,
       "balancedAccuracy": 0.7353,
@@ -803,39 +691,31 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.8,
+      "threshold": 0.73,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.5294,
-      "balancedAccuracy": 0.7353,
+      "falseRejectRate": 0.5882,
+      "balancedAccuracy": 0.7059,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
-      "threshold": 0.805,
+      "threshold": 0.735,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.7059,
-      "balancedAccuracy": 0.6471,
+      "falseRejectRate": 0.6765,
+      "balancedAccuracy": 0.6618,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
-      "threshold": 0.81,
+      "threshold": 0.74,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.7353,
-      "balancedAccuracy": 0.6324,
+      "falseRejectRate": 0.6765,
+      "balancedAccuracy": 0.6618,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
-      "threshold": 0.815,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.7353,
-      "balancedAccuracy": 0.6324,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.82,
+      "threshold": 0.745,
       "rejectionRate": 1.0,
       "falseRejectRate": 0.7353,
       "balancedAccuracy": 0.6324,
@@ -843,7 +723,7 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.825,
+      "threshold": 0.75,
       "rejectionRate": 1.0,
       "falseRejectRate": 0.7647,
       "balancedAccuracy": 0.6176,
@@ -851,15 +731,7 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.83,
-      "rejectionRate": 1.0,
-      "falseRejectRate": 0.7941,
-      "balancedAccuracy": 0.6029,
-      "nRefusal": 15,
-      "nAnswerable": 34
-    },
-    {
-      "threshold": 0.835,
+      "threshold": 0.755,
       "rejectionRate": 1.0,
       "falseRejectRate": 0.8529,
       "balancedAccuracy": 0.5735,
@@ -867,90 +739,218 @@
       "nAnswerable": 34
     },
     {
-      "threshold": 0.84,
+      "threshold": 0.76,
       "rejectionRate": 1.0,
       "falseRejectRate": 0.9118,
       "balancedAccuracy": 0.5441,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.765,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 0.9118,
+      "balancedAccuracy": 0.5441,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.77,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 0.9118,
+      "balancedAccuracy": 0.5441,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.775,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 0.9412,
+      "balancedAccuracy": 0.5294,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.78,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 0.9706,
+      "balancedAccuracy": 0.5147,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.785,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 0.9706,
+      "balancedAccuracy": 0.5147,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.79,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 0.9706,
+      "balancedAccuracy": 0.5147,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.795,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 0.9706,
+      "balancedAccuracy": 0.5147,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.8,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 0.9706,
+      "balancedAccuracy": 0.5147,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.805,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 0.9706,
+      "balancedAccuracy": 0.5147,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.81,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 0.9706,
+      "balancedAccuracy": 0.5147,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.815,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 0.9706,
+      "balancedAccuracy": 0.5147,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.82,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 1.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.825,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 1.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.83,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 1.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.835,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 1.0,
+      "balancedAccuracy": 0.5,
+      "nRefusal": 15,
+      "nAnswerable": 34
+    },
+    {
+      "threshold": 0.84,
+      "rejectionRate": 1.0,
+      "falseRejectRate": 1.0,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.845,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.9118,
-      "balancedAccuracy": 0.5441,
+      "falseRejectRate": 1.0,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.85,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.9118,
-      "balancedAccuracy": 0.5441,
+      "falseRejectRate": 1.0,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.855,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.9412,
-      "balancedAccuracy": 0.5294,
+      "falseRejectRate": 1.0,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.86,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.9412,
-      "balancedAccuracy": 0.5294,
+      "falseRejectRate": 1.0,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.865,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.9706,
-      "balancedAccuracy": 0.5147,
+      "falseRejectRate": 1.0,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.87,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.9706,
-      "balancedAccuracy": 0.5147,
+      "falseRejectRate": 1.0,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.875,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.9706,
-      "balancedAccuracy": 0.5147,
+      "falseRejectRate": 1.0,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.88,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.9706,
-      "balancedAccuracy": 0.5147,
+      "falseRejectRate": 1.0,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.885,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.9706,
-      "balancedAccuracy": 0.5147,
+      "falseRejectRate": 1.0,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },
     {
       "threshold": 0.89,
       "rejectionRate": 1.0,
-      "falseRejectRate": 0.9706,
-      "balancedAccuracy": 0.5147,
+      "falseRejectRate": 1.0,
+      "balancedAccuracy": 0.5,
       "nRefusal": 15,
       "nAnswerable": 34
     },

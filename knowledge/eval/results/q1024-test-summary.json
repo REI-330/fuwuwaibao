@@ -1,0 +1,50 @@
+{
+  "questions": "knowledge\\evaluations\\questions-test.json",
+  "tag": "q1024-test-",
+  "levels": [
+    {
+      "label": "BM25",
+      "n": 32,
+      "hit": 16,
+      "hitRate": 0.5,
+      "hitAt1": 0.4062,
+      "refsInSlots": 21,
+      "slots": 96,
+      "precisionAtK": 0.2188,
+      "path": "knowledge\\eval\\runs\\q1024-test-bm25-topk.json"
+    },
+    {
+      "label": "VECTOR",
+      "n": 32,
+      "hit": 21,
+      "hitRate": 0.6562,
+      "hitAt1": 0.4688,
+      "refsInSlots": 26,
+      "slots": 96,
+      "precisionAtK": 0.2708,
+      "path": "knowledge\\eval\\runs\\q1024-test-vector-topk.json"
+    },
+    {
+      "label": "FUSION α=0.35",
+      "n": 32,
+      "hit": 19,
+      "hitRate": 0.5938,
+      "hitAt1": 0.5,
+      "refsInSlots": 25,
+      "slots": 96,
+      "precisionAtK": 0.2604,
+      "path": "knowledge\\eval\\runs\\q1024-test-fusion-a035-topk.json"
+    },
+    {
+      "label": "FUSION+RERANK",
+      "n": 32,
+      "hit": 21,
+      "hitRate": 0.6562,
+      "hitAt1": 0.625,
+      "refsInSlots": 30,
+      "slots": 96,
+      "precisionAtK": 0.3125,
+      "path": "knowledge\\eval\\runs\\q1024-test-adopted-a035-topk.json"
+    }
+  ]
+}

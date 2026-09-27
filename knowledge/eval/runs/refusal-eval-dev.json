@@ -1,14 +1,14 @@
 {
   "schema": "career-graph-refusal-eval/v1",
-  "generatedAt": "2026-09-17T17:08:48+0800",
+  "generatedAt": "2026-09-27T21:13:24+0800",
   "set": "knowledge\\evaluations\\questions-dev.json",
   "signal": "max cosine（绝对值，跨查询可比）",
-  "threshold": 0.595,
+  "threshold": 0.615,
   "metrics": {
-    "threshold": 0.595,
+    "threshold": 0.615,
     "rejectionRate": 1.0,
-    "falseRejectRate": 0.0294,
-    "balancedAccuracy": 0.9853,
+    "falseRejectRate": 0.0882,
+    "balancedAccuracy": 0.9559,
     "nRefusal": 15,
     "nAnswerable": 34
   },
@@ -16,7 +16,7 @@
     {
       "questionId": "D01",
       "answerable": true,
-      "maxCos": 0.804274,
+      "maxCos": 0.816472,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -27,7 +27,7 @@
     {
       "questionId": "D02",
       "answerable": true,
-      "maxCos": 0.850234,
+      "maxCos": 0.724273,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -38,7 +38,7 @@
     {
       "questionId": "D03",
       "answerable": true,
-      "maxCos": 0.775089,
+      "maxCos": 0.776623,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -49,7 +49,7 @@
     {
       "questionId": "D04",
       "answerable": true,
-      "maxCos": 0.735108,
+      "maxCos": 0.695036,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -60,7 +60,7 @@
     {
       "questionId": "D05",
       "answerable": true,
-      "maxCos": 0.800379,
+      "maxCos": 0.750706,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -71,7 +71,7 @@
     {
       "questionId": "D06",
       "answerable": true,
-      "maxCos": 0.80063,
+      "maxCos": 0.727986,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -82,9 +82,9 @@
     {
       "questionId": "D07",
       "answerable": true,
-      "maxCos": 0.71254,
-      "judgedRefusal": false,
-      "correct": true,
+      "maxCos": 0.610799,
+      "judgedRefusal": true,
+      "correct": false,
       "referenceChunks": [
         "S05#s97~2",
         "S05#s109~2"
@@ -93,7 +93,7 @@
     {
       "questionId": "D08",
       "answerable": true,
-      "maxCos": 0.82635,
+      "maxCos": 0.723574,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -104,7 +104,7 @@
     {
       "questionId": "D09",
       "answerable": true,
-      "maxCos": 0.791899,
+      "maxCos": 0.74521,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -115,7 +115,7 @@
     {
       "questionId": "D10",
       "answerable": true,
-      "maxCos": 0.804506,
+      "maxCos": 0.73282,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -126,7 +126,7 @@
     {
       "questionId": "D11",
       "answerable": true,
-      "maxCos": 0.822445,
+      "maxCos": 0.755755,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -137,7 +137,7 @@
     {
       "questionId": "D12",
       "answerable": true,
-      "maxCos": 0.779113,
+      "maxCos": 0.743419,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -148,7 +148,7 @@
     {
       "questionId": "D13",
       "answerable": true,
-      "maxCos": 0.770843,
+      "maxCos": 0.719182,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -159,7 +159,7 @@
     {
       "questionId": "D14",
       "answerable": true,
-      "maxCos": 0.750953,
+      "maxCos": 0.728456,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -170,7 +170,7 @@
     {
       "questionId": "D15",
       "answerable": true,
-      "maxCos": 0.641646,
+      "maxCos": 0.633212,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -181,7 +181,7 @@
     {
       "questionId": "D16",
       "answerable": true,
-      "maxCos": 0.681682,
+      "maxCos": 0.714972,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -192,7 +192,7 @@
     {
       "questionId": "D17",
       "answerable": true,
-      "maxCos": 0.658515,
+      "maxCos": 0.63483,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -203,7 +203,7 @@
     {
       "questionId": "D18",
       "answerable": true,
-      "maxCos": 0.71804,
+      "maxCos": 0.654504,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -214,7 +214,7 @@
     {
       "questionId": "D19",
       "answerable": true,
-      "maxCos": 0.696132,
+      "maxCos": 0.709735,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -225,7 +225,7 @@
     {
       "questionId": "D20",
       "answerable": true,
-      "maxCos": 0.777301,
+      "maxCos": 0.676314,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -236,7 +236,7 @@
     {
       "questionId": "N01",
       "answerable": true,
-      "maxCos": 0.755825,
+      "maxCos": 0.731854,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -247,7 +247,7 @@
     {
       "questionId": "N02",
       "answerable": true,
-      "maxCos": 0.831552,
+      "maxCos": 0.759261,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -258,7 +258,7 @@
     {
       "questionId": "N03",
       "answerable": true,
-      "maxCos": 0.83755,
+      "maxCos": 0.721787,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -269,7 +269,7 @@
     {
       "questionId": "N04",
       "answerable": true,
-      "maxCos": 0.832941,
+      "maxCos": 0.71031,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -280,7 +280,7 @@
     {
       "questionId": "N05",
       "answerable": true,
-      "maxCos": 0.835081,
+      "maxCos": 0.710942,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -291,7 +291,7 @@
     {
       "questionId": "N06",
       "answerable": true,
-      "maxCos": 0.789193,
+      "maxCos": 0.752289,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -302,7 +302,7 @@
     {
       "questionId": "N07",
       "answerable": true,
-      "maxCos": 0.800454,
+      "maxCos": 0.77486,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -313,7 +313,7 @@
     {
       "questionId": "N08",
       "answerable": true,
-      "maxCos": 0.894287,
+      "maxCos": 0.734839,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -324,7 +324,7 @@
     {
       "questionId": "N09",
       "answerable": true,
-      "maxCos": 0.864404,
+      "maxCos": 0.753153,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -335,7 +335,7 @@
     {
       "questionId": "N10",
       "answerable": true,
-      "maxCos": 0.801541,
+      "maxCos": 0.742555,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -346,7 +346,7 @@
     {
       "questionId": "N11",
       "answerable": true,
-      "maxCos": 0.808411,
+      "maxCos": 0.701849,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -357,9 +357,9 @@
     {
       "questionId": "N12",
       "answerable": true,
-      "maxCos": 0.608164,
-      "judgedRefusal": false,
-      "correct": true,
+      "maxCos": 0.5765,
+      "judgedRefusal": true,
+      "correct": false,
       "referenceChunks": [
         "S16#s291~2",
         "S16#s292"
@@ -368,7 +368,7 @@
     {
       "questionId": "N13",
       "answerable": true,
-      "maxCos": 0.550849,
+      "maxCos": 0.568036,
       "judgedRefusal": true,
       "correct": false,
       "referenceChunks": [
@@ -379,7 +379,7 @@
     {
       "questionId": "N14",
       "answerable": true,
-      "maxCos": 0.747644,
+      "maxCos": 0.65332,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -390,7 +390,7 @@
     {
       "questionId": "RD01",
       "answerable": false,
-      "maxCos": 0.39217,
+      "maxCos": 0.455811,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -398,7 +398,7 @@
     {
       "questionId": "RD02",
       "answerable": false,
-      "maxCos": 0.46201,
+      "maxCos": 0.500104,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -406,7 +406,7 @@
     {
       "questionId": "RD03",
       "answerable": false,
-      "maxCos": 0.316203,
+      "maxCos": 0.462031,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -414,7 +414,7 @@
     {
       "questionId": "RD04",
       "answerable": false,
-      "maxCos": 0.435573,
+      "maxCos": 0.478492,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -422,7 +422,7 @@
     {
       "questionId": "RD05",
       "answerable": false,
-      "maxCos": 0.453599,
+      "maxCos": 0.561875,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -430,7 +430,7 @@
     {
       "questionId": "RD06",
       "answerable": false,
-      "maxCos": 0.506395,
+      "maxCos": 0.509295,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -438,7 +438,7 @@
     {
       "questionId": "RD07",
       "answerable": false,
-      "maxCos": 0.585645,
+      "maxCos": 0.572969,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -446,7 +446,7 @@
     {
       "questionId": "RD08",
       "answerable": false,
-      "maxCos": 0.426595,
+      "maxCos": 0.484699,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -454,7 +454,7 @@
     {
       "questionId": "RD09",
       "answerable": false,
-      "maxCos": 0.546896,
+      "maxCos": 0.61255,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -462,7 +462,7 @@
     {
       "questionId": "RD10",
       "answerable": false,
-      "maxCos": 0.444149,
+      "maxCos": 0.532396,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -470,7 +470,7 @@
     {
       "questionId": "RD11",
       "answerable": false,
-      "maxCos": 0.548845,
+      "maxCos": 0.574511,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -478,7 +478,7 @@
     {
       "questionId": "RD12",
       "answerable": false,
-      "maxCos": 0.543769,
+      "maxCos": 0.547382,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -486,7 +486,7 @@
     {
       "questionId": "RD13",
       "answerable": false,
-      "maxCos": 0.593352,
+      "maxCos": 0.547276,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -494,7 +494,7 @@
     {
       "questionId": "RD14",
       "answerable": false,
-      "maxCos": 0.487101,
+      "maxCos": 0.508317,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -502,7 +502,7 @@
     {
       "questionId": "RD15",
       "answerable": false,
-      "maxCos": 0.528605,
+      "maxCos": 0.535634,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []

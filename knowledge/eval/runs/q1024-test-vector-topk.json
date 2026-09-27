@@ -1,0 +1,910 @@
+{
+  "schema": "career-graph-vector-retrieval/v1",
+  "generatedAt": "2026-09-27T21:13:45+0800",
+  "retriever": {
+    "type": "dense-vector",
+    "service": "http://127.0.0.1:8090/v1/embeddings",
+    "model": "Qwen3-Embedding-0.6B(int8,onnx)",
+    "dtype": "int8",
+    "dim": 1024,
+    "metric": "cosine（点积；TEI 输出已 L2 归一化）",
+    "topk": 3,
+    "rayonThreads": "unknown"
+  },
+  "corpus": {
+    "chunks": 1757
+  },
+  "metrics": {
+    "main": {
+      "hitRate": "21/32",
+      "hitRateValue": 0.6562,
+      "meanPrecisionAtK": 0.2708
+    }
+  },
+  "timing": {
+    "embedCorpusSec": 0,
+    "querySec": 4.9,
+    "perQueryMs": 151.6
+  },
+  "perQuestion": [
+    {
+      "questionId": "T01",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "在 ESP32 上用 SPI 发送 uint16_t 类型的数据时，字节的发送顺序是怎样的？如果需要对发送或接收的数据做格式转换，应该用哪些宏？",
+      "referenceChunks": [
+        "S02#s19",
+        "S02#s43~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s19",
+          "score": 0.719026
+        },
+        {
+          "chunkId": "S02#s37",
+          "score": 0.688055
+        },
+        {
+          "chunkId": "S02#s42~3",
+          "score": 0.667496
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s19"
+      ]
+    },
+    {
+      "questionId": "T02",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "ESP32 上使用 GPIO 交换矩阵走 SPI 信号和直接使用 IO_MUX 专用管脚相比，在时钟频率上有什么限制？SPI2 的 MISO 专用管脚是哪个 GPIO？",
+      "referenceChunks": [
+        "S02#s22",
+        "S02#s42~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s22",
+          "score": 0.796858
+        },
+        {
+          "chunkId": "S04#s73",
+          "score": 0.729249
+        },
+        {
+          "chunkId": "S02#s36",
+          "score": 0.703118
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s22"
+      ]
+    },
+    {
+      "questionId": "T03",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "在 ESP-IDF 堆内存 API 中，遍历堆块时的回调函数如何通过返回值来控制遍历是否继续？",
+      "referenceChunks": [
+        "S03#s63~2",
+        "S03#s71"
+      ],
+      "topk": [
+        {
+          "chunkId": "S03#s46",
+          "score": 0.668723
+        },
+        {
+          "chunkId": "S03#s67",
+          "score": 0.641372
+        },
+        {
+          "chunkId": "S03#s71",
+          "score": 0.624007
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S03#s71"
+      ]
+    },
+    {
+      "questionId": "T04",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "在 ESP-IDF 中，如果想知道某个已分配指针实际占用了多少字节，应该调用哪个函数？使用时需要注意什么？",
+      "referenceChunks": [
+        "S03#s61",
+        "S03#s61~9"
+      ],
+      "topk": [
+        {
+          "chunkId": "S03#s46",
+          "score": 0.654132
+        },
+        {
+          "chunkId": "S03#s51",
+          "score": 0.621413
+        },
+        {
+          "chunkId": "S03#s67",
+          "score": 0.610442
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T05",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "使用 SPI Master 在 ESP32 上通过 GPIO matrix 连接从设备时，最高支持多少 MHz 的通信频率？如果频率不够用该怎么办？",
+      "referenceChunks": [
+        "S02#s41",
+        "S02#s41~6"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s43",
+          "score": 0.70479
+        },
+        {
+          "chunkId": "S02#s22",
+          "score": 0.703499
+        },
+        {
+          "chunkId": "S02#s41",
+          "score": 0.699189
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s41"
+      ]
+    },
+    {
+      "questionId": "T06",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "在多堆 API 中，如果需要释放一块通过对齐分配接口申请的内存，推荐使用哪个函数？另外如何查询某个堆的历史最低剩余空闲空间？",
+      "referenceChunks": [
+        "S03#s69",
+        "S03#s69~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S03#s67",
+          "score": 0.671766
+        },
+        {
+          "chunkId": "S03#s69~4",
+          "score": 0.641406
+        },
+        {
+          "chunkId": "S03#s58",
+          "score": 0.629776
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S03#s69~4"
+      ]
+    },
+    {
+      "questionId": "T07",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "在 ESP-IDF 里要申请一块带对齐要求、并且指定内存能力的内存，对齐参数有什么硬性约束？另外，如果想检查所有堆有没有被写坏、并且希望把具体出错信息打出来，该调哪个接口、返回值怎么读？",
+      "referenceChunks": [
+        "S03#s61~2",
+        "S03#s61~6"
+      ],
+      "topk": [
+        {
+          "chunkId": "S03#s46",
+          "score": 0.654796
+        },
+        {
+          "chunkId": "S03#s47",
+          "score": 0.639269
+        },
+        {
+          "chunkId": "S03#s67",
+          "score": 0.629074
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T08",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "用 heap_caps_calloc 拿到的内存初值是什么？它和标准库 calloc 在 IDF 里是什么对应关系？还有，如果已经知道堆损坏发生在某个地址附近、想用开销更小的方式查，应该用哪个接口，什么情况下这种查法会不管用？",
+      "referenceChunks": [
+        "S03#s61~3",
+        "S03#s61~7"
+      ],
+      "topk": [
+        {
+          "chunkId": "S03#s61~3",
+          "score": 0.721126
+        },
+        {
+          "chunkId": "S03#s57",
+          "score": 0.717223
+        },
+        {
+          "chunkId": "S03#s66",
+          "score": 0.709453
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S03#s61~3"
+      ]
+    },
+    {
+      "questionId": "T09",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "heap_caps_get_minimum_free_size 返回的数值，和「这块内存历史上最少剩多少」是不是一回事？为什么？另外，如果我想遍历某个能力集合下的所有堆、并在每个块上做点事，用哪个接口、回调要带哪些参数？",
+      "referenceChunks": [
+        "S03#s61~10",
+        "S03#s61~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S03#s61~4",
+          "score": 0.748663
+        },
+        {
+          "chunkId": "S03#s69~4",
+          "score": 0.734979
+        },
+        {
+          "chunkId": "S03#s70",
+          "score": 0.709238
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S03#s61~4"
+      ]
+    },
+    {
+      "questionId": "T10",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "在 ESP32 上给某个 IO 配内部上拉或下拉时要注意哪些坑：重复调用会怎样、有没有哪些引脚根本没有内部上下拉电阻？另外 gpio_hold 是做什么用的，开启后引脚还受不受后续配置改动影响？",
+      "referenceChunks": [
+        "S04#s78~3",
+        "S04#s78~7"
+      ],
+      "topk": [
+        {
+          "chunkId": "S04#s78~3",
+          "score": 0.654505
+        },
+        {
+          "chunkId": "S04#s78~7",
+          "score": 0.646087
+        },
+        {
+          "chunkId": "S04#s87~4",
+          "score": 0.638389
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S04#s78~3",
+        "S04#s78~7"
+      ]
+    },
+    {
+      "questionId": "T11",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "要把一个 IO 配成开漏输出，应该用哪个接口？如果还想单独设置它在睡眠期间的上拉下拉，用哪个函数？这个函数和普通模式下的上下拉配置在参数与返回值风格上有什么一致之处？",
+      "referenceChunks": [
+        "S04#s78~10",
+        "S04#s78~5"
+      ],
+      "topk": [
+        {
+          "chunkId": "S04#s74",
+          "score": 0.700387
+        },
+        {
+          "chunkId": "S04#s78~3",
+          "score": 0.650163
+        },
+        {
+          "chunkId": "S04#s75",
+          "score": 0.646809
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T12",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "SPI 主机驱动里「排队交给中断去执行」和「轮询发送」这两类事务，在接口用法和并发限制上分别有什么讲究？各自有没有明确的使用禁忌？",
+      "referenceChunks": [
+        "S02#s41~2",
+        "S02#s41~5"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s11",
+          "score": 0.661905
+        },
+        {
+          "chunkId": "S02#s12",
+          "score": 0.642549
+        },
+        {
+          "chunkId": "S02#s20",
+          "score": 0.636755
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T13",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "从 SPI 事务结果接口取回结果时，对事务描述符的使用有什么约束、为什么？另外 SPI 主机频率上限意味着什么：超过上限之后会出现什么现象？",
+      "referenceChunks": [
+        "S02#s41~3",
+        "S02#s41~7"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s43",
+          "score": 0.717051
+        },
+        {
+          "chunkId": "S02#s33",
+          "score": 0.705235
+        },
+        {
+          "chunkId": "S02#s16",
+          "score": 0.700786
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T14",
+      "set": "main",
+      "category": "测试自动化",
+      "question": "pytest 里把 fixture 参数化之后，依赖它的测试会怎么执行？如果我不想用自动生成的用例 ID、而是自己指定名字，有哪几种写法、返回值需要注意什么？",
+      "referenceChunks": [
+        "S13#s223",
+        "S13#s223~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S13#s223~4",
+          "score": 0.744637
+        },
+        {
+          "chunkId": "S14#s267~3",
+          "score": 0.685927
+        },
+        {
+          "chunkId": "S13#s207",
+          "score": 0.676343
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S13#s223~4"
+      ]
+    },
+    {
+      "questionId": "T15",
+      "set": "main",
+      "category": "测试自动化",
+      "question": "fixture 之间能不能互相引用、这样做的价值是什么？另外，当同一个 fixture 在 conftest 与具体测试文件里都被定义时，哪一层生效、能不能只对个别用例覆盖？",
+      "referenceChunks": [
+        "S13#s225",
+        "S13#s231"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s275",
+          "score": 0.710435
+        },
+        {
+          "chunkId": "S13#s207",
+          "score": 0.705461
+        },
+        {
+          "chunkId": "S14#s278",
+          "score": 0.696059
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T16",
+      "set": "main",
+      "category": "测试自动化",
+      "question": "有没有办法不改 fixture 代码、只用命令行选项就改变它的作用范围？如果有，那个 callable 是怎么被调用的？另外，同一个测试里需要多次创建同类数据时，fixture 该怎么写比较合适？",
+      "referenceChunks": [
+        "S14#s247",
+        "S14#s266"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s247",
+          "score": 0.695103
+        },
+        {
+          "chunkId": "S14#s246",
+          "score": 0.680031
+        },
+        {
+          "chunkId": "S14#s278",
+          "score": 0.669791
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S14#s247"
+      ]
+    },
+    {
+      "questionId": "T17",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "用 MindSpore Lite 的 benchmark 工具在 Windows 上做推理测试，运行前要做哪些环境准备、怎么指定要跑的模型？跑完之后输出里的平均误差是什么意思、如果不指定输入数据会怎样？",
+      "referenceChunks": [
+        "S05#s109",
+        "S05#s109~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s107",
+          "score": 0.749156
+        },
+        {
+          "chunkId": "S05#s92",
+          "score": 0.697552
+        },
+        {
+          "chunkId": "S05#s98",
+          "score": 0.696915
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T18",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "用 MindSpore Lite 的 C++ 接口自己写推理程序时，编译环境有什么要求？代码里取输入张量、填数据、再执行预测大致是怎样的调用序列、失败时怎么判断？",
+      "referenceChunks": [
+        "S05#s110",
+        "S05#s110~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s92",
+          "score": 0.732797
+        },
+        {
+          "chunkId": "S05#s101",
+          "score": 0.72846
+        },
+        {
+          "chunkId": "S05#s110",
+          "score": 0.716638
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s110"
+      ]
+    },
+    {
+      "questionId": "T19",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "在 Linux 上把 MindSpore Lite 集成进自己的工程时，如果要链接静态库应该加什么链接选项？程序跑起来后想直观看看输出对不对，一般怎么处理输出张量？",
+      "referenceChunks": [
+        "S05#s101~2",
+        "S05#s101~6"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s110",
+          "score": 0.659659
+        },
+        {
+          "chunkId": "S05#s101",
+          "score": 0.641875
+        },
+        {
+          "chunkId": "S05#s95",
+          "score": 0.636811
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T20",
+      "set": "main",
+      "category": "职业能力",
+      "question": "O*NET 收录的软件质量保证分析师与测试员这个职业，在数据库和操作系统这两类软件上分别常用到哪些工具？能不能举出被标为热门技术的例子？",
+      "referenceChunks": [
+        "S16#s298~2",
+        "S16#s298~5"
+      ],
+      "topk": [
+        {
+          "chunkId": "S26#s606",
+          "score": 0.594353
+        },
+        {
+          "chunkId": "S16#s310",
+          "score": 0.582926
+        },
+        {
+          "chunkId": "S16#s283",
+          "score": 0.582628
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T21",
+      "set": "main",
+      "category": "职业能力",
+      "question": "这个职业在分析与科学计算软件、图形图像软件上分别用到什么？其中哪些被标为热门技术？",
+      "referenceChunks": [
+        "S16#s298",
+        "S16#s298~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S16#s293~2",
+          "score": 0.580794
+        },
+        {
+          "chunkId": "S26#s509",
+          "score": 0.577789
+        },
+        {
+          "chunkId": "S26#s599",
+          "score": 0.565645
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T22",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "想按固定步长、或者按固定元素个数生成一段区间内的 Tensor，分别该用哪个 API？另外飞桨的索引除了普通的切片取值，还支持哪些更灵活的写法？",
+      "referenceChunks": [
+        "S07#2.3",
+        "S07#4.1"
+      ],
+      "topk": [
+        {
+          "chunkId": "S07#4.1",
+          "score": 0.723883
+        },
+        {
+          "chunkId": "S07#s143",
+          "score": 0.716391
+        },
+        {
+          "chunkId": "S07#s125",
+          "score": 0.68228
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S07#4.1"
+      ]
+    },
+    {
+      "questionId": "T23",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "用 reshape 改形状时，参数里的 -1 和 0 分别代表什么意思？另外两个形状不一样的 Tensor 相加运算，什么情况下能自动广播、什么情况下会直接报错？",
+      "referenceChunks": [
+        "S07#3.1~2",
+        "S07#s141"
+      ],
+      "topk": [
+        {
+          "chunkId": "S07#3.1~2",
+          "score": 0.709534
+        },
+        {
+          "chunkId": "S07#s141",
+          "score": 0.672731
+        },
+        {
+          "chunkId": "S07#3.1",
+          "score": 0.64426
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S07#3.1~2",
+        "S07#s141"
+      ]
+    },
+    {
+      "questionId": "T24",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "飞桨的 Tensor 可以指定放在哪些设备上？其中固定内存这种位置有什么好处、又有什么代价？另外用 Numpy 数组创建 Tensor 时，两者是共享同一块内存吗？",
+      "referenceChunks": [
+        "S07#3.3",
+        "S07#s142"
+      ],
+      "topk": [
+        {
+          "chunkId": "S07#s124",
+          "score": 0.73727
+        },
+        {
+          "chunkId": "S07#s125",
+          "score": 0.705435
+        },
+        {
+          "chunkId": "S07#3.3",
+          "score": 0.699483
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S07#3.3"
+      ]
+    },
+    {
+      "questionId": "T25",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "拿 MNIST 做手写数字识别时，这个数据集有多少张图、图片分辨率是多少？跑这份代码之前要先用 pip 装哪两个库？另外训练完把模型保存下来，指定目录里会出现哪两个文件、各自存的是什么？",
+      "referenceChunks": [
+        "S06#3.4.1",
+        "S06#s115"
+      ],
+      "topk": [
+        {
+          "chunkId": "S06#s115",
+          "score": 0.731476
+        },
+        {
+          "chunkId": "S06#3.4.1",
+          "score": 0.636069
+        },
+        {
+          "chunkId": "S06#s115~2",
+          "score": 0.630396
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S06#s115",
+        "S06#3.4.1"
+      ]
+    },
+    {
+      "questionId": "T26",
+      "set": "main",
+      "category": "AI框架与推理",
+      "question": "用飞桨高层 API 训练一个模型，标准流程是哪几步、每一步分别负责什么？训练好之后拿测试集里的一张图做推理，为什么还要先给图片增加一个维度？",
+      "referenceChunks": [
+        "S06#3.3.1",
+        "S06#3.4.2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S06#s122",
+          "score": 0.705301
+        },
+        {
+          "chunkId": "S06#s112",
+          "score": 0.678682
+        },
+        {
+          "chunkId": "S06#3.4.2",
+          "score": 0.600867
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S06#3.4.2"
+      ]
+    },
+    {
+      "questionId": "T27",
+      "set": "main",
+      "category": "测试自动化",
+      "question": "pytest 决定夹具执行顺序时到底参考了哪些东西？夹具或测试的名字、定义在哪个文件、定义的先后，会不会影响执行顺序？",
+      "referenceChunks": [
+        "S14#s240",
+        "S14#s259"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s259",
+          "score": 0.610095
+        },
+        {
+          "chunkId": "S14#s261",
+          "score": 0.60124
+        },
+        {
+          "chunkId": "S14#s262~2",
+          "score": 0.547041
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S14#s259"
+      ]
+    },
+    {
+      "questionId": "T28",
+      "set": "main",
+      "category": "测试自动化",
+      "question": "pytest 里的 fixture 究竟是什么？另外，写在测试类里面的夹具和写在模块顶层的夹具，分别能被哪些测试请求到？",
+      "referenceChunks": [
+        "S14#s237",
+        "S14#s255"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s278",
+          "score": 0.711597
+        },
+        {
+          "chunkId": "S14#s265",
+          "score": 0.704598
+        },
+        {
+          "chunkId": "S14#s235",
+          "score": 0.702684
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "T29",
+      "set": "main",
+      "category": "测试自动化",
+      "question": "一个测试通常可以拆成哪几个步骤、各自负责什么？另外要让夹具的清理足够安全，夹具的结构应该遵循什么原则？",
+      "referenceChunks": [
+        "S14#s236",
+        "S14#s254"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s236",
+          "score": 0.591031
+        },
+        {
+          "chunkId": "S26#s1222",
+          "score": 0.562622
+        },
+        {
+          "chunkId": "S26#s864",
+          "score": 0.562259
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S14#s236"
+      ]
+    },
+    {
+      "questionId": "T30",
+      "set": "main",
+      "category": "测试自动化",
+      "question": "pytest 的夹具机制相比传统的 setup/teardown 写法好在哪些地方？另外如果把多个清理步骤全塞进一个夹具里，可能会踩什么坑？",
+      "referenceChunks": [
+        "S14#s235",
+        "S14#s253"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s253",
+          "score": 0.596296
+        },
+        {
+          "chunkId": "S14#s249",
+          "score": 0.572905
+        },
+        {
+          "chunkId": "S14#s235",
+          "score": 0.561138
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S14#s253",
+        "S14#s235"
+      ]
+    },
+    {
+      "questionId": "T31",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "要发送或接收的数据不超过 32 位时，还有必要为它单独申请一块缓冲区吗、该怎么做？另外改成用 GPIO 矩阵接从设备之后，为什么 SPI 读取的频率上限会明显下降、有什么办法弥补？",
+      "referenceChunks": [
+        "S02#s18",
+        "S02#s27"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s27",
+          "score": 0.664645
+        },
+        {
+          "chunkId": "S02#s15",
+          "score": 0.657975
+        },
+        {
+          "chunkId": "S02#s22",
+          "score": 0.651419
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s27"
+      ]
+    },
+    {
+      "questionId": "T32",
+      "set": "main",
+      "category": "嵌入式开发",
+      "question": "在 SPI1 总线上跑 SPI 主机驱动时，为什么要求代码和数据都放在内部存储器里、什么情况下缓存会被禁用？另外半双工模式下读写阶段同时进行会遇到什么问题、怎么绕开？",
+      "referenceChunks": [
+        "S02#s21",
+        "S02#s28"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s21",
+          "score": 0.689338
+        },
+        {
+          "chunkId": "S02#s28",
+          "score": 0.683676
+        },
+        {
+          "chunkId": "S02#s15",
+          "score": 0.662095
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s21",
+        "S02#s28"
+      ]
+    }
+  ]
+}
