@@ -85,9 +85,10 @@
       "question": "使用 SPI Master 在 ESP32 上通过 GPIO matrix 连接从设备时，最高支持多少 MHz 的通信频率？如果频率不够用该怎么办？",
       "answerable": true,
       "referenceChunks": [
-        "S02#s41",
-        "S02#s41~6"
+        "S02#s22",
+        "S02#s27~2"
       ],
+      "annotationFix": "2026-09-27 提案：原标 S02#s41 / S02#s41~6 是 spi_bus_add_device() 函数签名与 wait 参数说明，与『最高频率』无关。改为 S02#s22（GPIO 交换矩阵上限 40MHz、需高速请用 IO_MUX）与 S02#s27~2（GPIO_MATRIX 输入延迟 25ns、频率限制表）。",
       "gradingNotes": "ESP32 通过 GPIO matrix 与理想从设备通信时，最高频率约为 26MHz；而使用 IOMUX 专用引脚时最高可达 80MHz。；在半双工模式下，可以通过在 spi_device_interface_config_t 中正确设置 input_delay_ns 来增加额外的 dummy 周期，从而补偿 GPIO matrix 引入的延迟。",
       "sourceId": "S02",
       "minRefCjkRatio": 0.0074,
@@ -159,9 +160,10 @@
       "questionId": "T10",
       "category": "嵌入式开发",
       "referenceChunks": [
-        "S04#s78~3",
-        "S04#s78~7"
+        "S04#s79",
+        "S04#s78~8"
       ],
+      "annotationFix": "2026-09-28：原标 S04#s78~3 / S04#s78~7 是 gpio_input_enable、gpio_get_drive_capability 函数签名，与上下拉/hold 无关。改为 S04#s79（gpio_config_t 的 pull_up_en / pull_down_en 成员，正是内部上下拉的配置入口）与 S04#s78~8（For ESP32/S2/C3/S3/C2, this function cannot be used to hold the state of a digital GPIO during Deep-sleep…，即 hold 的作用边界）。注：提案原建议的 S04#s74 落在图谱引用集合内（泄漏风险），未采用。",
       "question": "在 ESP32 上给某个 IO 配内部上拉或下拉时要注意哪些坑：重复调用会怎样、有没有哪些引脚根本没有内部上下拉电阻？另外 gpio_hold 是做什么用的，开启后引脚还受不受后续配置改动影响？",
       "gradingNotes": "gpio_set_pull_mode 每次调用都会覆盖当前上下拉配置；ESP32 上只有同时支持输入输出的引脚才有内部上下拉，仅输入的 GPIO34–39 没有。gpio_hold_en 把引脚状态在那一点锁存，此后修改内部信号或 IO MUX/GPIO 配置（输入使能、输出使能、输出值、功能、驱动能力等）都不会改变该状态。",
       "split": "test",
@@ -192,6 +194,7 @@
         "S02#s41~2",
         "S02#s41~5"
       ],
+      "annotationDefect": "2026-09-28 复核：确认原标注 S02#s41~2 / S02#s41~5 答非所问（错误码列表与 ticks_to_wait 参数），但**本题无法修好**——它正确的那条使用禁忌『一次只向单个设备发送一种类型的传输事务』在全语料里**只存在于 S02#s20**，而 S02#s20 已是 dev 集 D02 的参考答案。T12 与 D02 问的是同一个考点，属**重复题**。提案原建议的 S02#s12 也落在图谱引用集合内。处置：保持原标注不动（不换成非答案段，否则会变成「已知不可回答」的题），把本题标记为需重写或从题集移除。",
       "question": "SPI 主机驱动里「排队交给中断去执行」和「轮询发送」这两类事务，在接口用法和并发限制上分别有什么讲究？各自有没有明确的使用禁忌？",
       "gradingNotes": "中断事务：spi_device_queue_trans 入队、结果用 spi_device_get_trans_result 取；同一设备通常不能同时启动（排队）轮询事务与中断事务。轮询事务：spi_device_polling_transmit 等价于依次调用 spi_device_polling_start 与 spi_device_polling_end；在上一个事务尚未 finalize 时不得使用。",
       "split": "test",
@@ -205,8 +208,9 @@
       "category": "嵌入式开发",
       "referenceChunks": [
         "S02#s41~3",
-        "S02#s41~7"
+        "S02#s27~2"
       ],
+      "annotationFix": "2026-09-28：只换错的那一段。原标后半 S02#s41~7 是 dummy_o 参数说明、与描述符约束无关；前半 S02#s41~3 本来就是对的——『The descriptor should not be modified until…』在全语料里**只出现在 S02#s41~3 与 S02#s42~3** 两段，而 S02#s42~3 已被 dev 集 D02 占用（提案原建议用它，会造成 dev/test 重叠）。故保留 S02#s41~3，只把 S02#s41~7 换成 S02#s27~2（GPIO_MATRIX 输入延迟 25ns 的频率限制表），以回答「频率上限意味着什么」。",
       "question": "从 SPI 事务结果接口取回结果时，对事务描述符的使用有什么约束、为什么？另外 SPI 主机频率上限意味着什么：超过上限之后会出现什么现象？",
       "gradingNotes": "取结果：spi_device_get_trans_result 会等待目标设备的事务完成并返回描述符指针，软件据此检查结果、释放或复用缓冲；在描述符被返回之前不得修改它。频率上限：spi_get_freq_limit 给出当前配置下的频率上限，主机工作在该上限内没问题，超过后全双工模式与 DMA 将不可用，半双工模式下会插入 dummy 位。",
       "split": "test",
@@ -234,9 +238,10 @@
       "questionId": "T15",
       "category": "测试自动化",
       "referenceChunks": [
-        "S13#s225",
-        "S13#s231"
+        "S14#s269",
+        "S14#s276"
       ],
+      "annotationFix": "2026-09-27 提案：原标 S13#s225 / S13#s231 是英文 pytest 文档（后者只是代码块开头、信息量低）。改为 S14#s269（中文：fixture 函数可以使用其他 fixture 本身，有助于夹具模块化）与 S14#s276（conftest 与测试文件同时定义时哪层生效、如何覆盖），同时修掉『中文问→英文答』的语言错配。",
       "question": "fixture 之间能不能互相引用、这样做的价值是什么？另外，当同一个 fixture 在 conftest 与具体测试文件里都被定义时，哪一层生效、能不能只对个别用例覆盖？",
       "gradingNotes": "fixture 可以使用其它 fixture，带来模块化设计与跨项目复用。覆盖：测试文件层（或直接用 parametrize 为某个 test 注入同名参数）可覆盖上层 conftest 中定义的 fixture，属于按目录层级与用例级别的覆盖机制。",
       "split": "test",
@@ -312,6 +317,7 @@
         "S16#s298~2",
         "S16#s298~5"
       ],
+      "annotationReview": "2026-09-28 复核后维持不变。提案曾判定 S16#s298~2『与问题无关（讲配置管理/CRM/内容工作流）』——该段开头确实是那些内容，但通读全文可见它完整包含数据库类软件：Data base management system software（Amazon DynamoDB / Elasticsearch / MongoDB / Oracle PL/SQL，均标 Hot Technology）、Data base reporting software、Data base user interface and query software（IBM DB2 等），正是问题问的『数据库软件』；S16#s298~5 覆盖『操作系统软件』（含 Object oriented data base management software）。两段都相关，原标注成立。",
       "question": "O*NET 收录的软件质量保证分析师与测试员这个职业，在数据库和操作系统这两类软件上分别常用到哪些工具？能不能举出被标为热门技术的例子？",
       "gradingNotes": "数据库类：数据库管理系统（如 Amazon DynamoDB、Elasticsearch、MongoDB、Oracle PL/SQL 等被标为 Hot Technology）、数据库报表软件、面向对象数据库管理软件（Hibernate ORM、PostgreSQL 等 Hot Technology）。操作系统类：Google Android、Microsoft Windows Server、Red Hat Enterprise Linux、UNIX Shell 等被标为 Hot Technology。",
       "split": "test",
