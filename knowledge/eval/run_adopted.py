@@ -191,6 +191,14 @@ def main():
         print(f"\n== LLM 重排（候选 {args.rerank_candidates}）：缓存里缺 {len(todo)} 题 ==")
         t0 = time.time()
         failed = []
+
+        def flush_rerank():
+            """增量落盘。整轮跑完才写的话，中途卡死或机器休眠就全丢（冻结题集那次被坑过：
+            跑到 10/32 时机器睡了一觉，进程挂死、缓存一个字节都没写下来）。"""
+            json.dump({"generatedAt": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+                       "model": os.environ.get("DEEPEVAL_MODEL"),
+                       "candidates": args.rerank_candidates, "picks": rerank},
+                      open(args.rerank_cache, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
         for i, q in enumerate(todo, 1):
             qid = q["questionId"]
             f = fused[qid]
@@ -223,12 +231,10 @@ def main():
                 print(f"  {qid} 重排失败（{args.retries} 次重试后）：{err}")
             else:
                 rerank[qid] = {"picked": picked, "candidates": cand}
-            if i % 10 == 0 or i == len(todo):
+            if i % 5 == 0 or i == len(todo):
+                flush_rerank()
                 print(f"  {i}/{len(todo)} 用时 {time.time()-t0:.1f}s", flush=True)
-        json.dump({"generatedAt": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
-                   "model": os.environ.get("DEEPEVAL_MODEL"),
-                   "candidates": args.rerank_candidates, "picks": rerank},
-                  open(args.rerank_cache, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+        flush_rerank()
         ok = sum(1 for q in answerable if (rerank.get(q["questionId"]) or {}).get("picked"))
         print(f"  完成：{ok}/{len(answerable)} 题有重排结果 → "
               f"{os.path.relpath(args.rerank_cache, ROOT)}")
