@@ -1,0 +1,249 @@
+{
+  "shard": "zh-other",
+  "sources": [
+    "S25",
+    "S24",
+    "S23",
+    "S21",
+    "S22",
+    "S14",
+    "S08",
+    "S06",
+    "S07",
+    "S09",
+    "S10",
+    "S11"
+  ],
+  "note": "候选段均已排除：被 dev/test 引用过、在图谱引用集合内、与已用段原文区间重叠。",
+  "count": 19,
+  "candidates": [
+    {
+      "chunkId": "S06#s111",
+      "sourceId": "S06",
+      "sectionPath": "",
+      "cjkRatio": 0.0286,
+      "length": 105,
+      "charRange": [
+        0,
+        105
+      ],
+      "text": "\\u200E\n\n3.3\n\n3.2\n\n3.1\n\n3.0\n\ndevelop\n\n3.0-beta\n\n2.6\n\n2.5\n\n2.4\n\n2.3\n\n2.2\n\n2.1\n\n2.0\n\n1.8\n\n中文(简)\n\nEnglish(En)"
+    },
+    {
+      "chunkId": "S06#s115~2",
+      "sourceId": "S06",
+      "sectionPath": "10分钟快速上手飞桨 > 三、实践：手写数字识别任务",
+      "cjkRatio": 0.13,
+      "length": 1254,
+      "charRange": [
+        2062,
+        3316
+      ],
+      "text": "# 执行推理并打印结果，此处predict_batch返回的是一个list，取出其中数据获得预测结果\nout = model.predict_batch(img_batch)[0]\npred_label = out.argmax()\nprint(\"true label: {}, pred label: {}\".format(label[0], pred_label))\n# 可视化图片\nfrom matplotlib import pyplot as plt\n\nplt.imshow(img[0])\n\nThe loss value printed in the log is the current step, and the metric is the average value of previous steps.\nEpoch 1/5\nstep 938/938 [==============================] - loss: 0.0519 - acc: 0.9344 - 14ms/step\nEpoch 2/5\nstep 938/938 [==============================] - loss: 0.0239 - acc: 0.9767 - 14ms/step\nEpoch 3/5\nstep 938/938 [==============================] - loss: 0.0416 - acc: 0.9811 - 14ms/step\nEpoch 4/5\nstep 938/938 [==============================] - loss: 0.0084 - acc: 0.9837 - 14ms/step\nEpoch 5/5\nstep 938/938 [==============================] - loss: 0.0838 - acc: 0.9860 - 14ms/step\nEval begin...\nstep 157/157 [==============================] - loss: 1.7577e-04 - acc: 0.9844 - 6ms/step\nEval samples: 10000\ntrue label: 7, pred label: 7\n\n[5]:\n\n<matplotlib.image.AxesImage at 0x7feb8a585dd0>\n\n以上代码使用 MNIST 数据集训练并测试了 LeNet 模型，并最终成功推理出了一张手写数字图片的标签，该图片推理结果是 7 （ pred label: 7），真实标签也是7 （true label: 7）。\n\n简单地说，深度学习任务一般分为以下几个核心步骤：\n\n数据集定义与加载\n\n模型组网\n\n模型训练与评估\n\n模型推理\n\n接下来逐个步骤介绍，帮助你快速掌握使用飞桨框架实践深度学习任务的方法。"
+    },
+    {
+      "chunkId": "S06#3.3.2",
+      "sourceId": "S06",
+      "sectionPath": "10分钟快速上手飞桨 > 三、实践：手写数字识别任务 > 3.3 > 3.3.2",
+      "cjkRatio": 0.3241,
+      "length": 432,
+      "charRange": [
+        7406,
+        7838
+      ],
+      "text": "模型训练完成之后，调用 paddle.Model.evaluate ，使用预先定义的测试数据集，来评估训练好的模型效果，评估完成后将输出模型在测试集上的损失函数值 loss 和精度 acc。\n\n[6]:\n\n# 进行模型评估\nmodel.evaluate(test_dataset, batch_size=64, verbose=1)\n\nEval begin...\nstep 157/157 [==============================] - loss: 5.7177e-04 - acc: 0.9859 - 6ms/step\nEval samples: 10000\n\n[6]:\n\n{'loss': [0.00057177414], 'acc': 0.9859}\n\n从结果可以看到，初步训练得到的模型精度在98%附近，在逐渐熟悉深度学习模型开发和训练技巧后，可以通过调整其中的训练参数来进一步提升模型的精度。\n\n更多参考： * 模型训练、评估与推理"
+    },
+    {
+      "chunkId": "S06#s114",
+      "sourceId": "S06",
+      "sectionPath": "10分钟快速上手飞桨 > 二、导入飞桨",
+      "cjkRatio": 0.3667,
+      "length": 120,
+      "charRange": [
+        495,
+        615
+      ],
+      "text": "安装完成后，需要在Python解释器中使用 import 导入飞桨，即可开始实践深度学习任务。\n\n若操作成功，会输出飞桨的版本号。\n\n[3]:\n\nimport paddle\n\nprint(paddle.__version__)\n\n2.2.1"
+    },
+    {
+      "chunkId": "S06#s122",
+      "sourceId": "S06",
+      "sectionPath": "10分钟快速上手飞桨 > 四、总结",
+      "cjkRatio": 0.8056,
+      "length": 180,
+      "charRange": [
+        8955,
+        9135
+      ],
+      "text": "至此通过飞桨几个简单的API完成了一个深度学习任务，总结整个流程和用到的关键 API 如下图所示。\n\n图 2：模型开发流程\n\n如果想要完成更复杂的深度学习任务，开发更强大的模型，飞桨提供了功能丰富的 API 帮助开发者完成任务，比如对数据集应用数据增强、使用更大的 CNN 模型、调优性能等。飞桨官网提供了丰富的教程与案例可供参考，欢迎一起探索深度学习的世界。"
+    },
+    {
+      "chunkId": "S07#s123",
+      "sourceId": "S07",
+      "sectionPath": "",
+      "cjkRatio": 0.0286,
+      "length": 105,
+      "charRange": [
+        0,
+        105
+      ],
+      "text": "\\u200E\n\n3.3\n\n3.2\n\n3.1\n\n3.0\n\ndevelop\n\n3.0-beta\n\n2.6\n\n2.5\n\n2.4\n\n2.3\n\n2.2\n\n2.1\n\n2.0\n\n1.8\n\n中文(简)\n\nEnglish(En)"
+    },
+    {
+      "chunkId": "S07#s143",
+      "sourceId": "S07",
+      "sectionPath": "Tensor 介绍 > 七、总结",
+      "cjkRatio": 0.5339,
+      "length": 118,
+      "charRange": [
+        19504,
+        19622
+      ],
+      "text": "Tensor 作为飞桨框架中重要的数据结构，具有丰富的 API 用以对 Tensor 进行创建、访问、修改、计算等一系列操作，从而满足深度学习任务的需要。更多 Tensor 相关的介绍，请参考 paddle.Tensor API 文档。"
+    },
+    {
+      "chunkId": "S07#s131",
+      "sourceId": "S07",
+      "sectionPath": "Tensor 介绍 > 三、Tensor 的属性",
+      "cjkRatio": 0.2906,
+      "length": 203,
+      "charRange": [
+        6972,
+        7175
+      ],
+      "text": "在前文中，可以看到打印 Tensor 时有 shape、dtype、place 等信息，这些都是 Tensor 的重要属性，想要了解如何操作 Tensor 需要对其属性有一定了解，接下来分别展开介绍 Tensor 的属性相关概念。\n\nTensor(shape=[3], dtype=float32, place=Place(gpu:0), stop_gradient=True,\n[2., 3., 4.])"
+    },
+    {
+      "chunkId": "S07#3.1~3",
+      "sourceId": "S07",
+      "sectionPath": "Tensor 介绍 > 三、Tensor 的属性 > 3.1",
+      "cjkRatio": 0.0884,
+      "length": 475,
+      "charRange": [
+        10180,
+        10655
+      ],
+      "text": "origin_tensor = paddle.to_tensor([1, 2, 3])\nnew_tensor = paddle.reshape(origin_tensor, [1, 3]) # 非原位操作\nsame_tensor = paddle.reshape_(origin_tensor, [1, 3]) # 原位操作\nprint(\"origin_tensor name: \", origin_tensor.name)\nprint(\"new_tensor name: \", new_tensor.name)\nprint(\"same_tensor name: \", same_tensor.name)\n\norigin_tensor name: generated_tensor_0\nnew_tensor name: auto_0_ # 非原位操作后产生的 Tensor 与原始 Tensor 的名称不同\nsame_tensor name: generated_tensor_0 # 原位操作后产生的 Tensor 与原始 Tensor 的名称相同"
+    },
+    {
+      "chunkId": "S07#3.2",
+      "sourceId": "S07",
+      "sectionPath": "Tensor 介绍 > 三、Tensor 的属性 > 3.2",
+      "cjkRatio": 0.1497,
+      "length": 1577,
+      "charRange": [
+        10683,
+        12260
+      ],
+      "text": "3.2.1 指定数据类型的介绍\n\nTensor 的数据类型 dtype 可以通过 Tensor.dtype 查看，支持类型包括：bool、float16、float32、float64、uint8、int8、int16、int32、int64、complex64、complex128。\n\n同一 Tensor 中所有元素的数据类型均相同，通常通过如下方式指定：\n\n通过给定 Python 序列创建的 Tensor，可直接使用 dtype 参数指定。如果未指定：\n\n对于 Python 整型数据，默认会创建 int64 型 Tensor；\n\n对于 Python 浮点型数据，默认会创建 float32 型 Tensor，并且可以通过 paddle.set_default_dtype 来调整浮点型数据的默认类型。\n\n# 创建 Tensor 时指定 dtype\nndim_1_tensor = paddle.to_tensor([2.0, 3.0, 4.0], dtype='float64')\nprint(\"Tensor dtype of ndim_1_tensor:\", ndim_1_tensor.dtype)\n# 创建 Tensor 时不指定 dtype，自动选择对应的默认类型\nprint(\"Tensor dtype from Python integers:\", paddle.to_tensor(1).dtype)\nprint(\"Tensor dtype from Python floating point:\", paddle.to_tensor(1.0).dtype)\n\nTensor dtype of ndim_1_tensor: paddle.float64\nTensor dtype from Python integers: paddle.int64\nTensor dtype from Python floating point: paddle.float32\n\n通过 Numpy 数组或其他 Tensor 创建的 Tensor，则与其原来的数据类型保持相同。\n\nTensor 不仅支持 float、int 类型数据，也支持 complex 复数类型数据。如果输入为复数，则 Tensor 的 dtype 为 complex64 或 complex128 ，其每个元素均为 1 个复数。如果未指定，默认数据类型是complex64：\n\nndim_2_Tensor = paddle.to_tensor([[(1+1j), (2+2j)],\n[(3+3j), (4+4j)]])\nprint(ndim_2_Tensor)\n\nTensor(shape=[2, 2], dtype=complex64, place=Place(gpu:0), stop_gradient=True,\n[[(1+1j), (2+2j)],\n[(3+3j), (4+4j)]])\n\n3.2.2 修改数据类型的方法\n\n飞桨框架提供了paddle.cast 接口来改变 Tensor 的 dtype：\n\nfloat32_Tensor = paddle.to_tensor(1.0)\n\nfloat64_Tensor = paddle.cast(float32_Tensor, dtype='float64')\nprint(\"Tensor after cast to float64:\", float64_Tensor.dtype)\n\nint64_Tensor = paddle.cast(float32_Tensor, dtype='int64')\nprint(\"Tensor after cast to int64:\", int64_Tensor.dtype)"
+    },
+    {
+      "chunkId": "S07#3.2~2",
+      "sourceId": "S07",
+      "sectionPath": "Tensor 介绍 > 三、Tensor 的属性 > 3.2",
+      "cjkRatio": 0.0,
+      "length": 85,
+      "charRange": [
+        12262,
+        12347
+      ],
+      "text": "Tensor after cast to float64: paddle.float64\nTensor after cast to int64: paddle.int64"
+    },
+    {
+      "chunkId": "S07#3.4",
+      "sourceId": "S07",
+      "sectionPath": "Tensor 介绍 > 三、Tensor 的属性 > 3.4",
+      "cjkRatio": 0.2826,
+      "length": 184,
+      "charRange": [
+        13286,
+        13470
+      ],
+      "text": "Tensor 的名称是其唯一的标识符，为 Python 字符串类型，查看一个 Tensor 的名称可以通过 Tensor.name 属性。默认地，在每个 Tensor 创建时，会自定义一个独一无二的名称。\n\nprint(\"Tensor name:\", paddle.to_tensor(1).name)\n\nTensor name: generated_tensor_0"
+    },
+    {
+      "chunkId": "S07#4.4",
+      "sourceId": "S07",
+      "sectionPath": "Tensor 介绍 > 四、Tensor 的操作 > 4.4",
+      "cjkRatio": 0.3402,
+      "length": 194,
+      "charRange": [
+        17086,
+        17280
+      ],
+      "text": "x.t() #矩阵转置\nx.transpose([1, 0]) #交换第 0 维与第 1 维的顺序\nx.norm('fro') #矩阵的弗罗贝尼乌斯范数\nx.dist(y, p=2) #矩阵（x-y）的 2 范数\nx.matmul(y) #矩阵乘法\n\n注意\n\n以上计算 API 也有原位（inplace）操作和非原位操作之分，如x.add(y)是非原位操作，x.add_(y)为原位操作。"
+    },
+    {
+      "chunkId": "S08#s144",
+      "sourceId": "S08",
+      "sectionPath": "",
+      "cjkRatio": 0.1961,
+      "length": 51,
+      "charRange": [
+        0,
+        51
+      ],
+      "text": "Ultralytics YOLO27： 即将推出。加入候补名单。\n\nGitHub repository"
+    },
+    {
+      "chunkId": "S08#s150",
+      "sourceId": "S08",
+      "sectionPath": "YOLO26 部署选项对比分析# > 常见问题#",
+      "cjkRatio": 0.409,
+      "length": 1362,
+      "charRange": [
+        5971,
+        7333
+      ],
+      "text": "Ultralytics YOLO26 支持多种部署格式，每种格式都针对特定环境和硬件平台而设计。主要格式包括：\n\nPyTorch，适用于研究和原型开发，并提供出色的 Python 集成支持。\n\nTorchScript，适用于无法使用 Python 的生产环境。\n\nONNX，用于跨平台兼容性和硬件加速。\n\nOpenVINO，用于在 Intel 硬件上实现优化性能。\n\nTensorRT，用于在 NVIDIA GPU 上实现高速推理。\n\n每种格式都有独特的优势。有关详细操作流程，请参阅我们的导出流程文档。\n\n要提升 Intel CPU 上的推理速度，你可以使用 Intel 的 OpenVINO 工具包部署 YOLO26 模型。OpenVINO 通过优化模型以高效利用 Intel 硬件，可显著提升性能。\n\n使用 model.export() 函数将 YOLO26 模型转换为 OpenVINO 格式。\n\n请参阅Intel OpenVINO 导出文档中的详细设置指南。\n\n如需了解更多信息，请查看我们的博客文章。\n\n是的，YOLO26 模型可以使用适用于 Android 的 LiteRT（此前称为 TensorFlow Lite）和 NCNN 部署到移动设备，也可以使用适用于 iOS 的 CoreML 或 LiteRT。LiteRT 是 Google 面向移动和嵌入式设备的端侧运行时，可在 Android、iOS 和浏览器上运行同一模型，从而实现高效的端侧推理。\n\n示例\n\n# Export command for NCNN format\nmodel.export(format=\"ncnn\")\n\n如需详细了解如何将模型部署到移动设备，请参阅我们的 LiteRT 集成指南。\n\n为 YOLO26 选择部署格式时，请考虑以下因素：\n\n性能：TensorRT 等格式可在 NVIDIA GPU 上提供卓越的速度，而 OpenVINO 针对 Intel 硬件进行了优化。\n\n兼容性：ONNX 在不同平台之间具有广泛的兼容性。\n\n集成便捷性：CoreML 或 LiteRT 等格式分别针对 iOS 和 Android 等特定生态系统进行了适配。\n\n社区支持：PyTorch 和 TensorFlow 等格式拥有丰富的社区资源和支持。\n\n如需进行比较分析，请参阅我们的导出格式文档。\n\n要在 Web 应用中部署 YOLO26 模型，你可以使用 LiteRT.js（LiteRT 的 Web 运行时），直接在浏览器和 Node.js 中运行机器学习模型。这种方式无需后端基础设施，并可提供实时性能。\n\n将 YOLO26 模型导出为 LiteRT 格式。\n\n使用 LiteRT.js 将导出的模型集成到你的 Web 应用中。\n\n如需分步说明，请参阅我们的 LiteRT 集成指南。\n\n贡献者\n\nGLglenn-jocher23RAraimbekovm3JEJESUSROYETH3AMambitious-octopus2LAlakshanthad1PDpderrenger1RIRizwanMunawar1LEleonnil1WAwangzhaode1MAMatthewNoyce1\n\n创建时间 2023年11月12日更新时间 上周"
+    },
+    {
+      "chunkId": "S08#s148~3",
+      "sourceId": "S08",
+      "sectionPath": "YOLO26 部署选项对比分析# > 部署选项对比#",
+      "cjkRatio": 0.9273,
+      "length": 55,
+      "charRange": [
+        6225,
+        6280
+      ],
+      "text": "此比较为你提供高层次概览。在部署时，请根据每个选项评估项目的具体需求和限制，并参考与你所选格式对应的集成指南。"
+    },
+    {
+      "chunkId": "S09#s151",
+      "sourceId": "S09",
+      "sectionPath": "",
+      "cjkRatio": 0.1961,
+      "length": 51,
+      "charRange": [
+        0,
+        51
+      ],
+      "text": "Ultralytics YOLO27： 即将推出。加入候补名单。\n\nGitHub repository"
+    },
+    {
+      "chunkId": "S09#s158",
+      "sourceId": "S09",
+      "sectionPath": "使用 Ultralytics YOLO 进行目标检测# > Predict# > 结果输出#",
+      "cjkRatio": 0.2756,
+      "length": 410,
+      "charRange": [
+        3307,
+        3717
+      ],
+      "text": "目标检测会为每张图像返回一个 Results 对象。主要的预测字段是 result.boxes，其中包含\n每个检测对象的框坐标、类别 ID 和置信度分数。\n\n属性\n\n类型\n\n形状\n\n描述\n\nresult.boxes\n\nBoxes\n\n(N)\n\n检测框。\n\nresult.boxes.data\n\ntorch.float32\n\n(N,6/7)\n\n原始 [x1,y1,x2,y2,conf,cls]，以及可选的跟踪 ID。\n\nresult.boxes.xyxy\n\ntorch.float32\n\n(N,4)\n\nxyxy 像素框。\n\nresult.boxes.conf\n\ntorch.float32\n\n(N,)\n\n置信度分数。\n\nresult.boxes.cls\n\ntorch.float32\n\n(N,)\n\n类别 ID；转换为 int 以获取名称。\n\n有关每项任务中任务专用的 Results 字段，请参阅按任务划分的预测结果部分。"
+    },
+    {
+      "chunkId": "S09#s159~2",
+      "sourceId": "S09",
+      "sectionPath": "使用 Ultralytics YOLO 进行目标检测# > 导出#",
+      "cjkRatio": 0.0906,
+      "length": 773,
+      "charRange": [
+        3724,
+        4497
+      ],
+      "text": "yolo26n_executorch_model/\n\nimgsz、batch、device\n\nAxelera\n\naxelera\n\nyolo26n_axelera_model/\n\nimgsz、batch、quantize、data、fraction、device\n\nDEEPX\n\ndeepx\n\nyolo26n_deepx_model/\n\nimgsz、quantize、simplify、opset、data、optimize、device\n\nQualcomm QNN\n\nqnn\n\nyolo26n_qnn.onnx\n\nimgsz、batch、name、quantize、simplify、opset、data、fraction、device\n\nLiteRT\n\nlitert\n\nyolo26n.tflite\n\nimgsz、quantize、batch、data、fraction、device\n\nHailo\n\nhailo\n\nyolo26n_hailo_model/\n\nimgsz、name、quantize、data、fraction、simplify、conf、iou\n\nHuawei Ascend\n\nascend\n\nyolo26n_ascend_model/\n\nimgsz、batch、name、quantize、opset、simplify、nms\n\nApple Core AI\n\ncoreai\n\nyolo26n.aimodel\n\nimgsz、batch、quantize\n\nnms=None 默认对外部 NMS 使用原始输出。设置 nms=False 以选择可用的无 NMS 检测头；不支持的格式将回退到其本机输出路径。上面的 nms 条目标识了可以通过 nms=True 嵌入 NMS 的格式。\n\n请在导出页面查看完整的 export 详情。"
+    }
+  ]
+}

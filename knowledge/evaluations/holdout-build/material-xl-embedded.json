@@ -1,0 +1,350 @@
+{
+  "shard": "xl-embedded",
+  "sources": [
+    "S02",
+    "S03",
+    "S04",
+    "S05",
+    "S12"
+  ],
+  "note": "候选段均已排除：被 dev/test 引用过、在图谱引用集合内、与已用段原文区间重叠。",
+  "count": 28,
+  "candidates": [
+    {
+      "chunkId": "S02#s33",
+      "sourceId": "S02",
+      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Common > Enumerations",
+      "cjkRatio": 0.0,
+      "length": 1543,
+      "charRange": [
+        14713,
+        16256
+      ],
+      "text": "enum spi_host_device_t\n\nGeneral purpose SPI Host Controller ID.\n\nValues:\n\nenumerator SPI1_HOST\n\nSPI1.\n\nenumerator SPI2_HOST\n\nSPI2.\n\nenumerator SPI3_HOST\n\nSPI3.\n\nenumerator SPI_HOST_MAX\n\ninvalid host value\n\nenum spi_event_t\n\nSPI Events.\n\nValues:\n\nenumerator SPI_EV_BUF_TX\n\nThe buffer has sent data to master.\n\nenumerator SPI_EV_BUF_RX\n\nThe buffer has received data from master.\n\nenumerator SPI_EV_SEND_DMA_READY\n\nSlave has loaded its TX data buffer to the hardware (DMA).\n\nenumerator SPI_EV_SEND\n\nMaster has received certain number of the data, the number is determined by Master.\n\nenumerator SPI_EV_RECV_DMA_READY\n\nSlave has loaded its RX data buffer to the hardware (DMA).\n\nenumerator SPI_EV_RECV\n\nSlave has received certain number of data from master, the number is determined by Master.\n\nenumerator SPI_EV_CMD9\n\nReceived CMD9 from master.\n\nenumerator SPI_EV_CMDA\n\nReceived CMDA from master.\n\nenumerator SPI_EV_TRANS\n\nA transaction has done.\n\nenum spi_command_t\n\nSPI command.\n\nValues:\n\nenumerator SPI_CMD_HD_WRBUF\n\nenumerator SPI_CMD_HD_RDBUF\n\nenumerator SPI_CMD_HD_WRDMA\n\nenumerator SPI_CMD_HD_RDDMA\n\nenumerator SPI_CMD_HD_SEG_END\n\nenumerator SPI_CMD_HD_EN_QPI\n\nenumerator SPI_CMD_HD_WR_END\n\nenumerator SPI_CMD_HD_INT0\n\nenumerator SPI_CMD_HD_INT1\n\nenumerator SPI_CMD_HD_INT2\n\nenum spi_sampling_point_t\n\nSPI master RX sample point mode configuration.\n\nValues:\n\nenumerator SPI_SAMPLING_POINT_PHASE_0\n\nData sampling point at 50% cycle delayed then standard timing, (default).\n\nenumerator SPI_SAMPLING_POINT_PHASE_1"
+    },
+    {
+      "chunkId": "S02#s33~2",
+      "sourceId": "S02",
+      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Common > Enumerations",
+      "cjkRatio": 0.0,
+      "length": 63,
+      "charRange": [
+        17133,
+        17196
+      ],
+      "text": "Data sampling point follows standard SPI timing in master mode."
+    },
+    {
+      "chunkId": "S02#s35",
+      "sourceId": "S02",
+      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Common > Functions",
+      "cjkRatio": 0.01,
+      "length": 1593,
+      "charRange": [
+        16716,
+        18309
+      ],
+      "text": "esp_err_t spi_bus_initialize(spi_host_device_t host_id, const spi_bus_config_t *bus_config, spi_dma_chan_t dma_chan)\n\nInitialize a SPI bus.\n\n警告\n\nSPI0/1 is not supported\n\n警告\n\nIf a DMA channel is selected, any transmit and receive buffer used should be allocated in DMA-capable memory.\n\n警告\n\nThe ISR of SPI is always executed on the core which calls this function. Never starve the ISR on this core or the SPI transactions will not be handled.\n\n参数:\n\nhost_id -- SPI peripheral that controls this bus\n\nbus_config -- Pointer to a spi_bus_config_t struct specifying how the host should be initialized\n\ndma_chan -- - Selecting a DMA channel for an SPI bus allows transactions on the bus with size only limited by the amount of internal memory.\n\nSelecting SPI_DMA_DISABLED limits the size of transactions.\n\nSet to SPI_DMA_DISABLED if only the SPI flash uses this bus.\n\nSet to SPI_DMA_CH_AUTO to let the driver to allocate the DMA channel.\n\n返回:\n\nESP_ERR_INVALID_ARG if configuration is invalid\n\nESP_ERR_INVALID_STATE if host already is in use\n\nESP_ERR_NOT_FOUND if there is no available DMA channel\n\nESP_ERR_NO_MEM if out of memory\n\nESP_OK on success\n\nesp_err_t spi_bus_free(spi_host_device_t host_id)\n\nFree a SPI bus.\n\n警告\n\nIn order for this to succeed, all devices have to be removed first.\n\n参数:\n\nhost_id -- SPI peripheral to free\n\n返回:\n\nESP_ERR_INVALID_ARG if parameter is invalid\n\nESP_ERR_INVALID_STATE if bus hasn't been initialized before, or not all devices on the bus are freed\n\nESP_OK on success\n\nvoid *spi_bus_dma_memory_alloc(spi_host_device_t host_id, size_t size, uint32_t extra_heap_caps)"
+    },
+    {
+      "chunkId": "S02#s35~2",
+      "sourceId": "S02",
+      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Common > Functions",
+      "cjkRatio": 0.0106,
+      "length": 566,
+      "charRange": [
+        16716,
+        17282
+      ],
+      "text": "Helper function for malloc DMA capable memory for SPI driver.\n\n备注\n\nUsing this API AFTER spi_bus_initialize() is called, this API will take care of the cache and hardware alignment internally. To free/release memory allocated by this helper function, simply calling free().\n\n参数:\n\nhost_id -- [in] SPI peripheral who will using the memory\n\nsize -- [in] Size in bytes, the amount of memory to allocate\n\nextra_heap_caps -- [in] Extra heap caps based on MALLOC_CAP_DMA\n\n返回:\n\nPointer to the memory if allocated successfully\n\nNULL If allocation failed or bus not initialized"
+    },
+    {
+      "chunkId": "S02#s30",
+      "sourceId": "S02",
+      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Common > Header File",
+      "cjkRatio": 0.0,
+      "length": 352,
+      "charRange": [
+        13899,
+        14251
+      ],
+      "text": "components/esp_hal_gpspi/include/hal/spi_types.h\n\nThis header file can be included with:\n\n#include \"hal/spi_types.h\"\n\nThis header file is a part of the API provided by the esp_hal_gpspi component. To declare that your component depends on esp_hal_gpspi, add the following to your CMakeLists.txt:\n\nREQUIRES esp_hal_gpspi\n\nor\n\nPRIV_REQUIRES esp_hal_gpspi"
+    },
+    {
+      "chunkId": "S02#s34",
+      "sourceId": "S02",
+      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Common > Header File",
+      "cjkRatio": 0.0,
+      "length": 365,
+      "charRange": [
+        16337,
+        16702
+      ],
+      "text": "components/esp_driver_spi/include/driver/spi_common.h\n\nThis header file can be included with:\n\n#include \"driver/spi_common.h\"\n\nThis header file is a part of the API provided by the esp_driver_spi component. To declare that your component depends on esp_driver_spi, add the following to your CMakeLists.txt:\n\nREQUIRES esp_driver_spi\n\nor\n\nPRIV_REQUIRES esp_driver_spi"
+    },
+    {
+      "chunkId": "S02#s37",
+      "sourceId": "S02",
+      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Common > Macros",
+      "cjkRatio": 0.0025,
+      "length": 1598,
+      "charRange": [
+        21771,
+        23369
+      ],
+      "text": "SPI_MAX_DMA_LEN\n\nSPI_SWAP_DATA_TX(DATA, LEN)\n\nTransform unsigned integer of length <= 32 bits to the format which can be sent by the SPI driver directly.\n\nE.g. to send 9 bits of data, you can:\n\nuint16_t data = SPI_SWAP_DATA_TX(0x145, 9);\n\nThen points tx_buffer to &data.\n\n参数:\n\nDATA -- Data to be sent, can be uint8_t, uint16_t or uint32_t.\n\nLEN -- Length of data to be sent, since the SPI peripheral sends from the MSB, this helps to shift the data to the MSB.\n\nSPI_SWAP_DATA_RX(DATA, LEN)\n\nTransform received data of length <= 32 bits to the format of an unsigned integer.\n\nE.g. to transform the data of 15 bits placed in a 4-byte array to integer:\n\nuint16_t data = SPI_SWAP_DATA_RX(*(uint32_t*)t->rx_data, 15);\n\n参数:\n\nDATA -- Data to be rearranged, can be uint8_t, uint16_t or uint32_t.\n\nLEN -- Length of data received, since the SPI peripheral writes from the MSB, this helps to shift the data to the LSB.\n\nSPICOMMON_BUSFLAG_SLAVE\n\nInitialize I/O in slave mode.\n\nSPICOMMON_BUSFLAG_MASTER\n\nInitialize I/O in master mode.\n\nSPICOMMON_BUSFLAG_IOMUX_PINS\n\nCheck using iomux pins. Or indicates the pins are configured through the IO mux rather than GPIO matrix.\n\nSPICOMMON_BUSFLAG_GPIO_PINS\n\nForce the signals to be routed through GPIO matrix. Or indicates the pins are routed through the GPIO matrix.\n\nSPICOMMON_BUSFLAG_SCLK\n\nCheck existing of SCLK pin. Or indicates CLK line initialized.\n\nSPICOMMON_BUSFLAG_MISO\n\nCheck existing of MISO pin. Or indicates MISO line initialized.\n\nSPICOMMON_BUSFLAG_MOSI\n\nCheck existing of MOSI pin. Or indicates MOSI line initialized.\n\nSPICOMMON_BUSFLAG_DUAL"
+    },
+    {
+      "chunkId": "S02#s37~2",
+      "sourceId": "S02",
+      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Common > Macros",
+      "cjkRatio": 0.0,
+      "length": 700,
+      "charRange": [
+        21771,
+        22471
+      ],
+      "text": "Check MOSI and MISO pins can output. Or indicates bus able to work under DIO mode.\n\nSPICOMMON_BUSFLAG_WPHD\n\nCheck existing of WP and HD pins. Or indicates WP & HD pins initialized.\n\nSPICOMMON_BUSFLAG_QUAD\n\nCheck existing of MOSI/MISO/WP/HD pins as output. Or indicates bus able to work under QIO mode.\n\nSPICOMMON_BUSFLAG_IO4_IO7\n\nCheck existing of IO4~IO7 pins. Or indicates IO4~IO7 pins initialized.\n\nSPICOMMON_BUSFLAG_OCTAL\n\nCheck existing of MOSI/MISO/WP/HD/SPIIO4/SPIIO5/SPIIO6/SPIIO7 pins as output. Or indicates bus able to work under octal mode.\n\nSPICOMMON_BUSFLAG_NATIVE_PINS\n\nSPICOMMON_BUSFLAG_SLP_ALLOW_PD\n\nAllow to power down the peripheral during light sleep, and auto recover then."
+    },
+    {
+      "chunkId": "S02#s31",
+      "sourceId": "S02",
+      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Common > Structures",
+      "cjkRatio": 0.0,
+      "length": 330,
+      "charRange": [
+        14266,
+        14596
+      ],
+      "text": "struct spi_line_mode_t\n\nLine mode of SPI transaction phases: CMD, ADDR, DOUT/DIN.\n\nPublic Members\n\nuint8_t cmd_lines\n\nThe line width of command phase, e.g. 2-line-cmd-phase.\n\nuint8_t addr_lines\n\nThe line width of address phase, e.g. 1-line-addr-phase.\n\nuint8_t data_lines\n\nThe line width of data phase, e.g. 4-line-data-phase."
+    },
+    {
+      "chunkId": "S02#s36",
+      "sourceId": "S02",
+      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Common > Structures",
+      "cjkRatio": 0.0013,
+      "length": 1557,
+      "charRange": [
+        18892,
+        20449
+      ],
+      "text": "struct spi_bus_config_t\n\nThis is a configuration structure for a SPI bus.\n\nYou can use this structure to specify the GPIO pins of the bus. Normally, the driver will use the GPIO matrix to route the signals. An exception is made when all signals either can be routed through the IO_MUX or are -1. In that case, the IO_MUX is used. On ESP32, using GPIO matrix will bring about 25ns of input delay, which may cause incorrect read for >40MHz speeds.\n\n备注\n\nBe advised that the slave driver does not use the quadwp/quadhd lines and fields in spi_bus_config_t referring to these lines will be ignored and can thus safely be left uninitialized.\n\nPublic Members\n\nint mosi_io_num\n\n[0] GPIO pin for Master Out Slave In (=spi_d) signal, or -1 if not used.\n\nint data0_io_num\n\n[0] GPIO pin for spi data0 signal in dual/quad/octal mode, or -1 if not used.\n\nint miso_io_num\n\n[1] GPIO pin for Master In Slave Out (=spi_q) signal, or -1 if not used.\n\nint data1_io_num\n\n[1] GPIO pin for spi data1 signal in dual/quad/octal mode, or -1 if not used.\n\nint sclk_io_num\n\n[2] GPIO pin for SPI Clock signal, or -1 if not used.\n\nint quadwp_io_num\n\n[3] GPIO pin for WP (Write Protect) signal, or -1 if not used.\n\nint data2_io_num\n\n[3] GPIO pin for spi data2 signal in quad/octal mode, or -1 if not used.\n\nint quadhd_io_num\n\n[4] GPIO pin for HD (Hold) signal, or -1 if not used.\n\nint data3_io_num\n\n[4] GPIO pin for spi data3 signal in quad/octal mode, or -1 if not used.\n\nint data4_io_num\n\n[5] GPIO pin for spi data4 signal in octal mode, or -1 if not used.\n\nint data5_io_num"
+    },
+    {
+      "chunkId": "S02#s32",
+      "sourceId": "S02",
+      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Common > Type Definitions",
+      "cjkRatio": 0.0,
+      "length": 79,
+      "charRange": [
+        14617,
+        14696
+      ],
+      "text": "typedef soc_periph_spi_clk_src_t spi_clock_source_t\n\nType of SPI clock source."
+    },
+    {
+      "chunkId": "S02#s40",
+      "sourceId": "S02",
+      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Master > Header File",
+      "cjkRatio": 0.0,
+      "length": 365,
+      "charRange": [
+        24502,
+        24867
+      ],
+      "text": "components/esp_driver_spi/include/driver/spi_master.h\n\nThis header file can be included with:\n\n#include \"driver/spi_master.h\"\n\nThis header file is a part of the API provided by the esp_driver_spi component. To declare that your component depends on esp_driver_spi, add the following to your CMakeLists.txt:\n\nREQUIRES esp_driver_spi\n\nor\n\nPRIV_REQUIRES esp_driver_spi"
+    },
+    {
+      "chunkId": "S02#s44",
+      "sourceId": "S02",
+      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Master > Type Definitions",
+      "cjkRatio": 0.2895,
+      "length": 228,
+      "charRange": [
+        44111,
+        44339
+      ],
+      "text": "typedef void (*transaction_cb_t)(spi_transaction_t *trans)\n\ntypedef struct spi_device_t *spi_device_handle_t\n\nHandle for a device on a SPI bus.\n\n此文档对您有帮助吗？\n\n反馈已收到，谢谢！\n\n如果您有其他意见，欢迎填写乐鑫文档反馈表。\n\n我们重视您的反馈。\n\n您可以填写乐鑫文档反馈表告诉我们如何改进该文档。"
+    },
+    {
+      "chunkId": "S02#s16",
+      "sourceId": "S02",
+      "sectionPath": "SPI 主机驱动程序 > SPI 传输事务 > 获取总线",
+      "cjkRatio": 0.5752,
+      "length": 153,
+      "charRange": [
+        5171,
+        5324
+      ],
+      "text": "若需连续发送专门的 SPI 传输事务以提高效率，可采用获取总线的方式。获取总线后，与其他设备间的传输事务（包括轮询传输事务或中断传输事务）将处于待处理状态，直到总线被释放。要获取和释放总线，请调用函数 spi_device_acquire_bus() 和 spi_device_release_bus()。"
+    },
+    {
+      "chunkId": "S02#s29",
+      "sourceId": "S02",
+      "sectionPath": "SPI 主机驱动程序 > 应用示例",
+      "cjkRatio": 0.4082,
+      "length": 196,
+      "charRange": [
+        13665,
+        13861
+      ],
+      "text": "peripherals/spi_master/hd_eeprom 演示了如何使用 SPI 主机驱动程序的半双工模式来读写 AT93C46D EEPROM（8 位模式）。\n\nperipherals/spi_master/lcd 演示了如何使用 SPI 主驱动程序在 LCD 上显示动画。借助 DMA，可以实现并行渲染和刷新。该示例还说明了如何使用 SPI 事务钩子函数来驱动 D/C 信号电平。"
+    },
+    {
+      "chunkId": "S03#s66~2",
+      "sourceId": "S03",
+      "sectionPath": "堆内存分配 > API 参考 - 初始化 > Functions",
+      "cjkRatio": 0.0054,
+      "length": 1485,
+      "charRange": [
+        24111,
+        25596
+      ],
+      "text": "Existing region: 0x1000 <-> 0x3000\nNew region: 0x1000 <-> 0x3000 (Allowed)\nNew region: 0x1000 <-> 0x2000 (Allowed)\nNew region: 0x0000 <-> 0x1000 (Allowed)\nNew region: 0x3000 <-> 0x4000 (Allowed)\nNew region: 0x0000 <-> 0x2000 (NOT Allowed)\nNew region: 0x0000 <-> 0x4000 (NOT Allowed)\nNew region: 0x1000 <-> 0x4000 (NOT Allowed)\nNew region: 0x2000 <-> 0x4000 (NOT Allowed)\n\n参数:\n\nstart -- Start address of new region.\n\nend -- End address of new region.\n\n返回:\n\nESP_OK on success, ESP_ERR_INVALID_ARG if a parameter is invalid, ESP_ERR_NOT_FOUND if the specified start address doesn't reside in a known region, or any error returned by heap_caps_add_region_with_caps().\n\nesp_err_t heap_caps_add_region_with_caps(const uint32_t caps[], intptr_t start, intptr_t end)\n\nAdd a region of memory to the collection of heaps at runtime, with custom capabilities.\n\nSimilar to heap_caps_add_region(), only custom memory capabilities are specified by the caller.\n\n备注\n\nPlease refer to following example for memory regions allowed for addition to heap based on an existing region (address range for demonstration purpose only):\n\nExisting region: 0x1000 <-> 0x3000\nNew region: 0x1000 <-> 0x3000 (Allowed)\nNew region: 0x1000 <-> 0x2000 (Allowed)\nNew region: 0x0000 <-> 0x1000 (Allowed)\nNew region: 0x3000 <-> 0x4000 (Allowed)\nNew region: 0x0000 <-> 0x2000 (NOT Allowed)\nNew region: 0x0000 <-> 0x4000 (NOT Allowed)\nNew region: 0x1000 <-> 0x4000 (NOT Allowed)\nNew region: 0x2000 <-> 0x4000 (NOT Allowed)\n\n参数:"
+    },
+    {
+      "chunkId": "S03#s66~3",
+      "sourceId": "S03",
+      "sectionPath": "堆内存分配 > API 参考 - 初始化 > Functions",
+      "cjkRatio": 0.0039,
+      "length": 518,
+      "charRange": [
+        25598,
+        26116
+      ],
+      "text": "caps -- Ordered array of capability masks for the new region, in order of priority. Must have length SOC_MEMORY_TYPE_NO_PRIOS. Does not need to remain valid after the call returns.\n\nstart -- Start address of new region.\n\nend -- End address of new region.\n\n返回:\n\nESP_OK on success\n\nESP_ERR_INVALID_ARG if a parameter is invalid\n\nESP_ERR_NO_MEM if no memory to register new heap.\n\nESP_ERR_INVALID_SIZE if the memory region is too small to fit a heap\n\nESP_FAIL if region overlaps the start and/or end of an existing region"
+    },
+    {
+      "chunkId": "S03#s65",
+      "sourceId": "S03",
+      "sectionPath": "堆内存分配 > API 参考 - 初始化 > Header File",
+      "cjkRatio": 0.0,
+      "length": 117,
+      "charRange": [
+        22404,
+        22521
+      ],
+      "text": "components/heap/include/esp_heap_caps_init.h\n\nThis header file can be included with:\n\n#include \"esp_heap_caps_init.h\""
+    },
+    {
+      "chunkId": "S03#s61~5",
+      "sourceId": "S03",
+      "sectionPath": "堆内存分配 > API 参考 - 堆分配 > Functions",
+      "cjkRatio": 0.005,
+      "length": 1594,
+      "charRange": [
+        10507,
+        12101
+      ],
+      "text": "This allows to detect local lows of the minimum_free_bytes value that wouldn't be detected otherwise.\n\n返回:\n\nesp_err_t ESP_OK if the function executed properly ESP_FAIL if called when monitoring already active\n\nesp_err_t heap_caps_monitor_local_minimum_free_size_stop(void)\n\nStop monitoring the value of minimum_free_bytes. After this call the minimum_free_bytes value calculated from startup will be returned in heap_caps_get_info and heap_caps_get_minimum_free_size.\n\n返回:\n\nesp_err_t ESP_OK if the function executed properly ESP_FAIL if called when monitoring not active\n\nvoid heap_caps_get_info(multi_heap_info_t *info, uint32_t caps)\n\nGet heap info for all regions with the given capabilities.\n\nCalls multi_heap_info() on all heaps which share the given capabilities. The information returned is an aggregate across all matching heaps. The meanings of fields are the same as defined for multi_heap_info_t, except that minimum_free_bytes has the same caveats described in heap_caps_get_minimum_free_size().\n\n参数:\n\ninfo -- Pointer to a structure which will be filled with relevant heap metadata.\n\ncaps -- Bitwise OR of MALLOC_CAP_* flags indicating the type of memory\n\nvoid heap_caps_print_heap_info(uint32_t caps)\n\nPrint a summary of all memory with the given capabilities.\n\nCalls multi_heap_info on all heaps which share the given capabilities, and prints a two-line summary for each, then a total summary.\n\n参数:\n\ncaps -- Bitwise OR of MALLOC_CAP_* flags indicating the type of memory\n\nbool heap_caps_check_integrity_all(bool print_errors)\n\nCheck integrity of all heap memory in the system."
+    },
+    {
+      "chunkId": "S03#s61~8",
+      "sourceId": "S03",
+      "sectionPath": "堆内存分配 > API 参考 - 堆分配 > Functions",
+      "cjkRatio": 0.0075,
+      "length": 1592,
+      "charRange": [
+        14908,
+        16500
+      ],
+      "text": "The variable parameters are bitwise OR of MALLOC_CAP_* flags indicating the type of memory. This API prefers to allocate memory with the first parameter. If failed, allocate memory with the next parameter. It will try in this order until allocating a chunk of memory successfully or fail to allocate memories with any of the parameters.\n\n参数:\n\nsize -- Size, in bytes, of the amount of memory to allocate\n\nnum -- Number of variable parameters\n\n返回:\n\nA pointer to the memory allocated on success, NULL on failure\n\nvoid *heap_caps_realloc_prefer(void *ptr, size_t size, size_t num, ...)\n\nReallocate a chunk of memory as preference in decreasing order.\n\n参数:\n\nptr -- Pointer to previously allocated memory, or NULL for a new allocation.\n\nsize -- Size of the new buffer requested, or 0 to free the buffer.\n\nnum -- Number of variable parameters\n\n返回:\n\nPointer to a new buffer of size 'size', or NULL if allocation failed.\n\nvoid *heap_caps_calloc_prefer(size_t n, size_t size, size_t num, ...)\n\nAllocate a chunk of memory as preference in decreasing order.\n\n参数:\n\nn -- Number of continuing chunks of memory to allocate\n\nsize -- Size, in bytes, of a chunk of memory to allocate\n\nnum -- Number of variable parameters\n\n返回:\n\nA pointer to the memory allocated on success, NULL on failure\n\nvoid heap_caps_dump(uint32_t caps)\n\nDump the full structure of all heaps with matching capabilities.\n\nPrints a large amount of output to serial (because of locking limitations, the output bypasses stdout/stderr). For each (variable sized) block in each matching heap, the following output is printed on a single line:"
+    },
+    {
+      "chunkId": "S03#s60",
+      "sourceId": "S03",
+      "sectionPath": "堆内存分配 > API 参考 - 堆分配 > Header File",
+      "cjkRatio": 0.0,
+      "length": 107,
+      "charRange": [
+        4262,
+        4369
+      ],
+      "text": "components/heap/include/esp_heap_caps.h\n\nThis header file can be included with:\n\n#include \"esp_heap_caps.h\""
+    },
+    {
+      "chunkId": "S03#s63",
+      "sourceId": "S03",
+      "sectionPath": "堆内存分配 > API 参考 - 堆分配 > Macros",
+      "cjkRatio": 0.0,
+      "length": 1574,
+      "charRange": [
+        19157,
+        20731
+      ],
+      "text": "HEAP_IRAM_ATTR\n\nMALLOC_CAP_EXEC\n\nFlags to indicate the capabilities of the various memory systems.\n\nMemory must be able to run executable code\n\nMALLOC_CAP_32BIT\n\nMemory must allow for aligned 32-bit data accesses.\n\nMALLOC_CAP_8BIT\n\nMemory must allow for 8/16/...-bit data accesses.\n\nMALLOC_CAP_DMA\n\nMemory must be able to accessed by DMA.\n\nMALLOC_CAP_PID2\n\nMemory must be mapped to PID2 memory space (PIDs are not currently used)\n\nMALLOC_CAP_PID3\n\nMemory must be mapped to PID3 memory space (PIDs are not currently used)\n\nMALLOC_CAP_PID4\n\nMemory must be mapped to PID4 memory space (PIDs are not currently used)\n\nMALLOC_CAP_PID5\n\nMemory must be mapped to PID5 memory space (PIDs are not currently used)\n\nMALLOC_CAP_PID6\n\nMemory must be mapped to PID6 memory space (PIDs are not currently used)\n\nMALLOC_CAP_PID7\n\nMemory must be mapped to PID7 memory space (PIDs are not currently used)\n\nMALLOC_CAP_SPIRAM\n\nMemory must be in SPI RAM.\n\nMALLOC_CAP_INTERNAL\n\nMemory must be internal; specifically it should not disappear when flash/spiram cache is switched off.\n\nMALLOC_CAP_DEFAULT\n\nMemory can be returned in a non-capability-specific memory allocation (e.g. malloc(), calloc()) call.\n\nMALLOC_CAP_IRAM_8BIT\n\nMemory must be in IRAM and allow unaligned access.\n\nMALLOC_CAP_RETENTION\n\nMemory must be able to accessed by retention DMA.\n\nMALLOC_CAP_RTCRAM\n\nMemory must be in RTC fast memory.\n\nMALLOC_CAP_SPM\n\nMemory must be in SPM memory.\n\nMALLOC_CAP_TCM\n\nMALLOC_CAP_DMA_DESC_AHB\n\nMemory must be capable of containing AHB DMA descriptors.\n\nMALLOC_CAP_DMA_DESC_AXI"
+    },
+    {
+      "chunkId": "S03#s62",
+      "sourceId": "S03",
+      "sectionPath": "堆内存分配 > API 参考 - 堆分配 > Structures",
+      "cjkRatio": 0.0,
+      "length": 526,
+      "charRange": [
+        18620,
+        19146
+      ],
+      "text": "struct walker_heap_info\n\nStructure used to store heap related data passed to the walker callback function.\n\nPublic Members\n\nintptr_t start\n\nStart address of the heap in which the block is located.\n\nintptr_t end\n\nEnd address of the heap in which the block is located.\n\nstruct walker_block_info\n\nStructure used to store block related data passed to the walker callback function.\n\nPublic Members\n\nvoid *ptr\n\nPointer to the block data.\n\nsize_t size\n\nThe size of the block.\n\nbool used\n\nBlock status. True: used, False: free."
+    },
+    {
+      "chunkId": "S03#s64",
+      "sourceId": "S03",
+      "sectionPath": "堆内存分配 > API 参考 - 堆分配 > Type Definitions",
+      "cjkRatio": 0.0,
+      "length": 1128,
+      "charRange": [
+        21245,
+        22373
+      ],
+      "text": "typedef void (*esp_alloc_failed_hook_t)(size_t size, uint32_t caps, const char *function_name)\n\ncallback called when an allocation operation fails, if registered\n\nParam size:\n\nin bytes of failed allocation\n\nParam caps:\n\ncapabilities requested of failed allocation\n\nParam function_name:\n\nfunction which generated the failure\n\ntypedef struct walker_heap_info walker_heap_into_t\n\nStructure used to store heap related data passed to the walker callback function.\n\ntypedef struct walker_block_info walker_block_info_t\n\nStructure used to store block related data passed to the walker callback function.\n\ntypedef bool (*heap_caps_walker_cb_t)(walker_heap_into_t heap_info, walker_block_info_t block_info, void *user_data)\n\nFunction callback used to get information of memory block during calls to heap_caps_walk or heap_caps_walk_all.\n\nParam heap_info:\n\nSee walker_heap_into_t\n\nParam block_info:\n\nSee walker_block_info_t\n\nParam user_data:\n\nOpaque pointer to user defined data\n\nReturn:\n\nTrue to proceed with the heap traversal False to stop the traversal of the current heap and continue with the traversal of the next heap (if any)"
+    },
+    {
+      "chunkId": "S03#s67",
+      "sourceId": "S03",
+      "sectionPath": "堆内存分配 > API 参考 - 多堆 API",
+      "cjkRatio": 0.6087,
+      "length": 46,
+      "charRange": [
+        26136,
+        26182
+      ],
+      "text": "（注意：堆属性分配器在内部使用多堆 API，而多数 IDF 程序不需要直接调用此 API。）"
+    },
+    {
+      "chunkId": "S03#s69~2",
+      "sourceId": "S03",
+      "sectionPath": "堆内存分配 > API 参考 - 多堆 API > Functions",
+      "cjkRatio": 0.0079,
+      "length": 1528,
+      "charRange": [
+        27790,
+        29318
+      ],
+      "text": "Semantics are the same as standard realloc(), only the argument 'p' must be NULL or have been allocated in the specified heap.\n\n参数:\n\nheap -- Handle to a registered heap.\n\np -- NULL, or a pointer previously returned from multi_heap_malloc() or multi_heap_realloc() for the same heap.\n\nsize -- Desired new size for buffer.\n\n返回:\n\nNew buffer of 'size' containing contents of 'p', or NULL if reallocation failed.\n\nsize_t multi_heap_get_allocated_size(multi_heap_handle_t heap, void *p)\n\nReturn the size that a particular pointer was allocated with.\n\n参数:\n\nheap -- Handle to a registered heap.\n\np -- Pointer, must have been previously returned from multi_heap_malloc() or multi_heap_realloc() for the same heap.\n\n返回:\n\nSize of the memory allocated at this block. May be more than the original size argument, due to padding and minimum block sizes.\n\nmulti_heap_handle_t multi_heap_register(void *start, size_t size)\n\nRegister a new heap for use.\n\nThis function initialises a heap at the specified address, and returns a handle for future heap operations.\n\nThere is no equivalent function for deregistering a heap - if all blocks in the heap are free, you can immediately start using the memory for other purposes.\n\n参数:\n\nstart -- Start address of the memory to use for a new heap.\n\nsize -- Size (in bytes) of the new heap.\n\n返回:\n\nHandle of a new heap ready for use, or NULL if the heap region was too small to be initialised.\n\nvoid multi_heap_set_lock(multi_heap_handle_t heap, void *lock)\n\nAssociate a private lock pointer with a heap."
+    },
+    {
+      "chunkId": "S03#s69~3",
+      "sourceId": "S03",
+      "sectionPath": "堆内存分配 > API 参考 - 多堆 API > Functions",
+      "cjkRatio": 0.0075,
+      "length": 1592,
+      "charRange": [
+        29320,
+        30912
+      ],
+      "text": "The lock argument is supplied to the MULTI_HEAP_LOCK() and MULTI_HEAP_UNLOCK() macros, defined in multi_heap_platform.h.\n\nThe lock in question must be recursive.\n\nWhen the heap is first registered, the associated lock is NULL.\n\n参数:\n\nheap -- Handle to a registered heap.\n\nlock -- Optional pointer to a locking structure to associate with this heap.\n\nvoid multi_heap_dump(multi_heap_handle_t heap)\n\nDump heap information to stdout.\n\nFor debugging purposes, this function dumps information about every block in the heap to stdout.\n\n参数:\n\nheap -- Handle to a registered heap.\n\nbool multi_heap_check(multi_heap_handle_t heap, bool print_errors)\n\nCheck heap integrity.\n\nWalks the heap and checks all heap data structures are valid. If any errors are detected, an error-specific message can be optionally printed to stderr. Print behaviour can be overridden at compile time by defining MULTI_CHECK_FAIL_PRINTF in multi_heap_platform.h.\n\n备注\n\nThis function is not thread-safe as it sets a global variable with the value of print_errors.\n\n参数:\n\nheap -- Handle to a registered heap.\n\nprint_errors -- If true, errors will be printed to stderr.\n\n返回:\n\ntrue if heap is valid, false otherwise.\n\nsize_t multi_heap_free_size(multi_heap_handle_t heap)\n\nReturn free heap size.\n\nReturns the number of bytes available in the heap.\n\nEquivalent to the total_free_bytes member returned by multi_heap_get_heap_info().\n\nNote that the heap may be fragmented, so the actual maximum size for a single malloc() may be lower. To know this size, see the largest_free_block member returned by multi_heap_get_heap_info().\n\n参数:"
+    },
+    {
+      "chunkId": "S03#s68",
+      "sourceId": "S03",
+      "sectionPath": "堆内存分配 > API 参考 - 多堆 API > Header File",
+      "cjkRatio": 0.0,
+      "length": 101,
+      "charRange": [
+        26198,
+        26299
+      ],
+      "text": "components/heap/include/multi_heap.h\n\nThis header file can be included with:\n\n#include \"multi_heap.h\""
+    }
+  ]
+}
