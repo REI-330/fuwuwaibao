@@ -16,7 +16,7 @@ fuwuwaibao/
 │   ├── mcp/          MCP 服务（3 个只读工具，stdio + Streamable HTTP）
 │   ├── tests/        契约测试（node:test）
 │   └── evidence/     MCP 验证证据
-├── knowledge/        ★ 知识库（22 来源 / 494 段 / 63 节点 226 边 / 38 页 Wiki）
+├── knowledge/        ★ 知识库（26 来源 / 1757 段 / 63 节点 226 边 / 38 页 Wiki）
 ├── knowledge-cn/     第二代语料（中国官方来源，采集完成、审核 0 通过）
 ├── knowledge-v1/     第一代语料（O*NET + ESCO，已停用）
 ├── pages/            按页面拆分的阅读镜像（不是构建源）
@@ -83,10 +83,11 @@ npm run mcp:verify-http                 # MCP ：HTTP 链路，含「两条链�
 - **路径引擎未实现**：`POST /api/v1/career-path/generate` 返回 501
 - **行动与训练空白**：`/actions` 只有"筹备中"；`/work-map`、`/catalog` 仍是 redirect
 - **未实现接口一律 501**（不假装可用）：auth / 简历解析 / chat / career-matches / growth-records
-- **知识库**：`publishedAt` 0/22；中文占比 12.8%；60% 标注未人工复核；两处评测脚本断链（详见 `knowledge/README.md`）
+- **知识库**：`publishedAt` 0/26；中文占比 46.4%（中文字符口径）；60% 图谱标注未人工复核（174/289）
+- **素材可复现性**：raw 快照 sha256 实测 **20/25 与登记值一致**，5 份不一致（`S15`/`S18`/`S19`/`S20`/`S22`，成因未定，详见 `knowledge/README.md`）
 
 ## 数据与密钥
 
 - **`knowledge/eval/.env` 含 API key，不入库**（模板见 `.env.example`）。
-- 大体积原始数据不入库：`knowledge/import/raw/`（116MB）、`knowledge-v1/data/`（404MB）、`knowledge-cn/data/sources/`（38MB）、向量缓存。
+- 大体积原始数据不入库：`knowledge/import/raw/`（111MB）、`knowledge-v1/data/`（403MB）、`knowledge-cn/data/sources/`（38MB）、向量缓存。
 - 第三方源码克隆（WeKnora、Tabiya 数据集）不入库，用官方仓库还原。

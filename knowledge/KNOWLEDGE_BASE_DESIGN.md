@@ -1,6 +1,6 @@
 # 职业导航知识库设计：图谱 + Wiki 三层架构
 
-> 状态：**§1–§7 已由离线流水线实现**（真实资料已收集：22 份来源 / 494 chunk；导出 `knowledge/exports/career-graph.json`，kbVersion `2026.09.15`、graphVersion `0.1.0`、status `pipeline-export`，含 63 节点 / 226 边 / 38 Wiki 页 / 24 道评测题；检索与评测结果属**原型模拟**水平，命中率仍待改进）；**§8 MCP 工具契约已实现并实际验证**（stdio 与 Streamable HTTP 双传输，见 §8.2 与 §12）；**§9 前端图谱视图已实现并实际验证**。本文档描述目标结构与契约，实现进度以 `knowledge/evaluations/` 和各步骤产出为准。
+> 状态：**§1–§7 已由离线流水线实现**（真实资料已收集：26 份来源 / 1757 chunk；导出 `knowledge/exports/career-graph.json`，kbVersion `2026.09.15`、graphVersion `0.1.0`、status `pipeline-export`，含 63 节点 / 226 边 / 38 Wiki 页 / 24 道评测题；检索与评测结果属**原型模拟**水平，命中率仍待改进）；**§8 MCP 工具契约已实现并实际验证**（stdio 与 Streamable HTTP 双传输，见 §8.2 与 §12）；**§9 前端图谱视图已实现并实际验证**。本文档描述目标结构与契约，实现进度以 `knowledge/evaluations/` 和各步骤产出为准。
 >
 > 已确定的两个方向性决定（均取 A 方案）：
 > 1. **Wiki 页生成**：离线 LLM 编译 + 人工审核为主，`llm-draft` 兜底。
@@ -408,7 +408,7 @@ CSS 需要 `transform-box: view-box; transform-origin: 0 0;` 才能让上式成�
 | 1 | 百宝箱企业版账号的知识库导入权限与检索接口 | 决定对照实验能否做 | **部分核验**：接入方式已实测为只有 `sse` / `streamableHttp`（无 stdio，见 §8.2）；知识库导入权限与配额、检索中间态（命中 chunk id / 分值 / Top-K）**仍未核验**，故对照实验暂不做 |
 | 2 | MCP server 用 TypeScript 还是 Python | 决定 `backend/` 目录与三个 npm 脚本的处理方式 | **已定：TypeScript**（与 `DEMO_PROTOTYPE_PLAN.md:183` 一致）。已落地在 `frontend/frotent/frontend1/mcp/` 并跑通验证。`backend/` 三脚本随之悬空，待删或补 |
 | 3 | `GraphNode.kind` 是否拓宽到 8 类（新增 `task` / `trend` / `credential` / `domain`） | 决定这四类节点能否上图；未拓宽时前端适配层必须显式过滤 | **已拓宽**：8 类已进 `lib/client/career-graph.ts` 的 `GraphNode.kind`，并由前端单测覆盖（`tests/career-graph-export.test.ts` 5/5 通过、`tsc --noEmit` 干净） |
-| 4 | 来源资料收集进度 | 是全部下游工作的输入 | **已完成**：22 份公开来源登记并抓取（494 个 chunk、433699 字符），见 `knowledge/sources/sources.json` / `knowledge/chunks/chunks.jsonl` |
+| 4 | 来源资料收集进度 | 是全部下游工作的输入 | **已完成**：26 份登记来源（25 份抓取快照 + S26 国标重组导入），1757 个 chunk / 845,250 字符，见 `knowledge/sources/sources.json` / `knowledge/chunks/chunks.jsonl` |
 | 5 | 是否保留前置关系的虚线语汇 | 仅影响视觉，不影响数据 | 已按配色方案实现，可回退 |
 | 6 | 学习单元（`knowledge`）与技能/职业之间缺一条关系类型 | §3.2 八种边里没有以 `knowledge` 为 `from` 的边，学习单元只能靠 `evidenced_by` 挂到原文，无法进入学习路径图 | 未定：新增 `covers` / `learned_by`，或复用 `prerequisite` 并放开 from 类型 |
 
@@ -427,9 +427,9 @@ CSS 需要 `transform-box: view-box; transform-origin: 0 0;` 才能让上式成�
 
 | 部分 | 状态 | 依据 |
 |---|---|---|
-| §1–§7 知识库方法 | **实际实现 + 部分实际验证（结果属原型模拟）** | 管线 01→11 全链路退出码 0（第 09 步硬约束 12/12 通过、pending 0、warn 0），导出 `knowledge/exports/career-graph.json`（`kbVersion 2026.09.15` / `status pipeline-export`，22 来源 / 494 chunk / 63 节点 / 226 边）；24 题评测已跑（`knowledge/evaluations/`），但检索命中率仍低（消融 BM25 2/18，含图 +1 跳 / wiki 层均 3/18），属**原型模拟**水平的初步结果 |
+| §1–§7 知识库方法 | **实际实现 + 部分实际验证（结果属原型模拟）** | 管线 01→11 全链路退出码 0（第 09 步硬约束 13/13 通过、pending 0、warn 0），导出 `knowledge/exports/career-graph.json`（`kbVersion 2026.09.15` / `status pipeline-export`，26 来源 / 1757 chunk / 63 节点 / 226 边）；24 题评测已跑（`knowledge/evaluations/`），但检索命中率仍低（2026-09-29 复跑：消融 BM25 1/18，含图 +1 跳 / wiki 层均 6/18），属**原型模拟**水平的初步结果 |
 | §8 MCP 工具契约 | **实际实现 + 实际验证** | `npm run mcp:verify`（stdio，14/14 断言）与 `npm run mcp:verify-http`（Streamable HTTP，25/25 断言）均退出码 0，证据 `evidence/mcp-verify.json`、`evidence/mcp-http-verify.json`；HTTP 入口经公网隧道再跑同一套断言同样 25/25（`evidence/mcp-public-verify.json`），即**公网可达** |
 | §9 前端图谱动画匹配 | **实际实现 + 实际验证** | `npm test` 5/5 通过（`tests/career-graph-export.test.ts`），`tsc --noEmit` 无新增错误 |
 | §10 检索归属与边界 | **设计方案**（依赖 §1–§7 落地） | 待真实资料与百宝箱账号 |
 
-**注意**：MCP 的「实际验证」指的是**协议链路与双端同源**已验证 —— 即「客户端能发现工具、能调用、能拿到图推理结果，且结果与网页同源」。它**不**代表知识内容的效果已经达标（底层虽已是自建管线导出的真实数据：22 来源 / 494 chunk / 63 节点 / 226 边，但 24 题检索命中率仍处原型水平，见上表第 1 行），也**不**代表百宝箱平台已经连入：公开 URL 上的三次调用均由本机发起，平台侧至今未提交过自部署 MCP 配置、未发起过任何调用。只有拿到平台侧的 `tools/list` / `tools/call` 返回，才能把这一项升级为「已实现 MCP 平台接入」。
+**注意**：MCP 的「实际验证」指的是**协议链路与双端同源**已验证 —— 即「客户端能发现工具、能调用、能拿到图推理结果，且结果与网页同源」。它**不**代表知识内容的效果已经达标（底层虽已是自建管线导出的真实数据：26 来源 / 1757 chunk / 63 节点 / 226 边，但 24 题检索命中率仍处原型水平，见上表第 1 行），也**不**代表百宝箱平台已经连入：公开 URL 上的三次调用均由本机发起，平台侧至今未提交过自部署 MCP 配置、未发起过任何调用。只有拿到平台侧的 `tools/list` / `tools/call` 返回，才能把这一项升级为「已实现 MCP 平台接入」。

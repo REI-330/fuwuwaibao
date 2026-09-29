@@ -6,7 +6,7 @@
 > - 前端知识图谱聚焦动画（`components/work-map/knowledge-graph.tsx`）、图谱纯函数模块（`lib/client/graph-view.ts`）与配套样式已写入代码，并已通过单测：`npm test` 5/5 通过（`tests/career-graph-export.test.ts`），`npx tsc --noEmit` 无新增错误（仅剩 `vite.config.ts` 两处历史 TS2307）。
 > - **MCP server 已实现并已实际跑通**：位于 `frontend/frotent/frontend1/mcp/`，`npm run mcp:verify` 退出码 0，`tools/list` + `tools/call × 3` 均有原始输出存档于 `frontend/frotent/frontend1/evidence/mcp-verify.json`（详见第 7 节）。
 > - **MCP server 的 HTTP 传输入口已实现，并已验证公网可达**：`mcp/http.ts` 暴露 Streamable HTTP 的 `POST /mcp` 与探活 `GET /health`，`npm run mcp:verify-http` 退出码 0（25/25 断言），证据 `frontend/frotent/frontend1/evidence/mcp-http-verify.json`；同一套断言再经第三方公网隧道、用公开 HTTPS 地址跑一遍（`MCP_HTTP_VERIFY_TARGET=https://<隧道域名> npm run mcp:verify-http`）同样退出码 0，证据 `frontend/frotent/frontend1/evidence/mcp-public-verify.json`（详见第 7 节）。**注意：这些请求的发起端仍是本机**，只证明「服务在公网上可达」，不等于平台侧真的连上了。
-> - **真实知识库与三层数据已完成**：L0 证据层 22 份来源 / 494 chunk（约 43.4 万字符），L1 图谱导出 `knowledge/exports/career-graph.json`（kbVersion `2026.09.15`、graphVersion `0.1.0`、status `pipeline-export`，63 节点 / 226 边 / 494 chunk），L2 Wiki 38 页（reviewed 29 / llm-draft 9）；契约样例 `knowledge/exports/career-graph.sample.json` 仍保留作对照。检索与评测结果属**原型模拟**水平（消融命中率约 3/18），尚需改进。
+> - **真实知识库与三层数据已完成**：L0 证据层 26 份登记来源 / 1757 chunk（845,250 字符，其中 25 份有 raw 快照），L1 图谱导出 `knowledge/exports/career-graph.json`（kbVersion `2026.09.15`、graphVersion `0.1.0`、status `pipeline-export`，63 节点 / 226 边 / 1757 chunk），L2 Wiki 38 页（reviewed 29 / llm-draft 9）；契约样例 `knowledge/exports/career-graph.sample.json` 仍保留作对照。检索与评测结果属**原型模拟**水平（消融命中率约 3/18），尚需改进。
 > - 仍未实现 / 未确认：**百宝箱平台侧的实际连入**（自部署 MCP 表单尚未提交，平台至今未发起过任何调用）、多端发布验证。百宝箱的知识库导入权限与检索中间态（命中 chunk id / 分值 / Top-K）仍未能核验，必须覆盖的发布端也仍需落实。
 
 ## 0. 1–2 天时间约束下的取舍
@@ -133,8 +133,8 @@ messages、conversationId、数据模式
 
 | 层 | 职责 | 产物 | 当前状态 |
 |---|---|---|---|
-| L0 证据层 | 可引用的来源与检索分块（原文位置、摘要、版本） | 来源登记 + 分块 | 已实现：22 份公开来源、494 个 chunk（433699 字符），见 `knowledge/sources/`、`knowledge/chunks/chunks.jsonl` |
-| L1 图谱层 | 职业 / 技能 / 知识单元 / 任务 / 工具 / 趋势 / 资质及其之间的边，每条边带 `sourceRefs` 与标注方式 | `knowledge/exports/career-graph.json` | 已实现：63 节点 / 226 边 / 494 chunk / 22 来源（`kbVersion 2026.09.15`，第 09 步硬约束 12/12 通过）；`career-graph.sample.json` 保留为契约样例 |
+| L0 证据层 | 可引用的来源与检索分块（原文位置、摘要、版本） | 来源登记 + 分块 | 已实现：26 份登记来源（25 份有 raw 快照）、1757 个 chunk（845,250 字符），见 `knowledge/sources/`、`knowledge/chunks/chunks.jsonl` |
+| L1 图谱层 | 职业 / 技能 / 知识单元 / 任务 / 工具 / 趋势 / 资质及其之间的边，每条边带 `sourceRefs` 与标注方式 | `knowledge/exports/career-graph.json` | 已实现：63 节点 / 226 边 / 1757 chunk / 26 来源（`kbVersion 2026.09.15`，第 09 步硬约束 13/13 通过）；`career-graph.sample.json` 保留为契约样例 |
 | L2 Wiki 页 | 按模板离线编译、人工分级审核后进入生产检索的百科式页面 | `wikiPages` 登记与 review 状态 | 已实现：38 页（reviewed 29 / llm-draft 9），见 `knowledge/wiki/index.json` |
 
 两条铁律：
@@ -232,7 +232,7 @@ MCP 与网页都消费相同知识数据，减少重复开发；如百宝箱采�
 > | Header | 无 |
 > | 鉴权方式 | 不需要授权 |
 > | 工具 | `search_career_knowledge` / `get_skill_gap` / `get_career_graph_view`（`tools/list` 实测 3 个） |
-> | 数据版本 | kbVersion `2026.09.15` / graphVersion `0.1.0`（63 节点 / 226 边 / 494 chunk / 22 来源） |
+> | 数据版本 | kbVersion `2026.09.15` / graphVersion `0.1.0`（63 节点 / 226 边 / 1757 chunk / 26 来源） |
 >
 > **URL 现状：`https://careergraph-fuwuwaibao.loca.lt/mcp`**（localtunnel 固定子域名，2026-09-15 换掉原先的随机域名 `legal-cloths-sink.loca.lt`）。地址本身固定，但**仍是隧道**：承载它的 `npx localtunnel --port 8787 --subdomain careergraph-fuwuwaibao` 进程一停，地址就失效，平台侧调用随即全部失败。因此它是「可提交的过渡地址」，不是终态 —— 终态应是把 `mcp/http.ts` 部署到公网主机或自有域名。
 >

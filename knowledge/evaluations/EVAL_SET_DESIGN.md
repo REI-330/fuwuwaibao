@@ -2,6 +2,8 @@
 
 - 版本：v1，2026-09-17
 - 适用语料：`knowledge/chunks/chunks.jsonl`（494 段 / 22 来源）+ `knowledge/graph/graph.json`（63 节点 / 226 边）
+- ⚠ **口径提示**：本文是 **v1 设计快照**，其中的容量核算按 494 段语料算出。语料已于 2026-09-27
+  中文化重组为 **1757 段 / 26 来源**（现役规模见 `knowledge/README.md`），配额与容量数字需按新语料重算。
 - 配套脚本：`knowledge/eval/build_candidate_pool.py`（候选池与容量）、`knowledge/eval/validate_questionset.py`（校验器）
 
 ## 0. 为什么要划分：先承认现在的问题
