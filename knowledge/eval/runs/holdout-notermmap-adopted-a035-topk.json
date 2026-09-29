@@ -1,0 +1,1138 @@
+{
+  "schema": "career-graph-adopted-retrieval/v1",
+  "generatedAt": "2026-09-29T17:09:38+0800",
+  "questions": "knowledge\\evaluations\\questions-holdout.json",
+  "retriever": {
+    "type": "fusion+llm-rerank",
+    "alpha_bm25": 0.35,
+    "topk": 3,
+    "rerankCandidates": 10,
+    "rerankCache": "knowledge\\eval\\runs\\holdout-rerank-cache.json",
+    "components": [
+      "bm25 (lib/graph.mjs)",
+      "dense (TEI Qwen3-Embedding-0.6B)",
+      "LLM listwise rerank (claude-sonnet-4.6)"
+    ]
+  },
+  "metrics": [
+    {
+      "split": "holdout",
+      "n": 35,
+      "hit": 30,
+      "hitRate": 0.8571,
+      "hitAt1": 0.7714,
+      "refsInSlots": 50,
+      "slots": 105,
+      "precisionAtK": 0.4762
+    },
+    {
+      "split": "ALL",
+      "n": 35,
+      "hit": 30,
+      "hitRate": 0.8571,
+      "hitAt1": 0.7714,
+      "refsInSlots": 50,
+      "slots": 105,
+      "precisionAtK": 0.4762
+    }
+  ],
+  "refusedQuestions": 15,
+  "refusalMetric": "empty（本集无拒答题或阈值未定）",
+  "perQuestion": [
+    {
+      "questionId": "XC01",
+      "split": "holdout",
+      "set": "嵌入式开发",
+      "question": "在 ESP-IDF 的 SPI 主机驱动里：(1) 用来描述一次传输事务中命令阶段、地址阶段、数据阶段各自线宽的那个结构体，它的三个成员分别对应哪个阶段？成员的取值含义是什么（取 2、1、4 分别代表什么写法）？(2) 初始化 SPI 总线时可用的总线标志里，与引脚走线方式相关的两个标志分别表示什么？它们既可表示初始化意图也可用于查询，在查询引脚走线状态时如何区分信号是经 IO mux 还是经 GPIO matrix 路由？",
+      "referenceChunks": [
+        "S02#s31",
+        "S02#s37"
+      ],
+      "topk": [
+        {
+          "chunkId": "S02#s31",
+          "score": null,
+          "text": "struct spi_line_mode_t\n\nLine mode of SPI transaction phases: CMD, ADDR, DOUT/DIN.\n\nPublic Members\n\nuint8_t cmd_lines\n\nThe line width of command phase, e.g. 2-line-cmd-phase.\n\nuint8_t addr_lines\n\nThe line width of address phase, e.g. 1-line-addr-phase.\n\nuint8_t data_lines\n\nThe line width of data phase, e.g. 4-line-data-phase."
+        },
+        {
+          "chunkId": "S02#s13",
+          "score": null,
+          "text": "ESP32 支持的线路模式如下。要使用这些模式，请在结构体 spi_transaction_t 中设置 flags，如 传输事务标志信号 一栏所示。要检查相应的 IO 管脚是否被设置，请在 spi_bus_config_t 中设置 flags，如 总线 IO 设置标志信号 一栏所示。\n\n模式\n\n命令位宽\n\n地址位宽\n\n数据位宽\n\n传输事务标志信号\n\n总线 IO 设置标志信号\n\n普通 SPI 模式\n\n双线输出模式\n\nSPI_TRANS_MODE_DIO\n\nSPICOMMON_BUSFLAG_DUAL\n\n双线 I/O 模式\n\nSPI_TRANS_MODE_DIO\nSPI_TRANS_MULTILINE_ADDR\n\nSPICOMMON_BUSFLAG_DUAL\n\n四线输出模式\n\nSPI_TRANS_MODE_QIO\n\nSPICOMMON_BUSFLAG_QUAD\n\n四线 I/O 模式\n\nSPI_TRANS_MODE_QIO\nSPI_TRANS_MULTILINE_ADDR\n\nSPICOMMON_BUSFLAG_QUAD"
+        },
+        {
+          "chunkId": "S02#s22",
+          "score": null,
+          "text": "ESP32 的多数外设信号都直接与之专用的 IO_MUX 管脚连接，但这些信号也可以通过 GPIO 交换矩阵传输到任何其他可用的管脚。只要有一个信号通过 GPIO 交换矩阵传输，那么所有的信号都将通由其传输。\n\nGPIO 交换矩阵提高了信号传输的灵活性，但也存在以下缺陷：\n\n加大了 MISO 信号的输入延迟，增加了 MISO 设置时序违反的可能性。如果需要高速运行 SPI，请使用专用的 IO_MUX 管脚。\n\n只能传输最大时钟频率为 40 MHz 的信号，而使用 IO_MUX 管脚时可以传输的最大时钟频率为 80 MHz。\n\n备注\n\n了解有关 MISO 输入延迟对最大时钟频率影响的更多信息，请参阅 时序影响因素。\n\nSPI 总线的 IO_MUX 管脚如下表所示。\n\n管脚名称\n\nGPIO 编号 (SPI2)\n\nGPIO 编号 (SPI3)\n\nCS0 [1]\n\n15\n\nSCLK\n\n14\n\n18\n\nMISO\n\n12\n\n19\n\nMOSI\n\n13\n\n23\n\nQUADWP\n\n22\n\nQUADHD\n\n21"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S02#s31"
+      ]
+    },
+    {
+      "questionId": "XC02",
+      "split": "holdout",
+      "set": "嵌入式开发",
+      "question": "关于 ESP-IDF 的堆内存分配：(1) 当启用片外 RAM、要把可分配内存放到外部 SPI RAM 时，用常规分配接口（标准 malloc，或带 SPIRAM 能力参数的分配接口）能覆盖的容量上限是多少？要使用超出该上限的那部分外部 SPI RAM，必须改用哪种机制？(2) 当一个分配接口同时给出多个带偏好的内存能力参数时，分配器按什么顺序尝试分配？在什么条件下才算失败并返回空指针？",
+      "referenceChunks": [
+        "S03#s55",
+        "S03#s61~8"
+      ],
+      "topk": [
+        {
+          "chunkId": "S03#s55",
+          "score": null,
+          "text": "当启用 片外 RAM 时，可以根据配置调用标准 malloc 或通过 heap_caps_malloc(MALLOC_CAP_SPIRAM) 分配外部 SPI RAM，详情请参阅 配置片外 RAM。\n\n在 ESP32 上，只有不超过 4 MiB 的外部 SPI RAM 可以通过上述方式分配。要使用超过 4 MiB 限制的区域，可以使用 himem API。"
+        },
+        {
+          "chunkId": "S03#s61~8",
+          "score": null,
+          "text": "The variable parameters are bitwise OR of MALLOC_CAP_* flags indicating the type of memory. This API prefers to allocate memory with the first parameter. If failed, allocate memory with the next parameter. It will try in this order until allocating a chunk of memory successfully or fail to allocate memories with any of the parameters.\n\n参数:\n\nsize -- Size, in bytes, of the amount of memory to allocate\n\nnum -- Number of variable parameters\n\n返回:\n\nA pointer to the memory allocated on success, NULL on failure\n\nvoid *heap_caps_realloc_prefer(void *ptr, size_t size, size_t num, ...)\n\nReallocate a chunk of memory as preference in decreasing order.\n\n参数:\n\nptr -- Pointer to previously allocated memory, or NULL for a new allocation.\n\nsize -- Size of the new buffer requested, or 0 to free the buffer.\n\nnum -- Number of variable parameters\n\n返回:\n\nPointer to a new buffer of size 'size', or NULL if allocation failed.\n\nvoid *heap_caps_calloc_prefer(size_t n, size_t size, size_t num, ...)\n\nAllocate a chunk of memory as preference in decreasing order.\n\n参数:\n\nn -- Number of continuing chunks of memory to allocate\n\nsize -- Size, in bytes, of a chunk of memory to allocate\n\nnum -- Number of variable parameters\n\n返回:\n\nA pointer to the memory allocated on success, NULL on failure\n\nvoid heap_caps_dump(uint32_t caps)\n\nDump the full structure of all heaps with matching capabilities.\n\nPrints a large amount of output to serial (because of locking limitations, the output bypasses stdout/stderr). For each (variable sized) block in each matching heap, the following output is printed on a single line:"
+        },
+        {
+          "chunkId": "S03#s61~3",
+          "score": null,
+          "text": "caps -- Bitwise OR of MALLOC_CAP_* flags indicating the type of memory to be returned\n\n返回:\n\nA pointer to the memory allocated on success, NULL on failure\n\nvoid *heap_caps_calloc(size_t n, size_t size, uint32_t caps)\n\nAllocate a chunk of memory which has the given capabilities. The initialized value in the memory is set to zero.\n\nEquivalent semantics to libc calloc(), for capability-aware memory.\n\nIn IDF, calloc(p) is equivalent to heap_caps_calloc(p, MALLOC_CAP_8BIT).\n\n参数:\n\nn -- Number of continuing chunks of memory to allocate\n\nsize -- Size, in bytes, of a chunk of memory to allocate\n\ncaps -- Bitwise OR of MALLOC_CAP_* flags indicating the type of memory to be returned\n\n返回:\n\nA pointer to the memory allocated on success, NULL on failure\n\nsize_t heap_caps_get_total_size(uint32_t caps)\n\nGet the total size of all the regions that have the given capabilities.\n\nThis function takes all regions capable of having the given capabilities allocated in them and adds up the total space they have.\n\n参数:\n\ncaps -- Bitwise OR of MALLOC_CAP_* flags indicating the type of memory\n\n返回:\n\ntotal size in bytes\n\nsize_t heap_caps_get_free_size(uint32_t caps)\n\nGet the total free size of all the regions that have the given capabilities.\n\nThis function takes all regions capable of having the given capabilities allocated in them and adds up the free space they have.\n\n备注\n\nNote that because of heap fragmentation it is probably not possible to allocate a single block of memory of this size. Use heap_caps_get_largest_free_block() for this purpose.\n\n参数:"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S03#s55",
+        "S03#s61~8"
+      ]
+    },
+    {
+      "questionId": "XE01",
+      "split": "holdout",
+      "set": "嵌入式开发",
+      "question": "在 ESP-IDF 的 GPIO 参考中：peripherals/gpio/generic_gpio 示例演示了哪两种 GPIO 用法？调用 gpio_isr_register 注册中断处理程序时，处理程序会被挂在哪个 CPU 核上、在什么情况下被调用；如果要禁用或移除这个 ISR 应该怎么做，以及什么情况下该函数会返回 ESP_ERR_NOT_FOUND？",
+      "referenceChunks": [
+        "S04#s76",
+        "S04#s78~4"
+      ],
+      "topk": [
+        {
+          "chunkId": "S04#s78~4",
+          "score": null,
+          "text": "Register GPIO interrupt handler, the handler is an ISR. The handler will be attached to the same CPU core that this function is running on.\n\nThis ISR function is called whenever any GPIO interrupt occurs. See the alternative gpio_install_isr_service() and gpio_isr_handler_add() API in order to have the driver support per-GPIO ISRs.\n\nTo disable or remove the ISR, pass the returned handle to the interrupt allocation functions.\n\n参数:\n\nfn -- Interrupt handler function.\n\narg -- Parameter for handler function\n\nintr_alloc_flags -- Flags used to allocate the interrupt. One or multiple (ORred) ESP_INTR_FLAG_* values. See esp_intr_alloc.h for more info.\n\nhandle -- Pointer to return handle. If non-NULL, a handle for the interrupt will be returned here.\n\n返回:\n\nESP_OK Success ;\n\nESP_ERR_INVALID_ARG GPIO error\n\nESP_ERR_NOT_FOUND No free interrupt found with the specified flags\n\nesp_err_t gpio_pullup_en(gpio_num_t gpio_num)\n\nEnable pull-up on GPIO.\n\n参数:\n\ngpio_num -- GPIO number\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG Parameter error\n\nesp_err_t gpio_pullup_dis(gpio_num_t gpio_num)\n\nDisable pull-up on GPIO.\n\n参数:\n\ngpio_num -- GPIO number\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG Parameter error\n\nesp_err_t gpio_pulldown_en(gpio_num_t gpio_num)\n\nEnable pull-down on GPIO.\n\n参数:\n\ngpio_num -- GPIO number\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG Parameter error\n\nesp_err_t gpio_pulldown_dis(gpio_num_t gpio_num)\n\nDisable pull-down on GPIO.\n\n参数:\n\ngpio_num -- GPIO number\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG Parameter error\n\nesp_err_t gpio_output_enable(gpio_num_t gpio_num)"
+        },
+        {
+          "chunkId": "S04#s76",
+          "score": null,
+          "text": "peripherals/gpio/generic_gpio 演示了如何配置 GPIO 以生成脉冲，触发中断。"
+        },
+        {
+          "chunkId": "S04#s78~6",
+          "score": null,
+          "text": "Uninstall the driver's GPIO ISR service, freeing related resources.\n\n返回:\n\nESP_OK Success\n\nesp_err_t gpio_isr_handler_add(gpio_num_t gpio_num, gpio_isr_t isr_handler, void *args)\n\nAdd ISR handler for the corresponding GPIO pin.\n\nCall this function after using gpio_install_isr_service() to install the driver's GPIO ISR handler service.\n\nThe pin ISR handlers no longer need to be declared with IRAM_ATTR, unless you pass the ESP_INTR_FLAG_IRAM flag when allocating the ISR in gpio_install_isr_service().\n\nThis ISR handler will be called from an ISR. So there is a stack size limit (configurable as \"ISR stack size\" in menuconfig). This limit is smaller compared to a global GPIO interrupt handler due to the additional level of indirection.\n\n参数:\n\ngpio_num -- GPIO number\n\nisr_handler -- ISR handler function for the corresponding GPIO number.\n\nargs -- parameter for ISR handler.\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_STATE Wrong state, the ISR service has not been initialized.\n\nESP_ERR_INVALID_ARG Parameter error\n\nesp_err_t gpio_isr_handler_remove(gpio_num_t gpio_num)\n\nRemove ISR handler for the corresponding GPIO pin.\n\n参数:\n\ngpio_num -- GPIO number\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_STATE Wrong state, the ISR service has not been initialized.\n\nESP_ERR_INVALID_ARG Parameter error\n\nesp_err_t gpio_set_drive_capability(gpio_num_t gpio_num, gpio_drive_cap_t strength)\n\nSet GPIO pad drive capability.\n\n参数:\n\ngpio_num -- GPIO number, only support output GPIOs\n\nstrength -- Drive capability of the pad\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG Parameter error"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S04#s78~4",
+        "S04#s76"
+      ]
+    },
+    {
+      "questionId": "XE02",
+      "split": "holdout",
+      "set": "嵌入式开发",
+      "question": "在 ESP-IDF 的 RTC GPIO / GPIO 参考中：(1) 把一个 IO 初始化为 RTC GPIO 要调用哪个函数、它会把该 IO 的路由切到哪个 MUX（对应的反初始化函数又切回哪里）？rtc_gpio_is_valid_gpio 返回 true 和 false 各代表什么？(2) 在 gpio_mode_t 与 gpio_pull_mode_t 中，表示「只输出且开漏」、「上下拉同时使能」、「垫片悬空」的枚举值分别叫什么？",
+      "referenceChunks": [
+        "S04#s85",
+        "S04#s87"
+      ],
+      "topk": [
+        {
+          "chunkId": "S04#s87",
+          "score": null,
+          "text": "bool rtc_gpio_is_valid_gpio(gpio_num_t gpio_num)\n\nDetermine if the specified IO is a valid RTC GPIO.\n\n参数:\n\ngpio_num -- GPIO number\n\n返回:\n\ntrue if the IO is valid for RTC GPIO use. false otherwise.\n\nint rtc_io_number_get(gpio_num_t gpio_num)\n\nGet RTC IO index number by GPIO number.\n\n参数:\n\ngpio_num -- GPIO number\n\n返回:\n\n>=0: Index of RTC IO. -1 : The IO is not an RTC IO.\n\nesp_err_t rtc_gpio_init(gpio_num_t gpio_num)\n\nInit an IO to be an RTC GPIO, route to RTC IO MUX.\n\n参数:\n\ngpio_num -- GPIO number (e.g. GPIO_NUM_12)\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG The IO is not an RTC IO\n\nesp_err_t rtc_gpio_deinit(gpio_num_t gpio_num)\n\nDeinit an IO as an RTC GPIO, route back to IO MUX.\n\n参数:\n\ngpio_num -- GPIO number (e.g. GPIO_NUM_12)\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG The IO is not an RTC IO\n\nuint32_t rtc_gpio_get_level(gpio_num_t gpio_num)\n\nGet the RTC IO input level.\n\n参数:\n\ngpio_num -- GPIO number (e.g. GPIO_NUM_12)\n\n返回:\n\n1 High level\n\n0 Low level\n\nESP_ERR_INVALID_ARG The IO is not an RTC IO\n\nesp_err_t rtc_gpio_set_level(gpio_num_t gpio_num, uint32_t level)\n\nSet the RTC IO output level.\n\n参数:\n\ngpio_num -- GPIO number (e.g. GPIO_NUM_12)\n\nlevel -- output level\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG The IO is not an RTC IO\n\nesp_err_t rtc_gpio_set_direction(gpio_num_t gpio_num, rtc_gpio_mode_t mode)\n\nRTC GPIO set direction.\n\nConfigure RTC GPIO direction, such as output only, input only, output and input.\n\n参数:\n\ngpio_num -- GPIO number (e.g. GPIO_NUM_12)\n\nmode -- RTC GPIO direction\n\n返回:\n\nESP_OK Success\n\nESP_ERR_INVALID_ARG The IO is not an RTC IO"
+        },
+        {
+          "chunkId": "S04#s91",
+          "score": null,
+          "text": "enum rtc_gpio_mode_t\n\nRTCIO output/input mode type.\n\nValues:\n\nenumerator RTC_GPIO_MODE_INPUT_ONLY\n\nPad input\n\nenumerator RTC_GPIO_MODE_OUTPUT_ONLY\n\nPad output\n\nenumerator RTC_GPIO_MODE_INPUT_OUTPUT\n\nPad input + output\n\nenumerator RTC_GPIO_MODE_DISABLED\n\nPad (output + input) disable\n\nenumerator RTC_GPIO_MODE_OUTPUT_OD\n\nPad open-drain output\n\nenumerator RTC_GPIO_MODE_INPUT_OUTPUT_OD\n\nPad input + open-drain output\n\n此文档对您有帮助吗？\n\n反馈已收到，谢谢！\n\n如果您有其他意见，欢迎填写乐鑫文档反馈表。\n\n我们重视您的反馈。\n\n您可以填写乐鑫文档反馈表告诉我们如何改进该文档。"
+        },
+        {
+          "chunkId": "S04#s85",
+          "score": null,
+          "text": "enum gpio_port_t\n\nValues:\n\nenumerator GPIO_PORT_0\n\nenumerator GPIO_PORT_MAX\n\nenum gpio_int_type_t\n\nValues:\n\nenumerator GPIO_INTR_DISABLE\n\nDisable GPIO interrupt\n\nenumerator GPIO_INTR_POSEDGE\n\nGPIO interrupt type : rising edge\n\nenumerator GPIO_INTR_NEGEDGE\n\nGPIO interrupt type : falling edge\n\nenumerator GPIO_INTR_ANYEDGE\n\nGPIO interrupt type : both rising and falling edge\n\nenumerator GPIO_INTR_LOW_LEVEL\n\nGPIO interrupt type : input low level trigger\n\nenumerator GPIO_INTR_HIGH_LEVEL\n\nGPIO interrupt type : input high level trigger\n\nenumerator GPIO_INTR_MAX\n\nenum gpio_mode_t\n\nValues:\n\nenumerator GPIO_MODE_DISABLE\n\nGPIO mode : disable input and output\n\nenumerator GPIO_MODE_INPUT\n\nGPIO mode : input only\n\nenumerator GPIO_MODE_OUTPUT\n\nGPIO mode : output only mode\n\nenumerator GPIO_MODE_OUTPUT_OD\n\nGPIO mode : output only with open-drain mode\n\nenumerator GPIO_MODE_INPUT_OUTPUT_OD\n\nGPIO mode : output and input with open-drain mode\n\nenumerator GPIO_MODE_INPUT_OUTPUT\n\nGPIO mode : output and input mode\n\nenum gpio_pullup_t\n\nValues:\n\nenumerator GPIO_PULLUP_DISABLE\n\nDisable GPIO pull-up resistor\n\nenumerator GPIO_PULLUP_ENABLE\n\nEnable GPIO pull-up resistor\n\nenum gpio_pulldown_t\n\nValues:\n\nenumerator GPIO_PULLDOWN_DISABLE\n\nDisable GPIO pull-down resistor\n\nenumerator GPIO_PULLDOWN_ENABLE\n\nEnable GPIO pull-down resistor\n\nenum gpio_pull_mode_t\n\nValues:\n\nenumerator GPIO_PULLUP_ONLY\n\nPad pull up\n\nenumerator GPIO_PULLDOWN_ONLY\n\nPad pull down\n\nenumerator GPIO_PULLUP_PULLDOWN\n\nPad pull up + pull down\n\nenumerator GPIO_FLOATING\n\nPad floating\n\nenum gpio_drive_cap_t\n\nValues:"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S04#s87",
+        "S04#s85"
+      ]
+    },
+    {
+      "questionId": "XE03",
+      "split": "holdout",
+      "set": "AI框架与推理",
+      "question": "按 MindSpore 端侧推理快速入门的 Linux 篇流程操作：(1) 下载发布件时要依据什么来选择发布件，本例选的是哪一种（软件系统、底层架构、版本）？(2) 进入集成推理环节后，MindSpore Lite 加载模型对 Context 有什么硬性要求；用 CPU 推理时设备信息是通过哪个接口、哪个类挂到 Context 上的，是否需要对它做额外设置？",
+      "referenceChunks": [
+        "S05#s101~4",
+        "S05#s99"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s95",
+          "score": null,
+          "text": "用户可在MindSpore Lite官网下载页面，得到各版本的MindSpore Lite发布件。\n在本例中，我们选择的是软件系统为Linux、底层架构为x86_64的CPU发布件，以1.6.0版本为例，用户可点击此处直接下载。\n每个发布件的包结构会有不同，本例中，Linux发布件的包结构如下（随着用户对MindSpore Lite各个功能的学习，我们将逐步讲解发布件中文件的作用，在此处，用户对发布件结构有个简略印象即可）：\n\nmindspore-lite-{version}-linux-x64\n├── runtime\n│ ├── include # MindSpore Lite集成开发的API头文件\n│ ├── lib\n│ │ ├── libmindspore-lite.a # MindSpore Lite推理框架的静态库\n│ │ ├── libmindspore-lite-jni.so # MindSpore Lite推理框架的JNI动态库\n│ │ ├── libmindspore-lite.so # MindSpore Lite推理框架的动态库\n│ │ ├── libmindspore-lite-train.a # MindSpore Lite训练框架的静态库\n│ │ ├── libmindspore-lite-train.so # MindSpore Lite训练框架的动态库\n│ │ └── mindspore-lite-java.jar # MindSpore Lite推理框架jar包\n│ └── third_party\n│ └── libjpeg-turbo\n└── tools\n├── benchmark # 基准测试工具目录\n├── benchmark_train # 训练模型基准测试工具目录\n├── codegen # 代码生成工具目录\n├── converter # 模型转换工具目录\n└── cropper # 库裁剪工具目录"
+        },
+        {
+          "chunkId": "S05#s99",
+          "score": null,
+          "text": "用户根据模型推理时的系统环境，下载对应的发布件。\n在本例中，选择的是软件系统为Linux、底层架构为x86_64的CPU发布件，以1.6.0版本为例，用户可点击此处直接下载。"
+        },
+        {
+          "chunkId": "S05#s110~5",
+          "score": null,
+          "text": "接着，通过Context::MutableDeviceInfo接口，得到context对象的设备管理列表。\n\nauto &device_list = context->MutableDeviceInfo();\n\n在本例中，由于使用CPU进行推理，故需申请一个CPUDeviceInfo类的对象device_info。\n\nauto device_info = std::make_shared<mindspore::CPUDeviceInfo>();\n\n因为采用了CPU的默认设置，所以不需对device_info对象做任何设置，直接添加到context的设备管理列表。\n\ndevice_list.push_back(device_info);\n\n(3) 加载模型\n\n首先创建一个Model类对象model，Model类定义了MindSpore Lite中的模型，用于计算图管理。\n关于Model类的详细说明，可参考API文档。\n\nauto model = new (std::nothrow) mindspore::Model();\n\n接着调用Build接口传入模型，将模型编译至可在设备上运行的状态。\n在加载编译完模型之后，被解析的模型信息已记录在model变量中，原先的模型文件内存model_buf可以释放。\n由于model_buf是以char数组的方式申请的，故使用delete[]释放内存。\n\nauto build_ret = model->Build(model_buf, size, mindspore::kMindIR, context);\ndelete[](model_buf);\n\n(4) 传入数据\n\n在执行模型推理前，需要设置推理的输入数据。\n此例，通过Model.GetInputs接口，获取模型的所有输入张量。单个张量的格式为MSTensor。\n关于MSTensor张量的详细说明，请参考MSTensor的API说明。\n\nauto inputs = model->GetInputs();\n\n通过张量的MutableData接口，可以获取张量的数据内存指针。\n在本例中，模型的输入为浮点数格式，所以此处将指针强转为浮点指针。用户可根据自己模型的数据格式做不同处理，也可通过张量的DataType接口，得到该张量的数据类型。\n\nauto input_data = reinterpret_cast<float *>(tensor.MutableData());\n\n接着，通过数据指针，将我们要推理的数据传入张量内部。\n在本例中我们传入的是随机生成的0.1至1的浮点数据，且数据呈平均分布。\n在实际的推理中，用户在读取图片或音频等实际数据后，需进行算法特定的预处理操作，并将处理后的数据传入模型。\n\ntemplate <typename T, typename Distribution>\nvoid GenerateRandomData(int size, void *data, Distribution distribution) {\nstd::mt19937 random_engine;\nint elements_num = size / sizeof(T);\n(void)std::generate_n(static_cast<T *>(data), elements_num,\n[&distribution, &random_engine]() { return static_cast<T>(distribution(random_engine)); });\n}\n\n..."
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s99"
+      ]
+    },
+    {
+      "questionId": "XE04",
+      "split": "holdout",
+      "set": "AI框架与推理",
+      "question": "在 MindSpore 端侧推理快速入门中：(1) 把非 ms 模型转成 MindSpore Lite 使用的 ms 模型时，转换工具包含在哪些平台的发布件里；这个转换操作与执行平台的关系是什么，在不同平台上执行会得到相同还是不同的转换后模型文件？(2) 文档中 benchmark 推理测试的配置样例里，ModelPath 和 ModelType 分别写的是什么值；DeviceType、NumThreads、WarmUpLoopCount、LoopCount 又分别取什么值？",
+      "referenceChunks": [
+        "S05#s103",
+        "S05#s109~3"
+      ],
+      "topk": [
+        {
+          "chunkId": "S05#s94",
+          "score": null,
+          "text": "将用户的模型转换为MindSpore Lite的模型文件。该操作主要包括以下步骤：\n\n下载发布件\n\n在Windows和Linux的发布件中，都含有转换工具，用户可根据自己的平台，下载使用任一个发布件。\n通过发布件内的converter_lite工具，将非ms模型转换为MindSpore Lite使用的ms模型。\n该操作与平台无关，无论在哪个平台上执行转换，可得到相同的转换后模型文件。\n\n转换模型\n\n使用发布件内的converter_lite转换工具完成模型转换。"
+        },
+        {
+          "chunkId": "S05#s100~3",
+          "score": null,
+          "text": "ModelPath = mobilenetv2.ms\nModelType = MindIR\nInDataPath = input.bin\nConfigFilePath =\nInDataType = bin\nLoopCount = 10\nDeviceType = CPU\nAccuracyThreshold = 0.5\nCosineDistanceThreshold = -1.1\nWarmUpLoopCount = 3\nNumThreads = 2\nFp16Priority = 0\nEnableParallel = 0\ncalibDataPath = output.txt\ncpuBindMode = HIGHER_CPU\nCalibDataType = FLOAT\nstart unified benchmark run\nPrepareTime = 31.709 ms\nMarkAccuracy\nInData 0: 0.417022 0.720325 0.000114375 0.302333 0.146756 0.0923386 0.18626 0.345561 0.396767 0.538817 0.419195 0.68522 0.204452 0.878117 0.0273876 0.670467 0.417305 0.55869 0.140387 0.198101\n================ Comparing Output data ================\nData of node Default/head-MobileNetV2Head/Softmax-op204 : 4.75662e-05 0.000445443 0.000294212 0.000354572 0.000165406 8.36175e-05 0.000198424 0.000329004 0.000288576 0.000203605 0.000962143 0.00421465 0.0019162 0.00129701 0.00260928 0.0012302 0.000879829 0.000609378 0.000691054 0.00119472 0.000516733 0.00160048 0.000959531 0.00176164 0.000365934 0.00013575 0.000245539 0.000414651 0.000165337 0.000480154 0.000216396 0.00101303 0.000105544 0.000475172 0.000761407 0.000305815 0.000294882 0.000307003 0.00188077 0.000454868 0.000897518 0.00051352 0.000595383 0.000644214 0.000513376 0.000343709 0.00103984 0.000197185 7.54722e-05 8.89811e-05\nMean bias of node/tensor Default/head-MobileNetV2Head/Softmax-op204 : 0%\nMean bias of all nodes/tensors: 0%\n=======================================================\n\nRun Benchmark mobilenetv2.ms Success."
+        },
+        {
+          "chunkId": "S05#s109~3",
+          "score": null,
+          "text": "ModelPath = mobilenetv2.ms\nModelType = MindIR\nInDataPath = input.bin\nConfigFilePath =\nInDataType = bin\nLoopCount = 10\nDeviceType = CPU\nAccuracyThreshold = 0.5\nCosineDistanceThreshold = -1.1\nWarmUpLoopCount = 3\nNumThreads = 2\nFp16Priority = 0\nEnableParallel = 0\ncalibDataPath = output.txt\ncpuBindMode = HIGHER_CPU\nCalibDataType = FLOAT\nstart unified benchmark run\nPrepareTime = 31.709 ms\nMarkAccuracy\nInData 0: 0.417022 0.720325 0.000114375 0.302333 0.146756 0.0923386 0.18626 0.345561 0.396767 0.538817 0.419195 0.68522 0.204452 0.878117 0.0273876 0.670467 0.417305 0.55869 0.140387 0.198101\n================ Comparing Output data ================\nData of node Default/head-MobileNetV2Head/Softmax-op204 : 4.75662e-05 0.000445443 0.000294212 0.000354572 0.000165406 8.36175e-05 0.000198424 0.000329004 0.000288576 0.000203605 0.000962143 0.00421465 0.0019162 0.00129701 0.00260928 0.0012302 0.000879829 0.000609378 0.000691054 0.00119472 0.000516733 0.00160048 0.000959531 0.00176164 0.000365934 0.00013575 0.000245539 0.000414651 0.000165337 0.000480154 0.000216396 0.00101303 0.000105544 0.000475172 0.000761407 0.000305815 0.000294882 0.000307003 0.00188077 0.000454868 0.000897518 0.00051352 0.000595383 0.000644214 0.000513376 0.000343709 0.00103984 0.000197185 7.54722e-05 8.89811e-05\nMean bias of node/tensor Default/head-MobileNetV2Head/Softmax-op204 : 0%\nMean bias of all nodes/tensors: 0%\n=======================================================\n\nRun Benchmark mobilenetv2.ms Success."
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S05#s109~3"
+      ]
+    },
+    {
+      "questionId": "XE05",
+      "split": "holdout",
+      "set": "测试自动化",
+      "question": "在 Selenium 的显式等待中：(1) 文档说 Wait 类可以通过各种参数实例化来改变条件的评估方式，这些可定制的内容具体包括哪几类？(2) 在 Java 里做这种定制最常用的是哪个类；示例把总超时设为 2 秒、轮询间隔设为 300 毫秒、并自动忽略「元素不可交互」异常，对应的是哪三个方法调用？在 .NET 示例中，轮询间隔和被忽略的异常类型又分别是通过什么设置的？",
+      "referenceChunks": [
+        "S12#s193",
+        "S12#s196~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S12#s193",
+          "score": null,
+          "text": "Wait 类可以通过各种参数进行实例化,\n这些参数会改变条件的评估方式.\n\n这可以包括：\n\n更改代码的评估频率 (轮询间隔)\n\n指定哪些异常应自动处理\n\n更改总超时时长\n\n自定义超时消息\n\n例如, 如果默认情况下对 元素不可交互 错误进行重试,\n那么我们可以在执行中的代码里的某个方法内添加一个操作\n(我们只需要确保代码在成功时返回 true 即可)：\n\nThe easiest way to customize Waits in Java is to use the FluentWait class:\n\nWait<WebDriver> wait =\nnew FluentWait<>(driver)\n.withTimeout(Duration.ofSeconds(2))\n.pollingEvery(Duration.ofMillis(300))\n.ignoring(ElementNotInteractableException.class);\n\nwait.until(\nd -> {\nrevealed.sendKeys(\"Displayed\");\nreturn true;\n});\n\nView Complete Code\n\nView on GitHub"
+        },
+        {
+          "chunkId": "S12#s196~2",
+          "score": null,
+          "text": "[TestMethod]\npublic void ExplicitOptions()\n{\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\nIWebElement revealed = driver.FindElement(By.Id(\"revealed\"));\ndriver.FindElement(By.Id(\"reveal\")).Click();\n\nWebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2))\n{\nPollingInterval = TimeSpan.FromMilliseconds(300),\n};\nwait.IgnoreExceptionTypes(typeof(ElementNotInteractableException));\n\nwait.Until(d => {\nrevealed.SendKeys(\"Displayed\");\nreturn true;\n});\n\nAssert.AreEqual(\"input\", revealed.TagName);\n}\n}\n}\n\nerrors = [Selenium::WebDriver::Error::NoSuchElementError,\nSelenium::WebDriver::Error::ElementNotInteractableError]\nwait = Selenium::WebDriver::Wait.new(timeout: 2,\ninterval: 0.3,\nignore: errors)\n\nwait.until { revealed.send_keys('Displayed') || true }\n\nView Complete Code\n\nView on GitHub"
+        },
+        {
+          "chunkId": "S12#s194",
+          "score": null,
+          "text": "package dev.selenium.waits;\n\nimport dev.selenium.BaseTest;\nimport java.time.Duration;\nimport org.junit.jupiter.api.Assertions;\nimport org.junit.jupiter.api.Test;\nimport org.openqa.selenium.By;\nimport org.openqa.selenium.ElementNotInteractableException;\nimport org.openqa.selenium.NoSuchElementException;\nimport org.openqa.selenium.WebDriver;\nimport org.openqa.selenium.WebElement;\nimport org.openqa.selenium.chrome.ChromeOptions;\nimport org.openqa.selenium.support.ui.FluentWait;\nimport org.openqa.selenium.support.ui.Wait;\nimport org.openqa.selenium.support.ui.WebDriverWait;\n\npublic class WaitsTest extends BaseTest {\n@Test\npublic void fails() {\nstartChromeDriver(new ChromeOptions());\n\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\ndriver.findElement(By.id(\"adder\")).click();\n\nAssertions.assertThrows(\nNoSuchElementException.class,\n() -> {\ndriver.findElement(By.id(\"box0\"));\n});\n}\n\n@Test\npublic void sleep() throws InterruptedException {\nstartChromeDriver(new ChromeOptions());\n\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\ndriver.findElement(By.id(\"adder\")).click();\n\nThread.sleep(1000);\n\nWebElement added = driver.findElement(By.id(\"box0\"));\n\nAssertions.assertEquals(\"redbox\", added.getDomAttribute(\"class\"));\n}\n\n@Test\npublic void implicit() {\nstartChromeDriver(new ChromeOptions());\n\ndriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));\ndriver.get(\"https://www.selenium.dev/selenium/web/dynamic.html\");\ndriver.findElement(By.id(\"adder\")).click();\n\nWebElement added = driver.findElement(By.id(\"box0\"));"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S12#s193",
+        "S12#s196~2"
+      ]
+    },
+    {
+      "questionId": "XA01",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "O*NET 收录的『软件质量保证分析师与测试员』这个职业，在其「工作活动」里 \"Organizing, Planning, and Prioritizing Work\" 与 \"Monitoring Processes, Materials, or Surroundings\" 分别被定义成什么工作？在其「可迁移技能」里，与质量检验和系统绩效评估对应的 \"Quality Control Analysis\" 与 \"Systems Evaluation\" 又分别怎么定义？",
+      "referenceChunks": [
+        "S16#s292~2",
+        "S16#s300"
+      ],
+      "topk": [
+        {
+          "chunkId": "S16#s292~2",
+          "score": null,
+          "text": "Organizing, Planning, and Prioritizing Work — Developing specific goals and plans to prioritize, organize, and accomplish your work.\n\nRelated occupations\n\nEstablishing and Maintaining Interpersonal Relationships — Developing constructive and cooperative working relationships with others, and maintaining them over time.\n\nRelated occupations\n\nMaking Decisions and Solving Problems — Analyzing information and evaluating results to choose the best solution and solve problems.\n\nRelated occupations\n\nThinking Creatively — Developing, designing, or creating new applications, ideas, relationships, systems, or products, including artistic contributions.\n\nRelated occupations\n\nMonitoring Processes, Materials, or Surroundings — Monitoring and reviewing information from materials, events, or the environment, to detect or assess problems.\n\nRelated occupations\n\nCoordinating the Work and Activities of Others — Getting members of a group to work together to accomplish tasks.\n\nRelated occupations\n\nDeveloping and Building Teams — Encouraging and building mutual trust, respect, and cooperation among team members.\n\nRelated occupations\n\nJudging the Qualities of Objects, Services, or People — Assessing the value, importance, or quality of things or people.\n\nRelated occupations\n\nInterpreting the Meaning of Information for Others — Translating or explaining what information means and how it can be used.\n\nRelated occupations\n\nScheduling Work and Activities — Scheduling events, programs, and activities, as well as the work of others.\n\nRelated occupations"
+        },
+        {
+          "chunkId": "S16#s292",
+          "score": null,
+          "text": "Working with Computers — Using computers and computer systems (including hardware and software) to program, write software, set up functions, enter data, or process information.\n\nRelated occupations\n\nGetting Information — Observing, receiving, and otherwise obtaining information from all relevant sources.\n\nRelated occupations\n\nCommunicating with Supervisors, Peers, or Subordinates — Providing information to supervisors, co-workers, and subordinates by telephone, in written form, e-mail, or in person.\n\nRelated occupations\n\nProcessing Information — Compiling, coding, categorizing, calculating, tabulating, auditing, or verifying information or data.\n\nRelated occupations\n\nUpdating and Using Relevant Knowledge — Keeping up-to-date technically and applying new knowledge to your job.\n\nRelated occupations\n\nAnalyzing Data or Information — Identifying the underlying principles, reasons, or facts of information by breaking down information or data into separate parts.\n\nRelated occupations\n\nEvaluating Information to Determine Compliance with Standards — Using relevant information and individual judgment to determine whether events or processes comply with laws, regulations, or standards.\n\nRelated occupations\n\nIdentifying Objects, Actions, and Events — Identifying information by categorizing, estimating, recognizing differences or similarities, and detecting changes in circumstances or events.\n\nRelated occupations\n\nDocumenting/Recording Information — Entering, transcribing, recording, storing, or maintaining information in written or electronic/magnetic form.\n\nRelated occupations"
+        },
+        {
+          "chunkId": "S16#s287",
+          "score": null,
+          "text": "Software Skills\n\nEssential Skills\n\nTransferable Skills\n\nKnowledge\n\nEducation"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S16#s292~2"
+      ]
+    },
+    {
+      "questionId": "XA02",
+      "split": "holdout",
+      "set": "测试自动化",
+      "question": "O*NET 收录的『软件质量保证分析师与测试员』这个职业，其「详细工作活动」中与评估软硬件技术效用、评估数据库性能、修改软件程序以改进性能、为分析准备数据、向他人提供计算机硬件建议相对应的原文活动分别是什么？其「软件技能」里 \"File versioning software\" 与 \"Enterprise application integration software\" 两类各列出了哪些工具，其中哪些被标注为 Hot Technology，条目没列全时用什么方式提示？",
+      "referenceChunks": [
+        "S16#s293~2",
+        "S16#s298~3"
+      ],
+      "topk": [
+        {
+          "chunkId": "S16#s293~2",
+          "score": null,
+          "text": "Evaluate utility of software or hardware technologies.\n\nRelated occupations\n\nAssess database performance.\n\nRelated occupations\n\nModify software programs to improve performance.\n\nRelated occupations\n\nPrepare data for analysis.\n\nRelated occupations\n\nProvide recommendations to others about computer hardware.\n\nRelated occupations\n\nFind occupations related to multiple detailed work activities\n\nback to top"
+        },
+        {
+          "chunkId": "S16#s298~2",
+          "score": null,
+          "text": "Configuration management software — Chef Hot Technology ; Perforce Helix software; Puppet Hot Technology ; Visible Razor; 6 more\n\nRelated occupations\n\nContent workflow software — Emerald Software Group Emerald Green Office; Twiki; Workflow software\n\nRelated occupations\n\nCustomer relationship management CRM software — Blackbaud The Raiser's Edge; Oracle Eloqua; Salesforce software Hot Technology\n\nRelated occupations\n\nData base management system software — Amazon DynamoDB Hot Technology ; Elasticsearch Hot Technology ; MongoDB Hot Technology ; Oracle PL/SQL Hot Technology ; 22 more\n\nRelated occupations\n\nData base reporting software — Microsoft SQL Server Reporting Services SSRS Hot Technology ; Oracle Business Intelligence Discoverer; SAP Business Intelligence; SAP Crystal Reports; 3 more\n\nRelated occupations\n\nData base user interface and query software — Airtable; Apache Hive Hot Technology ; Blackboard software; IBM DB2 Hot Technology ; 12 more\n\nRelated occupations\n\nData mining software — Google Analytics Hot Technology\n\nRelated occupations\n\nDesktop communications software — Skype\n\nRelated occupations\n\nDesktop publishing software — Adobe InDesign Hot Technology ; Microsoft Publisher\n\nRelated occupations\n\nDevelopment environment software — Apache Kafka Hot Technology ; Apache Maven Hot Technology ; Apache Subversion SVN Hot Technology ; Oracle Java 2 Platform Enterprise Edition J2EE Hot Technology ; 61 more\n\nRelated occupations\n\nDevice drivers or system software — Microsoft DirectX\n\nRelated occupations"
+        },
+        {
+          "chunkId": "S16#s298~3",
+          "score": null,
+          "text": "Document management software — Adobe Acrobat Hot Technology ; Document management system software; Microsoft SharePoint Hot Technology\n\nRelated occupations\n\nElectronic mail software — Google Gmail; IBM Notes; Microsoft Exchange; Microsoft Outlook Hot Technology\n\nRelated occupations\n\nEnterprise application integration software — Extensible markup language XML Hot Technology ; IBM InfoSphere DataStage; Jenkins CI ; Microsoft SQL Server Integration Services SSIS Hot Technology ; 4 more\n\nRelated occupations\n\nEnterprise resource planning ERP software — Microsoft Dynamics; Oracle Fusion Applications; Oracle PeopleSoft Hot Technology ; SAP software Hot Technology ; 6 more\n\nRelated occupations\n\nEnterprise system management software — IBM Power Systems software\n\nRelated occupations\n\nExpert system software — Ansible software Hot Technology\n\nRelated occupations\n\nFile versioning software — Git ; Version control software\n\nRelated occupations\n\nFilesystem software — File server software\n\nRelated occupations\n\nFinancial analysis software — Delphi Technology; Oracle E-Business Suite Financials\n\nRelated occupations\n\nGeographic information system — ESRI ArcGIS software Hot Technology ; Geographic information system GIS software\n\nRelated occupations\n\nGraphical user interface development software — Graphical user interface GUI builder software; Graphical user interface GUI design software; Salesforce Visualforce\n\nRelated occupations"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S16#s293~2",
+        "S16#s298~3"
+      ]
+    },
+    {
+      "questionId": "XA03",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "O*NET 收录的『软件质量保证分析师与测试员』这个职业被划入哪个 Job Zone，对应的 SVP 范围是多少？该 Job Zone 对学历、相关经验与在职培训分别提了什么要求，并举了哪些职业作为举例？在其「能力」条目里 \"Problem Sensitivity\" 与 \"Information Ordering\" 分别怎么定义？",
+      "referenceChunks": [
+        "S16#s295",
+        "S16#s303"
+      ],
+      "topk": [
+        {
+          "chunkId": "S16#s295",
+          "score": null,
+          "text": "Title\n\nJob Zone Four: Considerable Preparation Needed\n\nEducation\n\nMost of these occupations require a four-year bachelor's degree, but some do not.\n\nRelated Experience\n\nA considerable amount of work-related skill, knowledge, or experience is needed for these occupations. For example, an accountant must complete four years of college and work for several years in accounting to be considered qualified.\n\nJob Training\n\nEmployees in these occupations usually need several years of work-related experience, on-the-job training, and/or vocational training.\n\nJob Zone Examples\n\nMany of these occupations involve coordinating, supervising, managing, or training others. Examples include real estate brokers, sales managers, database administrators, graphic designers, conservation scientists, art directors, and cost estimators.\n\nSVP Range\n\n(7.0 to < 8.0)\n\nback to top"
+        },
+        {
+          "chunkId": "S16#s283",
+          "score": null,
+          "text": "15-1253.00\n\nBright Outlook\n\nUpdated 2026\n\nDevelop and execute software tests to identify software problems and their causes. Test system modifications to prepare for implementation. Document software and application defects using a bug tracking system and report defects to software or web developers. Create and maintain databases of known defects. May participate in software design reviews to provide input on functional requirements, operational characteristics, product designs, and schedules.\n\nSample of reported job titles:\nAutomation Tester, Information Technology Analyst (IT Analyst), Quality Assurance Analyst (QA Analyst), Quality Assurance Engineer (QA Engineer), Quality Engineer, Software Quality Assurance Analyst (SQA Analyst), Software Quality Assurance Engineer (SQA Engineer), Software Quality Engineer, Software Test Engineer, Test Engineer"
+        },
+        {
+          "chunkId": "S16#s304",
+          "score": null,
+          "text": "Interest code: ICR\n\nWant to discover your interests? Take the O*NET Interest Profiler.\n\nInvestigative — Work involves studying and researching non-living objects, living organisms, disease or other forms of impairment, or human behavior. Investigative occupations are often associated with physical, life, medical, or social sciences, and can be found in the fields of humanities, mathematics/statistics, information technology, or health care service.\n\nMathematics/Statistics — Work involves developing and applying mathematics and statistical theory and methods.\n\nRelated occupations\n\nRelated occupations\n\nConventional — Work involves following procedures and regulations to organize information or data, typically in a business setting. Conventional occupations are often associated with office work, accounting, mathematics/statistics, information technology, finance, or human resources.\n\nInformation Technology — Work involves designing, developing, testing, and maintaining computer software, hardware, networks, and systems.\n\nRelated occupations\n\nMathematics/Statistics — Work involves developing and applying mathematics and statistical theory and methods.\n\nRelated occupations\n\nRelated occupations"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S16#s295"
+      ]
+    },
+    {
+      "questionId": "XA04",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "O*NET 收录的『计算机硬件工程师』这个职业，在其「工作活动」里 \"Repairing and Maintaining Electronic Equipment\" 与 \"Developing and Building Teams\" 分别怎么定义？在其「工作环境」中，受访者对 \"Importance of Being Exact or Accurate\"、\"Level of Competition\" 与 \"Duration of Typical Work Week\" 的回答比例分别是多少？",
+      "referenceChunks": [
+        "S17#s321~3",
+        "S17#s323"
+      ],
+      "topk": [
+        {
+          "chunkId": "S17#s320",
+          "score": null,
+          "text": "Update knowledge and skills to keep up with rapid advancements in computer technology.\n\nRelated occupations\n\nDesign and develop computer hardware and support peripherals, including central processing units (CPUs), support logic, microprocessors, custom integrated circuits, and printers and disk drives.\n\nRelated occupations\n\nConfer with engineering staff and consult specifications to evaluate interface between hardware and software and operational and performance requirements of overall system.\n\nRelated occupations\n\nBuild, test, and modify product prototypes, using working models or theoretical models constructed with computer simulation.\n\nRelated occupations\n\nWrite detailed functional specifications that document the hardware development process and support hardware introduction.\n\nRelated occupations\n\nTest and verify hardware and support peripherals to ensure that they meet specifications and requirements, by recording and analyzing test data.\n\nRelated occupations\n\nDirect technicians, engineering designers or other technical support personnel as needed.\n\nRelated occupations\n\nProvide technical support to designers, marketing and sales departments, suppliers, engineers and other team members throughout the product development and implementation process.\n\nRelated occupations\n\nSelect hardware and material, assuring compliance with specifications and product requirements.\n\nRelated occupations\n\nStore, retrieve, and manipulate data for analysis of system capabilities and requirements.\n\nRelated occupations\n\nAnalyze user needs and recommend appropriate hardware.\n\nRelated occupations"
+        },
+        {
+          "chunkId": "S16#s294",
+          "score": null,
+          "text": "E-Mail — 100% responded “Every day.”\n\nRelated occupations\n\nFace-to-Face Discussions with Individuals and Within Teams — 75% responded “Every day.”\n\nRelated occupations\n\nSpend Time Sitting — 71% responded “Continually or almost continually.”\n\nRelated occupations\n\nImportance of Being Exact or Accurate — 50% responded “Extremely important.”\n\nRelated occupations\n\nWork With or Contribute to a Work Group or Team — 58% responded “Extremely important.”\n\nRelated occupations\n\nFreedom to Make Decisions — 65% responded “Some freedom.”\n\nRelated occupations\n\nIndoors, Environmentally Controlled — 67% responded “Every day.”\n\nRelated occupations\n\nTelephone Conversations — 42% responded “Every day.”\n\nRelated occupations\n\nContact With Others — 47% responded “Contact with others most of the time.”\n\nRelated occupations\n\nDetermine Tasks, Priorities and Goals — 74% responded “Some freedom.”\n\nRelated occupations\n\nTime Pressure — 41% responded “Once a week or more but not every day.”\n\nRelated occupations\n\nDuration of Typical Work Week — 59% responded “40 hours.”\n\nRelated occupations\n\nImportance of Repeating Same Tasks — 38% responded “Very important.”\n\nRelated occupations\n\nImpact of Decisions on Co-workers or Company Results — 38% responded “Important results.”\n\nRelated occupations\n\nLevel of Competition — 42% responded “Moderately competitive.”\n\nRelated occupations\n\nSpend Time Making Repetitive Motions — 35% responded “Continually or almost continually.”\n\nRelated occupations\n\nPhysical Proximity — 70% responded “Slightly close (e.g., shared office).”\n\nRelated occupations"
+        },
+        {
+          "chunkId": "S17#s333",
+          "score": null,
+          "text": "Interest code: RIC\n\nWant to discover your interests? Take the O*NET Interest Profiler.\n\nRealistic — Work involves designing, building, or repairing of equipment, materials, or structures, engaging in physical activity, or working outdoors. Realistic occupations are often associated with engineering, mechanics and electronics, construction, woodworking, transportation, machine operation, agriculture, animal services, physical or manual labor, athletics, or protective services.\n\nEngineering — Work involves applying science and technology to the design, building, testing, and use of electrical and electronic components, mechanical devices and machines, automotive, marine, and aerospace equipment and vehicles, materials, or structures.\n\nRelated occupations\n\nMechanics/Electronics — Work involves maintaining and repairing of machinery, such as automotive engines, electronic equipment, computers, and communication systems.\n\nRelated occupations\n\nRelated occupations\n\nInvestigative — Work involves studying and researching non-living objects, living organisms, disease or other forms of impairment, or human behavior. Investigative occupations are often associated with physical, life, medical, or social sciences, and can be found in the fields of humanities, mathematics/statistics, information technology, or health care service.\n\nRelated occupations"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "XA05",
+      "split": "holdout",
+      "set": "测试自动化",
+      "question": "O*NET 收录的『计算机硬件工程师』这个职业，其「软件技能」中 \"Process mapping and design software\"、\"Program testing software\"、\"Spreadsheet software\" 三类分别列出了哪些工具？该段对 Hot Technology 的含义、以及该职业 Hot Technologies 与 In Demand skills 的数量是怎么说明的？在其「知识」条目里 \"Computers and Electronics\" 与 \"Engineering and Technology\" 分别怎么定义？",
+      "referenceChunks": [
+        "S17#s327~2",
+        "S17#s330"
+      ],
+      "topk": [
+        {
+          "chunkId": "S17#s327~2",
+          "score": null,
+          "text": "Related occupations\n\nProcess mapping and design software — Microsoft Visio Hot Technology\n\nRelated occupations\n\nProgram testing software — Windows kernel debuggers\n\nRelated occupations\n\nSpreadsheet software — Microsoft Excel Hot Technology\n\nRelated occupations\n\nHot Technologies are requirements most frequently included across all employer job postings.\n\nSee all 20 Hot Technologies for this occupation.\n\nIn Demand skills are frequently included in employer job postings for this occupation.\n\nSee all 13 In Demand skills for this occupation.\n\nback to top"
+        },
+        {
+          "chunkId": "S17#s327",
+          "score": null,
+          "text": "Analytical or scientific software — MathWorks Simulink; Mentor Graphics LeonardoSpectrum; SAS Hot Technology ; The MathWorks MATLAB ; 49 more\n\nRelated occupations\n\nCompiler and decompiler software — Cadence Encounter RTL Compiler\n\nRelated occupations\n\nComputer aided design CAD software — Autodesk AutoCAD Hot Technology ; Dassault Systemes CATIA; PTC Creo Parametric; Xilinx ISE Foundation; 15 more\n\nRelated occupations\n\nData base user interface and query software — Database software; Microsoft Access Hot Technology ; PCI Express PCIe In Demand ; Structured query language SQL Hot Technology\n\nRelated occupations\n\nDesktop communications software — Eko\n\nRelated occupations\n\nDevelopment environment software — C ; Microsoft Visual Basic Hot Technology ; National Instruments LabVIEW; Register transfer language RTL; 9 more\n\nRelated occupations\n\nFile versioning software — Apache Subversion SVN Hot Technology ; Git Hot Technology\n\nRelated occupations\n\nInformation retrieval or search software — Internet search engine software\n\nRelated occupations\n\nInternet browser software — Web browser software\n\nRelated occupations\n\nObject or component oriented development software — C++ ; Oracle Java Hot Technology ; Perl ; Python ; 2 more\n\nRelated occupations\n\nOffice suite software — Microsoft Office software Hot Technology\n\nRelated occupations\n\nOperating system software — Cisco IOS; Linux ; Shell script Hot Technology ; UNIX Hot Technology ; 1 more\n\nRelated occupations\n\nPattern design software — Block diagram software\n\nRelated occupations\n\nPresentation software — Microsoft PowerPoint Hot Technology"
+        },
+        {
+          "chunkId": "S17#s312",
+          "score": null,
+          "text": "17-2061.00\n\nBright Outlook\n\nUpdated 2026\n\nResearch, design, develop, or test computer or computer-related equipment for commercial, industrial, military, or scientific use. May supervise the manufacturing and installation of computer or computer-related equipment and components.\n\nSample of reported job titles:\nDesign Engineer, Engineer, Field Service Engineer, Hardware Design Engineer, Hardware Engineer, Physical Design Engineer, Project Engineer, Staff Engineer, Systems Integration Engineer"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S17#s327~2"
+      ]
+    },
+    {
+      "questionId": "XA06",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "O*NET 收录的『计算机硬件工程师』这个职业，在其「能力」条目里 \"Visualization\"、\"Mathematical Reasoning\" 与 \"Flexibility of Closure\" 分别怎么定义？在其「工作风格」条目里 \"Attention to Detail\" 与 \"Intellectual Curiosity\" 又是如何描述的？",
+      "referenceChunks": [
+        "S17#s332~2",
+        "S17#s334"
+      ],
+      "topk": [
+        {
+          "chunkId": "S17#s332",
+          "score": null,
+          "text": "Deductive Reasoning — The ability to apply general rules to specific problems to produce answers that make sense.\n\nRelated occupations\n\nInductive Reasoning — The ability to combine pieces of information to form general rules or conclusions (includes finding a relationship among seemingly unrelated events).\n\nRelated occupations\n\nInformation Ordering — The ability to arrange things or actions in a certain order or pattern according to a specific rule or set of rules (e.g., patterns of numbers, letters, words, pictures, mathematical operations).\n\nRelated occupations\n\nOral Comprehension — The ability to listen to and understand information and ideas presented through spoken words and sentences.\n\nRelated occupations\n\nOral Expression — The ability to communicate information and ideas in speaking so others will understand.\n\nRelated occupations\n\nWritten Comprehension — The ability to read and understand information and ideas presented in writing.\n\nRelated occupations\n\nProblem Sensitivity — The ability to tell when something is wrong or is likely to go wrong. It does not involve solving the problem, only recognizing that there is a problem.\n\nRelated occupations\n\nWritten Expression — The ability to communicate information and ideas in writing so others will understand.\n\nRelated occupations\n\nNear Vision — The ability to see details at close range (within a few feet of the observer).\n\nRelated occupations\n\nCategory Flexibility — The ability to generate or use different sets of rules for combining or grouping things in different ways.\n\nRelated occupations"
+        },
+        {
+          "chunkId": "S17#s334",
+          "score": null,
+          "text": "Innovation — A tendency to be inventive, to be imaginative, and to adopt new perspectives on ways to accomplish work.\n\nRelated occupations\n\nAdaptability — A tendency to be open to and comfortable with change, new experiences, or ideas at work.\n\nRelated occupations\n\nAchievement Orientation — A tendency to establish and maintain personally challenging work-related goals, set high work-related standards, and exert high effort toward meeting those goals and standards.\n\nRelated occupations\n\nIntellectual Curiosity — A tendency to seek out and acquire new work-related knowledge and obtain a deep understanding of work-related subjects.\n\nRelated occupations\n\nAttention to Detail — A tendency to be detail-oriented, organized, and thorough in completing work.\n\nRelated occupations\n\nDependability — A tendency to be reliable, responsible, and consistent in meeting work-related obligations.\n\nRelated occupations\n\nback to top"
+        },
+        {
+          "chunkId": "S16#s305",
+          "score": null,
+          "text": "Intellectual Curiosity — A tendency to seek out and acquire new work-related knowledge and obtain a deep understanding of work-related subjects.\n\nRelated occupations\n\nCautiousness — A tendency to be careful, deliberate, and risk-avoidant when making work-related decisions or doing work.\n\nRelated occupations\n\nAttention to Detail — A tendency to be detail-oriented, organized, and thorough in completing work.\n\nRelated occupations\n\nDependability — A tendency to be reliable, responsible, and consistent in meeting work-related obligations.\n\nRelated occupations\n\nback to top"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S17#s334"
+      ]
+    },
+    {
+      "questionId": "XD01",
+      "split": "holdout",
+      "set": "标准与政策",
+      "question": "O*NET 收录的『计算机硬件工程师』（Computer Hardware Engineers，17-2061.00）这一职业：其 Apprenticeship Opportunities 小节给出的示例学徒岗位名称是什么，这些岗位由谁审核并批准、用于哪一类项目？其 Professional Associations 的 National Associations 类别下，与计算机、工程直接相关的全国性协会有哪些（至少举出三个）？",
+      "referenceChunks": [
+        "S17#s326",
+        "S17#s339"
+      ],
+      "topk": [
+        {
+          "chunkId": "S17#s326",
+          "score": null,
+          "text": "Example apprenticeship titles for this occupation:\n\nHardware Engineer\n\nSpecific title(s) listed above are vetted by industry and approved by the U.S. Department of Labor for use in a Registered Apprenticeship Program.\n\nStart your career and build your skillset. Visit Apprenticeship.gov\nexternal site to learn about opportunities related to this occupation.\n\nback to top"
+        },
+        {
+          "chunkId": "S17#s339",
+          "score": null,
+          "text": "Actively assisted with the O*NET data collection, helping to identify occupational experts who can be surveyed about their work in the occupation.\n\nView the list of Allies\n\nNational Associations\n\nAmerican Society for Engineering Education\nexternal site\n\nAssociation for Computing Machinery\nexternal site\n\nIEEE Computer Society\nexternal site\n\nInstitute of Electrical and Electronics Engineers\nexternal site\n\nISACA\nexternal site\n\nNational Society of Professional Engineers\nexternal site\n\nSociety of Women Engineers\nexternal site"
+        },
+        {
+          "chunkId": "S17#s340",
+          "score": null,
+          "text": "Accreditation Board for Engineering and Technology\nexternal site\n\nCompTIA\nexternal site\n\nback to top\n\nWas this page helpful?\n\nJob Seeker Help • Contact Us\n\nShare:\n\nFacebook\nX\nLinkedIn\nReddit\nEmail\n\nLink to Us • Cite this Page\n\nCreative Commons CC-BY\nLicense\n\n17-2061.00 - Computer Hardware Engineers by U.S. Department of Labor, Employment and Training Administration is licensed under a Creative Commons Attribution 4.0 International License.\n\nFollow us:\n\nAbout this Site • Privacy • Disclaimer\n\nSite updated August 25, 2026"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S17#s326",
+        "S17#s339"
+      ]
+    },
+    {
+      "questionId": "XD02",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "O*NET 收录的『计算机硬件工程师』这一职业：其 Abilities 小节把「把一般规则应用到具体问题上以得出合理答案」与「按某一特定规则把事物或动作排成一定顺序或模式」分别定义为哪两项能力（请给出英文名称）？其 Detailed Work Activities 小节列出的活动里，与「测试、验证」直接相关的有哪几项？",
+      "referenceChunks": [
+        "S17#s322",
+        "S17#s332"
+      ],
+      "topk": [
+        {
+          "chunkId": "S17#s332",
+          "score": null,
+          "text": "Deductive Reasoning — The ability to apply general rules to specific problems to produce answers that make sense.\n\nRelated occupations\n\nInductive Reasoning — The ability to combine pieces of information to form general rules or conclusions (includes finding a relationship among seemingly unrelated events).\n\nRelated occupations\n\nInformation Ordering — The ability to arrange things or actions in a certain order or pattern according to a specific rule or set of rules (e.g., patterns of numbers, letters, words, pictures, mathematical operations).\n\nRelated occupations\n\nOral Comprehension — The ability to listen to and understand information and ideas presented through spoken words and sentences.\n\nRelated occupations\n\nOral Expression — The ability to communicate information and ideas in speaking so others will understand.\n\nRelated occupations\n\nWritten Comprehension — The ability to read and understand information and ideas presented in writing.\n\nRelated occupations\n\nProblem Sensitivity — The ability to tell when something is wrong or is likely to go wrong. It does not involve solving the problem, only recognizing that there is a problem.\n\nRelated occupations\n\nWritten Expression — The ability to communicate information and ideas in writing so others will understand.\n\nRelated occupations\n\nNear Vision — The ability to see details at close range (within a few feet of the observer).\n\nRelated occupations\n\nCategory Flexibility — The ability to generate or use different sets of rules for combining or grouping things in different ways.\n\nRelated occupations"
+        },
+        {
+          "chunkId": "S17#s322",
+          "score": null,
+          "text": "Update technical knowledge.\n\nRelated occupations\n\nDesign electronic or computer equipment or instrumentation.\n\nRelated occupations\n\nConfer with technical personnel to prepare designs or operational plans.\n\nRelated occupations\n\nCreate physical models or prototypes.\n\nRelated occupations\n\nTest performance of electrical, electronic, mechanical, or integrated systems or equipment.\n\nRelated occupations\n\nPrepare procedural documents.\n\nRelated occupations\n\nConduct validation tests of equipment or processes.\n\nRelated occupations\n\nSupervise engineering or other technical personnel.\n\nRelated occupations\n\nRecommend technical design or process changes to improve efficiency, quality, or performance.\n\nRelated occupations\n\nAnalyze design requirements for computer or electronics systems.\n\nRelated occupations\n\nSelect project materials.\n\nRelated occupations\n\nAdvise customers on the use of products or services.\n\nRelated occupations\n\nProvide technical guidance to other personnel.\n\nRelated occupations\n\nTrain personnel on proper operational procedures.\n\nRelated occupations\n\nMonitor processes for compliance with standards.\n\nRelated occupations\n\nDetermine operational criteria or specifications.\n\nRelated occupations\n\nAssemble equipment or components.\n\nRelated occupations\n\nFind occupations related to multiple detailed work activities\n\nback to top"
+        },
+        {
+          "chunkId": "S17#s320~2",
+          "score": null,
+          "text": "Evaluate factors such as reporting formats required, cost constraints, and need for security restrictions to determine hardware configuration.\n\nRelated occupations\n\nProvide training and support to system designers and users.\n\nRelated occupations\n\nMonitor functioning of equipment and make necessary modifications to ensure system operates in conformance with specifications.\n\nRelated occupations\n\nSpecify power supply requirements and configuration, drawing on system performance expectations and design specifications.\n\nRelated occupations\n\nAssemble and modify existing pieces of equipment to meet special needs.\n\nRelated occupations\n\nAnalyze information to determine, recommend, and plan layout, including type of computers and peripheral equipment modifications.\n\nRelated occupations\n\nRecommend purchase of equipment to control dust, temperature, and humidity in area of system installation.\n\nRelated occupations\n\nFind occupations related to multiple tasks\n\nback to top"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S17#s332",
+        "S17#s322"
+      ]
+    },
+    {
+      "questionId": "XD03",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "O*NET 收录的『计算机硬件工程师』这一职业：其 Job Zone 小节给出的级别名称是什么、SVP Range 是多少、该小节对新入职者的学历是如何描述的？其 Education 小节里受访者给出的前三项学历要求分别是什么、占比各多少？这两处关于学历的说法是否一致？",
+      "referenceChunks": [
+        "S17#s324",
+        "S17#s331"
+      ],
+      "topk": [
+        {
+          "chunkId": "S17#s324",
+          "score": null,
+          "text": "Title\n\nJob Zone Four: Considerable Preparation Needed\n\nEducation\n\nMost of these occupations require a four-year bachelor's degree, but some do not.\n\nRelated Experience\n\nA considerable amount of work-related skill, knowledge, or experience is needed for these occupations. For example, an accountant must complete four years of college and work for several years in accounting to be considered qualified.\n\nJob Training\n\nEmployees in these occupations usually need several years of work-related experience, on-the-job training, and/or vocational training.\n\nJob Zone Examples\n\nMany of these occupations involve coordinating, supervising, managing, or training others. Examples include real estate brokers, sales managers, database administrators, graphic designers, conservation scientists, art directors, and cost estimators.\n\nSVP Range\n\n(7.0 to < 8.0)\n\nback to top"
+        },
+        {
+          "chunkId": "S17#s312",
+          "score": null,
+          "text": "17-2061.00\n\nBright Outlook\n\nUpdated 2026\n\nResearch, design, develop, or test computer or computer-related equipment for commercial, industrial, military, or scientific use. May supervise the manufacturing and installation of computer or computer-related equipment and components.\n\nSample of reported job titles:\nDesign Engineer, Engineer, Field Service Engineer, Hardware Design Engineer, Hardware Engineer, Physical Design Engineer, Project Engineer, Staff Engineer, Systems Integration Engineer"
+        },
+        {
+          "chunkId": "S16#s295",
+          "score": null,
+          "text": "Title\n\nJob Zone Four: Considerable Preparation Needed\n\nEducation\n\nMost of these occupations require a four-year bachelor's degree, but some do not.\n\nRelated Experience\n\nA considerable amount of work-related skill, knowledge, or experience is needed for these occupations. For example, an accountant must complete four years of college and work for several years in accounting to be considered qualified.\n\nJob Training\n\nEmployees in these occupations usually need several years of work-related experience, on-the-job training, and/or vocational training.\n\nJob Zone Examples\n\nMany of these occupations involve coordinating, supervising, managing, or training others. Examples include real estate brokers, sales managers, database administrators, graphic designers, conservation scientists, art directors, and cost estimators.\n\nSVP Range\n\n(7.0 to < 8.0)\n\nback to top"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S17#s324"
+      ]
+    },
+    {
+      "questionId": "XB01",
+      "split": "holdout",
+      "set": "测试自动化",
+      "question": "在 pytest 中，如果希望某个 fixture 无需在每个用例的函数签名里声明就能被本文件所有用例自动使用，应当怎样设置该 fixture？在需要先完成一套准备、再连续执行多条断言的场景下，官方建议把它定义成自动使用的 fixture 并搭配什么样的 scope？",
+      "referenceChunks": [
+        "S13#s208",
+        "S13#s219"
+      ],
+      "topk": [
+        {
+          "chunkId": "S13#s208",
+          "score": null,
+          "text": "Sometimes you may want to have a fixture (or even several) that you know all\nyour tests will depend on. “Autouse” fixtures are a convenient way to make all\ntests automatically request them. This can cut out a\nlot of redundant requests, and can even provide more advanced fixture usage\n(more on that further down).\n\nWe can make a fixture an autouse fixture by passing in autouse=True to the\nfixture’s decorator. Here’s a simple example for how they can be used:\n\n# contents of test_append.py\nimport pytest\n\n@pytest.fixture\ndef first_entry():\nreturn \"a\"\n\n@pytest.fixture\ndef order(first_entry):\nreturn []\n\n@pytest.fixture(autouse=True)\ndef append_first(order, first_entry):\nreturn order.append(first_entry)\n\ndef test_string_only(order, first_entry):\nassert order == [first_entry]\n\ndef test_string_and_int(order, first_entry):\norder.append(2)\nassert order == [first_entry, 2]\n\nIn this example, the append_first fixture is an autouse fixture. Because it\nhappens automatically, both tests are affected by it, even though neither test\nrequested it. That doesn’t mean they can’t be requested though; just\nthat it isn’t necessary."
+        },
+        {
+          "chunkId": "S14#s263",
+          "score": null,
+          "text": "有时，您可能希望在完成所有设置之后运行多个断言，这是有意义的，因为在更复杂的系统中，单个操作可以启动多个行为。pytest有一种便捷的方法来处理这个问题，它结合了我们到目前为止已经讨论过的一系列内容。\n\n所有需要做的就是提高到更大的范围，然后拥有 act 步骤定义为自动使用灯具，最后，确保所有灯具都以更高级别的范围为目标。\n\n我们拉吧 an example from above ，并稍微调整一下。假设除了检查标题中的欢迎消息外，我们还希望检查注销按钮和指向用户配置文件的链接。\n\n让我们看一下如何构建它，这样我们就可以运行多个断言，而不必再次重复所有这些步骤。\n\n注解\n\n在本例中，某些固定装置(即 base_url 和 admin_credentials )隐含着存在于其他地方。所以现在，让我们假设它们存在，我们只是不去看它们。\n\n# contents of tests/end_to_end/test_login.py\nfrom uuid import uuid4\nfrom urllib.parse import urljoin\n\nfrom selenium.webdriver import Chrome\nimport pytest\n\nfrom src.utils.pages import LoginPage, LandingPage\nfrom src.utils import AdminApiClient\nfrom src.utils.data_types import User\n\n@pytest.fixture(scope=\"class\")\ndef admin_client(base_url, admin_credentials):\nreturn AdminApiClient(base_url, **admin_credentials)\n\n@pytest.fixture(scope=\"class\")\ndef user(admin_client):\n_user = User(name=\"Susan\", username=f\"testuser-{uuid4()}\", password=\"P4$$word\")\nadmin_client.create_user(_user)\nyield _user\nadmin_client.delete_user(_user)\n\n@pytest.fixture(scope=\"class\")\ndef driver():\n_driver = Chrome()\nyield _driver\n_driver.quit()\n\n@pytest.fixture(scope=\"class\")\ndef landing_page(driver, login):\nreturn LandingPage(driver)\n\nclass TestLandingPageSuccess:\n@pytest.fixture(scope=\"class\", autouse=True)\ndef login(self, driver, base_url, user):\ndriver.get(urljoin(base_url, \"/login\"))\npage = LoginPage(driver)\npage.login(user)\n\ndef test_name_in_header(self, landing_page, user):\nassert landing_page.header == f\"Welcome, {user.name}!\"\n\ndef test_sign_out_button(self, landing_page):\nassert landing_page.sign_out_button.is_displayed()"
+        },
+        {
+          "chunkId": "S14#s255",
+          "score": null,
+          "text": "夹具可用性是从测试的角度确定的。装置只有在定义装置的范围内时才可供测试请求。如果在类内定义了装置，则只能由该类内的测试请求它。但是，如果在模块的全局范围内定义了一个装置，那么该模块中的每个测试，即使它是在一个类中定义的，也可以请求它。\n\n类似地，如果测试与定义自动使用夹具的范围相同，则该测试也只能受到自动使用夹具的影响(请参见 自动设备首先在其作用域内执行 ）\n\n一个装置也可以请求任何其他装置，不管它是在哪里定义的，只要请求它们的测试可以看到所有涉及的装置。\n\n例如，下面是一个测试文件，其中包含一个装置 (outer )需要固定装置 (inner )来自未在中定义的作用域：\n\nimport pytest\n\n@pytest.fixture\ndef order():\nreturn []\n\n@pytest.fixture\ndef outer(order, inner):\norder.append(\"outer\")\n\nclass TestOne:\n@pytest.fixture\ndef inner(self, order):\norder.append(\"one\")\n\ndef test_order(self, order, outer):\nassert order == [\"one\", \"outer\"]\n\nclass TestTwo:\n@pytest.fixture\ndef inner(self, order):\norder.append(\"two\")\n\ndef test_order(self, order, outer):\nassert order == [\"two\", \"outer\"]\n\n从测试的角度来看，他们可以毫不费力地看到他们所依赖的每一个灯具：\n\n所以当他们跑的时候， outer 会毫不费力地找到 inner ，因为pytest从测试的角度进行搜索。\n\n注解\n\n定义装置的作用域与实例化该装置的顺序无关：该顺序由所描述的逻辑强制执行 here ."
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S13#s208"
+      ]
+    },
+    {
+      "questionId": "XB02",
+      "split": "holdout",
+      "set": "测试自动化",
+      "question": "在 pytest 中，一个 fixture 能否使用 scope 更宽（更大）的另一个 fixture，反过来是否可以？当多个用例请求同一个 fixture 时会发生什么，为什么它们跑起来几乎和只跑一个用例一样快？",
+      "referenceChunks": [
+        "S13#s209~2",
+        "S13#s225~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s260",
+          "score": null,
+          "text": "在fixture的函数请求中，那些更高范围的（例如 session )在较低范围的装置(如 function 或 class ）\n\n下面是一个例子：\n\nimport pytest\n\n@pytest.fixture(scope=\"session\")\ndef order():\nreturn []\n\n@pytest.fixture\ndef func(order):\norder.append(\"function\")\n\n@pytest.fixture(scope=\"class\")\ndef cls(order):\norder.append(\"class\")\n\n@pytest.fixture(scope=\"module\")\ndef mod(order):\norder.append(\"module\")\n\n@pytest.fixture(scope=\"package\")\ndef pack(order):\norder.append(\"package\")\n\n@pytest.fixture(scope=\"session\")\ndef sess(order):\norder.append(\"session\")\n\nclass TestClass:\ndef test_order(self, func, cls, mod, pack, sess, order):\nassert order == [\"session\", \"package\", \"module\", \"class\", \"function\"]\n\n测试将通过，因为较大的作用域装置将首先执行。\n\n订单细分为："
+        },
+        {
+          "chunkId": "S14#s255",
+          "score": null,
+          "text": "夹具可用性是从测试的角度确定的。装置只有在定义装置的范围内时才可供测试请求。如果在类内定义了装置，则只能由该类内的测试请求它。但是，如果在模块的全局范围内定义了一个装置，那么该模块中的每个测试，即使它是在一个类中定义的，也可以请求它。\n\n类似地，如果测试与定义自动使用夹具的范围相同，则该测试也只能受到自动使用夹具的影响(请参见 自动设备首先在其作用域内执行 ）\n\n一个装置也可以请求任何其他装置，不管它是在哪里定义的，只要请求它们的测试可以看到所有涉及的装置。\n\n例如，下面是一个测试文件，其中包含一个装置 (outer )需要固定装置 (inner )来自未在中定义的作用域：\n\nimport pytest\n\n@pytest.fixture\ndef order():\nreturn []\n\n@pytest.fixture\ndef outer(order, inner):\norder.append(\"outer\")\n\nclass TestOne:\n@pytest.fixture\ndef inner(self, order):\norder.append(\"one\")\n\ndef test_order(self, order, outer):\nassert order == [\"one\", \"outer\"]\n\nclass TestTwo:\n@pytest.fixture\ndef inner(self, order):\norder.append(\"two\")\n\ndef test_order(self, order, outer):\nassert order == [\"two\", \"outer\"]\n\n从测试的角度来看，他们可以毫不费力地看到他们所依赖的每一个灯具：\n\n所以当他们跑的时候， outer 会毫不费力地找到 inner ，因为pytest从测试的角度进行搜索。\n\n注解\n\n定义装置的作用域与实例化该装置的顺序无关：该顺序由所描述的逻辑强制执行 here ."
+        },
+        {
+          "chunkId": "S14#s245",
+          "score": null,
+          "text": "需要网络访问的设备依赖于连接性，通常创建成本很高。扩展前面的示例，我们可以添加 scope=\"module\" 参数 @pytest.fixture 调用以导致 smtp_connection Fixture函数，负责创建与先前存在的SMTP服务器的连接，每次测试仅调用一次 模块 （默认情况下，每个测试调用一次 功能 ）因此，一个测试模块中的多个测试功能将接收相同的 smtp_connection 夹具实例，节省时间。的可能值 scope 是： function ， class ， module ， package 或 session .\n\n下一个示例将fixture函数放入单独的 conftest.py fixture可以从目录中的多个测试模块访问以下功能：\n\n# content of conftest.py\nimport pytest\nimport smtplib\n\n@pytest.fixture(scope=\"module\")\ndef smtp_connection():\nreturn smtplib.SMTP(\"smtp.gmail.com\", 587, timeout=5)\n\n# content of test_module.py\n\ndef test_ehlo(smtp_connection):\nresponse, msg = smtp_connection.ehlo()\nassert response == 250\nassert b\"smtp.gmail.com\" in msg\nassert 0 # for demo purposes\n\ndef test_noop(smtp_connection):\nresponse, msg = smtp_connection.noop()\nassert response == 250\nassert 0 # for demo purposes\n\n这里， test_ehlo 需要 smtp_connection 夹具值。Pytest将发现并调用 @pytest.fixture 标记 smtp_connection 夹具功能。运行测试的方式如下：\n\n$ pytest test_module.py\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-6.x.y, py-1.x.y, pluggy-0.x.y\ncachedir: $PYTHON_PREFIX/.pytest_cache\nrootdir: $REGENDOC_TMPDIR\ncollected 2 items\n\ntest_module.py FF [100%]\n\n================================= FAILURES =================================\n________________________________ test_ehlo _________________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef>\n\ndef test_ehlo(smtp_connection):\nresponse, msg = smtp_connection.ehlo()\nassert response == 250\nassert b\"smtp.gmail.com\" in msg\n> assert 0 # for demo purposes\nE assert 0"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "XB03",
+      "split": "holdout",
+      "set": "测试自动化",
+      "question": "在 pytest 中，参数化 fixture 的每个取值会对应一个怎样的用例标识？这个标识还附带什么用途，以及怎样才能自定义这个标识字符串？",
+      "referenceChunks": [
+        "S13#s223~3",
+        "S13#s226~2"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s267~3",
+          "score": null,
+          "text": "数字、字符串、布尔和 None 将在测试ID中使用它们通常的字符串表示形式。对于其他对象，pytest将根据参数名称生成字符串。可以使用 ids 关键字参数：\n\n# content of test_ids.py\nimport pytest\n\n@pytest.fixture(params=[0, 1], ids=[\"spam\", \"ham\"])\ndef a(request):\nreturn request.param\n\ndef test_a(a):\npass\n\ndef idfn(fixture_value):\nif fixture_value == 0:\nreturn \"eggs\"\nelse:\nreturn None\n\n@pytest.fixture(params=[0, 1], ids=idfn)\ndef b(request):\nreturn request.param\n\ndef test_b(b):\npass\n\n上面显示了如何 ids 可以是要使用的字符串列表，也可以是将使用fixture值调用的函数，然后必须返回要使用的字符串。在后一种情况下，如果函数返回 None 然后将使用pytest的自动生成的ID。\n\n运行上述测试将导致使用以下测试ID：\n\n$ pytest --collect-only\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-6.x.y, py-1.x.y, pluggy-0.x.y\ncachedir: $PYTHON_PREFIX/.pytest_cache\nrootdir: $REGENDOC_TMPDIR\ncollected 10 items\n\n<Module test_anothersmtp.py>\n<Function test_showhelo[smtp.gmail.com]>\n<Function test_showhelo[mail.python.org]>\n<Module test_ids.py>\n<Function test_a[spam]>\n<Function test_a[ham]>\n<Function test_b[eggs]>\n<Function test_b[1]>\n<Module test_module.py>\n<Function test_ehlo[smtp.gmail.com]>\n<Function test_noop[smtp.gmail.com]>\n<Function test_ehlo[mail.python.org]>\n<Function test_noop[mail.python.org]>\n\n======================= 10 tests collected in 0.12s ========================"
+        },
+        {
+          "chunkId": "S13#s223~4",
+          "score": null,
+          "text": "def idfn(fixture_value):\nif fixture_value == 0:\nreturn \"eggs\"\nelse:\nreturn None\n\n@pytest.fixture(params=[0, 1], ids=idfn)\ndef b(request):\nreturn request.param\n\ndef test_b(b):\npass\n\nThe above shows how ids can be either a list of strings to use or\na function which will be called with the fixture value and then\nhas to return a string to use. In the latter case if the function\nreturns None then pytest’s auto-generated ID will be used.\n\nRunning the above tests results in the following test IDs being used:\n\n$ pytest --collect-only\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-9.x.y, pluggy-1.x.y\nrootdir: /home/sweet/project\ncollected 12 items\n\n<Dir fixtures.rst-236>\n<Module test_anothersmtp.py>\n<Function test_showhelo[smtp.gmail.com]>\n<Function test_showhelo[mail.python.org]>\n<Module test_emaillib.py>\n<Function test_email_received>\n<Module test_finalizers.py>\n<Function test_bar>\n<Module test_ids.py>\n<Function test_a[spam]>\n<Function test_a[ham]>\n<Function test_b[eggs]>\n<Function test_b[1]>\n<Module test_module.py>\n<Function test_ehlo[smtp.gmail.com]>\n<Function test_noop[smtp.gmail.com]>\n<Function test_ehlo[mail.python.org]>\n<Function test_noop[mail.python.org]>\n\n======================= 12 tests collected in 0.12s ========================"
+        },
+        {
+          "chunkId": "S14#s267",
+          "score": null,
+          "text": "fixture函数可以参数化，在这种情况下，它们将被多次调用，每次执行一组相关的测试，即依赖于该fixture的测试。测试函数通常不需要知道它们的重新运行。夹具参数化有助于为组件编写详尽的功能测试，这些组件本身可以通过多种方式进行配置。\n\n扩展前面的示例，我们可以标记fixture以创建两个 smtp_connection fixture实例，它将导致使用fixture的所有测试运行两次。fixture函数通过 request 对象：\n\n# content of conftest.py\nimport pytest\nimport smtplib\n\n@pytest.fixture(scope=\"module\", params=[\"smtp.gmail.com\", \"mail.python.org\"])\ndef smtp_connection(request):\nsmtp_connection = smtplib.SMTP(request.param, 587, timeout=5)\nyield smtp_connection\nprint(\"finalizing {}\".format(smtp_connection))\nsmtp_connection.close()\n\n主要变化是 params 具有 @pytest.fixture ，fixture函数将执行的每个值的列表，可以通过 request.param . 无需更改测试功能代码。让我们再跑一次：\n\n$ pytest -q test_module.py\nFFFF [100%]\n================================= FAILURES =================================\n________________________ test_ehlo[smtp.gmail.com] _________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef>\n\ndef test_ehlo(smtp_connection):\nresponse, msg = smtp_connection.ehlo()\nassert response == 250\nassert b\"smtp.gmail.com\" in msg\n> assert 0 # for demo purposes\nE assert 0\n\ntest_module.py:7: AssertionError\n________________________ test_noop[smtp.gmail.com] _________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef>\n\ndef test_noop(smtp_connection):\nresponse, msg = smtp_connection.noop()\nassert response == 250\n> assert 0 # for demo purposes\nE assert 0\n\ntest_module.py:13: AssertionError\n________________________ test_ehlo[mail.python.org] ________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef>"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "XB04",
+      "split": "holdout",
+      "set": "测试自动化",
+      "question": "pytest 运行时会怎样处理同时处于活动状态的 fixture 数量？对一个带参数的 fixture，为什么它可能在同一个 scope 内被多次执行、pytest 又是如何安排这些实例的创建与销毁先后顺序的？",
+      "referenceChunks": [
+        "S13#s210",
+        "S13#s226"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s270",
+          "score": null,
+          "text": "在测试运行期间，Pytest最小化活动设备的数量。如果您有一个参数化的fixture，那么使用它的所有测试将首先用一个实例执行，然后在创建下一个fixture实例之前调用终结器。此外，这简化了对创建和使用全局状态的应用程序的测试。\n\n下面的示例使用两个参数化的设备，其中一个在每个模块的基础上确定范围，所有功能都执行 print 调用以显示安装/拆卸流程：\n\n# content of test_module.py\nimport pytest\n\n@pytest.fixture(scope=\"module\", params=[\"mod1\", \"mod2\"])\ndef modarg(request):\nparam = request.param\nprint(\" SETUP modarg\", param)\nyield param\nprint(\" TEARDOWN modarg\", param)\n\n@pytest.fixture(scope=\"function\", params=[1, 2])\ndef otherarg(request):\nparam = request.param\nprint(\" SETUP otherarg\", param)\nyield param\nprint(\" TEARDOWN otherarg\", param)\n\ndef test_0(otherarg):\nprint(\" RUN test0 with otherarg\", otherarg)\n\ndef test_1(modarg):\nprint(\" RUN test1 with modarg\", modarg)\n\ndef test_2(otherarg, modarg):\nprint(\" RUN test2 with otherarg {} and modarg {}\".format(otherarg, modarg))\n\n让我们在详细模式下运行测试，并查看打印输出：\n\n$ pytest -v -s test_module.py\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-6.x.y, py-1.x.y, pluggy-0.x.y -- $PYTHON_PREFIX/bin/python\ncachedir: $PYTHON_PREFIX/.pytest_cache\nrootdir: $REGENDOC_TMPDIR\ncollecting ... collected 8 items\n\ntest_module.py::test_0[1] SETUP otherarg 1\nRUN test0 with otherarg 1\nPASSED TEARDOWN otherarg 1\n\ntest_module.py::test_0[2] SETUP otherarg 2\nRUN test0 with otherarg 2\nPASSED TEARDOWN otherarg 2\n\ntest_module.py::test_1[mod1] SETUP modarg mod1\nRUN test1 with modarg mod1\nPASSED\ntest_module.py::test_2[mod1-1] SETUP otherarg 1\nRUN test2 with otherarg 1 and modarg mod1\nPASSED TEARDOWN otherarg 1"
+        },
+        {
+          "chunkId": "S14#s246",
+          "score": null,
+          "text": "fixture是在测试首次请求时创建的，并根据它们的 scope ：\n\nfunction ：默认范围，则在测试结束时销毁fixture。\n\nclass ：在课程中最后一次测试的拆卸过程中，夹具被破坏。\n\nmodule ：在模块中最后一次测试的拆卸过程中，夹具被破坏。\n\npackage ：在拆下包装中的最后一次试验时，夹具被破坏。\n\nsession ：夹具在测试会话结束时被销毁。\n\n注解\n\nPytest一次只缓存fixture的一个实例，这意味着当使用参数化fixture时，Pytest可以在给定范围内多次调用fixture。"
+        },
+        {
+          "chunkId": "S14#s259",
+          "score": null,
+          "text": "When pytest wants to execute a test, once it knows what fixtures will be\nexecuted, it has to figure out the order they'll be executed in. To do this, it\nconsiders 3 factors:\n\n范围\n\n依赖项\n\n汽车旅馆\n\n除了重合之外，装置或测试的名称、它们的定义位置、定义顺序以及请求装置的顺序都不会影响执行顺序。虽然pytest会努力确保这样的巧合在一次又一次的运行中保持一致，但这不是应该依赖的东西。如果您想要控制顺序，最安全的方法是依赖这3件事，并确保清楚地建立了依赖关系。"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "XB05",
+      "split": "holdout",
+      "set": "测试自动化",
+      "question": "在 pytest 中，同名 fixture 能否在某个测试目录层级被覆盖？覆盖后的版本还能否方便地取到被覆盖的原始 fixture？如果把某层级带参数的 fixture 改成不带参数的版本（或反过来），这种覆盖是否依然成立？",
+      "referenceChunks": [
+        "S13#s229",
+        "S13#s232"
+      ],
+      "topk": [
+        {
+          "chunkId": "S14#s276",
+          "score": null,
+          "text": "假设测试文件结构为：\n\ntests/\n__init__.py\n\nconftest.py\n# content of tests/conftest.py\nimport pytest\n\n@pytest.fixture(params=['one', 'two', 'three'])\ndef parametrized_username(request):\nreturn request.param\n\n@pytest.fixture\ndef non_parametrized_username(request):\nreturn 'username'\n\ntest_something.py\n# content of tests/test_something.py\nimport pytest\n\n@pytest.fixture\ndef parametrized_username():\nreturn 'overridden-username'\n\n@pytest.fixture(params=['one', 'two', 'three'])\ndef non_parametrized_username(request):\nreturn request.param\n\ndef test_username(parametrized_username):\nassert parametrized_username == 'overridden-username'\n\ndef test_parametrized_username(non_parametrized_username):\nassert non_parametrized_username in ['one', 'two', 'three']\n\ntest_something_else.py\n# content of tests/test_something_else.py\ndef test_username(parametrized_username):\nassert parametrized_username in ['one', 'two', 'three']\n\ndef test_username(non_parametrized_username):\nassert non_parametrized_username == 'username'\n\n在上面的示例中，参数化夹具被非参数化版本覆盖，而非参数化夹具被某些测试模块的参数化版本覆盖。显然，这同样适用于测试文件夹级别。"
+        },
+        {
+          "chunkId": "S14#s274",
+          "score": null,
+          "text": "假设测试文件结构为：\n\ntests/\n__init__.py\n\nconftest.py\n# content of tests/conftest.py\nimport pytest\n\n@pytest.fixture\ndef username():\nreturn 'username'\n\ntest_something.py\n# content of tests/test_something.py\nimport pytest\n\n@pytest.fixture\ndef username(username):\nreturn 'overridden-' + username\n\ndef test_username(username):\nassert username == 'overridden-username'\n\ntest_something_else.py\n# content of tests/test_something_else.py\nimport pytest\n\n@pytest.fixture\ndef username(username):\nreturn 'overridden-else-' + username\n\ndef test_username(username):\nassert username == 'overridden-else-username'\n\n在上面的示例中，可以为某些测试模块重写具有相同名称的fixture。"
+        },
+        {
+          "chunkId": "S14#s273",
+          "score": null,
+          "text": "假设测试文件结构为：\n\ntests/\n__init__.py\n\nconftest.py\n# content of tests/conftest.py\nimport pytest\n\n@pytest.fixture\ndef username():\nreturn 'username'\n\ntest_something.py\n# content of tests/test_something.py\ndef test_username(username):\nassert username == 'username'\n\nsubfolder/\n__init__.py\n\nconftest.py\n# content of tests/subfolder/conftest.py\nimport pytest\n\n@pytest.fixture\ndef username(username):\nreturn 'overridden-' + username\n\ntest_something.py\n# content of tests/subfolder/test_something.py\ndef test_username(username):\nassert username == 'overridden-username'\n\n如您所见，具有相同名称的fixture可以被某些测试文件夹级别覆盖。请注意 base 或 super 夹具可从 overriding 夹具很容易-在上面的例子中使用。"
+        }
+      ],
+      "hit": false,
+      "hits": []
+    },
+    {
+      "questionId": "ZC01",
+      "split": "holdout",
+      "set": "AI框架与推理",
+      "question": "在飞桨（PaddlePaddle）框架中，打印一个 Tensor 时通常能看到哪些属性信息？这些属性对操作 Tensor 有什么意义？另外，如果想查看某个 Tensor 的名称，应该使用哪个属性，默认的名称是什么样子的？",
+      "referenceChunks": [
+        "S07#3.4",
+        "S07#s131"
+      ],
+      "topk": [
+        {
+          "chunkId": "S07#s131",
+          "score": null,
+          "text": "在前文中，可以看到打印 Tensor 时有 shape、dtype、place 等信息，这些都是 Tensor 的重要属性，想要了解如何操作 Tensor 需要对其属性有一定了解，接下来分别展开介绍 Tensor 的属性相关概念。\n\nTensor(shape=[3], dtype=float32, place=Place(gpu:0), stop_gradient=True,\n[2., 3., 4.])"
+        },
+        {
+          "chunkId": "S07#3.4",
+          "score": null,
+          "text": "Tensor 的名称是其唯一的标识符，为 Python 字符串类型，查看一个 Tensor 的名称可以通过 Tensor.name 属性。默认地，在每个 Tensor 创建时，会自定义一个独一无二的名称。\n\nprint(\"Tensor name:\", paddle.to_tensor(1).name)\n\nTensor name: generated_tensor_0"
+        },
+        {
+          "chunkId": "S07#3.1",
+          "score": null,
+          "text": "3.1.1 形状的介绍\n\n形状是 Tensor 的一个重要的基础属性，可以通过 Tensor.shape 查看一个 Tensor 的形状，以下为相关概念：\n\nshape：描述了 Tensor 每个维度上元素的数量。\n\nndim： Tensor 的维度数量，例如向量的维度为 1，矩阵的维度为 2，Tensor 可以有任意数量的维度。\n\naxis 或者 dimension：Tensor 的轴，即某个特定的维度。\n\nsize：Tensor 中全部元素的个数。\n\n创建 1 个四维 Tensor ，并通过图形来直观表达以上几个概念之间的关系：\n\nndim_4_Tensor = paddle.ones([2, 3, 4, 5])\n\n图 2 Tensor 的 shape、axis、dimension、ndim 之间的关系\n\nprint(\"Data Type of every element:\", ndim_4_Tensor.dtype)\nprint(\"Number of dimensions:\", ndim_4_Tensor.ndim)\nprint(\"Shape of Tensor:\", ndim_4_Tensor.shape)\nprint(\"Elements number along axis 0 of Tensor:\", ndim_4_Tensor.shape[0])\nprint(\"Elements number along the last axis of Tensor:\", ndim_4_Tensor.shape[-1])\n\nData Type of every element: paddle.float32\nNumber of dimensions: 4\nShape of Tensor: [2, 3, 4, 5]\nElements number along axis 0 of Tensor: 2\nElements number along the last axis of Tensor: 5\n\n3.1.2 重置 Tensor 形状（Reshape） 的方法\n\n重新设置 Tensor 的 shape 在深度学习任务中比较常见，如一些计算类 API 会对输入数据有特定的形状要求，这时可通过 paddle.reshape 接口来改变 Tensor 的 shape，但并不改变 Tensor 的 size 和其中的元素数据。\n\n以下示例代码中，创建 1 个 shape=[3] 的一维 Tensor，使用 reshape 功能将该 Tensor 重置为 shape=[1, 3] 的二维 Tensor。这种做法经常用在把一维的标签（label）数据扩展为二维，由于飞桨框架中神经网络通常需要传入一个 batch 的数据进行计算，因此可将数据增加一个 batch 维，方便后面的数据计算。\n\nndim_1_Tensor = paddle.to_tensor([1, 2, 3])\nprint(\"the shape of ndim_1_Tensor:\", ndim_1_Tensor.shape)\n\nreshape_Tensor = paddle.reshape(ndim_1_Tensor, [1, 3])\nprint(\"After reshape:\", reshape_Tensor.shape)\n\nthe shape of ndim_1_Tensor: [3]\nAfter reshape: [1, 3]\n\n在指定新的 shape 时存在一些技巧：\n\n-1 表示这个维度的值是从 Tensor 的元素总数和剩余维度自动推断出来的。因此，有且只有一个维度可以被设置为 -1。"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S07#s131",
+        "S07#3.4"
+      ]
+    },
+    {
+      "questionId": "ZC02",
+      "split": "holdout",
+      "set": "AI框架与推理",
+      "question": "飞桨（PaddlePaddle）的 Tensor 提供了一系列矩阵计算 API，请至少举出三个并说明各自用途（如矩阵转置、范数、矩阵乘法分别怎么调用）。此外，这些计算 API 的原位（inplace）操作与非原位操作有什么区别，从写法上如何区分？",
+      "referenceChunks": [
+        "S07#4.4",
+        "S07#s143"
+      ],
+      "topk": [
+        {
+          "chunkId": "S07#4.4",
+          "score": null,
+          "text": "x.t() #矩阵转置\nx.transpose([1, 0]) #交换第 0 维与第 1 维的顺序\nx.norm('fro') #矩阵的弗罗贝尼乌斯范数\nx.dist(y, p=2) #矩阵（x-y）的 2 范数\nx.matmul(y) #矩阵乘法\n\n注意\n\n以上计算 API 也有原位（inplace）操作和非原位操作之分，如x.add(y)是非原位操作，x.add_(y)为原位操作。"
+        },
+        {
+          "chunkId": "S07#3.1~3",
+          "score": null,
+          "text": "origin_tensor = paddle.to_tensor([1, 2, 3])\nnew_tensor = paddle.reshape(origin_tensor, [1, 3]) # 非原位操作\nsame_tensor = paddle.reshape_(origin_tensor, [1, 3]) # 原位操作\nprint(\"origin_tensor name: \", origin_tensor.name)\nprint(\"new_tensor name: \", new_tensor.name)\nprint(\"same_tensor name: \", same_tensor.name)\n\norigin_tensor name: generated_tensor_0\nnew_tensor name: auto_0_ # 非原位操作后产生的 Tensor 与原始 Tensor 的名称不同\nsame_tensor name: generated_tensor_0 # 原位操作后产生的 Tensor 与原始 Tensor 的名称相同"
+        },
+        {
+          "chunkId": "S07#4.2",
+          "score": null,
+          "text": "x.abs() #逐元素取绝对值\nx.ceil() #逐元素向上取整\nx.floor() #逐元素向下取整\nx.round() #逐元素四舍五入\nx.exp() #逐元素计算自然常数为底的指数\nx.log() #逐元素计算 x 的自然对数\nx.reciprocal() #逐元素求倒数\nx.square() #逐元素计算平方\nx.sqrt() #逐元素计算平方根\nx.sin() #逐元素计算正弦\nx.cos() #逐元素计算余弦\nx.add(y) #逐元素相加\nx.subtract(y) #逐元素相减\nx.multiply(y) #逐元素相乘\nx.divide(y) #逐元素相除\nx.mod(y) #逐元素相除并取余\nx.pow(y) #逐元素幂运算\nx.max() #指定维度上元素最大值，默认为全部维度\nx.min() #指定维度上元素最小值，默认为全部维度\nx.prod() #指定维度上元素累乘，默认为全部维度\nx.sum() #指定维度上元素的和，默认为全部维度\n\n飞桨框架对 Python 数学运算相关的魔法函数进行了重写，例如：\n\nx + y -> x.add(y) #逐元素相加\nx - y -> x.subtract(y) #逐元素相减\nx * y -> x.multiply(y) #逐元素相乘\nx / y -> x.divide(y) #逐元素相除\nx % y -> x.mod(y) #逐元素相除并取余\nx ** y -> x.pow(y) #逐元素幂运算"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S07#4.4"
+      ]
+    },
+    {
+      "questionId": "ZA01",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "信息安全测试员的「安全研究—漏洞工具研究」中，围绕漏洞触发代码需要完成哪些工作（从编写触发代码到形成可用的测试工具）？其「脆弱性测试—测试实施」在安全压力测试方面要求产出哪些成果、并对应哪些相关知识？",
+      "referenceChunks": [
+        "S26#s891",
+        "S26#s894"
+      ],
+      "topk": [
+        {
+          "chunkId": "S26#s891",
+          "score": null,
+          "text": "技能要求：能检索已披露漏洞的测试方法工具、\n\n技能要求：能搭建漏洞测试与测试工具所需的运行环境\n\n技能要求：能验证已披露漏洞测试工具的有效性\n\n技能要求：能根据已有的漏洞代码片段编写漏洞触发代码\n\n技能要求：能优化已公开的漏洞测试工具\n\n技能要求：能集成开发漏洞验证程序用于测试工作\n\n技能要求：能分析漏洞信息并编写漏洞触发代码\n\n技能要求：能根据漏洞触发代码编写漏洞测试工具\n\n相关知识：漏洞测试环境搭建方法\n\n相关知识：漏洞触发原理\n\n相关知识：已披露漏洞测试工具的使用方法\n\n相关知识：漏洞触发代码编写方法\n\n相关知识：漏洞测试工具原理漏洞验证程序集成开发方法\n\n相关知识：漏洞信息分析方法漏洞测试工具编写方法"
+        },
+        {
+          "chunkId": "S26#s894",
+          "score": null,
+          "text": "技能要求：能配置使用渗透、测试工具完成测试\n\n技能要求：能确认扫描工作执行的工作状态\n\n技能要求：能配置使用安全、压力测试工具完成测试\n\n技能要求：能通过资产风险寻找测试突破口\n\n技能要求：能根据给定测试项人工实施漏洞测试工作\n\n技能要求：能根据目标系统实际情况制定安全压力测试策略确定测试指标,\n\n技能要求：能根据误报信息优化测试工具的使用策略\n\n技能要求：能根据业务逻辑测试业务逻辑漏洞\n\n技能要求：能编写安全压力测试实施方案并对目标进行,安全压力测试\n\n技能要求：能对安全压力测试数据进行分析编写安全压,力测试报告\n\n技能要求：能结合测试场景制定测试工具的使用策略\n\n技能要求：能根据项目需要编写定制化测试工具\n\n技能要求：能根据安全压力测试结果给出针对性的系统优化方案\n\n相关知识：渗透测试工具配置方法\n\n相关知识：渗透测试工具使用方法\n\n相关知识：扫描工作状态确认方法\n\n相关知识：安全压力测试工具配置方法\n\n相关知识：安全压力测试工具使用方法\n\n相关知识：渗透测试实施流程人工渗透方法\n\n相关知识：安全压力测试实施方法\n\n相关知识：测试工具使用策略优化方法\n\n相关知识：系统调用逻辑业、务逻辑交互方式\n\n相关知识：业务逻辑漏洞测试思路安全压力测试实施方案编写方法\n\n相关知识：安全压力测试数据分析方法\n\n相关知识：安全压力测试报告编写方法\n\n相关知识：代码审计原理测试工具编写方法\n\n相关知识：系统性能优化方法"
+        },
+        {
+          "chunkId": "S26#s890",
+          "score": null,
+          "text": "技能要求：能查阅公开的安全漏洞以下简称漏洞报()告梳理漏洞分析报告,\n\n技能要求：能检索已公开的漏洞验证程序\n\n技能要求：能标记测试结果的漏洞等级\n\n技能要求：能收集已公开的高危漏洞信息进行漏洞分析,编写漏洞复现报告\n\n技能要求：能评估已公开漏洞的危害影响范围提交漏、,洞评估报告\n\n技能要求：能根据已公开的高危漏洞信息编写漏洞利用流程报告\n\n技能要求：能根据已公开的漏洞信息提出解决方法\n\n技能要求：能研究漏洞影响范围编写漏洞预警报告,\n\n技能要求：能判断漏洞的补丁或临时解决方案对漏洞防范的有效性\n\n相关知识：主流漏洞信息共享平台或漏洞库的使用方法\n\n相关知识：漏洞报告梳理方法主流漏洞信息共享平台或漏洞库的漏洞原理\n\n相关知识：已公开漏洞验证程序检索方法\n\n相关知识：漏洞等级定义方法\n\n相关知识：主流漏洞信息共享平台或漏洞库的体系知识\n\n相关知识：漏洞复现报告编写方法\n\n相关知识：漏洞危害评估方法漏洞评估报告编写方法\n\n相关知识：漏洞利用流程报告编写方法\n\n相关知识：漏洞攻击原理漏,洞防护绕过原理\n\n相关知识：、\n\n相关知识：漏洞预警发布要求漏洞防护方法\n\n相关知识：漏洞预警报告编写方法"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S26#s891",
+        "S26#s894"
+      ]
+    },
+    {
+      "questionId": "ZA02",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "网络与信息安全管理员的「风险管控—风险判断（等级1）」要求能依据哪几类审核结果进行风险预判、并如何处理风险预判案例？其「风险管控—案例汇总（等级1）」要求把汇总的典型案例做关联汇总后达成什么目的、又可据此做出哪些调整？",
+      "referenceChunks": [
+        "S26#s479",
+        "S26#s482"
+      ],
+      "topk": [
+        {
+          "chunkId": "S26#s482",
+          "score": null,
+          "text": "技能要求：能根据内容审核结果进行风险预判\n\n技能要求：能根据质量审核结果进行风险预判\n\n技能要求：能根据回溯审核结果进行风险预判\n\n技能要求：能上报风险预判案例\n\n相关知识：根据内容审核结果进行的风险预判方法\n\n相关知识：根据质量审核结果进行的风险预判方法\n\n相关知识：根据回溯审核结果进行的风险预判方法"
+        },
+        {
+          "chunkId": "S26#s479",
+          "score": null,
+          "text": "技能要求：能汇总工作中遇到的典型案例\n\n技能要求：能使用办公软件对汇总的案例进行统计分析\n\n技能要求：能撰写工作统计报告\n\n技能要求：能将汇总的典型案例进行关联汇总判断是否,存在潜在风险\n\n技能要求：能使用互联网信息审核工具进行统计分析\n\n技能要求：能撰写工作统计报告\n\n技能要求：能根据关联汇总后的案例进行审核规则和审核策略的调整\n\n技能要求：能撰写工作统计报告\n\n技能要求：能根据互联网信息审核工具使用情况提出工具调整建议\n\n相关知识：案例汇总方法常用统计分析方法\n\n相关知识：工作统计报告的撰写方法\n\n相关知识：潜在内容风险判断方法\n\n相关知识：工作统计报告的撰写方法\n\n相关知识：互联网信息统计工具的统计方法\n\n相关知识：审核策略制定方法工作统计报告的撰写方法"
+        },
+        {
+          "chunkId": "S26#s481",
+          "score": null,
+          "text": "技能要求：能对内容审核结果进行回溯审核\n\n技能要求：能对社会热点问题进行回溯审核\n\n技能要求：能根据监管部门要求进行回溯审核\n\n技能要求：能对线上内容进行巡查\n\n相关知识：内容审核结果的回溯审核方法\n\n相关知识：社会热点问题的回溯审核方法\n\n相关知识：根据监管部门要求进行的回溯审核方法\n\n相关知识：线上内容的巡查方法"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S26#s482",
+        "S26#s479"
+      ]
+    },
+    {
+      "questionId": "ZA03",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "电子专用设备装调工的「作业准备—装配调试作业准备（等级2）」要求准备哪些图纸和接线图，并按工艺文件选用、连接哪几类仪器仪表？其「装配作业—识图及电路板装配（等级1）」要求读懂什么图、识别哪些符号，并依据什么在电路板上装配元器件？",
+      "referenceChunks": [
+        "S26#s805",
+        "S26#s808"
+      ],
+      "topk": [
+        {
+          "chunkId": "S26#s805",
+          "score": null,
+          "text": "技能要求：能按功能单元装配调试要求准备电路图功\n\n技能要求：能、单元接线图能按工艺文件要求合理选用功\n\n技能要求：能单元调试仪器仪表\n\n技能要求：能按工艺文件要求合理选用整机调试仪器仪表\n\n技能要求：能按工艺文件要求合理地将整机测量仪器仪表连接成系统\n\n相关知识：工艺文件表达方法及各种符号含义功能单元调试仪器仪表使用方法\n\n相关知识：常用整机调试仪器仪表用途\n\n相关知识：及使用方法常用整机测量仪器仪表使用方法"
+        },
+        {
+          "chunkId": "S26#s808",
+          "score": null,
+          "text": "技能要求：能读懂作业电路图识别常用器材的图形符,号文字符号、\n\n技能要求：能根据接线图装、配图在电路板上进行元器件装配\n\n相关知识：常用低压电器图形符号文字符号国家标准\n\n相关知识：、常用电子元器件图形符号文字符号国家标、准电路板装配要求"
+        },
+        {
+          "chunkId": "S26#s803",
+          "score": null,
+          "text": "技能要求：能按功能单元作业要求准备电路图接线图、、装配图等工艺文件\n\n技能要求：能按工艺文件要求准备相应记录表格\n\n相关知识：作业文件管理制度工艺\n\n相关知识：记录填写要求"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S26#s805",
+        "S26#s808"
+      ]
+    },
+    {
+      "questionId": "ZA04",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "物联网安装调试员的「硬件设备安装与调试—安装、调试变送器（等级3）」对变送器提出了哪几项技能要求、分别对应哪些相关知识？其「硬件设备安装与调试—排除物联网终端故障（等级4）」在分析与排除故障后要求编写什么文档，相关知识包括哪些内容？",
+      "referenceChunks": [
+        "S26#s971",
+        "S26#s974"
+      ],
+      "topk": [
+        {
+          "chunkId": "S26#s971",
+          "score": null,
+          "text": "技能要求：能检测变送器能安装调试变送、器\n\n技能要求：能保养和维护变送器\n\n相关知识：变送器的分类及工作原理\n\n相关知识：变送器安装和使用方法\n\n相关知识：变送器保养与维护方法"
+        },
+        {
+          "chunkId": "S26#s974",
+          "score": null,
+          "text": "技能要求：能对物联网终端的故障现象进行分析\n\n技能要求：能排除物联网终端故障\n\n技能要求：能编写故障排除记录\n\n相关知识：物联网终端的故障类型物联网终端的故障现象及原因物联网终端故障的排除方法\n\n相关知识：故障排除记录的编写要求"
+        },
+        {
+          "chunkId": "S26#s985",
+          "score": null,
+          "text": "技能要求：能在物联网云平台中添加转换设备\n\n技能要求：能配置转换设备参数\n\n技能要求：能通过转换设备采集变送器数据到物联网云平台\n\n相关知识：了解ModbusTCP协议云平台相关参数\n\n相关知识：的配置方法"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S26#s971",
+        "S26#s974"
+      ]
+    },
+    {
+      "questionId": "ZA05",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "信息通信网络机务员的「移动无线网络维护—故障分析与处理（等级1）」中，针对室内分布系统故障要求具备哪些分析与处理能力？其「数据通信网络维护—故障分析与处理（等级1）」中，针对互联网骨干网应急要求编制并实施什么、并能依据应急预案做什么？",
+      "referenceChunks": [
+        "S26#s1057",
+        "S26#s1060"
+      ],
+      "topk": [
+        {
+          "chunkId": "S26#s1057",
+          "score": null,
+          "text": "技能要求：能处理室内分布系统接入端设备驻波比故障\n\n技能要求：能根据现场供电图纸检查及判断基站供电情况\n\n技能要求：能制作馈线和馈线接头并更换馈线,\n\n技能要求：能使用基础命令对一般故障进行测试判断\n\n技能要求：能检修基站设备,并填写检修记录与故障报告\n\n技能要求：能处理通路和设备告警一般故障\n\n技能要求：能完成一般故障的远程预处理\n\n技能要求：能完成基站正常维护时各项指标的测试并分,析处理基站故障\n\n技能要求：能通过环回等方式定位和处理传输类故障\n\n技能要求：能分析处理室内分布系统设备故障\n\n技能要求：能通过分析网络性能指标处理因移动通信参数设置不当等原因导致的疑难故障\n\n技能要求：能定位和处理移动网络核心侧传输侧与无线、侧对接故障\n\n技能要求：能完成无线侧设备的硬件配置调整\n\n技能要求：能修复室内分布系统故障\n\n技能要求：能完成直放站正常维护时各项指标的测试并,分析判断处理故障\n\n技能要求：能进入系统调试模式处理设备软硬件故障\n\n技能要求：能处理移动网批量断站等重大故障\n\n技能要求：能完成全网性寻呼成功率低用户感知差等重、大疑难故障的处理、\n\n技能要求：能解决系统间干扰故障问题\n\n技能要求：能分析端到端故障并定位处理各类跨专,、业网络问题\n\n相关知识：驻波比故障处理方法\n\n相关知识：基站设备供电标准馈线和馈线接头制作方法\n\n相关知识：移动网络基本维护方法\n\n相关知识：检修记录与故障报告填写要求\n\n相关知识：通路故障紧急处理方案无线网络常见故障分析处理方法\n\n相关知识：基站设备基本性能指标\n\n相关知识：的测试方法端口环回测试方法室内分布系统结构类型及室内分布系统、设备故障处理方法\n\n相关知识：移动通信系统参数功能及系统参数\n\n相关知识：调整的流程和规范\n\n相关知识：核心网传输网、相关知识\n\n相关知识：无线设备配置调整方法\n\n相关知识：室内分布系统组网知识\n\n相关知识：直放站工作原理与技术指标\n\n相关知识：无线网管系统操作维护知识\n\n相关知识：移动网重大故障应急处理的主要措施\n\n相关知识：影响寻呼成功率的原因及提升寻呼成功率的相关措施\n\n相关知识：系统间干扰解决方法\n\n相关知识：移动网电路域、分组域技术"
+        },
+        {
+          "chunkId": "S26#s1060",
+          "score": null,
+          "text": "技能要求：能使用常用网络维护命令判断故障\n\n技能要求：能处理接入网小、型局域网等仅在小范围内影响通信质量的设备故障\n\n技能要求：能在故障现场配合远程维护人员按指令查看现场设备运行情况及进行故障分段测试重启操作、\n\n技能要求：能分析一般数据通信网络故障并填写故障报告,\n\n技能要求：能处理数据交换机故障\n\n技能要求：能识别路由器故障能设置测试仪表、抓包工具参数并根据指定,要求进行抓包\n\n技能要求：能使用抓包技术进行数据分析并对照协议,标准定位故障原因()\n\n技能要求：能处理路由器故障能通过收集处理、远程信息定位一般故障\n\n技能要求：能处理多协议标签交换(Multi-ProtocolLabel虚拟专Switching,MPLS)网技术(VirtualPrivateNet-业务故障work,VPN)\n\n技能要求：能分析处理分布式拒绝服务(DistributedDenial攻击等ofService,DDoS)互联网突发异常情况\n\n技能要求：能分析处理网络间歇性丢包数据转发异常等、疑难故障\n\n技能要求：能处理端到端的互联网协议全业务故障\n\n技能要求：能编制并实施涉及跨城域网或涉及多专业的应急预案\n\n技能要求：能根据应急预案实施互联网骨干网间互联应急响应\n\n相关知识：互联网协议(In-基本ternetProtocol,IP)概念\n\n相关知识：数据网络设备故障处理的基本方法\n\n相关知识：维护设备的硬件结构\n\n相关知识：tocol,TCP/IP)数据通信网络故障报告填写方法\n\n相关知识：数据交换机故障处理方法\n\n相关知识：路由器相关知识网络测试命令及协议分析工具\n\n相关知识：路由器交换机、、防火墙设备原理\n\n相关知识：路由器故障处理方法\n\n相关知识：数据网络故障处理工具与方法\n\n相关知识：多协议标签交换虚拟专网技术相关知识\n\n相关知识：及其应用常见冗余保护技术相关知识\n\n相关知识：及其应用常见安全防护策略的配置方法\n\n相关知识：骨干网网络架构骨干网络的主要路由策略和安全防护策略骨干网络应急处理流程\n\n相关知识：互联网骨干网间互联管理知识"
+        },
+        {
+          "chunkId": "S26#s1061",
+          "score": null,
+          "text": "技能要求：能根据网络优化方案收集网络优化相关设备运行状态\n\n技能要求：能按照实施步骤对接入层设备进行优化调整\n\n技能要求：能对局域网的新建扩容及优化方案提出合、理化建议\n\n技能要求：能使用安全检查设备进行常规安全检查并分,析检查结果\n\n技能要求：能使用操作命令或网管系统检测系统流量并,提出优化建议\n\n技能要求：能通过服务质量(QualityofService,QoS)或路由策略临时解决网络拥塞问题\n\n技能要求：能优化调整监控指标和监控阈值减少误告警,和漏告警情况的发生\n\n技能要求：能为三层网络制定并组织实施应急预案\n\n技能要求：能根据用户投诉与网络分析结果制定参数或策略优化调整方案\n\n技能要求：能对扩容改造项、目的设计和施工提出合理化建议\n\n技能要求：能优化设备配置策略实现合理的带宽分配和,重点业务保障\n\n技能要求：能实施数据通信设备更新改造及重大项目整治\n\n技能要求：能制定数据网管系统优化方案并组织实施\n\n技能要求：能通过分析全网关键绩效指标与用户感知相关指标提出指标改善提升的有效方法\n\n技能要求：能优化网络层次结构并提升网络路由处理\n\n技能要求：能力业务支持能力和网络安、全防护能力能分析评估网络组网方案和网络改造优化方案\n\n技能要求：能应用网络新技术设计网络方案\n\n相关知识：城域网结构知识接入层设备种类及组成\n\n相关知识：知识\n\n相关知识：局域网组网技术及其应用场景安全检查软件或工具的种类及其使用方法\n\n相关知识：流量负载均衡的实现方法\n\n相关知识：服务质量知识监控指标\n\n相关知识：和监控阈值设置方法\n\n相关知识：数据网络整体架构常见路由策略实现方式\n\n相关知识：及其应用场景\n\n相关知识：互联网协议网络设备进网验收标准\n\n相关知识：常见互联网协议数据流的标记方法\n\n相关知识：和服务质量调度策略相关知识设备生命周期管理相关知识\n\n相关知识：相关网管系统软硬件结构\n\n相关知识：数据通信网络关键绩效指标\n\n相关知识：体系\n\n相关知识：互联网协议网络设计规范\n\n相关知识：网络规划知识安全密钥知识\n\n相关知识：互联网协议网络优化调整的评价指标\n\n相关知识：及分析方法"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S26#s1057",
+        "S26#s1060"
+      ]
+    },
+    {
+      "questionId": "ZA06",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "电子产品制版工的「底版制作—翻拍（等级3）」要求把什么翻拍成生产用底版、并检查哪一种一致性？其「底版检查—齐套性检查（等级1）」要求从哪些方面检查底版的齐套性？",
+      "referenceChunks": [
+        "S26#s1141",
+        "S26#s1144"
+      ],
+      "topk": [
+        {
+          "chunkId": "S26#s1141",
+          "score": null,
+          "text": "技能要求：能将人工贴图后照相原版翻拍为生产用底版\n\n技能要求：能检查翻拍后生产用底版与照相原版的一致性\n\n相关知识：生产用底版翻拍工艺\n\n相关知识：要求生产用底版与母版一致性要求\n\n相关知识：底版一致性检查方法"
+        },
+        {
+          "chunkId": "S26#s1144",
+          "score": null,
+          "text": "技能要求：能检查底版数量、种类等是否符合要求\n\n技能要求：能检查辨别底版、镜像关系与正负相图形关系\n\n技能要求：能检查产品图形、生产辅助图形附连测试图、形的完整性\n\n技能要求：能检查成套底版的重合度是否符合要求\n\n技能要求：能检查底版配套使用性是否符合要求\n\n相关知识：底版种类和齐套性所需底版数量要求\n\n相关知识：产品图形生产、辅助图形附连测试图形、的添加要求\n\n相关知识：成套底版重合度要求\n\n相关知识：与检查方法配套使用底版要求与检查方法"
+        },
+        {
+          "chunkId": "S26#s1136",
+          "score": null,
+          "text": "技能要求：能识别银盐底片、重氮底片等底片类型与药膜面\n\n技能要求：能检查与调整待用激光光绘机翻版机等设备、的水电气等状态、、\n\n技能要求：能检查激光强度、曝光\n\n技能要求：能量或时间等工艺参数是否符合工艺要求能按照已设定的加工要求进行底片绘制或翻拍操作\n\n技能要求：能设置激光强度、曝光\n\n技能要求：能量或时间等工艺参数能使用标准图形检查激光光绘机精度\n\n技能要求：能按要求保养和维护激光光绘机翻版机等设、备\n\n相关知识：底片类型药膜、面等基本知识\n\n相关知识：激光光绘机翻、版机等设备操作规程\n\n相关知识：底片绘制或翻拍工艺\n\n相关知识：要求光源洁净度与、温湿度等环境控制要求\n\n相关知识：底版绘制与翻拍工艺\n\n相关知识：控制要点激光光绘机翻、版机等设备调整方法\n\n相关知识：激光光绘机精度检查方法\n\n相关知识：激光光绘机翻、版机等设备维护保养要求"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S26#s1141",
+        "S26#s1144"
+      ]
+    },
+    {
+      "questionId": "ZB01",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "『信息安全测试员』的『个人信息合规分析』职业功能中，『个人信息安全事件分析（等级 2）』要求采用技术手段完成哪些分析与定位工作？『个人信息合规管理』职业功能中的『安全事件管理（等级 2）』围绕应急预案和恶意软件造成的安全事件又要求哪些能力？",
+      "referenceChunks": [
+        "S26#s922",
+        "S26#s928"
+      ],
+      "topk": [
+        {
+          "chunkId": "S26#s922",
+          "score": null,
+          "text": "技能要求：能采用技术手段对个人信息安全事件进行定位能采用技术手段对个人信息安全事件进行溯源分析\n\n技能要求：能对侵犯个人信息安全事件的风险等级进行分析能对侵犯个人信息的违法违规行为进行分析\n\n相关知识：个人信息安全事件定位方法数据溯源技术知识\n\n相关知识：个人信息安全事件溯源分析方法\n\n相关知识：个人信息安全事件分析方法常见的个人信息安全事件及违法违规行为"
+        },
+        {
+          "chunkId": "S26#s928",
+          "score": null,
+          "text": "技能要求：能制定个人信息安全事件应急预案能根据预案完成应急演练,并对应急预案进行修订能对恶意软件等造成的个人信息安全事件进行处置\n\n相关知识：个人信息安全事件应急预案制定方法应急演练知识\n\n相关知识：常见个人信息安全事件应急处置和报告相关知识\n\n相关知识：恶意软件相关知识\n\n相关知识：及处理方法"
+        },
+        {
+          "chunkId": "S26#s920",
+          "score": null,
+          "text": "技能要求：能对联网应用或设备侵犯个人信息风险进行监测能对联网应用或设备侵犯个人信息相关事件进行分析能对联网应用或设备软件开发包(SDK)利用情况实施监控\n\n相关知识：联网应用或设备监测方法联网应用或设备侵犯个人信息风险分析方法\n\n相关知识：联网应用或设备利用的软件开发包(SDK)监控方法\n\n相关知识：联网应用或设备软件开发包(SDK)利用情况分析方法"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S26#s922",
+        "S26#s928"
+      ]
+    },
+    {
+      "questionId": "ZB02",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "『信息安全测试员』的『个人信息合规检测』职业功能中，『个人信息收集、传输、使用或公开等行为检测（等级 1）』要求检测收集个人信息的哪些方面、并对哪些环节的合规性作出判定？『个人信息使用安全性检测（等级 2）』除访问控制安全性外还要求检测哪些内容？",
+      "referenceChunks": [
+        "S26#s911",
+        "S26#s916"
+      ],
+      "topk": [
+        {
+          "chunkId": "S26#s911",
+          "score": null,
+          "text": "技能要求：能对联网应用或设备收集个人信息的目的、方式、范围进行检测能对联网应用或设备中索权程度、捆绑授权行为进行检测或判定能对联网应用或设备收集的个人信息传输、使用、公开及其合规性进行检测\n\n相关知识：联网应用或设备收集个人信息的检测方法联网应用或设备收集个人信息合规要点\n\n相关知识：及常见的违法违规行为个人信息传输、使用或公开的合法合规性检测方法"
+        },
+        {
+          "chunkId": "S26#s916",
+          "score": null,
+          "text": "技能要求：能对联网应用或设备个人信息的访问控制安全性进行检测能对联网应用或设备个人信息的使用限制进行检测能对个人信息展示进行个人信息安全检测\n\n技能要求：能对互联网信息服务推荐算法不当使用等违法违规行为进行检测能对联网应用或设备涉及处理敏感个人信息的合规性进行检测能对个人信息删除的合规性进行检测\n\n相关知识：联网应用或设备个人信息的访问控制规则及安全性检测方法联网应用或设备个人信息的使用限制检测方法\n\n相关知识：常见的个人信息展示方法\n\n相关知识：及安全性检测方法\n\n相关知识：互联网信息服务推荐算法合规性及检测方法个人信息删除的合规性及检测方法"
+        },
+        {
+          "chunkId": "S26#s914",
+          "score": null,
+          "text": "技能要求：能对联网应用或设备个人信息收集过程的合法性进行检测能对联网应用或设备个人信息收集最小必要性进行检测\n\n相关知识：联网应用或设备个人信息收集过程合规检测方法个人信息收集最小必要性原则个人信息收集最小必要性检测方法"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S26#s911",
+        "S26#s916"
+      ]
+    },
+    {
+      "questionId": "ZB03",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "『信息安全测试员』的『个人信息合规分析』职业功能中，『代码审计（等级 1）』要求对联网应用或设备的哪两类代码分别做安全性审计与合规性审计、相关审计知识重点覆盖哪些模块？『个人信息合规检测』职业功能中的『个人信息合规检测工具使用（等级 1）』又要求掌握哪些工具及其用途？",
+      "referenceChunks": [
+        "S26#s913",
+        "S26#s921"
+      ],
+      "topk": [
+        {
+          "chunkId": "S26#s921",
+          "score": null,
+          "text": "技能要求：能对联网应用或设备调用的接口行为代码进行安全性审计能对联网应用或设备个人权限声明代码进行合规性审计\n\n相关知识：代码安全性审计知识个人信息保护代码(重点包括个人信息收集、身份及访问控制、传输及共享、日志、归档及个人信息删除等模块)审计知识"
+        },
+        {
+          "chunkId": "S26#s913",
+          "score": null,
+          "text": "技能要求：能使用逆向工程相关的检测工具进行个人信息合规检测能使用hook框架对应用程序进行动态分析和个人信息数据流检测能使用抓包工具监控和分析网络数据流,识别个人信息泄露风险\n\n相关知识：逆向工程相关工具的使用方法及应用场景hook框架的原理\n\n相关知识：及使用方法抓包工具的原理\n\n相关知识：及使用方法"
+        },
+        {
+          "chunkId": "S26#s910",
+          "score": null,
+          "text": "技能要求：能对联网应用或设备中隐私政策的独立性、易读性、准确性进行检测能对联网应用或设备中收集的个人信息类型进行检测能对联网应用或设备中隐私政策等文件的不合理条款进行检测\n\n相关知识：联网应用或设备中隐私政策合规检测方法个人信息分类联网应用或设备中个人信息处理合规检测方法"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S26#s921",
+        "S26#s913"
+      ]
+    },
+    {
+      "questionId": "ZB04",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "『信息安全测试员』的『个人信息合规管理』职业功能中，『个人信息保护合规体系建设（等级 3）』要求完成哪些体系性工作（含面向哪些对象设计保护方案、做什么自评估）？『个人信息保护安全研究』职业功能中的『跨境数据传输与安全管理（等级 3）』要求制定什么方案、监控什么？",
+      "referenceChunks": [
+        "S26#s929",
+        "S26#s938"
+      ],
+      "topk": [
+        {
+          "chunkId": "S26#s929",
+          "score": null,
+          "text": "技能要求：能根据业务特点和需求建立个人信息保护合规体系能对个人信息保护能力及违法违规行为进行评审能针对敏感个人信息、未成年人个人信息设计相应的保护方案能对个人信息跨境合规性进行自评估能对个人信息安全的防护策略进行效果分析及优化\n\n相关知识：个人信息分类分级知识个人信息保护方案制定方法\n\n相关知识：敏感个人信息、未成年人个人信息保护相关法律法规知识\n\n相关知识：数据加密、完整性保护知识\n\n相关知识：个人信息跨境合规评估知识\n\n相关知识：隐私计算知识\n\n相关知识：常见个人信息安全防护策略"
+        },
+        {
+          "chunkId": "S26#s938",
+          "score": null,
+          "text": "技能要求：能制定跨境数据传输的安全管理方案能监控跨境数据传输的合规性\n\n相关知识：跨境数据传输的安全管理知识跨境数据传输合规性监控方法"
+        },
+        {
+          "chunkId": "S26#s930",
+          "score": null,
+          "text": "技能要求：能根据业务需求对个人信息收集、存储、使用、加工、传输、提供、公开、删除等环节提出合规方案能为不同应用程序和联网设备开发、制造、运营提供个人信息保护咨询\n\n相关知识：个人信息收集、存储、使用、加工、传输、提供、公开、删除各环节合规方案合规咨询的原则合规咨询的流程\n\n相关知识：、方法典型行业个人信息保护合规要点"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S26#s929",
+        "S26#s938"
+      ]
+    },
+    {
+      "questionId": "ZB05",
+      "split": "holdout",
+      "set": "职业能力",
+      "question": "『信息安全测试员』的『个人信息保护安全研究』职业功能中，『数据安全保护（等级 2）』要求设计什么、评估什么？『个人信息合规管理』职业功能中的『个人信息保护影响评估（等级 2）』要求制订什么、识别什么并提出什么？",
+      "referenceChunks": [
+        "S26#s927",
+        "S26#s934"
+      ],
+      "topk": [
+        {
+          "chunkId": "S26#s934",
+          "score": null,
+          "text": "技能要求：能设计数据安全保护措施能评估数据安全措施的效果\n\n相关知识：数据安全技术数据安全评估方法"
+        },
+        {
+          "chunkId": "S26#s927",
+          "score": null,
+          "text": "技能要求：能对联网应用或设备进行个人信息保护影响评估,制订个人信息保护影响计划能进行个人信息保护影响评估,识别潜在风险能提出风险缓解措施\n\n相关知识：风险评估知识个人信息保护影响评估知识\n\n相关知识：风险识别与管理方法"
+        },
+        {
+          "chunkId": "S26#s929",
+          "score": null,
+          "text": "技能要求：能根据业务特点和需求建立个人信息保护合规体系能对个人信息保护能力及违法违规行为进行评审能针对敏感个人信息、未成年人个人信息设计相应的保护方案能对个人信息跨境合规性进行自评估能对个人信息安全的防护策略进行效果分析及优化\n\n相关知识：个人信息分类分级知识个人信息保护方案制定方法\n\n相关知识：敏感个人信息、未成年人个人信息保护相关法律法规知识\n\n相关知识：数据加密、完整性保护知识\n\n相关知识：个人信息跨境合规评估知识\n\n相关知识：隐私计算知识\n\n相关知识：常见个人信息安全防护策略"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S26#s934",
+        "S26#s927"
+      ]
+    },
+    {
+      "questionId": "ZB06",
+      "split": "holdout",
+      "set": "标准与政策",
+      "question": "『信息安全测试员』的『个人信息保护安全研究』职业功能中，『个人信息政策法规研究（等级 1）』要求查阅解读什么、并依据什么变化调整个人信息保护实施方案？『个人信息合规检测』职业功能中的『用户权利保障检测（等级 1）』要求检测用户哪些权利相关内容、并识别什么？",
+      "referenceChunks": [
+        "S26#s912",
+        "S26#s931"
+      ],
+      "topk": [
+        {
+          "chunkId": "S26#s931",
+          "score": null,
+          "text": "技能要求：能查阅和解读国内外个人信息保护相关法律法规能根据政策法规变化调整个人信息保护实施方案\n\n相关知识：国内外个人信息保护法律法规法律法规解读及应用方法"
+        },
+        {
+          "chunkId": "S26#s912",
+          "score": null,
+          "text": "技能要求：能对联网应用或设备收集个人信息时告知同意的方式、方法、内容的合规性进行检测能对联网应用或设备中的反馈申诉权利进行检测能对联网应用或设备使用过程中个人信息主体对其个人信息自主控制范围、权限、方式的合规性进行检测能识别联网应用或设备使用过程中涉及的敏感个人信息\n\n相关知识：联网应用或设备中用户权利相关法律法规要求联网应用或设备中用户权利检测方法\n\n相关知识：敏感个人信息相关知识"
+        },
+        {
+          "chunkId": "S26#s936",
+          "score": null,
+          "text": "技能要求：能跟踪并分析个人信息保护政策法规的变化能解读政策变化,提出实施方案\n\n相关知识：个人信息保护政策法规政策法规实施方法"
+        }
+      ],
+      "hit": true,
+      "hits": [
+        "S26#s931",
+        "S26#s912"
+      ]
+    }
+  ]
+}

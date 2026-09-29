@@ -1,0 +1,234 @@
+{
+  "generatedAt": "2026-09-29T16:52:22+0800",
+  "model": "term-map:knowledge\\term-map\\zh-en.json",
+  "kinds": [
+    "occupation",
+    "section",
+    "software_category"
+  ],
+  "queries": {
+    "XC01": "在 ESP-IDF 的 SPI 主机驱动里：(1) 用来描述一次传输事务中命令阶段、地址阶段、数据阶段各自线宽的那个结构体，它的三个成员分别对应哪个阶段？成员的取值含义是什么（取 2、1、4 分别代表什么写法）？(2) 初始化 SPI 总线时可用的总线标志里，与引脚走线方式相关的两个标志分别表示什么？它们既可表示初始化意图也可用于查询，在查询引脚走线状态时如何区分信号是经 IO mux 还是经 GPIO matrix 路由？",
+    "XC02": "关于 ESP-IDF 的堆内存分配：(1) 当启用片外 RAM、要把可分配内存放到外部 SPI RAM 时，用常规分配接口（标准 malloc，或带 SPIRAM 能力参数的分配接口）能覆盖的容量上限是多少？要使用超出该上限的那部分外部 SPI RAM，必须改用哪种机制？(2) 当一个分配接口同时给出多个带偏好的内存能力参数时，分配器按什么顺序尝试分配？在什么条件下才算失败并返回空指针？",
+    "XE01": "在 ESP-IDF 的 GPIO 参考中：peripherals/gpio/generic_gpio 示例演示了哪两种 GPIO 用法？调用 gpio_isr_register 注册中断处理程序时，处理程序会被挂在哪个 CPU 核上、在什么情况下被调用；如果要禁用或移除这个 ISR 应该怎么做，以及什么情况下该函数会返回 ESP_ERR_NOT_FOUND？",
+    "XE02": "在 ESP-IDF 的 RTC GPIO / GPIO 参考中：(1) 把一个 IO 初始化为 RTC GPIO 要调用哪个函数、它会把该 IO 的路由切到哪个 MUX（对应的反初始化函数又切回哪里）？rtc_gpio_is_valid_gpio 返回 true 和 false 各代表什么？(2) 在 gpio_mode_t 与 gpio_pull_mode_t 中，表示「只输出且开漏」、「上下拉同时使能」、「垫片悬空」的枚举值分别叫什么？",
+    "XE03": "按 MindSpore 端侧推理快速入门的 Linux 篇流程操作：(1) 下载发布件时要依据什么来选择发布件，本例选的是哪一种（软件系统、底层架构、版本）？(2) 进入集成推理环节后，MindSpore Lite 加载模型对 Context 有什么硬性要求；用 CPU 推理时设备信息是通过哪个接口、哪个类挂到 Context 上的，是否需要对它做额外设置？",
+    "XE04": "在 MindSpore 端侧推理快速入门中：(1) 把非 ms 模型转成 MindSpore Lite 使用的 ms 模型时，转换工具包含在哪些平台的发布件里；这个转换操作与执行平台的关系是什么，在不同平台上执行会得到相同还是不同的转换后模型文件？(2) 文档中 benchmark 推理测试的配置样例里，ModelPath 和 ModelType 分别写的是什么值；DeviceType、NumThreads、WarmUpLoopCount、LoopCount 又分别取什么值？",
+    "XE05": "在 Selenium 的显式等待中：(1) 文档说 Wait 类可以通过各种参数实例化来改变条件的评估方式，这些可定制的内容具体包括哪几类？(2) 在 Java 里做这种定制最常用的是哪个类；示例把总超时设为 2 秒、轮询间隔设为 300 毫秒、并自动忽略「元素不可交互」异常，对应的是哪三个方法调用？在 .NET 示例中，轮询间隔和被忽略的异常类型又分别是通过什么设置的？",
+    "XA01": "O*NET 收录的『软件质量保证分析师与测试员』这个职业，在其「工作活动」里 \"Organizing, Planning, and Prioritizing Work\" 与 \"Monitoring Processes, Materials, or Surroundings\" 分别被定义成什么工作？在其「可迁移技能」里，与质量检验和系统绩效评估对应的 \"Quality Control Analysis\" 与 \"Systems Evaluation\" 又分别怎么定义？ Software Quality Assurance Analysts and Testers Detailed Work Activities Transferable Skills Work Activities",
+    "XA02": "O*NET 收录的『软件质量保证分析师与测试员』这个职业，其「详细工作活动」中与评估软硬件技术效用、评估数据库性能、修改软件程序以改进性能、为分析准备数据、向他人提供计算机硬件建议相对应的原文活动分别是什么？其「软件技能」里 \"File versioning software\" 与 \"Enterprise application integration software\" 两类各列出了哪些工具，其中哪些被标注为 Hot Technology，条目没列全时用什么方式提示？ Computer Hardware Engineers Software Quality Assurance Analysts and Testers Detailed Work Activities Work Activities Data base management system software",
+    "XA03": "O*NET 收录的『软件质量保证分析师与测试员』这个职业被划入哪个 Job Zone，对应的 SVP 范围是多少？该 Job Zone 对学历、相关经验与在职培训分别提了什么要求，并举了哪些职业作为举例？在其「能力」条目里 \"Problem Sensitivity\" 与 \"Information Ordering\" 分别怎么定义？ Software Quality Assurance Analysts and Testers",
+    "XA04": "O*NET 收录的『计算机硬件工程师』这个职业，在其「工作活动」里 \"Repairing and Maintaining Electronic Equipment\" 与 \"Developing and Building Teams\" 分别怎么定义？在其「工作环境」中，受访者对 \"Importance of Being Exact or Accurate\"、\"Level of Competition\" 与 \"Duration of Typical Work Week\" 的回答比例分别是多少？ Computer Hardware Engineers Detailed Work Activities Work Activities Work Context",
+    "XA05": "O*NET 收录的『计算机硬件工程师』这个职业，其「软件技能」中 \"Process mapping and design software\"、\"Program testing software\"、\"Spreadsheet software\" 三类分别列出了哪些工具？该段对 Hot Technology 的含义、以及该职业 Hot Technologies 与 In Demand skills 的数量是怎么说明的？在其「知识」条目里 \"Computers and Electronics\" 与 \"Engineering and Technology\" 分别怎么定义？ Computer Hardware Engineers",
+    "XA06": "O*NET 收录的『计算机硬件工程师』这个职业，在其「能力」条目里 \"Visualization\"、\"Mathematical Reasoning\" 与 \"Flexibility of Closure\" 分别怎么定义？在其「工作风格」条目里 \"Attention to Detail\" 与 \"Intellectual Curiosity\" 又是如何描述的？ Computer Hardware Engineers Work Styles",
+    "XD01": "O*NET 收录的『计算机硬件工程师』（Computer Hardware Engineers，17-2061.00）这一职业：其 Apprenticeship Opportunities 小节给出的示例学徒岗位名称是什么，这些岗位由谁审核并批准、用于哪一类项目？其 Professional Associations 的 National Associations 类别下，与计算机、工程直接相关的全国性协会有哪些（至少举出三个）？ Computer Hardware Engineers",
+    "XD02": "O*NET 收录的『计算机硬件工程师』这一职业：其 Abilities 小节把「把一般规则应用到具体问题上以得出合理答案」与「按某一特定规则把事物或动作排成一定顺序或模式」分别定义为哪两项能力（请给出英文名称）？其 Detailed Work Activities 小节列出的活动里，与「测试、验证」直接相关的有哪几项？ Computer Hardware Engineers",
+    "XD03": "O*NET 收录的『计算机硬件工程师』这一职业：其 Job Zone 小节给出的级别名称是什么、SVP Range 是多少、该小节对新入职者的学历是如何描述的？其 Education 小节里受访者给出的前三项学历要求分别是什么、占比各多少？这两处关于学历的说法是否一致？ Computer Hardware Engineers",
+    "XB01": "在 pytest 中，如果希望某个 fixture 无需在每个用例的函数签名里声明就能被本文件所有用例自动使用，应当怎样设置该 fixture？在需要先完成一套准备、再连续执行多条断言的场景下，官方建议把它定义成自动使用的 fixture 并搭配什么样的 scope？",
+    "XB02": "在 pytest 中，一个 fixture 能否使用 scope 更宽（更大）的另一个 fixture，反过来是否可以？当多个用例请求同一个 fixture 时会发生什么，为什么它们跑起来几乎和只跑一个用例一样快？",
+    "XB03": "在 pytest 中，参数化 fixture 的每个取值会对应一个怎样的用例标识？这个标识还附带什么用途，以及怎样才能自定义这个标识字符串？",
+    "XB04": "pytest 运行时会怎样处理同时处于活动状态的 fixture 数量？对一个带参数的 fixture，为什么它可能在同一个 scope 内被多次执行、pytest 又是如何安排这些实例的创建与销毁先后顺序的？",
+    "XB05": "在 pytest 中，同名 fixture 能否在某个测试目录层级被覆盖？覆盖后的版本还能否方便地取到被覆盖的原始 fixture？如果把某层级带参数的 fixture 改成不带参数的版本（或反过来），这种覆盖是否依然成立？",
+    "ZC01": "在飞桨（PaddlePaddle）框架中，打印一个 Tensor 时通常能看到哪些属性信息？这些属性对操作 Tensor 有什么意义？另外，如果想查看某个 Tensor 的名称，应该使用哪个属性，默认的名称是什么样子的？",
+    "ZC02": "飞桨（PaddlePaddle）的 Tensor 提供了一系列矩阵计算 API，请至少举出三个并说明各自用途（如矩阵转置、范数、矩阵乘法分别怎么调用）。此外，这些计算 API 的原位（inplace）操作与非原位操作有什么区别，从写法上如何区分？",
+    "ZA01": "信息安全测试员的「安全研究—漏洞工具研究」中，围绕漏洞触发代码需要完成哪些工作（从编写触发代码到形成可用的测试工具）？其「脆弱性测试—测试实施」在安全压力测试方面要求产出哪些成果、并对应哪些相关知识？ Software Quality Assurance Analysts and Testers",
+    "ZA02": "网络与信息安全管理员的「风险管控—风险判断（等级1）」要求能依据哪几类审核结果进行风险预判、并如何处理风险预判案例？其「风险管控—案例汇总（等级1）」要求把汇总的典型案例做关联汇总后达成什么目的、又可据此做出哪些调整？",
+    "ZA03": "电子专用设备装调工的「作业准备—装配调试作业准备（等级2）」要求准备哪些图纸和接线图，并按工艺文件选用、连接哪几类仪器仪表？其「装配作业—识图及电路板装配（等级1）」要求读懂什么图、识别哪些符号，并依据什么在电路板上装配元器件？",
+    "ZA04": "物联网安装调试员的「硬件设备安装与调试—安装、调试变送器（等级3）」对变送器提出了哪几项技能要求、分别对应哪些相关知识？其「硬件设备安装与调试—排除物联网终端故障（等级4）」在分析与排除故障后要求编写什么文档，相关知识包括哪些内容？",
+    "ZA05": "信息通信网络机务员的「移动无线网络维护—故障分析与处理（等级1）」中，针对室内分布系统故障要求具备哪些分析与处理能力？其「数据通信网络维护—故障分析与处理（等级1）」中，针对互联网骨干网应急要求编制并实施什么、并能依据应急预案做什么？",
+    "ZA06": "电子产品制版工的「底版制作—翻拍（等级3）」要求把什么翻拍成生产用底版、并检查哪一种一致性？其「底版检查—齐套性检查（等级1）」要求从哪些方面检查底版的齐套性？",
+    "ZB01": "『信息安全测试员』的『个人信息合规分析』职业功能中，『个人信息安全事件分析（等级 2）』要求采用技术手段完成哪些分析与定位工作？『个人信息合规管理』职业功能中的『安全事件管理（等级 2）』围绕应急预案和恶意软件造成的安全事件又要求哪些能力？ Software Quality Assurance Analysts and Testers",
+    "ZB02": "『信息安全测试员』的『个人信息合规检测』职业功能中，『个人信息收集、传输、使用或公开等行为检测（等级 1）』要求检测收集个人信息的哪些方面、并对哪些环节的合规性作出判定？『个人信息使用安全性检测（等级 2）』除访问控制安全性外还要求检测哪些内容？ Software Quality Assurance Analysts and Testers",
+    "ZB03": "『信息安全测试员』的『个人信息合规分析』职业功能中，『代码审计（等级 1）』要求对联网应用或设备的哪两类代码分别做安全性审计与合规性审计、相关审计知识重点覆盖哪些模块？『个人信息合规检测』职业功能中的『个人信息合规检测工具使用（等级 1）』又要求掌握哪些工具及其用途？ Software Quality Assurance Analysts and Testers",
+    "ZB04": "『信息安全测试员』的『个人信息合规管理』职业功能中，『个人信息保护合规体系建设（等级 3）』要求完成哪些体系性工作（含面向哪些对象设计保护方案、做什么自评估）？『个人信息保护安全研究』职业功能中的『跨境数据传输与安全管理（等级 3）』要求制定什么方案、监控什么？ Software Quality Assurance Analysts and Testers",
+    "ZB05": "『信息安全测试员』的『个人信息保护安全研究』职业功能中，『数据安全保护（等级 2）』要求设计什么、评估什么？『个人信息合规管理』职业功能中的『个人信息保护影响评估（等级 2）』要求制订什么、识别什么并提出什么？ Software Quality Assurance Analysts and Testers",
+    "ZB06": "『信息安全测试员』的『个人信息保护安全研究』职业功能中，『个人信息政策法规研究（等级 1）』要求查阅解读什么、并依据什么变化调整个人信息保护实施方案？『个人信息合规检测』职业功能中的『用户权利保障检测（等级 1）』要求检测用户哪些权利相关内容、并识别什么？ Software Quality Assurance Analysts and Testers"
+  },
+  "fired": {
+    "XC01": [],
+    "XC02": [],
+    "XE01": [],
+    "XE02": [],
+    "XE03": [],
+    "XE04": [],
+    "XE05": [],
+    "XA01": [
+      {
+        "en": "Software Quality Assurance Analysts and Testers",
+        "kind": "occupation",
+        "matchedKey": "软件测试员"
+      },
+      {
+        "en": "Detailed Work Activities",
+        "kind": "section",
+        "matchedKey": "工作活动"
+      },
+      {
+        "en": "Transferable Skills",
+        "kind": "section",
+        "matchedKey": "可迁移技能"
+      },
+      {
+        "en": "Work Activities",
+        "kind": "section",
+        "matchedKey": "工作活动"
+      }
+    ],
+    "XA02": [
+      {
+        "en": "Computer Hardware Engineers",
+        "kind": "occupation",
+        "matchedKey": "计算机硬件"
+      },
+      {
+        "en": "Software Quality Assurance Analysts and Testers",
+        "kind": "occupation",
+        "matchedKey": "软件测试员"
+      },
+      {
+        "en": "Detailed Work Activities",
+        "kind": "section",
+        "matchedKey": "详细工作活动"
+      },
+      {
+        "en": "Work Activities",
+        "kind": "section",
+        "matchedKey": "工作活动"
+      },
+      {
+        "en": "Data base management system software",
+        "kind": "software_category",
+        "matchedKey": "数据库软件"
+      }
+    ],
+    "XA03": [
+      {
+        "en": "Software Quality Assurance Analysts and Testers",
+        "kind": "occupation",
+        "matchedKey": "软件测试员"
+      }
+    ],
+    "XA04": [
+      {
+        "en": "Computer Hardware Engineers",
+        "kind": "occupation",
+        "matchedKey": "计算机硬件工程师"
+      },
+      {
+        "en": "Detailed Work Activities",
+        "kind": "section",
+        "matchedKey": "工作活动"
+      },
+      {
+        "en": "Work Activities",
+        "kind": "section",
+        "matchedKey": "工作活动"
+      },
+      {
+        "en": "Work Context",
+        "kind": "section",
+        "matchedKey": "工作环境"
+      }
+    ],
+    "XA05": [
+      {
+        "en": "Computer Hardware Engineers",
+        "kind": "occupation",
+        "matchedKey": "计算机硬件工程师"
+      }
+    ],
+    "XA06": [
+      {
+        "en": "Computer Hardware Engineers",
+        "kind": "occupation",
+        "matchedKey": "计算机硬件工程师"
+      },
+      {
+        "en": "Work Styles",
+        "kind": "section",
+        "matchedKey": "工作风格"
+      }
+    ],
+    "XD01": [
+      {
+        "en": "Computer Hardware Engineers",
+        "kind": "occupation",
+        "matchedKey": "计算机硬件工程师"
+      }
+    ],
+    "XD02": [
+      {
+        "en": "Computer Hardware Engineers",
+        "kind": "occupation",
+        "matchedKey": "计算机硬件工程师"
+      }
+    ],
+    "XD03": [
+      {
+        "en": "Computer Hardware Engineers",
+        "kind": "occupation",
+        "matchedKey": "计算机硬件工程师"
+      }
+    ],
+    "XB01": [],
+    "XB02": [],
+    "XB03": [],
+    "XB04": [],
+    "XB05": [],
+    "ZC01": [],
+    "ZC02": [],
+    "ZA01": [
+      {
+        "en": "Software Quality Assurance Analysts and Testers",
+        "kind": "occupation",
+        "matchedKey": "软件测试员"
+      }
+    ],
+    "ZA02": [],
+    "ZA03": [],
+    "ZA04": [],
+    "ZA05": [],
+    "ZA06": [],
+    "ZB01": [
+      {
+        "en": "Software Quality Assurance Analysts and Testers",
+        "kind": "occupation",
+        "matchedKey": "软件测试员"
+      }
+    ],
+    "ZB02": [
+      {
+        "en": "Software Quality Assurance Analysts and Testers",
+        "kind": "occupation",
+        "matchedKey": "软件测试员"
+      }
+    ],
+    "ZB03": [
+      {
+        "en": "Software Quality Assurance Analysts and Testers",
+        "kind": "occupation",
+        "matchedKey": "软件测试员"
+      }
+    ],
+    "ZB04": [
+      {
+        "en": "Software Quality Assurance Analysts and Testers",
+        "kind": "occupation",
+        "matchedKey": "软件测试员"
+      }
+    ],
+    "ZB05": [
+      {
+        "en": "Software Quality Assurance Analysts and Testers",
+        "kind": "occupation",
+        "matchedKey": "软件测试员"
+      }
+    ],
+    "ZB06": [
+      {
+        "en": "Software Quality Assurance Analysts and Testers",
+        "kind": "occupation",
+        "matchedKey": "软件测试员"
+      }
+    ]
+  }
+}
