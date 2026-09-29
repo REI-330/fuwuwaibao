@@ -1,6 +1,6 @@
 {
   "schema": "career-graph-bm25-retrieval/v1",
-  "generatedAt": "2026-09-27T11:02:37.597Z",
+  "generatedAt": "2026-09-29T12:27:19.310Z",
   "retriever": {
     "type": "bm25",
     "impl": "knowledge/pipeline/lib/graph.mjs",

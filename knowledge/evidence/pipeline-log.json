@@ -1,6 +1,6 @@
 {
   "schema": "career-graph-pipeline-log/v1",
-  "updatedAt": "2026-09-29T09:18:12.987Z",
+  "updatedAt": "2026-09-29T12:29:05.892Z",
   "steps": [
     {
       "step": "01",
@@ -377,9 +377,9 @@
       "step": "10",
       "title": "布局与索引",
       "command": "node knowledge/pipeline/10-layout-index.mjs",
-      "startedAt": "2026-09-27T11:02:21.415Z",
-      "finishedAt": "2026-09-27T11:02:21.946Z",
-      "durationMs": 531,
+      "startedAt": "2026-09-29T12:29:03.516Z",
+      "finishedAt": "2026-09-29T12:29:04.067Z",
+      "durationMs": 551,
       "inputs": [
         "knowledge/extract/accepted.jsonl",
         "knowledge/chunks/chunks.jsonl",
@@ -409,15 +409,15 @@
         "本步不改 annotatedBy：llm-draft → llm-reviewed 的唯一通道仍是第 06 步（设计文档 L251）。"
       ],
       "node": "v22.22.2",
-      "runCount": 11
+      "runCount": 12
     },
     {
       "step": "11",
       "title": "版本化导出与效果评测",
       "command": "node knowledge/pipeline/11-export-eval.mjs",
-      "startedAt": "2026-09-27T11:02:22.023Z",
-      "finishedAt": "2026-09-27T11:02:23.744Z",
-      "durationMs": 1721,
+      "startedAt": "2026-09-29T12:29:04.166Z",
+      "finishedAt": "2026-09-29T12:29:05.892Z",
+      "durationMs": 1726,
       "inputs": [
         "knowledge/graph/graph.json",
         "knowledge/chunks/chunks.jsonl",
@@ -455,7 +455,7 @@
         "评测只报检索中间态（Top-3 + 分值 + 耗时），不调模型；「引用支持度」需人工判定，报告已明确标注为未做（§7 L262 / L276）。"
       ],
       "node": "v22.22.2",
-      "runCount": 32
+      "runCount": 33
     },
     {
       "step": "12",

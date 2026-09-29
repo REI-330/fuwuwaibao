@@ -45,6 +45,22 @@ function jsonResult<T extends ToolPayload>(payload: T) {
   };
 }
 
+/**
+ * 工具描述里的规模数字**从导出派生，不写死**。
+ *
+ * 写死过一次：语料 2026-09-27 由 494 段重组为 1757 段后，这里仍在对外声称「494 段原文」，
+ * 于是任何宿主 `tools/list` 看到的第一句话就是过期数字（与 `lib/graph.mjs` 里
+ * `describeTokenizer()` 同一个教训：元数据硬编码就一定会漂）。
+ */
+function graphSizeLabel(store: CareerKnowledgeStore): string {
+  const counts = store.raw.meta.counts ?? {};
+  const nodes = counts.nodes ?? store.graph.nodes.length;
+  const edges = counts.edges ?? store.graph.edges.length;
+  const chunks = counts.chunks ?? store.raw.chunks.length;
+  const sources = counts.sources ?? store.raw.sources.length;
+  return `${nodes} 个节点 / ${edges} 条边 / ${chunks} 段原文 / ${sources} 份来源`;
+}
+
 export function createCareerGraphServer(store: CareerKnowledgeStore = getDefaultStore()): McpServer {
   const server = new McpServer(SERVER_INFO, {
     instructions:
@@ -57,7 +73,7 @@ export function createCareerGraphServer(store: CareerKnowledgeStore = getDefault
     {
       title: "检索职业图谱知识",
       description:
-        "在同一份版本化图谱（63 个节点 / 226 条边 / 494 段原文）里做图感知检索：命中节点会连同图邻域关系、" +
+        `在同一份版本化图谱（${graphSizeLabel(store)}）里做图感知检索：命中节点会连同图邻域关系、` +
         "chunk 级引用与 wiki 路径一起返回，而不是只甩一段文本。用于「某职业需要什么」「某技能属于哪个能力域」这类问题。",
       inputSchema: {
         query: z.string().min(1).describe("检索词，例如「模型量化」「边缘 AI 工程师」「SK090」。中英文均可。"),
