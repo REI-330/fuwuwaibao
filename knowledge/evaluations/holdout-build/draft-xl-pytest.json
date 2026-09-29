@@ -1,0 +1,60 @@
+{
+  "shard": "xl-pytest",
+  "questions": [
+    {
+      "questionId": "XB01",
+      "split": "holdout",
+      "category": "测试自动化",
+      "question": "在 pytest 中，如果希望某个 fixture 无需在每个用例的函数签名里声明就能被本文件所有用例自动使用，应当怎样设置该 fixture？在需要先完成一套准备、再连续执行多条断言的场景下，官方建议把它定义成自动使用的 fixture 并搭配什么样的 scope？",
+      "answerable": true,
+      "referenceChunks": ["S13#s208", "S13#s219"],
+      "gradingNotes": "在 fixture 装饰器上传入 autouse=True，即可让本文件所有用例自动请求该 fixture；被自动启用的 fixture 仍然可以被显式写进用例签名请求；为在一次测试里连续运行多条断言，可先提升到更大的 scope，再把执行动作本身定义成一个 autouse fixture，并让其它 fixture 都指向该更高的层级 scope。",
+      "sourceId": "S13",
+      "layer": "xl"
+    },
+    {
+      "questionId": "XB02",
+      "split": "holdout",
+      "category": "测试自动化",
+      "question": "在 pytest 中，一个 fixture 能否使用 scope 更宽（更大）的另一个 fixture，反过来是否可以？当多个用例请求同一个 fixture 时会发生什么，为什么它们跑起来几乎和只跑一个用例一样快？",
+      "answerable": true,
+      "referenceChunks": ["S13#s225~2", "S13#s209~2"],
+      "gradingNotes": "fixture 可以使用 scope 更宽的 fixture，但不能反过来——session 级 fixture 无法有意义地使用 module 级 fixture；若多个用例请求同一个 fixture，它们会复用同一个实例（pytest 在 traceback 里显示传入的参数值，可看到同一对象被传给两个用例），因此这些用例几乎像只运行了一个那样快。",
+      "sourceId": "S13",
+      "layer": "xl"
+    },
+    {
+      "questionId": "XB03",
+      "split": "holdout",
+      "category": "测试自动化",
+      "question": "在 pytest 中，参数化 fixture 的每个取值会对应一个怎样的用例标识？这个标识还附带什么用途，以及怎样才能自定义这个标识字符串？",
+      "answerable": true,
+      "referenceChunks": ["S13#s226~2", "S13#s223~3"],
+      "gradingNotes": "参数化 fixture 的每个取值都会生成一个用例标识，多个参数值按顺序拼进方括号，例如 test_1[mod1]、test_2[mod1-1]、test_1[mod2]；这些标识可用于 -k 选择要运行的特定用例，也能在失败时定位具体用例，配合 --collect-only 可列出生成的标识；数字、字符串、布尔和 None 用其通常的字符串表示，其它对象则依据参数名生成，可通过 ids 关键字参数自定义标识字符串。",
+      "sourceId": "S13",
+      "layer": "xl"
+    },
+    {
+      "questionId": "XB04",
+      "split": "holdout",
+      "category": "测试自动化",
+      "question": "pytest 运行时会怎样处理同时处于活动状态的 fixture 数量？对一个带参数的 fixture，为什么它可能在同一个 scope 内被多次执行、pytest 又是如何安排这些实例的创建与销毁先后顺序的？",
+      "answerable": true,
+      "referenceChunks": ["S13#s226", "S13#s210"],
+      "gradingNotes": "pytest 会尽量减少运行期间同时处于活动状态的 fixture 数量；对参数化 fixture，所有使用它的用例会先用同一个实例执行，然后先调用 finalizer，之后才创建下一个实例；由于 pytest 同一时刻只缓存一个 fixture 实例，使用参数化 fixture 时它可能在同一个 scope 内被多次调用。",
+      "sourceId": "S13",
+      "layer": "xl"
+    },
+    {
+      "questionId": "XB05",
+      "split": "holdout",
+      "category": "测试自动化",
+      "question": "在 pytest 中，同名 fixture 能否在某个测试目录层级被覆盖？覆盖后的版本还能否方便地取到被覆盖的原始 fixture？如果把某层级带参数的 fixture 改成不带参数的版本（或反过来），这种覆盖是否依然成立？",
+      "answerable": true,
+      "referenceChunks": ["S13#s229", "S13#s232"],
+      "gradingNotes": "同名 fixture 可以在某个测试目录层级被覆盖，且覆盖版本中可以方便地访问被覆盖的基/超（super）fixture；覆盖对是否参数化同样适用——带参数的 fixture 可被不带参数的版本覆盖，不带参数的也可被带参数的覆盖，且该规则同样适用于测试目录层级。",
+      "sourceId": "S13",
+      "layer": "xl"
+    }
+  ]
+}

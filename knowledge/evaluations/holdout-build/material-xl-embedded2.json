@@ -1,184 +1,13 @@
 {
-  "shard": "xl-embedded",
+  "shard": "xl-embedded2",
   "sources": [
-    "S02",
-    "S03",
     "S04",
     "S05",
     "S12"
   ],
   "note": "候选段均已排除：被 dev/test 引用过、在图谱引用集合内、与已用段原文区间重叠。受格点抽样保证，同一 sourceId 内任意两段的 docIndex 差都是 3 的倍数且 ≥3（起草时用 docIndex 差判断间隔，不要用数组下标）。",
-  "count": 36,
+  "count": 26,
   "candidates": [
-    {
-      "chunkId": "S02#s16",
-      "sourceId": "S02",
-      "docIndex": 0,
-      "sectionPath": "SPI 主机驱动程序 > SPI 传输事务 > 获取总线",
-      "cjkRatio": 0.5752,
-      "length": 153,
-      "charRange": [
-        5171,
-        5324
-      ],
-      "text": "若需连续发送专门的 SPI 传输事务以提高效率，可采用获取总线的方式。获取总线后，与其他设备间的传输事务（包括轮询传输事务或中断传输事务）将处于待处理状态，直到总线被释放。要获取和释放总线，请调用函数 spi_device_acquire_bus() 和 spi_device_release_bus()。"
-    },
-    {
-      "chunkId": "S02#s34",
-      "sourceId": "S02",
-      "docIndex": 6,
-      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Common > Header File",
-      "cjkRatio": 0.0,
-      "length": 365,
-      "charRange": [
-        16337,
-        16702
-      ],
-      "text": "components/esp_driver_spi/include/driver/spi_common.h\n\nThis header file can be included with:\n\n#include \"driver/spi_common.h\"\n\nThis header file is a part of the API provided by the esp_driver_spi component. To declare that your component depends on esp_driver_spi, add the following to your CMakeLists.txt:\n\nREQUIRES esp_driver_spi\n\nor\n\nPRIV_REQUIRES esp_driver_spi"
-    },
-    {
-      "chunkId": "S02#s37",
-      "sourceId": "S02",
-      "docIndex": 12,
-      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Common > Macros",
-      "cjkRatio": 0.0025,
-      "length": 1598,
-      "charRange": [
-        21771,
-        23369
-      ],
-      "text": "SPI_MAX_DMA_LEN\n\nSPI_SWAP_DATA_TX(DATA, LEN)\n\nTransform unsigned integer of length <= 32 bits to the format which can be sent by the SPI driver directly.\n\nE.g. to send 9 bits of data, you can:\n\nuint16_t data = SPI_SWAP_DATA_TX(0x145, 9);\n\nThen points tx_buffer to &data.\n\n参数:\n\nDATA -- Data to be sent, can be uint8_t, uint16_t or uint32_t.\n\nLEN -- Length of data to be sent, since the SPI peripheral sends from the MSB, this helps to shift the data to the MSB.\n\nSPI_SWAP_DATA_RX(DATA, LEN)\n\nTransform received data of length <= 32 bits to the format of an unsigned integer.\n\nE.g. to transform the data of 15 bits placed in a 4-byte array to integer:\n\nuint16_t data = SPI_SWAP_DATA_RX(*(uint32_t*)t->rx_data, 15);\n\n参数:\n\nDATA -- Data to be rearranged, can be uint8_t, uint16_t or uint32_t.\n\nLEN -- Length of data received, since the SPI peripheral writes from the MSB, this helps to shift the data to the LSB.\n\nSPICOMMON_BUSFLAG_SLAVE\n\nInitialize I/O in slave mode.\n\nSPICOMMON_BUSFLAG_MASTER\n\nInitialize I/O in master mode.\n\nSPICOMMON_BUSFLAG_IOMUX_PINS\n\nCheck using iomux pins. Or indicates the pins are configured through the IO mux rather than GPIO matrix.\n\nSPICOMMON_BUSFLAG_GPIO_PINS\n\nForce the signals to be routed through GPIO matrix. Or indicates the pins are routed through the GPIO matrix.\n\nSPICOMMON_BUSFLAG_SCLK\n\nCheck existing of SCLK pin. Or indicates CLK line initialized.\n\nSPICOMMON_BUSFLAG_MISO\n\nCheck existing of MISO pin. Or indicates MISO line initialized.\n\nSPICOMMON_BUSFLAG_MOSI\n\nCheck existing of MOSI pin. Or indicates MOSI line initialized.\n\nSPICOMMON_BUSFLAG_DUAL"
-    },
-    {
-      "chunkId": "S02#s31",
-      "sourceId": "S02",
-      "docIndex": 3,
-      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Common > Structures",
-      "cjkRatio": 0.0,
-      "length": 330,
-      "charRange": [
-        14266,
-        14596
-      ],
-      "text": "struct spi_line_mode_t\n\nLine mode of SPI transaction phases: CMD, ADDR, DOUT/DIN.\n\nPublic Members\n\nuint8_t cmd_lines\n\nThe line width of command phase, e.g. 2-line-cmd-phase.\n\nuint8_t addr_lines\n\nThe line width of address phase, e.g. 1-line-addr-phase.\n\nuint8_t data_lines\n\nThe line width of data phase, e.g. 4-line-data-phase."
-    },
-    {
-      "chunkId": "S02#s33~2",
-      "sourceId": "S02",
-      "docIndex": 9,
-      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Common > Enumerations",
-      "cjkRatio": 0.0,
-      "length": 63,
-      "charRange": [
-        17133,
-        17196
-      ],
-      "text": "Data sampling point follows standard SPI timing in master mode."
-    },
-    {
-      "chunkId": "S02#s40",
-      "sourceId": "S02",
-      "docIndex": 15,
-      "sectionPath": "SPI 主机驱动程序 > API 参考 - SPI Master > Header File",
-      "cjkRatio": 0.0,
-      "length": 365,
-      "charRange": [
-        24502,
-        24867
-      ],
-      "text": "components/esp_driver_spi/include/driver/spi_master.h\n\nThis header file can be included with:\n\n#include \"driver/spi_master.h\"\n\nThis header file is a part of the API provided by the esp_driver_spi component. To declare that your component depends on esp_driver_spi, add the following to your CMakeLists.txt:\n\nREQUIRES esp_driver_spi\n\nor\n\nPRIV_REQUIRES esp_driver_spi"
-    },
-    {
-      "chunkId": "S03#s48",
-      "sourceId": "S03",
-      "docIndex": 0,
-      "sectionPath": "堆内存分配 > 可用堆空间 > DRAM",
-      "cjkRatio": 0.5936,
-      "length": 219,
-      "charRange": [
-        1811,
-        2030
-      ],
-      "text": "启动时，DRAM 堆包含应用程序未静态分配的所有数据内存，减少静态分配的 buffer 将增加可用的空闲堆空间。\n\n调用命令 idf.py size 可查找静态分配内存大小。\n\n备注\n\n有关 DRAM 使用限制的详细信息，请参阅 DRAM（数据 RAM） 。\n\n备注\n\n运行时可用的 DRAM 堆空间可能少于编译时计算的大小，因为启动时会在运行 FreeRTOS 调度程序之前从堆中分配部分内存，包括初始 FreeRTOS 任务的栈内存。"
-    },
-    {
-      "chunkId": "S03#s59",
-      "sourceId": "S03",
-      "docIndex": 6,
-      "sectionPath": "堆内存分配 > 实现说明",
-      "cjkRatio": 0.6401,
-      "length": 364,
-      "charRange": [
-        3867,
-        4231
-      ],
-      "text": "堆属性分配器对芯片内存区域的了解源于 SoC 组件，该组件包含芯片的内存布局信息以及每个区域的不同属性。各区域的功能为首要考虑因素，如会优先使用 DRAM 和 IRAM 特定区域而非用途更广的 D/IRAM 区域来分配内存。\n\n每个连续的内存区域都包含其自己的内存堆，由 multi_heap 函数创建。 multi_heap 允许将任何连续的内存区域作为堆使用。\n\n堆属性分配器通过对内存区域的了解初始化每个单独的堆，堆属性 API 中的分配函数将基于所需的属性、可用空间和每个区域使用的首选项为分配函数找到最合适的堆，随后为位于特定内存区域的堆调用 multi_heap_malloc()。\n\n调用 free() 查找对应释放地址的特定堆，随后在特定的 multi_heap 实例上调用 multi_heap_free()。"
-    },
-    {
-      "chunkId": "S03#s64",
-      "sourceId": "S03",
-      "docIndex": 12,
-      "sectionPath": "堆内存分配 > API 参考 - 堆分配 > Type Definitions",
-      "cjkRatio": 0.0,
-      "length": 1128,
-      "charRange": [
-        21245,
-        22373
-      ],
-      "text": "typedef void (*esp_alloc_failed_hook_t)(size_t size, uint32_t caps, const char *function_name)\n\ncallback called when an allocation operation fails, if registered\n\nParam size:\n\nin bytes of failed allocation\n\nParam caps:\n\ncapabilities requested of failed allocation\n\nParam function_name:\n\nfunction which generated the failure\n\ntypedef struct walker_heap_info walker_heap_into_t\n\nStructure used to store heap related data passed to the walker callback function.\n\ntypedef struct walker_block_info walker_block_info_t\n\nStructure used to store block related data passed to the walker callback function.\n\ntypedef bool (*heap_caps_walker_cb_t)(walker_heap_into_t heap_info, walker_block_info_t block_info, void *user_data)\n\nFunction callback used to get information of memory block during calls to heap_caps_walk or heap_caps_walk_all.\n\nParam heap_info:\n\nSee walker_heap_into_t\n\nParam block_info:\n\nSee walker_block_info_t\n\nParam user_data:\n\nOpaque pointer to user defined data\n\nReturn:\n\nTrue to proceed with the heap traversal False to stop the traversal of the current heap and continue with the traversal of the next heap (if any)"
-    },
-    {
-      "chunkId": "S03#s69~2",
-      "sourceId": "S03",
-      "docIndex": 18,
-      "sectionPath": "堆内存分配 > API 参考 - 多堆 API > Functions",
-      "cjkRatio": 0.0079,
-      "length": 1528,
-      "charRange": [
-        27790,
-        29318
-      ],
-      "text": "Semantics are the same as standard realloc(), only the argument 'p' must be NULL or have been allocated in the specified heap.\n\n参数:\n\nheap -- Handle to a registered heap.\n\np -- NULL, or a pointer previously returned from multi_heap_malloc() or multi_heap_realloc() for the same heap.\n\nsize -- Desired new size for buffer.\n\n返回:\n\nNew buffer of 'size' containing contents of 'p', or NULL if reallocation failed.\n\nsize_t multi_heap_get_allocated_size(multi_heap_handle_t heap, void *p)\n\nReturn the size that a particular pointer was allocated with.\n\n参数:\n\nheap -- Handle to a registered heap.\n\np -- Pointer, must have been previously returned from multi_heap_malloc() or multi_heap_realloc() for the same heap.\n\n返回:\n\nSize of the memory allocated at this block. May be more than the original size argument, due to padding and minimum block sizes.\n\nmulti_heap_handle_t multi_heap_register(void *start, size_t size)\n\nRegister a new heap for use.\n\nThis function initialises a heap at the specified address, and returns a handle for future heap operations.\n\nThere is no equivalent function for deregistering a heap - if all blocks in the heap are free, you can immediately start using the memory for other purposes.\n\n参数:\n\nstart -- Start address of the memory to use for a new heap.\n\nsize -- Size (in bytes) of the new heap.\n\n返回:\n\nHandle of a new heap ready for use, or NULL if the heap region was too small to be initialised.\n\nvoid multi_heap_set_lock(multi_heap_handle_t heap, void *lock)\n\nAssociate a private lock pointer with a heap."
-    },
-    {
-      "chunkId": "S03#s55",
-      "sourceId": "S03",
-      "docIndex": 3,
-      "sectionPath": "堆内存分配 > 特殊用途 > 外部 SPI 内存",
-      "cjkRatio": 0.3687,
-      "length": 179,
-      "charRange": [
-        3062,
-        3241
-      ],
-      "text": "当启用 片外 RAM 时，可以根据配置调用标准 malloc 或通过 heap_caps_malloc(MALLOC_CAP_SPIRAM) 分配外部 SPI RAM，详情请参阅 配置片外 RAM。\n\n在 ESP32 上，只有不超过 4 MiB 的外部 SPI RAM 可以通过上述方式分配。要使用超过 4 MiB 限制的区域，可以使用 himem API。"
-    },
-    {
-      "chunkId": "S03#s61~8",
-      "sourceId": "S03",
-      "docIndex": 9,
-      "sectionPath": "堆内存分配 > API 参考 - 堆分配 > Functions",
-      "cjkRatio": 0.0075,
-      "length": 1592,
-      "charRange": [
-        14908,
-        16500
-      ],
-      "text": "The variable parameters are bitwise OR of MALLOC_CAP_* flags indicating the type of memory. This API prefers to allocate memory with the first parameter. If failed, allocate memory with the next parameter. It will try in this order until allocating a chunk of memory successfully or fail to allocate memories with any of the parameters.\n\n参数:\n\nsize -- Size, in bytes, of the amount of memory to allocate\n\nnum -- Number of variable parameters\n\n返回:\n\nA pointer to the memory allocated on success, NULL on failure\n\nvoid *heap_caps_realloc_prefer(void *ptr, size_t size, size_t num, ...)\n\nReallocate a chunk of memory as preference in decreasing order.\n\n参数:\n\nptr -- Pointer to previously allocated memory, or NULL for a new allocation.\n\nsize -- Size of the new buffer requested, or 0 to free the buffer.\n\nnum -- Number of variable parameters\n\n返回:\n\nPointer to a new buffer of size 'size', or NULL if allocation failed.\n\nvoid *heap_caps_calloc_prefer(size_t n, size_t size, size_t num, ...)\n\nAllocate a chunk of memory as preference in decreasing order.\n\n参数:\n\nn -- Number of continuing chunks of memory to allocate\n\nsize -- Size, in bytes, of a chunk of memory to allocate\n\nnum -- Number of variable parameters\n\n返回:\n\nA pointer to the memory allocated on success, NULL on failure\n\nvoid heap_caps_dump(uint32_t caps)\n\nDump the full structure of all heaps with matching capabilities.\n\nPrints a large amount of output to serial (because of locking limitations, the output bypasses stdout/stderr). For each (variable sized) block in each matching heap, the following output is printed on a single line:"
-    },
-    {
-      "chunkId": "S03#s66~3",
-      "sourceId": "S03",
-      "docIndex": 15,
-      "sectionPath": "堆内存分配 > API 参考 - 初始化 > Functions",
-      "cjkRatio": 0.0039,
-      "length": 518,
-      "charRange": [
-        25598,
-        26116
-      ],
-      "text": "caps -- Ordered array of capability masks for the new region, in order of priority. Must have length SOC_MEMORY_TYPE_NO_PRIOS. Does not need to remain valid after the call returns.\n\nstart -- Start address of new region.\n\nend -- End address of new region.\n\n返回:\n\nESP_OK on success\n\nESP_ERR_INVALID_ARG if a parameter is invalid\n\nESP_ERR_NO_MEM if no memory to register new heap.\n\nESP_ERR_INVALID_SIZE if the memory region is too small to fit a heap\n\nESP_FAIL if region overlaps the start and/or end of an existing region"
-    },
     {
       "chunkId": "S04#s76",
       "sourceId": "S04",
@@ -375,6 +204,19 @@
       "text": "ModelPath = mobilenetv2.ms\nModelType = MindIR\nInDataPath = input.bin\nConfigFilePath =\nInDataType = bin\nLoopCount = 10\nDeviceType = CPU\nAccuracyThreshold = 0.5\nCosineDistanceThreshold = -1.1\nWarmUpLoopCount = 3\nNumThreads = 2\nFp16Priority = 0\nEnableParallel = 0\ncalibDataPath = output.txt\ncpuBindMode = HIGHER_CPU\nCalibDataType = FLOAT\nstart unified benchmark run\nPrepareTime = 31.709 ms\nMarkAccuracy\nInData 0: 0.417022 0.720325 0.000114375 0.302333 0.146756 0.0923386 0.18626 0.345561 0.396767 0.538817 0.419195 0.68522 0.204452 0.878117 0.0273876 0.670467 0.417305 0.55869 0.140387 0.198101\n================ Comparing Output data ================\nData of node Default/head-MobileNetV2Head/Softmax-op204 : 4.75662e-05 0.000445443 0.000294212 0.000354572 0.000165406 8.36175e-05 0.000198424 0.000329004 0.000288576 0.000203605 0.000962143 0.00421465 0.0019162 0.00129701 0.00260928 0.0012302 0.000879829 0.000609378 0.000691054 0.00119472 0.000516733 0.00160048 0.000959531 0.00176164 0.000365934 0.00013575 0.000245539 0.000414651 0.000165337 0.000480154 0.000216396 0.00101303 0.000105544 0.000475172 0.000761407 0.000305815 0.000294882 0.000307003 0.00188077 0.000454868 0.000897518 0.00051352 0.000595383 0.000644214 0.000513376 0.000343709 0.00103984 0.000197185 7.54722e-05 8.89811e-05\nMean bias of node/tensor Default/head-MobileNetV2Head/Softmax-op204 : 0%\nMean bias of all nodes/tensors: 0%\n=======================================================\n\nRun Benchmark mobilenetv2.ms Success."
     },
     {
+      "chunkId": "S05#s110~10",
+      "sourceId": "S05",
+      "docIndex": 21,
+      "sectionPath": "端侧推理快速入门 > Windows篇 > 模型推理 > 集成推理",
+      "cjkRatio": 0.0,
+      "length": 1598,
+      "charRange": [
+        53881,
+        55479
+      ],
+      "text": "18936e-05 0.000143329 0.000117873 8.40231e-05 0.000588662 0.000158744 0.00069335 0.000287121 0.000151016 0.00152298 0.00024393 0.000737831 0.00115437 5.96499e-05 0.000118379 0.000228003 0.0041712 5.89845e-05 0.00273432 0.00321251 0.00269996 0.000762481 4.82307e-05 0.000160988 0.00115545 0.0155078 0.00138022 0.0025505 0.000223013 0.000251236 0.000123665 5.52253e-05 0.000267688 0.000453393 0.00029877 0.000429822 0.00099786 0.000183652 0.000397013 0.00108393 0.000333911 0.0008731 0.000275806 0.000101959 0.000920896 0.000532173 0.000526293 0.0006834 0.000935434 0.000351484 0.00198101 0.000158832 0.00025276 0.0309715 0.000236896 0.000507701 7.17417e-05 0.000136413 0.00511946 0.001006 0.00030655 0.000170018 0.00102066 0.000676819 0.00111926 0.00101352 0.00122263 0.000436026 0.000709552 0.00280173 0.000343102 0.000684757 0.00250305 8.5246e-05 8.35988e-05 8.50596e-05 0.000745612 0.000384923 0.000115974 0.000104449 0.00142474 0.000464432 0.00013609 4.29949e-05 0.000410546 0.000318726 8.40787e-05 0.00206693 0.00057538 0.000382494 0.000160234 0.000307552 0.000529971 0.000586405 0.00398225 0.00151492 0.00026454 0.000511842 9.7473e-05 0.000163672 0.000160056 0.000816508 3.00784e-05 0.00037759 0.00014328 8.48268e-05 0.00142338 6.22116e-05 0.000788073 0.00155491 0.00121945 0.000680781 0.000758789 0.000459647 0.00708145 0.00120801 7.03766e-05 0.000364867 0.000123017 0.00420891 0.000513928 0.00123761 0.000267312 0.000333363 0.00122328 0.000298812 0.000238888 0.000615765 8.10465e-05 0.000246716 0.00123949 0.000508113 7.77746e-05 0.000487965 0.000462255 0.000310659 0.000585418 0.00176246 0."
+    },
+    {
       "chunkId": "S12#s182",
       "sourceId": "S12",
       "docIndex": 0,
@@ -427,6 +269,19 @@
       "text": "Wait 类可以通过各种参数进行实例化,\n这些参数会改变条件的评估方式.\n\n这可以包括：\n\n更改代码的评估频率 (轮询间隔)\n\n指定哪些异常应自动处理\n\n更改总超时时长\n\n自定义超时消息\n\n例如, 如果默认情况下对 元素不可交互 错误进行重试,\n那么我们可以在执行中的代码里的某个方法内添加一个操作\n(我们只需要确保代码在成功时返回 true 即可)：\n\nThe easiest way to customize Waits in Java is to use the FluentWait class:\n\nWait<WebDriver> wait =\nnew FluentWait<>(driver)\n.withTimeout(Duration.ofSeconds(2))\n.pollingEvery(Duration.ofMillis(300))\n.ignoring(ElementNotInteractableException.class);\n\nwait.until(\nd -> {\nrevealed.sendKeys(\"Displayed\");\nreturn true;\n});\n\nView Complete Code\n\nView on GitHub"
     },
     {
+      "chunkId": "S12#s196~2",
+      "sourceId": "S12",
+      "docIndex": 24,
+      "sectionPath": "等待策略 > 显式等待 > 定制 > /examples/dotnet/SeleniumDocs/Waits/WaitsTest.cs",
+      "cjkRatio": 0.0,
+      "length": 821,
+      "charRange": [
+        28605,
+        29426
+      ],
+      "text": "[TestMethod]\npublic void ExplicitOptions()\n{\ndriver.Url = \"https://www.selenium.dev/selenium/web/dynamic.html\";\nIWebElement revealed = driver.FindElement(By.Id(\"revealed\"));\ndriver.FindElement(By.Id(\"reveal\")).Click();\n\nWebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2))\n{\nPollingInterval = TimeSpan.FromMilliseconds(300),\n};\nwait.IgnoreExceptionTypes(typeof(ElementNotInteractableException));\n\nwait.Until(d => {\nrevealed.SendKeys(\"Displayed\");\nreturn true;\n});\n\nAssert.AreEqual(\"input\", revealed.TagName);\n}\n}\n}\n\nerrors = [Selenium::WebDriver::Error::NoSuchElementError,\nSelenium::WebDriver::Error::ElementNotInteractableError]\nwait = Selenium::WebDriver::Wait.new(timeout: 2,\ninterval: 0.3,\nignore: errors)\n\nwait.until { revealed.send_keys('Displayed') || true }\n\nView Complete Code\n\nView on GitHub"
+    },
+    {
       "chunkId": "S12#s183~2",
       "sourceId": "S12",
       "docIndex": 3,
@@ -477,6 +332,19 @@
         27982
       ],
       "text": "import pytest\nimport time\nfrom selenium.common import NoSuchElementException, ElementNotInteractableException\nfrom selenium.webdriver.common.by import By\nfrom selenium.webdriver.support.wait import WebDriverWait\n\ndef test_fails(driver):\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\ndriver.find_element(By.ID, \"adder\").click()\n\nwith pytest.raises(NoSuchElementException):\ndriver.find_element(By.ID, 'box0')\n\ndef test_sleep(driver):\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\ndriver.find_element(By.ID, \"adder\").click()\n\ntime.sleep(2)\nadded = driver.find_element(By.ID, \"box0\")\n\nassert added.get_dom_attribute('class') == \"redbox\"\n\ndef test_implicit(driver):\ndriver.implicitly_wait(2)\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\ndriver.find_element(By.ID, \"adder\").click()\n\nadded = driver.find_element(By.ID, \"box0\")\n\nassert added.get_dom_attribute('class') == \"redbox\"\n\ndef test_explicit(driver):\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\nrevealed = driver.find_element(By.ID, \"revealed\")\ndriver.find_element(By.ID, \"reveal\").click()\n\nwait = WebDriverWait(driver, timeout=2)\nwait.until(lambda _ : revealed.is_displayed())\n\nrevealed.send_keys(\"Displayed\")\nassert revealed.get_property(\"value\") == \"Displayed\"\n\ndef test_explicit_options(driver):\ndriver.get('https://www.selenium.dev/selenium/web/dynamic.html')\nrevealed = driver.find_element(By.ID, \"revealed\")\ndriver.find_element(By.ID, \"reveal\").click()"
+    },
+    {
+      "chunkId": "S12#s199",
+      "sourceId": "S12",
+      "docIndex": 27,
+      "sectionPath": "等待策略 > Support the Selenium Project",
+      "cjkRatio": 0.0,
+      "length": 57,
+      "charRange": [
+        32906,
+        32963
+      ],
+      "text": "Learn more or view the full list of sponsors.\n\nLearn more"
     }
   ]
 }

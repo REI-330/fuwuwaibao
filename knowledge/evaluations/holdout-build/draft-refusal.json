@@ -1,0 +1,140 @@
+{
+  "shard": "refusal",
+  "questions": [
+    {
+      "questionId": "RH01",
+      "split": "holdout",
+      "category": "超范围",
+      "answerable": false,
+      "type": "实时数据",
+      "question": "2025 年深圳 ESP32 嵌入式开发工程师的平均月薪大概是多少？这个岗位目前的求职竞争比高不高？",
+      "expectation": "应明确说明资料不足：知识库语料覆盖的是 ESP-IDF/ESP32 嵌入式开发的技术文档、AI 框架与端侧推理、pytest 测试自动化、O*NET 与国标职业能力及国家标准信息，全部为技术规程与职业描述文本，不含薪资、招聘量、竞争比等实时统计数据，因此无法给出月薪与竞争比。"
+    },
+    {
+      "questionId": "RH02",
+      "split": "holdout",
+      "category": "超范围",
+      "answerable": false,
+      "type": "实时数据",
+      "question": "国内测试自动化方向（以 pytest 为主）的工程师岗位，现在各大招聘平台的在招职位数和平均投递人数分别是多少？",
+      "expectation": "应明确说明资料不足：语料中的 pytest 内容仅为中英文官方使用文档（fixture、参数化、插件等用法），属于工具文档而非招聘市场数据；语料不收录任何职位数、投递量等实时招聘指标，故无法回答。"
+    },
+    {
+      "questionId": "RH03",
+      "split": "holdout",
+      "category": "超范围",
+      "answerable": false,
+      "type": "实时数据",
+      "question": "飞桨 PaddlePaddle 相关岗位现在的招聘需求量比去年同期增长了多少？",
+      "expectation": "应明确说明资料不足：语料只覆盖 PaddlePaddle、MindSpore Lite、YOLO 等框架的技术特性与端侧推理用法，以及职业能力与国家标准描述，不含任何按时间变化的招聘需求统计数据，无法给出同比增长率。"
+    },
+    {
+      "questionId": "RH04",
+      "split": "holdout",
+      "category": "超范围",
+      "answerable": false,
+      "type": "未来预测",
+      "question": "到 2030 年，我国边缘 AI 推理工程师的人才缺口预计会达到多少万人？",
+      "expectation": "应明确说明资料不足：语料提供的是 O*NET 职业画像、国家职业技能标准等静态职业能力信息，以及 AI 框架/端侧推理技术文档，不含人才供需缺口或未来趋势的预测数值，因此无法给出该预测。"
+    },
+    {
+      "questionId": "RH05",
+      "split": "holdout",
+      "category": "超范围",
+      "answerable": false,
+      "type": "未来预测",
+      "question": "未来五年计算机硬件工程师这一岗位的数量会如何变化？请给出具体的增长率预测。",
+      "expectation": "应明确说明资料不足：语料中关于 Computer Hardware Engineers 的内容来自 O*NET，仅描述其任务、技能与知识要求，属于现状画像而非趋势预测；语料不含岗位数量与增长率的预测数值，无法回答。"
+    },
+    {
+      "questionId": "RH06",
+      "split": "holdout",
+      "category": "超范围",
+      "answerable": false,
+      "type": "个体化建议",
+      "question": "我是电子信息工程专业的应届本科生，想往嵌入式方向发展，应该报考哪一所学校的在职硕士最合适？",
+      "expectation": "应明确说明资料不足：语料只含嵌入式开发技术文档、职业能力描述与国家标准信息，不涉及院校、专业报考、导师选择等择校建议，且无任何可依据的个人背景评估信息，故无法给出报考推荐。"
+    },
+    {
+      "questionId": "RH07",
+      "split": "holdout",
+      "category": "超范围",
+      "answerable": false,
+      "type": "个体化建议",
+      "question": "我只有半年测试经验，想转做 pytest 测试自动化，请告诉我每天应该具体学习哪些内容、按什么顺序安排。",
+      "expectation": "应明确说明资料不足：语料提供的 pytest 内容是官方文档中的机制与用法（fixture、参数化、插件等），属于工具知识而非针对个人基础定制的学习计划；语料不含按「半年经验」这类个人条件编排的逐日学习路径，无法给出该建议。"
+    },
+    {
+      "questionId": "RH08",
+      "split": "holdout",
+      "category": "超范围",
+      "answerable": false,
+      "type": "个体化建议",
+      "question": "我今年 35 岁、一直做硬件测试，现在想转做计算机视觉，还来得及吗？请结合我的情况给出一条路径建议。",
+      "expectation": "应明确说明资料不足：语料覆盖计算机视觉相关框架（如 YOLO）与端侧推理的技术内容，以及职业能力描述，但不含针对年龄、既有岗位等个人条件的转型可行性判断与路径规划，无法给出该个体化建议。"
+    },
+    {
+      "questionId": "RH09",
+      "split": "holdout",
+      "category": "超范围",
+      "answerable": false,
+      "type": "个体化服务",
+      "question": "请帮我把下面这三段实习经历改写成一份投递嵌入式岗位的中文简历。",
+      "expectation": "应明确说明资料不足：语料是技术文档、职业能力画像与国家标准，属于知识型资料，不具备代写简历这类个体化服务能力，也不含简历撰写模板与相关素材，因此无法完成该请求。"
+    },
+    {
+      "questionId": "RH10",
+      "split": "holdout",
+      "category": "超范围",
+      "answerable": false,
+      "type": "个体化服务",
+      "question": "请替我定制一份从零开始、为期六个月的端侧 AI 工程师学习规划表，包含每周的具体任务。",
+      "expectation": "应明确说明资料不足：语料包含端侧推理与 AI 框架的技术知识与职业能力要求，但不提供代为制定个人学习规划的服务，也没有六个月周期逐周任务的现成素材，故无法交付该规划表。"
+    },
+    {
+      "questionId": "RH11",
+      "split": "holdout",
+      "category": "超范围",
+      "answerable": false,
+      "type": "主观裁决",
+      "question": "在软件质量保障方向上，O*NET 的职业能力描述和某培训机构颁发的测试证书，哪个更权威？哪家机构更值得报？",
+      "expectation": "应明确说明资料不足：语料中的 O*NET 内容为职业任务/技能/知识的客观描述，国家职业技能标准为国家标准信息，二者均不构成对培训机构或证书优劣的评判，语料不含任何机构对比与权威性裁决依据，无法给出结论。"
+    },
+    {
+      "questionId": "RH12",
+      "split": "holdout",
+      "category": "超范围",
+      "answerable": false,
+      "type": "主观裁决",
+      "question": "在做端侧部署时，PaddlePaddle 和 MindSpore Lite 到底哪个更好用？请直接给一个唯一的结论。",
+      "expectation": "应明确说明资料不足：语料分别介绍 PaddlePaddle、MindSpore Lite 等框架的技术特性与推理用法，属于并列的客观描述，并不对两者做优劣比较或给出推荐；语料不含任何评测排名或主观裁决依据，无法给出「哪个更好」的结论。"
+    },
+    {
+      "questionId": "RH13",
+      "split": "holdout",
+      "category": "超范围",
+      "answerable": false,
+      "type": "内部信息",
+      "question": "国内头部厂商（如华为、小米）内部测试团队实际使用的自动化测试框架和技术栈具体是什么？",
+      "expectation": "应明确说明资料不足：语料为公开的技术文档、职业能力描述与国家标准，不包含任何公司内部的团队技术栈或私有工具选型信息，因此无法提供该类内部信息。"
+    },
+    {
+      "questionId": "RH14",
+      "split": "holdout",
+      "category": "超范围",
+      "answerable": false,
+      "type": "内部信息",
+      "question": "某公司 ESP32 量产项目所使用的内部 CI/CD 流水线配置和私有固件接口文档，能提供一下吗？",
+      "expectation": "应明确说明资料不足：语料中关于 ESP32 的内容为 ESP-IDF 公开开发文档，不含任何企业的内部流水线配置、私有接口或未公开工程资料，属于无法从该知识库获取的内部信息。"
+    },
+    {
+      "questionId": "RH15",
+      "split": "holdout",
+      "category": "超范围",
+      "answerable": false,
+      "type": "政策细则",
+      "question": "按照现行政策，取得电子类职业技能等级证书后，政府补贴的具体金额是多少，申领流程和所需材料又有哪些？",
+      "expectation": "应明确说明资料不足：语料含国家职业技能标准等标准信息，但仅涉及职业分类与技能要求，不包含补贴金额、申领流程、所需材料等地方性政策细则与经办规定，故无法给出具体补贴标准。"
+    }
+  ]
+}

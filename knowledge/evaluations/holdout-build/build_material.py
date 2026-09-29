@@ -20,7 +20,7 @@
 import json
 import os
 import random
-from collections import defaultdict
+from collections import Counter, defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 K = os.path.join(ROOT, "knowledge")
@@ -29,14 +29,16 @@ GRAPH = os.path.join(K, "graph", "graph.json")
 EVAL = os.path.join(K, "evaluations")
 OUT = os.path.join(EVAL, "holdout-build")
 
-# 分片：片名 → (来源, 每小节取几段, 最多几个小节, 跳过前几个小节)
+# 分片：片名 → (来源, 每来源最多几段, 跳过前面几段格点)
 SHARDS = {
-    "zh-s26-a": (["S26"], 2, 30, 0),
-    "zh-s26-b": (["S26"], 2, 30, 30),
-    "zh-other": (["S25", "S24", "S23", "S21", "S22", "S14", "S08", "S06", "S07", "S09", "S10", "S11"], 2, 18, 0),
-    "xl-onet": (["S16", "S17"], 3, 20, 0),
-    "xl-pytest": (["S13"], 2, 22, 0),
-    "xl-embedded": (["S02", "S03", "S04", "S05", "S12"], 2, 20, 0),
+    "zh-s26-a": (["S26"], 30, 0),
+    "zh-s26-b": (["S26"], 30, 30),
+    "zh-other": (["S25", "S24", "S23", "S21", "S22", "S14", "S08", "S06", "S07", "S09", "S10", "S11"], 4, 0),
+    "xl-onet": (["S16", "S17"], 14, 0),
+    "xl-onet2": (["S17"], 14, 0),
+    "xl-pytest": (["S13"], 30, 0),
+    "xl-embedded": (["S02", "S03", "S04", "S05", "S12"], 8, 0),
+    "xl-embedded2": (["S04", "S05", "S12"], 10, 0),
 }
 
 
@@ -71,30 +73,31 @@ def main():
 
     os.makedirs(OUT, exist_ok=True)
     index = []
-    for name, (srcs, per_sec, max_sec, skip_sec) in SHARDS.items():
+    for name, (srcs, max_sec, skip_sec) in SHARDS.items():
         pool = [c for c in chunks if c["sourceId"] in srcs]
         pool = [c for c in pool if c["chunkId"] not in cited and not overlaps_used(c)]
 
-        by_sec = defaultdict(list)
-        for c in pool:
-            by_sec[(c["sourceId"], c.get("sectionPath") or c.get("heading") or "(无小节)")].append(c)
-        for k in by_sec:
-            by_sec[k].sort(key=lambda c: c["charRange"][0])
-        secs = sorted(by_sec)
-        picked_secs = secs[skip_sec:skip_sec + max_sec]
-
+        # 按**原文顺序**取两条交错的格点（步长 6、偏移 0 与 3）。这样同一来源内任意两段
+        # 的位置差都是 3 的倍数且 ≥3，起草人怎么挑都不会违反「原文间隔 ≥3」。
+        #
+        # 之前按小节取 2 段是不行的：S26 的小节粒度极细（1207 个小节、多数只有 1 段），
+        # 有 2 段的小节里那两段在原文里往往紧邻，导致 6 道题的顺序间隔只有 1–2。
+        # （起草人当时按 candidates 数组下标核，数组是跨来源轮转出来的、不等于原文顺序，
+        #   所以看着合规、实际违规——这是材料生成该背的锅，不是起草人的。）
         rows = []
-        for sec in picked_secs:
-            group = by_sec[sec]
-            if len(group) <= per_sec:
-                chosen = group
-            else:
-                # 在小节内均匀取，避免全是相邻窗口
-                step = len(group) / per_sec
-                chosen = [group[int(i * step)] for i in range(per_sec)]
-            for c in chosen:
+        for src in srcs:
+            lst = sorted([c for c in pool if c["sourceId"] == src],
+                         key=lambda c: c["charRange"][0])
+            lattice = [c for off in (0, 3) for i, c in enumerate(lst) if i % 6 == off]
+            if skip_sec:
+                lattice = lattice[skip_sec:]
+            if max_sec and len(lattice) > max_sec:
+                step = len(lattice) / max_sec      # 均匀抽稀到上限
+                lattice = [lattice[int(i * step)] for i in range(max_sec)]
+            for c in lattice:
                 rows.append({
                     "chunkId": c["chunkId"], "sourceId": c["sourceId"],
+                    "docIndex": lst.index(c),      # 该来源内按原文顺序的位置，间隔规则看它
                     "sectionPath": c.get("sectionPath") or c.get("heading") or "",
                     "cjkRatio": round(cjk_ratio(c.get("text") or ""), 4),
                     "length": len(c.get("text") or ""),
@@ -103,14 +106,17 @@ def main():
                 })
         doc = {
             "shard": name, "sources": srcs,
-            "note": "候选段均已排除：被 dev/test 引用过、在图谱引用集合内、与已用段原文区间重叠。",
+            "note": "候选段均已排除：被 dev/test 引用过、在图谱引用集合内、与已用段原文区间重叠。"
+                    "受格点抽样保证，同一 sourceId 内任意两段的 docIndex 差都是 3 的倍数且 ≥3"
+                    "（起草时用 docIndex 差判断间隔，不要用数组下标）。",
             "count": len(rows), "candidates": rows,
         }
         p = os.path.join(OUT, f"material-{name}.json")
         json.dump(doc, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
         zh = sum(1 for r in rows if r["cjkRatio"] >= 0.20)
+        bysrc = Counter(r["sourceId"] for r in rows)
         index.append(f"{name}: {len(rows)} 段（中文段 {zh} / 英文段 {len(rows)-zh}）"
-                     f"  小节 {len(picked_secs)} 个  来源 {srcs}")
+                     f"  来源 {dict(bysrc)}")
         print(index[-1])
 
     open(os.path.join(OUT, "material-index.txt"), "w", encoding="utf-8").write(

@@ -1,0 +1,27 @@
+{
+  "shard": "zh-other",
+  "questions": [
+    {
+      "questionId": "ZC01",
+      "split": "holdout",
+      "category": "AI框架与推理",
+      "question": "在飞桨（PaddlePaddle）框架中，打印一个 Tensor 时通常能看到哪些属性信息？这些属性对操作 Tensor 有什么意义？另外，如果想查看某个 Tensor 的名称，应该使用哪个属性，默认的名称是什么样子的？",
+      "answerable": true,
+      "referenceChunks": ["S07#s131", "S07#3.4"],
+      "gradingNotes": "打印 Tensor 时可以看到 shape、dtype、place 等信息，这些都是 Tensor 的重要属性；要操作 Tensor 需要先对其属性有基本了解；Tensor 的名称是其唯一的标识符，为 Python 字符串类型，通过 Tensor.name 属性查看；默认地每个 Tensor 在创建时会自定义一个独一无二的名称；打印 paddle.to_tensor(1).name 得到的结果形如 generated_tensor_0。",
+      "sourceId": "S07",
+      "layer": "zh"
+    },
+    {
+      "questionId": "ZC02",
+      "split": "holdout",
+      "category": "AI框架与推理",
+      "question": "飞桨（PaddlePaddle）的 Tensor 提供了一系列矩阵计算 API，请至少举出三个并说明各自用途（如矩阵转置、范数、矩阵乘法分别怎么调用）。此外，这些计算 API 的原位（inplace）操作与非原位操作有什么区别，从写法上如何区分？",
+      "answerable": true,
+      "referenceChunks": ["S07#s143", "S07#4.4"],
+      "gradingNotes": "Tensor 具有丰富的 API 用以对其进行创建、访问、修改、计算等一系列操作；矩阵相关计算 API 举例：x.t() 为矩阵转置、x.transpose([1, 0]) 交换第 0 维与第 1 维的顺序、x.norm('fro') 为矩阵的弗罗贝尼乌斯范数、x.dist(y, p=2) 为矩阵 (x-y) 的 2 范数、x.matmul(y) 为矩阵乘法；以上计算 API 也有原位（inplace）操作和非原位操作之分，如 x.add(y) 是非原位操作，x.add_(y)（带下划线）为原位操作。",
+      "sourceId": "S07",
+      "layer": "zh"
+    }
+  ]
+}

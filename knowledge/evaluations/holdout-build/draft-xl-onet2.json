@@ -1,0 +1,38 @@
+{
+  "shard": "xl-onet2",
+  "questions": [
+    {
+      "questionId": "XD01",
+      "split": "holdout",
+      "category": "标准与政策",
+      "question": "O*NET 收录的『计算机硬件工程师』（Computer Hardware Engineers，17-2061.00）这一职业：其 Apprenticeship Opportunities 小节给出的示例学徒岗位名称是什么，这些岗位由谁审核并批准、用于哪一类项目？其 Professional Associations 的 National Associations 类别下，与计算机、工程直接相关的全国性协会有哪些（至少举出三个）？",
+      "answerable": true,
+      "referenceChunks": ["S17#s326", "S17#s339"],
+      "gradingNotes": "示例学徒岗位名称为 Hardware Engineer；该岗位名称由行业审核（vetted by industry）并由美国劳工部（U.S. Department of Labor）批准，用于 Registered Apprenticeship Program。National Associations 下列出 American Society for Engineering Education、Association for Computing Machinery、IEEE Computer Society、Institute of Electrical and Electronics Engineers、ISACA、National Society of Professional Engineers、Society of Women Engineers。",
+      "sourceId": "S17",
+      "layer": "xl"
+    },
+    {
+      "questionId": "XD02",
+      "split": "holdout",
+      "category": "职业能力",
+      "question": "O*NET 收录的『计算机硬件工程师』这一职业：其 Abilities 小节把「把一般规则应用到具体问题上以得出合理答案」与「按某一特定规则把事物或动作排成一定顺序或模式」分别定义为哪两项能力（请给出英文名称）？其 Detailed Work Activities 小节列出的活动里，与「测试、验证」直接相关的有哪几项？",
+      "answerable": true,
+      "referenceChunks": ["S17#s332", "S17#s322"],
+      "gradingNotes": "前一项对应 Deductive Reasoning（The ability to apply general rules to specific problems to produce answers that make sense）；后一项对应 Information Ordering（The ability to arrange things or actions in a certain order or pattern according to a specific rule or set of rules，例如数字、字母、单词、图片、数学运算的模式）。Detailed Work Activities 中与测试、验证直接相关的活动有 Test performance of electrical, electronic, mechanical, or integrated systems or equipment 与 Conduct validation tests of equipment or processes。",
+      "sourceId": "S17",
+      "layer": "xl"
+    },
+    {
+      "questionId": "XD03",
+      "split": "holdout",
+      "category": "职业能力",
+      "question": "O*NET 收录的『计算机硬件工程师』这一职业：其 Job Zone 小节给出的级别名称是什么、SVP Range 是多少、该小节对新入职者的学历是如何描述的？其 Education 小节里受访者给出的前三项学历要求分别是什么、占比各多少？这两处关于学历的说法是否一致？",
+      "answerable": true,
+      "referenceChunks": ["S17#s324", "S17#s331"],
+      "gradingNotes": "Job Zone 级别名称为 Job Zone Four: Considerable Preparation Needed；SVP Range 为 (7.0 to < 8.0)；该小节 Education 一项写明 Most of these occupations require a four-year bachelor's degree, but some do not。Education 小节里受访者给出的前三项为 Bachelor's degree required 占 48%、Master's degree required 占 34%、Some college, no degree required 占 7%。两者基本一致：Job Zone 的『多数要求四年制本科』与调查中本科占比最高（48%）吻合，但调查显示硕士要求也占到 34%，高于 Job Zone 描述给人的印象。",
+      "sourceId": "S17",
+      "layer": "xl"
+    }
+  ]
+}

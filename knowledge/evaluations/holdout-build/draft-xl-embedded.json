@@ -1,0 +1,27 @@
+{
+  "shard": "xl-embedded",
+  "questions": [
+    {
+      "questionId": "XC01",
+      "split": "holdout",
+      "category": "嵌入式开发",
+      "question": "在 ESP-IDF 的 SPI 主机驱动里：(1) 用来描述一次传输事务中命令阶段、地址阶段、数据阶段各自线宽的那个结构体，它的三个成员分别对应哪个阶段？成员的取值含义是什么（取 2、1、4 分别代表什么写法）？(2) 初始化 SPI 总线时可用的总线标志里，与引脚走线方式相关的两个标志分别表示什么？它们既可表示初始化意图也可用于查询，在查询引脚走线状态时如何区分信号是经 IO mux 还是经 GPIO matrix 路由？",
+      "answerable": true,
+      "referenceChunks": ["S02#s31", "S02#s37"],
+      "gradingNotes": "该结构体按 CMD、ADDR、DOUT/DIN 三个传输阶段描述线宽；cmd_lines 为命令阶段线宽（如 2-line-cmd-phase）；addr_lines 为地址阶段线宽（如 1-line-addr-phase）；data_lines 为数据阶段线宽（如 4-line-data-phase）；总线标志中 IOMUX 标志表示使用 iomux 引脚，或表示引脚经由 IO mux 而非 GPIO matrix 配置；GPIO 引脚标志表示强制信号走 GPIO matrix，或表示引脚经由 GPIO matrix 路由。",
+      "sourceId": "S02",
+      "layer": "xl"
+    },
+    {
+      "questionId": "XC02",
+      "split": "holdout",
+      "category": "嵌入式开发",
+      "question": "关于 ESP-IDF 的堆内存分配：(1) 当启用片外 RAM、要把可分配内存放到外部 SPI RAM 时，用常规分配接口（标准 malloc，或带 SPIRAM 能力参数的分配接口）能覆盖的容量上限是多少？要使用超出该上限的那部分外部 SPI RAM，必须改用哪种机制？(2) 当一个分配接口同时给出多个带偏好的内存能力参数时，分配器按什么顺序尝试分配？在什么条件下才算失败并返回空指针？",
+      "answerable": true,
+      "referenceChunks": ["S03#s55", "S03#s61~8"],
+      "gradingNotes": "启用片外 RAM 后可调用标准 malloc 或通过 heap_caps_malloc(MALLOC_CAP_SPIRAM) 分配外部 SPI RAM；在 ESP32 上只有不超过 4 MiB 的外部 SPI RAM 能按上述方式分配，超过 4 MiB 限制的区域需要使用 himem API；带偏好的分配接口把可变参数视为 MALLOC_CAP_* 标志的按位或，优先用第一个参数分配，失败则用下一个参数，按此顺序一直尝试，直到成功分配或所有参数都失败；全部失败时返回 NULL，成功时返回指向所分配内存的指针。",
+      "sourceId": "S03",
+      "layer": "xl"
+    }
+  ]
+}

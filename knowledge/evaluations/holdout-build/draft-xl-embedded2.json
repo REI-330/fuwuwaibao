@@ -1,0 +1,60 @@
+{
+  "shard": "xl-embedded2",
+  "questions": [
+    {
+      "questionId": "XE01",
+      "split": "holdout",
+      "category": "嵌入式开发",
+      "question": "在 ESP-IDF 的 GPIO 参考中：peripherals/gpio/generic_gpio 示例演示了哪两种 GPIO 用法？调用 gpio_isr_register 注册中断处理程序时，处理程序会被挂在哪个 CPU 核上、在什么情况下被调用；如果要禁用或移除这个 ISR 应该怎么做，以及什么情况下该函数会返回 ESP_ERR_NOT_FOUND？",
+      "answerable": true,
+      "referenceChunks": ["S04#s76", "S04#s78~4"],
+      "gradingNotes": "peripherals/gpio/generic_gpio 示例演示了如何配置 GPIO 以生成脉冲、触发中断；gpio_isr_register 注册的处理程序是一个 ISR，会被挂到调用该函数的同一个 CPU 核上；该 ISR 函数在任意 GPIO 中断发生时都会被调用（若要让驱动支持按 GPIO 分别处理，应改用 gpio_install_isr_service() 与 gpio_isr_handler_add()）；要禁用或移除该 ISR，需把返回的 handle 交给中断分配函数；返回 ESP_ERR_NOT_FOUND 表示用指定的 flags 找不到空闲中断。",
+      "sourceId": "S04",
+      "layer": "xl"
+    },
+    {
+      "questionId": "XE02",
+      "split": "holdout",
+      "category": "嵌入式开发",
+      "question": "在 ESP-IDF 的 RTC GPIO / GPIO 参考中：(1) 把一个 IO 初始化为 RTC GPIO 要调用哪个函数、它会把该 IO 的路由切到哪个 MUX（对应的反初始化函数又切回哪里）？rtc_gpio_is_valid_gpio 返回 true 和 false 各代表什么？(2) 在 gpio_mode_t 与 gpio_pull_mode_t 中，表示「只输出且开漏」、「上下拉同时使能」、「垫片悬空」的枚举值分别叫什么？",
+      "answerable": true,
+      "referenceChunks": ["S04#s85", "S04#s87"],
+      "gradingNotes": "rtc_gpio_init 把一个 IO 初始化为 RTC GPIO，并把它路由到 RTC IO MUX；rtc_gpio_deinit 反初始化该 IO 并把路由切回 IO MUX；rtc_gpio_is_valid_gpio 用于判断指定 IO 是否是有效的 RTC GPIO，返回 true 表示该 IO 可用于 RTC GPIO 用途，false 表示不可用；gpio_mode_t 中 GPIO_MODE_OUTPUT_OD 表示 output only with open-drain（仅输出、开漏）；gpio_pull_mode_t 中 GPIO_PULLUP_PULLDOWN 表示 Pad pull up + pull down（上下拉同时使能）；gpio_pull_mode_t 中 GPIO_FLOATING 表示 Pad floating（悬空）。",
+      "sourceId": "S04",
+      "layer": "xl"
+    },
+    {
+      "questionId": "XE03",
+      "split": "holdout",
+      "category": "AI框架与推理",
+      "question": "按 MindSpore 端侧推理快速入门的 Linux 篇流程操作：(1) 下载发布件时要依据什么来选择发布件，本例选的是哪一种（软件系统、底层架构、版本）？(2) 进入集成推理环节后，MindSpore Lite 加载模型对 Context 有什么硬性要求；用 CPU 推理时设备信息是通过哪个接口、哪个类挂到 Context 上的，是否需要对它做额外设置？",
+      "answerable": true,
+      "referenceChunks": ["S05#s99", "S05#s101~4"],
+      "gradingNotes": "用户需根据模型推理时的系统环境下载对应的发布件；本例选择的是软件系统为 Linux、底层架构为 x86_64 的 CPU 发布件，以 1.6.0 版本为例；Context 保存了模型推理时所需的相关配置，包括算子偏好、线程数、自动并发以及推理处理器相关的其他配置；MindSpore Lite 加载模型时必须提供一个 Context 类对象（示例先申请 std::make_shared<mindspore::Context>()）；通过 Context::MutableDeviceInfo 接口得到 context 对象的设备管理列表；因为使用 CPU 推理，需申请一个 CPUDeviceInfo 对象 device_info，由于采用 CPU 默认设置，不需对 device_info 做任何设置，直接 push_back 到设备管理列表。",
+      "sourceId": "S05",
+      "layer": "xl"
+    },
+    {
+      "questionId": "XE04",
+      "split": "holdout",
+      "category": "AI框架与推理",
+      "question": "在 MindSpore 端侧推理快速入门中：(1) 把非 ms 模型转成 MindSpore Lite 使用的 ms 模型时，转换工具包含在哪些平台的发布件里；这个转换操作与执行平台的关系是什么，在不同平台上执行会得到相同还是不同的转换后模型文件？(2) 文档中 benchmark 推理测试的配置样例里，ModelPath 和 ModelType 分别写的是什么值；DeviceType、NumThreads、WarmUpLoopCount、LoopCount 又分别取什么值？",
+      "answerable": true,
+      "referenceChunks": ["S05#s103", "S05#s109~3"],
+      "gradingNotes": "Windows 和 Linux 的发布件中都含有转换工具，用户可根据自己的平台下载使用任一个发布件；通过发布件内的 converter_lite 工具，把非 ms 模型转换为 MindSpore Lite 使用的 ms 模型；该操作与平台无关，无论在哪个平台上执行转换，都可得到相同的转换后模型文件；benchmark 配置样例中 ModelPath = mobilenetv2.ms、ModelType = MindIR；DeviceType = CPU、NumThreads = 2、WarmUpLoopCount = 3、LoopCount = 10。",
+      "sourceId": "S05",
+      "layer": "xl"
+    },
+    {
+      "questionId": "XE05",
+      "split": "holdout",
+      "category": "测试自动化",
+      "question": "在 Selenium 的显式等待中：(1) 文档说 Wait 类可以通过各种参数实例化来改变条件的评估方式，这些可定制的内容具体包括哪几类？(2) 在 Java 里做这种定制最常用的是哪个类；示例把总超时设为 2 秒、轮询间隔设为 300 毫秒、并自动忽略「元素不可交互」异常，对应的是哪三个方法调用？在 .NET 示例中，轮询间隔和被忽略的异常类型又分别是通过什么设置的？",
+      "answerable": true,
+      "referenceChunks": ["S12#s193", "S12#s196~2"],
+      "gradingNotes": "Wait 类可以通过各种参数进行实例化，这些参数会改变条件的评估方式，可定制内容包括：更改代码的评估频率（轮询间隔）、指定哪些异常应自动处理、更改总超时时长、自定义超时消息；Java 中最简单的定制方式是使用 FluentWait 类：new FluentWait<>(driver).withTimeout(Duration.ofSeconds(2)).pollingEvery(Duration.ofMillis(300)).ignoring(ElementNotInteractableException.class)；默认情况下会对「元素不可交互」错误进行重试，可在执行中的代码的某个方法内添加操作，但需要确保代码在成功时返回 true；.NET 示例通过 WebDriverWait 的对象初始化器设置 PollingInterval = TimeSpan.FromMilliseconds(300)，并通过 wait.IgnoreExceptionTypes(typeof(ElementNotInteractableException)) 指定要自动忽略的异常类型，且 Until 中的委托在成功时返回 true。",
+      "sourceId": "S12",
+      "layer": "xl"
+    }
+  ]
+}

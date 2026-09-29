@@ -4,192 +4,13 @@
     "S16",
     "S17"
   ],
-  "note": "候选段均已排除：被 dev/test 引用过、在图谱引用集合内、与已用段原文区间重叠。",
-  "count": 24,
+  "note": "候选段均已排除：被 dev/test 引用过、在图谱引用集合内、与已用段原文区间重叠。受格点抽样保证，同一 sourceId 内任意两段的 docIndex 差都是 3 的倍数且 ≥3（起草时用 docIndex 差判断间隔，不要用数组下标）。",
+  "count": 20,
   "candidates": [
-    {
-      "chunkId": "S16#s303",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Abilities",
-      "cjkRatio": 0.0,
-      "length": 1527,
-      "charRange": [
-        27550,
-        29077
-      ],
-      "text": "Deductive Reasoning — The ability to apply general rules to specific problems to produce answers that make sense.\n\nRelated occupations\n\nInductive Reasoning — The ability to combine pieces of information to form general rules or conclusions (includes finding a relationship among seemingly unrelated events).\n\nRelated occupations\n\nOral Comprehension — The ability to listen to and understand information and ideas presented through spoken words and sentences.\n\nRelated occupations\n\nOral Expression — The ability to communicate information and ideas in speaking so others will understand.\n\nRelated occupations\n\nProblem Sensitivity — The ability to tell when something is wrong or is likely to go wrong. It does not involve solving the problem, only recognizing that there is a problem.\n\nRelated occupations\n\nWritten Comprehension — The ability to read and understand information and ideas presented in writing.\n\nRelated occupations\n\nWritten Expression — The ability to communicate information and ideas in writing so others will understand.\n\nRelated occupations\n\nInformation Ordering — The ability to arrange things or actions in a certain order or pattern according to a specific rule or set of rules (e.g., patterns of numbers, letters, words, pictures, mathematical operations).\n\nRelated occupations\n\nNear Vision — The ability to see details at close range (within a few feet of the observer).\n\nRelated occupations\n\nSpeech Recognition — The ability to identify and understand the speech of another person.\n\nRelated occupations"
-    },
-    {
-      "chunkId": "S16#s303~2",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Abilities",
-      "cjkRatio": 0.0,
-      "length": 1268,
-      "charRange": [
-        29079,
-        30347
-      ],
-      "text": "Category Flexibility — The ability to generate or use different sets of rules for combining or grouping things in different ways.\n\nRelated occupations\n\nFlexibility of Closure — The ability to identify or detect a known pattern (a figure, object, word, or sound) that is hidden in other distracting material.\n\nRelated occupations\n\nPerceptual Speed — The ability to quickly and accurately compare similarities and differences among sets of letters, numbers, objects, pictures, or patterns. The things to be compared may be presented at the same time or one after the other. This ability also includes comparing a presented object with a remembered object.\n\nRelated occupations\n\nFluency of Ideas — The ability to come up with a number of ideas about a topic (the number of ideas is important, not their quality, correctness, or creativity).\n\nRelated occupations\n\nOriginality — The ability to come up with unusual or clever ideas about a given topic or situation, or to develop creative ways to solve a problem.\n\nRelated occupations\n\nSelective Attention — The ability to concentrate on a task over a period of time without being distracted.\n\nRelated occupations\n\nSpeech Clarity — The ability to speak clearly so others can understand you.\n\nRelated occupations\n\nback to top"
-    },
-    {
-      "chunkId": "S16#s297",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Apprenticeship Opportunities",
-      "cjkRatio": 0.0,
-      "length": 392,
-      "charRange": [
-        14462,
-        14854
-      ],
-      "text": "Example apprenticeship titles for this occupation:\n\nSoftware Quality Assurance Tester (Nof)\n\nSpecific title(s) listed above are vetted by industry and approved by the U.S. Department of Labor for use in a Registered Apprenticeship Program.\n\nStart your career and build your skillset. Visit Apprenticeship.gov\nexternal site to learn about opportunities related to this occupation.\n\nback to top"
-    },
-    {
-      "chunkId": "S16#s293",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Detailed Work Activities",
-      "cjkRatio": 0.0,
-      "length": 1555,
-      "charRange": [
-        9626,
-        11181
-      ],
-      "text": "Document operational activities.\n\nRelated occupations\n\nAnalyze data to identify or resolve operational problems.\n\nRelated occupations\n\nTroubleshoot issues with computer applications or systems.\n\nRelated occupations\n\nCompile technical information or documentation.\n\nRelated occupations\n\nReport maintenance or equipment problems to appropriate personnel.\n\nRelated occupations\n\nDevelop testing routines or procedures.\n\nRelated occupations\n\nDocument design or development procedures.\n\nRelated occupations\n\nRecommend changes to improve computer or information systems.\n\nRelated occupations\n\nInstall computer software.\n\nRelated occupations\n\nTest computer system operations to ensure proper functioning.\n\nRelated occupations\n\nCreate databases to store electronic data.\n\nRelated occupations\n\nMonitor computer system performance to ensure proper operation.\n\nRelated occupations\n\nDevelop performance metrics or standards related to information technology.\n\nRelated occupations\n\nCollaborate with others to determine design specifications or details.\n\nRelated occupations\n\nDevelop detailed project plans.\n\nRelated occupations\n\nTest software performance.\n\nRelated occupations\n\nProvide customer service to clients or users.\n\nRelated occupations\n\nManage documentation to ensure organization or accuracy.\n\nRelated occupations\n\nRead documents to gather technical information.\n\nRelated occupations\n\nCollaborate with others to resolve information technology issues.\n\nRelated occupations\n\nAnalyze data to identify trends or relationships among variables.\n\nRelated occupations"
-    },
-    {
-      "chunkId": "S16#s293~2",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Detailed Work Activities",
-      "cjkRatio": 0.0,
-      "length": 403,
-      "charRange": [
-        11183,
-        11586
-      ],
-      "text": "Evaluate utility of software or hardware technologies.\n\nRelated occupations\n\nAssess database performance.\n\nRelated occupations\n\nModify software programs to improve performance.\n\nRelated occupations\n\nPrepare data for analysis.\n\nRelated occupations\n\nProvide recommendations to others about computer hardware.\n\nRelated occupations\n\nFind occupations related to multiple detailed work activities\n\nback to top"
-    },
-    {
-      "chunkId": "S16#s302",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Education",
-      "cjkRatio": 0.0,
-      "length": 271,
-      "charRange": [
-        27242,
-        27513
-      ],
-      "text": "How much education does a new hire need to perform a job in this occupation? Respondents said:\n\n50%\n\nresponded:\nBachelor’s degree required\n\n26%\n\nresponded:\nAssociate’s degree or other 2-year degree required\n\n9%\n\nresponded:\nPost-secondary certificate required\n\nback to top"
-    },
-    {
-      "chunkId": "S16#s299",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Essential Skills",
-      "cjkRatio": 0.0,
-      "length": 1050,
-      "charRange": [
-        23846,
-        24896
-      ],
-      "text": "Reading Comprehension — Understanding written sentences and paragraphs in work-related documents.\n\nRelated occupations\n\nActive Listening — Giving full attention to what other people are saying, taking time to understand the points being made, asking questions as appropriate, and not interrupting at inappropriate times.\n\nRelated occupations\n\nCritical Thinking — Using logic and reasoning to identify the strengths and weaknesses of alternative solutions, conclusions, or approaches to problems.\n\nRelated occupations\n\nSpeaking — Talking to others to convey information effectively.\n\nRelated occupations\n\nWriting — Communicating effectively in writing as appropriate for the needs of the audience.\n\nRelated occupations\n\nMonitoring — Monitoring/Assessing performance of yourself, other individuals, or organizations to make improvements or take corrective action.\n\nRelated occupations\n\nActive Learning — Understanding the implications of new information for both current and future problem-solving and decision-making.\n\nRelated occupations\n\nback to top"
-    },
-    {
-      "chunkId": "S16#s304",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Interests",
-      "cjkRatio": 0.0,
-      "length": 1207,
-      "charRange": [
-        30360,
-        31567
-      ],
-      "text": "Interest code: ICR\n\nWant to discover your interests? Take the O*NET Interest Profiler.\n\nInvestigative — Work involves studying and researching non-living objects, living organisms, disease or other forms of impairment, or human behavior. Investigative occupations are often associated with physical, life, medical, or social sciences, and can be found in the fields of humanities, mathematics/statistics, information technology, or health care service.\n\nMathematics/Statistics — Work involves developing and applying mathematics and statistical theory and methods.\n\nRelated occupations\n\nRelated occupations\n\nConventional — Work involves following procedures and regulations to organize information or data, typically in a business setting. Conventional occupations are often associated with office work, accounting, mathematics/statistics, information technology, finance, or human resources.\n\nInformation Technology — Work involves designing, developing, testing, and maintaining computer software, hardware, networks, and systems.\n\nRelated occupations\n\nMathematics/Statistics — Work involves developing and applying mathematics and statistical theory and methods.\n\nRelated occupations\n\nRelated occupations"
-    },
-    {
-      "chunkId": "S16#s304~2",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Interests",
-      "cjkRatio": 0.0,
-      "length": 708,
-      "charRange": [
-        31569,
-        32277
-      ],
-      "text": "Realistic — Work involves designing, building, or repairing of equipment, materials, or structures, engaging in physical activity, or working outdoors. Realistic occupations are often associated with engineering, mechanics and electronics, construction, woodworking, transportation, machine operation, agriculture, animal services, physical or manual labor, athletics, or protective services.\n\nEngineering — Work involves applying science and technology to the design, building, testing, and use of electrical and electronic components, mechanical devices and machines, automotive, marine, and aerospace equipment and vehicles, materials, or structures.\n\nRelated occupations\n\nRelated occupations\n\nback to top"
-    },
-    {
-      "chunkId": "S16#s307",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Job Openings on the Web",
-      "cjkRatio": 0.0,
-      "length": 51,
-      "charRange": [
-        33595,
-        33646
-      ],
-      "text": "State job openings\n\nLocal job openings\n\nback to top"
-    },
-    {
-      "chunkId": "S16#s295",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Job Zone",
-      "cjkRatio": 0.0,
-      "length": 863,
-      "charRange": [
-        13434,
-        14297
-      ],
-      "text": "Title\n\nJob Zone Four: Considerable Preparation Needed\n\nEducation\n\nMost of these occupations require a four-year bachelor's degree, but some do not.\n\nRelated Experience\n\nA considerable amount of work-related skill, knowledge, or experience is needed for these occupations. For example, an accountant must complete four years of college and work for several years in accounting to be considered qualified.\n\nJob Training\n\nEmployees in these occupations usually need several years of work-related experience, on-the-job training, and/or vocational training.\n\nJob Zone Examples\n\nMany of these occupations involve coordinating, supervising, managing, or training others. Examples include real estate brokers, sales managers, database administrators, graphic designers, conservation scientists, art directors, and cost estimators.\n\nSVP Range\n\n(7.0 to < 8.0)\n\nback to top"
-    },
-    {
-      "chunkId": "S16#s301",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Knowledge",
-      "cjkRatio": 0.0,
-      "length": 954,
-      "charRange": [
-        26275,
-        27229
-      ],
-      "text": "Computers and Electronics — Knowledge of circuit boards, processors, chips, electronic equipment, and computer hardware and software, including applications and programming.\n\nRelated occupations\n\nEnglish Language — Knowledge of the structure and content of the English language including the meaning and spelling of words, and rules of composition and grammar.\n\nRelated occupations\n\nEngineering and Technology — Knowledge of the practical application of engineering science and technology. This includes applying principles, techniques, procedures, and equipment to the design and production of various goods and services.\n\nRelated occupations\n\nMathematics — Knowledge of arithmetic, algebra, geometry, calculus, statistics, and their applications.\n\nRelated occupations\n\nDesign — Knowledge of design techniques, tools, and principles involved in production of precision technical plans, blueprints, drawings, and models.\n\nRelated occupations\n\nback to top"
-    },
-    {
-      "chunkId": "S16#s309",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Professional Associations",
-      "cjkRatio": 0.0,
-      "length": 217,
-      "charRange": [
-        34228,
-        34445
-      ],
-      "text": "Disclaimer:\nSources are listed to provide additional information on related jobs, specialties, and/or industries.\nLinks to non-DOL Internet sites are provided for your convenience and do not constitute an endorsement."
-    },
-    {
-      "chunkId": "S16#s310",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Professional Associations > O*NET Ally",
-      "cjkRatio": 0.0,
-      "length": 1495,
-      "charRange": [
-        34459,
-        35954
-      ],
-      "text": "Actively assisted with the O*NET data collection, helping to identify occupational experts who can be surveyed about their work in the occupation.\n\nView the list of Allies\n\nNational Associations\n\nAmerican Society for Quality\nexternal site\n\nAssociation for Computing Machinery\nexternal site\n\nAssociation of Software Testing\nexternal site\n\nComputing Research Association\nexternal site\n\nIEEE Computer Society\nexternal site\n\nIEEE-USA\nexternal site\n\nInstitute of Electrical and Electronics Engineers\nexternal site\n\nNational Center for Women and Information Technology\nexternal site\n\nQuality Assurance Institute\nexternal site\n\nSociety of Women Engineers\nexternal site\n\nAccreditation, Certification, & Unions\n\nAmerican Software Testing Qualifications Board\nexternal site\n\nAssociation for Testing and Software Quality Assurance\nexternal site\n\nCompTIA\nexternal site\n\nInstitute for Certification of Computing Professionals\nexternal site\n\nInternational Software Testing Qualifications Board\nexternal site\n\nProject Management Institute\nexternal site\n\nback to top\n\nWas this page helpful?\n\nJob Seeker Help • Contact Us\n\nShare:\n\nFacebook\nX\nLinkedIn\nReddit\nEmail\n\nLink to Us • Cite this Page\n\nCreative Commons CC-BY\nLicense\n\n15-1253.00 - Software Quality Assurance Analysts and Testers by U.S. Department of Labor, Employment and Training Administration is licensed under a Creative Commons Attribution 4.0 International License.\n\nFollow us:\n\nAbout this Site • Privacy • Disclaimer\n\nSite updated August 25, 2026"
-    },
-    {
-      "chunkId": "S16#s308",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Related Occupations",
-      "cjkRatio": 0.0,
-      "length": 512,
-      "charRange": [
-        33687,
-        34199
-      ],
-      "text": "15-1299.07 Blockchain Engineers\nBright Outlook\n\n17-2061.00 Computer Hardware Engineers Bright Outlook\n\n15-1251.00 Computer Programmers\n\n15-1211.00 Computer Systems Analysts Bright Outlook\n\n15-1299.08 Computer Systems Engineers/Architects Bright Outlook\n\n15-1243.00 Database Architects Bright Outlook\n\n15-1299.05 Information Security Engineers Bright Outlook\n\n15-1299.04 Penetration Testers Bright Outlook\n\n15-1252.00 Software Developers Bright Outlook\n\n17-2112.02 Validation Engineers Bright Outlook\n\nback to top"
-    },
     {
       "chunkId": "S16#s284",
       "sourceId": "S16",
+      "docIndex": 0,
       "sectionPath": "Software Quality Assurance Analysts and Testers > See the easy-read overview for Software Quality Assurance Analysts & Testers at My Next Move",
       "cjkRatio": 0.0,
       "length": 272,
@@ -200,68 +21,35 @@
       "text": "You will be leaving O*NET OnLine to visit our sister site My Next Move. You can return by using the Back button in your browser, or by choosing “O*NET OnLine” from the O*NET Sites menu at the bottom of any page in My Next Move.\n\nYes, let’s go\n\nDon’t ask again this session"
     },
     {
-      "chunkId": "S16#s285",
+      "chunkId": "S16#s292~2",
       "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > See the easy-read overview for Software Quality Assurance Analysts & Testers at My Next Move for Veterans",
+      "docIndex": 6,
+      "sectionPath": "Software Quality Assurance Analysts and Testers > Work Activities",
       "cjkRatio": 0.0,
-      "length": 298,
+      "length": 1551,
       "charRange": [
-        1387,
-        1685
+        7304,
+        8855
       ],
-      "text": "You will be leaving O*NET OnLine to visit our sister site My Next Move for Veterans. You can return by using the Back button in your browser, or by choosing “O*NET OnLine” from the O*NET Sites menu at the bottom of any page in My Next Move for Veterans.\n\nYes, let’s go\n\nDon’t ask again this session"
+      "text": "Organizing, Planning, and Prioritizing Work — Developing specific goals and plans to prioritize, organize, and accomplish your work.\n\nRelated occupations\n\nEstablishing and Maintaining Interpersonal Relationships — Developing constructive and cooperative working relationships with others, and maintaining them over time.\n\nRelated occupations\n\nMaking Decisions and Solving Problems — Analyzing information and evaluating results to choose the best solution and solve problems.\n\nRelated occupations\n\nThinking Creatively — Developing, designing, or creating new applications, ideas, relationships, systems, or products, including artistic contributions.\n\nRelated occupations\n\nMonitoring Processes, Materials, or Surroundings — Monitoring and reviewing information from materials, events, or the environment, to detect or assess problems.\n\nRelated occupations\n\nCoordinating the Work and Activities of Others — Getting members of a group to work together to accomplish tasks.\n\nRelated occupations\n\nDeveloping and Building Teams — Encouraging and building mutual trust, respect, and cooperation among team members.\n\nRelated occupations\n\nJudging the Qualities of Objects, Services, or People — Assessing the value, importance, or quality of things or people.\n\nRelated occupations\n\nInterpreting the Meaning of Information for Others — Translating or explaining what information means and how it can be used.\n\nRelated occupations\n\nScheduling Work and Activities — Scheduling events, programs, and activities, as well as the work of others.\n\nRelated occupations"
     },
     {
-      "chunkId": "S16#s298~3",
+      "chunkId": "S16#s295",
       "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Software Skills",
+      "docIndex": 12,
+      "sectionPath": "Software Quality Assurance Analysts and Testers > Job Zone",
       "cjkRatio": 0.0,
-      "length": 1434,
+      "length": 863,
       "charRange": [
-        17907,
-        19341
+        13434,
+        14297
       ],
-      "text": "Document management software — Adobe Acrobat Hot Technology ; Document management system software; Microsoft SharePoint Hot Technology\n\nRelated occupations\n\nElectronic mail software — Google Gmail; IBM Notes; Microsoft Exchange; Microsoft Outlook Hot Technology\n\nRelated occupations\n\nEnterprise application integration software — Extensible markup language XML Hot Technology ; IBM InfoSphere DataStage; Jenkins CI ; Microsoft SQL Server Integration Services SSIS Hot Technology ; 4 more\n\nRelated occupations\n\nEnterprise resource planning ERP software — Microsoft Dynamics; Oracle Fusion Applications; Oracle PeopleSoft Hot Technology ; SAP software Hot Technology ; 6 more\n\nRelated occupations\n\nEnterprise system management software — IBM Power Systems software\n\nRelated occupations\n\nExpert system software — Ansible software Hot Technology\n\nRelated occupations\n\nFile versioning software — Git ; Version control software\n\nRelated occupations\n\nFilesystem software — File server software\n\nRelated occupations\n\nFinancial analysis software — Delphi Technology; Oracle E-Business Suite Financials\n\nRelated occupations\n\nGeographic information system — ESRI ArcGIS software Hot Technology ; Geographic information system GIS software\n\nRelated occupations\n\nGraphical user interface development software — Graphical user interface GUI builder software; Graphical user interface GUI design software; Salesforce Visualforce\n\nRelated occupations"
-    },
-    {
-      "chunkId": "S16#s298~6",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Software Skills",
-      "cjkRatio": 0.0,
-      "length": 1415,
-      "charRange": [
-        22411,
-        23826
-      ],
-      "text": "Transaction security and virus protection software — Anti-spyware software; Antivirus software; McAfee; NortonLifeLock cybersecurity software; 1 more\n\nRelated occupations\n\nTransaction server software — Customer information control system CICS; IBM Middleware; Microsoft Internet Information Services (IIS); Object Management Group Object Request Broker; 1 more\n\nRelated occupations\n\nVideo conferencing software — Cisco Webex Hot Technology ; Google Meet; LogMeIn GoToMeeting; Zoom Hot Technology ; 1 more\n\nRelated occupations\n\nVideo creation and editing software — Adobe After Effects Hot Technology ; Flipgrid; Screencastify; YouTube; 1 more\n\nRelated occupations\n\nWeb page creation and editing software — Adobe Dreamweaver; Google Sites; LinkedIn; Social media sites\n\nRelated occupations\n\nWeb platform development software — Django Hot Technology ; Google Angular Hot Technology ; React Hot Technology ; Spring Framework Hot Technology ; 25 more\n\nRelated occupations\n\nWord processing software — 3M Post-it App; Google Docs Hot Technology ; Microsoft OneNote; Microsoft Word Hot Technology ; 1 more\n\nRelated occupations\n\nHot Technologies are requirements most frequently included across all employer job postings.\n\nSee all 126 Hot Technologies for this occupation.\n\nIn Demand skills are frequently included in employer job postings for this occupation.\n\nSee all 24 In Demand skills for this occupation.\n\nback to top"
-    },
-    {
-      "chunkId": "S16#s291~3",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Tasks",
-      "cjkRatio": 0.0,
-      "length": 55,
-      "charRange": [
-        5608,
-        5663
-      ],
-      "text": "Find occupations related to multiple tasks\n\nback to top"
-    },
-    {
-      "chunkId": "S16#s296",
-      "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Training & Credentials",
-      "cjkRatio": 0.0,
-      "length": 107,
-      "charRange": [
-        14323,
-        14430
-      ],
-      "text": "State training\n\nLocal training\n\nCertifications\n\nFind certifications nationwide\n\nState licenses\n\nback to top"
+      "text": "Title\n\nJob Zone Four: Considerable Preparation Needed\n\nEducation\n\nMost of these occupations require a four-year bachelor's degree, but some do not.\n\nRelated Experience\n\nA considerable amount of work-related skill, knowledge, or experience is needed for these occupations. For example, an accountant must complete four years of college and work for several years in accounting to be considered qualified.\n\nJob Training\n\nEmployees in these occupations usually need several years of work-related experience, on-the-job training, and/or vocational training.\n\nJob Zone Examples\n\nMany of these occupations involve coordinating, supervising, managing, or training others. Examples include real estate brokers, sales managers, database administrators, graphic designers, conservation scientists, art directors, and cost estimators.\n\nSVP Range\n\n(7.0 to < 8.0)\n\nback to top"
     },
     {
       "chunkId": "S16#s300",
       "sourceId": "S16",
+      "docIndex": 18,
       "sectionPath": "Software Quality Assurance Analysts and Testers > Transferable Skills",
       "cjkRatio": 0.0,
       "length": 1343,
@@ -272,28 +60,212 @@
       "text": "Programming — Writing computer programs for various purposes.\n\nRelated occupations\n\nComplex Problem Solving — Identifying complex problems and reviewing related information to develop and evaluate options and implement solutions.\n\nRelated occupations\n\nQuality Control Analysis — Conducting tests and inspections of products, services, or processes to evaluate quality or performance.\n\nRelated occupations\n\nSystems Evaluation — Identifying measures or indicators of system performance and the actions needed to improve or correct performance, relative to the goals of the system.\n\nRelated occupations\n\nJudgment and Decision Making — Considering the relative costs and benefits of potential actions to choose the most appropriate one.\n\nRelated occupations\n\nOperations Analysis — Analyzing needs and product requirements to create a design.\n\nRelated occupations\n\nSystems Analysis — Determining how a system should work and how changes in conditions, operations, and the environment will affect outcomes.\n\nRelated occupations\n\nCoordination — Adjusting actions in relation to others' actions.\n\nRelated occupations\n\nOperations Monitoring — Watching gauges, dials, or other indicators to make sure a machine is working properly.\n\nRelated occupations\n\nTime Management — Managing one's own time and the time of others.\n\nRelated occupations\n\nback to top"
     },
     {
-      "chunkId": "S16#s286",
+      "chunkId": "S16#s304~2",
       "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Ver la perspectiva general fácil de leer para Analistas y Probadores de Control de Calidad de Software en Mi Próximo Paso",
+      "docIndex": 24,
+      "sectionPath": "Software Quality Assurance Analysts and Testers > Interests",
       "cjkRatio": 0.0,
-      "length": 292,
+      "length": 708,
       "charRange": [
-        1810,
-        2102
+        31569,
+        32277
       ],
-      "text": "Saldrá de O*NET OnLine para visitar nuestro sitio afiliado Mi Próximo Paso. Puede regresar usando el botón Atrás en su navegador, o eligiendo “O*NET OnLine” en el menú Sitios O*NET en la parte inferior de cualquier página en Mi Próximo Paso.\n\nSí, vamos\n\nNo preguntar de nuevo para esta sesión"
+      "text": "Realistic — Work involves designing, building, or repairing of equipment, materials, or structures, engaging in physical activity, or working outdoors. Realistic occupations are often associated with engineering, mechanics and electronics, construction, woodworking, transportation, machine operation, agriculture, animal services, physical or manual labor, athletics, or protective services.\n\nEngineering — Work involves applying science and technology to the design, building, testing, and use of electrical and electronic components, mechanical devices and machines, automotive, marine, and aerospace equipment and vehicles, materials, or structures.\n\nRelated occupations\n\nRelated occupations\n\nback to top"
     },
     {
-      "chunkId": "S16#s290",
+      "chunkId": "S16#s287",
       "sourceId": "S16",
-      "sectionPath": "Software Quality Assurance Analysts and Testers > Ver la perspectiva general fácil de leer para Analistas y Probadores de Control de Calidad de Software en Mi Próximo Paso > More Information",
+      "docIndex": 3,
+      "sectionPath": "Software Quality Assurance Analysts and Testers > Ver la perspectiva general fácil de leer para Analistas y Probadores de Control de Calidad de Software en Mi Próximo Paso > Worker Requirements",
       "cjkRatio": 0.0,
-      "length": 46,
+      "length": 76,
       "charRange": [
-        2341,
-        2387
+        2125,
+        2201
       ],
-      "text": "Related Occupations\n\nProfessional Associations"
+      "text": "Software Skills\n\nEssential Skills\n\nTransferable Skills\n\nKnowledge\n\nEducation"
+    },
+    {
+      "chunkId": "S16#s293~2",
+      "sourceId": "S16",
+      "docIndex": 9,
+      "sectionPath": "Software Quality Assurance Analysts and Testers > Detailed Work Activities",
+      "cjkRatio": 0.0,
+      "length": 403,
+      "charRange": [
+        11183,
+        11586
+      ],
+      "text": "Evaluate utility of software or hardware technologies.\n\nRelated occupations\n\nAssess database performance.\n\nRelated occupations\n\nModify software programs to improve performance.\n\nRelated occupations\n\nPrepare data for analysis.\n\nRelated occupations\n\nProvide recommendations to others about computer hardware.\n\nRelated occupations\n\nFind occupations related to multiple detailed work activities\n\nback to top"
+    },
+    {
+      "chunkId": "S16#s298~3",
+      "sourceId": "S16",
+      "docIndex": 15,
+      "sectionPath": "Software Quality Assurance Analysts and Testers > Software Skills",
+      "cjkRatio": 0.0,
+      "length": 1434,
+      "charRange": [
+        17907,
+        19341
+      ],
+      "text": "Document management software — Adobe Acrobat Hot Technology ; Document management system software; Microsoft SharePoint Hot Technology\n\nRelated occupations\n\nElectronic mail software — Google Gmail; IBM Notes; Microsoft Exchange; Microsoft Outlook Hot Technology\n\nRelated occupations\n\nEnterprise application integration software — Extensible markup language XML Hot Technology ; IBM InfoSphere DataStage; Jenkins CI ; Microsoft SQL Server Integration Services SSIS Hot Technology ; 4 more\n\nRelated occupations\n\nEnterprise resource planning ERP software — Microsoft Dynamics; Oracle Fusion Applications; Oracle PeopleSoft Hot Technology ; SAP software Hot Technology ; 6 more\n\nRelated occupations\n\nEnterprise system management software — IBM Power Systems software\n\nRelated occupations\n\nExpert system software — Ansible software Hot Technology\n\nRelated occupations\n\nFile versioning software — Git ; Version control software\n\nRelated occupations\n\nFilesystem software — File server software\n\nRelated occupations\n\nFinancial analysis software — Delphi Technology; Oracle E-Business Suite Financials\n\nRelated occupations\n\nGeographic information system — ESRI ArcGIS software Hot Technology ; Geographic information system GIS software\n\nRelated occupations\n\nGraphical user interface development software — Graphical user interface GUI builder software; Graphical user interface GUI design software; Salesforce Visualforce\n\nRelated occupations"
+    },
+    {
+      "chunkId": "S16#s303",
+      "sourceId": "S16",
+      "docIndex": 21,
+      "sectionPath": "Software Quality Assurance Analysts and Testers > Abilities",
+      "cjkRatio": 0.0,
+      "length": 1527,
+      "charRange": [
+        27550,
+        29077
+      ],
+      "text": "Deductive Reasoning — The ability to apply general rules to specific problems to produce answers that make sense.\n\nRelated occupations\n\nInductive Reasoning — The ability to combine pieces of information to form general rules or conclusions (includes finding a relationship among seemingly unrelated events).\n\nRelated occupations\n\nOral Comprehension — The ability to listen to and understand information and ideas presented through spoken words and sentences.\n\nRelated occupations\n\nOral Expression — The ability to communicate information and ideas in speaking so others will understand.\n\nRelated occupations\n\nProblem Sensitivity — The ability to tell when something is wrong or is likely to go wrong. It does not involve solving the problem, only recognizing that there is a problem.\n\nRelated occupations\n\nWritten Comprehension — The ability to read and understand information and ideas presented in writing.\n\nRelated occupations\n\nWritten Expression — The ability to communicate information and ideas in writing so others will understand.\n\nRelated occupations\n\nInformation Ordering — The ability to arrange things or actions in a certain order or pattern according to a specific rule or set of rules (e.g., patterns of numbers, letters, words, pictures, mathematical operations).\n\nRelated occupations\n\nNear Vision — The ability to see details at close range (within a few feet of the observer).\n\nRelated occupations\n\nSpeech Recognition — The ability to identify and understand the speech of another person.\n\nRelated occupations"
+    },
+    {
+      "chunkId": "S16#s308",
+      "sourceId": "S16",
+      "docIndex": 27,
+      "sectionPath": "Software Quality Assurance Analysts and Testers > Related Occupations",
+      "cjkRatio": 0.0,
+      "length": 512,
+      "charRange": [
+        33687,
+        34199
+      ],
+      "text": "15-1299.07 Blockchain Engineers\nBright Outlook\n\n17-2061.00 Computer Hardware Engineers Bright Outlook\n\n15-1251.00 Computer Programmers\n\n15-1211.00 Computer Systems Analysts Bright Outlook\n\n15-1299.08 Computer Systems Engineers/Architects Bright Outlook\n\n15-1243.00 Database Architects Bright Outlook\n\n15-1299.05 Information Security Engineers Bright Outlook\n\n15-1299.04 Penetration Testers Bright Outlook\n\n15-1252.00 Software Developers Bright Outlook\n\n17-2112.02 Validation Engineers Bright Outlook\n\nback to top"
+    },
+    {
+      "chunkId": "S17#s313",
+      "sourceId": "S17",
+      "docIndex": 0,
+      "sectionPath": "Computer Hardware Engineers > See the easy-read overview for Computer Hardware Engineers at My Next Move",
+      "cjkRatio": 0.0,
+      "length": 272,
+      "charRange": [
+        603,
+        875
+      ],
+      "text": "You will be leaving O*NET OnLine to visit our sister site My Next Move. You can return by using the Back button in your browser, or by choosing “O*NET OnLine” from the O*NET Sites menu at the bottom of any page in My Next Move.\n\nYes, let’s go\n\nDon’t ask again this session"
+    },
+    {
+      "chunkId": "S17#s321~3",
+      "sourceId": "S17",
+      "docIndex": 6,
+      "sectionPath": "Computer Hardware Engineers > Work Activities",
+      "cjkRatio": 0.0,
+      "length": 1573,
+      "charRange": [
+        7723,
+        9296
+      ],
+      "text": "Developing and Building Teams — Encouraging and building mutual trust, respect, and cooperation among team members.\n\nRelated occupations\n\nMonitoring Processes, Materials, or Surroundings — Monitoring and reviewing information from materials, events, or the environment, to detect or assess problems.\n\nRelated occupations\n\nRepairing and Maintaining Electronic Equipment — Servicing, repairing, calibrating, regulating, fine-tuning, or testing machines, devices, and equipment that operate primarily on the basis of electrical or electronic (not mechanical) principles.\n\nRelated occupations\n\nScheduling Work and Activities — Scheduling events, programs, and activities, as well as the work of others.\n\nRelated occupations\n\nCoordinating the Work and Activities of Others — Getting members of a group to work together to accomplish tasks.\n\nRelated occupations\n\nEstablishing and Maintaining Interpersonal Relationships — Developing constructive and cooperative working relationships with others, and maintaining them over time.\n\nRelated occupations\n\nJudging the Qualities of Objects, Services, or People — Assessing the value, importance, or quality of things or people.\n\nRelated occupations\n\nTraining and Teaching Others — Identifying the educational needs of others, developing formal educational or training programs or classes, and teaching or instructing others.\n\nRelated occupations\n\nGuiding, Directing, and Motivating Subordinates — Providing guidance and direction to subordinates, including setting performance standards and monitoring performance.\n\nRelated occupations"
+    },
+    {
+      "chunkId": "S17#s325",
+      "sourceId": "S17",
+      "docIndex": 12,
+      "sectionPath": "Computer Hardware Engineers > Training & Credentials",
+      "cjkRatio": 0.0,
+      "length": 107,
+      "charRange": [
+        13797,
+        13904
+      ],
+      "text": "State training\n\nLocal training\n\nCertifications\n\nFind certifications nationwide\n\nState licenses\n\nback to top"
+    },
+    {
+      "chunkId": "S17#s330",
+      "sourceId": "S17",
+      "docIndex": 18,
+      "sectionPath": "Computer Hardware Engineers > Knowledge",
+      "cjkRatio": 0.0,
+      "length": 1369,
+      "charRange": [
+        18859,
+        20228
+      ],
+      "text": "Computers and Electronics — Knowledge of circuit boards, processors, chips, electronic equipment, and computer hardware and software, including applications and programming.\n\nRelated occupations\n\nEngineering and Technology — Knowledge of the practical application of engineering science and technology. This includes applying principles, techniques, procedures, and equipment to the design and production of various goods and services.\n\nRelated occupations\n\nDesign — Knowledge of design techniques, tools, and principles involved in production of precision technical plans, blueprints, drawings, and models.\n\nRelated occupations\n\nMathematics — Knowledge of arithmetic, algebra, geometry, calculus, statistics, and their applications.\n\nRelated occupations\n\nEnglish Language — Knowledge of the structure and content of the English language including the meaning and spelling of words, and rules of composition and grammar.\n\nRelated occupations\n\nPhysics — Knowledge and prediction of physical principles, laws, their interrelationships, and applications to understanding fluid, material, and atmospheric dynamics, and mechanical, electrical, atomic and sub-atomic structures and processes.\n\nRelated occupations\n\nTelecommunications — Knowledge of transmission, broadcasting, switching, control, and operation of telecommunications systems.\n\nRelated occupations\n\nback to top"
+    },
+    {
+      "chunkId": "S17#s334",
+      "sourceId": "S17",
+      "docIndex": 24,
+      "sectionPath": "Computer Hardware Engineers > Work Styles",
+      "cjkRatio": 0.0,
+      "length": 921,
+      "charRange": [
+        25107,
+        26028
+      ],
+      "text": "Innovation — A tendency to be inventive, to be imaginative, and to adopt new perspectives on ways to accomplish work.\n\nRelated occupations\n\nAdaptability — A tendency to be open to and comfortable with change, new experiences, or ideas at work.\n\nRelated occupations\n\nAchievement Orientation — A tendency to establish and maintain personally challenging work-related goals, set high work-related standards, and exert high effort toward meeting those goals and standards.\n\nRelated occupations\n\nIntellectual Curiosity — A tendency to seek out and acquire new work-related knowledge and obtain a deep understanding of work-related subjects.\n\nRelated occupations\n\nAttention to Detail — A tendency to be detail-oriented, organized, and thorough in completing work.\n\nRelated occupations\n\nDependability — A tendency to be reliable, responsible, and consistent in meeting work-related obligations.\n\nRelated occupations\n\nback to top"
+    },
+    {
+      "chunkId": "S17#s316",
+      "sourceId": "S17",
+      "docIndex": 3,
+      "sectionPath": "Computer Hardware Engineers > Ver la perspectiva general fácil de leer para Ingenieros de Computadoras en Mi Próximo Paso > Worker Requirements",
+      "cjkRatio": 0.0,
+      "length": 76,
+      "charRange": [
+        1674,
+        1750
+      ],
+      "text": "Software Skills\n\nEssential Skills\n\nTransferable Skills\n\nKnowledge\n\nEducation"
+    },
+    {
+      "chunkId": "S17#s323",
+      "sourceId": "S17",
+      "docIndex": 9,
+      "sectionPath": "Computer Hardware Engineers > Work Context",
+      "cjkRatio": 0.0,
+      "length": 1569,
+      "charRange": [
+        11181,
+        12750
+      ],
+      "text": "E-Mail — 93% responded “Every day.”\n\nRelated occupations\n\nDuration of Typical Work Week — 76% responded “More than 40 hours.”\n\nRelated occupations\n\nSpend Time Sitting — 61% responded “Continually or almost continually.”\n\nRelated occupations\n\nFace-to-Face Discussions with Individuals and Within Teams — 50% responded “Every day.”\n\nRelated occupations\n\nIndoors, Environmentally Controlled — 79% responded “Every day.”\n\nRelated occupations\n\nImportance of Being Exact or Accurate — 59% responded “Extremely important.”\n\nRelated occupations\n\nWork With or Contribute to a Work Group or Team — 50% responded “Very important.”\n\nRelated occupations\n\nFreedom to Make Decisions — 66% responded “Some freedom.”\n\nRelated occupations\n\nTelephone Conversations — 39% responded “Every day.”\n\nRelated occupations\n\nDetermine Tasks, Priorities and Goals — 66% responded “Some freedom.”\n\nRelated occupations\n\nContact With Others — 34% responded “Constant contact with others.”\n\nRelated occupations\n\nLevel of Competition — 59% responded “Highly competitive.”\n\nRelated occupations\n\nTime Pressure — 45% responded “Once a week or more but not every day.”\n\nRelated occupations\n\nCoordinate or Lead Others in Accomplishing Work Activities — 52% responded “Very important.”\n\nRelated occupations\n\nImpact of Decisions on Co-workers or Company Results — 38% responded “Important results.”\n\nRelated occupations\n\nWritten Letters and Memos — 32% responded “Once a week or more but not every day.”\n\nRelated occupations\n\nImportance of Repeating Same Tasks — 32% responded “Important.”\n\nRelated occupations"
+    },
+    {
+      "chunkId": "S17#s327~2",
+      "sourceId": "S17",
+      "docIndex": 15,
+      "sectionPath": "Computer Hardware Engineers > Software Skills",
+      "cjkRatio": 0.0,
+      "length": 555,
+      "charRange": [
+        15947,
+        16502
+      ],
+      "text": "Related occupations\n\nProcess mapping and design software — Microsoft Visio Hot Technology\n\nRelated occupations\n\nProgram testing software — Windows kernel debuggers\n\nRelated occupations\n\nSpreadsheet software — Microsoft Excel Hot Technology\n\nRelated occupations\n\nHot Technologies are requirements most frequently included across all employer job postings.\n\nSee all 20 Hot Technologies for this occupation.\n\nIn Demand skills are frequently included in employer job postings for this occupation.\n\nSee all 13 In Demand skills for this occupation.\n\nback to top"
+    },
+    {
+      "chunkId": "S17#s332~2",
+      "sourceId": "S17",
+      "docIndex": 21,
+      "sectionPath": "Computer Hardware Engineers > Abilities",
+      "cjkRatio": 0.0,
+      "length": 1151,
+      "charRange": [
+        22089,
+        23240
+      ],
+      "text": "Originality — The ability to come up with unusual or clever ideas about a given topic or situation, or to develop creative ways to solve a problem.\n\nRelated occupations\n\nSpeech Clarity — The ability to speak clearly so others can understand you.\n\nRelated occupations\n\nFluency of Ideas — The ability to come up with a number of ideas about a topic (the number of ideas is important, not their quality, correctness, or creativity).\n\nRelated occupations\n\nSpeech Recognition — The ability to identify and understand the speech of another person.\n\nRelated occupations\n\nVisualization — The ability to imagine how something will look after it is moved around or when its parts are moved or rearranged.\n\nRelated occupations\n\nFlexibility of Closure — The ability to identify or detect a known pattern (a figure, object, word, or sound) that is hidden in other distracting material.\n\nRelated occupations\n\nMathematical Reasoning — The ability to choose the right mathematical methods or formulas to solve a problem.\n\nRelated occupations\n\nNumber Facility — The ability to add, subtract, multiply, or divide quickly and correctly.\n\nRelated occupations\n\nback to top"
+    },
+    {
+      "chunkId": "S17#s337",
+      "sourceId": "S17",
+      "docIndex": 27,
+      "sectionPath": "Computer Hardware Engineers > Related Occupations",
+      "cjkRatio": 0.0,
+      "length": 516,
+      "charRange": [
+        26850,
+        27366
+      ],
+      "text": "15-1299.08 Computer Systems Engineers/Architects\nBright Outlook\n\n17-3023.00 Electrical and Electronic Engineering Technologists and Technicians\n\n17-2071.00 Electrical Engineers Bright Outlook\n\n17-2072.00 Electronics Engineers, Except Computer Bright Outlook\n\n17-3027.00 Mechanical Engineering Technologists and Technicians\n\n17-2199.05 Mechatronics Engineers\n\n17-2199.06 Microsystems Engineers\n\n17-2199.08 Robotics Engineers\n\n17-3024.01 Robotics Technicians\n\n15-1252.00 Software Developers Bright Outlook\n\nback to top"
     }
   ]
 }

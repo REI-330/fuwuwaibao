@@ -3,12 +3,13 @@
   "sources": [
     "S13"
   ],
-  "note": "候选段均已排除：被 dev/test 引用过、在图谱引用集合内、与已用段原文区间重叠。",
-  "count": 30,
+  "note": "候选段均已排除：被 dev/test 引用过、在图谱引用集合内、与已用段原文区间重叠。受格点抽样保证，同一 sourceId 内任意两段的 docIndex 差都是 3 的倍数且 ≥3（起草时用 docIndex 差判断间隔，不要用数组下标）。",
+  "count": 15,
   "candidates": [
     {
       "chunkId": "S13#s200",
       "sourceId": "S13",
+      "docIndex": 0,
       "sectionPath": "",
       "cjkRatio": 0.0,
       "length": 50,
@@ -19,32 +20,74 @@
       "text": "Skip to content\n\npytest documentation\n\nBack to top"
     },
     {
-      "chunkId": "S13#s201",
+      "chunkId": "S13#s207",
       "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶",
+      "docIndex": 6,
+      "sectionPath": "How to use fixtures¶ > “Requesting” fixtures¶ > Fixtures can be requested more than once per test (return values are cached)¶",
       "cjkRatio": 0.0,
-      "length": 54,
+      "length": 1103,
       "charRange": [
-        74,
-        128
+        5241,
+        6344
       ],
-      "text": "See also\n\nAbout fixtures\n\nSee also\n\nFixtures reference"
+      "text": "Fixtures can also be requested more than once during the same test, and\npytest won’t execute them again for that test. This means we can request\nfixtures in multiple fixtures that are dependent on them (and even again in the\ntest itself) without those fixtures being executed more than once.\n\n# contents of test_append.py\nimport pytest\n\n# Arrange\n@pytest.fixture\ndef first_entry():\nreturn \"a\"\n\n# Arrange\n@pytest.fixture\ndef order():\nreturn []\n\n# Act\n@pytest.fixture\ndef append_first(order, first_entry):\nreturn order.append(first_entry)\n\ndef test_string_only(append_first, order, first_entry):\n# Assert\nassert order == [first_entry]\n\nIf a requested fixture was executed once for every time it was requested\nduring a test, then this test would fail because both append_first and\ntest_string_only would see order as an empty list (i.e. []), but\nsince the return value of order was cached (along with any side effects\nexecuting it may have had) after the first time it was called, both the test and\nappend_first were referencing the same object, and the test saw the effect\nappend_first had on that object."
     },
     {
-      "chunkId": "S13#s226",
+      "chunkId": "S13#s212",
       "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Automatic grouping of tests by fixture instances¶",
+      "docIndex": 12,
+      "sectionPath": "How to use fixtures¶ > Teardown/Cleanup (AKA Fixture finalization)¶",
       "cjkRatio": 0.0,
-      "length": 1579,
+      "length": 400,
       "charRange": [
-        40681,
-        42260
+        12526,
+        12926
       ],
-      "text": "pytest minimizes the number of active fixtures during test runs.\nIf you have a parametrized fixture, then all the tests using it will\nfirst execute with one instance and then finalizers are called\nbefore the next fixture instance is created. Among other things,\nthis eases testing of applications which create and use global state.\n\nThe following example uses two parametrized fixtures, one of which is\nscoped on a per-module basis, and all the functions perform print calls\nto show the setup/teardown flow:\n\n# content of test_module.py\nimport pytest\n\n@pytest.fixture(scope=\"module\", params=[\"mod1\", \"mod2\"])\ndef modarg(request):\nparam = request.param\nprint(\" SETUP modarg\", param)\nyield param\nprint(\" TEARDOWN modarg\", param)\n\n@pytest.fixture(scope=\"function\", params=[1, 2])\ndef otherarg(request):\nparam = request.param\nprint(\" SETUP otherarg\", param)\nyield param\nprint(\" TEARDOWN otherarg\", param)\n\ndef test_0(otherarg):\nprint(\" RUN test0 with otherarg\", otherarg)\n\ndef test_1(modarg):\nprint(\" RUN test1 with modarg\", modarg)\n\ndef test_2(otherarg, modarg):\nprint(f\" RUN test2 with otherarg {otherarg} and modarg {modarg}\")\n\nLet’s run the tests in verbose mode and with looking at the print-output:\n\n$ pytest -v -s test_module.py\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-9.x.y, pluggy-1.x.y -- $PYTHON_PREFIX/bin/python\ncachedir: .pytest_cache\nrootdir: /home/sweet/project\ncollecting ... collected 8 items\n\ntest_module.py::test_0[1] SETUP otherarg 1\nRUN test0 with otherarg 1\nPASSED TEARDOWN otherarg 1"
+      "text": "When we run our tests, we’ll want to make sure they clean up after themselves so\nthey don’t mess with any other tests (and also so that we don’t leave behind a\nmountain of test data to bloat the system). Fixtures in pytest offer a very\nuseful teardown system, which allows us to define the specific steps necessary\nfor each fixture to clean up after itself.\n\nThis system can be leveraged in two ways."
+    },
+    {
+      "chunkId": "S13#s216",
+      "sourceId": "S13",
+      "docIndex": 18,
+      "sectionPath": "How to use fixtures¶ > Teardown/Cleanup (AKA Fixture finalization)¶ > 2 > Note on finalizer order¶",
+      "cjkRatio": 0.0,
+      "length": 1462,
+      "charRange": [
+        17782,
+        19244
+      ],
+      "text": "Finalizers are executed in a first-in-last-out order.\nFor yield fixtures, the first teardown code to run is from the right-most fixture, i.e. the last test parameter.\n\n# content of test_finalizers.py\nimport pytest\n\ndef test_bar(fix_w_yield1, fix_w_yield2):\nprint(\"test_bar\")\n\n@pytest.fixture\ndef fix_w_yield1():\nyield\nprint(\"after_yield_1\")\n\n@pytest.fixture\ndef fix_w_yield2():\nyield\nprint(\"after_yield_2\")\n\n$ pytest -s test_finalizers.py\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-9.x.y, pluggy-1.x.y\nrootdir: /home/sweet/project\ncollected 1 item\n\ntest_finalizers.py test_bar\n.after_yield_2\nafter_yield_1\n\n============================ 1 passed in 0.12s =============================\n\nFor finalizers, the first fixture to run is last call to request.addfinalizer.\n\n# content of test_finalizers.py\nfrom functools import partial\nimport pytest\n\n@pytest.fixture\ndef fix_w_finalizers(request):\nrequest.addfinalizer(partial(print, \"finalizer_2\"))\nrequest.addfinalizer(partial(print, \"finalizer_1\"))\n\ndef test_bar(fix_w_finalizers):\nprint(\"test_bar\")\n\n$ pytest -s test_finalizers.py\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-9.x.y, pluggy-1.x.y\nrootdir: /home/sweet/project\ncollected 1 item\n\ntest_finalizers.py test_bar\n.finalizer_1\nfinalizer_2\n\n============================ 1 passed in 0.12s ============================="
+    },
+    {
+      "chunkId": "S13#s219~2",
+      "sourceId": "S13",
+      "docIndex": 24,
+      "sectionPath": "How to use fixtures¶ > Running multiple assert statements safely¶",
+      "cjkRatio": 0.0,
+      "length": 1229,
+      "charRange": [
+        25590,
+        26819
+      ],
+      "text": "@pytest.fixture(scope=\"class\")\ndef user(admin_client):\n_user = User(name=\"Susan\", username=f\"testuser-{uuid4()}\", password=\"P4$$word\")\nadmin_client.create_user(_user)\nyield _user\nadmin_client.delete_user(_user)\n\n@pytest.fixture(scope=\"class\")\ndef driver():\n_driver = Chrome()\nyield _driver\n_driver.quit()\n\n@pytest.fixture(scope=\"class\")\ndef landing_page(driver, login):\nreturn LandingPage(driver)\n\nclass TestLandingPageSuccess:\n@pytest.fixture(scope=\"class\", autouse=True)\n@classmethod\ndef login(cls, driver, base_url, user):\ndriver.get(urljoin(base_url, \"/login\"))\npage = LoginPage(driver)\npage.login(user)\n\ndef test_name_in_header(self, landing_page, user):\nassert landing_page.header == f\"Welcome, {user.name}!\"\n\ndef test_sign_out_button(self, landing_page):\nassert landing_page.sign_out_button.is_displayed()\n\ndef test_profile_link(self, landing_page, user):\nprofile_href = urljoin(base_url, f\"/profile?id={user.profile_id}\")\nassert landing_page.profile_link.get_attribute(\"href\") == profile_href\n\nNotice that the methods are only referencing self in the signature as a\nformality. No state is tied to the actual test class as it might be in the\nunittest.TestCase framework. Everything is managed by the pytest fixture\nsystem."
+    },
+    {
+      "chunkId": "S13#s223~2",
+      "sourceId": "S13",
+      "docIndex": 30,
+      "sectionPath": "How to use fixtures¶ > Parametrizing fixtures¶",
+      "cjkRatio": 0.0,
+      "length": 1431,
+      "charRange": [
+        33261,
+        34692
+      ],
+      "text": "def test_ehlo(smtp_connection):\nresponse, msg = smtp_connection.ehlo()\nassert response == 250\nassert b\"smtp.gmail.com\" in msg\n> assert 0 # for demo purposes\n^^^^^^^^\nE assert 0\n\ntest_module.py:7: AssertionError\n________________________ test_noop[smtp.gmail.com] _________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef0004>\n\ndef test_noop(smtp_connection):\nresponse, msg = smtp_connection.noop()\nassert response == 250\n> assert 0 # for demo purposes\n^^^^^^^^\nE assert 0\n\ntest_module.py:13: AssertionError\n________________________ test_ehlo[mail.python.org] ________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef0005>\n\ndef test_ehlo(smtp_connection):\nresponse, msg = smtp_connection.ehlo()\nassert response == 250\n> assert b\"smtp.gmail.com\" in msg\nE AssertionError: assert b'smtp.gmail.com' in b'mail.python.org\\nPIPELINING\\nSIZE 51200000\\nETRN\\nSTARTTLS\\nAUTH DIGEST-MD5 NTLM CRAM-MD5\\nENHANCEDSTATUSCODES\\n8BITMIME\\nDSN\\nSMTPUTF8\\nCHUNKING'\n\ntest_module.py:6: AssertionError\n-------------------------- Captured stdout setup ---------------------------\nfinalizing <smtplib.SMTP object at 0xdeadbeef0004>\n________________________ test_noop[mail.python.org] ________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef0005>\n\ndef test_noop(smtp_connection):\nresponse, msg = smtp_connection.noop()\nassert response == 250\n> assert 0 # for demo purposes\n^^^^^^^^\nE assert 0"
     },
     {
       "chunkId": "S13#s226~2",
       "sourceId": "S13",
+      "docIndex": 36,
       "sectionPath": "How to use fixtures¶ > Automatic grouping of tests by fixture instances¶",
       "cjkRatio": 0.0,
       "length": 1414,
@@ -55,44 +98,74 @@
       "text": "test_module.py::test_0[2] SETUP otherarg 2\nRUN test0 with otherarg 2\nPASSED TEARDOWN otherarg 2\n\ntest_module.py::test_1[mod1] SETUP modarg mod1\nRUN test1 with modarg mod1\nPASSED\ntest_module.py::test_2[mod1-1] SETUP otherarg 1\nRUN test2 with otherarg 1 and modarg mod1\nPASSED TEARDOWN otherarg 1\n\ntest_module.py::test_2[mod1-2] SETUP otherarg 2\nRUN test2 with otherarg 2 and modarg mod1\nPASSED TEARDOWN otherarg 2\n\ntest_module.py::test_1[mod2] TEARDOWN modarg mod1\nSETUP modarg mod2\nRUN test1 with modarg mod2\nPASSED\ntest_module.py::test_2[mod2-1] SETUP otherarg 1\nRUN test2 with otherarg 1 and modarg mod2\nPASSED TEARDOWN otherarg 1\n\ntest_module.py::test_2[mod2-2] SETUP otherarg 2\nRUN test2 with otherarg 2 and modarg mod2\nPASSED TEARDOWN otherarg 2\nTEARDOWN modarg mod2\n\n============================ 8 passed in 0.12s =============================\n\nYou can see that the parametrized module-scoped modarg resource caused an\nordering of test execution that led to the fewest possible “active” resources.\nThe finalizer for the mod1 parametrized resource was executed before the\nmod2 resource was setup.\n\nIn particular notice that test_0 is completely independent and finishes first.\nThen test_1 is executed with mod1, then test_2 with mod1, then test_1\nwith mod2 and finally test_2 with mod2.\n\nThe otherarg parametrized resource (having function scope) was set up before\nand torn down after every test that used it."
     },
     {
-      "chunkId": "S13#s208",
+      "chunkId": "S13#s231",
       "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Autouse fixtures (fixtures you don’t have to request)¶",
+      "docIndex": 42,
+      "sectionPath": "How to use fixtures¶ > Overriding fixtures on various levels¶ > Override a fixture with direct test parametrization¶",
       "cjkRatio": 0.0,
-      "length": 1122,
+      "length": 865,
       "charRange": [
-        6402,
-        7524
+        47450,
+        48315
       ],
-      "text": "Sometimes you may want to have a fixture (or even several) that you know all\nyour tests will depend on. “Autouse” fixtures are a convenient way to make all\ntests automatically request them. This can cut out a\nlot of redundant requests, and can even provide more advanced fixture usage\n(more on that further down).\n\nWe can make a fixture an autouse fixture by passing in autouse=True to the\nfixture’s decorator. Here’s a simple example for how they can be used:\n\n# contents of test_append.py\nimport pytest\n\n@pytest.fixture\ndef first_entry():\nreturn \"a\"\n\n@pytest.fixture\ndef order(first_entry):\nreturn []\n\n@pytest.fixture(autouse=True)\ndef append_first(order, first_entry):\nreturn order.append(first_entry)\n\ndef test_string_only(order, first_entry):\nassert order == [first_entry]\n\ndef test_string_and_int(order, first_entry):\norder.append(2)\nassert order == [first_entry, 2]\n\nIn this example, the append_first fixture is an autouse fixture. Because it\nhappens automatically, both tests are affected by it, even though neither test\nrequested it. That doesn’t mean they can’t be requested though; just\nthat it isn’t necessary."
+      "text": "Given the tests file structure is:\n\ntests/\nconftest.py\n# content of tests/conftest.py\nimport pytest\n\n@pytest.fixture\ndef username():\nreturn 'username'\n\n@pytest.fixture\ndef other_username(username):\nreturn 'other-' + username\n\ntest_something.py\n# content of tests/test_something.py\nimport pytest\n\n@pytest.mark.parametrize('username', ['directly-overridden-username'])\ndef test_username(username):\nassert username == 'directly-overridden-username'\n\n@pytest.mark.parametrize('username', ['directly-overridden-username-other'])\ndef test_username_other(other_username):\nassert other_username == 'other-directly-overridden-username-other'\n\nIn the example above, a fixture value is overridden by the test parameter value. Note that the value of the fixture\ncan be overridden this way even if the test doesn’t use it directly (doesn’t mention it in the function prototype)."
     },
     {
-      "chunkId": "S13#s222",
+      "chunkId": "S13#s205",
       "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Factories as fixtures¶",
+      "docIndex": 3,
+      "sectionPath": "How to use fixtures¶ > “Requesting” fixtures¶ > Fixtures are reusable¶",
       "cjkRatio": 0.0,
-      "length": 1196,
+      "length": 1524,
       "charRange": [
-        30590,
-        31786
+        2900,
+        4424
       ],
-      "text": "The “factory as fixture” pattern can help in situations where the result\nof a fixture is needed multiple times in a single test. Instead of returning\ndata directly, the fixture instead returns a function which generates the data.\nThis function can then be called multiple times in the test.\n\nFactories can have parameters as needed:\n\n@pytest.fixture\ndef make_customer_record():\ndef _make_customer_record(name):\nreturn {\"name\": name, \"orders\": []}\n\nreturn _make_customer_record\n\ndef test_customer_records(make_customer_record):\ncustomer_1 = make_customer_record(\"Lisa\")\ncustomer_2 = make_customer_record(\"Mike\")\ncustomer_3 = make_customer_record(\"Meredith\")\n\nIf the data created by the factory requires managing, the fixture can take care of that:\n\n@pytest.fixture\ndef make_customer_record():\ncreated_records = []\n\ndef _make_customer_record(name):\nrecord = models.Customer(name=name, orders=[])\ncreated_records.append(record)\nreturn record\n\nyield _make_customer_record\n\nfor record in created_records:\nrecord.destroy()\n\ndef test_customer_records(make_customer_record):\ncustomer_1 = make_customer_record(\"Lisa\")\ncustomer_2 = make_customer_record(\"Mike\")\ncustomer_3 = make_customer_record(\"Meredith\")"
+      "text": "One of the things that makes pytest’s fixture system so powerful, is that it\ngives us the ability to define a generic setup step that can be reused over and\nover, just like a normal function would be used. Two different tests can request\nthe same fixture and have pytest give each test their own result from that\nfixture.\n\nThis is extremely useful for making sure tests aren’t affected by each other. We\ncan use this system to make sure each test gets its own fresh batch of data and\nis starting from a clean state so it can provide consistent, repeatable results.\n\nHere’s an example of how this can come in handy:\n\n# contents of test_append.py\nimport pytest\n\n# Arrange\n@pytest.fixture\ndef first_entry():\nreturn \"a\"\n\n# Arrange\n@pytest.fixture\ndef order(first_entry):\nreturn [first_entry]\n\ndef test_string(order):\n# Act\norder.append(\"b\")\n\n# Assert\nassert order == [\"a\", \"b\"]\n\ndef test_int(order):\n# Act\norder.append(2)\n\n# Assert\nassert order == [\"a\", 2]\n\nEach test here is being given its own copy of that list object,\nwhich means the order fixture is getting executed twice (the same\nis true for the first_entry fixture). If we were to do this by hand as\nwell, it would look something like this:\n\ndef first_entry():\nreturn \"a\"\n\ndef order(first_entry):\nreturn [first_entry]\n\ndef test_string(order):\n# Act\norder.append(\"b\")\n\n# Assert\nassert order == [\"a\", \"b\"]\n\ndef test_int(order):\n# Act\norder.append(2)\n\n# Assert\nassert order == [\"a\", 2]\n\nentry = first_entry()\nthe_list = order(first_entry=entry)\ntest_string(order=the_list)"
     },
     {
-      "chunkId": "S13#s220",
+      "chunkId": "S13#s209~3",
       "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Fixtures can introspect the requesting test context¶",
+      "docIndex": 9,
+      "sectionPath": "How to use fixtures¶ > Scope: sharing fixtures across classes, modules, packages or session¶",
       "cjkRatio": 0.0,
-      "length": 1326,
+      "length": 247,
       "charRange": [
-        27987,
-        29313
+        10599,
+        10846
       ],
-      "text": "Fixture functions can accept the request object\nto introspect the “requesting” test function, class or module context.\nFurther extending the previous smtp_connection fixture example, let’s\nread an optional server URL from the test module which uses our fixture:\n\n# content of conftest.py\nimport smtplib\n\nimport pytest\n\n@pytest.fixture(scope=\"module\")\ndef smtp_connection(request):\nserver = getattr(request.module, \"smtpserver\", \"smtp.gmail.com\")\nsmtp_connection = smtplib.SMTP(server, 587, timeout=5)\nyield smtp_connection\nprint(f\"finalizing {smtp_connection} ({server})\")\nsmtp_connection.close()\n\nWe use the request.module attribute to optionally obtain an\nsmtpserver attribute from the test module. If we just execute\nagain, nothing much has changed:\n\n$ pytest -s -q --tb=no test_module.py\nFFfinalizing <smtplib.SMTP object at 0xdeadbeef0002> (smtp.gmail.com)\n\n========================= short test summary info ==========================\nFAILED test_module.py::test_ehlo - assert 0\nFAILED test_module.py::test_noop - assert 0\n2 failed in 0.12s\n\nLet’s quickly create another test module that actually sets the\nserver URL in its module namespace:\n\n# content of test_anothersmtp.py\n\nsmtpserver = \"mail.python.org\" # will be read by smtp fixture\n\ndef test_showhelo(smtp_connection):\nassert 0, smtp_connection.helo()\n\nRunning it:"
+      "text": "If you decide that you rather want to have a session-scoped smtp_connection\ninstance, you can simply declare it:\n\n@pytest.fixture(scope=\"session\")\ndef smtp_connection():\n# the returned fixture value will be shared for\n# all tests requesting it\n..."
+    },
+    {
+      "chunkId": "S13#s214",
+      "sourceId": "S13",
+      "docIndex": 15,
+      "sectionPath": "How to use fixtures¶ > Teardown/Cleanup (AKA Fixture finalization)¶ > 1 > Handling errors for yield fixture¶",
+      "cjkRatio": 0.0,
+      "length": 279,
+      "charRange": [
+        15497,
+        15776
+      ],
+      "text": "If a yield fixture raises an exception before yielding, pytest won’t try to run\nthe teardown code after that yield fixture’s yield statement. But, for every\nfixture that has already run successfully for that test, pytest will still\nattempt to tear them down as it normally would."
+    },
+    {
+      "chunkId": "S13#s218",
+      "sourceId": "S13",
+      "docIndex": 21,
+      "sectionPath": "How to use fixtures¶ > Safe teardowns¶ > Safe fixture structure¶",
+      "cjkRatio": 0.0,
+      "length": 1599,
+      "charRange": [
+        20991,
+        22590
+      ],
+      "text": "The safest and simplest fixture structure requires limiting fixtures to only\nmaking one state-changing action each, and then bundling them together with\ntheir teardown code, as the email examples above showed.\n\nThe chance that a state-changing operation can fail but still modify state is\nnegligible, as most of these operations tend to be transaction-based (at least at the\nlevel of testing where state could be left behind). So if we make sure that any\nsuccessful state-changing action gets torn down by moving it to a separate\nfixture function and separating it from other, potentially failing\nstate-changing actions, then our tests will stand the best chance at leaving\nthe test environment the way they found it.\n\nFor an example, let’s say we have a website with a login page, and we have\naccess to an admin API where we can generate users. For our test, we want to:\n\nCreate a user through that admin API\n\nLaunch a browser using Selenium\n\nGo to the login page of our site\n\nLog in as the user we created\n\nAssert that their name is in the header of the landing page\n\nWe wouldn’t want to leave that user in the system, nor would we want to leave\nthat browser session running, so we’ll want to make sure the fixtures that\ncreate those things clean up after themselves.\n\nHere’s what that might look like:\n\nNote\n\nFor this example, certain fixtures (i.e. base_url and\nadmin_credentials) are implied to exist elsewhere. So for now, let’s\nassume they exist, and we’re just not looking at them.\n\nfrom uuid import uuid4\nfrom urllib.parse import urljoin\n\nfrom selenium.webdriver import Chrome\nimport pytest"
     },
     {
       "chunkId": "S13#s220~2",
       "sourceId": "S13",
+      "docIndex": 27,
       "sectionPath": "How to use fixtures¶ > Fixtures can introspect the requesting test context¶",
       "cjkRatio": 0.0,
       "length": 737,
@@ -105,6 +178,7 @@
     {
       "chunkId": "S13#s225",
       "sourceId": "S13",
+      "docIndex": 33,
       "sectionPath": "How to use fixtures¶ > Modularity: using fixtures from a fixture function¶",
       "cjkRatio": 0.0,
       "length": 1328,
@@ -115,20 +189,9 @@
       "text": "In addition to using fixtures in test functions, fixture functions\ncan use other fixtures themselves. This contributes to a modular design\nof your fixtures and allows reuse of framework-specific fixtures across\nmany projects. As a simple example, we can extend the previous example\nand instantiate an object app where we stick the already defined\nsmtp_connection resource into it:\n\n# content of test_appsetup.py\n\nimport pytest\n\nclass App:\ndef __init__(self, smtp_connection):\nself.smtp_connection = smtp_connection\n\n@pytest.fixture(scope=\"module\")\ndef app(smtp_connection):\nreturn App(smtp_connection)\n\ndef test_smtp_connection_exists(app):\nassert app.smtp_connection\n\nHere we declare an app fixture which receives the previously defined\nsmtp_connection fixture and instantiates an App object with it. Let’s run it:\n\n$ pytest -v test_appsetup.py\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-9.x.y, pluggy-1.x.y -- $PYTHON_PREFIX/bin/python\ncachedir: .pytest_cache\nrootdir: /home/sweet/project\ncollecting ... collected 2 items\n\ntest_appsetup.py::test_smtp_connection_exists[smtp.gmail.com] PASSED [ 50%]\ntest_appsetup.py::test_smtp_connection_exists[mail.python.org] PASSED [100%]\n\n============================ 2 passed in 0.12s ============================="
     },
     {
-      "chunkId": "S13#s225~2",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Modularity: using fixtures from a fixture function¶",
-      "cjkRatio": 0.0,
-      "length": 628,
-      "charRange": [
-        40000,
-        40628
-      ],
-      "text": "Due to the parametrization of smtp_connection, the test will run twice with two\ndifferent App instances and respective smtp servers. There is no\nneed for the app fixture to be aware of the smtp_connection\nparametrization because pytest will fully analyse the fixture dependency graph.\n\nNote that the app fixture has a scope of module and uses a\nmodule-scoped smtp_connection fixture. The example would still work if\nsmtp_connection was cached on a session scope: it is fine for fixtures to use\n“broader” scoped fixtures but not the other way round:\nA session-scoped fixture could not use a module-scoped one in a\nmeaningful way."
-    },
-    {
       "chunkId": "S13#s228",
       "sourceId": "S13",
+      "docIndex": 39,
       "sectionPath": "How to use fixtures¶ > Overriding fixtures on various levels¶",
       "cjkRatio": 0.0,
       "length": 150,
@@ -137,234 +200,6 @@
         45828
       ],
       "text": "In a relatively large test suite, you may want to override a fixture, to augment\nor change its behavior inside of certain test modules or directories."
-    },
-    {
-      "chunkId": "S13#s229",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Overriding fixtures on various levels¶ > Override a fixture on a directory (conftest) level¶",
-      "cjkRatio": 0.0,
-      "length": 770,
-      "charRange": [
-        45883,
-        46653
-      ],
-      "text": "Given the tests file structure is:\n\ntests/\nconftest.py\n# content of tests/conftest.py\nimport pytest\n\n@pytest.fixture\ndef username():\nreturn 'username'\n\ntest_something.py\n# content of tests/test_something.py\ndef test_username(username):\nassert username == 'username'\n\nsubdir/\nconftest.py\n# content of tests/subdir/conftest.py\nimport pytest\n\n@pytest.fixture\ndef username(username):\nreturn 'overridden-' + username\n\ntest_something_else.py\n# content of tests/subdir/test_something_else.py\ndef test_username(username):\nassert username == 'overridden-username'\n\nAs you can see, a fixture with the same name can be overridden for a certain test directory level.\nNote that the base or super fixture can be accessed from the overriding\nfixture easily - used in the example above."
-    },
-    {
-      "chunkId": "S13#s230",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Overriding fixtures on various levels¶ > Override a fixture on a test module level¶",
-      "cjkRatio": 0.0,
-      "length": 695,
-      "charRange": [
-        46699,
-        47394
-      ],
-      "text": "Given the tests file structure is:\n\ntests/\nconftest.py\n# content of tests/conftest.py\nimport pytest\n\n@pytest.fixture\ndef username():\nreturn 'username'\n\ntest_something.py\n# content of tests/test_something.py\nimport pytest\n\n@pytest.fixture\ndef username(username):\nreturn 'overridden-' + username\n\ndef test_username(username):\nassert username == 'overridden-username'\n\ntest_something_else.py\n# content of tests/test_something_else.py\nimport pytest\n\n@pytest.fixture\ndef username(username):\nreturn 'overridden-else-' + username\n\ndef test_username(username):\nassert username == 'overridden-else-username'\n\nIn the example above, a fixture with the same name can be overridden for a certain test module."
-    },
-    {
-      "chunkId": "S13#s231",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Overriding fixtures on various levels¶ > Override a fixture with direct test parametrization¶",
-      "cjkRatio": 0.0,
-      "length": 865,
-      "charRange": [
-        47450,
-        48315
-      ],
-      "text": "Given the tests file structure is:\n\ntests/\nconftest.py\n# content of tests/conftest.py\nimport pytest\n\n@pytest.fixture\ndef username():\nreturn 'username'\n\n@pytest.fixture\ndef other_username(username):\nreturn 'other-' + username\n\ntest_something.py\n# content of tests/test_something.py\nimport pytest\n\n@pytest.mark.parametrize('username', ['directly-overridden-username'])\ndef test_username(username):\nassert username == 'directly-overridden-username'\n\n@pytest.mark.parametrize('username', ['directly-overridden-username-other'])\ndef test_username_other(other_username):\nassert other_username == 'other-directly-overridden-username-other'\n\nIn the example above, a fixture value is overridden by the test parameter value. Note that the value of the fixture\ncan be overridden this way even if the test doesn’t use it directly (doesn’t mention it in the function prototype)."
-    },
-    {
-      "chunkId": "S13#s232",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Overriding fixtures on various levels¶ > Override a parametrized fixture with non-parametrized one and vice versa¶",
-      "cjkRatio": 0.0,
-      "length": 1258,
-      "charRange": [
-        48392,
-        49650
-      ],
-      "text": "Given the tests file structure is:\n\ntests/\nconftest.py\n# content of tests/conftest.py\nimport pytest\n\n@pytest.fixture(params=['one', 'two', 'three'])\ndef parametrized_username(request):\nreturn request.param\n\n@pytest.fixture\ndef non_parametrized_username(request):\nreturn 'username'\n\ntest_something.py\n# content of tests/test_something.py\nimport pytest\n\n@pytest.fixture\ndef parametrized_username():\nreturn 'overridden-username'\n\n@pytest.fixture(params=['one', 'two', 'three'])\ndef non_parametrized_username(request):\nreturn request.param\n\ndef test_username(parametrized_username):\nassert parametrized_username == 'overridden-username'\n\ndef test_parametrized_username(non_parametrized_username):\nassert non_parametrized_username in ['one', 'two', 'three']\n\ntest_something_else.py\n# content of tests/test_something_else.py\ndef test_username(parametrized_username):\nassert parametrized_username in ['one', 'two', 'three']\n\ndef test_username(non_parametrized_username):\nassert non_parametrized_username == 'username'\n\nIn the example above, a parametrized fixture is overridden with a non-parametrized version, and\na non-parametrized fixture is overridden with a parametrized version for certain test module.\nThe same applies for the test directory level obviously."
-    },
-    {
-      "chunkId": "S13#s223~2",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Parametrizing fixtures¶",
-      "cjkRatio": 0.0,
-      "length": 1431,
-      "charRange": [
-        33261,
-        34692
-      ],
-      "text": "def test_ehlo(smtp_connection):\nresponse, msg = smtp_connection.ehlo()\nassert response == 250\nassert b\"smtp.gmail.com\" in msg\n> assert 0 # for demo purposes\n^^^^^^^^\nE assert 0\n\ntest_module.py:7: AssertionError\n________________________ test_noop[smtp.gmail.com] _________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef0004>\n\ndef test_noop(smtp_connection):\nresponse, msg = smtp_connection.noop()\nassert response == 250\n> assert 0 # for demo purposes\n^^^^^^^^\nE assert 0\n\ntest_module.py:13: AssertionError\n________________________ test_ehlo[mail.python.org] ________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef0005>\n\ndef test_ehlo(smtp_connection):\nresponse, msg = smtp_connection.ehlo()\nassert response == 250\n> assert b\"smtp.gmail.com\" in msg\nE AssertionError: assert b'smtp.gmail.com' in b'mail.python.org\\nPIPELINING\\nSIZE 51200000\\nETRN\\nSTARTTLS\\nAUTH DIGEST-MD5 NTLM CRAM-MD5\\nENHANCEDSTATUSCODES\\n8BITMIME\\nDSN\\nSMTPUTF8\\nCHUNKING'\n\ntest_module.py:6: AssertionError\n-------------------------- Captured stdout setup ---------------------------\nfinalizing <smtplib.SMTP object at 0xdeadbeef0004>\n________________________ test_noop[mail.python.org] ________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef0005>\n\ndef test_noop(smtp_connection):\nresponse, msg = smtp_connection.noop()\nassert response == 250\n> assert 0 # for demo purposes\n^^^^^^^^\nE assert 0"
-    },
-    {
-      "chunkId": "S13#s223~3",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Parametrizing fixtures¶",
-      "cjkRatio": 0.0,
-      "length": 1590,
-      "charRange": [
-        34694,
-        36284
-      ],
-      "text": "test_module.py:13: AssertionError\n------------------------- Captured stdout teardown -------------------------\nfinalizing <smtplib.SMTP object at 0xdeadbeef0005>\n========================= short test summary info ==========================\nFAILED test_module.py::test_ehlo[smtp.gmail.com] - assert 0\nFAILED test_module.py::test_noop[smtp.gmail.com] - assert 0\nFAILED test_module.py::test_ehlo[mail.python.org] - AssertionError: asser...\nFAILED test_module.py::test_noop[mail.python.org] - assert 0\n4 failed in 0.12s\n\nWe see that our two test functions each ran twice, against the different\nsmtp_connection instances. Note also, that with the mail.python.org\nconnection the second test fails in test_ehlo because a\ndifferent server string is expected than what arrived.\n\npytest will build a string that is the test ID for each fixture value\nin a parametrized fixture, e.g. test_ehlo[smtp.gmail.com] and\ntest_ehlo[mail.python.org] in the above examples. These IDs can\nbe used with -k to select specific cases to run, and they will\nalso identify the specific case when one is failing. Running pytest\nwith --collect-only will show the generated IDs.\n\nNumbers, strings, booleans and None will have their usual string\nrepresentation used in the test ID. For other objects, pytest will\nmake a string based on the argument name. It is possible to customise\nthe string used in a test ID for a certain fixture value by using the\nids keyword argument:\n\n# content of test_ids.py\nimport pytest\n\n@pytest.fixture(params=[0, 1], ids=[\"spam\", \"ham\"])\ndef a(request):\nreturn request.param\n\ndef test_a(a):\npass"
-    },
-    {
-      "chunkId": "S13#s219",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Running multiple assert statements safely¶",
-      "cjkRatio": 0.0,
-      "length": 1397,
-      "charRange": [
-        24191,
-        25588
-      ],
-      "text": "Sometimes you may want to run multiple asserts after doing all that setup, which\nmakes sense as, in more complex systems, a single action can kick off multiple\nbehaviors. pytest has a convenient way of handling this and it combines a bunch\nof what we’ve gone over so far.\n\nAll that’s needed is stepping up to a larger scope, then having the act\nstep defined as an autouse fixture, and finally, making sure all the fixtures\nare targeting that higher level scope.\n\nLet’s pull an example from above, and tweak it a\nbit. Let’s say that in addition to checking for a welcome message in the header,\nwe also want to check for a sign out button, and a link to the user’s profile.\n\nLet’s take a look at how we can structure that so we can run multiple asserts\nwithout having to repeat all those steps again.\n\nNote\n\nFor this example, certain fixtures (i.e. base_url and\nadmin_credentials) are implied to exist elsewhere. So for now, let’s\nassume they exist, and we’re just not looking at them.\n\n# contents of tests/end_to_end/test_login.py\nfrom uuid import uuid4\nfrom urllib.parse import urljoin\n\nfrom selenium.webdriver import Chrome\nimport pytest\n\nfrom src.utils.pages import LoginPage, LandingPage\nfrom src.utils import AdminApiClient\nfrom src.utils.data_types import User\n\n@pytest.fixture(scope=\"class\")\ndef admin_client(base_url, admin_credentials):\nreturn AdminApiClient(base_url, **admin_credentials)"
-    },
-    {
-      "chunkId": "S13#s219~2",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Running multiple assert statements safely¶",
-      "cjkRatio": 0.0,
-      "length": 1229,
-      "charRange": [
-        25590,
-        26819
-      ],
-      "text": "@pytest.fixture(scope=\"class\")\ndef user(admin_client):\n_user = User(name=\"Susan\", username=f\"testuser-{uuid4()}\", password=\"P4$$word\")\nadmin_client.create_user(_user)\nyield _user\nadmin_client.delete_user(_user)\n\n@pytest.fixture(scope=\"class\")\ndef driver():\n_driver = Chrome()\nyield _driver\n_driver.quit()\n\n@pytest.fixture(scope=\"class\")\ndef landing_page(driver, login):\nreturn LandingPage(driver)\n\nclass TestLandingPageSuccess:\n@pytest.fixture(scope=\"class\", autouse=True)\n@classmethod\ndef login(cls, driver, base_url, user):\ndriver.get(urljoin(base_url, \"/login\"))\npage = LoginPage(driver)\npage.login(user)\n\ndef test_name_in_header(self, landing_page, user):\nassert landing_page.header == f\"Welcome, {user.name}!\"\n\ndef test_sign_out_button(self, landing_page):\nassert landing_page.sign_out_button.is_displayed()\n\ndef test_profile_link(self, landing_page, user):\nprofile_href = urljoin(base_url, f\"/profile?id={user.profile_id}\")\nassert landing_page.profile_link.get_attribute(\"href\") == profile_href\n\nNotice that the methods are only referencing self in the signature as a\nformality. No state is tied to the actual test class as it might be in the\nunittest.TestCase framework. Everything is managed by the pytest fixture\nsystem."
-    },
-    {
-      "chunkId": "S13#s217",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Safe teardowns¶",
-      "cjkRatio": 0.0,
-      "length": 1502,
-      "charRange": [
-        19462,
-        20964
-      ],
-      "text": "The fixture system of pytest is very powerful, but it’s still being run by a\ncomputer, so it isn’t able to figure out how to safely teardown everything we\nthrow at it. If we aren’t careful, an error in the wrong spot might leave stuff\nfrom our tests behind, and that can cause further issues pretty quickly.\n\nFor example, consider the following tests (based off of the mail example from\nabove):\n\n# content of test_emaillib.py\nfrom emaillib import Email, MailAdminClient\n\nimport pytest\n\n@pytest.fixture\ndef setup():\nmail_admin = MailAdminClient()\nsending_user = mail_admin.create_user()\nreceiving_user = mail_admin.create_user()\nemail = Email(subject=\"Hey!\", body=\"How's it going?\")\nsending_user.send_email(email, receiving_user)\nyield receiving_user, email\nreceiving_user.clear_mailbox()\nmail_admin.delete_user(sending_user)\nmail_admin.delete_user(receiving_user)\n\ndef test_email_received(setup):\nreceiving_user, email = setup\nassert email in receiving_user.inbox\n\nThis version is a lot more compact, but it’s also harder to read, doesn’t have a\nvery descriptive fixture name, and none of the fixtures can be reused easily.\n\nThere’s also a more serious issue, which is that if any of those steps in the\nsetup raise an exception, none of the teardown code will run.\n\nOne option might be to go with the addfinalizer method instead of yield\nfixtures, but that might get pretty complex and difficult to maintain (and it\nwouldn’t be compact anymore).\n\n$ pytest -q test_emaillib.py\n. [100%]\n1 passed in 0.12s"
-    },
-    {
-      "chunkId": "S13#s218",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Safe teardowns¶ > Safe fixture structure¶",
-      "cjkRatio": 0.0,
-      "length": 1599,
-      "charRange": [
-        20991,
-        22590
-      ],
-      "text": "The safest and simplest fixture structure requires limiting fixtures to only\nmaking one state-changing action each, and then bundling them together with\ntheir teardown code, as the email examples above showed.\n\nThe chance that a state-changing operation can fail but still modify state is\nnegligible, as most of these operations tend to be transaction-based (at least at the\nlevel of testing where state could be left behind). So if we make sure that any\nsuccessful state-changing action gets torn down by moving it to a separate\nfixture function and separating it from other, potentially failing\nstate-changing actions, then our tests will stand the best chance at leaving\nthe test environment the way they found it.\n\nFor an example, let’s say we have a website with a login page, and we have\naccess to an admin API where we can generate users. For our test, we want to:\n\nCreate a user through that admin API\n\nLaunch a browser using Selenium\n\nGo to the login page of our site\n\nLog in as the user we created\n\nAssert that their name is in the header of the landing page\n\nWe wouldn’t want to leave that user in the system, nor would we want to leave\nthat browser session running, so we’ll want to make sure the fixtures that\ncreate those things clean up after themselves.\n\nHere’s what that might look like:\n\nNote\n\nFor this example, certain fixtures (i.e. base_url and\nadmin_credentials) are implied to exist elsewhere. So for now, let’s\nassume they exist, and we’re just not looking at them.\n\nfrom uuid import uuid4\nfrom urllib.parse import urljoin\n\nfrom selenium.webdriver import Chrome\nimport pytest"
-    },
-    {
-      "chunkId": "S13#s218~2",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Safe teardowns¶ > Safe fixture structure¶",
-      "cjkRatio": 0.0,
-      "length": 1553,
-      "charRange": [
-        22592,
-        24145
-      ],
-      "text": "from src.utils.pages import LoginPage, LandingPage\nfrom src.utils import AdminApiClient\nfrom src.utils.data_types import User\n\n@pytest.fixture\ndef admin_client(base_url, admin_credentials):\nreturn AdminApiClient(base_url, **admin_credentials)\n\n@pytest.fixture\ndef user(admin_client):\n_user = User(name=\"Susan\", username=f\"testuser-{uuid4()}\", password=\"P4$$word\")\nadmin_client.create_user(_user)\nyield _user\nadmin_client.delete_user(_user)\n\n@pytest.fixture\ndef driver():\n_driver = Chrome()\nyield _driver\n_driver.quit()\n\n@pytest.fixture\ndef login(driver, base_url, user):\ndriver.get(urljoin(base_url, \"/login\"))\npage = LoginPage(driver)\npage.login(user)\n\n@pytest.fixture\ndef landing_page(driver, login):\nreturn LandingPage(driver)\n\ndef test_name_on_landing_page_after_login(landing_page, user):\nassert landing_page.header == f\"Welcome, {user.name}!\"\n\nThe way the dependencies are laid out means it’s unclear if the user\nfixture would execute before the driver fixture. But that’s ok, because\nthose are atomic operations, and so it doesn’t matter which one runs first\nbecause the sequence of events for the test is still linearizable. But what does matter is\nthat, no matter which one runs first, if the one raises an exception while the\nother would not have, neither will have left anything behind. If driver\nexecutes before user, and user raises an exception, the driver will\nstill quit, and the user was never made. And if driver was the one to raise\nthe exception, then the driver would never have been started and the user would\nnever have been made."
-    },
-    {
-      "chunkId": "S13#s209~2",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Scope: sharing fixtures across classes, modules, packages or session¶",
-      "cjkRatio": 0.0,
-      "length": 1564,
-      "charRange": [
-        9033,
-        10597
-      ],
-      "text": "$ pytest test_module.py\n=========================== test session starts ============================\nplatform linux -- Python 3.x.y, pytest-9.x.y, pluggy-1.x.y\nrootdir: /home/sweet/project\ncollected 2 items\n\ntest_module.py FF [100%]\n\n================================= FAILURES =================================\n________________________________ test_ehlo _________________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef0001>\n\ndef test_ehlo(smtp_connection):\nresponse, msg = smtp_connection.ehlo()\nassert response == 250\nassert b\"smtp.gmail.com\" in msg\n> assert 0 # for demo purposes\n^^^^^^^^\nE assert 0\n\ntest_module.py:7: AssertionError\n________________________________ test_noop _________________________________\n\nsmtp_connection = <smtplib.SMTP object at 0xdeadbeef0001>\n\ndef test_noop(smtp_connection):\nresponse, msg = smtp_connection.noop()\nassert response == 250\n> assert 0 # for demo purposes\n^^^^^^^^\nE assert 0\n\ntest_module.py:13: AssertionError\n========================= short test summary info ==========================\nFAILED test_module.py::test_ehlo - assert 0\nFAILED test_module.py::test_noop - assert 0\n============================ 2 failed in 0.12s =============================\n\nYou see the two assert 0 failing and more importantly you can also see\nthat the exact same smtp_connection object was passed into the\ntwo test functions because pytest shows the incoming argument values in the\ntraceback. As a result, the two test functions using smtp_connection run\nas quick as a single one because they reuse the same instance."
-    },
-    {
-      "chunkId": "S13#s209~3",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Scope: sharing fixtures across classes, modules, packages or session¶",
-      "cjkRatio": 0.0,
-      "length": 247,
-      "charRange": [
-        10599,
-        10846
-      ],
-      "text": "If you decide that you rather want to have a session-scoped smtp_connection\ninstance, you can simply declare it:\n\n@pytest.fixture(scope=\"session\")\ndef smtp_connection():\n# the returned fixture value will be shared for\n# all tests requesting it\n..."
-    },
-    {
-      "chunkId": "S13#s211",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Scope: sharing fixtures across classes, modules, packages or session¶ > Dynamic scope¶",
-      "cjkRatio": 0.0,
-      "length": 850,
-      "charRange": [
-        11628,
-        12478
-      ],
-      "text": "Added in version 5.2.\n\nIn some cases, you might want to change the scope of the fixture without changing the code.\nTo do that, pass a callable to scope. The callable must return a string with a valid scope\nand will be executed only once - during the fixture definition. It will be called with two\nkeyword arguments - fixture_name as a string and config with a configuration object.\n\nThis can be especially useful when dealing with fixtures that need time for setup, like spawning\na docker container. You can use the command-line argument to control the scope of the spawned\ncontainers for different environments. See the example below.\n\ndef determine_scope(fixture_name, config):\nif config.getoption(\"--keep-containers\", None):\nreturn \"session\"\nreturn \"function\"\n\n@pytest.fixture(scope=determine_scope)\ndef docker_container():\nyield spawn_container()"
-    },
-    {
-      "chunkId": "S13#s210",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Scope: sharing fixtures across classes, modules, packages or session¶ > Fixture scopes¶",
-      "cjkRatio": 0.0,
-      "length": 745,
-      "charRange": [
-        10865,
-        11610
-      ],
-      "text": "Fixtures are created when first requested by a test, and are destroyed based on their scope:\n\nfunction: the default scope, the fixture is destroyed at the end of the test.\n\nclass: the fixture is destroyed during teardown of the last test in the class.\n\nmodule: the fixture is destroyed during teardown of the last test in the module.\n\npackage: the fixture is destroyed during teardown of the last test in the package where the fixture is defined, including sub-packages and sub-directories within it.\n\nsession: the fixture is destroyed at the end of the test session.\n\nNote\n\nPytest only caches one instance of a fixture at a time, which\nmeans that when using a parametrized fixture, pytest may invoke a fixture more than once in\nthe given scope."
-    },
-    {
-      "chunkId": "S13#s212",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Teardown/Cleanup (AKA Fixture finalization)¶",
-      "cjkRatio": 0.0,
-      "length": 400,
-      "charRange": [
-        12526,
-        12926
-      ],
-      "text": "When we run our tests, we’ll want to make sure they clean up after themselves so\nthey don’t mess with any other tests (and also so that we don’t leave behind a\nmountain of test data to bloat the system). Fixtures in pytest offer a very\nuseful teardown system, which allows us to define the specific steps necessary\nfor each fixture to clean up after itself.\n\nThis system can be leveraged in two ways."
-    },
-    {
-      "chunkId": "S13#1",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Teardown/Cleanup (AKA Fixture finalization)¶ > 1",
-      "cjkRatio": 0.0,
-      "length": 1561,
-      "charRange": [
-        12962,
-        14523
-      ],
-      "text": "“Yield” fixtures yield instead of return. With these\nfixtures, we can run some code and pass an object back to the requesting\nfixture/test, just like with the other fixtures. The only differences are:\n\nreturn is swapped out for yield.\n\nAny teardown code for that fixture is placed after the yield.\n\nOnce pytest figures out a linear order for the fixtures, it will run each one up\nuntil it returns or yields, and then move on to the next fixture in the list to\ndo the same thing.\n\nOnce the test is finished, pytest will go back down the list of fixtures, but in\nthe reverse order, taking each one that yielded, and running the code inside\nit that was after the yield statement.\n\nAs a simple example, consider this basic email module:\n\n# content of emaillib.py\nclass MailAdminClient:\ndef create_user(self):\nreturn MailUser()\n\ndef delete_user(self, user):\n# do some cleanup\npass\n\nclass MailUser:\ndef __init__(self):\nself.inbox = []\n\ndef send_email(self, email, other):\nother.inbox.append(email)\n\ndef clear_mailbox(self):\nself.inbox.clear()\n\nclass Email:\ndef __init__(self, subject, body):\nself.subject = subject\nself.body = body\n\nLet’s say we want to test sending email from one user to another. We’ll have to\nfirst make each user, then send the email from one user to the other, and\nfinally assert that the other user received that message in their inbox. If we\nwant to clean up after the test runs, we’ll likely have to make sure the other\nuser’s mailbox is emptied before deleting that user, otherwise the system may\ncomplain.\n\nHere’s what that might look like:"
-    },
-    {
-      "chunkId": "S13#1~2",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Teardown/Cleanup (AKA Fixture finalization)¶ > 1",
-      "cjkRatio": 0.0,
-      "length": 934,
-      "charRange": [
-        14525,
-        15459
-      ],
-      "text": "# content of test_emaillib.py\nfrom emaillib import Email, MailAdminClient\n\nimport pytest\n\n@pytest.fixture\ndef mail_admin():\nreturn MailAdminClient()\n\n@pytest.fixture\ndef sending_user(mail_admin):\nuser = mail_admin.create_user()\nyield user\nmail_admin.delete_user(user)\n\n@pytest.fixture\ndef receiving_user(mail_admin):\nuser = mail_admin.create_user()\nyield user\nuser.clear_mailbox()\nmail_admin.delete_user(user)\n\ndef test_email_received(sending_user, receiving_user):\nemail = Email(subject=\"Hey!\", body=\"How's it going?\")\nsending_user.send_email(email, receiving_user)\nassert email in receiving_user.inbox\n\nBecause receiving_user is the last fixture to run during setup, it’s the first to run\nduring teardown.\n\nThere is a risk that even having the order right on the teardown side of things\ndoesn’t guarantee a safe cleanup. That’s covered in a bit more detail in\nSafe teardowns.\n\n$ pytest -q test_emaillib.py\n. [100%]\n1 passed in 0.12s"
-    },
-    {
-      "chunkId": "S13#s214",
-      "sourceId": "S13",
-      "sectionPath": "How to use fixtures¶ > Teardown/Cleanup (AKA Fixture finalization)¶ > 1 > Handling errors for yield fixture¶",
-      "cjkRatio": 0.0,
-      "length": 279,
-      "charRange": [
-        15497,
-        15776
-      ],
-      "text": "If a yield fixture raises an exception before yielding, pytest won’t try to run\nthe teardown code after that yield fixture’s yield statement. But, for every\nfixture that has already run successfully for that test, pytest will still\nattempt to tear them down as it normally would."
     }
   ]
 }
