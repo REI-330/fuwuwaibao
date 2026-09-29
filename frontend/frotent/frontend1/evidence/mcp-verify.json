@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-09-27T11:02:27.433Z",
+  "capturedAt": "2026-09-29T09:20:36.582Z",
   "command": "npm run mcp:verify  →  node --import tsx scripts/verify-mcp.ts",
   "server": {
     "transport": "stdio",
