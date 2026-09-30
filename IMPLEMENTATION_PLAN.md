@@ -225,7 +225,17 @@
 
 ## 5. 待清理的卫生问题（低优先，但影响交接）
 
-1. 顶层有无关遗留文件：`element.md`（牌局笔记）、`pelican_bike.html`。
-2. 规划类文档重复：`DEMO_PROTOTYPE_PLAN.md`、`FRONTEND_MVP_FEATURE_LIST.md`、`PAGE_FUNCTION_MAP.md`、本文件——建议在根 README 里标注哪份是现行。
-3. `knowledge/` 顶层**没有 README**，11 步跑法散落在多份文档里。
-4. 评测类文档 7 份且有「不可复算」的历史结论，建议加一份索引说明哪份可复算。
+> 状态（2026-09-30 收口）：**4 条全部处理完**，留痕如下。
+
+| # | 原问题 | 处置 | 状态 |
+|---|---|---|---|
+| 1 | 顶层有无关遗留文件：`element.md`（牌局笔记）、`pelican_bike.html` | 已删除（提交 `8ee8006`）；同批删掉 `knowledge-cn/data/sqlite-amalgamation/`（11 MB）+ `.zip`（2.8 MB）、以及未入库的队友第三方包副本 `mcp-server(1)/` 与两份重复 zip | ✅ |
+| 2 | 规划类文档重复，没标注哪份是现行 | 根 `README.md`「文档索引（哪份是现行）」已用 ★ 标出现行、并把 `DEMO_PROTOTYPE_PLAN.md`/`FRONTEND_MVP_FEATURE_LIST.md` 标为**仅供参考** | ✅ |
+| 3 | `knowledge/` 顶层没有 README，11 步跑法散落 | 已有 `knowledge/README.md`：目录结构、11 步跑法、口径（中文占比/快照 sha256）、哪些跑得了 | ✅ |
+| 4 | 评测类文档 7 份且有「不可复算」的历史结论 | `knowledge/evaluations/` 已有 `README.md` + `实验总表.md` 做索引，标明哪份可复算；本轮新增 `语言自适应融合.md`（零 LLM 可随时复算） | ✅ |
+
+**同批处理的其它交付卫生问题**：
+
+- `knowledge/eval/runs/` 里 `m27-shard1b-*` 三个分片中间产物已清（实为 canonical 34 题结果的 **4 题真子集** D05–D08，已用脚本核验为子集后才删）。
+- 复核 `.env` 未被跟踪（`.gitignore` 用 `.env*` + `!.env.example` 通配，避免 `.env.bak` 之类漏网）。
+- 137 项未提交改动按主题拆成 8 个提交（见 `交付验收对照表.md` 末尾清单），每个提交自洽、可单独回滚。
