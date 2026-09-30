@@ -145,8 +145,17 @@ CAREER_LLM_DISABLED=1                                          ← 显式关闭�
 
 - **扫描件 / 图片简历、`.doc` 老格式** → `415` + 可执行建议（无 OCR，不假装识别）。
   （**PDF 不再属于「跑不通」**：本机装了 pypdf / PyMuPDF / pdfminer 任一就能解析，见上表；一个都没装才回 415 并给安装命令。）
-- **岗位匹配** `/api/career-matches/*` → `501`。要有真实招聘数据源（外部 `liepin-cli` 登录或 `LIEPIN_API_URL` + token）；
-  没有数据源时**不做假岗位**。
+- **岗位匹配** `/api/career-matches/*` → `501`。**已查清并留痕，别再重复找一遍**：
+  - 需要**求职者视角的在招岗位**数据源；没有数据源时**不做假岗位**。
+  - 「用猎聘」这条路**走过、不通**：`Viy1204/liepin-cli`（`@viyzhu/liepin-cli`）是**猎聘招聘者端
+    （lpt.liepin.com）**工具 —— `search` 搜的是**候选人**、`joblist` 是招聘方自己发的职位，
+    不是求职者端岗位搜索；且要 Node ≥20 + 本机 Chrome + **招聘者账号扫码登录**，猎聘**封境外 IP**
+    （须关代理直连），无头模式会被判「账号行为异常」。
+  - 队友 `mcp-server` 包里的 `providers/liepin.py` 假设的命令 `liepin-cli job search --job-name … --output json`
+    **在真实 CLI 里不存在**（真身是 `liepin search <关键词> --city …`），且该包默认 `MCP_ALLOW_DEMO=true`，
+    拿不到就返回 `DEMO-1 / Demo company` 的**假岗位** —— 与本项目纪律冲突，未采用。
+  - 结论：**维持 501**，等有正规求职者侧岗位数据源（或本人授权用其招聘者账号）再动。详见
+    `交付验收对照表.md`「2026-09-30 第二轮」一节。
 - **`/api/auth/register`、`/login`** → `501`。本项目**不存账号密码**，访客会话足以支撑单用户使用。
 - **WeKnora 标准版对照** → 5 个镜像 2.72 GB，本机 Docker 拉不动。**不影响功能**：对照已用 Lite 版完成。
 - **中国官方语料进检索链路** → 采集完成，1519 条已由业主**豁免闸门**（`WAIVED`，**不是人工审核通过**）；
