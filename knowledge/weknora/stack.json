@@ -163,13 +163,41 @@
       "headings": 6,
       "levels": 2,
       "tier": "heading"
+    },
+    {
+      "sourceId": "S23",
+      "blocks": 108,
+      "headings": 13,
+      "levels": 3,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S24",
+      "blocks": 95,
+      "headings": 11,
+      "levels": 3,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S25",
+      "blocks": 144,
+      "headings": 20,
+      "levels": 3,
+      "tier": "heading"
+    },
+    {
+      "sourceId": "S26",
+      "blocks": 16077,
+      "headings": 1512,
+      "levels": 4,
+      "tier": "heading"
     }
   ],
   "counts": {
-    "documents": 22,
-    "children": 1136,
-    "parents": 114,
-    "headingTier": 18,
+    "documents": 26,
+    "children": 2861,
+    "parents": 220,
+    "headingTier": 22,
     "recursiveTier": 4
   },
   "results": [
@@ -177,16 +205,16 @@
       "name": "现状（自建栈 494 段）",
       "note": "返回 3 段",
       "main": {
-        "exact3": 7,
-        "center3": 7,
-        "center10": 16,
-        "cover3": 7
+        "exact3": 6,
+        "center3": 6,
+        "center10": 15,
+        "cover3": 6
       },
       "held": {
-        "exact3": 2,
-        "center3": 2,
-        "center10": 10,
-        "cover3": 2
+        "exact3": 5,
+        "center3": 5,
+        "center10": 11,
+        "cover3": 5
       }
     },
     {
@@ -194,53 +222,53 @@
       "note": "返回 3 个子块",
       "main": {
         "exact3": 0,
-        "center3": 6,
+        "center3": 2,
         "center10": 11,
-        "cover3": 6,
+        "cover3": 3,
         "avgBudget": 3
       },
       "held": {
         "exact3": 0,
         "center3": 1,
-        "center10": 9,
-        "cover3": 1,
+        "center10": 7,
+        "cover3": 0,
         "avgBudget": 3
       }
     },
     {
       "name": "② ① + 父块返回（3 个父块）",
-      "note": "实际返回 ~30 个子块",
+      "note": "实际返回 ~33 个子块",
       "main": {
         "exact3": 0,
-        "center3": 12,
-        "center10": 12,
-        "cover3": 12,
-        "avgBudget": 30.5
+        "center3": 14,
+        "center10": 14,
+        "cover3": 13,
+        "avgBudget": 33.3
       },
       "held": {
         "exact3": 0,
-        "center3": 5,
-        "center10": 5,
-        "cover3": 4,
-        "avgBudget": 30.4
+        "center3": 6,
+        "center10": 6,
+        "cover3": 6,
+        "avgBudget": 33.2
       }
     },
     {
       "name": "③ 对照：直接多返回同等数量子块",
-      "note": "同样 ~30 个子块，但无父子结构",
+      "note": "同样 ~33 个子块，但无父子结构",
       "main": {
         "exact3": 0,
         "center3": 20,
         "center10": 11,
-        "cover3": 17,
-        "avgBudget": 30
+        "cover3": 16,
+        "avgBudget": 33
       },
       "held": {
         "exact3": 0,
-        "center3": 12,
-        "center10": 9,
-        "cover3": 7,
-        "avgBudget": 30
+        "center3": 13,
+        "center10": 7,
+        "cover3": 9,
+        "avgBudget": 33
       }
     }
   ],
