@@ -35,7 +35,7 @@
 
 登录和注册按钮当前都没有提交邮箱和密码，只把姓名或邮箱前缀作为 `displayName` 调用体验账号接口：
 
-`POST /api/auth/guest`（**已接入**）
+`POST /api/auth/guest`（**已接入，且后端已于 2026-09-30 实现**）
 
 ```json
 {
@@ -43,7 +43,7 @@
 }
 ```
 
-后端应返回 `201`，并设置会话 Cookie：
+后端返回 `201`，并设置会话 Cookie（`career_session=user_<12hex>`；`HttpOnly; SameSite=Lax; Max-Age=2592000`）：
 
 ```json
 {
@@ -62,7 +62,9 @@
 
 ### 后端待补
 
-正式登录/注册至少需要：
+**`/api/auth/guest` 已实现**（2026-09-30，M1-2）：返回 201 + `HttpOnly` 会话 Cookie，带 Cookie 的请求按 `user_id` 隔离画像/记忆/成长记录；无 Cookie 或 Cookie 值非法一律回落 `user_local`（不返回 401）。`register` / `login` **仍是 501** —— 本项目不存账号密码。
+
+正式登录/注册若要落地，至少需要：
 
 - `POST /api/auth/register`：接收 `displayName`、`email`、`password`、`agreementAccepted`，返回用户和会话。
 - `POST /api/auth/login`：接收 `email`、`password`、`rememberMe`，返回用户和会话。
@@ -171,36 +173,74 @@
 
 补充读取：`GET /api/profile`（**已接入，`/growth` 正在使用**）返回 `{ data: { profile } }`。
 
-### 简历上传待补
+### 简历解析（`POST /api/resumes/extract`，**已实现 2026-09-29**）
 
-当前选择的 PDF/DOC/DOCX/JPG/PNG 文件**不会发送到后端**，“开始提取”会在前端延时 760ms 后填入固定演示数据。
+`app/(entry)/onboarding/page.tsx` 的「开始提取」现在**真的**把文件交给后端（不再有 760ms 演示数据）：
 
-建议新增 `POST /api/resumes/extract`，使用 `multipart/form-data`，字段 `file`，限制 10MB，并返回候选画像而不是直接写入正式画像：
+- 入口一：`multipart/form-data`，字段 `file`，上限 10MB；
+- 入口二：JSON `{"text": "..."}`（粘贴文本）；两条都可加 `?generator=rule-based` 强制不调模型。
+
+后端只产出**画像草稿 + 待确认记忆候选**，不写正式画像；页面拿到草稿后再走 `PUT /api/profile`（`source: "resume"`），用户复核后才 `POST /api/profile/confirm`。
+
+能力边界（写清楚是设计纪律，不是临时限制）：
+
+| 形态 | 行为 |
+| --- | --- |
+| `.docx` | Python 标准库 `zipfile` + `xml.etree` 读 `word/document.xml`，**不需要第三方依赖** |
+| `.txt` / `.md` | 依次按 UTF-8 → GB18030 解码 |
+| `.pdf` / 图片 / `.doc` | **415 `RESUME_FORMAT_UNSUPPORTED`** + 可执行建议（「请粘贴文本，或另存为 DOCX」）；不假装解析、不退回演示数据（改名的 PDF 也会被魔数嗅探拦住） |
+
+响应（实测样例）：
 
 ```json
 {
   "requestId": "uuid",
   "data": {
-    "resumeId": "resume_xxx",
+    "resumeId": "resume_7bca384005a4",
     "profileDraft": {
       "identity": "在校生",
-      "school": "...",
-      "major": "...",
-      "grade": "...",
-      "careerStage": "...",
-      "skills": "...",
-      "experience": "...",
-      "directions": "...",
-      "location": "...",
-      "question": "...",
+      "school": "浙江大学",
+      "major": "自动化",
+      "grade": "大三",
+      "skills": ["轻量级推理引擎集成", "模型量化与部署"],
+      "experience": ["模型量化部署实践"],
+      "directions": "边缘 AI 工程师",
+      "question": "边缘 AI 工程师",
       "source": "resume"
     },
-    "warnings": [],
+    "skills": [
+      {
+        "skillId": "SK...", "nodeId": "skill:SK...", "kind": "skill", "name": "轻量级推理引擎集成",
+        "evidence": { "field": "skills", "value": "轻量级推理引擎集成", "snippet": "轻量级推理引擎集成",
+                      "charRange": [113, 122], "located": true }
+      }
+    ],
+    "unrecognizedSkills": [{ "token": "Python", "reason": "图谱里没有同名词条（未写入画像技能表）" }],
+    "evidence": [
+      { "field": "school", "value": "浙江大学", "snippet": "浙江大学", "charRange": [59, 63], "located": true }
+    ],
+    "memoryCandidates": [{ "id": "memory_...", "category": "skill", "content": "具备或正在学习：轻量级推理引擎集成",
+                           "status": "candidate", "sourceType": "resume", "sourceId": "resume_...:skill:0" }],
+    "candidateCount": 5,
+    "llmHints": { "directions": [], "highlights": [] },
+    "extraction": { "module": "resume-extract/v1", "source": "text", "charCount": 241,
+                    "sections": ["education", "skills", "projects", "objective"],
+                    "llm": { "requested": true, "used": false, "model": null,
+                             "error": { "code": "LLM_NOT_CONFIGURED", "message": "…" } } },
+    "warnings": ["2 个技能词没有对应图谱词条，已列在 unrecognizedSkills 里（未写入画像）"],
     "originalFileRetained": false
   },
   "error": null
 }
 ```
+
+比原设计多出来的字段都有明确用途，不是装饰：
+
+- `skills[]` 每条带 `nodeId`（指向导出的 skill 节点）与 `evidence`（`charRange` 可在原文里切出该值）；
+- `unrecognizedSkills[]` 是「图谱不认识」的词（实测：`Python`、`ROS`）——**只列出、绝不写进画像技能表**，
+  否则它们会进匹配算式却无依据；
+- `memoryCandidates[]` 是落进记忆库的**待确认**候选（`sourceType: "resume"`，按内容指纹幂等，重复上传不重复生成）；
+- `extraction.llm{requested,used,model,error}`：这次到底走了规则还是模型、失败原因是什么（模型只处理规则认不出的残差）。
 
 
 
@@ -212,11 +252,11 @@
 - 抽屉状态：[`components/chat/chat-provider.tsx`](../components/chat/chat-provider.tsx)
 - 对话界面：[`components/chat/chat-conversation.tsx`](../components/chat/chat-conversation.tsx)
 - 请求：[`lib/client/chat-api.ts`](../lib/client/chat-api.ts)
-- 后端：[`backend/app/api/chat.py`](../backend/app/api/chat.py)
+- 后端：[`frontend1/backend/chat.py`](../frontend1/backend/chat.py)（队友那版 `backend/app/api/chat.py` 未移植，见根目录 `记忆系统整合方案.md` §5）
 
 聊天不是独立产品页，而是挂在所有产品页右侧的全局抽屉。`/chat` 会跳转到 `/growth?chat=open` 并打开抽屉。
 
-用户发送消息时调用 `POST /api/chat`（**已接入**）：
+用户发送消息时调用 `POST /api/chat`（**已实现**，2026-09-29）：
 
 ```json
 {
@@ -225,7 +265,8 @@
 }
 ```
 
-第一轮可以不传 `conversationId`。如果后端返回 `401`，前端会自动创建体验账号后重试一次。
+第一轮可以不传 `conversationId`（后端造一个并沿用）。如果后端返回 `401`，前端会自动创建体验账号后重试一次。
+查询串可加 `?generator=auto|llm|rule-based` 强制选择生成器（与 `/api/memories/{id}/triggers` 同一套取值）。
 
 后端返回：
 
@@ -235,15 +276,31 @@
   "data": {
     "message": "...",
     "conversationId": "conversation_xxx",
-    "provider": "tbox"
+    "provider": "llm",
+    "injected": {
+      "query": "我应该优先补哪些技能？",
+      "count": 2,
+      "memoryIds": ["memory_xxx"],
+      "memoryHash": "sha1…",
+      "summaryText": "【常驻】\n- 目标职业：边缘 AI 工程师\n【本次想起】\n- 技能：…",
+      "prefixBytes": 1204,
+      "memoryBlockBytes": 210,
+      "promptTemplate": "career-chat/v1"
+    },
+    "llm": { "requested": "auto", "used": "llm", "model": "deepseek-v4.1-flash", "error": null, "elapsedMs": 6444 }
   },
   "error": null
 }
 ```
 
-后端当前会把已确认画像和当前路径作为系统上下文传给 TBox，并持久化最近的 `conversationId`。
+实现口径（与本文其他小节一致：**只写真实发生的事**）：
 
-每条用户消息还会在前端生成一条“候选画像”，用户可修改内容、选择画像模块和信息类别，再确认写入；这些候选和确认结果目前**不会提交后端**，刷新后丢失。聊天附件按钮也只展示说明，不上传文件。
+- **注入**：已确认记忆（persona 常驻 + 联想召回，来自 `GET /api/memories/context` 的同一份 `build_context`）+ 用户画像 + 图谱事实（沿既有边算出的要求技能/缺口），拼成**固定可审计前缀**；`injected` 逐轮回传，能复核这次到底喂了什么。
+- **无记忆时不改写提问**：检索用的 query 就是用户原话（只去首尾空白）；没有记忆时记忆块整块缺席，不插空标题占位。
+- **降级不报错**：没配端点或调用失败时，`provider=rule-based`，回答只由图谱事实与已确认记忆拼出，错误码与说明放在 `llm.error` 里（前端在输入框上方显示"本轮未接模型"）。
+- **不是 TBox**：走的是本项目自己的 OpenAI 兼容客户端（`frontend1/backend/llm.py`，与评测侧共用一份配置）；会话表在进程内保留最近 6 轮，**不落库**（跨重启的历史要等画像持久化那批）。
+
+每条用户消息还会在前端生成一条“候选画像”，用户可修改内容、选择画像模块和信息类别，再确认写入；这些候选目前**不会提交后端**，刷新后丢失（后端的记忆候选走 `/api/memories` 与 `/api/growth-records` 两条写入通道）。聊天附件按钮也只展示说明，不上传文件。
 
 ## 5. `/path` 个性化成长路径
 
@@ -283,7 +340,7 @@
 | `weekly_hours` | number | 否 | 每周可投入小时数 |
 | `career_goal` | string | 否 | 职业目标 |
 
-当前前端固定 `weekly_hours = 10`，且只有 `AI001` 会硬编码一项当前技能，其他职业传空数组。后端虽然会保存路径快照，但生成输入尚未自动取用已确认画像。建议由后端根据当前用户画像补全缺省字段，或由前端先读取画像后提交，避免路径“个性化”只依赖硬编码。
+> **2026-09-30 更新（M1-4/M1-6）**：`POST /api/v1/career-path/generate` **已实现**。前端不再硬编码 `weekly_hours=10` 与 `AI001` 的 `SK215=3`：目标职业按 `?occupation=` → 画像 `candidateOccupationIds[0]` → 目录第一个回落，当前技能由**后端读已确认画像**补（画像里未标等级的按 1 级计入，并在 `warnings` 里明说），每周小时数可在页面上改并影响各阶段周数。生成结果还带 `warnings`、`rules_version`、`metrics_version`。
 
 ### 后端返回
 
@@ -512,6 +569,14 @@
 - `plannedTasks`：用户从路径安排的任务。
 
 用户的分类、时间范围、确认状态和关键词筛选都是本地操作，不需要后端写请求。但刷新页面后全部记录会丢失。
+
+> **已实现部分（2026-09-29）**：`POST /api/growth-records`（写一条记录，并在同一事务里把它投影成**待确认**记忆候选）、
+> `GET /api/growth-records?kind=&limit=`（返回已落库的记录，每条带它派生出的候选）、
+> `DELETE /api/growth-records/{id}`（删记录只清**未确认**候选，已确认的记忆归用户）。
+> 档案页因此多了一个「写入记忆候选」按钮，写入后到「用户画像 → 记忆库」的待确认栏里决定是否保留。
+> 请求/响应类型见 [`types/contracts/growth.ts`](../frontend1/types/contracts/growth.ts)。
+> **本小节下面的 `summary` / `cursor` / 服务端分类筛选仍属【设计方案】**：页面时间线依旧来自 `ProfileProvider` 内存，
+> 后端只存"被显式写入"的那些记录；`/api/growth-records/confirm`（候选→记录→证据→事件一个事务，重复 confirm 幂等、越权 400）已于 **2026-09-30 实现（M1-3）**。
 
 ### 后端应返回的数据
 

@@ -15,8 +15,8 @@
 另外两条入口目前处于“组件已写、页面未挂载”状态：
 
 ```text
-/work-map → /growth       （当前 page.tsx 只有 redirect）
-/catalog → /growth        （当前 page.tsx 只有 redirect）
+/work-map                （2026-09-30 M1-5：已挂真组件，不再 redirect）
+/catalog                 （2026-09-30 M1-5：已挂真组件，不再 redirect）
 ```
 
 产品页共同包裹关系是：`app/(product)/layout.tsx` → `ProductShell` → `ProfileProvider` + `ChatProvider` → `AppShell`。因此聊天抽屉、动态画像内存状态、侧边导航会跨 `/growth`、`/path`、`/actions`、`/growth-records` 共享。
@@ -27,11 +27,11 @@
 |---|---|---|---|
 | 根入口 | `/` | 服务端跳转到 `/auth` | 进入认证 |
 | 认证 | `/auth` | 登录、注册按钮当前都创建 guest | 跳 `/onboarding` |
-| 初始画像 | `/onboarding` | 手填画像可保存；简历提取使用 mock 数据 | 跳 `/work-map`、确认后跳 `/chat` |
+| 初始画像 | `/onboarding` | 手填画像可保存；简历解析走真接口（文本/DOCX，PDF 明确拒绝） | 跳 `/work-map`、确认后跳 `/chat` |
 | 动态画像 | `/growth` | 读取画像和岗位推荐，支持画像/市场两个 tab | 跳 `/path`，可打开聊天抽屉 |
 | 聊天兼容入口 | `/chat` | 跳 `/growth?chat=open` | 全局聊天抽屉 |
-| 工作地图 | `/work-map` | 当前跳 `/growth` | 未挂载的图谱组件可跳 `/path`、`/actions` |
-| 职业目录 | `/catalog` | 当前跳 `/growth` | 未挂载目录组件可跳 `/path` |
+| 工作地图 | `/work-map` | 已挂真组件：`WorkMapExplorer` 读职业/技能真数据 + `CareerMatchPanel`（对 501 显示「尚未上线」） | 可跳 `/path`、`/catalog` |
+| 职业目录 | `/catalog` | 已挂真组件：`CatalogBrowser` 读 `/api/v1/occupations`、`/skills`、`/catalog/stats` | 可跳 `/path` |
 | 成长路径 | `/path` | 按 occupation 参数请求路径生成 | 读取职业目录；任务计划应进入 `/actions` |
 | 职场模拟 | `/actions` | 当前仅显示筹备中 | 预期提交任务并写入成长记录 |
 | 成长记录 | `/growth-records` | 使用 Provider 内存状态展示记录 | 跳 `/actions`、`/growth` |
@@ -94,7 +94,7 @@
 
 - 首屏提供“上传简历”和“回答基础问题”两种方式。
 - 手动填写画像字段：身份、学校、专业、年级/工作年限、当前状态、技能、经历、方向、城市、当前问题。
-- 简历支持选择 PDF、DOC、DOCX、JPG、JPEG、PNG；图片会打开 `ImageEditor`。
+- 简历解析**真的**走后端（`POST /api/resumes/extract`）：支持 DOCX / 纯文本；PDF、`.doc`、图片会被明确拒绝（415 + 可执行建议），图片仍可先走 `ImageEditor`，但**不做 OCR**。
 - 解析后进入画像预览确认，不直接确认写入。
 - 支持跳过画像进入工作地图入口。
 
@@ -106,14 +106,14 @@
 - 图片文件 → 打开 `ImageEditor` → 处理后的 Blob 替换原文件。
 - 手动提交或简历解析 → `review`。
 - 画像确认成功 → `/chat`。
-- “进入未来工作地图”和“暂时跳过” → `/work-map`，但当前 `/work-map` 会继续重定向 `/growth`。
+- “进入未来工作地图”和“暂时跳过” → `/work-map`；M1-5 之后该页已是真页面（不再重定向 `/growth`）。
 
 ### 实际数据行为
 
-- `ensureGuest()` 调用 `/api/auth/guest` 确保访客 Cookie。
+- `ensureGuest()` 调 `/api/auth/guest`；**M1-2 之后该接口返回 201 并下发 `HttpOnly` 会话 Cookie**（按 `user_id` 隔离画像/记忆）。`ensureGuest()` 仍保留对 **501 的容忍**（当成「这个构建没有会话系统」继续，回落本机单用户 `user_local`）—— 两条路都不该让 onboarding 卡住。
 - 手动提交调用 `PUT /api/profile`。
 - 画像确认调用 `POST /api/profile/confirm`。
-- `parseResume()` 当前没有上传 `file`，等待 760ms 后把固定 `mockMapped` 写入 `/api/profile`。
+- `parseResume()` 真上传文件到 `POST /api/resumes/extract`（multipart），拿 `profileDraft` 再走 `PUT /api/profile`；后端同时生成**待确认**记忆候选，页面展示 `warnings` 与候选条数。
 - `?mode=demo` 会自动创建 guest、写入一份固定演示画像并打开 review。
 
 ### 前端代码入口
@@ -191,9 +191,10 @@
 
 ### 实际请求与数据
 
-- `POST /api/chat`，请求 `{ message, conversationId? }`。
+- `POST /api/chat`，请求 `{ message, conversationId? }`（可选 `?generator=auto|llm|rule-based` 强制生成器）。
 - 收到 401 时，客户端先调用 `/api/auth/guest`，再重试聊天请求。
-- `conversationId` 保存在聊天 Provider 的客户端状态中。
+- `conversationId` 保存在聊天 Provider 的客户端状态中；后端也会沿用同一个 id（进程内最近 6 轮）。
+- **后端已实现**（`frontend1/backend/chat.py`）：每轮注入已确认记忆 + 图谱事实，配了模型就用模型、否则降级为规则版；响应带 `provider` / `injected` / `llm`，界面在输入框上方如实显示「本轮由谁回答、注入了几条记忆」。
 - 附件按钮目前只有界面行为，没有真实上传。
 
 ### 前端代码入口
@@ -218,7 +219,7 @@
 
 ### 当前真实行为
 
-- 页面入口当前只有 `redirect("/growth")`，不会渲染工作地图。
+- 页面入口 `WorkMapPage()` 渲染 `WorkMapExplorer` + `CareerMatchPanel`（M1-5 挂载），不再 `redirect("/growth")`。
 - `AppShell` 侧边导航也没有 `/work-map` 链接。
 
 ### 已存在但未挂载的功能
@@ -367,6 +368,9 @@
 - 查看当前画像 → `/growth`。
 - `AppShell` 通知读取 `ProfileProvider.records`，并链接回 `/growth`。
 - 当前记录由聊天候选确认和任务状态操作写入 Provider 内存，刷新即丢失。
+- **详情面板有「写入记忆候选」**（2026-09-29 新增）：把选中的这条记录 `POST /api/growth-records`，
+  后端写记录并派生**待确认**记忆候选（只取图谱已知的职业/技能名，认不出就不写），
+  随后到 `/growth` 的「记忆库 → 待确认」栏里决定是否保留。写同一记录两次是幂等的。
 
 ### 前端代码入口
 
@@ -378,8 +382,8 @@
 
 ### 当前缺口
 
-- 应增加 `GET /api/growth-records`，支持筛选、分页和详情。
-- 候选确认应由后端事务化写入画像记录、证据和成长事件。
+- ~~应增加 `GET /api/growth-records`，支持筛选、分页和详情。~~ **写入与列表已实现**（`POST/GET/DELETE /api/growth-records`）；服务端分类筛选、分页与 `/confirm`（候选→记录→证据→事件一个事务）仍未做。
+- 候选确认应由后端事务化写入画像记录、证据和成长事件（M1-3，依赖 `ProfileProvider` 先改成服务端数据）。
 - `ProfileProvider` 需要改为服务端数据 + 本地乐观更新，而不是只依赖 `useState`。
 
 ## 11. 跨页面共享入口

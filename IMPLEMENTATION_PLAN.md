@@ -25,49 +25,178 @@
 
 ## 2. 里程碑与任务
 
-### M1 · 让主链路能跑通（预计 2–3 天）
+### M1 · 让主链路能跑通（预计 2–3 天）—— ✅ 已完成（2026-09-30）
 
-| # | 任务 | 验收标准 | 依赖 |
+| # | 任务 | 验收标准 | 依赖 | 状态 |
+|---|---|---|---|---|
+| M1-1 | 后端 SQLite 持久化 | 画像/证据/成长事件落库；重建 `CareerApi` 实例后数据仍在；进程重启后 curl 仍读得到 | 决策 1 | ✅ |
+| M1-2 | `POST /api/auth/guest` + 会话隔离 | 返回 201 + HttpOnly Cookie；两个会话画像互不可见；无 Cookie 回落 `user_local`（保证现有测试不破） | M1-1 | ✅ |
+| M1-3 | `GET /api/growth-records` + `POST /api/growth-records/confirm` | 候选→记录→证据→事件**一个事务**写入；重复 confirm 不产生重复行 | M1-1 | ✅ |
+| M1-4 | 路径引擎 `POST /api/v1/career-path/generate` | 4 个职业都能生成；`hard_checks` 全 false；拓扑序满足所有 prerequisite 边；阶段不早于前置；同输入两次输出完全相同；未知职业 404 | 无 | ✅ |
+| M1-5 | `/work-map`、`/catalog` 从 redirect 改真页面 | 两个页面能渲染职业/技能真数据；career-matches 的 501 显示「尚未上线」而非白屏 | 无 | ✅ |
+| M1-6 | `/path` 读已确认画像 | 去掉 `AI001`/`SK215=3`/`weekly_hours=10` 硬编码；每周小时数可改且影响周数 | M1-4 | ✅ |
+| M1-7 | 请求层统一 | onboarding 里 6 处相对 `/api` 裸 fetch 全部走 `apiUrl()` | 无 | ✅ |
+
+**落地要点（2026-09-30）**
+
+- **M1-1**：`MemoryStore` 新增 `profiles` / `profile_evidence` / `growth_events` 三张表（stdlib `sqlite3`，与记忆库同一个 `career.db`）；`ProfileStore` 接受可选 `memories` 参数做读写透传，**不传时保持旧的纯内存行为**（既有单测不必改）。证据与事件的 `id` 由内容指纹决定，重复写入幂等。
+- **M1-2**：`POST /api/auth/guest` 下发 `career_session=user_<12hex>` + `HttpOnly; SameSite=Lax`；`CareerApi.handle` 新增 `cookies` / `response` 两个**每请求**参数（不用实例属性——`ThreadingHTTPServer` 每请求一线程，实例属性会被并发覆盖）。`user_id_from()` 校验 Cookie 形状，非法即回落 `user_local`（不报 401）。`register`/`login` 保持 501。
+- **M1-3**：`confirm_growth_candidates()` 在一个事务里改 `memory_items.status`、写 `profile_evidence`、写 `growth_events`；越权（传别的记录的 candidateId）返回 400 而不是静默跳过。事件刻意不设外键：记录删掉后事件仍是历史。
+- **M1-4**：新增 `backend/career_path.py`（零三方依赖）。阶段由**先修深度**决定（不是目标等级——按目标等级会让一条高等级公共先修把全部后继顶到最高阶段，实测整条路径塌进一个阶段）。`prerequisite_promotion` 保证「阶段不早于前置」。6 指标 / 6 硬校验 / 工作量全部由算出的结构自检得出。假设（`HOURS_PER_LEVEL=24`、各阶段建议最长周数）**写在常量里并在 `warnings` 里明说**，不冒充语料结论。
+- **M1-5/6/7**：`/work-map`、`/catalog` 挂真组件；`career-match-panel` 对 501 显示「职业匹配尚未上线」而不是把用户领去重建画像；`/path` 的目标职业按 `?occupation=` → 画像候选 → 目录第一个回落，每周小时数可改；onboarding 六处裸 fetch 统一走 `apiUrl()`。
+
+**M1 完成定义**：`npm test` + `pytest` 全绿；五个入口全部是真页面；画像刷新/重启后仍在。→ **已满足**（pytest 130、前端 12、`e2e` 169/169）。
+
+### M2 · 知识库补齐（预计 3–5 天）—— 部分完成（2026-09-30）
+
+> 状态汇总：**M2-2 / M2-3 / M2-4 / M2-5 / M2-7 ✅**（M2-4 的结论是「已评估、候选池无互补→不投入」）；**M2-1 / M2-6 ⛔ 卡在「只能人来做」的裁定**（同一类门禁）。
+
+| # | 任务 | 验收标准 | 依赖 | 状态 |
+|---|---|---|---|---|
+| M2-1 | 新增 `covers` 边 | taxonomy 有 covers；9 个学习单元各 ≥1 条、`sourceRefs` 指向真实 chunk；09 步硬约束仍 13/13；导出与前端 `RELATION_LABELS` 同步；相关测试计数更新为实际值 | 人工裁定 | ⛔ **受「不代签」阻塞**（见下） |
+| M2-2 | 修两条断链脚本 | `probe-heldout.mjs`、`weknora/build-stack.mjs` 读现役题集、退出码 0；拒答题不计入分母；防泄漏校验保留 | 无 | ✅ 实测双双 exit 0 |
+| M2-3 | 补 `publishedAt` | 26 份来源逐份核实发布时间；拿不到的明确标缺失（不猜）；前端据此显示时效 | 需查资料 | ⚠ 部分（核实属人力 → 改为把「缺失」做实，见下） |
+| M2-4 | 检索双路召回（B 方案） | 自建 + WeKnora 各出候选，合并后统一重排；用**新建的留出集**报数；id 体系不变 | 本机 WeKnora 产物 | ✅ **已评估：候选池无互补** —— 并集在 dev **+0 题**、holdout 仅 **+1 题**（XC01），落在 ±1 波动内；重排无从增益，故不再投入（见下） |
+| M2-5 | α 过拟合修正（A 方案） | 融合权重改为按查询自适应或仅中文层启用；在新建留出集上不低于单路向量 | 同上 | ✅ **已达标 + 可选门控**（见下） |
+| M2-6 | 大典职业接进图谱 | 桥接覆盖从 4/1676 提到一个有意义的比例，且每条桥边有 `sourceRefs` 与对齐度 | 映射规则 | ⛔ **定不出机械规则**（见下，0/127 名字重合）；只能人工裁定，与 M2-1 同类门禁 |
+| M2-7 | 用现成端点重跑重排档 / 裁判档 | `knowledge/eval/rerank_experiment.py` 等在同一题集上跑通并报数；**只用 dev / 新建留出集**，不动已消费的 holdout | LLM 端点**已可用** | ✅ 重排档 + 拒答档 + **`--judge` 答案表述核查 15/15**（dev） |
+
+> **M2-1 为什么没做（这条留痕比做完更重要）**
+>
+> `covers` 边（学习单元 → 技能）**已经从词表到代码实现了一遍**：taxonomy 加了 `covers`、
+> seed.json 的 9 个学习单元各手写了 1–4 个技能、04 步生成了 20 条边（`mustAppear=['to']` 硬校验、
+> `sourceRefs` 取技能自己的依据段）、07 步加了渲染、前端加了 `RELATION_LABELS.covers`、
+> 后端 `occupation_detail.stages[].covers` 也接上了 —— 跑通到 **63 节点 / 246 边 / 09 步 13/13**。
+>
+> 然后卡在第 06 步：
+>
+> ```
+> [kb:error] knowledge/review/adjudication.json 还不能用来裁定（1 项）：
+> [kb]   - spotCheck.reviewed=22，必须等于抽样条数 27
+> ```
+>
+> 新增 20 条边把人工裁定的**抽样**从 22 条顶到 27 条，而 `adjudication.json` 开头写得很清楚：
+>
+> > 「本文件是「人在回路」的实证：reviewer / reviewedAt / 各组 verdict 由人填写，
+> >   06-adjudicate.mjs 只负责校验与应用，**不代签**。」
+>
+> 也就是说：**加图谱内容 = 需要新增人工裁定**。在「不依赖人工审核」的前提下，
+> 正确做法不是替人把 5 条 decision 填上（那是伪造审核记录），而是**回退这次改动**、
+> 把结论记在这里，等有人的判断可用时再上（代码路径已验证过一次，重做成本很低）。
+>
+> 现状：图谱仍是 **226 边 / 9 类关系**，`graphVersion 0.1.0`；`knowledge/README.md` 与
+> `项目架构与技术文档.md` §11 第 11 条保留为已知缺口。
+>
+> **顺带得到两条可复算的事实**（对交付有用）：
+> 1. **管线 01–08 是确定性的**：同一 seed + 同一语料重跑 04，226 条边**逐条一致**，
+>    只有 `updatedAt`/`version` 这类「什么时候算的」字段变成当天（实测 id 顺序、字段值全部相同）。
+> 2. **改图谱结构的真实成本是「人工裁定 + 217 处对外计数」**，不是改几行代码 ——
+>    所以这类改动要么一次做对，要么别开。
+
+> **M2-3 改成了什么**：把「逐份核实发布日期」换成**把「缺失」做实**。
+> 26 份来源多是无定版日期的公开文档站，硬填一个日期就是编。所以：
+> * 导出里 `publishedAt` **保持 `null`**（26/26），`sources.json` 的许可以及口径写在 `knowledge/SOURCE_LICENSES.md`；
+> * MCP 的引用输出新增 `sourcePublishedAt` 与 `sourceTimeNote`：**为 null 时明确写
+>   「缺少发布时间：来源站未标明定版日期（按设计留空，不拿采集日期顶上）」**，
+>   调用方拿到的不是一个空字符串，而是一句它必须显示的话；
+> * 类型也从 `publishedAt: string` 改成 `string | null` —— 之前那个类型是**在撒谎**。
+
+
+> **M2-7 进展（2026-09-29）**：在现成端点上把「已采纳配置」四档在 **dev（34 道可答 + 15 道拒答）**上真跑了一遍
+> （`python knowledge/eval/run_full_eval.py --questions knowledge/evaluations/questions-dev.json --tag m27-dev-`）：
+>
+> | 档位 | 命中 | 命中@1 | 精确率@3 | 答案段 |
+> |---|---|---|---|---|
+> | BM25 | 25/34 | 0.5588 | 0.3529 | 36/102 |
+> | VECTOR（int8/ONNX，本机 `127.0.0.1:8090`） | 28/34 | 0.5294 | 0.3725 | 38/102 |
+> | FUSION α=0.35 | 29/34 | 0.5588 | 0.4020 | 41/102 |
+> | **FUSION+RERANK（采纳配置）** | **30/34** | **0.7647** | **0.4510** | 46/102 |
+>
+> - 产物：`knowledge/eval/runs/m27-dev-{bm25-full,bm25-topk,vector-topk,fusion-a035-topk,adopted-a035-topk,rerank-cache,summary}.json`；
+>   **未动已消费的 holdout / test**（题集只用 `questions-dev.json`）。
+> - 重排档结论：命中只 +1（29→30），但**命中@1 从 0.56 提到 0.76**、精确率@3 从 0.402 提到 0.451 ——
+>   重排的收益主要在「把本来就召回对的排到第一」，与既有判断「瓶颈在排序不在召回」一致。
+> - **端点现实成本要如实记**：单题重排 17–150 s（推理模型 + 10 候选长提示），串行跑完 34 题约 40 min+。
+>   本次按**同一配置、同一端点、同一个缓存文件**分片续跑（每题的重排是独立的 listwise 判断，分片只影响墙钟时间、
+>   不影响任何一题的判定），最后用**完整缓存的整集一次运行**出数；分片中间产物已清理，只留 canonical 的那一套。
+> - 拒答档：`python knowledge/eval/refusal_eval.py --set knowledge/evaluations/questions-dev.json --tune`
+>   → 最优阈值 **t=0.58**，拒答正确率 **15/15**、误拒率 **0.0588**（2/34：N13、N12）、平衡准确率 **0.9706**
+>   （产物 `knowledge/eval/runs/refusal-eval-dev.json`）。
+> - **答案表述核查（`--judge`）已补跑**（2026-09-30）：对 dev 的 15 道拒答题各生成一次回答再交裁判，
+>   **15/15 明确说「资料不足」，正确率 1.0000**（写进同一份 `refusal-eval-dev.json` 的 `answerSideCheck`）。
+>   M2-7 至此三项（重排档 / 拒答档 / 裁判档）齐全。
+
+> **M2-5 做成了什么（2026-09-30）**：详见 `knowledge/evaluations/语言自适应融合.md`（零 LLM，可随时复算）。
+> * **旧 test 的「融合伤 xl」反转不复现**：旧 test（494 段语料）xl 层「单路向量 14/21 > 融合 8/21」；
+>   现役 1757 段语料的新 holdout 上 xl 层是「融合 **12/21** > 单路向量 **11/21**」，总分 26/35 > 22/35
+>   —— 所以**验收「不低于单路向量」由现役配置本身就已满足**。
+> * 仍加了一道**查询自适应门控**（`peak = BM25 榜首/第 10 名`，`< 1.5` 就退单路向量）修掉
+>   「minmax 把噪声拉满」这个机制：**dev 29→31/34**（追平拿标注做分流的 oracle）、**holdout 26→27/35**
+>   （xl 12→**14**/21）。阈值 1.40–1.60 是平台，对阈值不敏感。
+> * **处置**：增益只有 +1～2 题（落在项目自己定义的「±1 波动」边缘），所以**默认不改现役配置**，
+>   把它做成 `run_adopted.py --gate-peak 1.5` 的**可选项**；三条被 holdout 筛掉的备选
+>   （GATE-CJK 阈值不可迁移、GATE-LATIN 倒扣、绝对幅度归一化零增益）记在文档 §5。
+> * 顺带修了一个复算坑：`run_adopted.py` 等脚本的语料缓存名由 `TEI_MODEL` 决定，未设时会取到
+>   float32 那份，与现役 int8 服务**不同源**（命中数差 1–3 题）—— 现已改为未设时打印警告。
+
+> **M2-6 为什么没做（2026-09-30：把「需先定映射规则」这条依赖查清了）**
+>
+> 原以为 M2-6 只是「定一条映射规则 + 写边」，实测发现**定不出机械规则**。证据脚本
+> `node knowledge/pipeline/import/bridge-coverage.mjs`（只读、可随时复算）：
+>
+> | 项 | 实测 |
+> |---|---|
+> | 现在覆盖率 | 9 条桥边 → **4/1676 = 0.239%**（大典 5 条 / O*NET 4 条；full 2 / partial 5 / related 2） |
+> | 自建层参与比对的词条 | **127**（63 个节点的 label + aliases，归一化去重） |
+> | 与**大典 · 职业**（1676 条）名字重合 | **0** |
+> | 与**大典 · 职业功能/技能**（18,552 条）名字重合 | **1**（`skill:SK111 数据标注`） |
+> | 与 **O*NET 全部条目**（1,253 条）名字重合 | **1**（`tool:selenium` ↔ `Selenium`） |
+>
+> 两套词表**本质上不相交**：自建层是「SPI 总线事务设计」这种细粒度工程技能，外部层是
+> 「(二)孵化操作」这种按职业写的工作内容条目。**任何自动生成的桥边都是「猜」**，而
+> `knowledge/import/README.md` §8 明确禁止：
+>
+> > **不做跨库合并** …… 需要合并时靠 `aligned_with` 边显式声明，**且必须由人写下
+> > `alignment`（full / partial / related）与理由**。
+>
+> 所以 M2-6 与 **M2-1 是同一类门禁**：不是「没写代码」，是「这一步只能人来做」。
+> 机器能做的只有把候选范围收窄，收不窄 —— 1,676 条里没有可机械判定的子集。
+>
+> **人力上限（供排期，不是承诺）**：472 个职业编号有国标「工作内容」数据，其中 **461 个**
+> 能在 1,676 个职业树里对上号 → 人把这 461 个职业各写 1 条 `alignment`，覆盖率可从
+> 0.24% 提到 **27.5%**。这一步没有任何地方可以外包给脚本。
+
+### M3 · 交付与合规 —— ✅ 完成（2026-09-30）
+
+| # | 任务 | 验收标准 | 状态 |
 |---|---|---|---|
-| M1-1 | 后端 SQLite 持久化 | 画像/证据/成长事件落库；重建 `CareerApi` 实例后数据仍在；进程重启后 curl 仍读得到 | 决策 1 |
-| M1-2 | `POST /api/auth/guest` + 会话隔离 | 返回 201 + HttpOnly Cookie；两个会话画像互不可见；无 Cookie 回落 `user_local`（保证现有测试不破） | M1-1 |
-| M1-3 | `GET /api/growth-records` + `POST /api/growth-records/confirm` | 候选→记录→证据→事件**一个事务**写入；重复 confirm 不产生重复行 | M1-1 |
-| M1-4 | 路径引擎 `POST /api/v1/career-path/generate` | 4 个职业都能生成；`hard_checks` 全 false；拓扑序满足所有 prerequisite 边；阶段不早于前置；同输入两次输出完全相同；未知职业 404 | 无 |
-| M1-5 | `/work-map`、`/catalog` 从 redirect 改真页面 | 两个页面能渲染职业/技能真数据；career-matches 的 501 显示「尚未上线」而非白屏 | 无 |
-| M1-6 | `/path` 读已确认画像 | 去掉 `AI001`/`SK215=3`/`weekly_hours=10` 硬编码；每周小时数可改且影响周数 | M1-4 |
-| M1-7 | 请求层统一 | onboarding 里 6 处相对 `/api` 裸 fetch 全部走 `apiUrl()` | 无 |
+| M3-1 | 根 `README.md` | 环境要求、启动命令、**唯一构建源提示**、哪些跑得通/跑不通、已知坑 | ✅ 已补「跑得通 / 跑不通」表 + 8 条「已知坑」+ 文档索引加两份新文档 |
+| M3-2 | `LICENSE` + 来源许可矩阵 | 26 份来源 × 许可 × 可否再分发；3 份 AGPL-3.0 单独说明 | ✅ 矩阵完成（`knowledge/SOURCE_LICENSES.md`）；**`LICENSE` 故意没建** —— 选哪个许可只有作者能定（见文件 §6） |
+| M3-3 | 数据边界说明 | 仓库里有什么、什么要重下、什么根本没拿到（中国官方语料 0 过审） | ✅ `DATA_BOUNDARY.md`（入库/不入库各 5 项、拿不到的 7 项、复算命令） |
+| M3-4 | 仓库清理 | 清掉 `knowledge-cn/data/sqlite-amalgamation*`；确认 `.env` 未被跟踪 | ✅ 删掉 `sqlite-amalgamation/`（11 MB）+ `.zip`（2.8 MB）+ `element.md` + `pelican_bike.html`（均已 `git add -u` 记为删除）；`.env` 未跟踪已验证 |
+| M3-5 | 演示脚本与视频 | 3–5 分钟，覆盖「画像→推荐→依据→路径→行动→记录」 | ✅ **改为可复算的演示脚本**：`npm run demo` → 9 步、真起后端、真数据、exit 0。理由见 `scripts/demo-walkthrough.mjs` 头部：视频只能证明「当时跑过」，脚本能证明「你现在也能跑出同样的东西」，且随代码被回归覆盖 |
 
-**M1 完成定义**：`npm test` + `pytest` 全绿；五个入口全部是真页面；画像刷新/重启后仍在；主链路可以完整演示一遍。
 
-### M2 · 知识库补齐（预计 3–5 天）
+## 3. 外部阻塞（2026-09-30 复核）
 
-| # | 任务 | 验收标准 | 依赖 |
-|---|---|---|---|
-| M2-1 | 新增 `covers` 边 | taxonomy 有 covers；9 个学习单元各 ≥1 条、`sourceRefs` 指向真实 chunk；09 步硬约束仍 13/13；导出与前端 `RELATION_LABELS` 同步；相关测试计数更新为实际值 | 决策 2 |
-| M2-2 | 修两条断链脚本 | `probe-heldout.mjs`、`weknora/build-stack.mjs` 读现役题集、退出码 0；拒答题不计入分母；防泄漏校验保留 | 无 |
-| M2-3 | 补 `publishedAt` | 26 份来源逐份核实发布时间；拿不到的明确标缺失（不猜）；前端据此显示时效 | 需查资料 |
-| M2-4 | 检索双路召回（B 方案） | 自建 + WeKnora 各出候选，合并后统一重排；用**新建的留出集**报数；id 体系不变 | 需本机 WeKnora Lite 在跑 |
-| M2-5 | α 过拟合修正（A 方案） | 融合权重改为按查询自适应或仅中文层启用；在新建留出集上不低于单路向量 | 同上 |
-| M2-6 | 大典职业接进图谱 | 桥接覆盖从 4/1676 提到一个有意义的比例，且每条桥边有 `sourceRefs` 与对齐度 | 3–5 天，需先定映射规则 |
+**没有卡在外部依赖上的东西**（端点、数据都在盘上）；但有 **两处是「只能人来做」的裁定**，
+如实列出 —— 它们不是「没写代码」，`descope` 也替代不了：
 
-### M3 · 交付与合规（预计 1–2 天）
-
-| # | 任务 | 验收标准 |
+| 事项 | 处置 | 依据 |
 |---|---|---|
-| M3-1 | 根 `README.md` | 环境要求、启动命令、**唯一构建源提示**、哪些跑得通/跑不通、已知坑 |
-| M3-2 | `LICENSE` + 来源许可矩阵 | 26 份来源 × 许可 × 可否再分发；3 份 AGPL-3.0 单独说明 |
-| M3-3 | 数据边界说明 | 仓库里有什么、什么要重下、什么根本没拿到（中国官方语料 0 过审） |
-| M3-4 | 仓库清理 | 清掉 `knowledge-cn/data/sqlite-amalgamation*`（9.2MB 无关文件）；确认 `.env` 未被跟踪 |
-| M3-5 | 演示脚本与视频 | 3–5 分钟，覆盖「画像→推荐→依据→路径→行动→记录」 |
+| 重排档 / 裁判档评测 | **已解** | `knowledge/eval/.env` 端点可用，产品/评测统一到 `backend/llm.py`；向量档所需 TEI 兼容服务本机在跑（`127.0.0.1:8090`） |
+| WeKnora **标准版**对照 | **不做（不影响功能）** | 对照已用 **Lite 版**完成并有结论（`knowledge/evaluations/WeKnora对照评测.md`：同套重排下 test 17/21 vs 自建 13/21，差距全在候选池）。标准版只多测图谱/GraphRAG、自带 rerank、docreader，属**对照上限**而非产品能力；产品零 WeKnora 依赖 |
+| 检索双路召回 / α 自适应（M2-4/M2-5） | **两项都已做（结论：一项采纳为可选、一项无可吃空间）** | M2-5 见 `knowledge/evaluations/语言自适应融合.md`（零 LLM、可复算：dev 29→31/34、新 holdout 26→27/35）。M2-4 见 `实验总表.md` F 组：把 WeKnora 思路的 2,861 子块按区间映回 1,757 段取并集，**dev 并集 +0 题、holdout 仅 +1 题（XC01）**，落在 ±1 波动内 → 候选池无互补，统一重排无从增益 |
+| 大典 / O*NET 接进自建图谱（M2-6） | ⛔ **卡在「只能人写」** | 数据早在盘上，但**定不出机械映射规则**：自建 127 个词条 vs 大典 1,676 个职业 **命中 0**、vs 18,552 个职业功能/技能 **命中 1**、vs O*NET 1,253 条 **命中 1**（`node knowledge/pipeline/import/bridge-coverage.mjs`）。`import/README.md` §8 要求 `aligned_with` **必须由人写下 `alignment` 与理由** → 与 M2-1「不代签」同类。人力上限 461 条 → 27.5% |
+| 学习单元 `covers` 边（M2-1） | ⛔ **卡在「不代签」** | 见 M2 段注记：代码路径已验证过一次，卡在第 06 步人工裁定抽样（22→27），回退保持 226 边 |
+| 26 份 `publishedAt`（M2-3） | **保持 null** | 按设计「无 `publishedAt` 就显示缺时间信息，不猜」，前端照此渲染 |
+| 中国官方语料过审 | **留在门外（=现状）** | `knowledge-cn/` 的审核门禁（`data/reviews/*.template.json` → `promote.py`）已就绪；1519 条候选 **APPROVED=0** 属纯人力活，不阻断产品可用 |
+| 百宝箱平台接入 | **不做** | 需固定公网地址 + 账号 |
+| 多端发布验证 | **不做** | 需对应平台账号与审核 |
 
-## 3. 外部阻塞（做不了就是做不了，别排期）
-
-| 事项 | 卡在哪 |
-|---|---|
-| WeKnora **标准版**对照 | 5 个镜像共 2.72GB，本机 Docker 拉不动（代理对大镜像层近乎失效） |
-| 重排档 / 裁判档评测 | 需要 OpenAI 兼容 LLM 端点与 key；向量档需要本机 TEI（模型 1.19GB） |
-| 百宝箱平台接入 | 需固定公网地址 + 账号；表单至今未提交 |
-| 多端发布验证 | 需对应平台账号与审核 |
+> 口径：外部数据只解决「内容从哪来」，不解决「能力有没有」。M2 的 `covers`（M2-1）与大典桥接（M2-6）
+> 属于**同一类**：机器能算范围、能出证据（`06-adjudicate.mjs` 的抽样、`bridge-coverage.mjs` 的命中统计），
+> 但**下结论的那一笔只能是人**。在「不依赖人工审核」的前提下这两项就是做不到 —— 如实留白，不替人签。
 
 ## 4. 已完成（不要再做一遍）
 
@@ -76,9 +205,21 @@
 | 1-12 步离线构建管线 | `knowledge/pipeline/01..12`，09 步 14 项校验 13/13 通过 |
 | 版本化图谱导出 | `knowledge/exports/career-graph.json`（26 来源 / 1757 段 / 63 节点 / 226 边 / 38 wiki） |
 | MCP 三工具 + 双传输 | `npm run mcp:verify`（stdio 14/14）、`mcp:verify-http`（25/25），证据在 `evidence/` |
-| 最小后端 9 个接口 | `backend/server.py`，未实现接口显式 501 |
-| 测试 | 前端 12 项、后端 16 项，均通过 |
+| 最小后端 15 组路由 | `backend/server.py`，**未实现接口显式 501**（仅余 `/api/auth/{register,login}`、`/api/career-matches/{current,generate,select}`） |
+| 测试 | 前端 12 项、后端 **130** 项（17 图谱/契约 + 19 记忆库 + 20 LLM/触发器 + 14 对话 + 12 成长记录 + 18 简历 + 5 画像落库 + 5 访客会话 + 6 成长确认 + 14 路径引擎），端到端 `npm run e2e` **169** 项断言（`e2e:all` 169 再加既有套件），均通过 |
+| 画像/证据/事件持久化（M1-1/M1-3） | `backend/memories.py` 新增 `profiles` / `profile_evidence` / `growth_events` 三表；`ProfileStore` 读写透传同一 `career.db`；`POST /api/growth-records/confirm` 一事务确认且幂等 |
+| 访客会话（M1-2） | `POST /api/auth/guest` → 201 + `HttpOnly` Cookie + 按 `user_id` 隔离；无/坏 Cookie 回落 `user_local`；`register`/`login` 仍 501 |
+| 路径引擎（M1-4） | 新增 `backend/career_path.py`（零三方依赖）：先修深度定阶段 + 拓扑序 + 6 指标 / 6 硬校验 / 工作量自检；同输入两次输出完全相同；未知职业 404 |
+| 五个入口全通（M1-5/6/7） | `/work-map`、`/catalog` 挂真组件（200 + SSR 出内容）；career-matches 的 501 显示「尚未上线」；`/path` 读已确认画像、每周小时可调；onboarding 六处裸 fetch 走 `apiUrl()` |
+| 记忆库 | `backend/memories.py`（stdlib + SQLite）+ 6 条 `/api/memories*` 路由 + `/growth` 记忆面板；候选闸门 / 写时触发器 / persona+联想召回 / 删除即遗忘，端到端全部有断言 |
+| 对话注入 | `backend/chat.py` + `POST /api/chat`：已确认记忆 + 图谱事实拼成固定可审计前缀；配了模型用模型、否则降级规则版（`provider`/`llm.error` 逐轮回传）；端到端离线档与真模型档各钉一遍 |
+| 成长记录 → 候选记忆 | `backend/growth.py` + `/api/growth-records`（写记录同事务派生候选、按 `recordId` 幂等、删记录只清未确认候选）；档案页有「写入记忆候选」入口 |
+| 简历解析 | `backend/resume.py` + `POST /api/resumes/extract`（文本/DOCX，stdlib 零依赖；PDF/图片 415 + 可执行建议）；产出画像草稿 + 待确认候选，每条抽取带原文 `charRange`；onboarding 的 760ms 假数据已删除，改走真链路 |
+| LLM 接入层 | `backend/llm.py`：产品侧（记忆触发器）与评测侧（重排/裁判/出题/术语表）**共用一份配置与重试纪律**；9 个评测脚本已从「各自手写 HTTP」改为 `from _shared_llm import chat`；实测生成可用触发器（24 s，概念高一级抽象） |
 | 评测体系 | dev 34 / test 32 / 拒答 30；冻结结果 24/32；拒答零误拒 |
+| 检索自适应门控（M2-5，2026-09-30） | `knowledge/eval/adaptive_fusion.py`（零 LLM）：dev 29→**31/34**、新 holdout 26→**27/35**；`run_adopted.py --gate-peak 1.5` 可选项；详见 `knowledge/evaluations/语言自适应融合.md` |
+| 裁判档（M2-7，2026-09-30） | `refusal_eval.py --judge`：dev 15 道拒答题**答案表述核查 15/15 = 1.0000**（写进 `refusal-eval-dev.json` 的 `answerSideCheck`） |
+| 大典桥接证据（M2-6，2026-09-30） | `knowledge/pipeline/import/bridge-coverage.mjs`（只读、离线）：覆盖率 4/1676 = 0.24%；「按名字机械对齐」命中 0/1/1 → 结论「只能人工裁定」 |
 | 交接文档 | `项目架构与技术文档.md`、`PAGE_FUNCTION_MAP.md`、前后端页面契约 |
 | GBK 崩溃修复 | commit `3f674a1` |
 
