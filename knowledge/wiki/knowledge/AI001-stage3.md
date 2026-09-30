@@ -3,7 +3,7 @@ entityId: knowledge:AI001:stage3
 entityType: knowledge
 title: 堆内存属性与 DMA 缓冲
 aliases: []
-version: 2026-09-15
+version: 2026-09-30
 review: llm-draft
 reviewedBy: null
 sources: ["S03#s51", "S03#s53"]

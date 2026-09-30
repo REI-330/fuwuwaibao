@@ -1,7 +1,7 @@
 {
   "schema": "career-graph-integrity/v1",
   "step": "09",
-  "generatedAt": "2026-09-29T09:18:12.925Z",
+  "generatedAt": "2026-09-30T16:12:03.089Z",
   "note": "第 09 步产物：设计文档 §3.3 三条硬约束 + 页面契约的机器校验结果。硬约束失败即构建失败（退出码 1）。",
   "inputs": [
     "knowledge/extract/accepted.jsonl",

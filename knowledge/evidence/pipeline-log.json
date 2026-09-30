@@ -1,6 +1,6 @@
 {
   "schema": "career-graph-pipeline-log/v1",
-  "updatedAt": "2026-09-29T12:29:05.892Z",
+  "updatedAt": "2026-09-30T16:12:05.508Z",
   "steps": [
     {
       "step": "01",
@@ -107,9 +107,9 @@
       "step": "04",
       "title": "实体与关系抽取",
       "command": "node knowledge/pipeline/04-extract-candidates.mjs",
-      "startedAt": "2026-09-15T13:35:50.625Z",
-      "finishedAt": "2026-09-15T13:35:50.640Z",
-      "durationMs": 15,
+      "startedAt": "2026-09-30T15:14:47.930Z",
+      "finishedAt": "2026-09-30T15:14:47.959Z",
+      "durationMs": 29,
       "inputs": [
         "knowledge/extract/seed.json",
         "knowledge/chunks/chunks.jsonl",
@@ -157,15 +157,15 @@
         "annotatedBy 统一标为 llm-draft：人工裁定前都只是草稿，第 06/08 步才会升级为 human / llm-reviewed。"
       ],
       "node": "v22.22.2",
-      "runCount": 3
+      "runCount": 6
     },
     {
       "step": "05",
       "title": "术语归一与消歧",
       "command": "node knowledge/pipeline/05-normalize.mjs",
-      "startedAt": "2026-09-15T13:36:02.806Z",
-      "finishedAt": "2026-09-15T13:36:02.822Z",
-      "durationMs": 16,
+      "startedAt": "2026-09-30T15:14:48.075Z",
+      "finishedAt": "2026-09-30T15:14:48.087Z",
+      "durationMs": 12,
       "inputs": [
         "knowledge/extract/candidates.jsonl",
         "knowledge/pipeline/taxonomy.json"
@@ -210,15 +210,15 @@
         "节点与边的 annotatedBy 统一为 llm-draft，等第 06 步裁定升级。"
       ],
       "node": "v22.22.2",
-      "runCount": 6
+      "runCount": 9
     },
     {
       "step": "06",
       "title": "人工裁定",
       "command": "node knowledge/pipeline/06-adjudicate.mjs",
-      "startedAt": "2026-09-15T13:36:02.893Z",
-      "finishedAt": "2026-09-15T13:36:02.912Z",
-      "durationMs": 19,
+      "startedAt": "2026-09-30T15:14:48.179Z",
+      "finishedAt": "2026-09-30T15:14:48.194Z",
+      "durationMs": 15,
       "inputs": [
         "knowledge/extract/normalized.jsonl",
         "knowledge/extract/aliases.json",
@@ -268,15 +268,15 @@
         "边分布：belongs_to 25，emerging_in 8，evidenced_by 109，learning_unit 9，prerequisite 24，requires 28，trains 12，transitions_to 3，uses 8。"
       ],
       "node": "v22.22.2",
-      "runCount": 7
+      "runCount": 9
     },
     {
       "step": "07",
       "title": "编译 Wiki 草稿",
       "command": "node knowledge/pipeline/07-compile-wiki.mjs",
-      "startedAt": "2026-09-15T13:36:02.983Z",
-      "finishedAt": "2026-09-15T13:36:03.032Z",
-      "durationMs": 49,
+      "startedAt": "2026-09-30T15:14:54.214Z",
+      "finishedAt": "2026-09-30T15:14:54.266Z",
+      "durationMs": 52,
       "inputs": [
         "knowledge/extract/accepted.jsonl",
         "knowledge/chunks/chunks.jsonl",
@@ -303,15 +303,15 @@
         "wiki/ 下没有残留页。"
       ],
       "node": "v22.22.2",
-      "runCount": 5
+      "runCount": 6
     },
     {
       "step": "08",
       "title": "人工审核 Wiki",
       "command": "node knowledge/pipeline/08-review-wiki.mjs",
-      "startedAt": "2026-09-15T13:36:03.104Z",
-      "finishedAt": "2026-09-15T13:36:03.146Z",
-      "durationMs": 42,
+      "startedAt": "2026-09-30T15:14:54.363Z",
+      "finishedAt": "2026-09-30T15:14:54.397Z",
+      "durationMs": 34,
       "inputs": [
         "knowledge/wiki/index.json",
         "knowledge/review/wiki-review.json"
@@ -338,15 +338,15 @@
         "已审核覆盖率 76.3%，其余保持 llm-draft 并按 §5 检索降权。"
       ],
       "node": "v22.22.2",
-      "runCount": 4
+      "runCount": 5
     },
     {
       "step": "09",
       "title": "完整性校验",
       "command": "node knowledge/pipeline/09-integrity-check.mjs",
-      "startedAt": "2026-09-29T09:18:12.925Z",
-      "finishedAt": "2026-09-29T09:18:12.987Z",
-      "durationMs": 62,
+      "startedAt": "2026-09-30T16:12:03.089Z",
+      "finishedAt": "2026-09-30T16:12:03.127Z",
+      "durationMs": 38,
       "inputs": [
         "knowledge/extract/accepted.jsonl",
         "knowledge/chunks/chunks.jsonl",
@@ -371,15 +371,15 @@
         "标注分布：llm-reviewed 115，llm-draft 174"
       ],
       "node": "v22.22.2",
-      "runCount": 25
+      "runCount": 72
     },
     {
       "step": "10",
       "title": "布局与索引",
       "command": "node knowledge/pipeline/10-layout-index.mjs",
-      "startedAt": "2026-09-29T12:29:03.516Z",
-      "finishedAt": "2026-09-29T12:29:04.067Z",
-      "durationMs": 551,
+      "startedAt": "2026-09-30T16:12:03.200Z",
+      "finishedAt": "2026-09-30T16:12:03.720Z",
+      "durationMs": 520,
       "inputs": [
         "knowledge/extract/accepted.jsonl",
         "knowledge/chunks/chunks.jsonl",
@@ -409,15 +409,15 @@
         "本步不改 annotatedBy：llm-draft → llm-reviewed 的唯一通道仍是第 06 步（设计文档 L251）。"
       ],
       "node": "v22.22.2",
-      "runCount": 12
+      "runCount": 59
     },
     {
       "step": "11",
       "title": "版本化导出与效果评测",
       "command": "node knowledge/pipeline/11-export-eval.mjs",
-      "startedAt": "2026-09-29T12:29:04.166Z",
-      "finishedAt": "2026-09-29T12:29:05.892Z",
-      "durationMs": 1726,
+      "startedAt": "2026-09-30T16:12:03.801Z",
+      "finishedAt": "2026-09-30T16:12:05.508Z",
+      "durationMs": 1707,
       "inputs": [
         "knowledge/graph/graph.json",
         "knowledge/chunks/chunks.jsonl",
@@ -455,7 +455,7 @@
         "评测只报检索中间态（Top-3 + 分值 + 耗时），不调模型；「引用支持度」需人工判定，报告已明确标注为未做（§7 L262 / L276）。"
       ],
       "node": "v22.22.2",
-      "runCount": 33
+      "runCount": 80
     },
     {
       "step": "12",

@@ -3,7 +3,7 @@ entityId: knowledge:AI004:stage2
 entityType: knowledge
 title: 量化与端侧基准测试
 aliases: []
-version: 2026-09-15
+version: 2026-09-30
 review: llm-draft
 reviewedBy: null
 sources: ["S05#s100", "S05#s97"]

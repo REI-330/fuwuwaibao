@@ -3,7 +3,7 @@ entityId: knowledge:AI002:stage1
 entityType: knowledge
 title: 检测模型训练与验证流程
 aliases: []
-version: 2026-09-15
+version: 2026-09-30
 review: llm-draft
 reviewedBy: null
 sources: ["S09#s154", "S09#s156"]

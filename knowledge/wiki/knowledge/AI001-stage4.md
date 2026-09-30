@@ -3,7 +3,7 @@ entityId: knowledge:AI001:stage4
 entityType: knowledge
 title: 端侧实时性与传输速度调优
 aliases: []
-version: 2026-09-15
+version: 2026-09-30
 review: llm-draft
 reviewedBy: null
 sources: ["S02#s23"]

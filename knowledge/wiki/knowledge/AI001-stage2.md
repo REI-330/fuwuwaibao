@@ -3,7 +3,7 @@ entityId: knowledge:AI001:stage2
 entityType: knowledge
 title: SPI 总线与传输事务
 aliases: []
-version: 2026-09-15
+version: 2026-09-30
 review: llm-draft
 reviewedBy: null
 sources: ["S02#s10", "S02#s17"]

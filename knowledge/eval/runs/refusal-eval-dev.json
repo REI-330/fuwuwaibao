@@ -1,14 +1,14 @@
 {
   "schema": "career-graph-refusal-eval/v1",
-  "generatedAt": "2026-09-27T21:13:24+0800",
+  "generatedAt": "2026-09-30T23:30:30+0800",
   "set": "knowledge\\evaluations\\questions-dev.json",
   "signal": "max cosine（绝对值，跨查询可比）",
-  "threshold": 0.615,
+  "threshold": 0.58,
   "metrics": {
-    "threshold": 0.615,
+    "threshold": 0.58,
     "rejectionRate": 1.0,
-    "falseRejectRate": 0.0882,
-    "balancedAccuracy": 0.9559,
+    "falseRejectRate": 0.0588,
+    "balancedAccuracy": 0.9706,
     "nRefusal": 15,
     "nAnswerable": 34
   },
@@ -16,7 +16,7 @@
     {
       "questionId": "D01",
       "answerable": true,
-      "maxCos": 0.816472,
+      "maxCos": 0.757041,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -27,7 +27,7 @@
     {
       "questionId": "D02",
       "answerable": true,
-      "maxCos": 0.724273,
+      "maxCos": 0.715734,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -38,7 +38,7 @@
     {
       "questionId": "D03",
       "answerable": true,
-      "maxCos": 0.776623,
+      "maxCos": 0.709719,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -49,7 +49,7 @@
     {
       "questionId": "D04",
       "answerable": true,
-      "maxCos": 0.695036,
+      "maxCos": 0.675736,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -60,7 +60,7 @@
     {
       "questionId": "D05",
       "answerable": true,
-      "maxCos": 0.750706,
+      "maxCos": 0.723636,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -71,7 +71,7 @@
     {
       "questionId": "D06",
       "answerable": true,
-      "maxCos": 0.727986,
+      "maxCos": 0.720142,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -82,9 +82,9 @@
     {
       "questionId": "D07",
       "answerable": true,
-      "maxCos": 0.610799,
-      "judgedRefusal": true,
-      "correct": false,
+      "maxCos": 0.618506,
+      "judgedRefusal": false,
+      "correct": true,
       "referenceChunks": [
         "S05#s97~2",
         "S05#s109~2"
@@ -93,7 +93,7 @@
     {
       "questionId": "D08",
       "answerable": true,
-      "maxCos": 0.723574,
+      "maxCos": 0.702187,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -104,7 +104,7 @@
     {
       "questionId": "D09",
       "answerable": true,
-      "maxCos": 0.74521,
+      "maxCos": 0.691324,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -115,7 +115,7 @@
     {
       "questionId": "D10",
       "answerable": true,
-      "maxCos": 0.73282,
+      "maxCos": 0.661938,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -126,7 +126,7 @@
     {
       "questionId": "D11",
       "answerable": true,
-      "maxCos": 0.755755,
+      "maxCos": 0.661607,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -137,7 +137,7 @@
     {
       "questionId": "D12",
       "answerable": true,
-      "maxCos": 0.743419,
+      "maxCos": 0.667652,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -148,7 +148,7 @@
     {
       "questionId": "D13",
       "answerable": true,
-      "maxCos": 0.719182,
+      "maxCos": 0.654987,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -159,7 +159,7 @@
     {
       "questionId": "D14",
       "answerable": true,
-      "maxCos": 0.728456,
+      "maxCos": 0.655047,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -170,7 +170,7 @@
     {
       "questionId": "D15",
       "answerable": true,
-      "maxCos": 0.633212,
+      "maxCos": 0.616446,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -181,7 +181,7 @@
     {
       "questionId": "D16",
       "answerable": true,
-      "maxCos": 0.714972,
+      "maxCos": 0.614214,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -192,7 +192,7 @@
     {
       "questionId": "D17",
       "answerable": true,
-      "maxCos": 0.63483,
+      "maxCos": 0.598033,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -203,7 +203,7 @@
     {
       "questionId": "D18",
       "answerable": true,
-      "maxCos": 0.654504,
+      "maxCos": 0.644968,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -214,7 +214,7 @@
     {
       "questionId": "D19",
       "answerable": true,
-      "maxCos": 0.709735,
+      "maxCos": 0.627868,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -225,7 +225,7 @@
     {
       "questionId": "D20",
       "answerable": true,
-      "maxCos": 0.676314,
+      "maxCos": 0.66101,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -236,7 +236,7 @@
     {
       "questionId": "N01",
       "answerable": true,
-      "maxCos": 0.731854,
+      "maxCos": 0.689426,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -247,7 +247,7 @@
     {
       "questionId": "N02",
       "answerable": true,
-      "maxCos": 0.759261,
+      "maxCos": 0.762647,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -258,7 +258,7 @@
     {
       "questionId": "N03",
       "answerable": true,
-      "maxCos": 0.721787,
+      "maxCos": 0.730454,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -269,7 +269,7 @@
     {
       "questionId": "N04",
       "answerable": true,
-      "maxCos": 0.71031,
+      "maxCos": 0.739458,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -280,7 +280,7 @@
     {
       "questionId": "N05",
       "answerable": true,
-      "maxCos": 0.710942,
+      "maxCos": 0.719497,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -291,7 +291,7 @@
     {
       "questionId": "N06",
       "answerable": true,
-      "maxCos": 0.752289,
+      "maxCos": 0.723934,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -302,7 +302,7 @@
     {
       "questionId": "N07",
       "answerable": true,
-      "maxCos": 0.77486,
+      "maxCos": 0.76788,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -313,7 +313,7 @@
     {
       "questionId": "N08",
       "answerable": true,
-      "maxCos": 0.734839,
+      "maxCos": 0.727368,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -324,7 +324,7 @@
     {
       "questionId": "N09",
       "answerable": true,
-      "maxCos": 0.753153,
+      "maxCos": 0.761278,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -335,7 +335,7 @@
     {
       "questionId": "N10",
       "answerable": true,
-      "maxCos": 0.742555,
+      "maxCos": 0.746568,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -346,7 +346,7 @@
     {
       "questionId": "N11",
       "answerable": true,
-      "maxCos": 0.701849,
+      "maxCos": 0.706595,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -357,7 +357,7 @@
     {
       "questionId": "N12",
       "answerable": true,
-      "maxCos": 0.5765,
+      "maxCos": 0.553398,
       "judgedRefusal": true,
       "correct": false,
       "referenceChunks": [
@@ -368,7 +368,7 @@
     {
       "questionId": "N13",
       "answerable": true,
-      "maxCos": 0.568036,
+      "maxCos": 0.516127,
       "judgedRefusal": true,
       "correct": false,
       "referenceChunks": [
@@ -379,7 +379,7 @@
     {
       "questionId": "N14",
       "answerable": true,
-      "maxCos": 0.65332,
+      "maxCos": 0.650648,
       "judgedRefusal": false,
       "correct": true,
       "referenceChunks": [
@@ -390,7 +390,7 @@
     {
       "questionId": "RD01",
       "answerable": false,
-      "maxCos": 0.455811,
+      "maxCos": 0.440281,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -398,7 +398,7 @@
     {
       "questionId": "RD02",
       "answerable": false,
-      "maxCos": 0.500104,
+      "maxCos": 0.47106,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -406,7 +406,7 @@
     {
       "questionId": "RD03",
       "answerable": false,
-      "maxCos": 0.462031,
+      "maxCos": 0.470668,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -414,7 +414,7 @@
     {
       "questionId": "RD04",
       "answerable": false,
-      "maxCos": 0.478492,
+      "maxCos": 0.473532,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -422,7 +422,7 @@
     {
       "questionId": "RD05",
       "answerable": false,
-      "maxCos": 0.561875,
+      "maxCos": 0.535681,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -430,7 +430,7 @@
     {
       "questionId": "RD06",
       "answerable": false,
-      "maxCos": 0.509295,
+      "maxCos": 0.504874,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -438,7 +438,7 @@
     {
       "questionId": "RD07",
       "answerable": false,
-      "maxCos": 0.572969,
+      "maxCos": 0.526181,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -446,7 +446,7 @@
     {
       "questionId": "RD08",
       "answerable": false,
-      "maxCos": 0.484699,
+      "maxCos": 0.515637,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -454,7 +454,7 @@
     {
       "questionId": "RD09",
       "answerable": false,
-      "maxCos": 0.61255,
+      "maxCos": 0.576825,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -462,7 +462,7 @@
     {
       "questionId": "RD10",
       "answerable": false,
-      "maxCos": 0.532396,
+      "maxCos": 0.534398,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -470,7 +470,7 @@
     {
       "questionId": "RD11",
       "answerable": false,
-      "maxCos": 0.574511,
+      "maxCos": 0.564995,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -478,7 +478,7 @@
     {
       "questionId": "RD12",
       "answerable": false,
-      "maxCos": 0.547382,
+      "maxCos": 0.532328,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -486,7 +486,7 @@
     {
       "questionId": "RD13",
       "answerable": false,
-      "maxCos": 0.547276,
+      "maxCos": 0.511106,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -494,7 +494,7 @@
     {
       "questionId": "RD14",
       "answerable": false,
-      "maxCos": 0.508317,
+      "maxCos": 0.519672,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
@@ -502,10 +502,105 @@
     {
       "questionId": "RD15",
       "answerable": false,
-      "maxCos": 0.535634,
+      "maxCos": 0.514233,
       "judgedRefusal": true,
       "correct": true,
       "referenceChunks": []
     }
-  ]
+  ],
+  "answerSideCheck": {
+    "rate": 1.0,
+    "perQuestion": [
+      {
+        "questionId": "RD01",
+        "judgedRefusal": true,
+        "verdict": "结论：ABSTAIN",
+        "answerHead": "资料不足。检索片段中未提供“嵌入式开发工程师”在“杭州”的月薪或中位数相关信息，无法据此回答。"
+      },
+      {
+        "questionId": "RD02",
+        "judgedRefusal": true,
+        "verdict": "结论：ABSTAIN",
+        "answerHead": "资料不足。检索片段中未提供任何正在招聘“边缘 AI 工程师”的公司名称，也没有招聘量、岗位数量或相关统计数据。[1] 只涉及物联网边缘网关、云边消息协同等技能/知识要求；[2][3] 仅显示“State job openings / Local job openings”，没有具体公司和招聘数量。因此无法依据这些片段回答该问题。"
+      },
+      {
+        "questionId": "RD03",
+        "judgedRefusal": true,
+        "verdict": "结论：ABSTAIN",
+        "answerHead": "资料不足。检索片段仅包含自动控制、计算机辅助制造、程序设计等技能要求和相关知识，没有提供任何关于研究生招生院校、报考难度、上岸率或自动化专业考研择校的信息，因此无法据此回答“应该报考哪所学校的研究生比较容易上岸”。"
+      },
+      {
+        "questionId": "RD04",
+        "judgedRefusal": true,
+        "verdict": "结论：ABSTAIN",
+        "answerHead": "根据所提供的检索片段，**无法回答该问题**。\n\n三个检索片段的内容均涉及职业技能要求与相关知识（如业务框架构建、人工智能应用分析、物联网边缘网关联动规则、云边协同等），但**均未提及**到 2030 年中国边缘 AI 领域的人才缺口数据。\n\n如需了解该人才缺口的准确数字，建议查阅相关行业人才报告或权威统计数据。"
+      },
+      {
+        "questionId": "RD05",
+        "judgedRefusal": true,
+        "verdict": "结论：ABSTAIN",
+        "answerHead": "资料不足，无法仅凭检索片段写出一份“可以直接投递”的完整机器视觉工程师简历。片段只包含技能要求和相关知识，缺少个人信息、教育背景、工作经历、项目经历、成果、证书、联系方式等必要内容。\n\n以下仅能依据片段整理为简历中的“技能与能力”部分：\n\n**技能与能力**\n- 能编写视觉系统集成程序；\n- 能编写对应脚本程序；\n- 能编写多相机应用程序；\n- 能编写相机应用程序（片段原文为“相机应D用程序”）；"
+      },
+      {
+        "questionId": "RD06",
+        "judgedRefusal": true,
+        "verdict": "结论：ABSTAIN",
+        "answerHead": "资料不足。检索片段仅包含计算机视觉相关岗位的技能要求和相关知识，未提及“岗位竞争比”或“投多少份简历能拿到一个 offer”的相关信息。因此，无法依据这些片段回答该问题。"
+      },
+      {
+        "questionId": "RD07",
+        "judgedRefusal": true,
+        "verdict": "结论：ABSTAIN",
+        "answerHead": "资料不足，无法判断。"
+      },
+      {
+        "questionId": "RD08",
+        "judgedRefusal": true,
+        "verdict": "结论：ABSTAIN",
+        "answerHead": "根据提供的检索片段，**无法判断“32 岁现在转行做 AI 还来得及吗”**。\n\n片段中只提到了 AI 相关岗位的一些技能与知识要求，例如：\n\n- 能结合人工智能技术提出业务发展规划建议；\n- 能综合业务流程及重难点结合人工智能技术构建业务流程；\n- 能根据业务需求编写批量数据计算作业并优化参数；\n- 能设计数据指标计算算法；\n- 需要常用算法与数据结构、数据画像等知识。\n\n但这些内容**没有涉及"
+      },
+      {
+        "questionId": "RD09",
+        "judgedRefusal": true,
+        "verdict": "结论：ABSTAIN",
+        "answerHead": "资料不足：检索片段中未提供“软件质量保证分析师”职业资格证的报名费或考试时间信息。片段仅列出了相关协会、认证机构（如 American Software Testing Qualifications Board、International Software Testing Qualifications Board、CompTIA 等）以及部分技能要求，但没有具体资格证的报名费用和考试时间安排。"
+      },
+      {
+        "questionId": "RD10",
+        "judgedRefusal": true,
+        "verdict": "结论：ABSTAIN",
+        "answerHead": "检索片段不足以完整回答“我们公司内部的知识库都有哪些文档”。\n\n仅根据片段[1]，可确认知识库文档相关内容包括：\n- 常见问题解答（FAQ）\n- 故障排查指南\n- 系统运维技术手册等知识库文档\n- 运维知识库（涉及修订、更新、编制指南、审定）\n\n但片段没有给出公司内部知识库的完整文档清单，也无法确认其他技术文档、维修报告、工作手册等是否属于公司内部知识库。因此，资料不足，不能列出“都有哪些文档”。"
+      },
+      {
+        "questionId": "RD11",
+        "judgedRefusal": true,
+        "verdict": "结论：ABSTAIN",
+        "answerHead": "资料不足，无法回答。\n\n检索片段没有提供职业名称，也没有提供“今年涨得最多”的具体涨幅数字。片段中只有部分职业的 2025 年工资中位数、2024 年就业人数，以及 2024—2034 年“预计增长：远快于平均（7%或以上）”。这属于未来就业增长预测，不是今年的涨幅数据。\n\n因此，无法依据这些片段推荐“今年涨得最多的职业”或给出具体涨幅数字。"
+      },
+      {
+        "questionId": "RD12",
+        "judgedRefusal": true,
+        "verdict": "结论：ABSTAIN",
+        "answerHead": "资料不足，无法帮你完成字节跳动测试开发岗位的内推。\n\n提供的检索片段仅包含一些测试与系统优化相关的技能要求和知识，例如：\n\n- 适配测试策略、适配流程、适配测试工具；\n- 测试用例设计方法、测试用例设计工具；\n- 信息化/业务支撑系统优化需求收集、优化后测试、数据库测试、数据流图、接口与功能建模等。\n\n但这些片段中没有提到“字节跳动”、测试开发岗位的具体招聘信息、内推渠道、内推码、联系方式、申请流"
+      },
+      {
+        "questionId": "RD13",
+        "judgedRefusal": true,
+        "verdict": "结论：ABSTAIN",
+        "answerHead": "资料不足，无法判断“明年会不会有一半的测试工程师被 AI 取代”。\n\n检索片段中只看到与 AI 和测试相关的讨论，例如“【AI 时代下 - 精准测试新范式】”“AI 赋能测试岗位”“在 AI 极速发展下重塑”“AI 产品测试人员”等，但没有提供任何关于“明年测试工程师被 AI 取代的比例”“是否达到一半”的数据、统计或明确预测。因此不能据此回答会或不会。"
+      },
+      {
+        "questionId": "RD14",
+        "judgedRefusal": true,
+        "verdict": "结论：ABSTAIN",
+        "answerHead": "资料不足，无法保证。\n\n检索片段中没有关于“嵌入式”学习的内容，也没有任何关于“学完就能找到工作”的保证或就业承诺。片段仅涉及培训方案编制、电子产品装配、浸焊设备操作、质量控制等技能要求，不能用来回答嵌入式学习后的就业保证问题。"
+      },
+      {
+        "questionId": "RD15",
+        "judgedRefusal": true,
+        "verdict": "结论：ABSTAIN",
+        "answerHead": "资料不足。  \n上述检索片段仅涉及职业技能培训中的技能要求、相关知识、培训讲义编写、教学方法等内容，未提及国家对职业技能培训的具体补贴金额，也未提及申领流程。因此，无法依据这些片段回答该问题。"
+      }
+    ]
+  }
 }

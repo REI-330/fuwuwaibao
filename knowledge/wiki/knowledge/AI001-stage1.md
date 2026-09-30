@@ -3,7 +3,7 @@ entityId: knowledge:AI001:stage1
 entityType: knowledge
 title: 嵌入式 C 与外设入门
 aliases: []
-version: 2026-09-15
+version: 2026-09-30
 review: llm-draft
 reviewedBy: null
 sources: ["S03#s46", "S04#s74"]

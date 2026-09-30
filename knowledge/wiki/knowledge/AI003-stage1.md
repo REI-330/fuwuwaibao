@@ -3,7 +3,7 @@ entityId: knowledge:AI003:stage1
 entityType: knowledge
 title: 等待策略与稳定测试
 aliases: []
-version: 2026-09-15
+version: 2026-09-30
 review: llm-draft
 reviewedBy: null
 sources: ["S12#s180", "S12#s187"]

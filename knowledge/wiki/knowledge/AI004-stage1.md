@@ -3,7 +3,7 @@ entityId: knowledge:AI004:stage1
 entityType: knowledge
 title: 模型转换与 Lite 推理集成
 aliases: []
-version: 2026-09-15
+version: 2026-09-30
 review: llm-draft
 reviewedBy: null
 sources: ["S05#s101", "S05#s96"]

@@ -2,7 +2,7 @@
   "meta": {
     "kbVersion": "2026.09.15",
     "graphVersion": "0.1.0",
-    "generatedAt": "2026-09-29T12:29:04.166Z",
+    "generatedAt": "2026-09-30T16:12:03.801Z",
     "status": "pipeline-export",
     "note": "由 knowledge/pipeline/11-export-eval.mjs 从第 01–10 步产物投影生成的真实交付物（status=pipeline-export，非 contract-sample）。节点/边只保留契约字段，x/y 与 requires.weight 来自第 10 步，annotatedBy 来自第 06 步裁定，本次导出未改动任何标注。",
     "adapterNotes": [
@@ -35855,7 +35855,7 @@
         "S03#s46"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0002",
@@ -35869,7 +35869,7 @@
         "S02#s7"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0003",
@@ -35883,7 +35883,7 @@
         "S02#s10"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0004",
@@ -35897,7 +35897,7 @@
         "S04#s74"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0005",
@@ -35911,7 +35911,7 @@
         "S03#s53"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0006",
@@ -35925,7 +35925,7 @@
         "S01#s2"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0007",
@@ -35939,7 +35939,7 @@
         "S02#s11"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0008",
@@ -35953,7 +35953,7 @@
         "S09#s154"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0009",
@@ -35967,7 +35967,7 @@
         "S09#s155"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0010",
@@ -35981,7 +35981,7 @@
         "S09#s156"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0011",
@@ -35995,7 +35995,7 @@
         "S09#s159"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0012",
@@ -36009,7 +36009,7 @@
         "S10#s162"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0013",
@@ -36023,7 +36023,7 @@
         "S07#s124"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0014",
@@ -36037,7 +36037,7 @@
         "S13#s202"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0015",
@@ -36051,7 +36051,7 @@
         "S13#s204"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0016",
@@ -36065,7 +36065,7 @@
         "S11#s172"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0017",
@@ -36079,7 +36079,7 @@
         "S12#s181"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0018",
@@ -36093,7 +36093,7 @@
         "S12#s180"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0019",
@@ -36107,7 +36107,7 @@
         "S14#s256"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0020",
@@ -36121,7 +36121,7 @@
         "S11#s176"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0021",
@@ -36135,7 +36135,7 @@
         "S03#s46"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0022",
@@ -36149,7 +36149,7 @@
         "S02#s7"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0023",
@@ -36163,7 +36163,7 @@
         "S09#s159"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0025",
@@ -36177,7 +36177,7 @@
         "S05#s98"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0026",
@@ -36191,7 +36191,7 @@
         "S05#s100"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0027",
@@ -36205,7 +36205,7 @@
         "S05#s97"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0028",
@@ -36219,7 +36219,7 @@
         "S08#s146"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0024",
@@ -36233,7 +36233,7 @@
         "S05#s96"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0029",
@@ -36244,7 +36244,7 @@
         "S02#s7"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0030",
@@ -36255,7 +36255,7 @@
         "S04#s74"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0031",
@@ -36266,7 +36266,7 @@
         "S03#s53"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0032",
@@ -36277,7 +36277,7 @@
         "S03#s46"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0034",
@@ -36288,7 +36288,7 @@
         "S02#s10"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0036",
@@ -36299,7 +36299,7 @@
         "S05#s96"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0035",
@@ -36310,7 +36310,7 @@
         "S02#s12"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0033",
@@ -36321,7 +36321,7 @@
         "S04#s73"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0039",
@@ -36332,7 +36332,7 @@
         "S09#s156"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0040",
@@ -36343,7 +36343,7 @@
         "S09#s159"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0041",
@@ -36354,7 +36354,7 @@
         "S10#s164"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0038",
@@ -36365,7 +36365,7 @@
         "S09#s155"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0043",
@@ -36376,7 +36376,7 @@
         "S05#s97"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0042",
@@ -36387,7 +36387,7 @@
         "S08#s146"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0037",
@@ -36398,7 +36398,7 @@
         "S07#s124"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0045",
@@ -36409,7 +36409,7 @@
         "S05#s100"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0047",
@@ -36420,7 +36420,7 @@
         "S13#s204"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0049",
@@ -36431,7 +36431,7 @@
         "S11#s172"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0048",
@@ -36442,7 +36442,7 @@
         "S14#s256"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0050",
@@ -36453,7 +36453,7 @@
         "S12#s181"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0052",
@@ -36464,7 +36464,7 @@
         "S11#s176"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0051",
@@ -36475,7 +36475,7 @@
         "S12#s180"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0044",
@@ -36486,7 +36486,7 @@
         "S05#s98"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0046",
@@ -36497,7 +36497,7 @@
         "S08#s145"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0053",
@@ -36508,7 +36508,7 @@
         "S03#s46"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0054",
@@ -36519,7 +36519,7 @@
         "S02#s7"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0055",
@@ -36530,7 +36530,7 @@
         "S02#s10"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0056",
@@ -36541,7 +36541,7 @@
         "S04#s74"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0057",
@@ -36552,7 +36552,7 @@
         "S03#s53"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0058",
@@ -36563,7 +36563,7 @@
         "S01#s2"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0059",
@@ -36574,7 +36574,7 @@
         "S02#s12"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0060",
@@ -36585,7 +36585,7 @@
         "S09#s154"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0061",
@@ -36596,7 +36596,7 @@
         "S09#s155"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0062",
@@ -36607,7 +36607,7 @@
         "S09#s156"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0063",
@@ -36618,7 +36618,7 @@
         "S09#s159"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0064",
@@ -36629,7 +36629,7 @@
         "S10#s162"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0065",
@@ -36640,7 +36640,7 @@
         "S07#s124"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0066",
@@ -36651,7 +36651,7 @@
         "S05#s98"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0067",
@@ -36662,7 +36662,7 @@
         "S05#s100"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0068",
@@ -36673,7 +36673,7 @@
         "S05#s97"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0069",
@@ -36684,7 +36684,7 @@
         "S08#s146"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0071",
@@ -36695,7 +36695,7 @@
         "S13#s202"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0072",
@@ -36706,7 +36706,7 @@
         "S13#s204"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0073",
@@ -36717,7 +36717,7 @@
         "S11#s172"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0074",
@@ -36728,7 +36728,7 @@
         "S12#s181"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0075",
@@ -36739,7 +36739,7 @@
         "S12#s180"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0076",
@@ -36750,7 +36750,7 @@
         "S14#s256"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0077",
@@ -36761,7 +36761,7 @@
         "S11#s176"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0070",
@@ -36772,7 +36772,7 @@
         "S05#s96"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0097",
@@ -36788,7 +36788,7 @@
         "S02#s17"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0098",
@@ -36804,7 +36804,7 @@
         "S02#s10"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0099",
@@ -36820,7 +36820,7 @@
         "S03#s46"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0100",
@@ -36836,7 +36836,7 @@
         "S02#s12"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0101",
@@ -36852,7 +36852,7 @@
         "S09#s154"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0102",
@@ -36868,7 +36868,7 @@
         "S09#s156"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0103",
@@ -36884,7 +36884,7 @@
         "S09#s159"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0104",
@@ -36900,7 +36900,7 @@
         "S08#s146"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0105",
@@ -36916,7 +36916,7 @@
         "S11#s172"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0106",
@@ -36932,7 +36932,7 @@
         "S12#s187"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0107",
@@ -36948,7 +36948,7 @@
         "S13#s204"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0108",
@@ -36964,7 +36964,7 @@
         "S14#s256"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0079",
@@ -36975,7 +36975,7 @@
         "S03#s46"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0078",
@@ -36986,7 +36986,7 @@
         "S01#s2"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0081",
@@ -36997,7 +36997,7 @@
         "S07#s124"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0080",
@@ -37008,7 +37008,7 @@
         "S09#s152"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0083",
@@ -37019,7 +37019,7 @@
         "S13#s202"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0082",
@@ -37030,7 +37030,7 @@
         "S11#s172"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0084",
@@ -37041,7 +37041,7 @@
         "S05#s96"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0085",
@@ -37052,7 +37052,7 @@
         "S05#s97"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0218",
@@ -37065,7 +37065,7 @@
         "S04#s74"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0219",
@@ -37078,7 +37078,7 @@
         "S02#s17"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0220",
@@ -37091,7 +37091,7 @@
         "S03#s51"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0221",
@@ -37103,7 +37103,7 @@
         "S02#s23"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0222",
@@ -37116,7 +37116,7 @@
         "S09#s156"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0223",
@@ -37129,7 +37129,7 @@
         "S12#s187"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0224",
@@ -37142,7 +37142,7 @@
         "S13#s233"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0225",
@@ -37155,7 +37155,7 @@
         "S05#s101"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0226",
@@ -37168,7 +37168,7 @@
         "S05#s97"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0086",
@@ -37184,7 +37184,7 @@
         "S09#s152"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0088",
@@ -37200,7 +37200,7 @@
         "S08#s146"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0087",
@@ -37216,7 +37216,7 @@
         "S05#s98"
       ],
       "annotatedBy": "llm-reviewed",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0089",
@@ -37229,7 +37229,7 @@
         "S08#s145"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0090",
@@ -37242,7 +37242,7 @@
         "S08#s149"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0093",
@@ -37255,7 +37255,7 @@
         "S17#s312"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0094",
@@ -37268,7 +37268,7 @@
         "S17#s320"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0091",
@@ -37281,7 +37281,7 @@
         "S16#s306"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0092",
@@ -37294,7 +37294,7 @@
         "S16#s291"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0096",
@@ -37307,7 +37307,7 @@
         "S11#s172"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0095",
@@ -37320,7 +37320,7 @@
         "S11#s176"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0215",
@@ -37331,7 +37331,7 @@
         "S17#s340"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0216",
@@ -37342,7 +37342,7 @@
         "S17#s340"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0217",
@@ -37353,7 +37353,7 @@
         "S18#s343"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0121",
@@ -37364,7 +37364,7 @@
         "S05#s94"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0122",
@@ -37375,7 +37375,7 @@
         "S08#s146"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0117",
@@ -37386,7 +37386,7 @@
         "S01#s2"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0118",
@@ -37397,7 +37397,7 @@
         "S03#s47"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0123",
@@ -37408,7 +37408,7 @@
         "S12#s180"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0124",
@@ -37419,7 +37419,7 @@
         "S13#s202"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0119",
@@ -37430,7 +37430,7 @@
         "S07#s124"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0120",
@@ -37441,7 +37441,7 @@
         "S09#s152"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0165",
@@ -37452,7 +37452,7 @@
         "S03#s46"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0166",
@@ -37463,7 +37463,7 @@
         "S04#s74"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0167",
@@ -37474,7 +37474,7 @@
         "S02#s10"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0168",
@@ -37485,7 +37485,7 @@
         "S02#s17"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0170",
@@ -37496,7 +37496,7 @@
         "S03#s51"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0169",
@@ -37507,7 +37507,7 @@
         "S03#s53"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0171",
@@ -37518,7 +37518,7 @@
         "S02#s23"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0172",
@@ -37529,7 +37529,7 @@
         "S09#s154"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0173",
@@ -37540,7 +37540,7 @@
         "S09#s156"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0174",
@@ -37551,7 +37551,7 @@
         "S12#s180"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0175",
@@ -37562,7 +37562,7 @@
         "S12#s187"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0177",
@@ -37573,7 +37573,7 @@
         "S13#s233"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0176",
@@ -37584,7 +37584,7 @@
         "S14#s256"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0179",
@@ -37595,7 +37595,7 @@
         "S05#s101"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0178",
@@ -37606,7 +37606,7 @@
         "S05#s96"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0180",
@@ -37617,7 +37617,7 @@
         "S05#s100"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0181",
@@ -37628,7 +37628,7 @@
         "S05#s97"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0110",
@@ -37639,7 +37639,7 @@
         "S04#s73"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0109",
@@ -37650,7 +37650,7 @@
         "S17#s312"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0111",
@@ -37661,7 +37661,7 @@
         "S09#s152"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0112",
@@ -37672,7 +37672,7 @@
         "S10#s162"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0113",
@@ -37683,7 +37683,7 @@
         "S16#s283"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0114",
@@ -37694,7 +37694,7 @@
         "S16#s291"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0115",
@@ -37705,7 +37705,7 @@
         "S05#s92"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0116",
@@ -37716,7 +37716,7 @@
         "S08#s149"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0125",
@@ -37727,7 +37727,7 @@
         "S03#s46"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0127",
@@ -37738,7 +37738,7 @@
         "S02#s17"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0126",
@@ -37749,7 +37749,7 @@
         "S02#s7"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0128",
@@ -37760,7 +37760,7 @@
         "S02#s10"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0129",
@@ -37771,7 +37771,7 @@
         "S04#s74"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0130",
@@ -37782,7 +37782,7 @@
         "S04#s75"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0131",
@@ -37793,7 +37793,7 @@
         "S03#s53"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0132",
@@ -37804,7 +37804,7 @@
         "S01#s2"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0133",
@@ -37815,7 +37815,7 @@
         "S03#s46"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0134",
@@ -37826,7 +37826,7 @@
         "S02#s11"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0135",
@@ -37837,7 +37837,7 @@
         "S02#s12"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0137",
@@ -37848,7 +37848,7 @@
         "S09#s152"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0136",
@@ -37859,7 +37859,7 @@
         "S09#s154"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0138",
@@ -37870,7 +37870,7 @@
         "S09#s155"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0139",
@@ -37881,7 +37881,7 @@
         "S09#s156"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0141",
@@ -37892,7 +37892,7 @@
         "S08#s146"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0140",
@@ -37903,7 +37903,7 @@
         "S09#s159"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0142",
@@ -37914,7 +37914,7 @@
         "S10#s162"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0143",
@@ -37925,7 +37925,7 @@
         "S10#s164"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0145",
@@ -37936,7 +37936,7 @@
         "S07#3.1"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0144",
@@ -37947,7 +37947,7 @@
         "S07#s124"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0147",
@@ -37958,7 +37958,7 @@
         "S05#s101"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0146",
@@ -37969,7 +37969,7 @@
         "S05#s98"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0148",
@@ -37980,7 +37980,7 @@
         "S05#s100"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0149",
@@ -37991,7 +37991,7 @@
         "S05#s97"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0150",
@@ -38002,7 +38002,7 @@
         "S08#s145"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0151",
@@ -38013,7 +38013,7 @@
         "S08#s146"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0154",
@@ -38024,7 +38024,7 @@
         "S13#s202"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0155",
@@ -38035,7 +38035,7 @@
         "S13#s204"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0156",
@@ -38046,7 +38046,7 @@
         "S13#s204"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0157",
@@ -38057,7 +38057,7 @@
         "S13#s209"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0158",
@@ -38068,7 +38068,7 @@
         "S11#s172"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0159",
@@ -38079,7 +38079,7 @@
         "S12#s181"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0160",
@@ -38090,7 +38090,7 @@
         "S12#s187"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0161",
@@ -38101,7 +38101,7 @@
         "S12#s180"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0162",
@@ -38112,7 +38112,7 @@
         "S14#s256"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0163",
@@ -38123,7 +38123,7 @@
         "S14#s277"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0164",
@@ -38134,7 +38134,7 @@
         "S11#s176"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0153",
@@ -38145,7 +38145,7 @@
         "S05#s94"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0152",
@@ -38156,7 +38156,7 @@
         "S05#s96"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0183",
@@ -38167,7 +38167,7 @@
         "S02#s10"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0182",
@@ -38178,7 +38178,7 @@
         "S02#s17"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0185",
@@ -38189,7 +38189,7 @@
         "S01#s2"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0184",
@@ -38200,7 +38200,7 @@
         "S03#s46"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0186",
@@ -38211,7 +38211,7 @@
         "S09#s154"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0187",
@@ -38222,7 +38222,7 @@
         "S09#s156"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0189",
@@ -38233,7 +38233,7 @@
         "S08#s146"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0188",
@@ -38244,7 +38244,7 @@
         "S09#s159"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0191",
@@ -38255,7 +38255,7 @@
         "S12#s180"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0190",
@@ -38266,7 +38266,7 @@
         "S12#s187"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0192",
@@ -38277,7 +38277,7 @@
         "S13#s202"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0193",
@@ -38288,7 +38288,7 @@
         "S14#s256"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0196",
@@ -38299,7 +38299,7 @@
         "S03#s46"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0197",
@@ -38310,7 +38310,7 @@
         "S03#s47"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0194",
@@ -38321,7 +38321,7 @@
         "S01#s2"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0195",
@@ -38332,7 +38332,7 @@
         "S01#s4"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0198",
@@ -38343,7 +38343,7 @@
         "S05#s96"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0199",
@@ -38354,7 +38354,7 @@
         "S05#s98"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0207",
@@ -38365,7 +38365,7 @@
         "S05#s97"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0201",
@@ -38376,7 +38376,7 @@
         "S06#s112"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0200",
@@ -38387,7 +38387,7 @@
         "S06#s113"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0205",
@@ -38398,7 +38398,7 @@
         "S13#s202"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0206",
@@ -38409,7 +38409,7 @@
         "S13#s233"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0204",
@@ -38420,7 +38420,7 @@
         "S11#s172"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0203",
@@ -38431,7 +38431,7 @@
         "S08#s145"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0202",
@@ -38442,7 +38442,7 @@
         "S09#s152"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0208",
@@ -38453,7 +38453,7 @@
         "S08#s145"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0209",
@@ -38464,7 +38464,7 @@
         "S08#s149"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0212",
@@ -38475,7 +38475,7 @@
         "S17#s312"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0213",
@@ -38486,7 +38486,7 @@
         "S17#s320"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0211",
@@ -38497,7 +38497,7 @@
         "S16#s283"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0210",
@@ -38508,7 +38508,7 @@
         "S16#s306"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     },
     {
       "id": "e-0214",
@@ -38519,7 +38519,7 @@
         "S11#s176"
       ],
       "annotatedBy": "llm-draft",
-      "updatedAt": "2026-09-15"
+      "updatedAt": "2026-09-30"
     }
   ],
   "wikiPages": [
@@ -38528,7 +38528,7 @@
       "entityType": "knowledge",
       "title": "嵌入式 C 与外设入门",
       "path": "wiki/knowledge/AI001-stage1.md",
-      "version": "2026-09-15",
+      "version": "2026-09-30",
       "review": "llm-draft",
       "reviewedBy": null,
       "sources": [
@@ -38544,7 +38544,7 @@
       "entityType": "knowledge",
       "title": "SPI 总线与传输事务",
       "path": "wiki/knowledge/AI001-stage2.md",
-      "version": "2026-09-15",
+      "version": "2026-09-30",
       "review": "llm-draft",
       "reviewedBy": null,
       "sources": [
@@ -38560,7 +38560,7 @@
       "entityType": "knowledge",
       "title": "堆内存属性与 DMA 缓冲",
       "path": "wiki/knowledge/AI001-stage3.md",
-      "version": "2026-09-15",
+      "version": "2026-09-30",
       "review": "llm-draft",
       "reviewedBy": null,
       "sources": [
@@ -38576,7 +38576,7 @@
       "entityType": "knowledge",
       "title": "端侧实时性与传输速度调优",
       "path": "wiki/knowledge/AI001-stage4.md",
-      "version": "2026-09-15",
+      "version": "2026-09-30",
       "review": "llm-draft",
       "reviewedBy": null,
       "sources": [
@@ -38591,7 +38591,7 @@
       "entityType": "knowledge",
       "title": "检测模型训练与验证流程",
       "path": "wiki/knowledge/AI002-stage1.md",
-      "version": "2026-09-15",
+      "version": "2026-09-30",
       "review": "llm-draft",
       "reviewedBy": null,
       "sources": [
@@ -38607,7 +38607,7 @@
       "entityType": "knowledge",
       "title": "等待策略与稳定测试",
       "path": "wiki/knowledge/AI003-stage1.md",
-      "version": "2026-09-15",
+      "version": "2026-09-30",
       "review": "llm-draft",
       "reviewedBy": null,
       "sources": [
@@ -38623,7 +38623,7 @@
       "entityType": "knowledge",
       "title": "夹具组织与跨文件共享",
       "path": "wiki/knowledge/AI003-stage2.md",
-      "version": "2026-09-15",
+      "version": "2026-09-30",
       "review": "llm-draft",
       "reviewedBy": null,
       "sources": [
@@ -38639,7 +38639,7 @@
       "entityType": "knowledge",
       "title": "模型转换与 Lite 推理集成",
       "path": "wiki/knowledge/AI004-stage1.md",
-      "version": "2026-09-15",
+      "version": "2026-09-30",
       "review": "llm-draft",
       "reviewedBy": null,
       "sources": [
@@ -38655,7 +38655,7 @@
       "entityType": "knowledge",
       "title": "量化与端侧基准测试",
       "path": "wiki/knowledge/AI004-stage2.md",
-      "version": "2026-09-15",
+      "version": "2026-09-30",
       "review": "llm-draft",
       "reviewedBy": null,
       "sources": [

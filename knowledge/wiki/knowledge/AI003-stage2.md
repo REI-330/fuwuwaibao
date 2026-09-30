@@ -3,7 +3,7 @@ entityId: knowledge:AI003:stage2
 entityType: knowledge
 title: 夹具组织与跨文件共享
 aliases: []
-version: 2026-09-15
+version: 2026-09-30
 review: llm-draft
 reviewedBy: null
 sources: ["S13#s233", "S14#s256"]
