@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useDynamicProfile } from "../../../components/profile/profile-provider";
+import { writeGrowthRecord } from "../../../lib/client/growth-api";
 
 type ArchiveCategory = "全部" | "能力变化" | "任务行动" | "职业方向" | "路径调整";
 type ArchiveStatus = "全部状态" | "已确认" | "已记录" | "待确认";
@@ -46,6 +47,32 @@ export default function GrowthRecordsPage() {
   const [status, setStatus] = useState<ArchiveStatus>("全部状态");
   const [keyword, setKeyword] = useState("");
   const [selectedId, setSelectedId] = useState("");
+  /* 写入记忆库：把选中的这条记录作为成长记录提交，后端会派生**待确认**记忆候选。
+     记录 id 用 `archive_<item.id>`：重复点不会产生重复记录或重复候选（后端按 recordId 幂等）。 */
+  const [saving, setSaving] = useState(false);
+  const [saveNote, setSaveNote] = useState("");
+
+  async function saveToMemory(item: ArchiveItem) {
+    setSaving(true);
+    setSaveNote("");
+    try {
+      const result = await writeGrowthRecord({
+        kind: item.category,
+        title: item.title,
+        before: item.before,
+        after: item.after,
+        explanation: item.explanation,
+        source: item.source,
+        occurredAt: item.occurredAt,
+        recordId: `archive_${item.id}`,
+      });
+      setSaveNote(`${result.note.message}（候选 ${result.candidates.length} 条：${result.candidates.map(candidate => candidate.content).join("、") || "无"}）`);
+    } catch (error) {
+      setSaveNote(error instanceof Error ? error.message : "写入失败，请稍后重试。");
+    } finally {
+      setSaving(false);
+    }
+  }
 
   const archive = useMemo<ArchiveItem[]>(() => {
     const eventItems: ArchiveItem[] = events.map(event => {
@@ -127,7 +154,8 @@ export default function GrowthRecordsPage() {
           <section><h3>证据与来源</h3><dl className="xn-archive-meta"><div><dt>数据来源</dt><dd>{selected.source}</dd></div><div><dt>证据标识</dt><dd>{selectedProof?.id ?? "尚未关联"}</dd></div><div><dt>证据等级</dt><dd>{selectedProof?.level ?? selectedRecord?.level ?? "待确认"}</dd></div><div><dt>关联任务</dt><dd>{selectedRun?.title ?? "无"}</dd></div></dl></section>
           {selectedRun && <section><h3>任务成果</h3><p>{selectedRun.submission}</p><div className="xn-archive-tags">{selectedRun.observedAbilities.map(item => <span key={item}>{item}</span>)}</div></section>}
           <section className="xn-archive-impact"><h3>对后续成长的影响</h3><p>{selected.impact}</p></section>
-          <footer>{selectedRun && <Link className="xn-btn xn-btn-outline" href={`/actions?task=${encodeURIComponent(selectedRun.taskId)}`}>查看关联任务</Link>}<Link className="xn-btn xn-btn-primary" href="/growth">查看当前画像</Link></footer>
+          <footer>{selectedRun && <Link className="xn-btn xn-btn-outline" href={`/actions?task=${encodeURIComponent(selectedRun.taskId)}`}>查看关联任务</Link>}<button className="xn-btn xn-btn-outline" disabled={saving} onClick={() => saveToMemory(selected)}>{saving ? "写入中…" : "写入记忆候选"}</button><Link className="xn-btn xn-btn-primary" href="/growth">查看当前画像</Link></footer>
+          {saveNote && <p className="xn-memory-hint">记忆库：{saveNote}　（到「用户画像 → 记忆库」的待确认栏里决定是否保留）</p>}
         </> : <div className="xn-archive-empty"><span>◎</span><b>选择一条成长记录</b><p>这里会展示变化前后、证据来源和后续影响。</p></div>}
       </aside>
     </section>

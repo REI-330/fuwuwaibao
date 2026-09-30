@@ -13,6 +13,11 @@ const scoreNames: Array<[keyof CareerMatchItem["scores"], string]> = [
 ];
 
 function Empty({ code, message, retry }: { code: string; message: string; retry: () => void }) {
+  // 501：契约里声明了、但最小后端未实现。**如实说「尚未上线」**，不要伪装成
+  // 「你还没有画像」把用户领去重建画像 —— 那会让人白填一遍表单。
+  if (code === "NOT_IMPLEMENTED") {
+    return <section className="xn-card xn-match-empty"><XiangxinMascot size={108} state="guiding" /><div><small>契约已声明 · 服务端未实现</small><h2>职业匹配尚未上线</h2><p>后端对 `/api/career-matches/*` 明确返回 501，本页不显示任何编造的匹配结果。当前可以先在工作地图里浏览职业图谱，或直接前往成长路径按目标职业编排。</p><div className="xn-match-empty-actions"><Link className="xn-btn xn-btn-outline" href="/catalog">浏览职业与技能目录</Link><Link className="xn-btn xn-btn-primary" href="/path">去编排成长路径</Link></div></div></section>;
+  }
   const needsProfile = ["UNAUTHORIZED", "PROFILE_NOT_FOUND", "INSUFFICIENT_PROFILE", "PROFILE_NOT_CONFIRMED"].includes(code);
   return <section className="xn-card xn-match-empty"><XiangxinMascot size={108} state="guiding" /><div><small>职业匹配需要已确认的信息</small><h2>{needsProfile ? "先建立并确认用户画像" : "暂时没有匹配结果"}</h2><p>{message}</p>{needsProfile ? <Link className="xn-btn xn-btn-primary" href="/onboarding">前往建立画像</Link> : <button className="xn-btn xn-btn-primary" onClick={retry}>重新生成</button>}</div></section>;
 }
@@ -64,7 +69,7 @@ export function CareerMatchPanel() {
     }
   }
 
-  if (loading || generating && !run) return <section className="xn-card xn-match-loading"><XiangxinMascot size={90} state="guiding" /><div><h2>正在匹配 32 个职业…</h2><p>综合画像中的兴趣、技能、经历和入门可行性。</p></div></section>;
+  if (loading || generating && !run) return <section className="xn-card xn-match-loading"><XiangxinMascot size={90} state="guiding" /><div><h2>正在匹配职业…</h2><p>综合画像中的兴趣、技能、经历和入门可行性。</p></div></section>;
   if (!run) return <Empty code={error.code} message={error.message || "当前没有可读取的职业匹配结果。"} retry={() => void regenerate()} />;
 
   return <div className="xn-match-page">

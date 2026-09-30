@@ -79,10 +79,10 @@ export function CatalogBrowser() {
     <PageHeading title="职业与技能目录" subtitle="图谱的列表视图：查询完整职业要求、技能目标和前置关系" />
 
     <section className="xn-catalog-stats" aria-label="数据库概况">
-      <div className="xn-card"><small>职业库</small><b>{stats?.occupations ?? 32}</b><span>个职业方向</span></div>
-      <div className="xn-card"><small>技能库</small><b>{stats?.skills ?? 297}</b><span>项标准技能</span></div>
-      <div className="xn-card"><small>前置关系</small><b>{stats?.prerequisites ?? 247}</b><span>条技能依赖</span></div>
-      <div className="xn-card"><small>阶段模板</small><b>{stats?.stages ?? 96}</b><span>个成长阶段</span></div>
+      <div className="xn-card"><small>职业库</small><b>{stats?.occupations ?? "—"}</b><span>个职业方向</span></div>
+      <div className="xn-card"><small>技能库</small><b>{stats?.skills ?? "—"}</b><span>项标准技能</span></div>
+      <div className="xn-card"><small>前置关系</small><b>{stats?.prerequisites ?? "—"}</b><span>条技能依赖</span></div>
+      <div className="xn-card"><small>阶段模板</small><b>{stats?.stages ?? "—"}</b><span>个成长阶段</span></div>
     </section>
 
     <section className="xn-card xn-catalog-browser">

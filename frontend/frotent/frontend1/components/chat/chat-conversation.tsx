@@ -20,6 +20,9 @@ export function ChatConversation() {
   const [conversationId, setConversationId] = useState<string>();
   const [candidates, setCandidates] = useState<ProfileCandidate[]>([]);
   const [mascotState, setMascotState] = useState<MascotState>("listening");
+  /* 本轮回答到底有没有用上模型、注入了哪几条记忆 —— 后端逐轮回传，界面如实展示。
+     与记忆管理面板的「注入预览」是同一条链路：预览看的是"将要"，这里看的是"实际"。 */
+  const [replyNote, setReplyNote] = useState("");
 
   async function submit(event: FormEvent) {
     event.preventDefault();
@@ -33,6 +36,10 @@ export function ChatConversation() {
       const reply = await sendChatMessage(text, conversationId);
       setConversationId(reply.conversationId ?? undefined);
       setMessages((current) => [...current, { role: "ai", text: reply.message }]);
+      const injected = reply.injected?.count ?? 0;
+      setReplyNote(reply.provider === "rule-based"
+        ? `本轮未接模型：回答由图谱事实 + ${injected} 条已确认记忆（规则版）拼出${reply.llm?.error?.code ? `；模型未生效：${reply.llm.error.code}` : ""}。`
+        : `本轮由 ${reply.llm?.model ?? "模型"} 生成 · 注入 ${injected} 条已确认记忆。`);
       setMascotState(current => current === "echo" ? current : /职业|建议|方向|推荐/.test(reply.message) ? "guiding" : "listening");
     } catch (error) {
       setMessages((current) => [...current, {
@@ -61,6 +68,7 @@ export function ChatConversation() {
           </div>
 
           {candidates.map(candidate => <CandidateProfileCard onNavigate={closeChat} key={candidate.id} candidate={candidate} onConfirm={() => setMascotState("echo")} onDismiss={() => setCandidates(current => current.filter(item => item.id !== candidate.id))} />)}
+          {replyNote && <p className="xn-chat-note">{replyNote}</p>}
           <form className="xn-chat-input" onSubmit={submit}>
             <textarea value={input} onChange={(event) => setInput(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); event.currentTarget.form?.requestSubmit(); } }} placeholder="告诉新向，你现在最想解决的问题..." aria-label="对话输入" />
             <button type="button" className="xn-attach" aria-label="附件使用说明" onClick={() => setMessages(current => [...current, { role: "ai", text: "本阶段聊天暂不解析附件。你可以把项目经历或任务结果作为文字发给我，再确认是否写入画像。" }])}>⌕</button>

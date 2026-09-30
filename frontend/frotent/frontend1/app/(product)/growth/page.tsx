@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import MemoryPanel from "../../../components/profile/memory-panel";
 import { getCareerRecommendations } from "../../../lib/client/career-recommendation-api";
 import { getProfile } from "../../../lib/client/profile-api";
 import type { CareerRecommendation } from "../../../types/contracts/career-recommendation";
@@ -26,6 +27,7 @@ export default function GrowthPage() {
   const [tab, setTab] = useState<Tab>("profile");
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [recommendations, setRecommendations] = useState<CareerRecommendation[]>([]);
+  const [memoryHash, setMemoryHash] = useState("");
   const [selectedId, setSelectedId] = useState("");
   const [loading, setLoading] = useState(true);
   const [profileError, setProfileError] = useState("");
@@ -41,6 +43,7 @@ export default function GrowthPage() {
     const recommendationRequest = getCareerRecommendations().then(result => {
       if (!active) return;
       setRecommendations(result.recommendations);
+      setMemoryHash(result.memory_hash ?? "");
       setSelectedId(result.recommendations[0]?.occupation_id ?? "");
     }).catch(error => {
       if (active) setRecommendationError(error instanceof Error ? error.message : "岗位推荐加载失败");
@@ -95,11 +98,14 @@ export default function GrowthPage() {
       </section>
 
       <section className="xn-job-recommendations">
-        <header><div><small>知识库检索</small><h2>推荐岗位</h2></div><span>基于已确认画像</span></header>
+        <header><div><small>知识库检索</small><h2>推荐岗位</h2></div><span>{memoryHash ? `结合已确认记忆 · ${memoryHash.slice(0, 8)}` : "基于已确认画像"}</span></header>
         {recommendationError && <div className="xn-profile-inline-error"><span>{recommendationError}</span><Link href="/onboarding">确认画像后重试</Link></div>}
-        {recommendations.length ? <div className="xn-profile-job-grid">{recommendations.slice(0, 3).map(job => <article className="xn-card xn-profile-job-card" key={job.occupation_id}><header><div><small>{job.occupation_id}</small><h3>{job.occupation_name}</h3></div><strong>{job.match_score}<span>%</span></strong></header><div className="xn-job-skill-tags">{job.core_skills.slice(0, 3).map(skill => <span key={skill}>{skill}</span>)}</div><p>{job.reason}</p><button className="xn-text-btn" onClick={() => showJob(job)}>查看岗位详情 <span aria-hidden="true">→</span></button></article>)}</div> : !recommendationError && <div className="xn-card xn-profile-empty">暂无岗位推荐，确认画像后系统将从职业知识库中匹配适合的岗位。</div>}
+        {recommendations.length ? <div className="xn-profile-job-grid">{recommendations.slice(0, 3).map(job => <article className="xn-card xn-profile-job-card" key={job.occupation_id}><header><div><small>{job.occupation_id}</small><h3>{job.occupation_name}</h3></div><strong>{job.match_score}<span>%</span></strong></header><div className="xn-job-skill-tags">{job.core_skills.slice(0, 3).map(skill => <span key={skill}>{skill}</span>)}</div><p>{job.reason}</p>{job.confirmed_memory?.length ? <p className="xn-memory-evidence">结合你确认过的记忆：{job.confirmed_memory.map(entry => entry.content).join("；")}</p> : null}<button className="xn-text-btn" onClick={() => showJob(job)}>查看岗位详情 <span aria-hidden="true">→</span></button></article>)}</div> : !recommendationError && <div className="xn-card xn-profile-empty">暂无岗位推荐，确认画像后系统将从职业知识库中匹配适合的岗位。</div>}
       </section>
     </div>}
+
+    {/* 记忆库独立于画像/推荐的加载状态：它自己取数，且「候选要不要确认」不该等推荐跑完才看得见 */}
+    {tab === "profile" && <MemoryPanel />}
 
     {!loading && tab === "market" && <section className="xn-card xn-job-market-detail" role="tabpanel">
       {selectedJob ? <>

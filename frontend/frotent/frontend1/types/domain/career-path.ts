@@ -131,4 +131,6 @@ export type GeneratedCareerPath = {
   generated_at: string;
   rules_version: string;
   metrics_version: string;
+  /** 后端如实回传的提示（工具归属、工作量、画像等级按入门计等）。 */
+  warnings: string[];
 };

@@ -140,3 +140,5 @@
 @media(min-width:1024px) and (max-width:1279px){.xn-main{padding-top:88px}.xn-topbar{position:fixed;inset:0 0 auto 88px}}
 @media(max-width:1023px){.xn-main{padding-top:88px}.xn-topbar{position:fixed;inset:0 0 auto 0}}
 @media(max-width:700px){.xn-main{padding-top:64px}}
+
+.xn-upload-zone+.xn-form-warnings,.xn-form-warnings{margin:14px 0 0;padding:12px 15px;border-radius:9px;color:#8a5a1d;background:#fff7e8;font-size:12px;line-height:1.8}.xn-form-warnings li{list-style:none}.xn-form-warnings li:before{content:"· "}

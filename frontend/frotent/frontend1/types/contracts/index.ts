@@ -24,4 +24,26 @@ export type {
 export type {
   CareerRecommendation,
   CareerRecommendationsResponse,
+  MemoryEvidence,
 } from "./career-recommendation";
+export type {
+  MemoryCategory,
+  MemoryContextEntry,
+  MemoryContextPayload,
+  MemoryItem,
+  MemoryListPayload,
+  MemoryStatus,
+  MemorySyncPayload,
+  MemoryTrigger,
+  MemoryWritePayload,
+} from "./memory";
+export type {
+  GrowthCandidate,
+  GrowthDeletePayload,
+  GrowthKind,
+  GrowthListPayload,
+  GrowthNote,
+  GrowthRecord,
+  GrowthWriteInput,
+  GrowthWritePayload,
+} from "./growth";

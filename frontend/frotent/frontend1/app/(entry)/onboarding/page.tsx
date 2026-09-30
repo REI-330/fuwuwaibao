@@ -9,6 +9,7 @@ import { ImageEditor } from "../../../components/entry/image-editor";
 import { ProfileReviewCard } from "../../../components/entry/profile-review-card";
 import type { UserProfile } from "../../../types/contracts/profile";
 import { useEffect, useRef } from "react";
+import { apiUrl } from "../../../lib/client/http";
 
 type View = "choices" | "resume" | "form" | "review";
 type EntryMode = "resume" | "manual";
@@ -34,6 +35,8 @@ export default function OnboardingPage() {
   const [showImageEditor, setShowImageEditor] = useState(false);
   const [reviewProfile, setReviewProfile] = useState<UserProfile | null>(null);
   const [resumeError, setResumeError] = useState("");
+  /** 后端抽取时的如实提醒（不支持的形态、图谱没收录的技能词…），不在前端二次解说 */
+  const [resumeWarnings, setResumeWarnings] = useState<string[]>([]);
   const guestReadyRef = useRef(false);
 
   // Demo 模式：URL ?mode=demo → 自动 guest auth + PUT mock 数据 → 跳 review
@@ -61,7 +64,7 @@ export default function OnboardingPage() {
           question: "希望确认更适合底层嵌入式开发还是边缘AI应用方向？",
           source: "resume",
         };
-        const r = await fetch("/api/profile", {
+        const r = await fetch(apiUrl("/api/profile"), {
           method: "PUT",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(demo),
@@ -83,6 +86,7 @@ export default function OnboardingPage() {
     const f = event.target.files?.[0] ?? null;
     setFile(f);
     setResumeError("");
+    setResumeWarnings([]);
     // 选中图片 → 弹出 ImageEditor
     if (isImageFile(f)) {
       setShowImageEditor(true);
@@ -104,43 +108,53 @@ export default function OnboardingPage() {
     if (!file) return;
     setProcessing(true);
     setResumeError("");
-    const mockMapped = {
-      identity: "在校生",
-      school: "浙江某高校",
-      major: "自动化",
-      grade: "大三",
-      skills: ["C语言", "STM32", "Python", "CamMV"],
-      experience: "STM32传感器采集项目；CamMV目标识别小车",
-      directions: "嵌入式开发,机器视觉,边缘AI",
-      location: "杭州",
-      question: "希望确认更适合底层开发还是边缘AI应用",
-      source: "resume",
-    };
-    // 简历路径也走真实 buildProfile
-    window.setTimeout(async () => {
-      try {
-        // 上传入口也可能直接从 /auth 进入，此时浏览器还没有访客 Cookie。
-        if (!(await ensureGuest())) {
-          throw new Error("guest session unavailable");
-        }
-        const r = await fetch("/api/profile", {
-          method: "PUT",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(mockMapped),
-        });
-        const data = await r.json().catch(() => ({})) as ProfileResponse;
-        const p: UserProfile | null = data?.data?.profile ?? null;
-        if (!r.ok || !p) {
-          throw new Error(data?.error?.message || data?.message || `profile request failed: ${r.status}`);
-        }
-        setReviewProfile(p);
-        setView("review");
-      } catch {
-        setReviewProfile(null);
-        setResumeError("简历解析失败，请重试；也可以改用手动填写。");
+    setResumeWarnings([]);
+    try {
+      // 上传入口也可能直接从 /auth 进入，此时浏览器还没有访客 Cookie。
+      if (!(await ensureGuest())) {
+        throw new Error("无法准备会话，请刷新后重试");
       }
+      // 真解析：把文件交给后端（零依赖：DOCX 用 stdlib 读，PDF/图片会明确回 415）
+      const form = new FormData();
+      form.append("file", file);
+      const extracted = await fetch(apiUrl("/api/resumes/extract"), { method: "POST", body: form });
+      const payload = await extracted.json().catch(() => ({})) as {
+        data?: { profileDraft?: Record<string, unknown>; warnings?: string[]; candidateCount?: number };
+        error?: { message?: string };
+      };
+      if (!extracted.ok || !payload?.data) {
+        throw new Error(payload?.error?.message || `简历解析失败（HTTP ${extracted.status}）`);
+      }
+      const draft = payload.data.profileDraft ?? {};
+      // 解析结果只是**草稿**：这里走真实画像接口落成 draft 画像，用户在复核页确认
+      const r = await fetch(apiUrl("/api/profile"), {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(draft),
+      });
+      const data = await r.json().catch(() => ({})) as ProfileResponse;
+      const p: UserProfile | null = data?.data?.profile ?? null;
+      if (!r.ok || !p) {
+        throw new Error(data?.error?.message || data?.message || `profile request failed: ${r.status}`);
+      }
+      setReviewProfile(p);
+      const warnings = payload.data.warnings ?? [];
+      setResumeWarnings(
+        (payload.data.candidateCount ?? 0) > 0
+          ? [...warnings, `已在记忆库生成 ${payload.data.candidateCount} 条待确认记忆，到「用户画像 → 记忆库」里逐条确认`]
+          : warnings,
+      );
+      setView("review");
+    } catch (error) {
+      setReviewProfile(null);
+      setResumeError(
+        error instanceof Error && error.message
+          ? `${error.message}（也可以改用手动填写）`
+          : "简历解析失败，请重试；也可以改用手动填写。",
+      );
+    } finally {
       setProcessing(false);
-    }, 760);
+    }
   }
 
   function resetChoices() {
@@ -158,7 +172,7 @@ export default function OnboardingPage() {
       if (!(await ensureGuest())) {
         throw new Error("guest session unavailable");
       }
-      const r1 = await fetch("/api/profile", {
+      const r1 = await fetch(apiUrl("/api/profile"), {
         method: "PUT",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(mapped),
@@ -185,11 +199,17 @@ export default function OnboardingPage() {
   async function ensureGuest(displayName = "访客") {
     if (guestReadyRef.current) return true;
     try {
-      const r = await fetch("/api/auth/guest", {
+      const r = await fetch(apiUrl("/api/auth/guest"), {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ displayName }),
       });
+      // 501 = 这个构建没有会话系统（本机单用户形态，`user_local`）。这不是失败：
+      // 只有真正的错误才该拦住流程，否则「很诚实的 501」会变成前端不可用。
+      if (r.status === 501) {
+        guestReadyRef.current = true;
+        return true;
+      }
       if (!r.ok) throw new Error("guest failed");
       guestReadyRef.current = true;
       return true;
@@ -259,7 +279,7 @@ export default function OnboardingPage() {
           <label className={`xn-upload-zone ${file ? "has-file" : ""}`}>
             <input
               type="file"
-              accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+              accept=".docx,.txt,.md,.pdf,.doc,.jpg,.jpeg,.png"
               onChange={chooseFile}
             />
             <span className="xn-upload-symbol">↑</span>
@@ -273,7 +293,7 @@ export default function OnboardingPage() {
             ) : (
               <>
                 <strong>拖放或选择简历文件</strong>
-                <small>支持PDF、DOCX、JPG、PNG，建议不超过10MB</small>
+                <small>支持 DOCX / 纯文本；PDF 与图片暂不支持（后端零依赖、无 OCR），不超过 10MB</small>
               </>
             )}
           </label>
@@ -281,6 +301,13 @@ export default function OnboardingPage() {
             <p className="xn-form-errors" role="alert">
               {resumeError}
             </p>
+          )}
+          {resumeWarnings.length > 0 && (
+            <ul className="xn-form-warnings">
+              {resumeWarnings.map((warning) => (
+                <li key={warning}>{warning}</li>
+              ))}
+            </ul>
           )}
           {isImageFile(file) && (
             <div className="xn-image-edit-hint">
@@ -342,7 +369,7 @@ export default function OnboardingPage() {
                 if (!(await ensureGuest())) {
                   throw new Error("guest session unavailable");
                 }
-                const r = await fetch("/api/profile/confirm", { method: "POST" });
+                const r = await fetch(apiUrl("/api/profile/confirm"), { method: "POST" });
                 if (!r.ok) {
                   const d = await r.json().catch(() => ({})) as ProfileResponse;
                   alert("确认失败：" + (d?.message || r.status));
