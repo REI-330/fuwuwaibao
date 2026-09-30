@@ -8,6 +8,9 @@
     "publisher",
     "url",
     "publishedAt",
+    "publishedAtSource",
+    "sourceUpdatedAt",
+    "sourceUpdatedAtSource",
     "collectedAt",
     "license",
     "scopeZh",
@@ -105,7 +108,10 @@
       "notes": [],
       "byteSize": 23494,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S02",
@@ -128,7 +134,10 @@
       "notes": [],
       "byteSize": 250651,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S03",
@@ -151,7 +160,10 @@
       "notes": [],
       "byteSize": 177950,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S04",
@@ -174,7 +186,10 @@
       "notes": [],
       "byteSize": 222646,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S05",
@@ -197,7 +212,10 @@
       "notes": [],
       "byteSize": 222526,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S06",
@@ -220,7 +238,10 @@
       "notes": [],
       "byteSize": 101946,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S07",
@@ -243,14 +264,17 @@
       "notes": [],
       "byteSize": 150251,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S08",
       "title": "Ultralytics 模型部署方案指南",
       "publisher": "Ultralytics",
       "url": "https://docs.ultralytics.com/zh/guides/model-deployment-options/",
-      "publishedAt": null,
+      "publishedAt": "2023-11-12",
       "collectedAt": "2026-09-15",
       "license": "AGPL-3.0",
       "scopeZh": "支持：模型导出格式与部署路径的选择依据。不支持：生产环境稳定性承诺。",
@@ -266,14 +290,17 @@
       "notes": [],
       "byteSize": 375328,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": "schema.org Article.datePublished",
+      "sourceUpdatedAt": "2026-09-07",
+      "sourceUpdatedAtSource": "schema.org Article.dateModified"
     },
     {
       "sourceId": "S09",
       "title": "Ultralytics 目标检测任务文档（中文）",
       "publisher": "Ultralytics",
       "url": "https://docs.ultralytics.com/zh/tasks/detect/",
-      "publishedAt": null,
+      "publishedAt": "2023-11-12",
       "collectedAt": "2026-09-15",
       "license": "AGPL-3.0",
       "scopeZh": "支持：目标检测任务的训练、验证与预测流程。不支持：精度与速度的绝对排名结论。",
@@ -289,14 +316,17 @@
       "notes": [],
       "byteSize": 431276,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": "schema.org Article.datePublished",
+      "sourceUpdatedAt": "2026-09-14",
+      "sourceUpdatedAtSource": "schema.org Article.dateModified"
     },
     {
       "sourceId": "S10",
       "title": "Ultralytics YOLO 文档（中文）：实例分割任务",
       "publisher": "Ultralytics",
       "url": "https://docs.ultralytics.com/zh/tasks/segment/",
-      "publishedAt": null,
+      "publishedAt": "2023-11-12",
       "collectedAt": "2026-09-15",
       "license": "AGPL-3.0",
       "scopeZh": "支持：实例分割任务的数据标注、训练、验证与预测流程。不支持：与其他分割模型的精度排名结论。",
@@ -312,7 +342,10 @@
       "notes": [],
       "byteSize": 430400,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": "schema.org Article.datePublished",
+      "sourceUpdatedAt": "2026-09-14",
+      "sourceUpdatedAtSource": "schema.org Article.dateModified"
     },
     {
       "sourceId": "S11",
@@ -335,7 +368,10 @@
       "notes": [],
       "byteSize": 70625,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "sourceUpdatedAt": "2024-03-29",
+      "sourceUpdatedAtSource": "schema.org TechArticle.dateModified",
+      "publishedAtSource": null
     },
     {
       "sourceId": "S12",
@@ -358,7 +394,10 @@
       "notes": [],
       "byteSize": 503867,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "sourceUpdatedAt": "2025-10-31",
+      "sourceUpdatedAtSource": "schema.org TechArticle.dateModified",
+      "publishedAtSource": null
     },
     {
       "sourceId": "S13",
@@ -381,7 +420,10 @@
       "notes": [],
       "byteSize": 186622,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S14",
@@ -404,7 +446,10 @@
       "notes": [],
       "byteSize": 221616,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S15",
@@ -427,7 +472,10 @@
       "notes": [],
       "byteSize": 52966,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S16",
@@ -450,7 +498,10 @@
       "notes": [],
       "byteSize": 270228,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S17",
@@ -473,7 +524,10 @@
       "notes": [],
       "byteSize": 202122,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S18",
@@ -496,7 +550,10 @@
       "notes": [],
       "byteSize": 34757,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S19",
@@ -519,7 +576,10 @@
       "notes": [],
       "byteSize": 67702,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S20",
@@ -542,7 +602,10 @@
       "notes": [],
       "byteSize": 100211,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S21",
@@ -565,7 +628,10 @@
       "notes": [],
       "byteSize": 147932,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S22",
@@ -588,7 +654,10 @@
       "notes": [],
       "byteSize": 308203,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-15T09:56:51.087Z"
+      "fetchedAt": "2026-09-15T09:56:51.087Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S23",
@@ -611,7 +680,10 @@
       "notes": [],
       "byteSize": 32099,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-27T10:22:26.225Z"
+      "fetchedAt": "2026-09-27T10:22:26.225Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S24",
@@ -634,7 +706,10 @@
       "notes": [],
       "byteSize": 45314,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-27T10:22:26.225Z"
+      "fetchedAt": "2026-09-27T10:22:26.225Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S25",
@@ -657,7 +732,10 @@
       "notes": [],
       "byteSize": 40750,
       "charset": "utf-8",
-      "fetchedAt": "2026-09-27T10:22:26.225Z"
+      "fetchedAt": "2026-09-27T10:22:26.225Z",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     },
     {
       "sourceId": "S26",
@@ -679,7 +757,10 @@
       ],
       "status": "chunked",
       "sourceKind": "synthesized-from-tables",
-      "note": "由步骤 12 从 import/raw/osta-standards/tables.jsonl 重组生成；序号列与正文列在 PDF 抽取时交错，重组规则见脚本头部注释。"
+      "note": "由步骤 12 从 import/raw/osta-standards/tables.jsonl 重组生成；序号列与正文列在 PDF 抽取时交错，重组规则见脚本头部注释。",
+      "publishedAtSource": null,
+      "sourceUpdatedAt": null,
+      "sourceUpdatedAtSource": null
     }
   ],
   "bySourceChunks": {

@@ -1,6 +1,6 @@
 {
   "schema": "career-graph-pipeline-log/v1",
-  "updatedAt": "2026-09-30T16:18:51.595Z",
+  "updatedAt": "2026-09-30T16:45:51.565Z",
   "steps": [
     {
       "step": "01",
@@ -344,9 +344,9 @@
       "step": "09",
       "title": "完整性校验",
       "command": "node knowledge/pipeline/09-integrity-check.mjs",
-      "startedAt": "2026-09-30T16:18:49.132Z",
-      "finishedAt": "2026-09-30T16:18:49.171Z",
-      "durationMs": 39,
+      "startedAt": "2026-09-30T16:45:49.138Z",
+      "finishedAt": "2026-09-30T16:45:49.179Z",
+      "durationMs": 41,
       "inputs": [
         "knowledge/extract/accepted.jsonl",
         "knowledge/chunks/chunks.jsonl",
@@ -371,15 +371,15 @@
         "标注分布：llm-reviewed 115，llm-draft 174"
       ],
       "node": "v22.22.2",
-      "runCount": 73
+      "runCount": 76
     },
     {
       "step": "10",
       "title": "布局与索引",
       "command": "node knowledge/pipeline/10-layout-index.mjs",
-      "startedAt": "2026-09-30T16:18:49.249Z",
-      "finishedAt": "2026-09-30T16:18:49.793Z",
-      "durationMs": 544,
+      "startedAt": "2026-09-30T16:45:49.254Z",
+      "finishedAt": "2026-09-30T16:45:49.776Z",
+      "durationMs": 522,
       "inputs": [
         "knowledge/extract/accepted.jsonl",
         "knowledge/chunks/chunks.jsonl",
@@ -409,15 +409,15 @@
         "本步不改 annotatedBy：llm-draft → llm-reviewed 的唯一通道仍是第 06 步（设计文档 L251）。"
       ],
       "node": "v22.22.2",
-      "runCount": 60
+      "runCount": 63
     },
     {
       "step": "11",
       "title": "版本化导出与效果评测",
       "command": "node knowledge/pipeline/11-export-eval.mjs",
-      "startedAt": "2026-09-30T16:18:49.872Z",
-      "finishedAt": "2026-09-30T16:18:51.595Z",
-      "durationMs": 1723,
+      "startedAt": "2026-09-30T16:45:49.856Z",
+      "finishedAt": "2026-09-30T16:45:51.565Z",
+      "durationMs": 1709,
       "inputs": [
         "knowledge/graph/graph.json",
         "knowledge/chunks/chunks.jsonl",
@@ -455,7 +455,7 @@
         "评测只报检索中间态（Top-3 + 分值 + 耗时），不调模型；「引用支持度」需人工判定，报告已明确标注为未做（§7 L262 / L276）。"
       ],
       "node": "v22.22.2",
-      "runCount": 81
+      "runCount": 85
     },
     {
       "step": "12",
@@ -490,6 +490,24 @@
         "产出 sha256 844a8761fa54，正文 421525 字符"
       ],
       "node": "v22.22.2"
+    },
+    {
+      "step": "13",
+      "name": "annotate-source-dates",
+      "ranAt": "2026-09-30T16:38:59.692Z",
+      "counts": {
+        "sources": 26,
+        "annotated": 0,
+        "withPublishedAt": 3,
+        "withSourceUpdatedAt": 5,
+        "withoutAnyDate": 21
+      },
+      "notes": [
+        "publishedAt 补齐 3/26，sourceUpdatedAt 补齐 5/26；两者都没有的 21 条保持 null，不拿 collectedAt 顶上。",
+        "改写 0 条：（无）。",
+        "注意：以下来源共享同一 publishedAt，可能是站点模板常量而非逐页真实发布日，2023-11-12 → S08/S09/S10（数据里已用 publishedAtSource 标出取值字段，供人工复核）。",
+        "无日期信号的来源 21 条：S01、S02、S03、S04、S05、S06、S07、S13、S14、S15、S16、S17、S18、S19、S20、S21、S22、S23、S24、S25、S26。"
+      ]
     }
   ]
 }
