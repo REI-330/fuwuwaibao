@@ -188,7 +188,8 @@
 | --- | --- |
 | `.docx` | Python 标准库 `zipfile` + `xml.etree` 读 `word/document.xml`，**不需要第三方依赖** |
 | `.txt` / `.md` | 依次按 UTF-8 → GB18030 解码 |
-| `.pdf` / 图片 / `.doc` | **415 `RESUME_FORMAT_UNSUPPORTED`** + 可执行建议（「请粘贴文本，或另存为 DOCX」）；不假装解析、不退回演示数据（改名的 PDF 也会被魔数嗅探拦住） |
+| `.pdf` | **解析**（后端运行时探测 pypdf / PyMuPDF / pdfminer，装了哪个用哪个；都不是硬依赖）。抽不出文字（扫描件）→ `415 RESUME_EMPTY_TEXT`；读出来是乱码（字体缺 ToUnicode 映射）→ `415 RESUME_PDF_TEXT_UNREADABLE`。**两条都不是「假装解析成功」** |
+| 图片 / `.doc` | **415 `RESUME_FORMAT_UNSUPPORTED`** + 可执行建议（「请粘贴文本，或另存为 DOCX」）；不假装解析、不退回演示数据（改名的 PDF 也会被魔数嗅探拦进 PDF 路径，而不是当成 DOCX 读） |
 
 响应（实测样例）：
 

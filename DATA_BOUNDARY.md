@@ -40,12 +40,13 @@
 | **WeKnora 标准版镜像** | 拉不动 | 5 个镜像共 2.72 GB，本机 Docker 代理对大镜像层近乎失效。**不影响功能**：对照实验已用 Lite 版完成并有结论 |
 | **百宝箱企业版账号** | 无 | 需固定公网地址 + 账号，接入未提交 |
 | **平台发布账号与审核** | 无 | 多端发布未做 |
-| **26 份来源的 `publishedAt`** | **26 / 26 为 `null`** | 公开文档站多无明确定版日期。按设计**留 `null` 不猜**，前端显示「缺少时间信息」 |
+| **26 份来源的 `publishedAt`** | **3 / 26 有值**（S08/S09/S10，取自页面 `schema.org Article.datePublished`）；另 **5 份有「最后更新」**（S08–S12 的 `dateModified`）；其余 21 份两者皆无 | 取值字段逐条记在 `publishedAtSource` / `sourceUpdatedAtSource` 里。**不拿采集时间或更新时间为发布时间顶数**；S08–S10 三份共享同一 `datePublished`，疑似站点模板常量，已在数据里标注待人工复核 |
 
 ## 4. 技术栈上的边界（不是数据，但同样影响「能不能跑」）
 
 - **后端与记忆系统零三方依赖**：`backend/` 只用 Python 标准库（含 `sqlite3`、`zipfile`、`xml.etree`）。
-  不装 FastAPI / SQLAlchemy / python-docx / pdf 库 —— 所以**简历只支持文本与 DOCX，PDF/图片明确 415**。
+  不装 FastAPI / SQLAlchemy / python-docx —— 所以**简历直接支持文本、DOCX 与 PDF**（PDF 用本机已装的
+   pypdf / PyMuPDF / pdfminer，运行时探测，都不是硬依赖）；图片与 `.doc` **明确 415**，无 OCR。
 - **知识库管线零三方依赖**：`knowledge/pipeline/01–12` 只用 Node 标准库。
 - **评测侧需要一个 OpenAI 兼容端点**（`knowledge/eval/.env`）；没配也能跑，只是模型版触发器与
   重排/裁判档不可用，会**自动降级为规则版并标明原因**，不报错。

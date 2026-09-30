@@ -93,11 +93,21 @@
 > 2. **改图谱结构的真实成本是「人工裁定 + 217 处对外计数」**，不是改几行代码 ——
 >    所以这类改动要么一次做对，要么别开。
 
-> **M2-3 改成了什么**：把「逐份核实发布日期」换成**把「缺失」做实**。
-> 26 份来源多是无定版日期的公开文档站，硬填一个日期就是编。所以：
-> * 导出里 `publishedAt` **保持 `null`**（26/26），`sources.json` 的许可以及口径写在 `knowledge/SOURCE_LICENSES.md`；
-> * MCP 的引用输出新增 `sourcePublishedAt` 与 `sourceTimeNote`：**为 null 时明确写
->   「缺少发布时间：来源站未标明定版日期（按设计留空，不拿采集日期顶上）」**，
+> **M2-3 最后落成了什么（2026-09-30 二度更新）**：先是把「逐份核实发布日期」降级为**把「缺失」做实**；
+> 后来发现**「缺」这个判断本身下得太早** —— 快照里其实有日期，只是没人去解析。于是新增
+> `knowledge/pipeline/13-annotate-source-dates.mjs`（离线、幂等、**正式解析 JSON-LD 并按 `@type` 收窄**，
+> 绝不正则抓裸日期），实测结果：
+> * **发布时节能核到 3/26**（S08/S09/S10 的 `schema.org Article.datePublished` = 2023-11-12）；
+> * **页面"最后更新"能核到 5/26**（S08–S12 的 `dateModified`）—— 单独存进 `sourceUpdatedAt`，
+>   **不拿更新时间冒充发布时间**；
+> * 其余 **21 份确实两者皆无**，保持 `null`，仍**不拿 `collectedAt` 顶上**；
+> * 每条的取值字段记进 `publishedAtSource` / `sourceUpdatedAtSource`，便于人工复核。
+>
+> ⚠️ 已如实写进数据的一条观察：**S08/S09/S10 三份共享同一个 `datePublished`**，疑似站点模板常量
+> 而非逐页真实发布日 —— 第 13 步会在日志里点名提示，没把这三个数当成「核实无误」。
+>
+> * MCP 的引用输出带 `sourcePublishedAt` / `sourcePublishedAtSource` / `sourceUpdatedAt` / `sourceTimeNote`：
+>   没有发布时间时明确写缺什么，**并区分「有更新但无发布」与「两者都没有」**，
 >   调用方拿到的不是一个空字符串，而是一句它必须显示的话；
 > * 类型也从 `publishedAt: string` 改成 `string | null` —— 之前那个类型是**在撒谎**。
 
@@ -189,7 +199,7 @@
 | 检索双路召回 / α 自适应（M2-4/M2-5） | **两项都已做（结论：一项采纳为可选、一项无可吃空间）** | M2-5 见 `knowledge/evaluations/语言自适应融合.md`（零 LLM、可复算：dev 29→31/34、新 holdout 26→27/35）。M2-4 见 `实验总表.md` F 组：把 WeKnora 思路的 2,861 子块按区间映回 1,757 段取并集，**dev 并集 +0 题、holdout 仅 +1 题（XC01）**，落在 ±1 波动内 → 候选池无互补，统一重排无从增益 |
 | 大典 / O*NET 接进自建图谱（M2-6） | ⛔ **卡在「只能人写」** | 数据早在盘上，但**定不出机械映射规则**：自建 127 个词条 vs 大典 1,676 个职业 **命中 0**、vs 18,552 个职业功能/技能 **命中 1**、vs O*NET 1,253 条 **命中 1**（`node knowledge/pipeline/import/bridge-coverage.mjs`）。`import/README.md` §8 要求 `aligned_with` **必须由人写下 `alignment` 与理由** → 与 M2-1「不代签」同类。人力上限 461 条 → 27.5% |
 | 学习单元 `covers` 边（M2-1） | ⛔ **卡在「不代签」** | 见 M2 段注记：代码路径已验证过一次，卡在第 06 步人工裁定抽样（22→27），回退保持 226 边 |
-| 26 份 `publishedAt`（M2-3） | **保持 null** | 按设计「无 `publishedAt` 就显示缺时间信息，不猜」，前端照此渲染 |
+| 26 份 `publishedAt`（M2-3） | **已用足可核验的部分**：3 份有发布时间（S08/S09/S10）、5 份有最后更新时间（S08–S12），其余 21 份保持 `null` | 新增 `knowledge/pipeline/13-annotate-source-dates.mjs`（离线、幂等、**正式解析 JSON-LD 而非正则抓裸日期**）；`publishedAtSource` / `sourceUpdatedAtSource` 逐条记下取值字段供复核 |
 | 中国官方语料过审 | **留在门外（=现状）** | `knowledge-cn/` 的审核门禁（`data/reviews/*.template.json` → `promote.py`）已就绪；1519 条候选 **APPROVED=0** 属纯人力活，不阻断产品可用 |
 | 百宝箱平台接入 | **不做** | 需固定公网地址 + 账号 |
 | 多端发布验证 | **不做** | 需对应平台账号与审核 |
@@ -214,7 +224,7 @@
 | 记忆库 | `backend/memories.py`（stdlib + SQLite）+ 6 条 `/api/memories*` 路由 + `/growth` 记忆面板；候选闸门 / 写时触发器 / persona+联想召回 / 删除即遗忘，端到端全部有断言 |
 | 对话注入 | `backend/chat.py` + `POST /api/chat`：已确认记忆 + 图谱事实拼成固定可审计前缀；配了模型用模型、否则降级规则版（`provider`/`llm.error` 逐轮回传）；端到端离线档与真模型档各钉一遍 |
 | 成长记录 → 候选记忆 | `backend/growth.py` + `/api/growth-records`（写记录同事务派生候选、按 `recordId` 幂等、删记录只清未确认候选）；档案页有「写入记忆候选」入口 |
-| 简历解析 | `backend/resume.py` + `POST /api/resumes/extract`（文本/DOCX，stdlib 零依赖；PDF/图片 415 + 可执行建议）；产出画像草稿 + 待确认候选，每条抽取带原文 `charRange`；onboarding 的 760ms 假数据已删除，改走真链路 |
+| 简历解析 | `backend/resume.py` + `POST /api/resumes/extract`（**文本 / DOCX / PDF**；DOCX 走 stdlib 零依赖，PDF 走运行时探测的可选后端；图片与 `.doc` 415 + 可执行建议）；产出画像草稿 + 待确认候选，每条抽取带原文 `charRange`；onboarding 的 760ms 假数据已删除，改走真链路 |
 | LLM 接入层 | `backend/llm.py`：产品侧（记忆触发器）与评测侧（重排/裁判/出题/术语表）**共用一份配置与重试纪律**；9 个评测脚本已从「各自手写 HTTP」改为 `from _shared_llm import chat`；实测生成可用触发器（24 s，概念高一级抽象） |
 | 评测体系 | dev 34 / test 32 / 拒答 30；冻结结果 24/32；拒答零误拒 |
 | 检索自适应门控（M2-5，2026-09-30） | `knowledge/eval/adaptive_fusion.py`（零 LLM）：dev 29→**31/34**、新 holdout 26→**27/35**；`run_adopted.py --gate-peak 1.5` 可选项；详见 `knowledge/evaluations/语言自适应融合.md` |

@@ -138,17 +138,19 @@ CAREER_LLM_DISABLED=1                                          ← 显式关闭�
 | 重排 / 裁判档评测 | 同上 | 脚本直接报错，不落缓存、**不输出假数** |
 | 稠密向量档 | 本机 TEI 兼容服务 `127.0.0.1:8090` | 只剩 BM25 档 |
 | 原始快照自洽（阶段 A） | `knowledge/raw/`（已入库） | 若把该目录移出分发物，阶段 A 会失败 —— 这是设计，不是 bug |
+| **简历 PDF 解析** | 本机装任一 PDF 库（`pypdf` / `PyMuPDF` / `pdfminer`） | PDF 解析是**可选能力**，不是硬依赖；装了就能解析，一个都没装才回 415 + 安装建议 |
 | O*NET / 大典外部层重建 | 外网（`knowledge/import/raw/` 不入库，116 MB） | 外部层用现成 `import/build/*.jsonl` 即可，不必重下 |
 
 **跑不通的**（做不了就是做不了）：
 
-- **简历 PDF / 图片 / `.doc`** → 明确 `415 RESUME_FORMAT_UNSUPPORTED` + 可执行建议（后端零依赖、无 OCR）。
-  要支持 PDF 得在前端加 `pdf.js` 之类的依赖，会打破「后端零依赖」，需要先拍板。
+- **扫描件 / 图片简历、`.doc` 老格式** → `415` + 可执行建议（无 OCR，不假装识别）。
+  （**PDF 不再属于「跑不通」**：本机装了 pypdf / PyMuPDF / pdfminer 任一就能解析，见上表；一个都没装才回 415 并给安装命令。）
 - **岗位匹配** `/api/career-matches/*` → `501`。要有真实招聘数据源（外部 `liepin-cli` 登录或 `LIEPIN_API_URL` + token）；
   没有数据源时**不做假岗位**。
 - **`/api/auth/register`、`/login`** → `501`。本项目**不存账号密码**，访客会话足以支撑单用户使用。
 - **WeKnora 标准版对照** → 5 个镜像 2.72 GB，本机 Docker 拉不动。**不影响功能**：对照已用 Lite 版完成。
-- **中国官方语料进检索链路** → 采集完成但 **0/1519 过审**（纯人力活），未过审不入库。
+- **中国官方语料进检索链路** → 采集完成，1519 条已由业主**豁免闸门**（`WAIVED`，**不是人工审核通过**）；
+  但导入仍卡在 **WeKnora 运行态门禁**（本机 Docker 未跑、嵌入模型权重丢失），所以尚未进检索链路。
 - **大典 / O*NET 外部职业库「接回」自建图谱** → **定不出机械规则**（实测：自建 127 个词条 vs 大典 1,676 个职业命中 **0**、vs 18,552 个职业功能/技能命中 1、vs O*NET 1,253 条命中 1）；
   `knowledge/import/README.md` §8 要求 `aligned_with` 必须由人写下 `alignment` 与理由。机器只能给证据
   （`node knowledge/pipeline/import/bridge-coverage.mjs`）：覆盖率 4/1676 = **0.24%**，人力上限 27.5%。**不做假的跨库合并。**
@@ -167,8 +169,10 @@ CAREER_LLM_DISABLED=1                                          ← 显式关闭�
    跑后端前若想保持工作树干净，把它指到临时路径。
 6. **CJK 输出**：Windows 控制台需要 `PYTHONIOENCODING=utf-8` + `python -X utf8`，否则中文乱码/报错。
 7. **`git` 在 Windows 上会提示 LF→CRLF**，属正常，不影响断言（e2e 按语义投影比对）。
-8. **`publishedAt` 26 份全为 `null`**：不是漏填，是设计（不猜）。引用输出里会明确写
-   「缺少发布时间」，不拿采集日期顶上。
+8. **`publishedAt` 只有 3/26 有值**（S08/S09/S10，取自页面 `schema.org Article.datePublished`）：不是漏填 ——
+   另外 21 份快照里确实没有页面级日期，**不拿采集日期顶上**。另新增 `sourceUpdatedAt`（页面最后更新，5/26：
+   S08–S12），两者是两件事，引用输出会分别说明。补日期用
+   `node knowledge/pipeline/13-annotate-source-dates.mjs`（离线、幂等；正式解析 JSON-LD 而不是正则抓裸日期）。
 9. **向量档要让语料缓存与端点同源**：`run_adopted.py` / `vector_retrieval.py` / `refusal_eval.py`
    的缓存名由 `TEI_MODEL` 决定，未设时取 **float32** 那份，而现役服务是 **int8/onnx** ——
    「float32 语料向量 × int8 查询向量」会让同一题集差 1–3 题。复算前
@@ -181,7 +185,7 @@ CAREER_LLM_DISABLED=1                                          ← 显式关闭�
 - **成长记录可写入记忆库（M1-3 已落地）**：`POST /api/growth-records` 把一条记录投影成**待确认**记忆候选（只取图谱已知的职业/技能名，认不出就不写）；`POST /api/growth-records/confirm` 把候选确认为正式记忆，**候选 → 记录 → 证据 → 事件一个事务写入**，重复 confirm 幂等、越权（拿别的记录的候选）直接 400
 - **路径引擎已实现（M1-4）**：`POST /api/v1/career-path/generate` 由图谱 `requires` / `prerequisite` 边做拓扑排序算出阶段与缺口，模型不参与；同输入两次输出完全相同（时钟可注入）；未知职业 404。`/path` 页不再硬编码 `AI001` / `SK215=3`，改读已确认画像且每周小时数可调（M1-6）
 - **五个入口全通（M1-5）**：`/work-map`、`/catalog` 由 redirect 改挂真组件（都是 200 + SSR 出内容）；`/actions` 仍只有"筹备中"（职场模拟，尚未排期）
-- **简历解析已实现（文本 / DOCX）**：`POST /api/resumes/extract` 真解析文件（DOCX 用 stdlib `zipfile`），产出**画像草稿 + 待确认记忆候选 + 画像证据**，每条抽取都带原文 `charRange`；**PDF 与图片明确 415**（后端零依赖、无 OCR），不假装解析
+- **简历解析已实现（文本 / DOCX / PDF）**：`POST /api/resumes/extract` 真解析文件（DOCX 用 stdlib `zipfile`；PDF 走运行时探测的 pypdf / PyMuPDF / pdfminer），产出**画像草稿 + 待确认记忆候选 + 画像证据**，每条抽取都带原文 `charRange`；**图片与 `.doc` 明确 415**（无 OCR），扫描件 PDF 与乱码 PDF 也分别明确报错，不假装解析。`GET /health` 的 `resume.pdfBackend` 会报当前用的是哪个后端
 - **访客会话已实现（M1-2）**：`POST /api/auth/guest` 返回 201 + `HttpOnly` 会话 Cookie，带 Cookie 的请求按 `user_id` 隔离画像/记忆/成长记录；无 Cookie 或 Cookie 非法一律回落 `user_local`（本机单用户形态照常可用）。`register` / `login` **仍是 501**：本项目不存账号密码
 - **未实现接口一律 501**（不假装可用）：`/api/auth/{register,login}`、`/api/career-matches/{current,generate,select}`（岗位匹配需真实招聘数据源，当前无）
 - **知识库**：`publishedAt` 0/26；中文占比 46.4%（中文字符口径）；60% 图谱标注未人工复核（174/289）。

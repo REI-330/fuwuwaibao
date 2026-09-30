@@ -18,7 +18,7 @@ python -c "import json;print(*[(s['sourceId'],s['license']) for s in json.load(o
 | 原始快照 | **26 份 × 3 文件（`.html` / `.txt` / `.blocks.json`）+ `manifest.json` = 79 个文件，约 12 MB** | `ls knowledge/raw/` 79 项；`git ls-files knowledge/raw` 有跟踪 |
 | 快照是否随仓库分发 | **是**（`knowledge/raw/` 已被 git 跟踪，不在 `.gitignore` 内） | `.gitignore` 只有 `knowledge/import/raw/`、`knowledge-v1/data/`、`knowledge-cn/data/sources/` |
 | 抽取结果是否随仓库分发 | **是**（`knowledge/chunks/`、`knowledge/graph/`、`knowledge/wiki/`、`knowledge/exports/`） | 同上 |
-| `publishedAt` | **26 份全为 `null`** | 公开文档站多无明确定版日期；按设计留 `null` 不猜 |
+| `publishedAt` | **3 / 26 有值**（S08/S09/S10，`schema.org Article.datePublished`）；`sourceUpdatedAt` **5 / 26**（S08–S12 的 `dateModified`）；其余 21 份都没有 | 2026-09-30 由 `node knowledge/pipeline/13-annotate-source-dates.mjs` 从已入库快照解析回填（正式 JSON-LD 解析，不是正则抓裸日期）；取值字段记在 `publishedAtSource` / `sourceUpdatedAtSource`，**不拿采集时间冒充发布时间** |
 
 ## 2. 矩阵
 
@@ -94,7 +94,8 @@ S14、S15、S21、S22、S23、S24、S25（+ S14 同源的镜像）。这些站�
 - **国家标准（GB/GB-T）全文**的复制与再分发受标准出版方约束，本项目只引用
   `openstd.samr.gov.cn` 的**检索入口与条目级信息**，未分发标准全文；
 - 这四份来源是中文语料的主体，也是「国内岗位名称与岗位要求」这条线唯一的合法落点 ——
-  语料过审（`knowledge-cn/`）仍为 0/1519，**未过审的内容不进本仓库的检索链路**。
+  `knowledge-cn/` 的 1519 条候选已由业主**豁免闸门**：`review_status=WAIVED`（**不是 APPROVED**），
+  每条带 `review_waiver`（豁免人 / 时间 / 理由）。复算：`python knowledge-cn/waive_review.py --waived-by <谁>`。
 
 ## 6. 本项目自身代码的许可：**尚未确定**
 
