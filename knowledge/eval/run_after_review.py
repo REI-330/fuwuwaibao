@@ -42,12 +42,16 @@ def step(n, title):
 
 
 def gate_review():
-    """审核门禁：统计已批准且可导入的记录数。"""
+    """审核门禁：统计已批准且可导入的记录数。
+
+    分开报 APPROVED 与 WAIVED，**不把两者合并成一个「已审」数字**：
+    APPROVED 是有人审过，WAIVED 是业主豁免了闸门，混报会让人以为数据经过人工审核。
+    """
     files = sorted(glob.glob(REVIEWED))
     if not files:
         print(f"  未找到审核产物：{REVIEWED}")
         return 0, 0
-    total = approved = eligible = 0
+    total = approved = eligible = waived = 0
     for p in files:
         n = 0
         with open(p, encoding="utf-8") as f:
@@ -60,10 +64,12 @@ def gate_review():
                 n += 1
                 if d.get("review_status") == "APPROVED":
                     approved += 1
+                if d.get("review_status") == "WAIVED":
+                    waived += 1
                 if d.get("eligible_for_import"):
                     eligible += 1
         print(f"  {os.path.basename(p)}: {n} 条")
-    print(f"  → 总计 {total} 条候选，APPROVED {approved}，eligible_for_import {eligible}")
+    print(f"  → 总计 {total} 条候选，APPROVED {approved}，WAIVED（业主豁免） {waived}，eligible_for_import {eligible}")
     return total, eligible
 
 
