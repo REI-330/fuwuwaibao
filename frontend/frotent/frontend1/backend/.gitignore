@@ -1,3 +1,9 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+
+# 记忆库默认落地文件（本地运行态，不入库）
+career.db
+career.db-journal
+career.db-wal
+career.db-shm

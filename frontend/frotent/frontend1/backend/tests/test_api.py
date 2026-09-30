@@ -235,10 +235,18 @@ def test_http_round_trip(store: GraphStore) -> None:
 
 
 def test_unknown_and_unimplemented_are_distinct(api: CareerApi) -> None:
-    status, payload = api.handle("GET", "/api/v1/career-path/generate", {}, None)
+    status, payload = api.handle("GET", "/api/career-matches/current", {}, None)
     assert status == 501
     assert payload["error"]["code"] == "NOT_IMPLEMENTED"
 
     status, payload = api.handle("GET", "/api/does-not-exist", {}, None)
     assert status == 404
     assert payload["error"]["code"] == "NOT_FOUND"
+
+
+def test_career_path_generate_is_no_longer_501(api: CareerApi) -> None:
+    """M1-4 之后这条路由必须真的生成路径，而不是继续回 501。"""
+    status, payload = api.handle("POST", "/api/v1/career-path/generate", {}, {"target_job": "AI001"})
+    assert status == 201
+    assert payload["error"] is None
+    assert payload["data"]["occupation_id"] == "AI001"

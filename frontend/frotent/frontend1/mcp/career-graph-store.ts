@@ -21,7 +21,7 @@ export type MarkdownSource = {
   title: string;
   publisher: string;
   url: string;
-  publishedAt: string;
+  publishedAt: string | null;
   collectedAt: string;
   license: string;
   /** 这份资料能支持 / 不能支持什么结论，检索时用来挡越界提问。 */
@@ -280,12 +280,21 @@ export type Citation = {
   sourceUrl: string;
   sourceScopeZh: string;
   sourceLicense: string;
+  /** 来源的定版日期；导出里 26 份**全部为 null**（公开文档站多无明确定版日期）。 */
+  sourcePublishedAt: string | null;
+  /**
+   * 时效的人话说明。`publishedAt` 为 null 时明确写「缺少发布时间」——
+   * 缺字段不等于「没有时效这回事」，调用方不该把它当成空字符串忽略掉。
+   * 也绝不拿 `collectedAt`（我们什么时候抓的）顶上，那是两件事。
+   */
+  sourceTimeNote: string;
 };
 
 export function citationForChunk(store: CareerKnowledgeStore, chunkId: string): Citation | null {
   const chunk = store.chunkById.get(chunkId);
   if (!chunk) return null;
   const source = store.sourceById.get(chunk.sourceId);
+  const publishedAt = source?.publishedAt ?? null;
   return {
     chunkId: chunk.chunkId,
     heading: chunk.heading,
@@ -295,7 +304,11 @@ export function citationForChunk(store: CareerKnowledgeStore, chunkId: string): 
     sourceTitle: source?.title ?? chunk.sourceId,
     sourceUrl: source?.url ?? "",
     sourceScopeZh: source?.scopeZh ?? "",
-    sourceLicense: source?.license ?? ""
+    sourceLicense: source?.license ?? "",
+    sourcePublishedAt: publishedAt,
+    sourceTimeNote: publishedAt
+      ? `来源定版于 ${publishedAt}`
+      : "缺少发布时间：来源站未标明定版日期（按设计留空，不拿采集日期顶上）"
   };
 }
 

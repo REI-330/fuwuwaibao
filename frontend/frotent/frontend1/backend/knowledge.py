@@ -82,6 +82,12 @@ class GraphStore:
         self._raw: Dict[str, Any] = {}
         self._nodes: Dict[str, Dict[str, Any]] = {}
         self._by_type: Dict[str, List[Dict[str, Any]]] = {}
+        # 名词表缓存（label + aliases），首次用到时构建，导出热更新时失效
+        self._terms: Optional[List[tuple]] = None
+        # 反向表：归一化名词 → 拥有它的节点。`terms_in` 只回文本里的**名字**，
+        # 而对话与成长记录还需要知道「这个词是什么种类的节点」（职业？技能？），
+        # 所以这里再存一份 name → nodes，避免调用方各自去猜。
+        self._term_nodes: Optional[Dict[str, List[Dict[str, Any]]]] = None
         self.refresh(force=True)
 
     # ------------------------------------------------------------------ 加载
@@ -100,6 +106,8 @@ class GraphStore:
             self._raw = raw
             self._nodes = nodes
             self._by_type = by_type
+            self._terms = None  # 导出换了，名词表要重建
+            self._term_nodes = None
             self._mtime = mtime
 
     # ------------------------------------------------------------- 基础访问器
@@ -123,6 +131,76 @@ class GraphStore:
         rows = [n for n in self._nodes.values() if n.get("kind") == kind]
         rows.sort(key=lambda n: n.get("id", ""))
         return rows
+
+    # ------------------------------------------------------------------ 词表
+    def term_index(self) -> List[tuple]:
+        """图谱里已有的名词表：每个节点的 label 与 aliases（长词在前）。
+
+        只为「文本里出现了哪些已经存在的概念」做子串匹配 —— 不新增任何结论。
+        用途之一：记忆库生成触发器时，概念锚点优先取真实节点名，而不是切出来的字片段。
+        """
+        with self._lock:
+            if self._terms is None:
+                terms: List[tuple] = []
+                seen = set()
+                for node in self._nodes.values():
+                    for name in [node.get("label", "")] + list(node.get("aliases", []) or []):
+                        normalized = normalize(name)
+                        if len(normalized) < 2 or normalized in seen:
+                            continue
+                        seen.add(normalized)
+                        terms.append((normalized, name))
+                terms.sort(key=lambda item: (-len(item[0]), item[0]))
+                self._terms = terms
+            return self._terms
+
+    def terms_in(self, text: Any) -> List[str]:
+        """这段文本里出现了图谱中的哪些概念（按词长降序，去重）。"""
+        haystack = normalize(text)
+        if not haystack:
+            return []
+        hits: List[str] = []
+        for normalized, name in self.term_index():
+            if normalized in haystack and name not in hits:
+                hits.append(name)
+        return hits
+
+    def _term_node_index(self) -> Dict[str, List[Dict[str, Any]]]:
+        with self._lock:
+            if self._term_nodes is None:
+                mapping: Dict[str, List[Dict[str, Any]]] = {}
+                for node in self._nodes.values():
+                    for name in [node.get("label", "")] + list(node.get("aliases", []) or []):
+                        normalized = normalize(name)
+                        if len(normalized) < 2:
+                            continue
+                        bucket = mapping.setdefault(normalized, [])
+                        if node not in bucket:
+                            bucket.append(node)
+                self._term_nodes = mapping
+            return self._term_nodes
+
+    def nodes_in(self, text: Any) -> List[Dict[str, Any]]:
+        """这段文本里出现了哪些**节点**（label/alias 子串命中，长词优先、按 id 去重）。
+
+        与 ``terms_in`` 的区别：这里回的是节点本身，调用方才能知道它是职业还是技能。
+        不新增任何结论 —— 只是把「文本里已经出现的、图谱里本来就有的名字」翻回节点。
+        """
+        haystack = normalize(text)
+        if not haystack:
+            return []
+        mapping = self._term_node_index()
+        hits: List[Dict[str, Any]] = []
+        seen: set = set()
+        for normalized, _name in self.term_index():
+            if normalized not in haystack:
+                continue
+            for node in mapping.get(normalized, []):
+                if node["id"] in seen:
+                    continue
+                seen.add(node["id"])
+                hits.append(node)
+        return hits
 
     def edges_of_type(self, edge_type: str) -> List[Dict[str, Any]]:
         return list(self._by_type.get(edge_type, []))
