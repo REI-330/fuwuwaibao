@@ -6,7 +6,8 @@
 
 * **证据可回填**：每条抽取的 ``charRange`` 必须真的能切出那个值（不是随手编的区间）；
 * **认不出就不写**：图谱没有的技能词只进 ``unrecognizedSkills``，不进画像技能表；
-* **不支持的形态明确拒绝**：PDF / 图片 / .doc 一律 415 + 可执行建议，不假装解析；
+* **不支持的形态明确拒绝**：图片 / .doc 一律 415 + 可执行建议，不假装解析；
+  PDF 走可选后端（本机装了就能解析，抽不出文字照样明确报错），**扫描件不会被当成解析成功**；
 * **授权闸门不变**：抽取结果只落 ``candidate``，确认前不进注入上下文；
 * **模型只兜底**：兜底失败/未配置时规则结果照常返回，并如实标注错误码。
 """
@@ -14,12 +15,15 @@
 from __future__ import annotations
 
 import html
+import importlib.util
 import io
 import json
 import zipfile
+from pathlib import Path
 
 import pytest
 
+from backend import resume
 from backend.llm import LlmClient, LlmConfig
 from backend.memories import MemoryStore
 from backend.resume import (
@@ -231,10 +235,23 @@ def test_docx_without_document_xml_is_rejected() -> None:
         extract_docx_text(buffer.getvalue())
 
 
+def build_pdf(lines: list[str]) -> bytes:
+    """现造一份 PDF 当测试素材（造 PDF 用 PyMuPDF；读的库可以是别的）。"""
+    fitz = pytest.importorskip("fitz", reason="需要用 PyMuPDF 造测试用 PDF")
+    document = fitz.open()
+    page = document.new_page()
+    y = 72
+    for line in lines:
+        page.insert_text((72, y), line, fontname="china-s", fontsize=12)
+        y += 22
+    data = document.tobytes()
+    document.close()
+    return data
+
+
 @pytest.mark.parametrize(
     "filename,data,expected",
     [
-        ("resume.pdf", b"%PDF-1.7\n%\xe2\xe3", ".pdf"),
         ("resume.png", b"\x89PNG\r\n\x1a\n" + b"\x00" * 32, ".png"),
         ("resume.doc", b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1", ".doc"),
     ],
@@ -248,11 +265,71 @@ def test_unsupported_formats_report_415(api: CareerApi, filename: str, data: byt
     assert payload["error"]["message"], "必须给出可执行的替代建议，而不是一句「不支持」"
 
 
-def test_pdf_renamed_to_docx_is_still_rejected() -> None:
-    """改名的 PDF 也要拦住 —— 嗅探魔数，不信扩展名。"""
+def test_pdf_renamed_to_docx_still_goes_through_the_pdf_path() -> None:
+    """改名的 PDF 也按 PDF 处理 —— 嗅探魔数，不信扩展名。
+
+    内容不是合法 PDF，所以两种情形都抛错（装了后端 → 解析失败；没装 → 415），
+    但 **suffix 必须是 .pdf**：说明它没有被当成 DOCX/纯文本去读。
+    """
     with pytest.raises(ResumeFormatError) as error:
         read_upload("resume.docx", b"%PDF-1.4 whatever")
     assert error.value.suffix == ".pdf"
+
+
+def test_pdf_without_any_backend_returns_actionable_415(monkeypatch: pytest.MonkeyPatch) -> None:
+    """一个 PDF 后端都没装时，仍然是 415 + 可执行建议，而不是抛裸异常。"""
+    monkeypatch.setattr(resume, "pdf_backend", lambda: None)
+    with pytest.raises(ResumeFormatError) as error:
+        resume.extract_pdf_text(b"%PDF-1.4 whatever")
+    assert error.value.suffix == ".pdf"
+    assert "pip install pypdf" in str(error.value)
+
+
+@pytest.mark.skipif(resume.pdf_backend() is None, reason="本机没有可用的 PDF 解析后端")
+def test_pdf_text_is_extracted_and_reaches_the_profile(
+    api: CareerApi, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """真造一份 PDF，走完整接口，确认抽出的文本真的进了画像草稿。"""
+    path = tmp_path / "resume.pdf"
+    path.write_bytes(build_pdf(["求职意向：嵌入式软件工程师", "技能：C 语言与内存模型，FreeRTOS"]))
+    raw, content_type = multipart("file", "resume.pdf", path.read_bytes())
+    status, payload = api.handle("POST", "/api/resumes/extract", {}, None, raw=raw, content_type=content_type)
+    assert status == 200, payload
+    body = payload["data"]
+    assert body["extraction"]["source"] == "pdf"
+    assert body["extraction"]["charCount"] > 0
+    assert "嵌入式软件工程师" in body["profileDraft"]["question"]
+    assert "C 语言与内存模型" in body["profileDraft"]["skills"]
+    assert body["candidateCount"] > 0
+
+
+@pytest.mark.skipif(
+    resume.pdf_backend() is None or not importlib.util.find_spec("pypdf"),
+    reason="需要同时有 pypdf 与另一个后端，才能复现「字形映不回 Unicode」的乱码",
+)
+def test_mojibake_pdf_is_reported_not_parsed(monkeypatch: pytest.MonkeyPatch) -> None:
+    """乱码必须报错，不能静默当简历解析。
+
+    复现的是 2026-09-30 实测到的真实现象：中文写进 PyMuPDF 内置 CJK 字体（无 ToUnicode 映射），
+    pypdf 读回来是 `lB\\x80La\\x0fT...`。**乱码喂给规则只会得到看似成功的垃圾技能词**，
+    所以这里断言它明确失败，而不是返回一堆垃圾。
+    """
+    data = build_pdf(["求职意向：嵌入式软件工程师"])
+    monkeypatch.setattr(resume, "_PDF_BACKENDS", ("pypdf",))
+    with pytest.raises(ResumeFormatError) as error:
+        resume.extract_pdf_text(data)
+    assert error.value.code == "RESUME_PDF_TEXT_UNREADABLE"
+    assert error.value.suffix == ".pdf"
+
+
+@pytest.mark.skipif(resume.pdf_backend() is None, reason="本机没有可用的 PDF 解析后端")
+def test_scanned_pdf_reports_empty_text_instead_of_guessing() -> None:
+    """没有文字的 PDF（等价于扫描件）→ 明确 RESUME_EMPTY_TEXT，不假装识别。"""
+    blank = build_pdf([])
+    with pytest.raises(ResumeFormatError) as error:
+        read_upload("scan.pdf", blank)
+    assert error.value.code == "RESUME_EMPTY_TEXT"
+    assert "OCR" in str(error.value)
 
 
 def test_file_size_limit_is_enforced(api: CareerApi) -> None:

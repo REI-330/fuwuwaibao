@@ -9,7 +9,8 @@
 本模块的设计约束（与本项目既有纪律逐条对齐）：
 
 1. **零三方依赖**：DOCX 用 stdlib ``zipfile`` + ``xml.etree`` 读 ``word/document.xml``；
-   PDF / 图片**明确不支持**（调用方返回 415 并给可执行建议），不假装、也不退回假数据。
+   PDF 走**运行时探测的可选后端**（pypdf / PyMuPDF / pdfminer，装了哪个用哪个，都不是硬依赖）；
+   图片**明确不支持**（调用方返回 415 并给可执行建议），不假装、也不退回假数据。
 2. **规则优先，模型只兜底**：技能锚点取自图谱名词表（``GraphStore.nodes_in``，161 条 label/alias，
    含中文技能名），字段用正则 + 章节定位；模型只处理**规则认不出的残差**，且必须在字段约束内，
    失败整段降级并如实标注（``llm.error``）。
@@ -24,6 +25,7 @@
 from __future__ import annotations
 
 import hashlib
+import importlib
 import io
 import re
 import zipfile
@@ -37,8 +39,8 @@ from .knowledge import GraphStore
 MODULE = "resume-extract/v1"
 MAX_TEXT_CHARS = 200000
 MAX_FILE_BYTES = 10 * 1024 * 1024  # 契约里的 10MB
-SUPPORTED_SUFFIXES = (".docx", ".txt", ".md", ".text")
-UNSUPPORTED_SUFFIXES = (".pdf", ".doc", ".jpg", ".jpeg", ".png", ".webp", ".zip", ".xlsx")
+SUPPORTED_SUFFIXES = (".pdf", ".docx", ".txt", ".md", ".text")
+UNSUPPORTED_SUFFIXES = (".doc", ".jpg", ".jpeg", ".png", ".webp", ".zip", ".xlsx")
 
 _W_P = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}p"
 _W_T = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t"
@@ -136,6 +138,87 @@ def decode_text_bytes(data: bytes) -> str:
     raise ResumeFormatError("文本简历不是 UTF-8 / GB18030 编码，无法读取", code="RESUME_ENCODING_UNSUPPORTED")
 
 
+# ---------------------------------------------------------------------------- PDF（可选能力）
+
+# PDF 解析是**运行时探测的可选能力**：本机装了哪个库就用哪个，一个都没有时退回 415 并说明原因。
+# 刻意不把任何 PDF 库写进 requirements —— 后端「零三方依赖」的定位不因此改变，
+# 只是「本机恰好有的话就别浪费」。这也让「有没有 PDF 能力」变成可由一次探测回答的事实，
+# 而不是一句写死的「不支持」。
+#
+# 顺序是**故意的**：PyMuPDF(fitz) 排第一。实测（2026-09-30）：同一份中文 PDF，
+# fitz 抽出「求职意向：嵌入式软件工程师」逐字正确，而 pypdf 抽出的是
+# `lB\x80La\x0fT\x11...` 这种乱码 —— 因为该 PDF 的字体没有 ToUnicode 映射，
+# pypdf 无法把字形映回 Unicode。中文简历里这种 PDF 不少，所以能选就选对中文更稳的后端。
+_PDF_BACKENDS = ("fitz", "pypdf", "pdfminer.high_level")
+
+# 抽出来的文本里若混进大量控制字符/替换字符，说明字形没能映回 Unicode（乱码），
+# 这时**必须报错**：把乱码喂给规则/模型，只会得到一堆看似成功的垃圾技能词。
+_MOJIBAKE_RE = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f\ufffd]")
+_MOJIBAKE_RATIO = 0.02
+
+
+def pdf_backend() -> Optional[str]:
+    """探测本机可用的 PDF 文本后端；一个都没有就返回 None。"""
+    for name in _PDF_BACKENDS:
+        try:
+            importlib.import_module(name)
+        except Exception:  # 装不上/版本不兼容都算「这个后端不可用」，继续试下一个
+            continue
+        return name
+    return None
+
+
+def extract_pdf_text(data: bytes) -> str:
+    """从 PDF 抽纯文本。扫描件（抽不出文字）单独报错，不假装识别成功。"""
+    backend = pdf_backend()
+    if backend is None:
+        raise ResumeFormatError(
+            "本机没有可用的 PDF 解析库（pypdf / PyMuPDF / pdfminer 都没装）。"
+            "装一个即可：pip install pypdf；或粘贴文本 / 把 PDF 另存为 DOCX 上传。",
+            suffix=".pdf",
+        )
+    try:
+        if backend == "pypdf":
+            from pypdf import PdfReader
+
+            pages = [(page.extract_text() or "") for page in PdfReader(io.BytesIO(data)).pages]
+        elif backend == "fitz":
+            import fitz
+
+            with fitz.open(stream=data, filetype="pdf") as document:
+                pages = [document.load_page(index).get_text() for index in range(document.page_count)]
+        else:
+            from pdfminer.high_level import extract_text as pdfminer_extract
+
+            pages = [pdfminer_extract(io.BytesIO(data))]
+    except Exception as error:  # 加密 / 损坏 / 库自身异常，都当作解析失败如实报出
+        raise ResumeFormatError(
+            f"PDF 解析失败（后端 {backend}）：{error}。加密或损坏的 PDF 请先另存一份，或粘贴文本。",
+            code="RESUME_PDF_PARSE_FAILED",
+            suffix=".pdf",
+        ) from error
+
+    lines = [line.strip() for page in pages for line in (page or "").splitlines() if line.strip()]
+    if not lines:
+        raise ResumeFormatError(
+            "这个 PDF 里抽不出文字（多半是扫描件 / 图片版）：本机没有 OCR，不会假装识别出内容。"
+            "请粘贴文本，或改用文字版 PDF / DOCX。",
+            code="RESUME_EMPTY_TEXT",
+            suffix=".pdf",
+        )
+    text = "\n".join(lines)
+    suspicious = len(_MOJIBAKE_RE.findall(text))
+    if suspicious / max(len(text), 1) > _MOJIBAKE_RATIO:
+        raise ResumeFormatError(
+            f"这个 PDF 的文字层读出来是乱码（后端 {backend}：字形没能映回 Unicode，"
+            "常见于字体缺 ToUnicode 映射的 PDF）。与其把乱码当简历解析，不如明说："
+            "请粘贴文本，或用 Word/WPS 另存一份 PDF / DOCX 再上传。",
+            code="RESUME_PDF_TEXT_UNREADABLE",
+            suffix=".pdf",
+        )
+    return text
+
+
 _PDF_MAGIC = b"%PDF"
 _IMAGE_MAGIC = (b"\x89PNG", b"\xff\xd8\xff", b"RIFF")
 
@@ -157,10 +240,8 @@ def read_upload(filename: str, data: bytes) -> Tuple[str, str]:
         raise ResumeFormatError(f"文件超过 {MAX_FILE_BYTES // (1024 * 1024)}MB 上限", code="RESUME_FILE_TOO_LARGE")
     suffix = suffix_of(filename)
     if data.startswith(_PDF_MAGIC) or suffix == ".pdf":
-        raise ResumeFormatError(
-            "PDF 暂不支持：后端只用 Python 标准库、没有 PDF 解析能力。请粘贴文本，或把 PDF 另存为 DOCX 后上传。",
-            suffix=".pdf",
-        )
+        # 先嗅探魔数再看后缀：改名的 PDF（.txt 外壳）也走解析，而不是被当成纯文本读出乱码
+        return extract_pdf_text(data), "pdf"
     if data.startswith(_IMAGE_MAGIC) or suffix in (".jpg", ".jpeg", ".png", ".webp", ".gif"):
         raise ResumeFormatError(
             "图片简历暂不支持：本机没有 OCR 能力，不会假装识别出内容。请粘贴文本或上传 DOCX。",

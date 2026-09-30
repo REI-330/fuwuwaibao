@@ -893,16 +893,32 @@ async function stageD(context) {
       reparse.json?.data?.resumeId === parsedData.resumeId && reparse.json?.data?.candidateCount === 0,
       String(reparse.json?.data?.candidateCount)
     );
-    // 不支持的形态必须明确拒绝，并给出可执行建议 —— 不假装解析、也不退回假数据
+    // 形态处理不了的必须明确拒绝、给出可执行建议 —— 不假装解析、也不退回假数据。
+    // PDF 现在是**可解析**的（本机装了哪个库就用哪个），所以这里拿一份截断的假 PDF 验证：
+    // 装了解析库 → 415 RESUME_PDF_PARSE_FAILED；一个库都没装 → 415 RESUME_FORMAT_UNSUPPORTED。
+    // 两种都必须是 415 + 一句能照做的建议，而不是 200 或一堆乱码当结果。
     const pdfForm = new FormData();
     pdfForm.append("file", new Blob([new TextEncoder().encode("%PDF-1.7\n")], { type: "application/pdf" }), "resume.pdf");
     const pdfResponse = await fetch(resumeEndpoint, { method: "POST", body: pdfForm });
     const pdfBody = await pdfResponse.json().catch(() => ({}));
+    const pdfCode = pdfBody?.error?.code;
+    const pdfMessage = String(pdfBody?.error?.message ?? "");
     check(
       "D",
-      "简历：PDF 明确 415 + 可执行建议（不假装解析）",
-      pdfResponse.status === 415 && pdfBody?.error?.code === "RESUME_FORMAT_UNSUPPORTED" && String(pdfBody?.error?.message ?? "").includes("DOCX"),
-      `${pdfResponse.status} ${pdfBody?.error?.code}`
+      "简历：坏 PDF 明确 415 + 可执行建议（不假装解析）",
+      pdfResponse.status === 415
+        && ["RESUME_PDF_PARSE_FAILED", "RESUME_FORMAT_UNSUPPORTED"].includes(pdfCode)
+        && /DOCX|pypdf|粘贴文本/.test(pdfMessage),
+      `${pdfResponse.status} ${pdfCode}`
+    );
+    // PDF 能不能用不该靠猜：/health 必须报出探测结果与当前用的后端
+    const healthForResume = await httpJson(`${base}/health`);
+    check(
+      "D",
+      "简历：/health 报出 PDF 能力与后端（不支持时也能一眼看见）",
+      typeof healthForResume.json?.resume?.pdfSupported === "boolean"
+        && "pdfBackend" in (healthForResume.json?.resume ?? {}),
+      `pdfSupported=${healthForResume.json?.resume?.pdfSupported} backend=${healthForResume.json?.resume?.pdfBackend}`
     );
 
     // 清理：把剩下的测试记忆（含候选）全删掉，保证 e2e 可重复跑（不污染本地 db）

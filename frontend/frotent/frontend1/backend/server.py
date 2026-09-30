@@ -49,6 +49,7 @@ from .growth import record_text as growth_record_text
 from .knowledge import GraphStore, code_of, normalize
 from .memories import VALID_GROWTH_KINDS, VALID_STATUSES, MemoryStore, UnknownGeneratorError
 from .resume import MAX_FILE_BYTES, ResumeFormatError
+from .resume import SUPPORTED_SUFFIXES, UNSUPPORTED_SUFFIXES, pdf_backend
 from .resume import extract as extract_resume
 from .resume import memory_candidates as resume_memory_candidates
 from .resume import parse_multipart_form, read_upload
@@ -324,7 +325,23 @@ class CareerApi:
 
         if path == "/health" and method == "GET":
             # 把模型状态放进 /health：不配端点时必须能一眼看见（否则会以为触发器在走模型）
-            return 200, {**self.store.health(), "llm": self.memories.describe_llm()}
+            # 简历能力同样放进来：PDF 是「装了库就能解析」的可选能力，不写死一句「不支持」。
+            backend = pdf_backend()
+            return 200, {
+                **self.store.health(),
+                "llm": self.memories.describe_llm(),
+                "resume": {
+                    "pdfSupported": backend is not None,
+                    "pdfBackend": backend,
+                    "supportedSuffixes": list(SUPPORTED_SUFFIXES),
+                    "unsupportedSuffixes": list(UNSUPPORTED_SUFFIXES),
+                    "note": (
+                        f"PDF 走本机已安装的 {backend}（不是硬依赖）；一个都没装时 PDF 返回 415 并给安装建议。"
+                        if backend
+                        else "本机没有 PDF 解析库（pypdf / PyMuPDF / pdfminer 都没装），PDF 上传返回 415 并给安装建议。"
+                    ),
+                },
+            }
 
         if path == "/api/career/recommendations" and method == "GET":
             # 该接口按契约不使用通用响应包（见 frontend-backend-page-contract.md §7）。
@@ -615,7 +632,16 @@ class CareerApi:
                     "INVALID_BODY", '请上传 multipart 的 file 字段，或提交 JSON {"text": "..."}', 400
                 )
         except ResumeFormatError as error:
-            status = 415 if error.code in ("RESUME_FORMAT_UNSUPPORTED", "RESUME_ENCODING_UNSUPPORTED") else 400
+            # 「这份上传内容我处理不了」一律 415 —— 包括乱码/扫描件/不支持的后缀。
+            # 400 留给「请求本身不合法」（空请求体、坏 generator 之类），两者不能混。
+            upload_codes = {
+                "RESUME_FORMAT_UNSUPPORTED",
+                "RESUME_ENCODING_UNSUPPORTED",
+                "RESUME_EMPTY_TEXT",
+                "RESUME_PDF_PARSE_FAILED",
+                "RESUME_PDF_TEXT_UNREADABLE",
+            }
+            status = 415 if error.code in upload_codes else 400
             return self.error(error.code, str(error), status, suffix=error.suffix)
 
         try:
