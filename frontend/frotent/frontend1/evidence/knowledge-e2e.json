@@ -1,0 +1,1302 @@
+{
+  "schema": "career-graph-e2e/v1",
+  "generatedAt": "2026-09-30T16:12:17.311Z",
+  "durationMs": 14450,
+  "versions": {
+    "node": "v22.22.2",
+    "platform": "win32",
+    "kbVersion": "2026.09.15",
+    "graphVersion": "0.1.0"
+  },
+  "flags": {
+    "withFrontend": true,
+    "withSuites": true,
+    "withLlm": false
+  },
+  "baseline": {
+    "bm25Dev": {
+      "hits": 25,
+      "total": 34,
+      "precisionAt3": 0.3529
+    },
+    "bm25V2": {
+      "hits": 10,
+      "total": 14
+    },
+    "rawSnapshots": 25,
+    "rawSha256Matched": 20,
+    "rawMismatch": {
+      "S15": -230,
+      "S18": -1085,
+      "S19": -10,
+      "S20": -2400,
+      "S22": -1
+    },
+    "hardChecks": "硬约束 13/13"
+  },
+  "metrics": {
+    "kbVersion": "2026.09.15",
+    "graphVersion": "0.1.0",
+    "counts": {
+      "sources": 26,
+      "chunks": 1757,
+      "nodes": 63,
+      "edges": 226,
+      "wikiPages": 38,
+      "evaluationQuestions": 24
+    },
+    "rawSha256": {
+      "matched": 20,
+      "total": 25,
+      "mismatched": {
+        "S15": -230,
+        "S18": -1085,
+        "S19": -10,
+        "S20": -2400,
+        "S22": -1
+      }
+    },
+    "hardChecks": "[kb]   14 项校验：硬约束 13/13 通过，pending 0，warn 0",
+    "pipelineRerun": {
+      "rawChanged": [
+        ".\\knowledge\\evidence\\integrity-report.json",
+        ".\\knowledge\\evidence\\pipeline-log.json",
+        ".\\knowledge\\graph\\graph.json",
+        ".\\knowledge\\graph\\search-index.json",
+        ".\\knowledge\\exports\\career-graph.json",
+        ".\\knowledge\\evaluations\\results.json",
+        ".\\knowledge\\evaluations\\report.md"
+      ],
+      "volatileOnly": [
+        ".\\knowledge\\evidence\\integrity-report.json",
+        ".\\knowledge\\evidence\\pipeline-log.json",
+        ".\\knowledge\\graph\\graph.json",
+        ".\\knowledge\\graph\\search-index.json",
+        ".\\knowledge\\exports\\career-graph.json",
+        ".\\knowledge\\evaluations\\results.json",
+        ".\\knowledge\\evaluations\\report.md"
+      ],
+      "semanticDiffs": []
+    },
+    "bm25Dev": {
+      "hitRate": "25/34",
+      "meanPrecisionAtK": 0.3529,
+      "stdout": "BM25（segmenter 分词）: 命中 25/34，平均精确率@3 0.3529"
+    },
+    "tools": [
+      "search_career_knowledge",
+      "get_skill_gap",
+      "get_career_graph_view"
+    ],
+    "searchCitations": 15,
+    "questionProbe": {
+      "asked": 12,
+      "answered": 12,
+      "cited": 11,
+      "detail": [
+        {
+          "questionId": "N01",
+          "ok": true,
+          "returned": 17,
+          "citedChunks": [
+            "S01#s6"
+          ]
+        },
+        {
+          "questionId": "N02",
+          "ok": true,
+          "returned": 16,
+          "citedChunks": [
+            "S02#s14"
+          ]
+        },
+        {
+          "questionId": "N03",
+          "ok": true,
+          "returned": 14,
+          "citedChunks": [
+            "S03#32",
+            "S03#s57"
+          ]
+        },
+        {
+          "questionId": "N04",
+          "ok": true,
+          "returned": 18,
+          "citedChunks": [
+            "S04#s78"
+          ]
+        },
+        {
+          "questionId": "N05",
+          "ok": true,
+          "returned": 15,
+          "citedChunks": [
+            "S05#s100~4",
+            "S05#s100~2"
+          ]
+        },
+        {
+          "questionId": "N06",
+          "ok": true,
+          "returned": 16,
+          "citedChunks": [
+            "S06#3.1",
+            "S06#3.2"
+          ]
+        },
+        {
+          "questionId": "N07",
+          "ok": true,
+          "returned": 20,
+          "citedChunks": [
+            "S07#2.1",
+            "S07#2.2"
+          ]
+        },
+        {
+          "questionId": "N08",
+          "ok": true,
+          "returned": 19,
+          "citedChunks": [
+            "S08#s147",
+            "S08#s147~2"
+          ]
+        },
+        {
+          "questionId": "N09",
+          "ok": true,
+          "returned": 15,
+          "citedChunks": [
+            "S09#s153"
+          ]
+        },
+        {
+          "questionId": "N10",
+          "ok": true,
+          "returned": 15,
+          "citedChunks": [
+            "S10#s166"
+          ]
+        },
+        {
+          "questionId": "N11",
+          "ok": true,
+          "returned": 17,
+          "citedChunks": [
+            "S14#2"
+          ]
+        },
+        {
+          "questionId": "N12",
+          "ok": true,
+          "returned": 19,
+          "citedChunks": []
+        }
+      ]
+    },
+    "frontendRoutes": {
+      "/work-map": {
+        "status": 200,
+        "location": null
+      },
+      "/catalog": {
+        "status": 200,
+        "location": null
+      },
+      "/chat": {
+        "status": 307,
+        "location": "http://localhost:3111/growth?chat=open"
+      }
+    }
+  },
+  "stages": [
+    {
+      "id": "A",
+      "title": "知识库产物自洽（导出 ↔ 分块 ↔ 图谱 ↔ 索引 ↔ 原始快照）",
+      "durationMs": 76,
+      "checks": 17,
+      "failed": 0,
+      "error": null
+    },
+    {
+      "id": "B",
+      "title": "构建闸门可复跑（09/10/11 重跑后语义投影不变）",
+      "durationMs": 2673,
+      "checks": 5,
+      "failed": 0,
+      "error": null
+    },
+    {
+      "id": "C",
+      "title": "检索闸门（现役 BM25 / dev 题集）",
+      "durationMs": 580,
+      "checks": 4,
+      "failed": 0,
+      "error": null
+    },
+    {
+      "id": "D",
+      "title": "后端 HTTP 端到端（真起 python 进程）",
+      "durationMs": 1074,
+      "checks": 97,
+      "failed": 0,
+      "error": null
+    },
+    {
+      "id": "E",
+      "title": "MCP HTTP 端到端（真起 mcp/http.ts，三个工具各调一次）",
+      "durationMs": 883,
+      "checks": 23,
+      "failed": 0,
+      "error": null
+    },
+    {
+      "id": "F",
+      "title": "跨端同源与引用可追溯（后端 = MCP = 导出）",
+      "durationMs": 1,
+      "checks": 10,
+      "failed": 0,
+      "error": null
+    },
+    {
+      "id": "G",
+      "title": "前端 dev server（SSR 页面）",
+      "durationMs": 3044,
+      "checks": 8,
+      "failed": 0,
+      "error": null
+    },
+    {
+      "id": "H",
+      "title": "既有测试套件",
+      "durationMs": 6089,
+      "checks": 5,
+      "failed": 0,
+      "error": null
+    }
+  ],
+  "checks": [
+    {
+      "stage": "A",
+      "label": "导出文件存在",
+      "ok": true,
+      "detail": "C:\\Users\\hr206\\OneDrive\\Desktop\\fuwuwaibao\\knowledge\\exports\\career-graph.json"
+    },
+    {
+      "stage": "A",
+      "label": "导出是第 11 步真实交付物（status=pipeline-export）",
+      "ok": true,
+      "detail": "pipeline-export"
+    },
+    {
+      "stage": "A",
+      "label": "meta.counts 与各数组长度逐项一致",
+      "ok": true,
+      "detail": "{\"sources\":26,\"chunks\":1757,\"nodes\":63,\"edges\":226,\"wikiPages\":38,\"evaluationQuestions\":24}"
+    },
+    {
+      "stage": "A",
+      "label": "chunks.jsonl 段数 = 导出 chunks",
+      "ok": true,
+      "detail": "1757 vs 1757"
+    },
+    {
+      "stage": "A",
+      "label": "chunkId 无重复",
+      "ok": true,
+      "detail": "1757/1757"
+    },
+    {
+      "stage": "A",
+      "label": "graph.json 与导出同源（节点/边数一致）",
+      "ok": true,
+      "detail": "graph 63/226"
+    },
+    {
+      "stage": "A",
+      "label": "search-index.json 覆盖全部节点与 chunk",
+      "ok": true,
+      "detail": "{\"nodeDocs\":63,\"nodeTerms\":449,\"chunkDocs\":1757,\"chunkSources\":26,\"aliasKeys\":161,\"ambiguousKeys\":3,\"resolvedAmbiguousKeys\":2,\"nodesWithChunkRefs\":63}"
+    },
+    {
+      "stage": "A",
+      "label": "每条边的两端都能解析（节点 id 或 chunk: 引用）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "stage": "A",
+      "label": "wiki 内链全部指向真实节点",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "stage": "A",
+      "label": "每段 chunk 都能指回已登记来源",
+      "ok": true,
+      "detail": "0 段无来源"
+    },
+    {
+      "stage": "A",
+      "label": "来源登记的 chunkCount 之和 = 导出 chunks",
+      "ok": true,
+      "detail": "1757 vs 1757"
+    },
+    {
+      "stage": "A",
+      "label": "raw 快照登记份数为 25",
+      "ok": true,
+      "detail": "25"
+    },
+    {
+      "stage": "A",
+      "label": "抓取无失败（fetchFailed=0，failures 为空）",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "stage": "A",
+      "label": "逐字节可复现份数 = 20/25（README 声明的口径）",
+      "ok": true,
+      "detail": "实测 20/25"
+    },
+    {
+      "stage": "A",
+      "label": "对不上的就是已知那 5 份，没有新增",
+      "ok": true,
+      "detail": "实测 S15,S18,S19,S20,S22"
+    },
+    {
+      "stage": "A",
+      "label": "5 份的字节差与 README 记录一致（-230/-1085/-10/-2400/-1）",
+      "ok": true,
+      "detail": "S15:-230 S18:-1085 S19:-10 S20:-2400 S22:-1"
+    },
+    {
+      "stage": "A",
+      "label": ".gitattributes 对 knowledge/raw/** 关闭行尾转换（否则 sha256 换了机器就变）",
+      "ok": true,
+      "detail": "缺少 -text 规则"
+    },
+    {
+      "stage": "B",
+      "label": "09 完整性校验退出码 0",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "stage": "B",
+      "label": "09 报出「硬约束 13/13」",
+      "ok": true,
+      "detail": "[kb]   14 项校验：硬约束 13/13 通过，pending 0，warn 0"
+    },
+    {
+      "stage": "B",
+      "label": "10 布局与索引退出码 0",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "stage": "B",
+      "label": "11 导出与评测退出码 0",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "stage": "B",
+      "label": "重跑 09–11 后，语义投影逐字不变（只允许时间戳/耗时变化）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "stage": "C",
+      "label": "BM25 跑批退出码 0",
+      "ok": true,
+      "detail": "exit=0"
+    },
+    {
+      "stage": "C",
+      "label": "跑批产物可解析出命中数",
+      "ok": true,
+      "detail": "25/34"
+    },
+    {
+      "stage": "C",
+      "label": "dev 题集命中 ≥ 钉住的基线 25/34",
+      "ok": true,
+      "detail": "实测 25/34"
+    },
+    {
+      "stage": "C",
+      "label": "平均精确率@3 ≥ 0.3529",
+      "ok": true,
+      "detail": "实测 0.3529"
+    },
+    {
+      "stage": "D",
+      "label": "后端在 http://127.0.0.1:8123 就绪（真起 python 进程）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "stage": "D",
+      "label": "/health 200",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "stage": "D",
+      "label": "/health exportStatus=pipeline-export",
+      "ok": true,
+      "detail": "pipeline-export"
+    },
+    {
+      "stage": "D",
+      "label": "/health dataSource 指向同一份导出",
+      "ok": true,
+      "detail": "C:/Users/hr206/OneDrive/Desktop/fuwuwaibao/knowledge/exports/career-graph.json"
+    },
+    {
+      "stage": "D",
+      "label": "/health 报出 LLM 配置状态（不含密钥）",
+      "ok": true,
+      "detail": "{\"configured\":false,\"source\":null,\"host\":null,\"model\":null,\"note\":\"未配置 LLM 端点：记忆触发器会走规则版，评测的重排/裁判档无法运行\"}"
+    },
+    {
+      "stage": "D",
+      "label": "/health 的 LLM 块不回显密钥",
+      "ok": true,
+      "detail": "{\"configured\":false,\"source\":null,\"host\":null,\"model\":null,\"note\":\"未配置 LLM 端点：记忆触发器会走规则版，评测的重排/裁判档无法运行\"}"
+    },
+    {
+      "stage": "D",
+      "label": "显式 CAREER_LLM_DISABLED=1 时 /health 报 configured=false",
+      "ok": true,
+      "detail": "{\"configured\":false,\"source\":null,\"host\":null,\"model\":null,\"note\":\"未配置 LLM 端点：记忆触发器会走规则版，评测的重排/裁判档无法运行\"}"
+    },
+    {
+      "stage": "D",
+      "label": "通用响应包形状 {requestId,data,error}",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "stage": "D",
+      "label": "catalog/stats 职业数 = 导出 occupation 节点数（4）",
+      "ok": true,
+      "detail": "4"
+    },
+    {
+      "stage": "D",
+      "label": "catalog/stats 技能数 = 导出 skill 节点数",
+      "ok": true,
+      "detail": "25"
+    },
+    {
+      "stage": "D",
+      "label": "catalog/stats prerequisite 边数 = 导出 prerequisite 边数",
+      "ok": true,
+      "detail": "24"
+    },
+    {
+      "stage": "D",
+      "label": "职业列表与导出的 occupation 节点一一对应",
+      "ok": true,
+      "detail": "AI001,AI002,AI003,AI004"
+    },
+    {
+      "stage": "D",
+      "label": "职业详情按 requires 边给出技能明细",
+      "ok": true,
+      "detail": "6 vs 6"
+    },
+    {
+      "stage": "D",
+      "label": "详情里的技能 id 都是导出的 skill 节点",
+      "ok": true,
+      "detail": "SK110,SK112,SK113"
+    },
+    {
+      "stage": "D",
+      "label": "未知职业 404 OCCUPATION_NOT_FOUND",
+      "ok": true,
+      "detail": "404 OCCUPATION_NOT_FOUND"
+    },
+    {
+      "stage": "D",
+      "label": "PUT /api/profile 返回标准化画像",
+      "ok": true,
+      "detail": "[{\"name\":\"Python\",\"level\":\"unknown\"},{\"name\":\"PyTorch\",\"level\":\"unknown\"},{\"name\":\"模型量化\",\"level\":\"unknown\"}]"
+    },
+    {
+      "stage": "D",
+      "label": "POST /api/profile/confirm 把画像置为 confirmed",
+      "ok": true,
+      "detail": "confirmed"
+    },
+    {
+      "stage": "D",
+      "label": "访客会话：POST /api/auth/guest 返回 201",
+      "ok": true,
+      "detail": "201"
+    },
+    {
+      "stage": "D",
+      "label": "访客会话：下发 HttpOnly 会话 Cookie",
+      "ok": true,
+      "detail": "career_session=user_***; Path=/; HttpOnly; SameSite=Lax; Max-Age=2592000"
+    },
+    {
+      "stage": "D",
+      "label": "访客会话：返回 isGuest 用户，不落账号密码",
+      "ok": true,
+      "detail": "{\"userId\":\"user_dbc5113049a5\",\"displayName\":\"端到端访客\",\"isGuest\":true,\"createdAt\":\"2026-09-30T16:12:06Z\"}"
+    },
+    {
+      "stage": "D",
+      "label": "访客会话：带 Cookie 拿到的是自己的画像（与无 Cookie 的 user_local 隔离）",
+      "ok": true,
+      "detail": "user_dbc5113049a5 vs user_dbc5113049a5"
+    },
+    {
+      "stage": "D",
+      "label": "访客会话：Cookie 值不合法时回落 user_local，不报 401",
+      "ok": true,
+      "detail": "200 user_local"
+    },
+    {
+      "stage": "D",
+      "label": "认证：/api/auth/register 仍是 501（本项目不存账号密码）",
+      "ok": true,
+      "detail": "501 NOT_IMPLEMENTED"
+    },
+    {
+      "stage": "D",
+      "label": "认证：/api/auth/login 仍是 501（本项目不存账号密码）",
+      "ok": true,
+      "detail": "501 NOT_IMPLEMENTED"
+    },
+    {
+      "stage": "D",
+      "label": "推荐接口按契约直出 recommendations（无信封）",
+      "ok": true,
+      "detail": "recommendations,memory_hash"
+    },
+    {
+      "stage": "D",
+      "label": "推荐条数 = 职业数",
+      "ok": true,
+      "detail": "4"
+    },
+    {
+      "stage": "D",
+      "label": "有了画像后至少一条匹配度 > 0",
+      "ok": true,
+      "detail": "AI004:16 AI001:0 AI002:0 AI003:0"
+    },
+    {
+      "stage": "D",
+      "label": "推荐里的职业 id 都在导出里",
+      "ok": true,
+      "detail": "AI004,AI001,AI002,AI003"
+    },
+    {
+      "stage": "D",
+      "label": "未实现接口明确 501（不假装可用）",
+      "ok": true,
+      "detail": "501 NOT_IMPLEMENTED"
+    },
+    {
+      "stage": "D",
+      "label": "未知路由 404（与 501 区分开）",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "stage": "D",
+      "label": "路径引擎已实现：POST 返回 201 而不是 501",
+      "ok": true,
+      "detail": "201"
+    },
+    {
+      "stage": "D",
+      "label": "路径覆盖 junior/intermediate/advanced 三阶段",
+      "ok": true,
+      "detail": "junior,intermediate,advanced"
+    },
+    {
+      "stage": "D",
+      "label": "六项硬校验全 false（无环 / 等级有效 / 先修顺序正确）",
+      "ok": true,
+      "detail": "{\"prerequisite_cycle\":false,\"missing_skill_id\":false,\"invalid_level\":false,\"invalid_stage\":false,\"invalid_gap\":false,\"prerequisite_order\":false}"
+    },
+    {
+      "stage": "D",
+      "label": "阶段不早于前置：拓扑序约束成立",
+      "ok": true,
+      "detail": "order"
+    },
+    {
+      "stage": "D",
+      "label": "同输入两次输出完全相同（结构确定，不含时钟字段）",
+      "ok": true,
+      "detail": "determinism"
+    },
+    {
+      "stage": "D",
+      "label": "路径引擎：未知职业 404 OCCUPATION_NOT_FOUND",
+      "ok": true,
+      "detail": "404 OCCUPATION_NOT_FOUND"
+    },
+    {
+      "stage": "D",
+      "label": "路径引擎：target_job_en 没有对应字段时留空、不臆造",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "stage": "D",
+      "label": "路径引擎如实回传 warnings（如工具归属只有职业级）",
+      "ok": true,
+      "detail": "[\"画像里的技能未标等级，按入门（1 级）计入：模型量化与部署\",\"图谱未记录「任务 ↔ 工具」的对应，下面任务里的工具按职业级给出：ESP-IDF、FreeRTOS\",\"有缺口技能暂无对应的实训任务（图谱里没有这条 trains 边），按自学安排。\",\"提供的当前技能都不在该职业的技能范围内，匹配度按 0 计。\"]"
+    },
+    {
+      "stage": "D",
+      "label": "POST /api/chat 200 且走通用响应包",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "stage": "D",
+      "label": "对话返回 message 与可复用的 conversationId",
+      "ok": true,
+      "detail": "conversation_7556188f0b33"
+    },
+    {
+      "stage": "D",
+      "label": "没有模型时对话降级为规则版并如实标注",
+      "ok": true,
+      "detail": "{\"requested\":\"auto\",\"used\":\"rule-based\",\"provider\":null,\"model\":null,\"error\":null,\"elapsedMs\":0}"
+    },
+    {
+      "stage": "D",
+      "label": "没有已确认记忆时不注入任何记忆（授权闸门在对话侧同样成立）",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "stage": "D",
+      "label": "检索用的提问就是用户原话（未被改写）",
+      "ok": true,
+      "detail": "我该先补哪些技能？"
+    },
+    {
+      "stage": "D",
+      "label": "规则版回答不是空串（没有模型也能用）",
+      "ok": true,
+      "detail": "（规则版回答 · 本轮未接模型，只依据图谱事实与已确认记忆）\n按你现在的画像，图"
+    },
+    {
+      "stage": "D",
+      "label": "带上 conversationId 时同一会话被复用",
+      "ok": true,
+      "detail": "conversation_7556188f0b33"
+    },
+    {
+      "stage": "D",
+      "label": "空消息被拒（400 INVALID_CHAT_MESSAGE）",
+      "ok": true,
+      "detail": "400 INVALID_CHAT_MESSAGE"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：候选写入返回 201",
+      "ok": true,
+      "detail": "201 memory_a9454311e725"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：候选没有触发器（未确认不生成）",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：候选不进注入上下文（授权边界）",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：确认后立刻生成触发器（1–3 条）",
+      "ok": true,
+      "detail": "1 条"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：触发器是规则版且带句式（generatedBy=rule-based）",
+      "ok": true,
+      "detail": "[\"轻量级推理引擎集成\"]"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：可显式选 generator=rule-based",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：生成器如实回传 requested/used/model",
+      "ok": true,
+      "detail": "{\"requested\":\"rule-based\",\"used\":\"rule-based\",\"model\":null,\"error\":null,\"count\":1}"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：未知 generator 被拒（不静默当成 auto）",
+      "ok": true,
+      "detail": "400 INVALID_GENERATOR"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：注入上下文含 persona 常驻与本次想起",
+      "ok": true,
+      "detail": "persona 1 / recalled 1"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：联想命中通道被标注（trigger:/word）",
+      "ok": true,
+      "detail": "[\"trigger:轻量级推理引擎集成\"]"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：注入预览不含未确认内容",
+      "ok": true,
+      "detail": "summaryText 完整可展示"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：无关提问不硬塞记忆",
+      "ok": true,
+      "detail": "0 条"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：确认后 memory_hash 由空变为非空",
+      "ok": true,
+      "detail": " → a47590d7ee80e6b42bdee088a66e950eb35ce934"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：推荐被真实增强（AI004 匹配度上升）",
+      "ok": true,
+      "detail": "AI004 16 → 32"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：推荐结果逐条带 confirmed_memory 证据",
+      "ok": true,
+      "detail": "[{\"memoryId\":\"memory_a9454311e725\",\"category\":\"skill\",\"content\":\"具备或正在学习：轻量级推理引擎集成\",\"usedFor\":\"skills\"},{\"memoryId\":\"memory_f9ada3e8d0d7\",\"category\":\"career_target\",\"content\":\"目标职业：边缘 AI 工程师\",\"usedFor\":\"interests\"},{\"memoryId\":\"memory_a9454311e725\",\"category\":\"skill\",\"content\":\"具备或正在学习：轻量级推理引擎集成\",\"usedFor\":\"skills\"},{\"memoryId\":\"memory_f9ada3e8d0d7\",\"category\":\"career_target\",\"content\":\"目标职业：边缘 AI 工程师\",\"usedFor\":\"interests\"},{\"memoryId\":\"memory_a9454311e725\",\"category\":\"skill\",\"content\":\"具备或正在学习：轻量级推理引擎集成\",\"usedFor\":\"skills\"},{\"memoryId\":\"memory_f9ada3e8d0d7\",\"category\":\"career_target\",\"content\":\"目标职业：边缘 AI 工程师\",\"usedFor\":\"interests\"},{\"memoryId\":\"memory_a9454311e725\",\"category\":\"skill\",\"content\":\"具备或正在学习：轻量级推理引擎集成\",\"usedFor\":\"skills\"},{\"memoryId\":\"memory_f9ada3e8d0d7\",\"category\":\"career_target\",\"content\":\"目标职业：边缘 AI 工程师\",\"usedFor\":\"interests\"}]"
+    },
+    {
+      "stage": "D",
+      "label": "对话：已确认记忆真的进了注入块",
+      "ok": true,
+      "detail": "[\"memory_f9ada3e8d0d7\"]"
+    },
+    {
+      "stage": "D",
+      "label": "对话：注入指纹与推荐接口的 memory_hash 一致（同一份已确认集合）",
+      "ok": true,
+      "detail": "a47590d7ee80e6b42bdee088a66e950eb35ce934 vs a47590d7ee80e6b42bdee088a66e950eb35ce934"
+    },
+    {
+      "stage": "D",
+      "label": "对话：persona 常驻进了提示词（可审计的 summaryText）",
+      "ok": true,
+      "detail": "\"【常驻】\\n- 目标职业：目标职业：边缘 AI 工程师\""
+    },
+    {
+      "stage": "D",
+      "label": "对话：答案里真的出现了那条记忆（注入链路闭到用户可见文本）",
+      "ok": true,
+      "detail": "（规则版回答 · 本轮未接模型，只依据图谱事实与已确认记忆）\n按你现在的画像，图谱里最接近的是「边缘 AI 工程师」（匹"
+    },
+    {
+      "stage": "D",
+      "label": "对话：提示词模板可溯源",
+      "ok": true,
+      "detail": "career-chat/v1"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：删除返回被删 id 与新指纹",
+      "ok": true,
+      "detail": "200 memory_a9454311e725"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：删除后推荐回落（遗忘是彻底的）",
+      "ok": true,
+      "detail": "AI004 32 → 16（基线 16）"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：删除后不再被想起",
+      "ok": true,
+      "detail": "注入预览已不含该记忆"
+    },
+    {
+      "stage": "D",
+      "label": "成长记录：写入返回 201 与记录 id",
+      "ok": true,
+      "detail": "201 growth_961a51dc2d9a"
+    },
+    {
+      "stage": "D",
+      "label": "成长记录：派生的记忆全部停在候选（授权闸门）",
+      "ok": true,
+      "detail": "[\"candidate\"]"
+    },
+    {
+      "stage": "D",
+      "label": "成长记录：候选带可溯源的 sourceId（指回记录）",
+      "ok": true,
+      "detail": "[\"growth_961a51dc2d9a:skill:0\"]"
+    },
+    {
+      "stage": "D",
+      "label": "成长记录：候选内容来自图谱已知名词（规则版派生，不调模型）",
+      "ok": true,
+      "detail": "[\"具备或正在学习：模型量化与部署\"]"
+    },
+    {
+      "stage": "D",
+      "label": "成长记录：候选不进注入上下文",
+      "ok": true,
+      "detail": "候选未进入召回"
+    },
+    {
+      "stage": "D",
+      "label": "成长记录：同一 recordId 重复提交是幂等的",
+      "ok": true,
+      "detail": "{\"reason\":\"record_exists\",\"message\":\"同一 recordId 已存在：按幂等处理，不重复写记录与候选\"}"
+    },
+    {
+      "stage": "D",
+      "label": "成长记录：认不出图谱名词时宁可不写候选",
+      "ok": true,
+      "detail": "{\"reason\":\"no_known_term\",\"message\":\"记录里没有图谱已知的职业/技能名，没有生成候选 —— 不把自由文本塞进记忆库\"}"
+    },
+    {
+      "stage": "D",
+      "label": "成长记录：候选确认后才进召回",
+      "ok": true,
+      "detail": "[\"memory_877e5a65ae5e\"]"
+    },
+    {
+      "stage": "D",
+      "label": "成长记录：删记录只清未确认候选、保留已确认记忆",
+      "ok": true,
+      "detail": "{\"deleted\":\"growth_961a51dc2d9a\",\"removedMemoryIds\":[],\"keptMemoryIds\":[\"memory_877e5a65ae5e\"],\"memoryHash\":\"b9770b4285031ed42f6aac7687104b072f55dde2\"}"
+    },
+    {
+      "stage": "D",
+      "label": "成长记录：未知记录 404（与 501 / 未知路由区分开）",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "stage": "D",
+      "label": "确认：候选→记录→证据→事件一次写入",
+      "ok": true,
+      "detail": "{\"c\":[\"memory_9813e8d5ae70\"],\"e\":1,\"v\":1}"
+    },
+    {
+      "stage": "D",
+      "label": "确认：重复 confirm 幂等（不产生重复行）",
+      "ok": true,
+      "detail": "{\"c\":[],\"a\":[\"memory_9813e8d5ae70\"]}"
+    },
+    {
+      "stage": "D",
+      "label": "确认：未知记录 404 GROWTH_RECORD_NOT_FOUND",
+      "ok": true,
+      "detail": "404 GROWTH_RECORD_NOT_FOUND"
+    },
+    {
+      "stage": "D",
+      "label": "确认：越权（拿别的记录的候选）必须被拒 400",
+      "ok": true,
+      "detail": "400 INVALID_GROWTH_CONFIRM"
+    },
+    {
+      "stage": "D",
+      "label": "成长记录：确认后的记忆真的进了对话注入",
+      "ok": true,
+      "detail": "[\"memory_f9ada3e8d0d7\",\"memory_877e5a65ae5e\",\"memory_9813e8d5ae70\"]"
+    },
+    {
+      "stage": "D",
+      "label": "简历：粘贴文本解析 200 且返回画像草稿",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "stage": "D",
+      "label": "简历：抽取出处写进画像证据表（M1-1，只写定位得到的）",
+      "ok": true,
+      "detail": "evidenceCount=5 of 5"
+    },
+    {
+      "stage": "D",
+      "label": "简历：学校/专业/年级从原文抽到（反例保护：不能把「大三」当专业）",
+      "ok": true,
+      "detail": "{\"school\":\"浙江大学\",\"major\":\"自动化\",\"grade\":\"大三\",\"question\":\"边缘 AI 工程师\",\"identity\":\"在校生\",\"skills\":[\"轻量级推理引擎集成\",\"模型量化与部署\"],\"experience\":[\"模型量化部署实践\"],\"directions\":\"边缘 AI 工程师\",\"source\":\"resume\"}"
+    },
+    {
+      "stage": "D",
+      "label": "简历：技能锚定图谱词条（nodeId 指向导出里的 skill 节点）",
+      "ok": true,
+      "detail": "[\"轻量级推理引擎集成\",\"模型量化与部署\"]"
+    },
+    {
+      "stage": "D",
+      "label": "简历：图谱不认识的技能词只进 unrecognizedSkills（不写画像技能表）",
+      "ok": true,
+      "detail": "[\"Python\",\"炖菜\"]"
+    },
+    {
+      "stage": "D",
+      "label": "简历：每条证据的 charRange 都定位到原文（可指回出处）",
+      "ok": true,
+      "detail": "[\"school\",\"major\",\"grade\",\"question\",\"identity\"]"
+    },
+    {
+      "stage": "D",
+      "label": "简历：抽取结果只落待确认候选（授权闸门）",
+      "ok": true,
+      "detail": "[\"candidate\",\"candidate\",\"candidate\",\"candidate\",\"candidate\"]"
+    },
+    {
+      "stage": "D",
+      "label": "简历：候选确认前不进注入上下文",
+      "ok": true,
+      "detail": "[\"memory_9813e8d5ae70\",\"memory_877e5a65ae5e\"]"
+    },
+    {
+      "stage": "D",
+      "label": "简历：候选确认后进注入上下文",
+      "ok": true,
+      "detail": "[\"memory_dea0a9eafd27\"]"
+    },
+    {
+      "stage": "D",
+      "label": "简历：同一份简历重复上传是幂等的（不产生重复候选）",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "stage": "D",
+      "label": "简历：PDF 明确 415 + 可执行建议（不假装解析）",
+      "ok": true,
+      "detail": "415 RESUME_FORMAT_UNSUPPORTED"
+    },
+    {
+      "stage": "D",
+      "label": "记忆：e2e 结束后不留残余（可重复跑）",
+      "ok": true,
+      "detail": "0 条："
+    },
+    {
+      "stage": "D",
+      "label": "成长记录：e2e 结束后不留残余",
+      "ok": true,
+      "detail": "0 条"
+    },
+    {
+      "stage": "E",
+      "label": "MCP HTTP 入口在 http://127.0.0.1:8798 就绪",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "stage": "E",
+      "label": "initialize 返回 session",
+      "ok": true,
+      "detail": "200 session=有"
+    },
+    {
+      "stage": "E",
+      "label": "tools/list 返回 3 个工具",
+      "ok": true,
+      "detail": "search_career_knowledge,get_skill_gap,get_career_graph_view"
+    },
+    {
+      "stage": "E",
+      "label": "search_career_knowledge 调用成功",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "stage": "E",
+      "label": "检索有命中（节点或 chunk 至少一类）",
+      "ok": true,
+      "detail": "节点 5 / chunk 5"
+    },
+    {
+      "stage": "E",
+      "label": "命中的节点 id 都在导出里",
+      "ok": true,
+      "detail": "skill:SK215,domain:edge-ai,occupation:AI004,domain:vision,knowledge:AI002:stage1"
+    },
+    {
+      "stage": "E",
+      "label": "命中的 chunk 都在导出里",
+      "ok": true,
+      "detail": "S05#s105~2,S05#s96~2,S08#s147,S26#s1190,S05#s100"
+    },
+    {
+      "stage": "E",
+      "label": "每条 citation 都能指回真实 chunk 与来源",
+      "ok": true,
+      "detail": "15 条引用"
+    },
+    {
+      "stage": "E",
+      "label": "get_skill_gap 调用成功",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "stage": "E",
+      "label": "目标解析到真实节点",
+      "ok": true,
+      "detail": "label → occupation:AI004"
+    },
+    {
+      "stage": "E",
+      "label": "缺口非空（目标职业要求了技能）",
+      "ok": true,
+      "detail": "10 步"
+    },
+    {
+      "stage": "E",
+      "label": "学习序满足先修边（先修必须排在依赖方之前）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "stage": "E",
+      "label": "已具备的技能被识别，不再出现在待学清单里",
+      "ok": true,
+      "detail": "Python 测试框架 pytest,C 语言与内存模型"
+    },
+    {
+      "stage": "E",
+      "label": "无法解析的已有技能原样回显，不瞎猜",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "stage": "E",
+      "label": "缺口步骤的 citations 可追溯",
+      "ok": true,
+      "detail": "17 条引用"
+    },
+    {
+      "stage": "E",
+      "label": "get_career_graph_view 调用成功",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "stage": "E",
+      "label": "视图节点数 = 导出节点数",
+      "ok": true,
+      "detail": "63 vs 63"
+    },
+    {
+      "stage": "E",
+      "label": "chunk 引用边被排除在可渲染边之外（记入 skippedEdges）",
+      "ok": true,
+      "detail": "109 vs 109"
+    },
+    {
+      "stage": "E",
+      "label": "可渲染边数 = 总边数 − chunk 引用边",
+      "ok": true,
+      "detail": "117 vs 117"
+    },
+    {
+      "stage": "E",
+      "label": "焦点节点被标记为 focal",
+      "ok": true,
+      "detail": "occupation:AI001"
+    },
+    {
+      "stage": "E",
+      "label": "摘要文案不含 undefined（此前是 undefined 的悬停文案）",
+      "ok": true,
+      "detail": "已选中「嵌入式开发工程师」，直接相关 15 个，两跳内 37 个，先修链 18 段，无关节点 20 个已降噪。"
+    },
+    {
+      "stage": "E",
+      "label": "问答探针：12 道真题都能拿到非空结果",
+      "ok": true,
+      "detail": "12/12"
+    },
+    {
+      "stage": "E",
+      "label": "问答探针：至少 1 道题的引用命中参考答案段（端到端可追溯）",
+      "ok": true,
+      "detail": "引用命中 11/12（MCP 检索是节点+chunk 双通道，非纯 BM25；此数只作链路信号，不作检索质量结论）"
+    },
+    {
+      "stage": "F",
+      "label": "后端 /health 与导出 kbVersion 一致",
+      "ok": true,
+      "detail": "2026.09.15 vs 2026.09.15"
+    },
+    {
+      "stage": "F",
+      "label": "后端 /health 与导出 graphVersion 一致",
+      "ok": true,
+      "detail": "0.1.0 vs 0.1.0"
+    },
+    {
+      "stage": "F",
+      "label": "后端 /health 与导出 generatedAt 一致（同一份字节）",
+      "ok": true,
+      "detail": "2026-09-30T16:12:03.801Z vs 2026-09-30T16:12:03.801Z"
+    },
+    {
+      "stage": "F",
+      "label": "后端 counts 与导出数组长度逐项一致",
+      "ok": true,
+      "detail": "{\"sources\":26,\"chunks\":1757,\"nodes\":63,\"edges\":226,\"wikiPages\":38,\"evaluationQuestions\":24}"
+    },
+    {
+      "stage": "F",
+      "label": "MCP dataVersion.kbVersion 与导出一致",
+      "ok": true,
+      "detail": "2026.09.15"
+    },
+    {
+      "stage": "F",
+      "label": "MCP dataVersion.generatedAt 与导出一致（同一份字节）",
+      "ok": true,
+      "detail": "2026-09-30T16:12:03.801Z"
+    },
+    {
+      "stage": "F",
+      "label": "后端与 MCP 指向的导出文件是同一个路径",
+      "ok": true,
+      "detail": "C:\\Users\\hr206\\OneDrive\\Desktop\\fuwuwaibao\\knowledge\\exports\\career-graph.json vs C:/Users/hr206/OneDrive/Desktop/fuwuwaibao/knowledge/exports/career-graph.json"
+    },
+    {
+      "stage": "F",
+      "label": "MCP counts 与导出数组长度逐项一致",
+      "ok": true,
+      "detail": "{\"nodes\":63,\"edges\":226,\"chunks\":1757,\"sources\":26,\"wikiPages\":38,\"evaluationQuestions\":24}"
+    },
+    {
+      "stage": "F",
+      "label": "MCP 返回的原文与导出里的 chunk 逐字相同",
+      "ok": true,
+      "detail": "S05#s105~2"
+    },
+    {
+      "stage": "F",
+      "label": "问答探针给出的引用段全部存在于导出 chunks 里",
+      "ok": true,
+      "detail": "16 条引用"
+    },
+    {
+      "stage": "G",
+      "label": "前端 dev server 在 http://localhost:3111 就绪",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "stage": "G",
+      "label": "/auth 返回 200 且能 SSR 出 HTML",
+      "ok": true,
+      "detail": "200 13553B"
+    },
+    {
+      "stage": "G",
+      "label": "/onboarding 返回 200 且带表单内容",
+      "ok": true,
+      "detail": "200 12716B"
+    },
+    {
+      "stage": "G",
+      "label": "/growth 返回 200（重定向后的落点）",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "stage": "G",
+      "label": "/growth 的 SSR 里出现记忆库面板（候选 / 已确认 / 注入预览三栏）",
+      "ok": true,
+      "detail": "已渲染"
+    },
+    {
+      "stage": "G",
+      "label": "/work-map 已是真页面（200 + SSR 出标题，不再是 redirect）",
+      "ok": true,
+      "detail": "200 标题已渲染"
+    },
+    {
+      "stage": "G",
+      "label": "/catalog 已是真页面（200 + SSR 出标题，不再是 redirect）",
+      "ok": true,
+      "detail": "200 标题已渲染"
+    },
+    {
+      "stage": "G",
+      "label": "/chat 的响应是 200 或站内重定向（chat 按设计走重定向）",
+      "ok": true,
+      "detail": "307 http://localhost:3111/growth?chat=open"
+    },
+    {
+      "stage": "H",
+      "label": "前端 node:test（npm test） 退出码 0",
+      "ok": true,
+      "detail": "exit=0 · # duration_ms 685.0562"
+    },
+    {
+      "stage": "H",
+      "label": "后端 pytest（backend/tests） 退出码 0",
+      "ok": true,
+      "detail": "exit=0 · 130 passed in 2.76s\r"
+    },
+    {
+      "stage": "H",
+      "label": "MCP stdio 验证（mcp:verify） 退出码 0",
+      "ok": true,
+      "detail": "exit=0 · [server] [career-graph-mcp@0.1.0] stdio 就绪；数据源 C:\\Users\\hr206\\OneDrive\\Desktop\\fuwuwaibao\\knowledge\\exports\\career-graph.json（2026.09.15）；工具 search_career_knowl"
+    },
+    {
+      "stage": "H",
+      "label": "MCP HTTP 验证（mcp:verify-http） 退出码 0",
+      "ok": true,
+      "detail": "exit=0 · [server] [career-graph-mcp] 会话建立 701e5887-20a1-4814-9508-0f7a0cc2f044（当前 1 个）"
+    },
+    {
+      "stage": "H",
+      "label": "题集硬规则校验（holdout）通过",
+      "ok": true,
+      "detail": "exit=0"
+    }
+  ],
+  "warnings": [
+    {
+      "stage": "B",
+      "label": "口径提醒：重跑 09–11 改写的文件不止「只改 generatedAt」那三份",
+      "detail": "本次改写：evidence/integrity-report.json evidence/pipeline-log.json graph/graph.json graph/search-index.json exports/career-graph.json evaluations/results.json evaluations/report.md；其中 evaluations/results.json、evaluations/report.md、evidence/pipeline-log.json 还含耗时/运行次数（每跑一次都变），所以「产物完全确定性」只对图谱类产物成立 —— 本阶段按语义投影（剥掉时间戳与耗时）比对，语义字段必须逐字不变"
+    }
+  ]
+}
