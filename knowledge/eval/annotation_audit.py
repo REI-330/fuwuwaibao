@@ -55,6 +55,8 @@ import sys
 import time
 import urllib.request
 
+from _shared_llm import chat  # 评测与产品共用的 LLM 入口（knowledge/eval/_shared_llm.py）
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 K = os.path.join(ROOT, "knowledge")
 ENV_FILE = os.path.join(K, "eval", ".env")
@@ -89,27 +91,8 @@ def load_env() -> None:
 
 
 def llm(prompt: str, timeout: int = 180, attempts: int = 3) -> str:
-    base = os.environ["DEEPEVAL_BASE_URL"].rstrip("/")
-    body = json.dumps({"model": os.environ["DEEPEVAL_MODEL"], "temperature": 0,
-                       "max_tokens": 200,
-                       "messages": [{"role": "user", "content": prompt}]}).encode("utf-8")
-    last = None
-    for i in range(attempts):
-        try:
-            req = urllib.request.Request(
-                base + "/chat/completions", data=body,
-                headers={"Authorization": "Bearer " + os.environ["DEEPEVAL_API_KEY"],
-                         "Content-Type": "application/json"})
-            with urllib.request.urlopen(req, timeout=timeout) as r:
-                d = json.load(r)
-            text = (d["choices"][0]["message"].get("content") or "").strip()
-            if text:
-                return text
-            last = "返回内容为空"
-        except Exception as error:  # noqa: BLE001
-            last = f"{type(error).__name__} {error}"
-        time.sleep(min(2 ** i, 8))
-    raise RuntimeError(last)
+    """统一走 `_shared_llm`（原实现这里自己拼 HTTP 并把 max_tokens 写死 200）。"""
+    return chat(prompt, max_tokens=1500, timeout=timeout, attempts=attempts)
 
 
 def blocks(ids, chunks) -> str:

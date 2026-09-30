@@ -24,6 +24,8 @@ import time
 import urllib.error
 import urllib.request
 
+from _shared_llm import chat  # 评测与产品共用的 LLM 入口（knowledge/eval/_shared_llm.py）
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 K = os.path.join(ROOT, "knowledge")
 RUNS = os.path.join(K, "eval", "runs")
@@ -53,27 +55,13 @@ def load_env():
                 os.environ.setdefault(k.strip(), v.strip().strip('"'))
 
 
-def llm(prompt, timeout=240, max_tokens=300, attempts=6):
-    base = os.environ["DEEPEVAL_BASE_URL"].rstrip("/")
-    body = json.dumps({"model": os.environ["DEEPEVAL_MODEL"], "temperature": 0,
-                       "max_tokens": max_tokens,
-                       "messages": [{"role": "user", "content": prompt}]}).encode()
-    last = None
-    for i in range(attempts):
-        try:
-            req = urllib.request.Request(
-                base + "/chat/completions", data=body,
-                headers={"Authorization": "Bearer " + os.environ["DEEPEVAL_API_KEY"],
-                         "Content-Type": "application/json"})
-            with urllib.request.urlopen(req, timeout=timeout) as r:
-                d = json.load(r)
-            return (d["choices"][0]["message"]["content"] or "").strip()
-        except urllib.error.HTTPError as e:
-            last = f"HTTP {e.code}"
-        except Exception as e:
-            last = f"{type(e).__name__} {e}"
-        time.sleep(min(4 * (i + 1), 20))
-    raise RuntimeError(last)
+def llm(prompt, timeout=240, max_tokens=1500, attempts=6):
+    """统一走 `_shared_llm`；重排脚本原来自己的退避（4s 起步、上限 20s）在这里指定。
+
+    原 max_tokens 默认 300：对现役推理模型不够（思维链吃额度、正文回空串），
+    重排结果会静默退化成一堆空输出。
+    """
+    return chat(prompt, max_tokens=max_tokens, timeout=timeout, attempts=attempts, backoff=(4.0, 20.0))
 
 
 def parse_ids(text, allowed, k=3):

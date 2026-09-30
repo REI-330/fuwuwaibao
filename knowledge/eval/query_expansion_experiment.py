@@ -36,6 +36,8 @@ import time
 import urllib.error
 import urllib.request
 
+from _shared_llm import chat  # 评测与产品共用的 LLM 入口（knowledge/eval/_shared_llm.py）
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 K = os.path.join(ROOT, "knowledge")
 CHUNKS = os.path.join(K, "chunks", "chunks.jsonl")
@@ -78,30 +80,13 @@ def load_env():
 
 
 def llm(prompt, timeout=120, attempts=4):
-    """带退避重试。端点对突发调用会直接拒（实测：连打 30+ 次后大量 HTTPError），
-    不加重试会让"扩展失败"静默退化成"用原问题"——表面上实验跑完了，实际基线=实验组。"""
-    base = os.environ["DEEPEVAL_BASE_URL"].rstrip("/")
-    # max_tokens 要够：端点上现役的 deepseek-v4.1-flash 是推理模型，思维链也吃这个额度，
-    # 给 200 时 content 常被挤空（实测 reasoning_tokens 已占十余个）。
-    body = json.dumps({"model": os.environ["DEEPEVAL_MODEL"], "temperature": 0,
-                       "max_tokens": 1500,
-                       "messages": [{"role": "user", "content": prompt}]}).encode()
-    last = None
-    for i in range(attempts):
-        try:
-            req = urllib.request.Request(base + "/chat/completions", data=body,
-                                         headers={"Authorization": "Bearer " + os.environ["DEEPEVAL_API_KEY"],
-                                                  "Content-Type": "application/json"})
-            with urllib.request.urlopen(req, timeout=timeout) as r:
-                d = json.load(r)
-            text = (d["choices"][0]["message"].get("content") or "").strip()
-            if text:
-                return text.splitlines()[0].strip()
-            last = "返回内容为空"
-        except Exception as error:  # noqa: BLE001
-            last = f"{type(error).__name__} {error}"
-        time.sleep(min(2 ** i, 8))
-    raise RuntimeError(str(last))
+    """统一走 `_shared_llm`；只取第一行（保留原有解析）。
+
+    原先这段注释里记的两条教训（端点会突发拒、推理模型吃 max_tokens）已经内建进
+    `backend/llm.py`，不再由每个脚本各记一遍。
+    """
+    text = chat(prompt, max_tokens=1500, timeout=timeout, attempts=attempts)
+    return text.splitlines()[0].strip()
 
 
 def embed(texts, timeout=300):

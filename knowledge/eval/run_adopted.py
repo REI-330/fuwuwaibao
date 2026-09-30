@@ -26,6 +26,8 @@ import sys
 import time
 import urllib.error
 import urllib.request
+
+from _shared_llm import chat  # 评测与产品共用的 LLM 入口（knowledge/eval/_shared_llm.py）
 from collections import defaultdict
 
 RERANK_PROMPT = """下面是从职业知识库里检索出的候选片段，请选出最有助于回答该问题的 3 段。
@@ -51,6 +53,13 @@ RERANK_CACHE = os.path.join(RUNS, "rerank-cache-10.json")
 CACHE_DIR = os.path.join(K, "eval", "cache")
 TEI = os.environ.get("TEI_EMBED_URL", "http://127.0.0.1:8090/v1/embeddings")
 MODEL = os.environ.get("TEI_MODEL", "Qwen3-Embedding-0.6B")
+
+if not os.environ.get("TEI_MODEL"):
+    # 实测踩过：现役服务是 int8/onnx，语料缓存却是 float32 那份（名字里没 int8），
+    # 于是「float32 语料向量 × int8 查询向量」不同源，命中数会莫名差 1–3 题。
+    print("[warn] 未设 TEI_MODEL，语料缓存按 'Qwen3-Embedding-0.6B'（float32）取。"
+          "若现役服务是 int8（/info 的 model_id 带 int8,onnx），请显式设 "
+          "TEI_MODEL=Qwen3-Embedding-0.6B-onnx-int8，否则语料与查询向量不同源。", file=sys.stderr)
 
 
 def embed(texts, timeout=600, batch=8):
@@ -87,32 +96,13 @@ def load_env():
 
 
 def llm(prompt, timeout=180, max_tokens=3000, attempts=4):
-    """带退避重试：端点对突发调用会直接拒（实测），必须重试。
+    """统一走 `_shared_llm`（原实现自己拼 HTTP + 自己重试）。
 
-    max_tokens 默认给 3000 而不是 300：端点现役的 deepseek-v4.1-flash 是推理模型，
-    思维链也吃这个额度。实测给 1200 时 34 题里有 3 题返回空 content / 无 content 字段，
-    被误判成"模型没给出可用编号"而重试到失败。
+    原先注释里那条「max_tokens 给 1200 时 34 题里有 3 题返回空 content，被误判成
+    '模型没给出可用编号'而重试到失败」已经内建进 `backend/llm.py`：空正文会被识别成
+    `LLM_EMPTY_CONTENT` 并明确报错，不再冒充"模型答了但格式不对"。
     """
-    base = os.environ["DEEPEVAL_BASE_URL"].rstrip("/")
-    body = json.dumps({"model": os.environ["DEEPEVAL_MODEL"], "temperature": 0,
-                       "max_tokens": max_tokens,
-                       "messages": [{"role": "user", "content": prompt}]}).encode()
-    last = None
-    for i in range(attempts):
-        try:
-            req = urllib.request.Request(
-                base + "/chat/completions", data=body,
-                headers={"Authorization": "Bearer " + os.environ["DEEPEVAL_API_KEY"],
-                         "Content-Type": "application/json"})
-            with urllib.request.urlopen(req, timeout=timeout) as r:
-                d = json.load(r)
-            return (d["choices"][0]["message"]["content"] or "").strip()
-        except urllib.error.HTTPError as e:
-            last = f"HTTP {e.code}"
-        except Exception as e:
-            last = f"{type(e).__name__} {e}"
-        time.sleep(min(2 ** i, 12))
-    raise RuntimeError(last)
+    return chat(prompt, max_tokens=max_tokens, timeout=timeout, attempts=attempts)
 
 
 def parse_ids(text, allowed, k=3):
@@ -139,6 +129,9 @@ def main():
                     help="逗号分隔的 chunkId：检索期剔除（导航/列表段等）")
     ap.add_argument("--retries", type=int, default=4, help="单题重排失败的重试次数")
     ap.add_argument("--retry-wait", type=float, default=3.0, help="重试基础退避秒数（线性递增）")
+    ap.add_argument("--gate-peak", type=float, default=None,
+                    help="查询自适应门控（M2-5）：BM25 榜首/第 10 名 < 该值时，该题退单路向量，"
+                         "不再掺 BM25。推荐 1.5（见 evaluations/语言自适应融合.md）")
     args = ap.parse_args()
     if args.do_rerank:
         load_env()
@@ -176,14 +169,27 @@ def main():
     excluded = {x.strip() for x in args.exclude.split(",") if x.strip()}
     if excluded:
         print(f"检索期剔除 {len(excluded)} 段：{sorted(excluded)}")
+    gated = 0
     for q, qv in zip(answerable, qvecs):
         qid = q["questionId"]
         if qid not in b_sc:
             continue
         vs = {cid: sum(a * b for a, b in zip(qv, vecs[cid])) for cid in ids}
         b, v = minmax(b_sc[qid]), minmax(vs)
+        # M2-5 查询自适应门控：BM25 没有真实字面命中（榜首/第 10 名 比值偏低）时，
+        # minmax 会把噪声拉满成整权重，反而挤掉向量本来对的名次 —— 这种情况退单路向量。
+        if args.gate_peak is not None:
+            raw = sorted(b_sc[qid].values(), reverse=True)
+            tenth = raw[min(9, len(raw) - 1)] if raw else 0.0
+            peak = (raw[0] / tenth) if (raw and tenth > 0) else 0.0
+            if peak < args.gate_peak:
+                gated += 1
+                fused[qid] = {c: v.get(c, 0.0) for c in v if c not in excluded}
+                continue
         fused[qid] = {c: args.alpha * b.get(c, 0.0) + (1 - args.alpha) * v.get(c, 0.0)
                       for c in set(b) | set(v) if c not in excluded}
+    if args.gate_peak is not None:
+        print(f"自适应门控 --gate-peak {args.gate_peak}：{gated}/{len(answerable)} 题退单路向量")
 
     if args.do_rerank:
         todo = [q for q in answerable if q["questionId"] in fused
@@ -299,7 +305,8 @@ def main():
 
     # 候选数必须从缓存里读：写死 10 会在用 30 的缓存时谎报配置（真跑过一次才发现）。
     cache_cands = sorted({len(v.get("candidates") or []) for v in rerank.values() if v.get("picked")})
-    print(f"\n配置：BM25+向量加权融合 α_bm25={args.alpha}；"
+    print(f"\n配置：BM25+向量加权融合 α_bm25={args.alpha}"
+          f"{'' if args.gate_peak is None else f'；自适应门控 --gate-peak {args.gate_peak}'}；"
           f"重排候选 {cache_cands or '(缓存为空)'}（读缓存 {os.path.basename(args.rerank_cache)}）")
     fusion_rows = grouped(fusion_q, f"档位 FUSION(α={args.alpha})")
     rerank_rows = grouped(rerank_q, "档位 FUSION+RERANK（已采纳配置）")

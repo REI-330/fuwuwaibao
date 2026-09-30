@@ -1,6 +1,6 @@
 # 06 人工裁定队列
 
-生成时间：2026-09-15T13:36:02.893Z
+生成时间：2026-09-30T15:14:48.179Z
 
 > 本文件由 `knowledge/pipeline/06-adjudicate.mjs` 生成，**不要手改**。
 > 人的输入只写进 `knowledge/review/adjudication.json`。

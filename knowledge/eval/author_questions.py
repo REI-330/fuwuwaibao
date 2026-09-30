@@ -30,6 +30,8 @@ import sys
 import time
 import urllib.error
 import urllib.request
+
+from _shared_llm import chat  # 评测与产品共用的 LLM 入口（knowledge/eval/_shared_llm.py）
 from collections import defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -120,33 +122,15 @@ def load_env():
                 os.environ.setdefault(k.strip(), v.strip().strip('"'))
 
 
-def llm(prompt, timeout=180, max_tokens=600, attempts=8, base_delay=5.0):
-    """带退避重试：端点会突发返回 503（实测一次中断可持续 1–3 分钟），
-    必须重试到能扛住一次完整中断，否则缓存里会留下"因限流而失败"的假记录。"""
-    base = os.environ["DEEPEVAL_BASE_URL"].rstrip("/")
-    body = json.dumps({"model": os.environ["DEEPEVAL_MODEL"], "temperature": 0,
-                       "max_tokens": max_tokens,
-                       "messages": [{"role": "user", "content": prompt}]}).encode()
-    last = None
-    for i in range(attempts):
-        try:
-            req = urllib.request.Request(
-                base + "/chat/completions", data=body,
-                headers={"Authorization": "Bearer " + os.environ["DEEPEVAL_API_KEY"],
-                         "Content-Type": "application/json"})
-            with urllib.request.urlopen(req, timeout=timeout) as r:
-                d = json.load(r)
-            return (d["choices"][0]["message"]["content"] or "").strip()
-        except urllib.error.HTTPError as e:
-            last = f"HTTP {e.code}"
-            try:
-                last += " " + e.read().decode("utf-8", "replace")[:120]
-            except Exception:
-                pass
-        except Exception as e:
-            last = f"{type(e).__name__} {e}"
-        time.sleep(min(base_delay * (2 ** i), 40) + random.uniform(0, 2))
-    raise RuntimeError(last)
+def llm(prompt, timeout=180, max_tokens=1500, attempts=8, base_delay=5.0):
+    """统一走 `_shared_llm`。
+
+    原注释里那条「端点会突发返回 503（一次中断可持续 1–3 分钟）」决定了两件事：
+    重试次数要够（8 次）、退避要长（5 s 起步、上限 40 s）—— 这两条现在作为参数
+    传给共用实现，纪律本身集中在 `backend/llm.py`。
+    """
+    return chat(prompt, max_tokens=max_tokens, timeout=timeout, attempts=attempts,
+                backoff=(base_delay, 40.0))
 
 
 def longest_common_substring(a, b):

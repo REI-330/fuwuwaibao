@@ -25,6 +25,8 @@ import sys
 import time
 import urllib.error
 import urllib.request
+
+from _shared_llm import chat  # 评测与产品共用的 LLM 入口（knowledge/eval/_shared_llm.py）
 from collections import defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -99,30 +101,9 @@ def load_env():
 
 
 def llm(prompt, timeout=240, max_tokens=2500, attempts=8, base_delay=5.0):
-    base = os.environ["DEEPEVAL_BASE_URL"].rstrip("/")
-    body = json.dumps({"model": os.environ["DEEPEVAL_MODEL"], "temperature": 0,
-                       "max_tokens": max_tokens,
-                       "messages": [{"role": "user", "content": prompt}]}).encode()
-    last = None
-    for i in range(attempts):
-        try:
-            req = urllib.request.Request(
-                base + "/chat/completions", data=body,
-                headers={"Authorization": "Bearer " + os.environ["DEEPEVAL_API_KEY"],
-                         "Content-Type": "application/json"})
-            with urllib.request.urlopen(req, timeout=timeout) as r:
-                d = json.load(r)
-            return (d["choices"][0]["message"]["content"] or "").strip()
-        except urllib.error.HTTPError as e:
-            last = f"HTTP {e.code}"
-            try:
-                last += " " + e.read().decode("utf-8", "replace")[:150]
-            except Exception:
-                pass
-        except Exception as e:
-            last = f"{type(e).__name__} {e}"
-        time.sleep(min(base_delay * (2 ** i), 40) + random.uniform(0, 2))
-    raise RuntimeError(last)
+    """统一走 `_shared_llm`（出题脚本要扛住端点 1–3 分钟的中断，所以 attempts/退避都留足）。"""
+    return chat(prompt, max_tokens=max_tokens, timeout=timeout, attempts=attempts,
+                backoff=(base_delay, 40.0))
 
 
 def parse_json_array(text):

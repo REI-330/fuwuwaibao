@@ -44,6 +44,10 @@ ENV_FILE = os.path.join(K, "eval", ".env")
 INVENTORY = os.path.join(HERE, "inventory.json")
 TERM_MAP = os.path.join(HERE, "zh-en.json")
 
+# 与评测脚本共用同一份 LLM 实现（本脚本不在 knowledge/eval 下，所以显式补一次 sys.path）
+sys.path.insert(0, os.path.join(K, "eval"))
+from _shared_llm import chat  # noqa: E402 —— 必须在 sys.path 调整之后导入
+
 # 软件类别标签：正文里写成 `Operating system software — ...`。标签一定以 software 结尾。
 SOFTWARE_LABEL = re.compile(r"([A-Z][A-Za-z0-9 ,\-/&.()]{2,70}?\bsoftware)\s*[—\-]")
 HAN = re.compile(r"[\u4e00-\u9fff]")
@@ -73,27 +77,8 @@ def load_env():
 
 
 def llm(prompt, timeout=180, attempts=4):
-    """带退避重试：端点对突发调用会直接拒，不重试会让失败静默退化成空结果。"""
-    base = os.environ["DEEPEVAL_BASE_URL"].rstrip("/")
-    body = json.dumps({"model": os.environ["DEEPEVAL_MODEL"], "temperature": 0,
-                       "max_tokens": 4000,
-                       "messages": [{"role": "user", "content": prompt}]}).encode()
-    last = None
-    for i in range(attempts):
-        try:
-            req = urllib.request.Request(base + "/chat/completions", data=body,
-                                         headers={"Authorization": "Bearer " + os.environ["DEEPEVAL_API_KEY"],
-                                                  "Content-Type": "application/json"})
-            with urllib.request.urlopen(req, timeout=timeout) as r:
-                d = json.load(r)
-            text = (d["choices"][0]["message"].get("content") or "").strip()
-            if text:
-                return text
-            last = "返回内容为空（推理模型可能把额度耗在思维链上）"
-        except Exception as error:  # noqa: BLE001
-            last = f"{type(error).__name__} {error}"
-        time.sleep(min(2 ** i, 8))
-    raise RuntimeError(str(last))
+    """统一走 `_shared_llm`（原实现自己拼 HTTP：失败静默退化成空结果，正是要避免的）。"""
+    return chat(prompt, max_tokens=4000, timeout=timeout, attempts=attempts)
 
 
 def parse_json_block(text):

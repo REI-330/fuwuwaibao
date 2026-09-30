@@ -33,6 +33,8 @@ import sys
 import time
 import urllib.request
 
+from _shared_llm import chat  # 评测与产品共用的 LLM 入口（knowledge/eval/_shared_llm.py）
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 K = os.path.join(ROOT, "knowledge")
 CHUNKS = os.path.join(K, "chunks", "chunks.jsonl")
@@ -63,16 +65,12 @@ def load_env():
 
 
 def llm(prompt, timeout=120):
-    base = os.environ["DEEPEVAL_BASE_URL"].rstrip("/")
-    body = json.dumps({"model": os.environ["DEEPEVAL_MODEL"], "temperature": 0,
-                       "max_tokens": 300,
-                       "messages": [{"role": "user", "content": prompt}]}).encode()
-    req = urllib.request.Request(base + "/chat/completions", data=body,
-                                 headers={"Authorization": "Bearer " + os.environ["DEEPEVAL_API_KEY"],
-                                          "Content-Type": "application/json"})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        d = json.load(r)
-    text = (d["choices"][0]["message"]["content"] or "")
+    """统一走 `_shared_llm`；返回拆好的子查询（保留原有的行解析，只换掉 HTTP 那层）。
+
+    原实现把 max_tokens 写死 300，对现役推理模型会被思维链吃光、正文回空串，
+    于是"拆解失败"会静默退化成"没有子查询"，基线与实验组看起来一样。
+    """
+    text = chat(prompt, max_tokens=1500, timeout=timeout)
     subs = [ln.strip(" -•\t") for ln in text.splitlines() if ln.strip()]
     return [s for s in subs if len(s) > 3][:3]
 

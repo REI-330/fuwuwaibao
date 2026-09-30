@@ -33,6 +33,7 @@
 | `eval/` | 评测脚本与跑批产物（Python 标准库） |
 | `import/` | 外部职业库（O*NET / 职业分类大典 / 国家职业技能标准） |
 | `evidence/` | 完整性报告与流水线日志 |
+| `SOURCE_LICENSES.md` | **26 份来源的许可矩阵与再分发口径**（含 3 份 AGPL-3.0 单独说明） |
 
 ## 跑管线（在**仓库根目录**执行）
 
@@ -44,8 +45,14 @@ node knowledge/pipeline/10-layout-index.mjs      # 确定性坐标 x/y + 检索�
 node knowledge/pipeline/11-export-eval.mjs       # 导出 + 图谱原生 24 题五档消融
 ```
 
-**产物是确定性的**（已实测）：重跑 09–11 后，`exports/career-graph.json`、`graph.json`、
-`search-index.json` 的差异**只有 `generatedAt` 时间戳**。
+**图谱类产物是确定性的**（已实测 + 已由 `npm run e2e` 阶段 B 钉住）：重跑 09–11 后，
+`exports/career-graph.json`、`graph.json`、`search-index.json`、`evidence/integrity-report.json`
+的差异**只有 `generatedAt` 时间戳**。
+
+⚠ 但「产物完全确定性」只对图谱类产物成立：第 11 步自己的评测产物
+`evaluations/results.json`（`elapsedMs`）、`evaluations/report.md`（耗时列）与
+`evidence/pipeline-log.json`（`startedAt` / `durationMs` / `runCount`）**每跑一次都会变**。
+端到端脚本因此按「剥掉时间戳与耗时后的语义投影」比对，语义字段仍必须逐字不变。
 
 01–08 步是**一次性构建**（抓取 / 分块 / 抽取 / 裁定 / 编译 wiki），需要网络或 LLM，
 不需要每次重跑；12 步（国标重组入库）同理。产物已在仓库里。
@@ -61,9 +68,25 @@ node knowledge/pipeline/probe-heldout.mjs                         # 留出集跑
 node knowledge/pipeline/probe-chunking.mjs                        # 分块 A/B
 python knowledge/eval/validate_questionset.py \
   --set knowledge/evaluations/questions-holdout.json --min-gap 3  # 题集硬规则（单集）
-python -m pytest backend/tests -q                                  # 后端 16 项（在 frontend/frotent/frontend1 下）
-npm test                                                           # 前端 12 项（同上目录）
+cd frontend/frotent/frontend1 && npm run e2e                      # ★ 端到端全链（169 条断言，约 18 s）
+cd frontend/frotent/frontend1 && npm run e2e:llm                  # 再验模型接通性（调真端点，约 30 s）
+cd frontend/frotent/frontend1 && python -m pytest backend/tests -q # 后端 130 项（19 记忆 + 20 LLM/触发器 + 17 图谱契约 + …）
+cd frontend/frotent/frontend1 && npm test                          # 前端 12 项
+node knowledge/pipeline/import/bridge-coverage.mjs                 # 桥接覆盖率 + 「机械对齐」实测（M2-6 证据，离线）
+node knowledge/pipeline/bm25-full.mjs --questions knowledge/evaluations/questions-dev.json \
+  --out knowledge/eval/runs/af-dev-bm25-full.json                  # 先出 BM25 完整排序
+node knowledge/pipeline/weknora/candidate-pool.mjs --questions knowledge/evaluations/questions-dev.json \
+  --bm25 knowledge/eval/runs/af-dev-bm25-full.json --tag dev       # 双路候选池互补性（M2-4，离线）
 ```
+
+`npm run e2e` 是本仓库**唯一一条覆盖整条链**的命令（脚本 `frontend/frotent/frontend1/scripts/e2e-knowledge.mjs`），
+阶段划分见该脚本头部注释；它同时是下面这些口径的**执行者**：raw 快照逐字节可复现 20/25、
+重跑 09–11 语义投影不变、dev 题集 BM25 命中 ≥ 25/34、三端 `generatedAt` 与 counts 同一份字节、
+记忆库「候选→确认→召回→推荐增强→删除即遗忘」全生命周期。
+
+`npm run e2e:llm` 会真调一次模型生成触发器（约 30 s，因此**不在默认链里**）：
+断言 `generatedBy=llm`、模型名可溯源、字段都在约束内，并且**用它自己生成的问句式去提问能召回该记忆**；
+模型不可用时它断言的是「降级标记 + 错误原因都在」，而不是假装成功。
 
 **题集现状**（详见 `evaluations/README.md`）：
 
@@ -71,7 +94,7 @@ npm test                                                           # 前端 12 �
 |---|---|---|
 | `questions-dev.json` | 49 题（可答 34：zh 20 / xl 14；拒答 15） | 调参、试方案 |
 | `questions-test.json` | 47 题（可答 32；拒答 15） | **已消费三次**（24/32 → 26/32 → 27/32），只作历史 |
-| `questions-holdout.json` | 50 题（可答 35：zh 14 / xl 21；拒答 15） | **验收载体，已消费一次**（首次基线 30/35） |
+| `questions-holdout.json` | 50 题（可答 35：zh 14 / xl 21；拒答 15） | **验收载体，已消费两次**（首次基线 30/35；M2-5 融合对照在 `语言自适应融合.md`） |
 | `questions-refusal.json` | 30 题 | 拒答阈值标定 |
 
 ## 哪些需要外部服务（跑不了会明确报错，不会静默给错数）
@@ -79,8 +102,12 @@ npm test                                                           # 前端 12 �
 | 档位 | 依赖 |
 |---|---|
 | 向量档 | 本机嵌入服务 `TEI_EMBED_URL`（缺省 `http://127.0.0.1:8090/v1/embeddings`）。现役用 `knowledge/eval/local_embed_server.py`（fastembed/ONNX，**不需要 Docker**），模型 `Qwen3-Embedding-0.6B(int8,onnx)`、1024 维；向量缓存按模型名分文件（`eval/cache/chunk-vectors-<model>.json`），**换模型必须重算**，文件名对不上会直接报错 |
-| 重排档 | OpenAI 兼容 LLM 端点（`DEEPEVAL_*`；重排档给 `deepseek-v4.1-flash`，它是推理模型，`max_tokens` 要给够） |
-| 裁判档 | DeepEval + `knowledge/eval/.env` 里的 `DEEPEVAL_*`。**`.env` 未入库**，模板见 `knowledge/eval/.env.example` |
+| 重排档 / 裁判档 / 查询扩展 / 出题 / 术语表 | **同一个** OpenAI 兼容 LLM 端点，配置在 `knowledge/eval/.env`（`DEEPEVAL_*`）。**`.env` 未入库**，模板见 `knowledge/eval/.env.example`（那里记了本机实测的模型清单与 `max_tokens` 实测值） |
+| 产品侧：记忆写时触发器（模型版） | 同上这一个端点。统一入口 `frontend/frotent/frontend1/backend/llm.py`，评测侧经 `knowledge/eval/_shared_llm.py` 复用同一份实现 —— **改一处配置，产品与评测一起变**。配不上时触发器自动降级为规则版并在 `generated_by` 里标出来，`GET /health` 的 `llm` 块也会说明 |
+
+> 「推理模型会把额度吃在思维链上」这条踩坑记录现在只有**一份**（`backend/llm.py` 的 `MIN_MAX_TOKENS`
+> 与自动翻倍逻辑）。此前 9 个评测脚本各自手写了一遍 `llm()`、各自填 max_tokens（200–4000 不等），
+> 改一处纪律改不到另一处；2026-09-29 已全部改为 `from _shared_llm import chat`。
 
 历史备选：`knowledge-v1/scripts/start_tei.sh`（TEI 官方镜像路线，**需要 Docker**）。
 
@@ -129,7 +156,7 @@ npm test                                                           # 前端 12 �
 
 | 端 | 读什么 | 验证命令 |
 |---|---|---|
-| 后端 | `backend/knowledge.py` 读导出 → 职业/技能目录、推荐算式 | `python -m pytest backend/tests -q`（16 项） |
+| 后端 | `backend/knowledge.py` 读导出 → 职业/技能目录、推荐算式 | `python -m pytest backend/tests -q`（**130 项**） |
 | MCP | `mcp/career-graph-store.ts` 读同一份导出 + 复用前端纯函数 | `npm run mcp:verify`、`npm run mcp:verify-http` |
 | 前端 | 经后端接口取数据；图谱视图用 `lib/client/graph-view.ts` 纯函数 | `npm test`（12 项） |
 
@@ -142,4 +169,6 @@ npm test                                                           # 前端 12 �
 数字按其当时口径保留，不要当成现役规模：
 `知识库构建方法与效果评估报告.md`、`系统知识库构建方法与效果评估报告.md`、
 `检索命中率优化实验.md`、`WeKnora对照评测.md`、`EVAL_SET_DESIGN.md`（v1）、`report.md`。
-现役口径一律以本文件与 `evaluations/实验总表.md` 的 C/D 组为准。
+现役口径一律以本文件与 `evaluations/实验总表.md` 的 C/D/E 组为准。
+
+现役（1757 段语料）的**检索实验**另见 `evaluations/语言自适应融合.md`（M2-5：单路向量 vs 融合 vs 查询自适应门控，dev 选型 / 新 holdout 报数，零 LLM 可复算）。

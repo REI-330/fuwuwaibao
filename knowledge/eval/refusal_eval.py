@@ -25,6 +25,8 @@ import os
 import sys
 import time
 import urllib.request
+
+from _shared_llm import MIN_MAX_TOKENS, chat  # 评测与产品共用的 LLM 入口（knowledge/eval/_shared_llm.py）
 from collections import defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -67,17 +69,18 @@ def load_env():
                 os.environ.setdefault(k.strip(), v.strip().strip('"'))
 
 
-def llm(prompt, timeout=180, max_tokens=500):
-    base = os.environ["DEEPEVAL_BASE_URL"].rstrip("/")
-    body = json.dumps({"model": os.environ["DEEPEVAL_MODEL"], "temperature": 0,
-                       "max_tokens": max_tokens,
-                       "messages": [{"role": "user", "content": prompt}]}).encode()
-    req = urllib.request.Request(base + "/chat/completions", data=body,
-                                 headers={"Authorization": "Bearer " + os.environ["DEEPEVAL_API_KEY"],
-                                          "Content-Type": "application/json"})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        d = json.load(r)
-    return (d["choices"][0]["message"]["content"] or "").strip()
+def llm(prompt, timeout=180, max_tokens=1500):
+    """统一走 `_shared_llm`（与产品侧记忆触发器共用同一份配置与重试纪律）。
+
+    原实现默认 500、判定句甚至传过 30：端点上现役的 deepseek-v4.1-flash 是推理模型，
+    `reasoning_tokens` 常常已经超过这些值，正文必然回空串 —— 判定会静默失效。
+    这里给下限兜住，并把被抬高的调用打出来，不静默改调用方的意图。
+    """
+    if max_tokens < MIN_MAX_TOKENS:
+        print(f"[llm] max_tokens={max_tokens} 低于安全下限 {MIN_MAX_TOKENS}，抬到 1500（推理模型会吃掉额度）",
+              file=sys.stderr)
+        max_tokens = 1500
+    return chat(prompt, max_tokens=max_tokens, timeout=timeout)
 
 
 def embed(texts, timeout=600, batch=8):

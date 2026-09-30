@@ -30,6 +30,8 @@ import time
 import urllib.error
 import urllib.request
 
+from _shared_llm import chat  # 评测与产品共用的 LLM 入口（knowledge/eval/_shared_llm.py）
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 K = os.path.join(ROOT, "knowledge")
 CHUNKS = os.path.join(K, "chunks", "chunks.jsonl")
@@ -65,16 +67,12 @@ def load_env():
 
 
 def llm(prompt, timeout=180):
-    base = os.environ["DEEPEVAL_BASE_URL"].rstrip("/")
-    body = json.dumps({"model": os.environ["DEEPEVAL_MODEL"], "temperature": 0,
-                       "max_tokens": 300,
-                       "messages": [{"role": "user", "content": prompt}]}).encode()
-    req = urllib.request.Request(base + "/chat/completions", data=body,
-                                 headers={"Authorization": "Bearer " + os.environ["DEEPEVAL_API_KEY"],
-                                          "Content-Type": "application/json"})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        d = json.load(r)
-    return (d["choices"][0]["message"]["content"] or "").strip()
+    """统一走 `_shared_llm`（与产品侧记忆触发器共用同一份配置与重试纪律）。
+
+    原来这里自己拼 HTTP 并把 max_tokens 写死 300：端点上现役的 deepseek-v4.1-flash
+    是推理模型，300 会被思维链吃光、content 回空串，重排结果静默退化成原序。
+    """
+    return chat(prompt, max_tokens=1500, timeout=timeout)
 
 
 def embed(texts, timeout=600, batch=8):
