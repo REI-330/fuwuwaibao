@@ -47,7 +47,7 @@ RRF_K = 60
 RRF_VECTOR_WEIGHT = 0.7
 RRF_KEYWORD_WEIGHT = 0.3
 RECORD_ID_PATTERN = re.compile(r"记录 ID：([A-Za-z0-9\-]+)")
-PROVENANCE_PATTERN = re.compile(r"_来源：.*?豁免人：业主_", re.S)
+PROVENANCE_PATTERN = re.compile(r"_(?:来源|出处)：.*?业主[^\n]*_", re.S)
 
 
 def connect(db_path):
@@ -55,9 +55,14 @@ def connect(db_path):
 
 
 def document_stats(conn):
-    """每个文档的 chunk 数 / 长度；顺带找出内容哈希序列完全相同的重复文档。"""
+    """每个**在库**文档的 chunk 数 / 长度；顺带找出内容哈希序列完全相同的重复文档。
+
+    只统计 `deleted_at IS NULL` 的文档：删除是软删除，旧 chunk 行不会立刻消失，
+    不排掉就会把重建前的旧块也当成现状（这正是第一次复跑时看到的假重复）。
+    """
     documents = []
-    for kid, name in conn.execute("SELECT id, file_name FROM knowledges"):
+    for kid, name in conn.execute(
+            "SELECT id, file_name FROM knowledges WHERE deleted_at IS NULL"):
         rows = list(conn.execute(
             "SELECT chunk_index, length(content), content, content_hash FROM chunks "
             "WHERE knowledge_id = ? ORDER BY chunk_index", (kid,)))
@@ -145,7 +150,9 @@ def main():
     documents, duplicates = document_stats(conn)
 
     target_rows = list(conn.execute(
-        "SELECT id, knowledge_id, chunk_index, content FROM chunks WHERE content LIKE ?",
+        "SELECT c.id, c.knowledge_id, c.chunk_index, c.content FROM chunks c "
+        "JOIN knowledges k ON k.id = c.knowledge_id "
+        "WHERE k.deleted_at IS NULL AND c.content LIKE ?",
         (f"%记录 ID：{args.record}%",)))
     if not target_rows:
         raise SystemExit(f"库里找不到记录 {args.record} 所在的 chunk")
@@ -189,12 +196,29 @@ def main():
                           if h.get("id") in target_ids), None)
 
     record_offset = ledger["recordOffsets"].get(args.record)
+    target_rank = ranks["hybrid"]["targetRank"]
+    at_head = bool(record_offset and record_offset["positionInChunk"] == 0)
+    top1 = ranks["hybrid"]["top1"] or {}
+    preview_shows_target = bool(top1.get("headRecordId") == args.record)
+    if target_rank is None:
+        explanation = (f"目标 chunk 在混合检索前 {args.depth} 名里**没有出现**，这是真召回失败。")
+    elif at_head and preview_shows_target:
+        explanation = ("目标 chunk 排第 %d，且该记录就是 chunk 首条 —— 预览前 120 字里直接看得到它。"
+                       % target_rank)
+    elif target_rank == 1:
+        explanation = ("目标 chunk 排第 1（向量第 %s、关键词第 %s），但这条记录在 chunk 里排第 %d，"
+                       "所以前 120 字的预览显示的是同 chunk 的邻座记录。"
+                       % (vector_rank, keyword_rank, (record_offset or {}).get("positionInChunk", -1) + 1))
+    else:
+        explanation = ("目标 chunk 排第 %d（向量第 %s、关键词第 %s），记录在 chunk 内位置第 %d。"
+                       % (target_rank, vector_rank, keyword_rank,
+                          (record_offset or {}).get("positionInChunk", -1) + 1))
+
     report = {
         "query": args.query,
         "targetRecord": args.record,
         "targetChunkIds": sorted(target_ids),
         "targetKnowledgeId": target_knowledge,
-        "targetIsAtChunkHead": bool(record_offset and record_offset["positionInChunk"] == 0),
         "targetOffset": record_offset,
         "retrieval": ranks,
         "rrfCheck": {
@@ -209,15 +233,11 @@ def main():
         "documents": documents,
         "duplicateDocuments": duplicates,
         "verdict": {
-            "recallFailure": rank_of(
-                wk.search(args.kb, args.query, top=args.depth), target_ids) is None,
-            "targetRankInHybrid": ranks["hybrid"]["targetRank"],
-            "explanation": (
-                f"目标 chunk 在混合检索里排第 {ranks['hybrid']['targetRank']}（向量第 "
-                f"{vector_rank}、关键词第 {keyword_rank}）。topPreview 显示别的专业，"
-                f"是因为每条记录只占 chunk 的 1/{max(1, len(target_rows[0][3]) // 160)}"
-                " 左右，而预览只取前 120 字。"
-            ),
+            "recallFailure": target_rank is None,
+            "targetRankInHybrid": target_rank,
+            "targetIsAtChunkHead": at_head,
+            "previewShowsTarget": preview_shows_target,
+            "explanation": explanation,
         },
     }
 

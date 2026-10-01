@@ -1,13 +1,36 @@
 {
   "reviewedRecords": 1519,
-  "chunks": 2167,
-  "chunksWithVector": 2167,
-  "documents": 6,
+  "chunks": 2641,
+  "chunksWithVector": 2641,
+  "documents": 5,
+  "softDeletedDocuments": 6,
   "documentsNotCompleted": 0,
   "missingRecordIds": 0,
   "missingSample": [],
   "embeddingDimensions": [
     1024
+  ],
+  "chunksPerDocument": [
+    {
+      "fileName": "moe-majors-2026-structured.md",
+      "chunks": 862
+    },
+    {
+      "fileName": "moe-majors-2026.md",
+      "chunks": 52
+    },
+    {
+      "fileName": "nbs-wages-2025.md",
+      "chunks": 36
+    },
+    {
+      "fileName": "occupation-2022-replacement.md",
+      "chunks": 1665
+    },
+    {
+      "fileName": "occupation-2022.md",
+      "chunks": 26
+    }
   ],
   "checks": {
     "每条记录都能在 chunk 里找到": true,
@@ -18,12 +41,10 @@
   },
   "probe": {
     "query": "哲学 专业代码",
-    "hits": 102,
-    "topPreview": "## moe-major-030302\n\n专业代码：030302；专业名称：社会工作；来源页码：第 4 页\n\n_来源：moe-majors-2026 · 类型：FACT · 记录 ID：moe-major-030302 · 审核状态：业主豁",
+    "hits": 132,
+    "topPreview": "## 010101 哲学\n\n- 专业代码：010101\n- 专业名称：哲学\n- 来源页码：第 3 页\n\n_出处：moe-majors-2026 · 类型：FACT · 记录 ID：moe-major-010101 · 审核状态：业主豁免闸门",
     "topRecordIds": [
-      "moe-major-030302",
-      "moe-major-030303T",
-      "moe-major-030304T"
+      "moe-major-010101"
     ]
   },
   "passed": true

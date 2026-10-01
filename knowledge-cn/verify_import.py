@@ -8,6 +8,13 @@
 3. **维度一致**：`lite_embeddings.dimension` 是否唯一且等于模型声明的维度；
 4. **活检索探针**：通过 HTTP `hybrid-search` 真发一次查询，确认不是「库里躺着但检索不到」。
 
+## 删除是软删除，计数必须排掉它
+
+`DELETE /api/v1/knowledge/:id` 走的是 `parse_status='deleting'` + `deleted_at` 置位，
+`chunks` 表里的旧行**不会立刻消失**（embedding / FTS 会另行清理）。所以核验必须
+`JOIN knowledges ON deleted_at IS NULL`，否则重建一次就会把旧 chunk 也算进来，
+数字虚高、还会误报「有文档停在未完成状态」。
+
 用法（仓库根目录）：
 
     python knowledge-cn/verify_import.py --db <weknora.db> --kb <kb-id>
@@ -80,26 +87,39 @@ def main():
     args = parser.parse_args()
 
     ids = expected_ids(args.reviewed)
-    conn = sqlite3.connect(args.db)
-    chunks = [row[0] or "" for row in conn.execute("SELECT content FROM chunks")]
+    conn = sqlite3.connect(f"file:{args.db}?mode=ro", uri=True) if not args.db.startswith("file:") \
+        else sqlite3.connect(args.db, uri=True)
+    live_chunks = list(conn.execute(
+        "SELECT c.content FROM chunks c JOIN knowledges k ON k.id = c.knowledge_id "
+        "WHERE k.deleted_at IS NULL"))
+    chunks = [row[0] or "" for row in live_chunks]
     blob = "\n".join(chunks)
     missing = [record_id for record_id in ids if record_id not in blob]
 
     vector_rows = conn.execute("SELECT COUNT(*) FROM vec_embeddings_1024_rowids").fetchone()[0]
     dimensions = sorted({row[0] for row in conn.execute("SELECT DISTINCT dimension FROM lite_embeddings")})
-    documents = conn.execute("SELECT COUNT(*) FROM knowledges").fetchone()[0]
+    documents = conn.execute(
+        "SELECT COUNT(*) FROM knowledges WHERE deleted_at IS NULL").fetchone()[0]
+    soft_deleted = conn.execute(
+        "SELECT COUNT(*) FROM knowledges WHERE deleted_at IS NOT NULL").fetchone()[0]
     pending = conn.execute(
-        "SELECT COUNT(*) FROM knowledges WHERE parse_status NOT IN ('completed')").fetchone()[0]
+        "SELECT COUNT(*) FROM knowledges WHERE deleted_at IS NULL "
+        "AND parse_status NOT IN ('completed')").fetchone()[0]
+    per_document = [{"fileName": name, "chunks": count} for name, count in conn.execute(
+        "SELECT k.file_name, COUNT(*) FROM chunks c JOIN knowledges k ON k.id = c.knowledge_id "
+        "WHERE k.deleted_at IS NULL GROUP BY k.file_name ORDER BY k.file_name")]
 
     report = {
         "reviewedRecords": len(ids),
         "chunks": len(chunks),
         "chunksWithVector": vector_rows,
         "documents": documents,
+        "softDeletedDocuments": soft_deleted,
         "documentsNotCompleted": pending,
         "missingRecordIds": len(missing),
         "missingSample": missing[:10],
         "embeddingDimensions": dimensions,
+        "chunksPerDocument": per_document,
         "checks": {},
     }
 
