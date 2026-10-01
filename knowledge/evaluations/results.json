@@ -1,7 +1,7 @@
 {
   "schema": "career-graph-eval-results/v1",
   "step": "11",
-  "generatedAt": "2026-10-01T08:52:07.260Z",
+  "generatedAt": "2026-10-01T12:07:17.908Z",
   "kbVersion": "2026.09.15",
   "graphVersion": "0.1.0",
   "note": "逐题 × 5 档配置的原始命中结果。检索用 10 的同一套零依赖 BM25（lib/graph.mjs），不调模型，所以只有检索耗时；「引用支持度」需人工判定，本文件不冒充。失败案例原样保留。",
@@ -71,7 +71,7 @@
         "meanPrecisionAt3": 0.037,
         "insufficientDataHandling": "5/6",
         "insufficientDataHandlingValue": 0.833,
-        "elapsedMs": 61
+        "elapsedMs": 70
       }
     },
     {
@@ -84,7 +84,7 @@
         "meanPrecisionAt3": 0.222,
         "insufficientDataHandling": "4/6",
         "insufficientDataHandlingValue": 0.667,
-        "elapsedMs": 326
+        "elapsedMs": 363
       }
     },
     {
@@ -97,7 +97,7 @@
         "meanPrecisionAt3": 0.222,
         "insufficientDataHandling": "4/6",
         "insufficientDataHandlingValue": 0.667,
-        "elapsedMs": 366
+        "elapsedMs": 399
       }
     },
     {
@@ -110,7 +110,7 @@
         "meanPrecisionAt3": 0.222,
         "insufficientDataHandling": "4/6",
         "insufficientDataHandlingValue": 0.667,
-        "elapsedMs": 349
+        "elapsedMs": 414
       }
     },
     {
@@ -123,7 +123,7 @@
         "meanPrecisionAt3": 0.222,
         "insufficientDataHandling": "4/6",
         "insufficientDataHandlingValue": 0.667,
-        "elapsedMs": 349
+        "elapsedMs": 415
       }
     }
   ],
@@ -139,7 +139,7 @@
         "meanPrecisionAt3": 0.037,
         "insufficientDataHandling": "5/6",
         "insufficientDataHandlingValue": 0.833,
-        "elapsedMs": 61
+        "elapsedMs": 70
       },
       "perQuestion": [
         {
@@ -862,7 +862,7 @@
         "meanPrecisionAt3": 0.222,
         "insufficientDataHandling": "4/6",
         "insufficientDataHandlingValue": 0.667,
-        "elapsedMs": 326
+        "elapsedMs": 363
       },
       "perQuestion": [
         {
@@ -1600,7 +1600,7 @@
         "meanPrecisionAt3": 0.222,
         "insufficientDataHandling": "4/6",
         "insufficientDataHandlingValue": 0.667,
-        "elapsedMs": 366
+        "elapsedMs": 399
       },
       "perQuestion": [
         {
@@ -2338,7 +2338,7 @@
         "meanPrecisionAt3": 0.222,
         "insufficientDataHandling": "4/6",
         "insufficientDataHandlingValue": 0.667,
-        "elapsedMs": 349
+        "elapsedMs": 414
       },
       "perQuestion": [
         {
@@ -3076,7 +3076,7 @@
         "meanPrecisionAt3": 0.222,
         "insufficientDataHandling": "4/6",
         "insufficientDataHandlingValue": 0.667,
-        "elapsedMs": 349
+        "elapsedMs": 415
       },
       "perQuestion": [
         {
