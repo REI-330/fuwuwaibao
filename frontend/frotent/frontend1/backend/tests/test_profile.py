@@ -19,7 +19,7 @@ import pytest
 
 from backend.knowledge import GraphStore
 from backend.memories import MemoryStore
-from backend.server import CareerApi, ProfileStore
+from backend.server import SESSION_COOKIE, CareerApi, ProfileStore
 
 
 @pytest.fixture(scope="module")
@@ -109,3 +109,101 @@ def test_growth_event_idempotent(store: GraphStore, tmp_path: Path) -> None:
     memories.add_growth_event("user_local", action="confirm_candidate", record_id="growth_1",
                               memory_id="memory_y", detail={"field": "skill"})
     assert len(memories.list_growth_events("user_local")) == 2
+
+
+# ----------------------------------------------------------- 画像历史快照（第七轮）
+#
+# 这一组钉住「回看上周那一刻的档案」：每次写入 / 确认留一份**只增不改**的快照，
+# 且同一 (version, status) 重复写是幂等的（重复 confirm 不堆快照）。
+
+
+def test_profile_history_survives_new_instance(store: GraphStore, tmp_path: Path) -> None:
+    db = tmp_path / "career-history.db"
+    first = build_api(store, db)
+    first.handle(
+        "PUT",
+        "/api/profile",
+        {},
+        {"identity": "在校生", "school": "浙江大学", "major": "自动化",
+         "skills": "C语言,STM32", "source": "manual"},
+    )
+    first.handle("POST", "/api/profile/confirm", {}, None)
+
+    status, payload = first.handle("GET", "/api/profile/history", {}, None)
+    assert status == 200
+    items = payload["data"]["items"]
+    assert payload["data"]["total"] == 2
+    draft = next(item for item in items if item["status"] == "draft")
+    confirmed = next(item for item in items if item["status"] == "confirmed")
+    assert draft["profileVersion"] == 1
+    assert draft["summary"]["skills"] == ["C语言", "STM32"]
+    assert confirmed["snapshotId"] != draft["snapshotId"]
+
+    # 换一个实例（等价于进程重启）：历史仍在，且能读到「那一刻的完整画像」
+    second = build_api(store, db)
+    status, payload = second.handle("GET", f"/api/profile/history/{draft['snapshotId']}", {}, None)
+    assert status == 200
+    snapshot = payload["data"]["profile"]
+    assert snapshot["status"] == "draft"
+    assert snapshot["major"] == "自动化"
+    assert [skill["name"] for skill in snapshot["skills"]] == ["C语言", "STM32"]
+
+
+def test_profile_snapshots_are_append_only_and_confirm_is_idempotent(store: GraphStore, tmp_path: Path) -> None:
+    api = build_api(store, tmp_path / "career-history-append.db")
+    api.handle("PUT", "/api/profile", {}, {"major": "自动化", "source": "manual"})
+    api.handle("POST", "/api/profile/confirm", {}, None)
+    api.handle("POST", "/api/profile/confirm", {}, None)  # 重复 confirm
+
+    data = api.handle("GET", "/api/profile/history", {}, None)[1]["data"]
+    assert data["total"] == 2, "重复 confirm 不该堆出第三份快照"
+
+    # 再写一版：只新增，旧的不动（append-only）
+    api.handle("PUT", "/api/profile", {}, {"major": "电子工程", "source": "manual"})
+    data = api.handle("GET", "/api/profile/history", {}, None)[1]["data"]
+    assert data["total"] == 3
+    assert data["items"][0]["profileVersion"] == 2
+    assert data["items"][0]["status"] == "draft"
+    assert data["items"][0]["summary"]["major"] == "电子工程"
+
+
+def test_profile_history_paginates_by_cursor(store: GraphStore, tmp_path: Path) -> None:
+    api = build_api(store, tmp_path / "career-history-page.db")
+    for index in range(5):
+        api.handle("PUT", "/api/profile", {}, {"major": f"M{index}", "source": "manual"})
+
+    first = api.handle("GET", "/api/profile/history", {"limit": ["2"]}, None)[1]["data"]
+    assert first["count"] == 2 and first["total"] == 5
+    assert first["hasMore"] is True and first["nextCursor"] == "2"
+
+    second = api.handle("GET", "/api/profile/history", {"limit": ["2"], "cursor": ["2"]}, None)[1]["data"]
+    assert second["count"] == 2 and second["nextCursor"] == "4"
+
+    third = api.handle("GET", "/api/profile/history", {"limit": ["2"], "cursor": ["4"]}, None)[1]["data"]
+    assert third["count"] == 1 and third["hasMore"] is False and third["nextCursor"] is None
+
+
+def test_profile_history_validates_pagination(store: GraphStore, tmp_path: Path) -> None:
+    api = build_api(store, tmp_path / "career-history-bad.db")
+    status, payload = api.handle("GET", "/api/profile/history", {"limit": ["x"]}, None)
+    assert status == 400 and payload["error"]["code"] == "INVALID_PROFILE_PAGE"
+    status, payload = api.handle("GET", "/api/profile/history", {"cursor": ["-1"]}, None)
+    assert status == 400 and payload["error"]["code"] == "INVALID_PROFILE_PAGE"
+
+
+def test_profile_snapshot_not_found_and_user_isolation(store: GraphStore, tmp_path: Path) -> None:
+    api = build_api(store, tmp_path / "career-history-scope.db")
+    alice = {SESSION_COOKIE: "user_aaaaaaaaaaaa"}
+    bob = {SESSION_COOKIE: "user_bbbbbbbbbbbb"}
+    api.handle("PUT", "/api/profile", {}, {"major": "自动化", "source": "manual"}, cookies=alice)
+    mine = api.handle("GET", "/api/profile/history", {}, None, cookies=alice)[1]["data"]["items"][0]["snapshotId"]
+
+    # 别人看不到我的快照，拿我的 id 也是 404（不泄露「这个 id 存在但不是你的」）
+    assert api.handle("GET", "/api/profile/history", {}, None, cookies=bob)[1]["data"]["total"] == 0
+    status, payload = api.handle("GET", f"/api/profile/history/{mine}", {}, None, cookies=bob)
+    assert status == 404 and payload["error"]["code"] == "PROFILE_SNAPSHOT_NOT_FOUND"
+
+    # 自己读自己是 200；未知 id 是 404
+    assert api.handle("GET", f"/api/profile/history/{mine}", {}, None, cookies=alice)[0] == 200
+    status, payload = api.handle("GET", "/api/profile/history/psnap_nope", {}, None, cookies=alice)
+    assert status == 404 and payload["error"]["code"] == "PROFILE_SNAPSHOT_NOT_FOUND"

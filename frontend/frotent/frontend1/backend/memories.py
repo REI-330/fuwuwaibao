@@ -221,6 +221,21 @@ CREATE TABLE IF NOT EXISTS growth_events (
 CREATE INDEX IF NOT EXISTS idx_growth_events_user
     ON growth_events (user_id, created_at);
 
+-- 画像历史快照：每次画像写入 / 确认都留一份**不可变**副本，用于「回看上周那一刻的档案」。
+-- 与 profiles 分开：profiles 是**可变的最新态**（每次 upsert 覆盖），profile_snapshots 是**只增不改**的历史。
+-- snapshot_id 由 (user_id, profile_version, status) 派生 → 同一次写入 / 重复 confirm 幂等，不堆重复行。
+CREATE TABLE IF NOT EXISTS profile_snapshots (
+    snapshot_id     TEXT PRIMARY KEY,
+    user_id         TEXT NOT NULL,
+    profile_json    TEXT NOT NULL,
+    profile_version INTEGER NOT NULL DEFAULT 0,
+    status          TEXT NOT NULL DEFAULT 'draft',
+    captured_at     TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_profile_snapshots_user
+    ON profile_snapshots (user_id, captured_at);
+
 -- 职业匹配结果：每个用户只保留**最新一份** run（契约的 /current 读的就是它）。
 -- 整份 run 按 JSON 存；另抽 run_id / profile_version / catalog_version 三列出来做「过期判定」——
 -- 画像或图谱变过就必须重算，而不是把旧结果端给用户（上层据此回 CAREER_MATCH_STALE）。
@@ -578,6 +593,85 @@ class MemoryStore:
                 ),
             )
             self._conn.commit()
+
+    # ------------------------------------------------ 画像历史快照（2026-10-01 第七轮）
+    @staticmethod
+    def _snapshot_id(user_id: str, version: int, status: str) -> str:
+        """快照 id 由 (user, version, status) 派生 —— 这是**写入动作的指纹**，不是内容指纹。
+
+        为什么不用内容：``confirm`` 只改 status 与 updatedAt（version 不变），若拿整份 JSON 算指纹，
+        重复 confirm 会因为 updatedAt 变了而每次都产生新快照，幂等就没了。用 (version, status) 才
+        对得上「同一个版本 + 同一个状态 = 同一次快照」这个语义。
+        """
+        digest = hashlib.sha1(f"{user_id}|{int(version)}|{status}".encode("utf-8")).hexdigest()[:16]
+        return f"psnap_{digest}"
+
+    def save_profile_snapshot(self, user_id: str, profile: Dict[str, Any]) -> Dict[str, Any]:
+        """留一份画像历史快照（只增不改）。同一 (version, status) 重复写是幂等的，返回同一 id。"""
+        version = int(profile.get("profileVersion") or 0)
+        status = str(profile.get("status") or "draft")
+        snapshot_id = self._snapshot_id(user_id, version, status)
+        payload = json.dumps(profile, ensure_ascii=False)
+        captured = str(profile.get("updatedAt") or self._now())
+        with self._lock:
+            self._conn.execute(
+                "INSERT OR IGNORE INTO profile_snapshots"
+                " (snapshot_id, user_id, profile_json, profile_version, status, captured_at)"
+                " VALUES (?, ?, ?, ?, ?, ?)",
+                (snapshot_id, user_id, payload, version, status, captured),
+            )
+            self._conn.commit()
+        return {"snapshotId": snapshot_id, "profileVersion": version, "status": status, "capturedAt": captured}
+
+    def count_profile_snapshots(self, user_id: str) -> int:
+        rows = self._rows("SELECT COUNT(*) AS total FROM profile_snapshots WHERE user_id = ?", [user_id])
+        return int(rows[0]["total"]) if rows else 0
+
+    def list_profile_snapshots(self, user_id: str, limit: Optional[int] = None, offset: int = 0) -> List[Dict[str, Any]]:
+        """按时间倒序列出快照（最新的在前）；``rowid`` 兜底保证同一秒的两条也不错位。"""
+        sql = (
+            "SELECT snapshot_id, profile_json, profile_version, status, captured_at, rowid AS seq"
+            " FROM profile_snapshots WHERE user_id = ?"
+            " ORDER BY captured_at DESC, seq DESC"
+        )
+        params: List[Any] = [user_id]
+        if limit is not None:
+            sql += " LIMIT ? OFFSET ?"
+            params.extend([int(limit), int(offset)])
+        elif offset:
+            sql += " LIMIT -1 OFFSET ?"
+            params.append(int(offset))
+        return [self._row_to_snapshot(row) for row in self._rows(sql, params)]
+
+    def get_profile_snapshot(self, user_id: str, snapshot_id: str) -> Optional[Dict[str, Any]]:
+        """取某一时刻的**完整**画像；不存在或不属于该用户都返回 ``None``（由路由回 404，不区分）。"""
+        rows = self._rows(
+            "SELECT profile_json FROM profile_snapshots WHERE user_id = ? AND snapshot_id = ?",
+            [user_id, snapshot_id],
+        )
+        if not rows:
+            return None
+        data = _json_dict(rows[0]["profile_json"])
+        return data or None
+
+    @staticmethod
+    def _row_to_snapshot(row: sqlite3.Row) -> Dict[str, Any]:
+        """列表项：给足「一眼看出这是哪一版」，但不塞整份画像（详情走 get 那支）。"""
+        profile = _json_dict(row["profile_json"])
+        skills = [item.get("name") for item in (profile.get("skills") or []) if isinstance(item, dict)]
+        return {
+            "snapshotId": row["snapshot_id"],
+            "profileVersion": row["profile_version"],
+            "status": row["status"],
+            "capturedAt": row["captured_at"],
+            "summary": {
+                "identity": profile.get("identity"),
+                "school": profile.get("school"),
+                "major": profile.get("major"),
+                "currentGoal": profile.get("currentGoal"),
+                "skills": [name for name in skills if name],
+            },
+        }
 
     # ------------------------------------------------- 职业匹配持久化（职业匹配页）
     def save_match_run(self, user_id: str, run: Dict[str, Any]) -> None:

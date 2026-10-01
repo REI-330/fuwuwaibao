@@ -87,6 +87,9 @@ from .resume import parse_multipart_form, read_upload
 # 成长记录分页：一次最多取多少条（前端默认 20）。不传 limit 时保持旧行为（一次给全部）。
 GROWTH_MAX_PAGE = 200
 
+# 画像历史快照分页：同口径。画像版本不会堆得像记忆那么多，50 足够。
+PROFILE_HISTORY_MAX_PAGE = 50
+
 IDENTITY_MAP = {
     "在校生": "student",
     "学生": "student",
@@ -158,6 +161,8 @@ class ProfileStore:
         self._lock = threading.RLock()
         # 没接记忆库（单测）时的进程内缓存，按 user_id 分桶
         self._cache: Dict[str, Dict[str, Any]] = {}
+        # 画像历史快照的进程内副本（仅在没接记忆库时用；接了库以库为准）
+        self._history: Dict[str, List[Dict[str, Any]]] = {}
 
     def _seed(self, user_id: str) -> Dict[str, Any]:
         return {
@@ -195,10 +200,62 @@ class ProfileStore:
         return self._cache[uid]
 
     def _store_profile(self, uid: str, profile: Dict[str, Any]) -> None:
+        """写当前态 + 留一份历史快照。快照是**只增不改**的：写失败也不该把当前态一起回滚掉，
+        所以两支各自独立。"""
         if self._memories is not None:
             self._memories.save_profile(uid, profile)
+            self._memories.save_profile_snapshot(uid, profile)
         else:
             self._cache[uid] = profile
+            history = self._history.setdefault(uid, [])
+            version = int(profile.get("profileVersion") or 0)
+            status = str(profile.get("status") or "draft")
+            snapshot_id = f"psnap_local_{version}_{status}"
+            entry = {
+                "snapshotId": snapshot_id,
+                "profileVersion": version,
+                "status": status,
+                "capturedAt": str(profile.get("updatedAt") or ""),
+                "summary": {
+                    "identity": profile.get("identity"),
+                    "school": profile.get("school"),
+                    "major": profile.get("major"),
+                    "currentGoal": profile.get("currentGoal"),
+                    "skills": [item.get("name") for item in (profile.get("skills") or []) if isinstance(item, dict)],
+                },
+                "profile": json.loads(json.dumps(profile)),
+            }
+            history[:] = [item for item in history if item["snapshotId"] != snapshot_id]
+            history.append(entry)
+
+    def history(self, user_id: Optional[str] = None, limit: Optional[int] = None,
+                offset: int = 0) -> Tuple[List[Dict[str, Any]], int]:
+        """画像历史快照：**最新在前**。返回 ``(items, total)``；没接库时用进程内副本。"""
+        uid = self._resolve(user_id)
+        with self._lock:
+            if self._memories is not None:
+                items = self._memories.list_profile_snapshots(uid, limit, offset)
+                total = self._memories.count_profile_snapshots(uid)
+                return items, total
+            ordered = list(reversed(self._history.get(uid, [])))
+            total = len(ordered)
+            window = ordered[offset:] if limit is None else ordered[offset:offset + limit]
+            return [self._snapshot_summary(item) for item in window], total
+
+    def snapshot(self, user_id: Optional[str], snapshot_id: str) -> Optional[Dict[str, Any]]:
+        """取某一时刻的完整画像；不存在返回 ``None``。"""
+        uid = self._resolve(user_id)
+        with self._lock:
+            if self._memories is not None:
+                return self._memories.get_profile_snapshot(uid, snapshot_id)
+            for item in self._history.get(uid, []):
+                if item["snapshotId"] == snapshot_id:
+                    return json.loads(json.dumps(item["profile"]))
+            return None
+
+    @staticmethod
+    def _snapshot_summary(item: Dict[str, Any]) -> Dict[str, Any]:
+        return {key: value for key, value in item.items() if key != "profile"}
 
     def get(self, user_id: Optional[str] = None) -> Dict[str, Any]:
         uid = self._resolve(user_id)
@@ -624,6 +681,41 @@ class CareerApi:
 
         if path == "/api/profile/confirm" and method == "POST":
             return 200, self.envelope({"profile": self.profiles.confirm(user_id)})
+
+        if path == "/api/profile/history" and method == "GET":
+            # 画像历史快照（2026-10-01 第七轮）：回答「上周那一刻的档案长什么样」。
+            # 位移分页，口径与成长记录一致；快照只增不改，读接口不参与任何写入。
+            raw_limit = _first(query, "limit")
+            raw_cursor = _first(query, "cursor") or _first(query, "offset")
+            if raw_limit and not raw_limit.isdigit():
+                return self.error("INVALID_PROFILE_PAGE", f"limit 必须是整数：{raw_limit}", 400)
+            if raw_cursor and not raw_cursor.isdigit():
+                return self.error("INVALID_PROFILE_PAGE", f"cursor 必须是整数位移：{raw_cursor}", 400)
+            limit = min(int(raw_limit), PROFILE_HISTORY_MAX_PAGE) if raw_limit else None
+            offset = int(raw_cursor) if raw_cursor else 0
+            items, total = self.profiles.history(user_id, limit, offset)
+            next_offset = offset + len(items)
+            has_more = bool(limit) and next_offset < total
+            return 200, self.envelope(
+                {
+                    "items": items,
+                    "count": len(items),
+                    "total": total,
+                    "limit": limit,
+                    "offset": offset,
+                    "nextCursor": str(next_offset) if has_more else None,
+                    "hasMore": has_more,
+                }
+            )
+
+        if path.startswith("/api/profile/history/") and path != "/api/profile/history/":
+            snapshot_id = path[len("/api/profile/history/") :].strip("/")
+            if method == "GET":
+                snapshot = self.profiles.snapshot(user_id, snapshot_id)
+                if snapshot is None:
+                    # 不存在 / 属于别人 —— 都回 404，不泄露「这个 id 存在但不是你的」
+                    return self.error("PROFILE_SNAPSHOT_NOT_FOUND", f"未找到画像快照：{snapshot_id}", 404)
+                return 200, self.envelope({"snapshotId": snapshot_id, "profile": snapshot})
 
         if path == "/api/v1/occupations" and method == "GET":
             keyword = _first(query, "keyword")
