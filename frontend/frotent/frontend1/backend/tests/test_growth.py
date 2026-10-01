@@ -198,3 +198,54 @@ def test_growth_record_validation(api: CareerApi) -> None:
     assert post(api, None)[0] == 400
     _, payload = api.handle("GET", "/api/growth-records", {"kind": ["不存在的类别"]}, None)
     assert payload["error"]["code"] == "INVALID_GROWTH_KIND"
+
+
+# --------------------------------------------------------------------- 分页
+
+def test_growth_records_paginate_by_cursor(api: CareerApi) -> None:
+    """时间线分页：位移分页必须**不重不漏**，且 `total` 是筛选后的总条数。"""
+    for index in range(7):
+        status, payload = post(api, {
+            "kind": "能力变化",
+            "title": f"第 {index} 条：模型量化与部署",
+            "after": f"第 {index} 次记录",
+            "recordId": f"page-{index}",
+            # 时间戳递增（秒），保证排序唯一可预期
+            "occurredAt": f"2026-10-0{index + 1}T00:00:00Z",
+        })
+        assert status == 201
+
+    _, first = api.handle("GET", "/api/growth-records", {"limit": ["3"]}, None)
+    page1 = first["data"]
+    assert page1["count"] == 3 and page1["total"] == 7
+    assert page1["hasMore"] is True and page1["nextCursor"] == "3"
+    assert page1["limit"] == 3 and page1["offset"] == 0
+
+    _, second = api.handle("GET", "/api/growth-records", {"limit": ["3"], "cursor": [page1["nextCursor"]]}, None)
+    page2 = second["data"]
+    assert page2["count"] == 3 and page2["offset"] == 3
+    assert page2["hasMore"] is True and page2["nextCursor"] == "6"
+
+    _, third = api.handle("GET", "/api/growth-records", {"limit": ["3"], "cursor": [page2["nextCursor"]]}, None)
+    page3 = third["data"]
+    assert page3["count"] == 1 and page3["hasMore"] is False and page3["nextCursor"] is None
+
+    ids = [item["id"] for item in page1["items"] + page2["items"] + page3["items"]]
+    assert len(ids) == 7 and len(set(ids)) == 7, "分页必须不重不漏"
+    # 排序：occurredAt 倒序
+    assert [item["occurredAt"] for item in page1["items"]] == sorted(
+        [item["occurredAt"] for item in page1["items"]], reverse=True)
+
+    # 分类筛选下的 total 只算这一类
+    post(api, {"kind": "任务行动", "title": "完成实践任务", "after": "做了", "recordId": "page-other"})
+    _, filtered = api.handle("GET", "/api/growth-records", {"kind": ["任务行动"], "limit": ["3"]}, None)
+    assert filtered["data"]["total"] == 1 and filtered["data"]["hasMore"] is False
+
+    # 不传 limit：保持旧行为（一次给全部），且 hasMore 为 false
+    _, all_records = api.handle("GET", "/api/growth-records", {}, None)
+    assert all_records["data"]["count"] == 8 and all_records["data"]["hasMore"] is False
+    assert all_records["data"]["nextCursor"] is None
+
+    # 非法分页参数要明确报错，而不是悄悄当成 0
+    assert api.handle("GET", "/api/growth-records", {"limit": ["abc"]}, None)[1]["error"]["code"] == "INVALID_GROWTH_PAGE"
+    assert api.handle("GET", "/api/growth-records", {"cursor": ["-1"]}, None)[1]["error"]["code"] == "INVALID_GROWTH_PAGE"

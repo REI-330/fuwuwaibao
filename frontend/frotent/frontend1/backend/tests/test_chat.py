@@ -17,6 +17,7 @@ import pytest
 
 from backend.chat import (
     GRAPH_TITLE,
+    HISTORY_TITLE,
     HISTORY_TURNS,
     MEMORY_TITLE,
     PROMPT_TEMPLATE,
@@ -287,3 +288,69 @@ def test_memory_augmented_profile_reaches_chat(store, memories, profiles) -> Non
     confirm_memory(api, "skill", "具备或正在学习：模型量化与部署")
     _, after = api.handle("POST", "/api/chat", {}, {"message": "边缘 AI 工程师需要什么技能？"})
     assert "你已经覆盖 1 项" in after["data"]["message"]
+
+
+# --------------------------------------------------------------------- 会话落库（刷新 / 重启不丢）
+
+def test_chat_sessions_and_messages_persist(store, memories, profiles, tmp_path) -> None:
+    """会话与消息落库：换一个 ChatService 实例（= 后端重启）之后，同一段对话还读得回来，
+    而且重启后的那一轮**真的把历史拼进了提示词**。"""
+    from backend.chat import ChatStore
+
+    db = str(tmp_path / "chat.db")
+    api = CareerApi(store=store, profiles=profiles, memories=memories,
+                    chats=ChatService(store, memories, profiles, sessions=ChatStore(db)))
+
+    status, payload = api.handle("POST", "/api/chat", {}, {"message": "边缘 AI 工程师需要什么技能？"})
+    assert status == 200
+    session_id = payload["data"]["conversationId"]
+
+    _, sessions = api.handle("GET", "/api/chat/sessions", {}, None)
+    assert sessions["data"]["persisted"] is True and sessions["data"]["count"] == 1
+    row = sessions["data"]["items"][0]
+    assert row["sessionId"] == session_id and row["messageCount"] == 2
+    assert row["title"].startswith("边缘 AI 工程师"), "标题取第一句用户消息"
+
+    _, detail = api.handle("GET", f"/api/chat/sessions/{session_id}", {}, None)
+    messages = detail["data"]["messages"]
+    assert [item["role"] for item in messages] == ["user", "assistant"]
+    assert messages[0]["text"] == "边缘 AI 工程师需要什么技能？"
+    assert messages[1]["provider"] == "rule-based", "走的是哪条路要如实落库"
+
+    _, second = api.handle("POST", "/api/chat", {}, {"message": "那我现在该先做什么？", "conversationId": session_id})
+    assert second["data"]["conversationId"] == session_id, "带 conversationId 要追加到同一段会话"
+    _, after = api.handle("GET", f"/api/chat/sessions/{session_id}", {}, None)
+    assert len(after["data"]["messages"]) == 4
+
+    # 「重启」：新实例 + 新连接读同一份库
+    transport = FakeTransport((200, completion("先把模型量化落到一个能跑的作品里。")))
+    restarted = CareerApi(store=store, profiles=profiles, memories=memories,
+                          chats=ChatService(store, memories, profiles, client=make_client(transport),
+                                            sessions=ChatStore(db)))
+    _, resumed = restarted.handle("POST", "/api/chat", {}, {"message": "继续", "conversationId": session_id})
+    assert resumed["data"]["conversationId"] == session_id
+    assert HISTORY_TITLE in transport.prompt, "重启后这一轮必须把库里的历史拼进提示词"
+    assert "边缘 AI 工程师需要什么技能？" in transport.prompt
+    assert restarted.handle("GET", f"/api/chat/sessions/{session_id}", {}, None)[1]["data"]["messages"][-1]["role"] == "assistant"
+
+    # 归属隔离：别人的会话对我就是「不存在」
+    other = {"career_session": "user_0000000000d1"}
+    assert restarted.handle("GET", "/api/chat/sessions", {}, None, cookies=other)[1]["data"]["count"] == 0
+    assert restarted.handle("GET", f"/api/chat/sessions/{session_id}", {}, None, cookies=other)[0] == 404
+    assert restarted.handle("DELETE", f"/api/chat/sessions/{session_id}", {}, None, cookies=other)[0] == 404
+    assert restarted.handle("GET", "/api/chat/sessions/nope", {}, None)[0] == 404
+
+    # 删除：会话与消息一起清掉
+    status, removed = restarted.handle("DELETE", f"/api/chat/sessions/{session_id}", {}, None)
+    assert status == 200 and removed["data"]["removedMessages"] == 6
+    assert restarted.handle("GET", f"/api/chat/sessions/{session_id}", {}, None)[0] == 404
+    assert restarted.handle("GET", "/api/chat/sessions", {}, None)[1]["data"]["count"] == 0
+
+
+def test_chat_without_session_store_is_honest(store, memories, profiles) -> None:
+    """没挂会话库时**如实说没挂**，而不是假装「没有历史」。"""
+    api = build_api(store, memories, profiles)
+    status, payload = api.handle("GET", "/api/chat/sessions", {}, None)
+    assert status == 200
+    assert payload["data"]["persisted"] is False and "没有挂会话库" in payload["data"]["note"]
+    assert api.handle("GET", "/api/chat/sessions/conversation_x", {}, None)[0] == 404

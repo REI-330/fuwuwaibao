@@ -35,6 +35,7 @@ from backend.tasks import (
     MAX_ATTACHMENT_PREVIEW_CHARS,
     MAX_ATTACHMENTS_PER_TASK,
     MAX_SUBMISSION_CHARS,
+    MAX_TASK_NOTE_CHARS,
     STATUS_AVAILABLE,
     STATUS_COMPLETED,
     STATUS_PLANNED,
@@ -464,8 +465,151 @@ def test_attachment_text_is_not_used_as_ability_evidence(api: CareerApi) -> None
     assert any(item["name"] == skill for item in report["needsVerification"])
 
 
-# ---------------------------------------------------------------------------- 归属
+def test_attachment_content_downloads_byte_for_byte(api: CareerApi) -> None:
+    """原始字节下载：拿回来的必须和上传的一模一样（不是预览、不是 JSON 包一层）。"""
+    task = first_task(api)
+    payload_bytes = "交付物正文：先核对约束，再逐项验证。".encode("utf-8")
+    attachment = upload(api, task["taskId"], "交付说明.md", payload_bytes)[1]["data"]["attachment"]
 
+    slot: dict = {}
+    status, body = api.handle("GET", f"/api/attachments/{attachment['attachmentId']}/content", {}, None, response=slot)
+    assert status == 200
+    assert body["data"]["byteSize"] == len(payload_bytes)
+    assert slot["rawBody"]["content"] == payload_bytes, "字节必须逐字一致"
+    assert slot["rawBody"]["contentType"] == "application/octet-stream" or slot["rawBody"]["contentType"]
+    assert "filename*=UTF-8''" in slot["rawBody"]["contentDisposition"]
+    assert hashlib.sha256(slot["rawBody"]["content"]).hexdigest() == attachment["sha256"]
+
+    # 归属不符 = 不存在
+    other = {"career_session": "user_0000000000b1"}
+    assert api.handle("GET", f"/api/attachments/{attachment['attachmentId']}/content", {}, None, cookies=other,
+                      response={})[0] == 404
+    assert call(api, "GET", "/api/attachments/att_nope/content")[1]["error"]["code"] == "ATTACHMENT_NOT_FOUND"
+    assert call(api, "GET", "/api/attachments/att_nope")[1]["error"]["code"] == "ATTACHMENT_NOT_FOUND"
+
+
+def test_attachment_delete_refuses_while_referenced(api: CareerApi) -> None:
+    """引用可追溯优先于清理：还被运行记录引用的附件不能删掉，否则 attachmentIds 会失去出处。"""
+    task = first_task(api)
+    used = upload(api, task["taskId"], "已被引用.txt", b"used")[1]["data"]["attachment"]
+    unused = upload(api, task["taskId"], "没人引用.txt", b"unused")[1]["data"]["attachment"]
+
+    run = call(api, "POST", f"/api/tasks/{task['taskId']}/runs",
+               {"submission": "按步骤做了，实测 40%。", "attachmentIds": [used["attachmentId"]]})[1]["data"]["run"]
+
+    status, payload = call(api, "DELETE", f"/api/attachments/{used['attachmentId']}")
+    assert status == 409 and payload["error"]["code"] == "ATTACHMENT_IN_USE"
+    assert payload["error"]["referencedRunIds"] == [run["runId"]]
+    # 409 之后确实还在
+    assert call(api, "GET", f"/api/attachments/{used['attachmentId']}")[0] == 200
+
+    # 没被引用的可以删，count 跟着减
+    status, payload = call(api, "DELETE", f"/api/attachments/{unused['attachmentId']}")
+    assert status == 200 and payload["data"]["deleted"] == unused["attachmentId"]
+    assert payload["data"]["attachmentCount"] == 1
+    assert call(api, "GET", f"/api/attachments/{unused['attachmentId']}")[0] == 404
+
+    # 别人的附件对我就是「不存在」，删也一样
+    other = {"career_session": "user_0000000000b2"}
+    mine = upload(api, task["taskId"], "我的.txt", b"mine")[1]["data"]["attachment"]
+    assert call(api, "DELETE", f"/api/attachments/{mine['attachmentId']}", cookies=other)[1]["error"]["code"] == "ATTACHMENT_NOT_FOUND"
+    assert call(api, "DELETE", "/api/attachments/att_nope")[1]["error"]["code"] == "ATTACHMENT_NOT_FOUND"
+    # 奇怪的后缀不是「额外功能」，是未知路由
+    assert call(api, "POST", f"/api/attachments/{mine['attachmentId']}/content")[0] == 404
+
+
+# ---------------------------------------------------------------------------- 个人视图覆盖层
+
+
+def test_task_view_overlay_changes_only_the_users_view(api: CareerApi) -> None:
+    """备注 / 隐藏 / 顺序是**个人视图**：图谱派生的任务内容一个字段都不许变。"""
+    _, listing = call(api, "GET", "/api/tasks")
+    items = listing["data"]["items"]
+    first = items[0]
+    endpoint = f"/api/tasks/{first['taskId']}"
+
+    status, payload = call(api, "PATCH", endpoint, {"note": "这条我打算先用仿真环境练手"})
+    assert status == 200
+    assert payload["data"]["override"]["note"] == "这条我打算先用仿真环境练手"
+    assert payload["data"]["task"]["note"] == "这条我打算先用仿真环境练手"
+    # 任务本体的字段必须逐字不变 —— 这是「任务不臆造」在写接口上的落点
+    for key in ("title", "deliverable", "steps", "requiredSkills", "sourceRefs", "tools", "taskId"):
+        assert payload["data"]["task"][key] == first[key], f"{key} 不该被覆盖层改写"
+
+    _, after_note = call(api, "GET", "/api/tasks")
+    mirror = next(task for task in after_note["data"]["items"] if task["taskId"] == first["taskId"])
+    assert mirror["note"] == "这条我打算先用仿真环境练手" and mirror["hidden"] is False
+    assert after_note["data"]["hiddenCount"] == 0
+
+    # 隐藏：从默认清单消失，**且不算完成**
+    status, payload = call(api, "PATCH", endpoint, {"hidden": True})
+    assert status == 200 and payload["data"]["task"]["hidden"] is True
+    _, hidden_list = call(api, "GET", "/api/tasks")
+    assert first["taskId"] not in [task["taskId"] for task in hidden_list["data"]["items"]]
+    assert hidden_list["data"]["hiddenCount"] == 1
+    # counts 只数看得见的任务，否则界面会「说有 1 条可做却一条都点不出」
+    assert sum(hidden_list["data"]["counts"].values()) == len(hidden_list["data"]["items"])
+
+    _, with_hidden = call(api, "GET", "/api/tasks", query={"includeHidden": ["1"]})
+    shown = next(task for task in with_hidden["data"]["items"] if task["taskId"] == first["taskId"])
+    assert shown["hidden"] is True
+    assert shown["status"] == STATUS_PLANNED, "隐藏不是完成：它不该变成 completed，也不该占着 available"
+    # 详情页仍然打得开（历史提交与附件都还挂在上面）
+    assert call(api, "GET", endpoint)[0] == 200
+
+    # 别人的清单不受影响
+    other = {"career_session": "user_0000000000c1"}
+    _, other_list = call(api, "GET", "/api/tasks", cookies=other)
+    assert first["taskId"] in [task["taskId"] for task in other_list["data"]["items"]]
+    assert all(task["note"] == "" and task["hidden"] is False for task in other_list["data"]["items"])
+
+    # 顺序：把整份清单倒过来 —— 排序键是（阶段, position），所以每个阶段内部都应逐条倒序
+    _, fresh = call(api, "GET", "/api/tasks")
+    ids = [task["taskId"] for task in fresh["data"]["items"]]
+    before_by_stage: dict = {}
+    for task in fresh["data"]["items"]:
+        before_by_stage.setdefault(task["sourcePath"]["stage"], []).append(task["taskId"])
+    status, payload = call(api, "POST", "/api/tasks/reorder", {"taskIds": list(reversed(ids))})
+    assert status == 200 and payload["data"]["updated"] == len(ids)
+    # 返回的是**按（阶段, position）重排后**的顺序（含被隐藏的那条：排序信息不因隐藏丢失）
+    assert set(ids).issubset(set(payload["data"]["ordered"]))
+    _, reordered = call(api, "GET", "/api/tasks")
+    after_by_stage: dict = {}
+    for task in reordered["data"]["items"]:
+        after_by_stage.setdefault(task["sourcePath"]["stage"], []).append(task["taskId"])
+    for stage_key, stage_ids in before_by_stage.items():
+        assert after_by_stage[stage_key] == list(reversed(stage_ids)), f"{stage_key} 阶段没按 position 排"
+    assert any(len(stage_ids) >= 2 and after_by_stage[stage_key] != stage_ids
+               for stage_key, stage_ids in before_by_stage.items()), "没有哪个阶段的顺序真的变了"
+    assert next(task for task in reordered["data"]["items"]
+                if task["taskId"] == fresh["data"]["items"][-1]["taskId"])["position"] == 0
+
+    # 不认得的 taskId 一律点名，不静默忽略
+    status, payload = call(api, "POST", "/api/tasks/reorder", {"taskIds": ["task_ZZ999_junior_0"]})
+    assert status == 422 and payload["error"]["code"] == "UNKNOWN_TASK"
+    assert payload["error"]["unknownTaskIds"] == ["task_ZZ999_junior_0"]
+    assert call(api, "POST", "/api/tasks/reorder", {"taskIds": []})[1]["error"]["code"] == "INVALID_BODY"
+
+    # 还原：备注 / 隐藏 / 顺序一起清掉
+    status, payload = call(api, "PATCH", endpoint, {"reset": True})
+    assert status == 200 and payload["data"]["reset"] is True and payload["data"]["override"] is None
+    _, restored = call(api, "GET", "/api/tasks")
+    back = next(task for task in restored["data"]["items"] if task["taskId"] == first["taskId"])
+    assert back["note"] == "" and back["hidden"] is False and back["position"] is None
+
+
+def test_task_view_overlay_validates_input(api: CareerApi) -> None:
+    task = first_task(api)
+    endpoint = f"/api/tasks/{task['taskId']}"
+    assert call(api, "PATCH", endpoint, {"hidden": "yes"})[1]["error"]["code"] == "INVALID_BODY"
+    assert call(api, "PATCH", endpoint, {"note": "x" * (MAX_TASK_NOTE_CHARS + 1)})[1]["error"]["code"] == "INVALID_BODY"
+    assert call(api, "PATCH", endpoint, {"position": -1})[1]["error"]["code"] == "INVALID_BODY"
+    assert call(api, "PATCH", endpoint, "not-a-dict")[1]["error"]["code"] == "INVALID_BODY"
+    assert call(api, "PATCH", "/api/tasks/task_ZZ999_junior_0", {"hidden": True})[1]["error"]["code"] == "TASK_NOT_FOUND"
+    assert call(api, "PATCH", "/api/tasks/not-a-task-id", {"hidden": True})[1]["error"]["code"] == "TASK_NOT_FOUND"
+
+
+# ---------------------------------------------------------------------------- 归属
 
 def test_runs_are_isolated_by_cookie(api: CareerApi) -> None:
     owner = {"career_session": "user_000000000021"}

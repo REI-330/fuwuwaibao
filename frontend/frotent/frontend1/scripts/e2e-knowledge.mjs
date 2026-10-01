@@ -1186,6 +1186,162 @@ async function stageD(context) {
       `${(probeReport?.observedAbilities ?? []).length} 条观察 / 仍缺 ${taskSkill}`
     );
 
+    /* ---- ⑩c 任务个人视图覆盖层：备注 / 隐藏 / 顺序（只改自己的视图） ---- */
+    const overlayNote = "e2e：这条先用仿真环境练手";
+    const overlayPatch = await httpJson(`${tasksEndpoint}/${targetTask.taskId}`, jsonInit("PATCH", { note: overlayNote }));
+    check(
+      "D",
+      "任务实践：备注写在个人覆盖层上，图谱派生的任务内容一个字段都没变",
+      overlayPatch.status === 200 && overlayPatch.json?.data?.task?.note === overlayNote
+        && overlayPatch.json?.data?.task?.title === targetTask.title
+        && JSON.stringify(overlayPatch.json?.data?.task?.steps) === JSON.stringify(targetTask.steps)
+        && JSON.stringify(overlayPatch.json?.data?.task?.requiredSkills) === JSON.stringify(targetTask.requiredSkills),
+      `note=${overlayPatch.json?.data?.task?.note}`
+    );
+    const hidePatch = await httpJson(`${tasksEndpoint}/${targetTask.taskId}`, jsonInit("PATCH", { hidden: true }));
+    const listAfterHide = await httpJson(tasksEndpoint);
+    check(
+      "D",
+      "任务实践：隐藏后从清单消失，且带着 hiddenCount",
+      hidePatch.status === 200
+        && !(listAfterHide.json?.data?.items ?? []).some(item => item.taskId === targetTask.taskId)
+        && (listAfterHide.json?.data?.hiddenCount ?? 0) === 1,
+      `hiddenCount=${listAfterHide.json?.data?.hiddenCount}`
+    );
+    const withHidden = await httpJson(`${tasksEndpoint}?includeHidden=1`);
+    const hiddenRow = (withHidden.json?.data?.items ?? []).find(item => item.taskId === targetTask.taskId);
+    check(
+      "D",
+      "任务实践：includeHidden=1 取得回来，隐藏不会让一条任务变成「现在就能做」",
+      Boolean(hiddenRow) && hiddenRow.hidden === true && hiddenRow.status !== "available",
+      `${hiddenRow?.hidden} ${hiddenRow?.status}`
+    );
+    const resetPatch = await httpJson(`${tasksEndpoint}/${targetTask.taskId}`, jsonInit("PATCH", { reset: true }));
+    check(
+      "D",
+      "任务实践：reset 把备注/隐藏/顺序一起清掉",
+      resetPatch.status === 200 && resetPatch.json?.data?.reset === true && resetPatch.json?.data?.override === null,
+      `override=${JSON.stringify(resetPatch.json?.data?.override)}`
+    );
+    const beforeReorder = (await httpJson(tasksEndpoint)).json?.data?.items ?? [];
+    const reorderIds = beforeReorder.map(item => item.taskId);
+    const stageCounts = {};
+    for (const item of beforeReorder) {
+      stageCounts[item.sourcePath.stage] = (stageCounts[item.sourcePath.stage] ?? 0) + 1;
+    }
+    const stageKey = Object.keys(stageCounts).sort((left, right) => stageCounts[right] - stageCounts[left])[0];
+    const stageBefore = beforeReorder.filter(item => item.sourcePath.stage === stageKey).map(item => item.taskId);
+    const reorder = await httpJson(`${base}/api/tasks/reorder`, jsonInit("POST", { taskIds: [...reorderIds].reverse() }));
+    const afterReorder = (await httpJson(tasksEndpoint)).json?.data?.items ?? [];
+    const stageAfter = afterReorder.filter(item => item.sourcePath.stage === stageKey).map(item => item.taskId);
+    check(
+      "D",
+      "任务实践：重排按（阶段, position）生效（阶段内倒序）",
+      reorder.status === 200 && reorder.json?.data?.updated === reorderIds.length
+        && stageBefore.length >= 2 && JSON.stringify(stageAfter) === JSON.stringify([...stageBefore].reverse()),
+      `${JSON.stringify(stageBefore)} → ${JSON.stringify(stageAfter)}`
+    );
+    const badReorder = await httpJson(`${base}/api/tasks/reorder`, jsonInit("POST", { taskIds: ["task_ZZ999_junior_0"] }));
+    check(
+      "D",
+      "任务实践：给不存在的任务排序直接 422 UNKNOWN_TASK",
+      badReorder.status === 422 && badReorder.json?.error?.code === "UNKNOWN_TASK",
+      `${badReorder.status} ${badReorder.json?.error?.code}`
+    );
+
+    /* ---- ⑩d 附件删除与原始字节下载 ---- */
+    const freshUpload = await uploadAttachment(base, targetTask.taskId, "没人引用的.txt", "临时材料");
+    const freshId = freshUpload.json?.data?.attachment?.attachmentId;
+    const deleteInUse = await httpJson(`${base}/api/attachments/${attach.attachmentId}`, { method: "DELETE" });
+    check(
+      "D",
+      "任务实践：还被提交引用的附件不能删（引用必须可追溯）",
+      deleteInUse.status === 409 && deleteInUse.json?.error?.code === "ATTACHMENT_IN_USE",
+      `${deleteInUse.status} ${deleteInUse.json?.error?.code}`
+    );
+    const contentRes = await httpJson(`${base}/api/attachments/${attach.attachmentId}/content`);
+    check(
+      "D",
+      "任务实践：附件能按原字节下载（带 filename 的 Content-Disposition）",
+      contentRes.status === 200 && /attachment; filename\*=UTF-8''/.test(contentRes.headers.get("content-disposition") ?? ""),
+      `${contentRes.status} ${contentRes.headers.get("content-disposition")}`
+    );
+    const deleteFresh = await httpJson(`${base}/api/attachments/${freshId}`, { method: "DELETE" });
+    check(
+      "D",
+      "任务实践：没人引用的附件可以删，计数跟着减",
+      deleteFresh.status === 200 && deleteFresh.json?.data?.deleted === freshId
+        && deleteFresh.json?.data?.attachmentCount === 3,
+      `${deleteFresh.status} count=${deleteFresh.json?.data?.attachmentCount}`
+    );
+    check(
+      "D",
+      "任务实践：删掉之后原字节也取不到了（404）",
+      (await httpJson(`${base}/api/attachments/${freshId}/content`)).status === 404,
+      `404`
+    );
+
+    /* ---- ⑩e 成长记录分页（时间线刷新不丢、可翻页） ---- */
+    const page1 = await httpJson(`${base}/api/growth-records?limit=1`);
+    const page1Data = page1.json?.data;
+    check(
+      "D",
+      "成长记录：limit 分页返回 total / nextCursor / hasMore",
+      page1.status === 200 && page1Data?.count === 1 && (page1Data?.total ?? 0) >= 1
+        && (page1Data?.total > 1 ? page1Data?.hasMore === true && page1Data?.nextCursor === "1" : page1Data?.hasMore === false),
+      `count=${page1Data?.count} total=${page1Data?.total} next=${page1Data?.nextCursor}`
+    );
+    let pagedOk = true;
+    let pagedDetail = "只有一页，跳过翻页比对";
+    if ((page1Data?.total ?? 0) > 1) {
+      const page2 = await httpJson(`${base}/api/growth-records?limit=1&cursor=${page1Data.nextCursor}`);
+      const page2Data = page2.json?.data;
+      pagedOk = page2Data?.offset === 1 && page2Data?.count === 1
+        && page2Data.items[0]?.id !== page1Data.items[0]?.id;
+      pagedDetail = `${page1Data.items[0]?.id} → ${page2Data?.items?.[0]?.id}`;
+    }
+    check("D", "成长记录：翻页不重复（位移分页）", pagedOk, pagedDetail);
+    const badPage = await httpJson(`${base}/api/growth-records?limit=abc`);
+    check(
+      "D",
+      "成长记录：非法分页参数明确报错，不悄悄当成 0",
+      badPage.status === 400 && badPage.json?.error?.code === "INVALID_GROWTH_PAGE",
+      `${badPage.status} ${badPage.json?.error?.code}`
+    );
+
+    /* ---- ⑩f 对话会话落库 ---- */
+    const chatTurn = await httpJson(`${base}/api/chat`, jsonInit("POST", { message: "边缘 AI 工程师需要什么技能？" }));
+    const chatSessionId = chatTurn.json?.data?.conversationId;
+    const chatSessions = await httpJson(`${base}/api/chat/sessions`);
+    check(
+      "D",
+      "对话：会话与消息落库（会话列表里能查到，消息数 2）",
+      chatTurn.status === 200 && Boolean(chatSessionId)
+        && (chatSessions.json?.data?.items ?? []).some(item => item.sessionId === chatSessionId && item.messageCount === 2)
+        && chatSessions.json?.data?.persisted === true,
+      `${chatSessions.json?.data?.count} 段 persisted=${chatSessions.json?.data?.persisted}`
+    );
+    const chatDetail = await httpJson(`${base}/api/chat/sessions/${chatSessionId}`);
+    check(
+      "D",
+      "对话：历史顺序是 用户 → 助手，且如实记录这一轮走了哪条路",
+      (chatDetail.json?.data?.messages ?? []).map(item => item.role).join(",") === "user,assistant"
+        && chatDetail.json?.data?.messages?.[1]?.provider === "rule-based",
+      `${(chatDetail.json?.data?.messages ?? []).map(item => item.role).join(",")}`
+    );
+    const chatForeign = await httpJson(`${base}/api/chat/sessions/${chatSessionId}`, {
+      headers: { Cookie: "career_session=user_0000000000e1" },
+    });
+    check("D", "对话：别人的会话当作不存在（404）", chatForeign.status === 404, String(chatForeign.status));
+    await httpJson(`${base}/api/chat/sessions/${chatSessionId}`, { method: "DELETE" });
+    const chatAfter = await httpJson(`${base}/api/chat/sessions`);
+    check(
+      "D",
+      "对话：删除会话连消息一起清（e2e 可重复跑）",
+      !(chatAfter.json?.data?.items ?? []).some(item => item.sessionId === chatSessionId),
+      `${chatAfter.json?.data?.count} 段`
+    );
+
     // 清理：把剩下的测试记忆（含候选）全删掉，保证 e2e 可重复跑（不污染本地 db）
     const leftover = await httpJson(mem);
     for (const item of leftover.json?.data?.items ?? []) await httpJson(`${mem}/${item.id}`, { method: "DELETE" });
@@ -1458,6 +1614,15 @@ async function stageG(context) {
       "/growth 的 SSR 里出现记忆库面板（候选 / 已确认 / 注入预览三栏）",
       growth.text.includes("记忆库") && growth.text.includes("待确认") && growth.text.includes("注入预览"),
       growth.text.includes("记忆库") ? "已渲染" : "未见「记忆库」字样"
+    );
+    /* 侧边导航：五个入口之外还要能点进工作地图 / 职业目录，以及打开 AI 对话抽屉
+       （对话是抽屉不是路由，所以它在导航里是个按钮）。 */
+    check(
+      "G",
+      "侧边导航含工作地图、职业目录与 AI 对话入口（不再只有 4 项）",
+      growth.text.includes('href="/work-map"') && growth.text.includes('href="/catalog"')
+        && growth.text.includes("AI 对话"),
+      growth.text.includes("AI 对话") ? "已渲染" : "未见「AI 对话」"
     );
 
     /* 职场模拟入口与它挂的两个真页面：以前 /actions 只有「内容筹备中」，
