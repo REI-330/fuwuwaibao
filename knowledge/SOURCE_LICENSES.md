@@ -96,7 +96,7 @@ S14、S15、S21、S22、S23、S24、S25（+ S14 同源的镜像）。这些站�
 - 这四份来源是中文语料的主体，也是「国内岗位名称与岗位要求」这条线唯一的合法落点 ——
   `knowledge-cn/` 的 1519 条候选已由业主**豁免闸门**：`review_status=WAIVED`（**不是 APPROVED**），
   每条带 `review_waiver`（豁免人 / 时间 / 理由）。复算：`python knowledge-cn/waive_review.py --waived-by <谁>`。
-  2026-10-01 这批已**导入 WeKnora Lite 并核验**（2167 chunk、记录 ID 0 缺失），核验：`knowledge-cn/verify_import.py`。
+  2026-10-01 这批已**导入 WeKnora Lite 并核验**（**5 份文档 / 2641 chunk**、记录 ID 0 缺失），核验：`knowledge-cn/verify_import.py`。
 
 ## 6. 本项目自身代码的许可：**尚未确定**
 
