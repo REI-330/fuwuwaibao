@@ -16,7 +16,7 @@
       "targetRank": 1,
       "top1": {
         "chunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
-        "score": 0.016393442622950817,
+        "score": 0.01639344262295082,
         "head": "## 020110TK 低空经济与管理（注：授予管理学学士学位）\n\n- 专业代码：020110TK\n- 专业名称：低空经济与管理（注：授予管理学学士学位）\n- 来源页码：第 3 页\n\n_出处：moe-majors-2026 · 类型：FAC",
         "headRecordId": "moe-major-020110TK"
       }
@@ -36,7 +36,7 @@
       "targetRank": 1,
       "top1": {
         "chunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
-        "score": 53660580.7754598,
+        "score": 54878407.35441356,
         "head": "## 020110TK 低空经济与管理（注：授予管理学学士学位）\n\n- 专业代码：020110TK\n- 专业名称：低空经济与管理（注：授予管理学学士学位）\n- 来源页码：第 3 页\n\n_出处：moe-majors-2026 · 类型：FAC",
         "headRecordId": "moe-major-020110TK"
       }
@@ -4330,13 +4330,6 @@
       "maxChars": 512
     },
     {
-      "knowledgeId": "c3f31e4a-8690-4d63-8039-aa78288cded7",
-      "fileName": "nbs-wages-2025.md",
-      "chunks": 36,
-      "medianChars": 510,
-      "maxChars": 512
-    },
-    {
       "knowledgeId": "210f6118-e930-4033-9a0a-c3edde88b9f7",
       "fileName": "occupation-2022.md",
       "chunks": 26,
@@ -4349,6 +4342,13 @@
       "chunks": 1665,
       "medianChars": 504,
       "maxChars": 512
+    },
+    {
+      "knowledgeId": "1e424249-c564-4597-a4d8-15c7faacd15d",
+      "fileName": "nbs-wages-2025.md",
+      "chunks": 7,
+      "medianChars": 2398,
+      "maxChars": 2400
     }
   ],
   "duplicateDocuments": [],

@@ -47,9 +47,11 @@ set -a; source .env.lite; set +a; ./WeKnora-lite.exe     # 监听 0.0.0.0:8080
 python knowledge-cn/acquisition/check_weknora.py
 
 # 3) 导入：**上传真实 .md 文件**，不要用 knowledge/manual
-#    结构化目录要带切块覆盖，否则 850 条记录会被挤成 3 条/chunk
+#    切块参数按文档定：结构化目录 heading+200（一块一条记录）、工资统计 2400（一张表一块）
 python knowledge-cn/acquisition/import_weknora.py --input data/reviewed/moe-majors-2026-structured.jsonl \
     --kb-id <kb-id> --strategy heading --chunk-size 200
+python knowledge-cn/acquisition/import_weknora.py --input data/reviewed/nbs-wages-2025.jsonl \
+    --kb-id <kb-id> --chunk-size 2400
 # 或者一次性照表重建全部 5 份（可重复跑，同名会先删再传）
 python knowledge-cn/acquisition/rebuild_weknora.py --kb-id <kb-id>
 
@@ -57,8 +59,8 @@ python knowledge-cn/acquisition/rebuild_weknora.py --kb-id <kb-id>
 python knowledge-cn/verify_import.py --db ../knowledge-v1/weknora-src/data/weknora-cn.db --kb <kb-id>
 ```
 
-核验结果（`evidence/import-verify.json`）：**5 份文档 / 2641 chunk** / 记录 ID **1519 全命中、0 缺失** /
-向量 2641 条（1024 维）/ 活检索有命中。
+核验结果（`evidence/import-verify.json`）：**5 份文档 / 2612 chunk** / 记录 ID **1519 全命中、0 缺失** /
+向量 2612 条（1024 维）/ 活检索有命中。
 
 三个**踩过的坑**，照抄可省一轮：
 
@@ -71,7 +73,7 @@ python knowledge-cn/verify_import.py --db ../knowledge-v1/weknora-src/data/wekno
   写 `deleted_at`，`chunks` 表里的旧行不会立刻消失。核验/统计必须
   `JOIN knowledges ON deleted_at IS NULL`，否则重建一次数字就虚高。
 
-## 已验收：检索质量评测（2026-10-01，两版）
+## 已验收：检索质量评测（2026-10-01，三版）
 
 题集 `evaluations/questions-cn-v1.json`（33 题：可答 26 / 超范围 7，gold 组 35 个），对真实
 `hybrid-search` 实测（`match_count=10`、`skip_context_enrichment=true`）：
@@ -81,28 +83,35 @@ python knowledge-cn/verify_import.py --db ../knowledge-v1/weknora-src/data/wekno
 | 第一版（改造前，6 文档/2167 chunk） | 混合 | 16/26 = 61.5% | 21/26 = 80.8% | 26/26 = 100% | 0.700 |
 | | 纯关键词 | 17/26 = 65.4% | 23/26 = 88.5% | 25/26 = 96.2% | 0.759 |
 | | 纯向量 | 12/26 = 46.2% | 18/26 = 69.2% | 23/26 = 88.5% | 0.563 |
-| **第二版（改造后，5 文档/2641 chunk）** | 混合 | 13/26 = 50.0% | 21/26 = 80.8% | **26/26 = 100%** | 0.632 |
-| | 纯关键词 | 15/26 = 57.7% | 23/26 = 88.5% | 25/26 = 96.2% | 0.710 |
-| | 纯向量 | 8/26 = 30.8% | 18/26 = 69.2% | 22/26 = 84.6% | 0.475 |
+| 第二版（一块一记录/删重复，2641 chunk） | 混合 | 13/26 = 50.0% | 21/26 = 80.8% | 26/26 = 100% | 0.632 |
+| **第三版（现役：工资统计 2400 + RRF 0.2/0.8，2612 chunk）** | **混合** | **19/26 = 73.1%** | **24/26 = 92.3%** | **26/26 = 100%** | **0.819** |
+| | 纯关键词 | 17/26 = 65.4% | 24/26 = 92.3% | 25/26 = 96.2% | 0.775 |
+| | 纯向量 | 14/26 = 53.8% | 21/26 = 80.8% | 22/26 = 84.6% | 0.652 |
 
 - 报告：[evaluations/检索质量评测-20261001.md](evaluations/检索质量评测-20261001.md)；
-  证据：`evidence/retrieval-quality-20261001{,-v2}.json`、`evidence/questions-verified.json`、
-  `evidence/boilerplate-experiment.json`。
+  证据：`evidence/retrieval-quality-20261001{,-v2,-v5}.json`、`evidence/chunking-sweep-nbs.json`、
+  `evidence/rrf-weight-sweep.json`、`evidence/boilerplate-experiment.json`、`evidence/questions-verified.json`。
+- **切块参数按文档定，不是全局一个数**（`acquisition/rebuild_weknora.py` 里那张表是唯一出处）：
+  结构化目录 200（一块一条记录）、工资统计 **2400**（一张表一块）、页级长文本 512。
+  工资统计那一档拍了六档才定（`eval/chunking_sweep.py`，每档一个独立临时库），
+  相关的 5 道题全部从 3–8 名提到第 1 名，其余 21 题零回归。
+- **融合权重从默认 0.7/0.3 调到 0.2/0.8**（`PUT /api/v1/tenants/kv/retrieval-config`）：
+  因为三版都观察到「关键词通道单独跑更强」，把权重挪过去之后混合第一次反超纯关键词
+  （@1 19 vs 17）。这一档过了**对半交叉验证**（在 A 半选权重、B 半验证：MRR 0.834 vs 基线 0.781；
+  反过来 0.804 vs 0.774，两个半边都独立选中 0.2/0.8）。每份评测证据里都记了当次生效的
+  `retrievalConfig`，否则「同一套题两个数」会被误读成不稳定。
 - 「低空经济与管理 检索到了经济工程」已查清为**预览口径的错觉**，且已按新口径重建：
   结构化目录 287 chunk（3 条/块）→ **862 chunk（一块一条记录）**，记录在块首的比例
   33.8% → **100%**，该查询的预览现在直接显示目标记录；重复文档 nbs-wages-2025.md 已合并为 1 份。
   详见 [evaluations/召回排查-低空经济与管理-20261001.md](evaluations/召回排查-低空经济与管理-20261001.md)。
-- **改造没有让位次变好**：全题均秩 2.77 → 2.85（未换 gold 的 23 题为 2.87 → 2.83），
-  @1 有升有降（升 6 降 4，另 3 题因标注多组化而变严）；@10 覆盖率两版都是 26/26。
-  「58% 出处样板稀释向量」的假说**已实测推翻**（剥掉样板后平均两两余弦只从 0.490 降到 0.470，
+- 「58% 出处样板稀释向量」的假说**已实测推翻**（剥掉样板后平均两两余弦只从 0.490 降到 0.470，
   名次 2 升 3 降），因此没有再做精简重建。
-- 两版一致的两条：**关键词通道单独跑优于混合**（本题集偏字面事实，不可外推）；**超范围题
-  在检索层完全不可分**（7 道题 top-1 分数全部是满分，按阈值判拒答 7/7 误判）。
+- 仍然成立的一条：**超范围题在检索层完全不可分**（7 道题 top-1 分数全部是满分，按阈值判拒答 7/7 误判）。
 - 与旧 24 题（面向自建职业图谱）**语料不重叠，数字不可互相引用**；也不对标
   `docs/EVALUATION.md` 里「人工 100 题 Top-5 ≥ 80%」的门槛（本次是作者自出 26 题）。
 
 ## 尚未验收
 
 招聘源接入、去重合并、岗位失效策略、**业主人工出题/人工判定相关性**、偏语义改写题集
-（用来判断 RRF 0.7/0.3 权重是否合适）、大典（1665 chunk）的切块参数对照均需后续验证。
+（用来判断 0.2/0.8 是否也适合语义型问题）、职业大典（1665 chunk）的切块对照均需后续验证。
 不得引用旧版万条计数或单关键词测试作为本版本验收结果。

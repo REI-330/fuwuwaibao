@@ -1,0 +1,5410 @@
+{
+  "kb": "aacc4889-a347-44ea-9dd1-b60ec1917cbb",
+  "questionsFile": "knowledge-cn/evaluations/questions-cn-v1.json",
+  "top": 10,
+  "configBefore": {
+    "embedding_top_k": 0,
+    "vector_threshold": 0,
+    "keyword_threshold": 0,
+    "rerank_top_k": 0,
+    "rerank_threshold": 0,
+    "rerank_model_id": ""
+  },
+  "keptBest": false,
+  "best": {
+    "vectorWeight": 0.2,
+    "keywordWeight": 0.8
+  },
+  "variants": [
+    {
+      "vectorWeight": 0.7,
+      "keywordWeight": 0.3,
+      "summary": {
+        "answerable": 26,
+        "refusal": 7,
+        "skippedAllJudgment": [],
+        "SameChunk": {
+          "hit@1": {
+            "hits": 18,
+            "total": 26,
+            "rate": 0.6923
+          },
+          "hit@3": {
+            "hits": 21,
+            "total": 26,
+            "rate": 0.8077
+          },
+          "hit@5": {
+            "hits": 23,
+            "total": 26,
+            "rate": 0.8846
+          },
+          "hit@10": {
+            "hits": 26,
+            "total": 26,
+            "rate": 1.0
+          },
+          "mrr": 0.7776
+        },
+        "Anywhere": {
+          "hit@1": {
+            "hits": 18,
+            "total": 26,
+            "rate": 0.6923
+          },
+          "hit@3": {
+            "hits": 21,
+            "total": 26,
+            "rate": 0.8077
+          },
+          "hit@5": {
+            "hits": 23,
+            "total": 26,
+            "rate": 0.8846
+          },
+          "hit@10": {
+            "hits": 26,
+            "total": 26,
+            "rate": 1.0
+          },
+          "mrr": 0.7776
+        },
+        "preview@1": {
+          "hits": 5,
+          "total": 21,
+          "rate": 0.2381
+        },
+        "top1IsTarget": {
+          "hits": 16,
+          "total": 21,
+          "rate": 0.7619
+        },
+        "multiGroup": {
+          "total": 5,
+          "sameChunkRanks": {
+            "CN03": 1,
+            "CN07": 6,
+            "CN08": 1,
+            "CN19": 2,
+            "CN24": 5
+          },
+          "anywhereRanks": {
+            "CN03": 1,
+            "CN07": 6,
+            "CN08": 1,
+            "CN19": 2,
+            "CN24": 5
+          }
+        },
+        "judgmentGroups": {
+          "questions": [
+            "CN25",
+            "CN26"
+          ],
+          "coveredWithinTop": 0,
+          "total": 2,
+          "note": "作者裁定的跨源关联，不计入头部命中率"
+        },
+        "refusalTop1Score": {
+          "min": 0.01631411951348493,
+          "median": 0.016393442622950817,
+          "max": 0.016393442622950817
+        },
+        "answerableTop1Score": {
+          "min": 0.015286470871449204,
+          "p25": 0.016119472806410934,
+          "median": 0.01631411951348493,
+          "max": 0.016393442622950817
+        },
+        "naiveThresholdMisfires": 7
+      },
+      "meanRank": 2.12,
+      "perQuestion": [
+        {
+          "questionId": "CN01",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "低空经济与管理",
+                "020110TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN02",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 3,
+          "evidenceRankAnywhere": 3,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 3,
+              "firstRankAnywhere": 3,
+              "chunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7"
+            }
+          ],
+          "top1Score": 0.01609079445145019,
+          "top1ChunkId": "ac39f751-63dc-4ffd-ad29-854eba339dca",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN03",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 2,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "140003TK",
+                "低空技术与工程"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab"
+            },
+            {
+              "name": "原页记录（含原代码）",
+              "anchors": [
+                "140003TK",
+                "083203TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 2,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN04",
+          "category": "专业目录-原代码与变更",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "140002TK",
+                "083202TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "b9c62ff7-53e0-4e7a-a5f5-aaac5337a10e"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "b9c62ff7-53e0-4e7a-a5f5-aaac5337a10e",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN05",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 7,
+          "evidenceRankAnywhere": 7,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "100709TK",
+                "药物经济与管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 7,
+              "firstRankAnywhere": 7,
+              "chunkId": "e62c647c-2a3e-4b91-a7e7-9d68be262211"
+            }
+          ],
+          "top1Score": 0.015286470871449204,
+          "top1ChunkId": "945b2ce8-23bc-49fd-95a7-9b4314d40788",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN06",
+          "category": "专业目录-归类与学位",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 2,
+          "evidenceRankAnywhere": 2,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "原页目录块",
+              "anchors": [
+                "0201 经济学类",
+                "低空经济与管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "2864d47a-4177-418d-b3b3-dfa2b7f1bc22"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN07",
+          "category": "专业目录-归类与学位",
+          "answerable": true,
+          "groupCount": 2,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 6,
+          "evidenceRankAnywhere": 6,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "0831 专业类块",
+              "anchors": [
+                "0831 公安技术类",
+                "刑事科学技术"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 6,
+              "firstRankAnywhere": 6,
+              "chunkId": "c1381188-8c6a-4ecc-bd59-d55f52804b88"
+            },
+            {
+              "name": "低空安全管理记录",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7",
+          "top1HeadRecordId": "moe-major-083113TK",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN08",
+          "category": "专业目录-归类与学位",
+          "answerable": true,
+          "groupCount": 3,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "1204 类名块",
+              "anchors": [
+                "1204 公共管理类",
+                "公共事业管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3"
+            },
+            {
+              "name": "航空安防管理记录",
+              "anchors": [
+                "120419TK",
+                "航空安防管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3"
+            },
+            {
+              "name": "无障碍管理记录",
+              "anchors": [
+                "120420TK",
+                "无障碍管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3"
+            }
+          ],
+          "top1Score": 0.015949820788530467,
+          "top1ChunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 3,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN09",
+          "category": "薪资统计-总量与增速",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "正文与表 1/表 2",
+              "anchors": [
+                "129441",
+                "124110"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "79dff8cb-32af-4347-9dd1-356947b73927"
+            }
+          ],
+          "top1Score": 0.01631411951348493,
+          "top1ChunkId": "79dff8cb-32af-4347-9dd1-356947b73927",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN10",
+          "category": "薪资统计-总量与增速",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "正文与表 4",
+              "anchors": [
+                "71590",
+                "69476"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN11",
+          "category": "薪资统计-总量与增速",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "正文与表 6",
+              "anchors": [
+                "210016",
+                "中层及以上管理人员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN12",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 2",
+              "anchors": [
+                "248752",
+                "信息传输、软件和信息技术服务业"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "79dff8cb-32af-4347-9dd1-356947b73927"
+            }
+          ],
+          "top1Score": 0.01631411951348493,
+          "top1ChunkId": "79dff8cb-32af-4347-9dd1-356947b73927",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN13",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 2",
+              "anchors": [
+                "62461",
+                "住宿和餐饮业"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "79dff8cb-32af-4347-9dd1-356947b73927"
+            }
+          ],
+          "top1Score": 0.01631411951348493,
+          "top1ChunkId": "79dff8cb-32af-4347-9dd1-356947b73927",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN14",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 1",
+              "anchors": [
+                "149902",
+                "东部地区"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN15",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 5",
+              "anchors": [
+                "140451",
+                "128166"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN16",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 3",
+              "anchors": [
+                "164956",
+                "外商投资单位"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "79dff8cb-32af-4347-9dd1-356947b73927"
+            }
+          ],
+          "top1Score": 0.01631411951348493,
+          "top1ChunkId": "79dff8cb-32af-4347-9dd1-356947b73927",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN17",
+          "category": "职业大典-职业编码",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "4-04-05-05",
+                "人工智能训练师"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "9a65258f-9016-4169-bcdf-80b53cb79283"
+            }
+          ],
+          "top1Score": 0.016208355367530406,
+          "top1ChunkId": "9a65258f-9016-4169-bcdf-80b53cb79283",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN18",
+          "category": "职业大典-职业编码",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 8,
+          "evidenceRankAnywhere": 8,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "2-06-07-13",
+                "数字化管理师"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 8,
+              "firstRankAnywhere": 8,
+              "chunkId": "af43aa07-a645-4bef-b935-813b71b0993e"
+            }
+          ],
+          "top1Score": 0.01576112412177986,
+          "top1ChunkId": "69b02c0b-298a-40d0-bd2c-c289472f924e",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN19",
+          "category": "职业大典-职业编码",
+          "answerable": true,
+          "groupCount": 2,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 2,
+          "evidenceRankAnywhere": 2,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "职业编码行",
+              "anchors": [
+                "4-02-04-06",
+                "无人机驾驶员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "1b75ba7d-38b2-44fb-af24-96c9e3b928aa"
+            },
+            {
+              "name": "工种行",
+              "anchors": [
+                "植保无人机驾驶员",
+                "安防无人机驾驶员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN20",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "2-06-01-04",
+                "易货经济专业人员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "db1aee6d-5166-49b2-b6ef-44c2f23791b5"
+            }
+          ],
+          "top1Score": 0.016208355367530406,
+          "top1ChunkId": "db1aee6d-5166-49b2-b6ef-44c2f23791b5",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN21",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "4-13-01-05",
+                "全媒体运营师"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "b72f9d43-c0b9-4416-821c-70e734c80b66"
+            }
+          ],
+          "top1Score": 0.01631411951348493,
+          "top1ChunkId": "b72f9d43-c0b9-4416-821c-70e734c80b66",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN22",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "2-02-30-03",
+                "战略规划与管理工程技术人员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "307c76b2-c44b-4248-afde-e86182d1e54f"
+            }
+          ],
+          "top1Score": 0.01631411951348493,
+          "top1ChunkId": "307c76b2-c44b-4248-afde-e86182d1e54f",
+          "top1HeadRecordId": "occupation-2022-replacement-page-84",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN23",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "4-10-01-06",
+                "家政服务员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "547c7040-13ae-453b-875b-18bd11853c3f"
+            }
+          ],
+          "top1Score": 0.01605222734254992,
+          "top1ChunkId": "547c7040-13ae-453b-875b-18bd11853c3f",
+          "top1HeadRecordId": "occupation-2022-replacement-page-265",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN24",
+          "category": "跨源综合",
+          "answerable": true,
+          "groupCount": 3,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 5,
+          "evidenceRankAnywhere": 5,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "低空经济与管理",
+              "anchors": [
+                "低空经济与管理",
+                "020110TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31"
+            },
+            {
+              "name": "低空安全管理",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 5,
+              "firstRankAnywhere": 5,
+              "chunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7"
+            },
+            {
+              "name": "低空技术与工程",
+              "anchors": [
+                "140003TK",
+                "低空技术与工程"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab"
+            }
+          ],
+          "top1Score": 0.01597782258064516,
+          "top1ChunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN25",
+          "category": "跨源综合",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 1,
+          "evidenceRankSameChunk": 4,
+          "evidenceRankAnywhere": 4,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "专业侧",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": true,
+              "firstRankSameChunk": null,
+              "firstRankAnywhere": null,
+              "chunkId": null
+            },
+            {
+              "name": "职业侧",
+              "anchors": [
+                "4-02-04-06",
+                "无人机驾驶员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 4,
+              "firstRankAnywhere": 4,
+              "chunkId": "1b75ba7d-38b2-44fb-af24-96c9e3b928aa"
+            }
+          ],
+          "top1Score": 0.016129032258064516,
+          "top1ChunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN26",
+          "category": "跨源综合",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 1,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "统计侧",
+              "anchors": [
+                "248752",
+                "信息传输、软件和信息技术服务业"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            },
+            {
+              "name": "职业侧",
+              "anchors": [
+                "4-04-05-05",
+                "人工智能训练师"
+              ],
+              "judgment": true,
+              "firstRankSameChunk": null,
+              "firstRankAnywhere": null,
+              "chunkId": null
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN27",
+          "category": "超范围-实时数据",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN28",
+          "category": "超范围-招生数据",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN29",
+          "category": "超范围-历史年份",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01631411951348493,
+          "top1ChunkId": "79dff8cb-32af-4347-9dd1-356947b73927",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN30",
+          "category": "超范围-未来目录",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN31",
+          "category": "超范围-企业与薪酬密薪",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN32",
+          "category": "超范围-就业去向",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN33",
+          "category": "超范围-版本差异",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "02fdea74-f070-4f73-90c1-5c1e83d12e0e",
+          "top1HeadRecordId": "occupation-2022-replacement-page-1",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        }
+      ]
+    },
+    {
+      "vectorWeight": 0.5,
+      "keywordWeight": 0.5,
+      "summary": {
+        "answerable": 26,
+        "refusal": 7,
+        "skippedAllJudgment": [],
+        "SameChunk": {
+          "hit@1": {
+            "hits": 18,
+            "total": 26,
+            "rate": 0.6923
+          },
+          "hit@3": {
+            "hits": 22,
+            "total": 26,
+            "rate": 0.8462
+          },
+          "hit@5": {
+            "hits": 24,
+            "total": 26,
+            "rate": 0.9231
+          },
+          "hit@10": {
+            "hits": 26,
+            "total": 26,
+            "rate": 1.0
+          },
+          "mrr": 0.7885
+        },
+        "Anywhere": {
+          "hit@1": {
+            "hits": 18,
+            "total": 26,
+            "rate": 0.6923
+          },
+          "hit@3": {
+            "hits": 22,
+            "total": 26,
+            "rate": 0.8462
+          },
+          "hit@5": {
+            "hits": 24,
+            "total": 26,
+            "rate": 0.9231
+          },
+          "hit@10": {
+            "hits": 26,
+            "total": 26,
+            "rate": 1.0
+          },
+          "mrr": 0.7885
+        },
+        "preview@1": {
+          "hits": 5,
+          "total": 21,
+          "rate": 0.2381
+        },
+        "top1IsTarget": {
+          "hits": 16,
+          "total": 21,
+          "rate": 0.7619
+        },
+        "multiGroup": {
+          "total": 5,
+          "sameChunkRanks": {
+            "CN03": 1,
+            "CN07": 7,
+            "CN08": 1,
+            "CN19": 2,
+            "CN24": 5
+          },
+          "anywhereRanks": {
+            "CN03": 1,
+            "CN07": 7,
+            "CN08": 1,
+            "CN19": 2,
+            "CN24": 5
+          }
+        },
+        "judgmentGroups": {
+          "questions": [
+            "CN25",
+            "CN26"
+          ],
+          "coveredWithinTop": 0,
+          "total": 2,
+          "note": "作者裁定的跨源关联，不计入头部命中率"
+        },
+        "refusalTop1Score": {
+          "min": 0.01626123744050767,
+          "median": 0.01639344262295082,
+          "max": 0.01639344262295082
+        },
+        "answerableTop1Score": {
+          "min": 0.015417457305502846,
+          "p25": 0.016097030209933437,
+          "median": 0.01626123744050767,
+          "max": 0.01639344262295082
+        },
+        "naiveThresholdMisfires": 7
+      },
+      "meanRank": 2,
+      "perQuestion": [
+        {
+          "questionId": "CN01",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "低空经济与管理",
+                "020110TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN02",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 2,
+          "evidenceRankAnywhere": 2,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7"
+            }
+          ],
+          "top1Score": 0.015889029003783105,
+          "top1ChunkId": "ac39f751-63dc-4ffd-ad29-854eba339dca",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN03",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 2,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "140003TK",
+                "低空技术与工程"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab"
+            },
+            {
+              "name": "原页记录（含原代码）",
+              "anchors": [
+                "140003TK",
+                "083203TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 2,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN04",
+          "category": "专业目录-原代码与变更",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "140002TK",
+                "083202TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "b9c62ff7-53e0-4e7a-a5f5-aaac5337a10e"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "b9c62ff7-53e0-4e7a-a5f5-aaac5337a10e",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN05",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 5,
+          "evidenceRankAnywhere": 5,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "100709TK",
+                "药物经济与管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 5,
+              "firstRankAnywhere": 5,
+              "chunkId": "e62c647c-2a3e-4b91-a7e7-9d68be262211"
+            }
+          ],
+          "top1Score": 0.015527202696196438,
+          "top1ChunkId": "945b2ce8-23bc-49fd-95a7-9b4314d40788",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN06",
+          "category": "专业目录-归类与学位",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 2,
+          "evidenceRankAnywhere": 2,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "原页目录块",
+              "anchors": [
+                "0201 经济学类",
+                "低空经济与管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "2864d47a-4177-418d-b3b3-dfa2b7f1bc22"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN07",
+          "category": "专业目录-归类与学位",
+          "answerable": true,
+          "groupCount": 2,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 7,
+          "evidenceRankAnywhere": 7,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "0831 专业类块",
+              "anchors": [
+                "0831 公安技术类",
+                "刑事科学技术"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 7,
+              "firstRankAnywhere": 7,
+              "chunkId": "c1381188-8c6a-4ecc-bd59-d55f52804b88"
+            },
+            {
+              "name": "低空安全管理记录",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7",
+          "top1HeadRecordId": "moe-major-083113TK",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN08",
+          "category": "专业目录-归类与学位",
+          "answerable": true,
+          "groupCount": 3,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "1204 类名块",
+              "anchors": [
+                "1204 公共管理类",
+                "公共事业管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3"
+            },
+            {
+              "name": "航空安防管理记录",
+              "anchors": [
+                "120419TK",
+                "航空安防管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3"
+            },
+            {
+              "name": "无障碍管理记录",
+              "anchors": [
+                "120420TK",
+                "无障碍管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3"
+            }
+          ],
+          "top1Score": 0.016001024065540194,
+          "top1ChunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 3,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN09",
+          "category": "薪资统计-总量与增速",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "正文与表 1/表 2",
+              "anchors": [
+                "129441",
+                "124110"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01626123744050767,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN10",
+          "category": "薪资统计-总量与增速",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "正文与表 4",
+              "anchors": [
+                "71590",
+                "69476"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN11",
+          "category": "薪资统计-总量与增速",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "正文与表 6",
+              "anchors": [
+                "210016",
+                "中层及以上管理人员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN12",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 2",
+              "anchors": [
+                "248752",
+                "信息传输、软件和信息技术服务业"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "79dff8cb-32af-4347-9dd1-356947b73927"
+            }
+          ],
+          "top1Score": 0.01626123744050767,
+          "top1ChunkId": "79dff8cb-32af-4347-9dd1-356947b73927",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN13",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 2",
+              "anchors": [
+                "62461",
+                "住宿和餐饮业"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01626123744050767,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN14",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 1",
+              "anchors": [
+                "149902",
+                "东部地区"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN15",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 5",
+              "anchors": [
+                "140451",
+                "128166"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN16",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 3",
+              "anchors": [
+                "164956",
+                "外商投资单位"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01626123744050767,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN17",
+          "category": "职业大典-职业编码",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "4-04-05-05",
+                "人工智能训练师"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "9a65258f-9016-4169-bcdf-80b53cb79283"
+            }
+          ],
+          "top1Score": 0.01626123744050767,
+          "top1ChunkId": "9a65258f-9016-4169-bcdf-80b53cb79283",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN18",
+          "category": "职业大典-职业编码",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 8,
+          "evidenceRankAnywhere": 8,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "2-06-07-13",
+                "数字化管理师"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 8,
+              "firstRankAnywhere": 8,
+              "chunkId": "af43aa07-a645-4bef-b935-813b71b0993e"
+            }
+          ],
+          "top1Score": 0.015417457305502846,
+          "top1ChunkId": "73419a38-709b-4fc0-bf30-8fcb6a65a754",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN19",
+          "category": "职业大典-职业编码",
+          "answerable": true,
+          "groupCount": 2,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 2,
+          "evidenceRankAnywhere": 2,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "职业编码行",
+              "anchors": [
+                "4-02-04-06",
+                "无人机驾驶员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "1b75ba7d-38b2-44fb-af24-96c9e3b928aa"
+            },
+            {
+              "name": "工种行",
+              "anchors": [
+                "植保无人机驾驶员",
+                "安防无人机驾驶员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN20",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "2-06-01-04",
+                "易货经济专业人员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "db1aee6d-5166-49b2-b6ef-44c2f23791b5"
+            }
+          ],
+          "top1Score": 0.01626123744050767,
+          "top1ChunkId": "db1aee6d-5166-49b2-b6ef-44c2f23791b5",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN21",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "4-13-01-05",
+                "全媒体运营师"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "b72f9d43-c0b9-4416-821c-70e734c80b66"
+            }
+          ],
+          "top1Score": 0.01626123744050767,
+          "top1ChunkId": "b72f9d43-c0b9-4416-821c-70e734c80b66",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN22",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "2-02-30-03",
+                "战略规划与管理工程技术人员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "307c76b2-c44b-4248-afde-e86182d1e54f"
+            }
+          ],
+          "top1Score": 0.01626123744050767,
+          "top1ChunkId": "307c76b2-c44b-4248-afde-e86182d1e54f",
+          "top1HeadRecordId": "occupation-2022-replacement-page-84",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN23",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "4-10-01-06",
+                "家政服务员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "547c7040-13ae-453b-875b-18bd11853c3f"
+            }
+          ],
+          "top1Score": 0.016001024065540194,
+          "top1ChunkId": "547c7040-13ae-453b-875b-18bd11853c3f",
+          "top1HeadRecordId": "occupation-2022-replacement-page-265",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN24",
+          "category": "跨源综合",
+          "answerable": true,
+          "groupCount": 3,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 5,
+          "evidenceRankAnywhere": 5,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "低空经济与管理",
+              "anchors": [
+                "低空经济与管理",
+                "020110TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 3,
+              "firstRankAnywhere": 3,
+              "chunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31"
+            },
+            {
+              "name": "低空安全管理",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 5,
+              "firstRankAnywhere": 5,
+              "chunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7"
+            },
+            {
+              "name": "低空技术与工程",
+              "anchors": [
+                "140003TK",
+                "低空技术与工程"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab"
+            }
+          ],
+          "top1Score": 0.015877016129032258,
+          "top1ChunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN25",
+          "category": "跨源综合",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 1,
+          "evidenceRankSameChunk": 3,
+          "evidenceRankAnywhere": 3,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "专业侧",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": true,
+              "firstRankSameChunk": null,
+              "firstRankAnywhere": null,
+              "chunkId": null
+            },
+            {
+              "name": "职业侧",
+              "anchors": [
+                "4-02-04-06",
+                "无人机驾驶员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 3,
+              "firstRankAnywhere": 3,
+              "chunkId": "1b75ba7d-38b2-44fb-af24-96c9e3b928aa"
+            }
+          ],
+          "top1Score": 0.016129032258064516,
+          "top1ChunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN26",
+          "category": "跨源综合",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 1,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "统计侧",
+              "anchors": [
+                "248752",
+                "信息传输、软件和信息技术服务业"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            },
+            {
+              "name": "职业侧",
+              "anchors": [
+                "4-04-05-05",
+                "人工智能训练师"
+              ],
+              "judgment": true,
+              "firstRankSameChunk": null,
+              "firstRankAnywhere": null,
+              "chunkId": null
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN27",
+          "category": "超范围-实时数据",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN28",
+          "category": "超范围-招生数据",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN29",
+          "category": "超范围-历史年份",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01626123744050767,
+          "top1ChunkId": "79dff8cb-32af-4347-9dd1-356947b73927",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN30",
+          "category": "超范围-未来目录",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN31",
+          "category": "超范围-企业与薪酬密薪",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN32",
+          "category": "超范围-就业去向",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN33",
+          "category": "超范围-版本差异",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "02fdea74-f070-4f73-90c1-5c1e83d12e0e",
+          "top1HeadRecordId": "occupation-2022-replacement-page-1",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        }
+      ]
+    },
+    {
+      "vectorWeight": 0.3,
+      "keywordWeight": 0.7,
+      "summary": {
+        "answerable": 26,
+        "refusal": 7,
+        "skippedAllJudgment": [],
+        "SameChunk": {
+          "hit@1": {
+            "hits": 18,
+            "total": 26,
+            "rate": 0.6923
+          },
+          "hit@3": {
+            "hits": 22,
+            "total": 26,
+            "rate": 0.8462
+          },
+          "hit@5": {
+            "hits": 24,
+            "total": 26,
+            "rate": 0.9231
+          },
+          "hit@10": {
+            "hits": 26,
+            "total": 26,
+            "rate": 1.0
+          },
+          "mrr": 0.7904
+        },
+        "Anywhere": {
+          "hit@1": {
+            "hits": 18,
+            "total": 26,
+            "rate": 0.6923
+          },
+          "hit@3": {
+            "hits": 22,
+            "total": 26,
+            "rate": 0.8462
+          },
+          "hit@5": {
+            "hits": 24,
+            "total": 26,
+            "rate": 0.9231
+          },
+          "hit@10": {
+            "hits": 26,
+            "total": 26,
+            "rate": 1.0
+          },
+          "mrr": 0.7904
+        },
+        "preview@1": {
+          "hits": 4,
+          "total": 21,
+          "rate": 0.1905
+        },
+        "top1IsTarget": {
+          "hits": 16,
+          "total": 21,
+          "rate": 0.7619
+        },
+        "multiGroup": {
+          "total": 5,
+          "sameChunkRanks": {
+            "CN03": 1,
+            "CN07": 8,
+            "CN08": 1,
+            "CN19": 2,
+            "CN24": 5
+          },
+          "anywhereRanks": {
+            "CN03": 1,
+            "CN07": 8,
+            "CN08": 1,
+            "CN19": 2,
+            "CN24": 5
+          }
+        },
+        "judgmentGroups": {
+          "questions": [
+            "CN25",
+            "CN26"
+          ],
+          "coveredWithinTop": 0,
+          "total": 2,
+          "note": "作者裁定的跨源关联，不计入头部命中率"
+        },
+        "refusalTop1Score": {
+          "min": 0.01631411951348493,
+          "median": 0.016393442622950817,
+          "max": 0.016393442622950817
+        },
+        "answerableTop1Score": {
+          "min": 0.01539991162174105,
+          "p25": 0.016109831029185867,
+          "median": 0.01631411951348493,
+          "max": 0.016393442622950817
+        },
+        "naiveThresholdMisfires": 7
+      },
+      "meanRank": 1.96,
+      "perQuestion": [
+        {
+          "questionId": "CN01",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "低空经济与管理",
+                "020110TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN02",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 2,
+          "evidenceRankAnywhere": 2,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7"
+            }
+          ],
+          "top1Score": 0.015687263556116014,
+          "top1ChunkId": "ac39f751-63dc-4ffd-ad29-854eba339dca",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN03",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 2,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "140003TK",
+                "低空技术与工程"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab"
+            },
+            {
+              "name": "原页记录（含原代码）",
+              "anchors": [
+                "140003TK",
+                "083203TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 2,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN04",
+          "category": "专业目录-原代码与变更",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "140002TK",
+                "083202TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "b9c62ff7-53e0-4e7a-a5f5-aaac5337a10e"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "b9c62ff7-53e0-4e7a-a5f5-aaac5337a10e",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN05",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 4,
+          "evidenceRankAnywhere": 4,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "100709TK",
+                "药物经济与管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 4,
+              "firstRankAnywhere": 4,
+              "chunkId": "e62c647c-2a3e-4b91-a7e7-9d68be262211"
+            }
+          ],
+          "top1Score": 0.015767934520943667,
+          "top1ChunkId": "945b2ce8-23bc-49fd-95a7-9b4314d40788",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN06",
+          "category": "专业目录-归类与学位",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 2,
+          "evidenceRankAnywhere": 2,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "原页目录块",
+              "anchors": [
+                "0201 经济学类",
+                "低空经济与管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "2864d47a-4177-418d-b3b3-dfa2b7f1bc22"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN07",
+          "category": "专业目录-归类与学位",
+          "answerable": true,
+          "groupCount": 2,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 8,
+          "evidenceRankAnywhere": 8,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "0831 专业类块",
+              "anchors": [
+                "0831 公安技术类",
+                "刑事科学技术"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 8,
+              "firstRankAnywhere": 8,
+              "chunkId": "c1381188-8c6a-4ecc-bd59-d55f52804b88"
+            },
+            {
+              "name": "低空安全管理记录",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7",
+          "top1HeadRecordId": "moe-major-083113TK",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN08",
+          "category": "专业目录-归类与学位",
+          "answerable": true,
+          "groupCount": 3,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "1204 类名块",
+              "anchors": [
+                "1204 公共管理类",
+                "公共事业管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3"
+            },
+            {
+              "name": "航空安防管理记录",
+              "anchors": [
+                "120419TK",
+                "航空安防管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3"
+            },
+            {
+              "name": "无障碍管理记录",
+              "anchors": [
+                "120420TK",
+                "无障碍管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3"
+            }
+          ],
+          "top1Score": 0.01605222734254992,
+          "top1ChunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 3,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN09",
+          "category": "薪资统计-总量与增速",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "正文与表 1/表 2",
+              "anchors": [
+                "129441",
+                "124110"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01631411951348493,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN10",
+          "category": "薪资统计-总量与增速",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "正文与表 4",
+              "anchors": [
+                "71590",
+                "69476"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN11",
+          "category": "薪资统计-总量与增速",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "正文与表 6",
+              "anchors": [
+                "210016",
+                "中层及以上管理人员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN12",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 2",
+              "anchors": [
+                "248752",
+                "信息传输、软件和信息技术服务业"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01631411951348493,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN13",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 2",
+              "anchors": [
+                "62461",
+                "住宿和餐饮业"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01631411951348493,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN14",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 1",
+              "anchors": [
+                "149902",
+                "东部地区"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN15",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 5",
+              "anchors": [
+                "140451",
+                "128166"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN16",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 3",
+              "anchors": [
+                "164956",
+                "外商投资单位"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01631411951348493,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN17",
+          "category": "职业大典-职业编码",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "4-04-05-05",
+                "人工智能训练师"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "9a65258f-9016-4169-bcdf-80b53cb79283"
+            }
+          ],
+          "top1Score": 0.01631411951348493,
+          "top1ChunkId": "9a65258f-9016-4169-bcdf-80b53cb79283",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN18",
+          "category": "职业大典-职业编码",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 7,
+          "evidenceRankAnywhere": 7,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "2-06-07-13",
+                "数字化管理师"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 7,
+              "firstRankAnywhere": 7,
+              "chunkId": "af43aa07-a645-4bef-b935-813b71b0993e"
+            }
+          ],
+          "top1Score": 0.01539991162174105,
+          "top1ChunkId": "b889995a-74e3-4f91-9661-29a8ed3e5127",
+          "top1HeadRecordId": "occupation-2022-replacement-page-222",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN19",
+          "category": "职业大典-职业编码",
+          "answerable": true,
+          "groupCount": 2,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 2,
+          "evidenceRankAnywhere": 2,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "职业编码行",
+              "anchors": [
+                "4-02-04-06",
+                "无人机驾驶员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "1b75ba7d-38b2-44fb-af24-96c9e3b928aa"
+            },
+            {
+              "name": "工种行",
+              "anchors": [
+                "植保无人机驾驶员",
+                "安防无人机驾驶员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6"
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN20",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "2-06-01-04",
+                "易货经济专业人员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "db1aee6d-5166-49b2-b6ef-44c2f23791b5"
+            }
+          ],
+          "top1Score": 0.01631411951348493,
+          "top1ChunkId": "db1aee6d-5166-49b2-b6ef-44c2f23791b5",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN21",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "4-13-01-05",
+                "全媒体运营师"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "b72f9d43-c0b9-4416-821c-70e734c80b66"
+            }
+          ],
+          "top1Score": 0.016208355367530406,
+          "top1ChunkId": "b72f9d43-c0b9-4416-821c-70e734c80b66",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN22",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "2-02-30-03",
+                "战略规划与管理工程技术人员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "307c76b2-c44b-4248-afde-e86182d1e54f"
+            }
+          ],
+          "top1Score": 0.016208355367530406,
+          "top1ChunkId": "307c76b2-c44b-4248-afde-e86182d1e54f",
+          "top1HeadRecordId": "occupation-2022-replacement-page-84",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN23",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "4-10-01-06",
+                "家政服务员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "220dc536-fb45-42a0-9f45-efae28e4b936"
+            }
+          ],
+          "top1Score": 0.015953021776364082,
+          "top1ChunkId": "220dc536-fb45-42a0-9f45-efae28e4b936",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN24",
+          "category": "跨源综合",
+          "answerable": true,
+          "groupCount": 3,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 5,
+          "evidenceRankAnywhere": 5,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "低空经济与管理",
+              "anchors": [
+                "低空经济与管理",
+                "020110TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 5,
+              "firstRankAnywhere": 5,
+              "chunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31"
+            },
+            {
+              "name": "低空安全管理",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 3,
+              "firstRankAnywhere": 3,
+              "chunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7"
+            },
+            {
+              "name": "低空技术与工程",
+              "anchors": [
+                "140003TK",
+                "低空技术与工程"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab"
+            }
+          ],
+          "top1Score": 0.016020864381520117,
+          "top1ChunkId": "4e0e57b6-afcf-4d7d-95d9-002442d8b600",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN25",
+          "category": "跨源综合",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 1,
+          "evidenceRankSameChunk": 3,
+          "evidenceRankAnywhere": 3,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "专业侧",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": true,
+              "firstRankSameChunk": null,
+              "firstRankAnywhere": null,
+              "chunkId": null
+            },
+            {
+              "name": "职业侧",
+              "anchors": [
+                "4-02-04-06",
+                "无人机驾驶员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 3,
+              "firstRankAnywhere": 3,
+              "chunkId": "1b75ba7d-38b2-44fb-af24-96c9e3b928aa"
+            }
+          ],
+          "top1Score": 0.016129032258064516,
+          "top1ChunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN26",
+          "category": "跨源综合",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 1,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "统计侧",
+              "anchors": [
+                "248752",
+                "信息传输、软件和信息技术服务业"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            },
+            {
+              "name": "职业侧",
+              "anchors": [
+                "4-04-05-05",
+                "人工智能训练师"
+              ],
+              "judgment": true,
+              "firstRankSameChunk": null,
+              "firstRankAnywhere": null,
+              "chunkId": null
+            }
+          ],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN27",
+          "category": "超范围-实时数据",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN28",
+          "category": "超范围-招生数据",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN29",
+          "category": "超范围-历史年份",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01631411951348493,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN30",
+          "category": "超范围-未来目录",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN31",
+          "category": "超范围-企业与薪酬密薪",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN32",
+          "category": "超范围-就业去向",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN33",
+          "category": "超范围-版本差异",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.016393442622950817,
+          "top1ChunkId": "02fdea74-f070-4f73-90c1-5c1e83d12e0e",
+          "top1HeadRecordId": "occupation-2022-replacement-page-1",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        }
+      ]
+    },
+    {
+      "vectorWeight": 0.2,
+      "keywordWeight": 0.8,
+      "summary": {
+        "answerable": 26,
+        "refusal": 7,
+        "skippedAllJudgment": [],
+        "SameChunk": {
+          "hit@1": {
+            "hits": 19,
+            "total": 26,
+            "rate": 0.7308
+          },
+          "hit@3": {
+            "hits": 23,
+            "total": 26,
+            "rate": 0.8846
+          },
+          "hit@5": {
+            "hits": 24,
+            "total": 26,
+            "rate": 0.9231
+          },
+          "hit@10": {
+            "hits": 26,
+            "total": 26,
+            "rate": 1.0
+          },
+          "mrr": 0.8193
+        },
+        "Anywhere": {
+          "hit@1": {
+            "hits": 19,
+            "total": 26,
+            "rate": 0.7308
+          },
+          "hit@3": {
+            "hits": 23,
+            "total": 26,
+            "rate": 0.8846
+          },
+          "hit@5": {
+            "hits": 24,
+            "total": 26,
+            "rate": 0.9231
+          },
+          "hit@10": {
+            "hits": 26,
+            "total": 26,
+            "rate": 1.0
+          },
+          "mrr": 0.8193
+        },
+        "preview@1": {
+          "hits": 5,
+          "total": 21,
+          "rate": 0.2381
+        },
+        "top1IsTarget": {
+          "hits": 17,
+          "total": 21,
+          "rate": 0.8095
+        },
+        "multiGroup": {
+          "total": 5,
+          "sameChunkRanks": {
+            "CN03": 1,
+            "CN07": 8,
+            "CN08": 1,
+            "CN19": 2,
+            "CN24": 5
+          },
+          "anywhereRanks": {
+            "CN03": 1,
+            "CN07": 8,
+            "CN08": 1,
+            "CN19": 2,
+            "CN24": 5
+          }
+        },
+        "judgmentGroups": {
+          "questions": [
+            "CN25",
+            "CN26"
+          ],
+          "coveredWithinTop": 0,
+          "total": 2,
+          "note": "作者裁定的跨源关联，不计入头部命中率"
+        },
+        "refusalTop1Score": {
+          "min": 0.01634056054997356,
+          "median": 0.01639344262295082,
+          "max": 0.01639344262295082
+        },
+        "answerableTop1Score": {
+          "min": 0.015642951833848874,
+          "p25": 0.016141050911013893,
+          "median": 0.01634056054997356,
+          "max": 0.01639344262295082
+        },
+        "naiveThresholdMisfires": 7
+      },
+      "meanRank": 1.85,
+      "perQuestion": [
+        {
+          "questionId": "CN01",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "低空经济与管理",
+                "020110TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN02",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7"
+            }
+          ],
+          "top1Score": 0.015642951833848874,
+          "top1ChunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7",
+          "top1HeadRecordId": "moe-major-083113TK",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN03",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 2,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "140003TK",
+                "低空技术与工程"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab"
+            },
+            {
+              "name": "原页记录（含原代码）",
+              "anchors": [
+                "140003TK",
+                "083203TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 2,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN04",
+          "category": "专业目录-原代码与变更",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "140002TK",
+                "083202TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "b9c62ff7-53e0-4e7a-a5f5-aaac5337a10e"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "b9c62ff7-53e0-4e7a-a5f5-aaac5337a10e",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN05",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 2,
+          "evidenceRankAnywhere": 2,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "100709TK",
+                "药物经济与管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "e62c647c-2a3e-4b91-a7e7-9d68be262211"
+            }
+          ],
+          "top1Score": 0.015888300433317286,
+          "top1ChunkId": "945b2ce8-23bc-49fd-95a7-9b4314d40788",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN06",
+          "category": "专业目录-归类与学位",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 2,
+          "evidenceRankAnywhere": 2,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "原页目录块",
+              "anchors": [
+                "0201 经济学类",
+                "低空经济与管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "2864d47a-4177-418d-b3b3-dfa2b7f1bc22"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN07",
+          "category": "专业目录-归类与学位",
+          "answerable": true,
+          "groupCount": 2,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 8,
+          "evidenceRankAnywhere": 8,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "0831 专业类块",
+              "anchors": [
+                "0831 公安技术类",
+                "刑事科学技术"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 8,
+              "firstRankAnywhere": 8,
+              "chunkId": "c1381188-8c6a-4ecc-bd59-d55f52804b88"
+            },
+            {
+              "name": "低空安全管理记录",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7",
+          "top1HeadRecordId": "moe-major-083113TK",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN08",
+          "category": "专业目录-归类与学位",
+          "answerable": true,
+          "groupCount": 3,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "1204 类名块",
+              "anchors": [
+                "1204 公共管理类",
+                "公共事业管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3"
+            },
+            {
+              "name": "航空安防管理记录",
+              "anchors": [
+                "120419TK",
+                "航空安防管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3"
+            },
+            {
+              "name": "无障碍管理记录",
+              "anchors": [
+                "120420TK",
+                "无障碍管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3"
+            }
+          ],
+          "top1Score": 0.01607782898105479,
+          "top1ChunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 3,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN09",
+          "category": "薪资统计-总量与增速",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "正文与表 1/表 2",
+              "anchors": [
+                "129441",
+                "124110"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01634056054997356,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN10",
+          "category": "薪资统计-总量与增速",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "正文与表 4",
+              "anchors": [
+                "71590",
+                "69476"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN11",
+          "category": "薪资统计-总量与增速",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "正文与表 6",
+              "anchors": [
+                "210016",
+                "中层及以上管理人员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN12",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 2",
+              "anchors": [
+                "248752",
+                "信息传输、软件和信息技术服务业"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01634056054997356,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN13",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 2",
+              "anchors": [
+                "62461",
+                "住宿和餐饮业"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01634056054997356,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN14",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 1",
+              "anchors": [
+                "149902",
+                "东部地区"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN15",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 5",
+              "anchors": [
+                "140451",
+                "128166"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN16",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 3",
+              "anchors": [
+                "164956",
+                "外商投资单位"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01634056054997356,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN17",
+          "category": "职业大典-职业编码",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "4-04-05-05",
+                "人工智能训练师"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "9a65258f-9016-4169-bcdf-80b53cb79283"
+            }
+          ],
+          "top1Score": 0.01634056054997356,
+          "top1ChunkId": "9a65258f-9016-4169-bcdf-80b53cb79283",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN18",
+          "category": "职业大典-职业编码",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 7,
+          "evidenceRankAnywhere": 7,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "2-06-07-13",
+                "数字化管理师"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 7,
+              "firstRankAnywhere": 7,
+              "chunkId": "af43aa07-a645-4bef-b935-813b71b0993e"
+            }
+          ],
+          "top1Score": 0.015642951833848874,
+          "top1ChunkId": "b889995a-74e3-4f91-9661-29a8ed3e5127",
+          "top1HeadRecordId": "occupation-2022-replacement-page-222",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN19",
+          "category": "职业大典-职业编码",
+          "answerable": true,
+          "groupCount": 2,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 2,
+          "evidenceRankAnywhere": 2,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "职业编码行",
+              "anchors": [
+                "4-02-04-06",
+                "无人机驾驶员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "1b75ba7d-38b2-44fb-af24-96c9e3b928aa"
+            },
+            {
+              "name": "工种行",
+              "anchors": [
+                "植保无人机驾驶员",
+                "安防无人机驾驶员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN20",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "2-06-01-04",
+                "易货经济专业人员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "db1aee6d-5166-49b2-b6ef-44c2f23791b5"
+            }
+          ],
+          "top1Score": 0.01634056054997356,
+          "top1ChunkId": "db1aee6d-5166-49b2-b6ef-44c2f23791b5",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN21",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "4-13-01-05",
+                "全媒体运营师"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "b72f9d43-c0b9-4416-821c-70e734c80b66"
+            }
+          ],
+          "top1Score": 0.016181914331041776,
+          "top1ChunkId": "b72f9d43-c0b9-4416-821c-70e734c80b66",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN22",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "2-02-30-03",
+                "战略规划与管理工程技术人员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "307c76b2-c44b-4248-afde-e86182d1e54f"
+            }
+          ],
+          "top1Score": 0.016181914331041776,
+          "top1ChunkId": "307c76b2-c44b-4248-afde-e86182d1e54f",
+          "top1HeadRecordId": "occupation-2022-replacement-page-84",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN23",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "4-10-01-06",
+                "家政服务员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "220dc536-fb45-42a0-9f45-efae28e4b936"
+            }
+          ],
+          "top1Score": 0.016099828725226327,
+          "top1ChunkId": "220dc536-fb45-42a0-9f45-efae28e4b936",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN24",
+          "category": "跨源综合",
+          "answerable": true,
+          "groupCount": 3,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 5,
+          "evidenceRankAnywhere": 5,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "低空经济与管理",
+              "anchors": [
+                "低空经济与管理",
+                "020110TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 5,
+              "firstRankAnywhere": 5,
+              "chunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31"
+            },
+            {
+              "name": "低空安全管理",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 3,
+              "firstRankAnywhere": 3,
+              "chunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7"
+            },
+            {
+              "name": "低空技术与工程",
+              "anchors": [
+                "140003TK",
+                "低空技术与工程"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab"
+            }
+          ],
+          "top1Score": 0.016145057128663685,
+          "top1ChunkId": "4e0e57b6-afcf-4d7d-95d9-002442d8b600",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN25",
+          "category": "跨源综合",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 1,
+          "evidenceRankSameChunk": 3,
+          "evidenceRankAnywhere": 3,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "专业侧",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": true,
+              "firstRankSameChunk": null,
+              "firstRankAnywhere": null,
+              "chunkId": null
+            },
+            {
+              "name": "职业侧",
+              "anchors": [
+                "4-02-04-06",
+                "无人机驾驶员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 3,
+              "firstRankAnywhere": 3,
+              "chunkId": "1b75ba7d-38b2-44fb-af24-96c9e3b928aa"
+            }
+          ],
+          "top1Score": 0.016129032258064516,
+          "top1ChunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN26",
+          "category": "跨源综合",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 1,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "统计侧",
+              "anchors": [
+                "248752",
+                "信息传输、软件和信息技术服务业"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            },
+            {
+              "name": "职业侧",
+              "anchors": [
+                "4-04-05-05",
+                "人工智能训练师"
+              ],
+              "judgment": true,
+              "firstRankSameChunk": null,
+              "firstRankAnywhere": null,
+              "chunkId": null
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN27",
+          "category": "超范围-实时数据",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN28",
+          "category": "超范围-招生数据",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN29",
+          "category": "超范围-历史年份",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01634056054997356,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN30",
+          "category": "超范围-未来目录",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN31",
+          "category": "超范围-企业与薪酬密薪",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN32",
+          "category": "超范围-就业去向",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN33",
+          "category": "超范围-版本差异",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "02fdea74-f070-4f73-90c1-5c1e83d12e0e",
+          "top1HeadRecordId": "occupation-2022-replacement-page-1",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        }
+      ]
+    },
+    {
+      "vectorWeight": 0.1,
+      "keywordWeight": 0.9,
+      "summary": {
+        "answerable": 26,
+        "refusal": 7,
+        "skippedAllJudgment": [],
+        "SameChunk": {
+          "hit@1": {
+            "hits": 18,
+            "total": 26,
+            "rate": 0.6923
+          },
+          "hit@3": {
+            "hits": 23,
+            "total": 26,
+            "rate": 0.8846
+          },
+          "hit@5": {
+            "hits": 25,
+            "total": 26,
+            "rate": 0.9615
+          },
+          "hit@10": {
+            "hits": 26,
+            "total": 26,
+            "rate": 1.0
+          },
+          "mrr": 0.8036
+        },
+        "Anywhere": {
+          "hit@1": {
+            "hits": 18,
+            "total": 26,
+            "rate": 0.6923
+          },
+          "hit@3": {
+            "hits": 23,
+            "total": 26,
+            "rate": 0.8846
+          },
+          "hit@5": {
+            "hits": 25,
+            "total": 26,
+            "rate": 0.9615
+          },
+          "hit@10": {
+            "hits": 26,
+            "total": 26,
+            "rate": 1.0
+          },
+          "mrr": 0.8036
+        },
+        "preview@1": {
+          "hits": 5,
+          "total": 21,
+          "rate": 0.2381
+        },
+        "top1IsTarget": {
+          "hits": 17,
+          "total": 21,
+          "rate": 0.8095
+        },
+        "multiGroup": {
+          "total": 5,
+          "sameChunkRanks": {
+            "CN03": 1,
+            "CN07": 9,
+            "CN08": 2,
+            "CN19": 2,
+            "CN24": 5
+          },
+          "anywhereRanks": {
+            "CN03": 1,
+            "CN07": 9,
+            "CN08": 2,
+            "CN19": 2,
+            "CN24": 5
+          }
+        },
+        "judgmentGroups": {
+          "questions": [
+            "CN25",
+            "CN26"
+          ],
+          "coveredWithinTop": 0,
+          "total": 2,
+          "note": "作者裁定的跨源关联，不计入头部命中率"
+        },
+        "refusalTop1Score": {
+          "min": 0.01636700158646219,
+          "median": 0.01639344262295082,
+          "max": 0.01639344262295082
+        },
+        "answerableTop1Score": {
+          "min": 0.015885992045956695,
+          "p25": 0.016160780122299104,
+          "median": 0.01636700158646219,
+          "max": 0.01639344262295082
+        },
+        "naiveThresholdMisfires": 7
+      },
+      "meanRank": 1.81,
+      "perQuestion": [
+        {
+          "questionId": "CN01",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "低空经济与管理",
+                "020110TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN02",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7"
+            }
+          ],
+          "top1Score": 0.015885992045956695,
+          "top1ChunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7",
+          "top1HeadRecordId": "moe-major-083113TK",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN03",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 2,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "140003TK",
+                "低空技术与工程"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab"
+            },
+            {
+              "name": "原页记录（含原代码）",
+              "anchors": [
+                "140003TK",
+                "083203TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 2,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN04",
+          "category": "专业目录-原代码与变更",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "140002TK",
+                "083202TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "b9c62ff7-53e0-4e7a-a5f5-aaac5337a10e"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "b9c62ff7-53e0-4e7a-a5f5-aaac5337a10e",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN05",
+          "category": "专业目录-代码与名称",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 2,
+          "evidenceRankAnywhere": 2,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "结构化专业记录",
+              "anchors": [
+                "100709TK",
+                "药物经济与管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "e62c647c-2a3e-4b91-a7e7-9d68be262211"
+            }
+          ],
+          "top1Score": 0.0160086663456909,
+          "top1ChunkId": "945b2ce8-23bc-49fd-95a7-9b4314d40788",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN06",
+          "category": "专业目录-归类与学位",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 2,
+          "evidenceRankAnywhere": 2,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "原页目录块",
+              "anchors": [
+                "0201 经济学类",
+                "低空经济与管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "2864d47a-4177-418d-b3b3-dfa2b7f1bc22"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN07",
+          "category": "专业目录-归类与学位",
+          "answerable": true,
+          "groupCount": 2,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 9,
+          "evidenceRankAnywhere": 9,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "0831 专业类块",
+              "anchors": [
+                "0831 公安技术类",
+                "刑事科学技术"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 9,
+              "firstRankAnywhere": 9,
+              "chunkId": "c1381188-8c6a-4ecc-bd59-d55f52804b88"
+            },
+            {
+              "name": "低空安全管理记录",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7",
+          "top1HeadRecordId": "moe-major-083113TK",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN08",
+          "category": "专业目录-归类与学位",
+          "answerable": true,
+          "groupCount": 3,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 2,
+          "evidenceRankAnywhere": 2,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "1204 类名块",
+              "anchors": [
+                "1204 公共管理类",
+                "公共事业管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3"
+            },
+            {
+              "name": "航空安防管理记录",
+              "anchors": [
+                "120419TK",
+                "航空安防管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3"
+            },
+            {
+              "name": "无障碍管理记录",
+              "anchors": [
+                "120420TK",
+                "无障碍管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "2df55ab6-6c87-43ea-9920-cfef9d505ed3"
+            }
+          ],
+          "top1Score": 0.016162549064881092,
+          "top1ChunkId": "1c1caaac-5797-442f-bc8f-e1b294d024b9",
+          "top1HeadRecordId": "moe-majors-2026-page-26",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN09",
+          "category": "薪资统计-总量与增速",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "正文与表 1/表 2",
+              "anchors": [
+                "129441",
+                "124110"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01636700158646219,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN10",
+          "category": "薪资统计-总量与增速",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "正文与表 4",
+              "anchors": [
+                "71590",
+                "69476"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN11",
+          "category": "薪资统计-总量与增速",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "正文与表 6",
+              "anchors": [
+                "210016",
+                "中层及以上管理人员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN12",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 2",
+              "anchors": [
+                "248752",
+                "信息传输、软件和信息技术服务业"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01636700158646219,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN13",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 2",
+              "anchors": [
+                "62461",
+                "住宿和餐饮业"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01636700158646219,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN14",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 1",
+              "anchors": [
+                "149902",
+                "东部地区"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN15",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 5",
+              "anchors": [
+                "140451",
+                "128166"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN16",
+          "category": "薪资统计-分组比较",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "表 3",
+              "anchors": [
+                "164956",
+                "外商投资单位"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            }
+          ],
+          "top1Score": 0.01636700158646219,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN17",
+          "category": "职业大典-职业编码",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "4-04-05-05",
+                "人工智能训练师"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "9a65258f-9016-4169-bcdf-80b53cb79283"
+            }
+          ],
+          "top1Score": 0.01636700158646219,
+          "top1ChunkId": "9a65258f-9016-4169-bcdf-80b53cb79283",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": true
+        },
+        {
+          "questionId": "CN18",
+          "category": "职业大典-职业编码",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 4,
+          "evidenceRankAnywhere": 4,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "2-06-07-13",
+                "数字化管理师"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 4,
+              "firstRankAnywhere": 4,
+              "chunkId": "af43aa07-a645-4bef-b935-813b71b0993e"
+            }
+          ],
+          "top1Score": 0.015885992045956695,
+          "top1ChunkId": "b889995a-74e3-4f91-9661-29a8ed3e5127",
+          "top1HeadRecordId": "occupation-2022-replacement-page-222",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN19",
+          "category": "职业大典-职业编码",
+          "answerable": true,
+          "groupCount": 2,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 2,
+          "evidenceRankAnywhere": 2,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "职业编码行",
+              "anchors": [
+                "4-02-04-06",
+                "无人机驾驶员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "1b75ba7d-38b2-44fb-af24-96c9e3b928aa"
+            },
+            {
+              "name": "工种行",
+              "anchors": [
+                "植保无人机驾驶员",
+                "安防无人机驾驶员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6"
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN20",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "2-06-01-04",
+                "易货经济专业人员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "db1aee6d-5166-49b2-b6ef-44c2f23791b5"
+            }
+          ],
+          "top1Score": 0.01636700158646219,
+          "top1ChunkId": "db1aee6d-5166-49b2-b6ef-44c2f23791b5",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN21",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "4-13-01-05",
+                "全媒体运营师"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "b72f9d43-c0b9-4416-821c-70e734c80b66"
+            }
+          ],
+          "top1Score": 0.016155473294553146,
+          "top1ChunkId": "b72f9d43-c0b9-4416-821c-70e734c80b66",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN22",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "2-02-30-03",
+                "战略规划与管理工程技术人员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "307c76b2-c44b-4248-afde-e86182d1e54f"
+            }
+          ],
+          "top1Score": 0.016155473294553146,
+          "top1ChunkId": "307c76b2-c44b-4248-afde-e86182d1e54f",
+          "top1HeadRecordId": "occupation-2022-replacement-page-84",
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN23",
+          "category": "职业大典-职业定义与任务",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "大典正文",
+              "anchors": [
+                "4-10-01-06",
+                "家政服务员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "220dc536-fb45-42a0-9f45-efae28e4b936"
+            }
+          ],
+          "top1Score": 0.016246635674088575,
+          "top1ChunkId": "220dc536-fb45-42a0-9f45-efae28e4b936",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN24",
+          "category": "跨源综合",
+          "answerable": true,
+          "groupCount": 3,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": 5,
+          "evidenceRankAnywhere": 5,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "低空经济与管理",
+              "anchors": [
+                "低空经济与管理",
+                "020110TK"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 5,
+              "firstRankAnywhere": 5,
+              "chunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31"
+            },
+            {
+              "name": "低空安全管理",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 3,
+              "firstRankAnywhere": 3,
+              "chunkId": "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7"
+            },
+            {
+              "name": "低空技术与工程",
+              "anchors": [
+                "140003TK",
+                "低空技术与工程"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 2,
+              "firstRankAnywhere": 2,
+              "chunkId": "6175230f-ddcd-4b54-a61a-7db63d1f34ab"
+            }
+          ],
+          "top1Score": 0.016269249875807253,
+          "top1ChunkId": "4e0e57b6-afcf-4d7d-95d9-002442d8b600",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN25",
+          "category": "跨源综合",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 1,
+          "evidenceRankSameChunk": 3,
+          "evidenceRankAnywhere": 3,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "专业侧",
+              "anchors": [
+                "083113TK",
+                "低空安全管理"
+              ],
+              "judgment": true,
+              "firstRankSameChunk": null,
+              "firstRankAnywhere": null,
+              "chunkId": null
+            },
+            {
+              "name": "职业侧",
+              "anchors": [
+                "4-02-04-06",
+                "无人机驾驶员"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 3,
+              "firstRankAnywhere": 3,
+              "chunkId": "1b75ba7d-38b2-44fb-af24-96c9e3b928aa"
+            }
+          ],
+          "top1Score": 0.016129032258064516,
+          "top1ChunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN26",
+          "category": "跨源综合",
+          "answerable": true,
+          "groupCount": 1,
+          "judgmentGroupCount": 1,
+          "evidenceRankSameChunk": 1,
+          "evidenceRankAnywhere": 1,
+          "judgmentEvidenceRank": null,
+          "groups": [
+            {
+              "name": "统计侧",
+              "anchors": [
+                "248752",
+                "信息传输、软件和信息技术服务业"
+              ],
+              "judgment": false,
+              "firstRankSameChunk": 1,
+              "firstRankAnywhere": 1,
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935"
+            },
+            {
+              "name": "职业侧",
+              "anchors": [
+                "4-04-05-05",
+                "人工智能训练师"
+              ],
+              "judgment": true,
+              "firstRankSameChunk": null,
+              "firstRankAnywhere": null,
+              "chunkId": null
+            }
+          ],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 1,
+          "top1CoversAllGroups": true,
+          "previewVisibleAt1": false
+        },
+        {
+          "questionId": "CN27",
+          "category": "超范围-实时数据",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN28",
+          "category": "超范围-招生数据",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN29",
+          "category": "超范围-历史年份",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01636700158646219,
+          "top1ChunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN30",
+          "category": "超范围-未来目录",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN31",
+          "category": "超范围-企业与薪酬密薪",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+          "top1HeadRecordId": null,
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN32",
+          "category": "超范围-就业去向",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+          "top1HeadRecordId": "moe-major-020110TK",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        },
+        {
+          "questionId": "CN33",
+          "category": "超范围-版本差异",
+          "answerable": false,
+          "groupCount": 0,
+          "judgmentGroupCount": 0,
+          "evidenceRankSameChunk": null,
+          "evidenceRankAnywhere": null,
+          "judgmentEvidenceRank": null,
+          "groups": [],
+          "top1Score": 0.01639344262295082,
+          "top1ChunkId": "02fdea74-f070-4f73-90c1-5c1e83d12e0e",
+          "top1HeadRecordId": "occupation-2022-replacement-page-1",
+          "groupsCoveredAtTop1": 0,
+          "top1CoversAllGroups": false,
+          "previewVisibleAt1": null
+        }
+      ]
+    }
+  ]
+}

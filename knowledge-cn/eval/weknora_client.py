@@ -149,6 +149,37 @@ class WeKnora:
                 break
         return chunks
 
+    # --- 知识库/文档的增删（扫描实验用：临时库、按标题清理） ---
+
+    def knowledge_by_name(self, kb_id, name):
+        """返回该 KB 下所有同名文档（列表接口不返回已删除的文档）。"""
+        return [row.get("id") for row in self.list_knowledge(kb_id)
+                if row.get("file_name") == name or row.get("title") == name]
+
+    def delete_knowledge(self, knowledge_id):
+        status, body = _request("DELETE", f"{self.base_url}/api/v1/knowledge/{knowledge_id}",
+                                token=self.token)
+        return status, body
+
+    def ensure_knowledge_base(self, name, embedding_model_id, description=""):
+        for kb in self.list_knowledge_bases():
+            if kb.get("name") == name:
+                return kb.get("id")
+        status, body = _request("POST", self.base_url + "/api/v1/knowledge-bases",
+                                {"name": name, "type": "document",
+                                 "description": description,
+                                 "embedding_model_id": embedding_model_id},
+                                token=self.token)
+        if status not in (200, 201):
+            raise SystemExit(f"建库失败 HTTP {status}: {str(body)[:200]}")
+        data = body.get("data") or body
+        return data.get("id")
+
+    def delete_knowledge_base(self, kb_id):
+        status, body = _request("DELETE", f"{self.base_url}/api/v1/knowledge-bases/{kb_id}",
+                                token=self.token)
+        return status, body
+
 
 def kb_id_from_db(db_path):
     """从 WeKnora 的 sqlite 里取知识库 ID（只有一个库时最省事）。"""

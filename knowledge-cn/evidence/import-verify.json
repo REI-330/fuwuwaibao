@@ -1,9 +1,9 @@
 {
   "reviewedRecords": 1519,
-  "chunks": 2641,
-  "chunksWithVector": 2641,
+  "chunks": 2612,
+  "chunksWithVector": 2612,
   "documents": 5,
-  "softDeletedDocuments": 6,
+  "softDeletedDocuments": 24,
   "documentsNotCompleted": 0,
   "missingRecordIds": 0,
   "missingSample": [],
@@ -21,7 +21,7 @@
     },
     {
       "fileName": "nbs-wages-2025.md",
-      "chunks": 36
+      "chunks": 7
     },
     {
       "fileName": "occupation-2022-replacement.md",
@@ -41,7 +41,7 @@
   },
   "probe": {
     "query": "哲学 专业代码",
-    "hits": 132,
+    "hits": 94,
     "topPreview": "## 010101 哲学\n\n- 专业代码：010101\n- 专业名称：哲学\n- 来源页码：第 3 页\n\n_出处：moe-majors-2026 · 类型：FACT · 记录 ID：moe-major-010101 · 审核状态：业主豁免闸门",
     "topRecordIds": [
       "moe-major-010101"

@@ -262,13 +262,16 @@ def main():
         for knowledge_id in existing:
             delete_document(base, token, knowledge_id)
         summary["deletedBeforeImport"] = existing
-        # 删除是异步任务（返回的是 task_id），必须等到同名确实不在列表里再传，
+        # 删除是异步任务（返回的是 task_id），必须等同名确实不在列表里再传，
         # 否则新文档会和还没删掉的旧文档同名共存 —— 那就是重复导入的成因。
-        deadline = time.time() + 120
+        # 注意：列表接口**不返回已置 deleted_at 的文档**，所以这里等的是
+        # 「已提交删除但还没落 deleted_at、parse_status=deleting」的那一段队列时间；
+        # 实测这段可能到几分钟，deadline 给 600 秒。
+        deadline = time.time() + 600
         while time.time() < deadline:
             if not existing_documents(base, token, args.kb_id).get(name):
                 break
-            time.sleep(2)
+            time.sleep(3)
         else:
             raise SystemExit(f"同名文档删除超时，未上传：{name}")
 

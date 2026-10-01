@@ -14,7 +14,8 @@
 | 文件 | 切块 | 依据 |
 |---|---|---|
 | `moe-majors-2026-structured.jsonl` | `strategy=heading`、`chunk_size=200` | 一条记录一个 chunk（`/chunker/preview` 实测 393/393） |
-| 其余 4 个 | 默认（512 字） | 正文是页级长文本，512 字能装下 1 个完整段落/定义 |
+| `nbs-wages-2025.jsonl` | `chunk_size=2400` | 一张表一个 chunk（`eval/chunking_sweep.py` 扫 512…3200 六档，2400 最好） |
+| 其余 3 个 | 默认（512 字） | 正文是页级长文本，512 字能装下 1 个完整段落/定义 |
 
 脚本对每个文件都走 `import_weknora.py --replace`（先删同名再传），因此**可重复执行**：
 重跑不会堆重复文档。跑完还会轮询到所有文档 `parse_status=completed` 才退出。
@@ -45,10 +46,13 @@ REVIEWED = ROOT / "knowledge-cn" / "data" / "reviewed"
 IMPORT_SCRIPT = ROOT / "knowledge-cn" / "acquisition" / "import_weknora.py"
 
 # 一个文件的切块参数只有这一处出处；改口径请同时更新模块 docstring 与 README。
+# 依据见 knowledge-cn/evaluations/检索质量评测-20261001.md 的「切块参数对照」一节：
+#   结构化目录 200（一块一条记录，/chunker/preview 实测 393/393）
+#   工资统计   2400（一张表一块；扫描 512/768/1024/1600/2400/3200 六档，2400 最好）
 FILES = [
     {"input": "moe-majors-2026-structured.jsonl", "strategy": "heading", "chunk_size": 200},
     {"input": "moe-majors-2026.jsonl", "strategy": None, "chunk_size": None},
-    {"input": "nbs-wages-2025.jsonl", "strategy": None, "chunk_size": None},
+    {"input": "nbs-wages-2025.jsonl", "strategy": None, "chunk_size": 2400},
     {"input": "occupation-2022.jsonl", "strategy": None, "chunk_size": None},
     {"input": "occupation-2022-replacement.jsonl", "strategy": None, "chunk_size": None},
 ]

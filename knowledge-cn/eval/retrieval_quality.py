@@ -40,7 +40,7 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from weknora_client import WeKnora  # noqa: E402
+from weknora_client import WeKnora, _request  # noqa: E402
 
 PREVIEW_CHARS = 120
 MODES = {
@@ -214,12 +214,29 @@ def main():
         raise SystemExit("题集里有重复的 questionId")
 
     wk = WeKnora()
+    # 融合权重是租户级配置（不是题库/代码里的常量），必须随证据一起记下来，
+    # 否则「同一套题两个数」会被误读成检索不稳定。空对象 = 用默认 0.7/0.3。
+    tenant_config = {}
+    try:
+        status, body = _request("GET", wk.base_url + "/api/v1/tenants/kv/retrieval-config",
+                                token=wk.token)
+        if status == 200:
+            tenant_config = body.get("data") or {}
+    except Exception as error:  # 读不到不算评测失败，但要如实标注
+        tenant_config = {"unavailable": f"{type(error).__name__}: {error}"}
+
     report = {
         "questionsFile": args.questions,
         "kb": document.get("kb", {}),
         "top": args.top,
         "previewChars": PREVIEW_CHARS,
         "judging": document.get("judging"),
+        "retrievalConfig": tenant_config,
+        "effectiveRrfWeights": {
+            "vector": tenant_config.get("rrf_vector_weight") or 0.7,
+            "keyword": tenant_config.get("rrf_keyword_weight") or 0.3,
+            "note": "租户级 retrieval_config；为 0/缺省时服务端用 0.7 / 0.3",
+        },
         "modes": {},
     }
     for mode in [m.strip() for m in args.modes.split(",") if m.strip()]:
