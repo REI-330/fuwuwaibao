@@ -34,6 +34,37 @@ WeKnora 模型配置与验收顺序见 [docs/WEKNORA_MODEL_SETUP.md](docs/WEKNOR
 - 薪资保存年度、地区、单位、样本范围；不将统计平均工资视作具体招聘薪资。
 - 公开可访问不代表可以公开再分发，当前快照仅作内部研究证据。
 
+## 已验收：导入与检索（2026-10-01）
+
+1519 条已审核候选（业主豁免闸门 `WAIVED`）**已导入 WeKnora Lite 并通过核验**：
+
+```powershell
+# 1) 起 WeKnora Lite（必须显式加载 .env.lite，否则 DB_DRIVER 为空会 panic）
+cd knowledge-v1/weknora-src
+set -a; source .env.lite; set +a; ./WeKnora-lite.exe     # 监听 0.0.0.0:8080
+
+# 2) 门禁（自带登录，不需要预先给 token）
+python knowledge-cn/acquisition/check_weknora.py
+
+# 3) 导入：**上传真实 .md 文件**，不要用 knowledge/manual
+python knowledge-cn/acquisition/import_weknora.py --input data/reviewed/<x>.jsonl --kb-id <kb-id>
+
+# 4) 核验：逐条比对记录 ID / 向量完整性 / 活检索探针
+python knowledge-cn/verify_import.py --db ../knowledge-v1/weknora-src/data/weknora-cn.db --kb <kb-id>
+```
+
+核验结果（`evidence/import-verify.json`）：6 份文档 / **2167 chunk** / 记录 ID **1519 全命中、0 缺失** /
+向量 2167 条（1024 维）/ 活检索有命中。
+
+两个**踩过的坑**，照抄可省一轮：
+
+- **不要用 `knowledge/manual`**：它建的 knowledge `file_type=manual`，不在 docparser 的
+  `simpleFormats`（md/txt/csv/json）里 → 被路由到 Python **docreader**；本机 docreader 没跑
+  （50051 无监听），解析会停在 processing。上传真实 `.md` 才走 Go 原生解析。
+- **`/api/v1/models` 要带 token**：它挂在 `Viewer()` 后面，**无 token 返回 200 + 空数组**，
+  看起来像「没配模型」。门禁脚本必须真登录。
+
 ## 尚未验收
 
-全量中文职业/专业抽取、招聘源接入、去重合并、岗位失效策略、WeKnora 在线导入与检索、人工标注评估集均需后续验证。不得引用旧版万条计数或单关键词测试作为本版本验收结果。
+全量中文职业/专业抽取、招聘源接入、去重合并、岗位失效策略、**本批语料的检索质量评测（需为其重新出题）**、
+人工标注评估集均需后续验证。不得引用旧版万条计数或单关键词测试作为本版本验收结果。

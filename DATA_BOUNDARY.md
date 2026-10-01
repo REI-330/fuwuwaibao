@@ -23,7 +23,7 @@
 |---|---|---|---|
 | `knowledge/import/raw/` | **116 MB** | 外部职业库的原始下载（O*NET / 大典 / 702 份国家职业技能标准） | 跑 `knowledge/pipeline/import/` 下的抓取脚本（`fetch-osta-dadian.mjs` / `import-onet.mjs` / `fetch-osta-standards.py`） |
 | `knowledge-v1/data/` | **404 MB** | 上一版（中文语料重组前）的旧数据层 | 只在需要复现历史结论时下；现役链路不依赖 |
-| `knowledge-cn/data/sources/` | **38 MB** | 中国官方语料**采集**区（1519 条候选，未过审） | 采集脚本在 `knowledge-cn/acquisition/`；**过审后才能进检索链路** |
+| `knowledge-cn/data/sources/` | **38 MB** | 中国官方语料**采集**区（原始快照 + 1519 条候选） | 采集脚本在 `knowledge-cn/acquisition/`；候选已由业主豁免闸门并导入 WeKnora（见下） |
 | `frontend/frotent/frontend1/node_modules/` | **776 MB** | 依赖 | `npm ci` |
 | `knowledge/eval/.env` | — | **含 API key** | 从 `knowledge/eval/.env.example` 复制后填自己的 key |
 
@@ -34,7 +34,8 @@
 
 | 想拿的东西 | 状态 | 说明 |
 |---|---|---|
-| **中国官方语料（过审）** | **0 / 1519 条** | 采集与抽取已完成，`APPROVED = 0`。缺的**不是技术而是人的判断**：`knowledge-cn/data/reviews/*.template.json` 逐条填 `decision=APPROVED` + `reviewer` + `reviewed_at` + `evidence_locator`，再跑 `acquisition/promote.py`。**在此之前这些内容不进本仓库的检索链路** |
+| **中国官方语料（入库）** | **1519 / 1519 已入库**（2026-10-01） | 审核由**业主豁免**（`WAIVED`，**不是人工逐条审核**）：数据里逐条带 `review_waiver{by,at,reason,policy}`。复算 `python knowledge-cn/waive_review.py --waived-by <谁>`。已导入 WeKnora Lite 并核验（2167 chunk、记录 ID 0 缺失），核验脚本 `python knowledge-cn/verify_import.py`。**仍未做的是这批语料的检索质量评测**（旧题集不适用，需重新出题） |
+| **WeKnora 运行态** | 可跑（**不需要 Docker**） | 向量后端用本机 `127.0.0.1:8090` 的 `Qwen3-Embedding-0.6B`（ONNX int8，1024 维，OpenAI 兼容），`config/builtin_models.yaml` 已指向它；起 Lite 用 `set -a; source .env.lite; ./WeKnora-lite.exe` |
 | **O*NET 30.3** | 未获得 | 仓库里的 O*NET 是 **29.1**（1,254 节点）与 OnLine 页面（26 份来源之一）。概要说「30.3」与仓库不符，见 `项目架构与技术文档.md` §12 第 8 条 |
 | **O*NET 独立外部层的完整图谱** | 部分 | `extern` 层有 21,987 节点 / 108,662 边（`import/build/*.jsonl`），但 `knowledge/import/raw/` 不入库，重下需外网 |
 | **WeKnora 标准版镜像** | 拉不动 | 5 个镜像共 2.72 GB，本机 Docker 代理对大镜像层近乎失效。**不影响功能**：对照实验已用 Lite 版完成并有结论 |
