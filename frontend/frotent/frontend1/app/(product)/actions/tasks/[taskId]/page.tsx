@@ -1,17 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 import type { CSSProperties } from "react";
 import { useParams } from "next/navigation";
 import { XiangxinMascot } from "../../../../../components/brand/xiangxin-mascot";
-import { evaluateTaskRun, getTask, submitTaskRun } from "../../../../../lib/client/task-api";
-import type { TaskDetailResponse, TaskRun, SubmitTaskRunResponse } from "../../../../../types/contracts/task";
+import { evaluateTaskRun, getTask, submitTaskRun, uploadTaskAttachment } from "../../../../../lib/client/task-api";
+import type { TaskAttachment, TaskDetailResponse, TaskRun, SubmitTaskRunResponse, UploadTaskAttachmentResponse } from "../../../../../types/contracts/task";
 
 function formatTime(value: string) {
   return new Intl.DateTimeFormat("zh-CN", {
     year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit",
   }).format(new Date(value));
+}
+
+function formatBytes(size: number) {
+  if (size < 1024) return `${size} B`;
+  if (size < 1024 * 1024) return `${(size / 1024).toFixed(1)} KB`;
+  return `${(size / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+/** 「这个附件到底读没读过」的一句话交代 —— 不能只写个文件名糊过去。 */
+function attachmentStatus(item: TaskAttachment) {
+  return `${item.kind} · ${formatBytes(item.byteSize)} · ${item.textExtracted ? "已抽文字" : "未抽文字"}`;
 }
 
 /**
@@ -31,6 +42,10 @@ export default function TaskDetailPage() {
   const [notice, setNotice] = useState<SubmitTaskRunResponse | null>(null);
   const [action, setAction] = useState("");
   const [submission, setSubmission] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [uploaded, setUploaded] = useState<UploadTaskAttachmentResponse | null>(null);
+  // 只勾「这次提交要引用的附件」——上传与引用分开，避免把上一轮的附件悄悄重复引用一遍
+  const [selected, setSelected] = useState<string[]>([]);
 
   const load = useCallback(async () => {
     try {
@@ -52,6 +67,29 @@ export default function TaskDetailPage() {
     return () => { active = false; };
   }, [load]);
 
+  async function pickFile(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    event.target.value = ""; // 清空才能重复选同一个文件
+    if (!file || uploading) return;
+    setUploading(true);
+    setError("");
+    try {
+      const result = await uploadTaskAttachment(taskId, file);
+      setUploaded(result);
+      // 刚上传的默认勾上（这是主路径），已有的附件不自动勾
+      setSelected(prev => (prev.includes(result.attachment.attachmentId) ? prev : [...prev, result.attachment.attachmentId]));
+      await load();
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "附件上传失败");
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  function toggleAttachment(attachmentId: string) {
+    setSelected(prev => (prev.includes(attachmentId) ? prev.filter(item => item !== attachmentId) : [...prev, attachmentId]));
+  }
+
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!submission.trim() || submitting) return;
@@ -61,11 +99,13 @@ export default function TaskDetailPage() {
       const result = await submitTaskRun(taskId, {
         action: action.trim() || undefined,
         submission: submission.trim(),
+        attachmentIds: selected,
         requestId: crypto.randomUUID(),
       });
       setNotice(result);
       setAction("");
       setSubmission("");
+      setSelected([]);
       await load();
       if (result.run.runId) void evaluate(result.run.runId, false);
     } catch (caught) {
@@ -92,8 +132,11 @@ export default function TaskDetailPage() {
   if (loading) return <div className="xn-card xn-interview-loading"><XiangxinMascot size={86} state="thinking" /><h1>正在从图谱里取这条任务…</h1></div>;
   if (!detail) return <div className="xn-card xn-interview-empty-page"><h1>无法打开这条任务</h1><p>{error || "任务不存在"}</p><Link className="xn-btn xn-btn-primary" href="/actions/tasks">返回任务清单</Link></div>;
 
-  const { task, runs, latestFeedback } = detail;
+  const { task, runs, latestFeedback, attachments, attachmentNotes } = detail;
   const latest: TaskRun | undefined = runs[0];
+  // 上限以服务端回传为准；第一次上传之前用与后端一致的默认值兜底
+  const maxBytes = uploaded?.limits.maxBytes ?? 5 * 1024 * 1024;
+  const maxPerTask = uploaded?.limits.maxPerTask ?? 20;
 
   return <div className="xn-stack xn-task-detail">
     <header className="xn-interview-history-title">
@@ -130,6 +173,30 @@ export default function TaskDetailPage() {
         <label><span>行动说明（选填）</span><textarea value={action} onChange={event => setAction(event.target.value)} maxLength={2000} placeholder="例如：先核对硬件约束，再按优先级逐项验证" /></label>
         <label><span>文本成果</span><textarea value={submission} onChange={event => setSubmission(event.target.value)} maxLength={8000} required placeholder="做到哪一步、怎么判断、结果是什么、哪里还不确定……" /></label>
         <div className="xn-answer-meta"><span>{submission.length}/8000</span><small>提交后立刻写入成长记录</small></div>
+
+        <section className="xn-task-attachments">
+          <header>
+            <b>附件（交付物）</b>
+            <small>{attachments.length}/{maxPerTask} 个 · 单个 ≤ {Math.round(maxBytes / (1024 * 1024))}MB</small>
+          </header>
+          <label className="xn-task-attach-picker">
+            <input type="file" onChange={pickFile} disabled={uploading} data-testid="task-attachment-input" />
+            <span>{uploading ? "正在上传…" : "选择文件上传"}</span>
+          </label>
+          {uploaded && <p className="xn-session-note">{uploaded.created ? "已上传" : "这个文件之前传过（按幂等复用同一条）"}：{uploaded.attachment.filename} —— {uploaded.attachment.note}</p>}
+          {attachments.length > 0 && <ul className="xn-task-attach-list">
+            {attachments.map(item => <li key={item.attachmentId}>
+              <label>
+                <input type="checkbox" checked={selected.includes(item.attachmentId)} onChange={() => toggleAttachment(item.attachmentId)} />
+                <span>{item.filename}</span>
+              </label>
+              <small>{attachmentStatus(item)}</small>
+              {item.preview && <details><summary>看预览{item.previewTruncated ? "（已截断）" : ""}</summary><pre>{item.preview}</pre></details>}
+            </li>)}
+          </ul>}
+          {attachmentNotes.map(note => <p key={note} className="xn-session-note">{note}</p>)}
+        </section>
+
         <button className="xn-btn xn-btn-primary" disabled={submitting || !submission.trim()}>{submitting ? "正在提交…" : "提交这次行动 →"}</button>
         <p className="xn-session-note">提交只会产出**待确认**候选，不会自动把你的能力写成「已掌握」。</p>
       </form>

@@ -58,6 +58,21 @@
 .xn-task-submit textarea:focus{border-color:#4e86df;box-shadow:0 0 0 3px rgba(37,99,235,.09)}
 .xn-task-submit>button{width:100%;margin-top:16px}
 
+.xn-task-attachments{margin-top:18px;padding:14px;border:1px dashed #cfdcea;border-radius:12px;background:#fbfdff}
+.xn-task-attachments>header{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.xn-task-attachments>header b{color:#1b3350;font-size:13px}
+.xn-task-attachments>header small{color:#8695a8;font-size:12px}
+.xn-task-attach-picker{display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:8px 14px;border:1px solid #cfdcea;border-radius:9px;background:#fff;color:#2f5fa8;font-size:13px;font-weight:700;cursor:pointer}
+.xn-task-attach-picker input{display:none}
+.xn-task-attach-picker:hover{border-color:#4e86df}
+.xn-task-attach-list{display:grid;gap:10px;margin:12px 0 0;padding:0;list-style:none}
+.xn-task-attach-list>li{display:grid;gap:4px;padding:10px 12px;border:1px solid #e6eef6;border-radius:9px;background:#fff}
+.xn-task-attach-list label{display:flex;align-items:center;gap:8px;color:#243a56;font-size:13px;font-weight:700}
+.xn-task-attach-list small{color:#7a8799;font-size:12px}
+.xn-task-attach-list details{margin-top:4px}
+.xn-task-attach-list summary{color:#2f5fa8;font-size:12px;cursor:pointer}
+.xn-task-attach-list pre{margin:6px 0 0;padding:10px;max-height:220px;overflow:auto;border-radius:8px;background:#f6f9fc;color:#4f6379;font-size:12px;line-height:1.6;white-space:pre-wrap}
+
 .xn-task-feedback{padding:24px}
 .xn-task-feedback>header h2{margin:5px 0 16px;color:#071f49;font-size:19px}
 .xn-task-feedback-head{display:grid;grid-template-columns:200px 1fr;gap:16px;align-items:center}

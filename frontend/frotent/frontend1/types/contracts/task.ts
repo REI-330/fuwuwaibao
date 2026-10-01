@@ -86,11 +86,46 @@ export type TaskRun = {
   provider: string | null;
 };
 
+/**
+ * 任务附件：**真字节存在库里**（`task_attachments.content`），接口只回元数据。
+ *
+ * `kind` / `textExtracted` / `note` 是「这个文件到底读没读过」的如实交代：
+ * 图片、压缩包一样收得下（存得下就存），但没有抽文字就写没有 —— 不假装解析成功。
+ * 附件里的文字**不作为能力证据**：能力闸门只看你手写的「行动说明 / 文本成果」。
+ */
+export type TaskAttachment = {
+  attachmentId: string;
+  taskId: string;
+  filename: string;
+  contentType: string;
+  kind: "text" | "docx" | "pdf" | "image" | "binary" | "empty";
+  byteSize: number;
+  sha256: string;
+  textExtracted: boolean;
+  preview: string | null;
+  previewTruncated: boolean;
+  note: string;
+  createdAt: string;
+};
+
 export type TaskDetailResponse = {
   task: PracticeTask;
   runs: TaskRun[];
+  attachments: TaskAttachment[];
+  attachmentCount: number;
   runCount: number;
   latestFeedback: TaskFeedback | null;
+  attachmentNotes: string[];
+  disclaimer: string;
+};
+
+export type UploadTaskAttachmentResponse = {
+  attachment: TaskAttachment & { created: boolean };
+  attachments: TaskAttachment[];
+  attachmentCount: number;
+  created: boolean;
+  limits: { maxBytes: number; maxPerTask: number; maxPerRun: number };
+  attachmentNotes: string[];
   disclaimer: string;
 };
 

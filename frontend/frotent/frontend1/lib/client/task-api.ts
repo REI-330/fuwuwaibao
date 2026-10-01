@@ -7,6 +7,7 @@ import type {
   TaskDetailResponse,
   TaskListResponse,
   TaskStatus,
+  UploadTaskAttachmentResponse,
 } from "../../types/contracts/task";
 import { apiUrl } from "./http";
 
@@ -45,6 +46,30 @@ export async function submitTaskRun(taskId: string, input: SubmitTaskRunInput): 
     headers: { "content-type": "application/json" },
     body: JSON.stringify(input),
   });
+}
+
+/**
+ * 上传任务附件（multipart，字段名 `file`）。
+ *
+ * 刻意**不**用 `call()`：那个 helper 会给请求体设 JSON 头，而 multipart 的
+ * `content-type` 必须带上浏览器生成的 boundary，手写会直接把后端解析弄坏。
+ * `Content-Type` 一个字都别设，交给 `FormData` 自己带。
+ */
+export async function uploadTaskAttachment(taskId: string, file: File): Promise<UploadTaskAttachmentResponse> {
+  const form = new FormData();
+  form.append("file", file, file.name);
+  const response = await fetch(apiUrl(`/api/tasks/${encodeURIComponent(taskId)}/attachments`), {
+    method: "POST",
+    credentials: "include",
+    cache: "no-store",
+    body: form,
+  });
+  const body = await response.json() as ApiResponse<UploadTaskAttachmentResponse>;
+  if (!response.ok || !body.data) {
+    throw new TaskApiError(response.status, body.error?.code ?? "ATTACHMENT_UPLOAD_FAILED",
+      body.error?.message ?? "附件上传失败");
+  }
+  return body.data;
 }
 
 export async function evaluateTaskRun(runId: string): Promise<EvaluateTaskRunResponse> {

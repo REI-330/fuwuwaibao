@@ -72,10 +72,14 @@ from .resume_store import ResumeStore
 from .tasks import DISCLAIMER as TASK_DISCLAIMER
 from .tasks import TaskStore, derive_tasks
 from .tasks import MAX_ACTION_CHARS as TASK_MAX_ACTION_CHARS
+from .tasks import MAX_ATTACHMENT_BYTES as TASK_MAX_ATTACHMENT_BYTES
 from .tasks import MAX_ATTACHMENTS as TASK_MAX_ATTACHMENTS
+from .tasks import MAX_ATTACHMENTS_PER_TASK as TASK_MAX_ATTACHMENTS_PER_TASK
 from .tasks import MAX_SUBMISSION_CHARS as TASK_MAX_SUBMISSION_CHARS
 from .tasks import STATUS_AVAILABLE, STATUS_COMPLETED, STATUS_PLANNED
-from .tasks import parse_task_id as parse_task_id_ref
+from .tasks import ATTACHMENT_EVIDENCE_SCOPE as TASK_ATTACHMENT_EVIDENCE_SCOPE
+from .tasks import ATTACHMENT_NOTES as TASK_ATTACHMENT_NOTES
+from .tasks import classify_attachment, parse_task_id as parse_task_id_ref, resolve_attachment_ids
 from .resume import memory_candidates as resume_memory_candidates
 from .resume import parse_multipart_form, read_upload
 
@@ -726,11 +730,14 @@ class CareerApi:
         if path == "/api/tasks" and method == "GET":
             return self._list_tasks(user_id, query)
 
+        if path.startswith("/api/attachments/") and path != "/api/attachments/" and method == "GET":
+            return self._get_task_attachment(user_id, path)
+
         if path.startswith("/api/task-runs/") and method == "POST":
             return self._evaluate_task_run(user_id, path)
 
         if path.startswith("/api/tasks/") and path != "/api/tasks/" and method in ("GET", "POST"):
-            return self._task_action(user_id, method, path, body)
+            return self._task_action(user_id, method, path, body, raw=raw, content_type=content_type)
 
         if path in NOT_IMPLEMENTED:
             return self.error(
@@ -805,7 +812,8 @@ class CareerApi:
         tasks = derive_tasks(path_result, self.tasks.submitted_task_ids(user_id))
         return next((task for task in tasks if task["taskId"] == task_id), None)
 
-    def _task_action(self, user_id: str, method: str, path: str, body: Any) -> Tuple[int, Dict[str, Any]]:
+    def _task_action(self, user_id: str, method: str, path: str, body: Any,
+                     raw: Optional[bytes] = None, content_type: str = "") -> Tuple[int, Dict[str, Any]]:
         rest = path[len("/api/tasks/") :].strip("/")
         parts = [part for part in rest.split("/") if part]
         task_id = parts[0] if parts else ""
@@ -818,18 +826,110 @@ class CareerApi:
             if task is None:
                 return self.error("TASK_NOT_FOUND", f"没有找到任务：{task_id}", 404)
             runs = self.tasks.list_runs(user_id, task_id)
+            attachments = self.tasks.list_attachments(user_id, task_id)
             return 200, self.envelope({
                 "task": task,
                 "runs": runs,
+                "attachments": attachments,
+                "attachmentCount": len(attachments),
                 "runCount": len(runs),
                 "latestFeedback": next((run["feedback"] for run in runs if run["feedback"]), None),
+                "attachmentNotes": TASK_ATTACHMENT_NOTES,
                 "disclaimer": TASK_DISCLAIMER,
             })
 
         if action == "runs" and method == "POST":
             return self._submit_task_run(user_id, task_id, body)
 
+        if action == "attachments" and method == "POST":
+            return self._upload_task_attachment(user_id, task_id, raw, content_type)
+
         return self.error("NOT_FOUND", f"未知路由：{method} {path}", 404)
+
+    def _get_task_attachment(self, user_id: str, path: str) -> Tuple[int, Dict[str, Any]]:
+        attachment_id = path[len("/api/attachments/") :].strip("/")
+        record = self.tasks.get_attachment(user_id, attachment_id) if attachment_id else None
+        if record is None:
+            return self.error("ATTACHMENT_NOT_FOUND", f"没有找到这个附件：{attachment_id}", 404)
+        # 刻意**不**回传原始字节：附件是交付物存档，接口只给元数据与已抽出的文字预览。
+        return 200, self.envelope({"attachment": record, "note": TASK_ATTACHMENT_EVIDENCE_SCOPE})
+
+    def _upload_task_attachment(self, user_id: str, task_id: str, raw: Optional[bytes],
+                                content_type: str) -> Tuple[int, Dict[str, Any]]:
+        """任务附件上传（multipart）。
+
+        与简历解析的差别写在这里，免得后来人以为两处不一致是 bug：
+        **附件存得下就存**（图片/压缩包/xlsx 照样收），只是「有没有抽出文字」如实回传；
+        拒绝只发生在「请求不合法」或「超限」—— 不拿 415 挡掉正常的交付物。
+        """
+        task = self._find_task(user_id, task_id)
+        if task is None:
+            return self.error("TASK_NOT_FOUND", f"没有找到任务：{task_id}", 404)
+
+        blob = raw or b""
+        if not blob:
+            return self.error("ATTACHMENT_BAD_UPLOAD", "请求体是空的：请用 multipart/form-data 上传 file 字段", 400)
+        if "multipart/form-data" not in str(content_type or ""):
+            return self.error(
+                "ATTACHMENT_BAD_UPLOAD",
+                "附件上传必须是 multipart/form-data（字段名 file）；JSON 只能提交文本成果",
+                400,
+            )
+        try:
+            fields, filenames = parse_multipart_form(blob, content_type)
+        except ResumeFormatError as error:
+            return self.error("ATTACHMENT_BAD_UPLOAD", str(error), 400)
+        upload = fields.get("file") or b""
+        if not upload:
+            return self.error("ATTACHMENT_BAD_UPLOAD", "multipart 里没有 file 字段", 400)
+        if len(upload) > TASK_MAX_ATTACHMENT_BYTES:
+            return self.error(
+                "ATTACHMENT_TOO_LARGE",
+                f"附件超过 {TASK_MAX_ATTACHMENT_BYTES // (1024 * 1024)}MB 上限",
+                413,
+            )
+        filename = str(filenames.get("file") or fields.get("filename", b"").decode("utf-8", "replace") or "attachment").strip()
+        filename = filename.replace("\\", "/").split("/")[-1][:200] or "attachment"
+
+        existing_count = self.tasks.count_attachments(user_id, task_id)
+        known = {item["attachmentId"]: item for item in self.tasks.list_attachments(user_id, task_id)}
+        # 幂等：同一个文件重复上传不算新增，先看是不是已经存过（否则会被数量上限误挡）
+        same = next((item for item in known.values()
+                     if item["filename"] == filename and item["byteSize"] == len(upload)), None)
+        if same is None and existing_count >= TASK_MAX_ATTACHMENTS_PER_TASK:
+            return self.error(
+                "ATTACHMENT_LIMIT",
+                f"这条任务下最多存 {TASK_MAX_ATTACHMENTS_PER_TASK} 个附件，请先删掉不用的",
+                422,
+            )
+
+        classified = classify_attachment(filename, upload)
+        record = self.tasks.add_attachment(
+            user_id=user_id,
+            task_id=task_id,
+            filename=filename,
+            content_type=str(content_type).split(";")[0].strip(),
+            data=upload,
+            kind=classified["kind"],
+            preview=classified["preview"],
+            text_extracted=classified["textExtracted"],
+            note=classified["note"],
+            preview_truncated=classified["previewTruncated"],
+        )
+        attachments = self.tasks.list_attachments(user_id, task_id)
+        return 201, self.envelope({
+            "attachment": record,
+            "attachments": attachments,
+            "attachmentCount": len(attachments),
+            "created": bool(record.get("created")),
+            "limits": {
+                "maxBytes": TASK_MAX_ATTACHMENT_BYTES,
+                "maxPerTask": TASK_MAX_ATTACHMENTS_PER_TASK,
+                "maxPerRun": TASK_MAX_ATTACHMENTS,
+            },
+            "attachmentNotes": TASK_ATTACHMENT_NOTES,
+            "disclaimer": TASK_DISCLAIMER,
+        })
 
     def _submit_task_run(self, user_id: str, task_id: str, body: Any) -> Tuple[int, Dict[str, Any]]:
         if not isinstance(body, dict):
@@ -865,6 +965,20 @@ class CareerApi:
         task = self._find_task(user_id, task_id)
         if task is None:
             return self.error("TASK_NOT_FOUND", f"没有找到任务：{task_id}", 404)
+
+        # 附件不再是「随便什么字符串」：必须是这个人在**这条任务**下真上传过的。
+        # 未知 id / 别人的 id / 挂在别的任务下的 id 都回 422 并点名，不静默忽略 ——
+        # 静默忽略会让运行记录里的 attachmentIds 变成查不到出处的引用。
+        known = self.tasks.attachment_index(user_id, attachments)
+        usable, unknown = resolve_attachment_ids(user_id, task_id, attachments, known)
+        if unknown:
+            return self.error(
+                "UNKNOWN_ATTACHMENT",
+                "这些 attachmentIds 不是这条任务下你上传的附件，请先上传再引用：" + "、".join(unknown),
+                422,
+                unknownAttachmentIds=unknown,
+            )
+        attachments = usable
 
         run_id = TaskStore.new_run_id()
         record = {

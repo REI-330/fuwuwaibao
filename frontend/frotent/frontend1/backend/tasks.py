@@ -21,6 +21,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -33,13 +34,53 @@ from typing import Any, Callable, Dict, List, Optional, Tuple
 from .career_path import STAGE_NAMES, STAGE_PERIOD, STAGES
 from .llm import LlmClient
 from .memories import DEFAULT_DB_ENV
-from .resume import parse_llm_json
+from .resume import (
+    ResumeFormatError,
+    decode_text_bytes,
+    extract_docx_text,
+    extract_pdf_text,
+    parse_llm_json,
+    pdf_backend,
+    suffix_of,
+)
 
 MODULE = "task-run/v1"
 
 MAX_ACTION_CHARS = 2000
 MAX_SUBMISSION_CHARS = 8000
 MAX_ATTACHMENTS = 20
+
+# ---------------------------------------------------------------- 附件（真文件，2026-10-01）
+#
+# 附件与简历解析**不是一回事**，所以规则也不同：
+#   * 简历解析的目的是「读出文字来填画像」，读不出来（图片 / .doc）就 415，不假装。
+#   * 附件的目的是「把交付物附上来」，**存得下就存** —— 图片、压缩包、xlsx 一样收，
+#     只是**能不能抽出文字预览**要如实回传（`textExtracted` / `note`），
+#     且附件文字**不作为能力证据**（能力闸门只看用户自己写的 action + submission）。
+# 这样比「一律 415」诚实：拒绝的是「假装读出了内容」，不是「你上传的东西我不想收」。
+MAX_ATTACHMENT_BYTES = 5 * 1024 * 1024
+MAX_ATTACHMENT_PREVIEW_CHARS = 2000
+MAX_ATTACHMENTS_PER_TASK = 20
+
+ATTACHMENT_TEXT_SUFFIXES = (
+    ".txt", ".md", ".text", ".csv", ".tsv", ".json", ".jsonl", ".log",
+    ".py", ".js", ".mjs", ".ts", ".tsx", ".sql", ".yaml", ".yml", ".ini",
+    ".toml", ".html", ".css", ".sh",
+)
+ATTACHMENT_IMAGE_SUFFIXES = (".jpg", ".jpeg", ".png", ".webp", ".gif", ".bmp")
+_IMAGE_MAGIC = (b"\x89PNG", b"\xff\xd8\xff", b"RIFF", b"GIF8")
+_PDF_MAGIC = b"%PDF"
+
+ATTACHMENT_NOTE_NO_TEXT = "这个格式不做文字抽取：文件已保存、可作为交付物引用，但内容没有被读过。"
+ATTACHMENT_NOTE_IMAGE = "图片不做 OCR（本机没有该能力）：文件已保存，但内容没有被读过。"
+ATTACHMENT_EVIDENCE_SCOPE = (
+    "附件只作为交付物存档：能力闸门只认你手写的「行动说明 / 文本成果」，"
+    "附件里的文字不会被当成能力证据。"
+)
+ATTACHMENT_NOTES = [
+    "附件与「文本成果」是两回事：附件是交付物存档，评估只读你手写的这段文字",
+    ATTACHMENT_EVIDENCE_SCOPE,
+]
 
 STAGE_ORDER = {stage: index for index, stage in enumerate(STAGES)}
 
@@ -82,6 +123,30 @@ CREATE UNIQUE INDEX IF NOT EXISTS uq_task_runs_request
     ON task_runs(user_id, request_id) WHERE request_id IS NOT NULL;
 CREATE INDEX IF NOT EXISTS idx_task_runs_user_task
     ON task_runs(user_id, task_id, submitted_at DESC);
+
+-- 附件：字节真的存在库里（BLOB），任务删除/未引用也不影响它作为交付物存档。
+-- 同一 user+task 下同 sha256+文件名只存一份（重复上传按幂等返回同一条）。
+CREATE TABLE IF NOT EXISTS task_attachments (
+    attachment_id     TEXT PRIMARY KEY,
+    user_id           TEXT NOT NULL,
+    task_id           TEXT NOT NULL,
+    filename          TEXT NOT NULL,
+    content_type      TEXT NOT NULL DEFAULT '',
+    kind              TEXT NOT NULL,
+    byte_size         INTEGER NOT NULL,
+    sha256            TEXT NOT NULL,
+    text_extracted    INTEGER NOT NULL DEFAULT 0,
+    preview           TEXT,
+    preview_truncated INTEGER NOT NULL DEFAULT 0,
+    note              TEXT NOT NULL DEFAULT '',
+    content           BLOB NOT NULL,
+    created_at        TEXT NOT NULL
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS uq_task_attachments_dedupe
+    ON task_attachments(user_id, task_id, sha256, filename);
+CREATE INDEX IF NOT EXISTS idx_task_attachments_user_task
+    ON task_attachments(user_id, task_id, created_at DESC);
 """
 
 
@@ -358,6 +423,89 @@ def _merge_model_evaluation(task: Dict[str, Any], source_text: str, payload: Dic
     }
 
 
+# ---------------------------------------------------------------------------- 附件
+
+
+def _clip_preview(text: str) -> Tuple[str, bool]:
+    """裁到上限，并如实回传「是不是被截断了」。"""
+    cleaned = str(text or "").strip()
+    if len(cleaned) <= MAX_ATTACHMENT_PREVIEW_CHARS:
+        return cleaned, False
+    return cleaned[:MAX_ATTACHMENT_PREVIEW_CHARS], True
+
+
+def classify_attachment(filename: str, data: bytes) -> Dict[str, Any]:
+    """判断附件的种类与「能不能抽出文字」，**不做拒绝判定**（存不存由调用方按大小/数量决定）。
+
+    返回 ``{"kind", "textExtracted", "preview", "previewTruncated", "note"}``。
+    抽不出文字不是错误 —— 如实说「没读过」，而不是假装读出了内容。
+    """
+    suffix = suffix_of(filename)
+    if not data:
+        return {"kind": "empty", "textExtracted": False, "preview": None,
+                "previewTruncated": False, "note": "文件是空的。"}
+
+    if data.startswith(_PDF_MAGIC) or suffix == ".pdf":
+        if pdf_backend() is None:
+            return {"kind": "pdf", "textExtracted": False, "preview": None, "previewTruncated": False,
+                    "note": "本机没有 PDF 解析后端：文件已保存，但没有提取文字。"}
+        try:
+            preview, truncated = _clip_preview(extract_pdf_text(data))
+        except ResumeFormatError as error:
+            return {"kind": "pdf", "textExtracted": False, "preview": None, "previewTruncated": False,
+                    "note": f"PDF 文字层读不出来（{error.code}）：文件已保存，但没有提取文字。"}
+        return {"kind": "pdf", "textExtracted": True, "preview": preview, "previewTruncated": truncated,
+                "note": "已从 PDF 文字层提取预览（仅供你核对附件内容，不作为能力证据）。"}
+
+    if data.startswith(_IMAGE_MAGIC) or suffix in ATTACHMENT_IMAGE_SUFFIXES:
+        return {"kind": "image", "textExtracted": False, "preview": None, "previewTruncated": False,
+                "note": ATTACHMENT_NOTE_IMAGE}
+
+    if suffix == ".docx":
+        try:
+            preview, truncated = _clip_preview(extract_docx_text(data))
+        except ResumeFormatError as error:
+            return {"kind": "docx", "textExtracted": False, "preview": None, "previewTruncated": False,
+                    "note": f"DOCX 读不出文字（{error.code}）：文件已保存，但没有提取文字。"}
+        return {"kind": "docx", "textExtracted": True, "preview": preview, "previewTruncated": truncated,
+                "note": "已从 DOCX 提取预览（仅供你核对附件内容，不作为能力证据）。"}
+
+    if suffix in ATTACHMENT_TEXT_SUFFIXES or suffix == "":
+        try:
+            preview, truncated = _clip_preview(decode_text_bytes(data))
+        except ResumeFormatError:
+            return {"kind": "binary", "textExtracted": False, "preview": None, "previewTruncated": False,
+                    "note": "按文本读解码失败（非 UTF-8/GB18030）：文件已保存，但没有提取文字。"}
+        return {"kind": "text", "textExtracted": True, "preview": preview, "previewTruncated": truncated,
+                "note": "已按文本解码（仅供你核对附件内容，不作为能力证据）。"}
+
+    return {"kind": "binary", "textExtracted": False, "preview": None, "previewTruncated": False,
+            "note": ATTACHMENT_NOTE_NO_TEXT}
+
+
+def resolve_attachment_ids(user_id: str, task_id: str, ids: List[str], known: Dict[str, Dict[str, Any]],
+                           ) -> Tuple[List[str], List[str]]:
+    """把提交里给的 `attachmentIds` 分成「确实属于该用户该任务的」与「不认得的」。
+
+    纯函数：`known` 是 ``{attachmentId: {"taskId": ...}}``。未知 id、别人的 id、
+    **挂在别的任务下的 id** 都算认得不了 —— 三种都不静默忽略，交给调用方回 422。
+    """
+    usable: List[str] = []
+    unknown: List[str] = []
+    for raw in ids:
+        attachment_id = str(raw or "").strip()
+        if not attachment_id:
+            continue
+        record = known.get(attachment_id)
+        if record is None or str(record.get("taskId") or "") != task_id:
+            if attachment_id not in unknown:
+                unknown.append(attachment_id)
+            continue
+        if attachment_id not in usable:
+            usable.append(attachment_id)
+    return usable, unknown
+
+
 # ---------------------------------------------------------------------------- 存储
 
 
@@ -448,6 +596,100 @@ class TaskStore:
                 "SELECT DISTINCT task_id FROM task_runs WHERE user_id = ?", (user_id,)
             ).fetchall()
             return {row["task_id"] for row in rows}
+
+    # ---------------------------------------------------------------- 附件
+
+    @staticmethod
+    def _row_to_attachment(row: sqlite3.Row) -> Dict[str, Any]:
+        """行 → 对外形状。**刻意不带 content 字节**：那是库里的东西，不出接口。"""
+        return {
+            "attachmentId": row["attachment_id"],
+            "taskId": row["task_id"],
+            "filename": row["filename"],
+            "contentType": row["content_type"],
+            "kind": row["kind"],
+            "byteSize": int(row["byte_size"]),
+            "sha256": row["sha256"],
+            "textExtracted": bool(row["text_extracted"]),
+            "preview": row["preview"],
+            "previewTruncated": bool(row["preview_truncated"]),
+            "note": row["note"],
+            "createdAt": row["created_at"],
+        }
+
+    @staticmethod
+    def new_attachment_id() -> str:
+        return f"att_{uuid.uuid4().hex[:12]}"
+
+    def list_attachments(self, user_id: str, task_id: str) -> List[Dict[str, Any]]:
+        with self._lock:
+            rows = self._conn.execute(
+                "SELECT * FROM task_attachments WHERE user_id = ? AND task_id = ? ORDER BY created_at ASC",
+                (user_id, task_id),
+            ).fetchall()
+            return [self._row_to_attachment(row) for row in rows]
+
+    def get_attachment(self, user_id: str, attachment_id: str) -> Optional[Dict[str, Any]]:
+        with self._lock:
+            row = self._conn.execute(
+                "SELECT * FROM task_attachments WHERE user_id = ? AND attachment_id = ?",
+                (user_id, attachment_id),
+            ).fetchone()
+            return self._row_to_attachment(row) if row else None
+
+    def attachment_index(self, user_id: str, ids: List[str]) -> Dict[str, Dict[str, Any]]:
+        """批量取「id → 挂在哪个任务下」，提交时校验归属用。**不搬字节。**"""
+        wanted = [str(item).strip() for item in ids if str(item).strip()]
+        if not wanted:
+            return {}
+        placeholders = ",".join("?" for _ in wanted)
+        with self._lock:
+            rows = self._conn.execute(
+                f"SELECT attachment_id, task_id FROM task_attachments "
+                f"WHERE user_id = ? AND attachment_id IN ({placeholders})",
+                (user_id, *wanted),
+            ).fetchall()
+            return {row["attachment_id"]: {"taskId": row["task_id"]} for row in rows}
+
+    def count_attachments(self, user_id: str, task_id: str) -> int:
+        with self._lock:
+            row = self._conn.execute(
+                "SELECT COUNT(*) AS total FROM task_attachments WHERE user_id = ? AND task_id = ?",
+                (user_id, task_id),
+            ).fetchone()
+            return int(row["total"]) if row else 0
+
+    def add_attachment(self, *, user_id: str, task_id: str, filename: str, content_type: str,
+                       data: bytes, kind: str, preview: Optional[str], text_extracted: bool,
+                       note: str, preview_truncated: bool = False) -> Dict[str, Any]:
+        """存一份附件。同一 user+task 下同 sha256+文件名**只存一份**（重复上传按幂等返回原记录）。"""
+        digest = hashlib.sha256(data).hexdigest()
+        with self._lock:
+            existing = self._conn.execute(
+                "SELECT * FROM task_attachments WHERE user_id = ? AND task_id = ? AND sha256 = ? AND filename = ?",
+                (user_id, task_id, digest, filename),
+            ).fetchone()
+            if existing:
+                record = self._row_to_attachment(existing)
+                record["created"] = False
+                return record
+            attachment_id = self.new_attachment_id()
+            self._conn.execute(
+                """INSERT INTO task_attachments
+                   (attachment_id, user_id, task_id, filename, content_type, kind, byte_size, sha256,
+                    text_extracted, preview, preview_truncated, note, content, created_at)
+                   VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                (attachment_id, user_id, task_id, filename, content_type, kind, len(data), digest,
+                 1 if text_extracted else 0, preview, 1 if preview_truncated else 0, note,
+                 sqlite3.Binary(data), self._now()),
+            )
+            self._conn.commit()
+            row = self._conn.execute(
+                "SELECT * FROM task_attachments WHERE attachment_id = ?", (attachment_id,)
+            ).fetchone()
+            record = self._row_to_attachment(row)
+            record["created"] = True
+            return record
 
     def create_run(self, *, run_id: str, user_id: str, task: Dict[str, Any], action: str, submission: str,
                    attachment_ids: List[str], growth_record_id: str, candidate_ids: List[str],
