@@ -215,12 +215,13 @@
 | 1-12 步离线构建管线 | `knowledge/pipeline/01..12`，09 步 14 项校验 13/13 通过 |
 | 版本化图谱导出 | `knowledge/exports/career-graph.json`（26 来源 / 1757 段 / 63 节点 / 226 边 / 38 wiki） |
 | MCP 三工具 + 双传输 | `npm run mcp:verify`（stdio 14/14）、`mcp:verify-http`（25/25），证据在 `evidence/` |
-| 最小后端 15 组路由 | `backend/server.py`，**未实现接口显式 501**（仅余 `/api/auth/{register,login}`、`/api/career-matches/{current,generate,select}`） |
+| 最小后端 15 组路由 | `backend/server.py`，**未实现接口显式 501**（**2026-09-30 起仅余 `/api/auth/{register,login}`** —— 职业匹配已实现） |
 | 测试 | 前端 12 项、后端 **130** 项（17 图谱/契约 + 19 记忆库 + 20 LLM/触发器 + 14 对话 + 12 成长记录 + 18 简历 + 5 画像落库 + 5 访客会话 + 6 成长确认 + 14 路径引擎），端到端 `npm run e2e` **169** 项断言（`e2e:all` 169 再加既有套件），均通过 |
 | 画像/证据/事件持久化（M1-1/M1-3） | `backend/memories.py` 新增 `profiles` / `profile_evidence` / `growth_events` 三表；`ProfileStore` 读写透传同一 `career.db`；`POST /api/growth-records/confirm` 一事务确认且幂等 |
 | 访客会话（M1-2） | `POST /api/auth/guest` → 201 + `HttpOnly` Cookie + 按 `user_id` 隔离；无/坏 Cookie 回落 `user_local`；`register`/`login` 仍 501 |
 | 路径引擎（M1-4） | 新增 `backend/career_path.py`（零三方依赖）：先修深度定阶段 + 拓扑序 + 6 指标 / 6 硬校验 / 工作量自检；同输入两次输出完全相同；未知职业 404 |
-| 五个入口全通（M1-5/6/7） | `/work-map`、`/catalog` 挂真组件（200 + SSR 出内容）；career-matches 的 501 显示「尚未上线」；`/path` 读已确认画像、每周小时可调；onboarding 六处裸 fetch 走 `apiUrl()` |
+| 五个入口全通（M1-5/6/7） | `/work-map`、`/catalog` 挂真组件（200 + SSR 出内容）；`/path` 读已确认画像、每周小时可调；onboarding 六处裸 fetch 走 `apiUrl()` |
+| 职业匹配（2026-09-30 新增） | `backend/career_match.py` + `/api/career-matches/{current,generate,select}`：**不再是 501**。四维打分（技能 0.50 / 兴趣 0.25 / 经历 0.15 / 入门可行性 0.10，权重是写在常量里的**产品假设**）+ 逐条依据（`reasons[].source`）+ 图谱缺口（skills 的 `targetLevel`/`importance`）+ 待验证问题。**不新增图谱结论、不臆造英文职业名、没有依据的维度记 0 并明说**；未生成 404 / 过期 409 `CAREER_MATCH_STALE` / 画像太空 409 `INSUFFICIENT_PROFILE`。测试 16 项、e2e 9 项，**全离线、不需要任何外部数据源** |
 | 记忆库 | `backend/memories.py`（stdlib + SQLite）+ 6 条 `/api/memories*` 路由 + `/growth` 记忆面板；候选闸门 / 写时触发器 / persona+联想召回 / 删除即遗忘，端到端全部有断言 |
 | 对话注入 | `backend/chat.py` + `POST /api/chat`：已确认记忆 + 图谱事实拼成固定可审计前缀；配了模型用模型、否则降级规则版（`provider`/`llm.error` 逐轮回传）；端到端离线档与真模型档各钉一遍 |
 | 成长记录 → 候选记忆 | `backend/growth.py` + `/api/growth-records`（写记录同事务派生候选、按 `recordId` 幂等、删记录只清未确认候选）；档案页有「写入记忆候选」入口 |

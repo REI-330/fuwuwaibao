@@ -145,21 +145,18 @@ CAREER_LLM_DISABLED=1                                          ← 显式关闭�
 
 - **扫描件 / 图片简历、`.doc` 老格式** → `415` + 可执行建议（无 OCR，不假装识别）。
   （**PDF 不再属于「跑不通」**：本机装了 pypdf / PyMuPDF / pdfminer 任一就能解析，见上表；一个都没装才回 415 并给安装命令。）
-- **岗位匹配** `/api/career-matches/*` → `501`。**已查清并留痕，别再重复找一遍**：
-  - 需要**求职者视角的在招岗位**数据源；没有数据源时**不做假岗位**。
-  - 「用猎聘」这条路**走过、不通**：`Viy1204/liepin-cli`（`@viyzhu/liepin-cli`）是**猎聘招聘者端
-    （lpt.liepin.com）**工具 —— `search` 搜的是**候选人**、`joblist` 是招聘方自己发的职位，
-    不是求职者端岗位搜索；且要 Node ≥20 + 本机 Chrome + **招聘者账号扫码登录**，猎聘**封境外 IP**
-    （须关代理直连），无头模式会被判「账号行为异常」。
-  - 队友 `mcp-server` 包里的 `providers/liepin.py` 假设的命令 `liepin-cli job search --job-name … --output json`
-    **在真实 CLI 里不存在**（真身是 `liepin search <关键词> --city …`），且该包默认 `MCP_ALLOW_DEMO=true`，
-    拿不到就返回 `DEMO-1 / Demo company` 的**假岗位** —— 与本项目纪律冲突，未采用。
-  - 结论：**维持 501**，等有正规求职者侧岗位数据源（或本人授权用其招聘者账号）再动。详见
-    `交付验收对照表.md`「2026-09-30 第二轮」一节。
 - **`/api/auth/register`、`/login`** → `501`。本项目**不存账号密码**，访客会话足以支撑单用户使用。
 - **WeKnora 标准版对照** → 5 个镜像 2.72 GB，本机 Docker 拉不动。**不影响功能**：对照已用 Lite 版完成。
 - **中国官方语料进检索链路** → 采集完成，1519 条已由业主**豁免闸门**（`WAIVED`，**不是人工审核通过**）；
   但导入仍卡在 **WeKnora 运行态门禁**（本机 Docker 未跑、嵌入模型权重丢失），所以尚未进检索链路。
+- **「在招岗位」（契约外的未来能力）** → 目前没有数据源，且**「用猎聘」这条路已查清、不通**，别再重复找：
+  - `Viy1204/liepin-cli`（`@viyzhu/liepin-cli`）是**猎聘招聘者端（lpt.liepin.com）**工具 —— `search` 搜的是
+    **候选人**、`joblist` 是招聘方自己发的职位，不是求职者端的岗位搜索；且要 Node ≥20 + 本机 Chrome +
+    **招聘者账号扫码登录**，猎聘**封境外 IP**（须关代理直连），无头模式会被判「账号行为异常」。
+  - 队友 `mcp-server` 包里的 `providers/liepin.py` 假设的命令 `liepin-cli job search --job-name … --output json`
+    **在真实 CLI 里不存在**（真身是 `liepin search <关键词> --city …`），且该包默认 `MCP_ALLOW_DEMO=true`，
+    拿不到就返回 `DEMO-1 / Demo company` 的**假岗位** —— 与本项目纪律冲突，未采用。
+  - 注意：**这件事不影响职业匹配**（见下），职业匹配根本不需要岗位数据。
 - **大典 / O*NET 外部职业库「接回」自建图谱** → **定不出机械规则**（实测：自建 127 个词条 vs 大典 1,676 个职业命中 **0**、vs 18,552 个职业功能/技能命中 1、vs O*NET 1,253 条命中 1）；
   `knowledge/import/README.md` §8 要求 `aligned_with` 必须由人写下 `alignment` 与理由。机器只能给证据
   （`node knowledge/pipeline/import/bridge-coverage.mjs`）：覆盖率 4/1676 = **0.24%**，人力上限 27.5%。**不做假的跨库合并。**
@@ -196,7 +193,9 @@ CAREER_LLM_DISABLED=1                                          ← 显式关闭�
 - **五个入口全通（M1-5）**：`/work-map`、`/catalog` 由 redirect 改挂真组件（都是 200 + SSR 出内容）；`/actions` 仍只有"筹备中"（职场模拟，尚未排期）
 - **简历解析已实现（文本 / DOCX / PDF）**：`POST /api/resumes/extract` 真解析文件（DOCX 用 stdlib `zipfile`；PDF 走运行时探测的 pypdf / PyMuPDF / pdfminer），产出**画像草稿 + 待确认记忆候选 + 画像证据**，每条抽取都带原文 `charRange`；**图片与 `.doc` 明确 415**（无 OCR），扫描件 PDF 与乱码 PDF 也分别明确报错，不假装解析。`GET /health` 的 `resume.pdfBackend` 会报当前用的是哪个后端
 - **访客会话已实现（M1-2）**：`POST /api/auth/guest` 返回 201 + `HttpOnly` 会话 Cookie，带 Cookie 的请求按 `user_id` 隔离画像/记忆/成长记录；无 Cookie 或 Cookie 非法一律回落 `user_local`（本机单用户形态照常可用）。`register` / `login` **仍是 501**：本项目不存账号密码
-- **未实现接口一律 501**（不假装可用）：`/api/auth/{register,login}`、`/api/career-matches/{current,generate,select}`（岗位匹配需真实招聘数据源，当前无）
+- **未实现接口一律 501**（不假装可用）：**只剩** `/api/auth/{register,login}`（本项目不存账号密码）。
+  职业匹配 `/api/career-matches/*` **已实现**（2026-09-30）：排序依据全在图谱（requires 边带
+  importance/targetLevel）与已确认画像里，四维打分 + 逐条依据 + 差距/待验证问题，见 `backend/career_match.py`。
 - **知识库**：`publishedAt` 0/26；中文占比 46.4%（中文字符口径）；60% 图谱标注未人工复核（174/289）。
   **检索**：跨语言层已解（M2-5 查询自适应门控，dev 29→31/34、新 holdout 26→27/35，见 `knowledge/evaluations/语言自适应融合.md`）；
   **外部库接不回自建层**（M2-6：桥接覆盖 4/1676 = 0.24%，定不出机械规则、只能人工裁定，与 M2-1 同类门禁）

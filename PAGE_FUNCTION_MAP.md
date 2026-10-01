@@ -220,13 +220,17 @@
 ### 当前真实行为
 
 - 页面入口 `WorkMapPage()` 渲染 `WorkMapExplorer` + `CareerMatchPanel`（M1-5 挂载），不再 `redirect("/growth")`。
+- 职业匹配**已实现**（2026-09-30）：`/api/career-matches/*` 不再回 501。排序依据来自图谱
+  （`requires` 边带 `importance`/`targetLevel`）与已确认画像，四维打分 + 逐条依据 + 差距/待验证问题；
+  未生成回 404 `CAREER_MATCH_NOT_FOUND`、画像或图谱变过回 409 `CAREER_MATCH_STALE`、
+  画像太空回 409 `INSUFFICIENT_PROFILE`。**不需要任何外部岗位数据源**（契约里没有岗位/公司/薪资字段）。
 - `AppShell` 侧边导航也没有 `/work-map` 链接。
 
 ### 已存在但未挂载的功能
 
 - `WorkMapExplorer`：加载职业、技能、目录统计，构建知识图谱和职业详情。
 - `KnowledgeGraph`：图谱节点选择。
-- `CareerMatchPanel`：生成匹配、查看匹配依据、选择目标职业。
+- `CareerMatchPanel`：生成匹配、查看四维评分与逐条依据、查看技能差距与待验证问题、选择目标职业（**已接真后端**）。
 - `CareerScenarios`：职业情境选择并生成路径或进入职场模拟。
 - `CatalogBrowser`：职业/技能搜索、详情和路径跳转。
 
