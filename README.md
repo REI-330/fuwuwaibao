@@ -151,7 +151,10 @@ CAREER_LLM_DISABLED=1                                          ← 显式关闭�
   6 份文档 → **2167 个 chunk**，记录 ID **1519/1519 全部命中、0 缺失**，每个 chunk 都有 1024 维向量，活检索有命中。
   审核状态仍是**业主豁免**（`WAIVED`，**不是人工审核通过**）。核验可复现：
   `python knowledge-cn/verify_import.py --db knowledge-v1/weknora-src/data/weknora-cn.db --kb <kb-id>`。
-  ⚠️ 检索**质量**尚未评测 —— 旧题集（24 题）是围绕职业图谱出的，不适用于这批官方语料，需要重新出题。
+  ⚠️ 检索**质量**已出首版（2026-10-01）：新出 33 题（可答 26 / 超范围 7），混合检索命中@1 61.5% /
+  @5 80.8% / @10 100%、MRR 0.700；证据 `knowledge-cn/evidence/retrieval-quality-20261001.json`。
+  仍是**作者自出题**，不是业主人工判定；且超范围题 top-1 分全部顶格，检索层无法拒答。
+  「低空经济与管理 top1 命中经济工程」已查清为**预览口径错觉**（目标 chunk 实际排第 1）。
 - **「在招岗位」（契约外的未来能力）** → 目前没有数据源，且**「用猎聘」这条路已查清、不通**，别再重复找：
   - `Viy1204/liepin-cli`（`@viyzhu/liepin-cli`）是**猎聘招聘者端（lpt.liepin.com）**工具 —— `search` 搜的是
     **候选人**、`joblist` 是招聘方自己发的职位，不是求职者端的岗位搜索；且要 Node ≥20 + 本机 Chrome +
