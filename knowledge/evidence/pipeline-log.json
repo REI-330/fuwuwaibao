@@ -1,6 +1,6 @@
 {
   "schema": "career-graph-pipeline-log/v1",
-  "updatedAt": "2026-10-01T08:05:48.850Z",
+  "updatedAt": "2026-10-01T08:52:09.286Z",
   "steps": [
     {
       "step": "01",
@@ -344,9 +344,9 @@
       "step": "09",
       "title": "完整性校验",
       "command": "node knowledge/pipeline/09-integrity-check.mjs",
-      "startedAt": "2026-10-01T08:05:45.611Z",
-      "finishedAt": "2026-10-01T08:05:45.666Z",
-      "durationMs": 55,
+      "startedAt": "2026-10-01T08:52:06.344Z",
+      "finishedAt": "2026-10-01T08:52:06.398Z",
+      "durationMs": 54,
       "inputs": [
         "knowledge/extract/accepted.jsonl",
         "knowledge/chunks/chunks.jsonl",
@@ -371,15 +371,15 @@
         "标注分布：llm-reviewed 115，llm-draft 174"
       ],
       "node": "v22.22.2",
-      "runCount": 78
+      "runCount": 79
     },
     {
       "step": "10",
       "title": "布局与索引",
       "command": "node knowledge/pipeline/10-layout-index.mjs",
-      "startedAt": "2026-10-01T08:05:45.764Z",
-      "finishedAt": "2026-10-01T08:05:46.505Z",
-      "durationMs": 741,
+      "startedAt": "2026-10-01T08:52:06.489Z",
+      "finishedAt": "2026-10-01T08:52:07.162Z",
+      "durationMs": 673,
       "inputs": [
         "knowledge/extract/accepted.jsonl",
         "knowledge/chunks/chunks.jsonl",
@@ -409,15 +409,15 @@
         "本步不改 annotatedBy：llm-draft → llm-reviewed 的唯一通道仍是第 06 步（设计文档 L251）。"
       ],
       "node": "v22.22.2",
-      "runCount": 65
+      "runCount": 66
     },
     {
       "step": "11",
       "title": "版本化导出与效果评测",
       "command": "node knowledge/pipeline/11-export-eval.mjs",
-      "startedAt": "2026-10-01T08:05:46.607Z",
-      "finishedAt": "2026-10-01T08:05:48.850Z",
-      "durationMs": 2243,
+      "startedAt": "2026-10-01T08:52:07.260Z",
+      "finishedAt": "2026-10-01T08:52:09.286Z",
+      "durationMs": 2026,
       "inputs": [
         "knowledge/graph/graph.json",
         "knowledge/chunks/chunks.jsonl",
@@ -455,7 +455,7 @@
         "评测只报检索中间态（Top-3 + 分值 + 耗时），不调模型；「引用支持度」需人工判定，报告已明确标注为未做（§7 L262 / L276）。"
       ],
       "node": "v22.22.2",
-      "runCount": 87
+      "runCount": 88
     },
     {
       "step": "12",

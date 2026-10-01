@@ -1,7 +1,7 @@
 {
   "schema": "career-graph-search-index/v1",
   "step": "10",
-  "generatedAt": "2026-10-01T08:05:45.764Z",
+  "generatedAt": "2026-10-01T08:52:06.489Z",
   "kbVersion": "2026.09.15",
   "graphVersion": "0.1.0",
   "note": "第 10 步产物：零依赖 BM25 倒排（同一份 lib/graph.mjs 的 tokenize/buildBm25 生成，第 11 步评测复算同一份数字）。节点级索引服务 MCP 的 search_career_knowledge；chunk 级索引服务 §7 的「可回答问题 Top-3 是否含标注的相关 chunk」。",
