@@ -98,15 +98,16 @@ def main():
           f"gold 组 {result['goldGroups']} 个，问题 {len(problems)} 处，"
           f"锚点跨度偏大的组 {len(fragile)} 个")
     for problem in problems:
-        print("  ✗", problem)
+        print("  [FAIL]", problem)
     for item in fragile:
-        print("  ⚠", item)
+        print("  [WARN]", item)
     if not problems:
         for entry in report:
             if entry["groups"]:
                 sizes = ", ".join(f"{g['name']}={g['coveringChunks']}(跨度{g['minWindowChars']})"
                                   for g in entry["groups"])
-                print(f"  ✓ {entry['questionId']}: {sizes}")
+                # 刻意用 ASCII 标记：Windows 控制台是 GBK，`✓` 这类字符会直接把这道硬门禁打崩
+                print(f"  [OK] {entry['questionId']}: {sizes}")
     raise SystemExit(0 if result["passed"] else 1)
 
 

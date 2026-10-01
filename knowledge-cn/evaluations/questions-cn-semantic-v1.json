@@ -1,0 +1,341 @@
+{
+  "schema": "career-kb-cn-questions/v1",
+  "generatedAt": null,
+  "split": "retrieval-quality-semantic-v1",
+  "derivedFrom": "knowledge-cn/evaluations/questions-cn-v1.json",
+  "kb": {
+    "id": "aacc4889-a347-44ea-9dd1-b60ec1917cbb",
+    "name": "中国官方语料验证库",
+    "records": 1519,
+    "chunks": 2167,
+    "documents": 6
+  },
+  "note": "偏语义改写子集：gold（锚点、来源、预期答案）与基础题集**逐字相同**，只把提问改成不出现任何锚点词面的说法；`literalQuestion` 保留了原问法便于对照。生成脚本会逐题断言「题面里不含任何 gold 锚点」，所以「偏语义」是机器校验过的事实，不是自称。**仍然**不是业主人工判定相关性，也没有做跨语言/口语化改写。",
+  "counts": {
+    "total": 16,
+    "answerable": 16,
+    "refusal": 0,
+    "goldGroups": 17
+  },
+  "judging": {
+    "判定(a)块内": "前 k 条里存在一条 chunk 同时含某个 gold 组的全部锚点；全部组都到齐才算命中",
+    "判定(b)窗口内": "前 k 条合起来含该组全部锚点（RAG 的真实形态：回答层看到的是 k 条上下文）",
+    "rank": "最后一组到齐时的位次（多组题=证据齐的位次）",
+    "preview@1": "第 1 条命中 chunk 的前 120 字里是否含全部锚点——对应 verify_import.py 里 topPreview 的可见口径",
+    "judgment": "标 judgment 的跨源关联组由作者裁定，不进头部指标"
+  },
+  "questions": [
+    {
+      "questionId": "CN01",
+      "category": "专业目录-代码与名称",
+      "answerable": true,
+      "question": "2026 年新设的本科专业里，有一个与无人机产业直接相关、毕业授予管理学学士学位的特设方向，它的专业代码是什么？",
+      "expectation": "020110TK。它是 02 门类经济学类（0201）下的特设专业，注有「授予管理学学士学位」，来源为《普通高等学校本科专业目录（2026年）》第 3 页。",
+      "gold": [
+        {
+          "name": "结构化专业记录",
+          "source": "moe-majors-2026-structured",
+          "anchors": [
+            "低空经济与管理",
+            "020110TK"
+          ]
+        }
+      ],
+      "literalQuestion": "教育部 2026 年本科专业目录里，「低空经济与管理」这个专业的专业代码是多少？",
+      "rewriteKind": "paraphrase-no-anchor"
+    },
+    {
+      "questionId": "CN06",
+      "category": "专业目录-归类与学位",
+      "answerable": true,
+      "question": "那个面向低空产业的本科特设专业，在专业目录里被归到哪一大类之下？",
+      "expectation": "属于 02 学科门类下的 0201 经济学类。依据是第 3 页目录块：0201 经济学类 下依次列出 020101 经济学 …… 020108T 经济工程、020109T、020110TK、020111T，随后是数字经济、低空经济与管理、资源环境审计三个名称；结构化记录按顺序把它们配成 020109T=数字经济、020110TK=低空经济与管理、020111T=资源环境审计。",
+      "gold": [
+        {
+          "name": "原页目录块",
+          "source": "moe-majors-2026",
+          "anchors": [
+            "0201 经济学类",
+            "低空经济与管理"
+          ]
+        }
+      ],
+      "literalQuestion": "在 2026 年本科专业目录里，「低空经济与管理」属于哪个专业类？",
+      "rewriteKind": "paraphrase-no-anchor"
+    },
+    {
+      "questionId": "CN09",
+      "category": "薪资统计-总量与增速",
+      "answerable": true,
+      "question": "2025 年，全国城镇非私营单位的就业人员，一年平均能挣多少钱？跟上一年比涨了多少？",
+      "expectation": "129441 元，比上年（124110 元）增加 5331 元，名义增长 4.3%，扣除价格因素实际增长 4.2%。来源：国家统计局《2025年城镇单位就业人员年平均工资情况》，2026-05-15 发布。",
+      "gold": [
+        {
+          "name": "正文与表 1/表 2",
+          "source": "nbs-wages-2025",
+          "anchors": [
+            "129441",
+            "124110"
+          ]
+        }
+      ],
+      "literalQuestion": "2025 年全国城镇非私营单位就业人员年平均工资是多少？比上年名义增长多少？",
+      "rewriteKind": "paraphrase-no-anchor"
+    },
+    {
+      "questionId": "CN10",
+      "category": "薪资统计-总量与增速",
+      "answerable": true,
+      "question": "2025 年，城镇里私营性质的单位，就业人员的年平均收入是多少？",
+      "expectation": "71590 元，比上年（69476 元）增加 2114 元，名义增长 3.0%，实际增长 2.9%。",
+      "gold": [
+        {
+          "name": "正文与表 4",
+          "source": "nbs-wages-2025",
+          "anchors": [
+            "71590",
+            "69476"
+          ]
+        }
+      ],
+      "literalQuestion": "2025 年全国城镇私营单位就业人员的年平均工资是多少？",
+      "rewriteKind": "paraphrase-no-anchor"
+    },
+    {
+      "questionId": "CN11",
+      "category": "薪资统计-总量与增速",
+      "answerable": true,
+      "question": "2025 年规模以上企业里，坐到管理岗位的那些人，平均一年能拿多少钱？",
+      "expectation": "规模以上企业就业人员年平均工资 106080 元（增加 3628 元，名义增长 3.5%）；其中中层及以上管理人员 210016 元（增长 3.4%）。同组的还有专业技术人员 155491 元、办事人员和有关人员 94936 元、社会生产服务和生活服务人员 79857 元、生产制造及有关人员 80739 元。",
+      "gold": [
+        {
+          "name": "正文与表 6",
+          "source": "nbs-wages-2025",
+          "anchors": [
+            "210016",
+            "中层及以上管理人员"
+          ]
+        }
+      ],
+      "literalQuestion": "2025 年规模以上企业就业人员年平均工资是多少？其中「中层及以上管理人员」是多少？",
+      "rewriteKind": "paraphrase-no-anchor"
+    },
+    {
+      "questionId": "CN12",
+      "category": "薪资统计-分组比较",
+      "answerable": true,
+      "question": "2025 年城镇非私营单位中，哪一个行业门类的平均工资排在第一？具体是多少？",
+      "expectation": "信息传输、软件和信息技术服务业，248752 元，是表 2 行业门类里的最高值；其次是金融业 211164 元。最低的是住宿和餐饮业 62461 元。",
+      "gold": [
+        {
+          "name": "表 2",
+          "source": "nbs-wages-2025",
+          "anchors": [
+            "248752",
+            "信息传输、软件和信息技术服务业"
+          ]
+        }
+      ],
+      "literalQuestion": "2025 年城镇非私营单位里，哪个行业门类的年平均工资最高？是多少？",
+      "rewriteKind": "paraphrase-no-anchor"
+    },
+    {
+      "questionId": "CN13",
+      "category": "薪资统计-分组比较",
+      "answerable": true,
+      "question": "2025 年城镇非私营单位里，平均工资垫底的是哪个行业？金额是多少？",
+      "expectation": "62461 元，比上年 60240 元名义增长 3.7%，是表 2 各行业门类里最低的一个。",
+      "gold": [
+        {
+          "name": "表 2",
+          "source": "nbs-wages-2025",
+          "anchors": [
+            "62461",
+            "住宿和餐饮业"
+          ]
+        }
+      ],
+      "literalQuestion": "2025 年城镇非私营单位中，住宿和餐饮业的年平均工资是多少？",
+      "rewriteKind": "paraphrase-no-anchor"
+    },
+    {
+      "questionId": "CN15",
+      "category": "薪资统计-分组比较",
+      "answerable": true,
+      "question": "2025 年城镇私营单位中，薪水最高的两个行业各自是多少钱？",
+      "expectation": "金融业 140451 元，信息传输、软件和信息技术服务业 128166 元，都是表 5 里私营单位的高位行业。",
+      "gold": [
+        {
+          "name": "表 5",
+          "source": "nbs-wages-2025",
+          "anchors": [
+            "140451",
+            "128166"
+          ]
+        }
+      ],
+      "literalQuestion": "2025 年城镇私营单位里，金融业和信息传输、软件和信息技术服务业的年平均工资分别是多少？",
+      "rewriteKind": "paraphrase-no-anchor"
+    },
+    {
+      "questionId": "CN16",
+      "category": "薪资统计-分组比较",
+      "answerable": true,
+      "question": "2025 年城镇非私营单位里，外资背景的单位平均一年发多少钱？比纯内资的单位高出多少？",
+      "expectation": "外商投资单位 164956 元；内资单位 125819 元、港澳台投资单位 146701 元。外商投资单位比内资单位高约 39137 元（按表 3 合计口径）。",
+      "gold": [
+        {
+          "name": "表 3",
+          "source": "nbs-wages-2025",
+          "anchors": [
+            "164956",
+            "外商投资单位"
+          ]
+        }
+      ],
+      "literalQuestion": "2025 年城镇非私营单位里，外商投资单位的年平均工资是多少？和内资单位差多少？",
+      "rewriteKind": "paraphrase-no-anchor"
+    },
+    {
+      "questionId": "CN17",
+      "category": "职业大典-职业编码",
+      "answerable": true,
+      "question": "《职业分类大典》里，负责给模型标注、准备训练数据的那类从业者，职业编码是多少？",
+      "expectation": "4-04-05-05，属 4-04-05 小类；同小类还有 4-04-05-01 计算机程序设计员、4-04-05-04 数据库运行管理员、4-04-05-06 区块链应用操作员、4-04-05-07 服务机器人应用技术员等。语料是 2022 年版《职业分类大典》社会公示稿，记录类型为 DRAFT_STANDARD，不是正式发布版。",
+      "gold": [
+        {
+          "name": "大典正文",
+          "source": "occupation-2022-replacement",
+          "anchors": [
+            "4-04-05-05",
+            "人工智能训练师"
+          ]
+        }
+      ],
+      "literalQuestion": "《职业分类大典》里「人工智能训练师」的职业编码是多少？",
+      "rewriteKind": "paraphrase-no-anchor"
+    },
+    {
+      "questionId": "CN18",
+      "category": "职业大典-职业编码",
+      "answerable": true,
+      "question": "大典里，专门把企业业务流程搬上信息化系统、并做数据治理的那类岗位，编码是多少？",
+      "expectation": "2-06-07-13，属 2-06-07 商务专业人员小类（同小类含 2-06-07-12 报关人员、2-06-07-14 企业合规师等）。",
+      "gold": [
+        {
+          "name": "大典正文",
+          "source": "occupation-2022-replacement",
+          "anchors": [
+            "2-06-07-13",
+            "数字化管理师"
+          ]
+        }
+      ],
+      "literalQuestion": "「数字化管理师」的职业编码是多少？",
+      "rewriteKind": "paraphrase-no-anchor"
+    },
+    {
+      "questionId": "CN19",
+      "category": "职业大典-职业编码",
+      "answerable": true,
+      "question": "大典里「用遥控设备驾驶无人航空器」的那类职业，编码是多少？它下面还分了哪几个具体工种？",
+      "expectation": "4-02-04-06；本职业包含但不限于植保无人机驾驶员、安防无人机驾驶员两个工种。**这条是「跨块」的**：大典一页切 512 字，职业编码与「本职业包含但不限于下列工种」那一行之间隔着整段定义与 7 条工作任务（500+ 字），所以 gold 拆成两组，分别局部可核验。",
+      "gold": [
+        {
+          "name": "职业编码行",
+          "source": "occupation-2022-replacement",
+          "anchors": [
+            "4-02-04-06",
+            "无人机驾驶员"
+          ]
+        },
+        {
+          "name": "工种行",
+          "source": "occupation-2022-replacement",
+          "anchors": [
+            "植保无人机驾驶员",
+            "安防无人机驾驶员"
+          ]
+        }
+      ],
+      "literalQuestion": "「无人机驾驶员」在职业分类大典里的编码是多少？它下面包含哪些工种？",
+      "rewriteKind": "paraphrase-no-anchor"
+    },
+    {
+      "questionId": "CN20",
+      "category": "职业大典-职业定义与任务",
+      "answerable": true,
+      "question": "大典里有一种专门做「以物换物」贸易分析与信用评估的职业，它的编码是多少？",
+      "expectation": "在易货贸易中从事经济和商品流通分析，进行信用评估、流程设计和管理、议价谈判及咨询服务的专业人员；主要工作任务 7 条，包括研究分析易货贸易需求估值、制订交易物产第三方鉴定标准，评估交易方信用，分析供应链金融、审核财政担保，研究设计交易流程，指导建立议价谈判管理决策系统，管理成交流程中的税务/通关/结汇/佣金/数字税等，提供易货运输、保险等服务。",
+      "gold": [
+        {
+          "name": "大典正文",
+          "source": "occupation-2022-replacement",
+          "anchors": [
+            "2-06-01-04",
+            "易货经济专业人员"
+          ]
+        }
+      ],
+      "literalQuestion": "「易货经济专业人员」是做什么的？主要工作任务包括哪些？",
+      "rewriteKind": "paraphrase-no-anchor"
+    },
+    {
+      "questionId": "CN21",
+      "category": "职业大典-职业定义与任务",
+      "answerable": true,
+      "question": "大典里那个借助多种媒介与技术手段，对信息做加工、匹配、分发、传播和反馈的岗位，编码是多少？",
+      "expectation": "4-13-01-05，定义：综合利用各种媒介技术和渠道，采用数据分析、创意策划等方式，从事对信息进行加工、匹配、分发、传播、反馈等工作的人员。",
+      "gold": [
+        {
+          "name": "大典正文",
+          "source": "occupation-2022-replacement",
+          "anchors": [
+            "4-13-01-05",
+            "全媒体运营师"
+          ]
+        }
+      ],
+      "literalQuestion": "职业分类大典里「全媒体运营师」的定义是什么？",
+      "rewriteKind": "paraphrase-no-anchor"
+    },
+    {
+      "questionId": "CN22",
+      "category": "职业大典-职业定义与任务",
+      "answerable": true,
+      "question": "大典里负责给企事业单位编制发展规划、做系统分析与设计评价的那类工程技术岗，编码是多少？",
+      "expectation": "2-02-30-03；从事企事业单位发展规划编制、系统分析、设计评价、运行管理的工程技术人员。",
+      "gold": [
+        {
+          "name": "大典正文",
+          "source": "occupation-2022-replacement",
+          "anchors": [
+            "2-02-30-03",
+            "战略规划与管理工程技术人员"
+          ]
+        }
+      ],
+      "literalQuestion": "「战略规划与管理工程技术人员」的职业定义和编码是什么？",
+      "rewriteKind": "paraphrase-no-anchor"
+    },
+    {
+      "questionId": "CN23",
+      "category": "职业大典-职业定义与任务",
+      "answerable": true,
+      "question": "大典里专门做家务料理、照看家庭成员的那类岗位，编码是多少？",
+      "expectation": "4-10-01-06；从事家务料理、家庭成员照护、家庭事务管理等工作的人员。",
+      "gold": [
+        {
+          "name": "大典正文",
+          "source": "occupation-2022-replacement",
+          "anchors": [
+            "4-10-01-06",
+            "家政服务员"
+          ]
+        }
+      ],
+      "literalQuestion": "「家政服务员」的职业定义是什么？编码是多少？",
+      "rewriteKind": "paraphrase-no-anchor"
+    }
+  ]
+}
