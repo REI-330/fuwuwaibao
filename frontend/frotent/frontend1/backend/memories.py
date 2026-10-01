@@ -220,6 +220,26 @@ CREATE TABLE IF NOT EXISTS growth_events (
 
 CREATE INDEX IF NOT EXISTS idx_growth_events_user
     ON growth_events (user_id, created_at);
+
+-- 职业匹配结果：每个用户只保留**最新一份** run（契约的 /current 读的就是它）。
+-- 整份 run 按 JSON 存；另抽 run_id / profile_version / catalog_version 三列出来做「过期判定」——
+-- 画像或图谱变过就必须重算，而不是把旧结果端给用户（上层据此回 CAREER_MATCH_STALE）。
+CREATE TABLE IF NOT EXISTS career_match_runs (
+    user_id         TEXT PRIMARY KEY,
+    run_id          TEXT NOT NULL,
+    run_json        TEXT NOT NULL,
+    profile_version INTEGER NOT NULL DEFAULT 0,
+    catalog_version TEXT NOT NULL DEFAULT '',
+    generated_at    TEXT NOT NULL
+);
+
+-- 用户选定的目标职业。与 run 分表：换目标不该强迫重新生成整份匹配。
+CREATE TABLE IF NOT EXISTS career_match_targets (
+    user_id       TEXT PRIMARY KEY,
+    occupation_id TEXT NOT NULL,
+    run_id        TEXT NOT NULL DEFAULT '',
+    selected_at   TEXT NOT NULL
+);
 """
 
 # 幂等迁移：`CREATE TABLE IF NOT EXISTS` 不会给**已存在**的表补列，
@@ -558,6 +578,71 @@ class MemoryStore:
                 ),
             )
             self._conn.commit()
+
+    # ------------------------------------------------- 职业匹配持久化（职业匹配页）
+    def save_match_run(self, user_id: str, run: Dict[str, Any]) -> None:
+        """整份 run 按 JSON upsert；另抽三列做过期判定（见 _SCHEMA 注释）。"""
+        now = self._now()
+        with self._lock:
+            self._conn.execute(
+                "INSERT INTO career_match_runs (user_id, run_id, run_json, profile_version, catalog_version, generated_at)"
+                " VALUES (?, ?, ?, ?, ?, ?)"
+                " ON CONFLICT(user_id) DO UPDATE SET"
+                " run_id = excluded.run_id,"
+                " run_json = excluded.run_json,"
+                " profile_version = excluded.profile_version,"
+                " catalog_version = excluded.catalog_version,"
+                " generated_at = excluded.generated_at",
+                (
+                    user_id,
+                    str(run.get("runId") or ""),
+                    json.dumps(run, ensure_ascii=False),
+                    int(run.get("profileVersion") or 0),
+                    str(run.get("catalogVersion") or ""),
+                    str(run.get("generatedAt") or now),
+                ),
+            )
+            self._conn.commit()
+
+    def get_match_run(self, user_id: str) -> Optional[Dict[str, Any]]:
+        """读该用户最新一份 run；没有或存档损坏都返回 ``None``（上层据此让前端重新生成）。"""
+        rows = self._rows("SELECT run_json FROM career_match_runs WHERE user_id = ?", [user_id])
+        if not rows:
+            return None
+        try:
+            data = json.loads(rows[0]["run_json"])
+        except (json.JSONDecodeError, TypeError):
+            return None
+        return data if isinstance(data, dict) else None
+
+    def save_match_target(self, user_id: str, occupation_id: str, run_id: str = "") -> None:
+        now = self._now()
+        with self._lock:
+            self._conn.execute(
+                "INSERT INTO career_match_targets (user_id, occupation_id, run_id, selected_at)"
+                " VALUES (?, ?, ?, ?)"
+                " ON CONFLICT(user_id) DO UPDATE SET"
+                " occupation_id = excluded.occupation_id,"
+                " run_id = excluded.run_id,"
+                " selected_at = excluded.selected_at",
+                (user_id, str(occupation_id), str(run_id or ""), now),
+            )
+            self._conn.commit()
+
+    def get_match_target(self, user_id: str) -> Optional[Dict[str, Any]]:
+        rows = self._rows(
+            "SELECT occupation_id, run_id, selected_at FROM career_match_targets WHERE user_id = ?",
+            [user_id],
+        )
+        if not rows:
+            return None
+        row = rows[0]
+        return {
+            "userId": user_id,
+            "occupationId": row["occupation_id"],
+            "matchRunId": row["run_id"],
+            "selectedAt": row["selected_at"],
+        }
 
     # ------------------------------------------------------- 画像证据 / 成长事件（M1-3）
     def add_profile_evidence(self, user_id: str, *, source_type: str, source_id: str, field: str,

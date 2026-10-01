@@ -653,10 +653,47 @@ async function stageD(context) {
     check("D", "推荐里的职业 id 都在导出里", rows.every(row => exportOccupationIds.includes(row.occupation_id)), rows.map(row => row.occupation_id).join(","));
     context.backendRecommendations = rows;
 
-    const notImplemented = await httpJson(`${base}/api/career-matches/current`);
+    const notImplemented = await httpJson(`${base}/api/auth/login`, { method: "POST" });
     check("D", "未实现接口明确 501（不假装可用）", notImplemented.status === 501 && notImplemented.json?.error?.code === "NOT_IMPLEMENTED", `${notImplemented.status} ${notImplemented.json?.error?.code}`);
     const unknown = await httpJson(`${base}/api/does-not-exist`);
     check("D", "未知路由 404（与 501 区分开）", unknown.status === 404, String(unknown.status));
+
+    /* ---- 职业匹配：曾经回 501（理由写的是「需要招聘数据源」，该归因已纠正）。
+            排序依据全在图谱（requires 边带 importance/targetLevel）与已确认画像里，
+            所以这一段**不需要任何外部数据源或凭证**，离线即可复现。 ---- */
+    const matchGenerate = await httpJson(`${base}/api/career-matches/generate`, { method: "POST" });
+    const matchRun = matchGenerate.json?.data?.run ?? {};
+    const matchItems = matchRun.items ?? [];
+    check("D", "职业匹配：不再 501，生成返回 201 且带 run", matchGenerate.status === 201 && typeof matchRun.runId === "string", `${matchGenerate.status} ${matchRun.runId}`);
+    check("D", "职业匹配：候选职业数 = 图谱职业数", matchItems.length === expectedOccupations, String(matchItems.length));
+    check("D",
+      "职业匹配：按分数降序且 rank 连续",
+      matchItems.every((item, index) => item.rank === index + 1)
+        && matchItems.every((item, index) => index === 0 || matchItems[index - 1].matchScore >= item.matchScore),
+      matchItems.map(item => `${item.rank}:${item.matchScore}`).join(" "));
+    check("D",
+      "职业匹配：每条理由都带出处（用户能复核）",
+      matchItems.length > 0 && matchItems.every(item => (item.reasons ?? []).length > 0 && item.reasons.every(reason => reason.source && reason.detail)),
+      matchItems.map(item => (item.reasons ?? []).length).join(","));
+    check("D",
+      "职业匹配：缺口来自图谱 requires 边（带 skillId / targetLevel / importance 刻度）",
+      matchItems.every(item => (item.skillGaps ?? []).every(gap => gap.skillId && gap.targetLevel >= 1 && gap.targetLevel <= 5 && gap.importance >= 1 && gap.importance <= 5)),
+      "");
+    check("D", "职业匹配：职业 id 都在导出里", matchItems.every(item => exportOccupationIds.includes(item.occupationId)), matchItems.map(item => item.occupationId).join(","));
+
+    const matchCurrent = await httpJson(`${base}/api/career-matches/current`);
+    check("D", "职业匹配：生成后可读取（同一份 run）", matchCurrent.status === 200 && matchCurrent.json?.data?.run?.runId === matchRun.runId, `${matchCurrent.status}`);
+
+    const matchSelect = await httpJson(`${base}/api/career-matches/select`, {
+      method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ occupationId: matchItems[0]?.occupationId }),
+    });
+    check("D", "职业匹配：选择目标职业落库", matchSelect.status === 200 && matchSelect.json?.data?.target?.occupationId === matchItems[0]?.occupationId, `${matchSelect.status}`);
+    const badSelect = await httpJson(`${base}/api/career-matches/select`, {
+      method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ occupationId: "AI999" }),
+    });
+    check("D", "职业匹配：不存在的职业被拒 404（不静默接受）", badSelect.status === 404, String(badSelect.status));
 
     /* ---- M1-4 路径引擎：由图谱 requires / prerequisite 边算出，模型不参与 ---- */
     const pathBody = { target_job: "AI001", weekly_hours: 10 };

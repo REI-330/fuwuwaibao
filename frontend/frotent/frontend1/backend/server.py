@@ -21,7 +21,7 @@
 * ``GET/POST /api/growth-records``         —— 成长记录；写入时把记录投影成**待确认**记忆候选
 * ``POST /api/resumes/extract``            —— 简历（文本/DOCX）→ 画像草稿 + 待确认记忆候选
 
-未实现的接口（认证、简历解析之外的推送、路径生成、岗位匹配等）统一返回 501，
+未实现的接口统一返回 501（当前只剩账号密码相关的 `/api/auth/{register,login}` —— 本项目不存账号密码），
 明确区分「契约已声明但本轮未实现」与「未知路由 404」，不假装可用。
 
 记忆库只消费 ``status='confirmed'`` 的那部分：候选记忆永远不进入上下文与推荐
@@ -50,6 +50,7 @@ from .knowledge import GraphStore, code_of, normalize
 from .memories import VALID_GROWTH_KINDS, VALID_STATUSES, MemoryStore, UnknownGeneratorError
 from .resume import MAX_FILE_BYTES, ResumeFormatError
 from .resume import SUPPORTED_SUFFIXES, UNSUPPORTED_SUFFIXES, pdf_backend
+from .career_match import InsufficientProfile, generate_run, is_stale, known_occupation_ids
 from .resume import extract as extract_resume
 from .resume import memory_candidates as resume_memory_candidates
 from .resume import parse_multipart_form, read_upload
@@ -75,9 +76,6 @@ _SPLIT_RE = re.compile(r"[,，、;；\n]+")
 NOT_IMPLEMENTED = (
     "/api/auth/register",
     "/api/auth/login",
-    "/api/career-matches/current",
-    "/api/career-matches/generate",
-    "/api/career-matches/select",
 )
 
 # 会话 Cookie（M1-2）。访客登录后由服务端下发，前端带着它就能拿到自己的画像与记忆；
@@ -588,6 +586,45 @@ class CareerApi:
             except InvalidCareerPathInput as error:
                 return self.error("INVALID_CAREER_PATH_INPUT", str(error), 400)
             return 201, self.envelope(result)
+
+        # ------------------------------------------------------------------ 职业匹配
+        # 契约：types/contracts/career-match.ts。**不需要外部数据源** —— 排序依据全部来自
+        # 图谱（requires 边带 importance / targetLevel）与已确认画像；算法与假设见
+        # backend/career_match.py 的模块 docstring。
+        if path == "/api/career-matches/current" and method == "GET":
+            run = self.memories.get_match_run(user_id)
+            if not run:
+                # 前端对这两个码有专门处理：NOT_FOUND 直接去生成，STALE 重新生成
+                return self.error("CAREER_MATCH_NOT_FOUND", "还没有生成过职业匹配结果。", 404)
+            if is_stale(run, self.profiles.get(user_id), self.store):
+                return self.error(
+                    "CAREER_MATCH_STALE",
+                    "画像或知识图谱已更新，旧结果不再适用，请重新生成。",
+                    409,
+                )
+            return 200, self.envelope({"run": run})
+
+        if path == "/api/career-matches/generate" and method == "POST":
+            profile = self.profiles.get(user_id)
+            try:
+                run = generate_run(self.store, profile, user_id)
+            except InsufficientProfile as error:
+                # 画像太空时明确拒答，而不是生成一份全是 0 分的「匹配结果」
+                return self.error("INSUFFICIENT_PROFILE", str(error), 409)
+            self.memories.save_match_run(user_id, run)
+            return 201, self.envelope({"run": run})
+
+        if path == "/api/career-matches/select" and method == "POST":
+            if not isinstance(body, dict):
+                return self.error("INVALID_BODY", "请求体必须是 JSON 对象", 400)
+            occupation_id = str(body.get("occupationId") or "").strip()
+            if not occupation_id:
+                return self.error("INVALID_BODY", "缺少 occupationId", 400)
+            if occupation_id not in known_occupation_ids(self.store):
+                return self.error("OCCUPATION_NOT_FOUND", f"图谱里没有职业 {occupation_id}", 404)
+            run = self.memories.get_match_run(user_id) or {}
+            self.memories.save_match_target(user_id, occupation_id, str(run.get("runId") or ""))
+            return 200, self.envelope({"target": self.memories.get_match_target(user_id)})
 
         if path in NOT_IMPLEMENTED:
             return self.error(

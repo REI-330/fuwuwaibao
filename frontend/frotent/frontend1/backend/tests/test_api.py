@@ -235,13 +235,24 @@ def test_http_round_trip(store: GraphStore) -> None:
 
 
 def test_unknown_and_unimplemented_are_distinct(api: CareerApi) -> None:
-    status, payload = api.handle("GET", "/api/career-matches/current", {}, None)
+    # 仍未实现的：账号密码相关（本项目不存账号密码）
+    status, payload = api.handle("POST", "/api/auth/login", {}, None)
     assert status == 501
     assert payload["error"]["code"] == "NOT_IMPLEMENTED"
 
     status, payload = api.handle("GET", "/api/does-not-exist", {}, None)
     assert status == 404
     assert payload["error"]["code"] == "NOT_FOUND"
+
+
+def test_career_matches_are_no_longer_501(api: CareerApi) -> None:
+    """职业匹配曾长期回 501（理由是「需要招聘数据源」）—— 该归因已纠正，现在必须真的能用。
+
+    契约里要的字段全在图谱与画像里，所以「未生成 → 404 NOT_FOUND，不是 501 未实现」。
+    """
+    status, payload = api.handle("GET", "/api/career-matches/current", {}, None)
+    assert status == 404
+    assert payload["error"]["code"] == "CAREER_MATCH_NOT_FOUND"
 
 
 def test_career_path_generate_is_no_longer_501(api: CareerApi) -> None:
