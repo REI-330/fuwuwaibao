@@ -1,0 +1,817 @@
+{
+  "questionsFile": "knowledge-cn/evaluations/questions-cn-v1.json",
+  "total": 33,
+  "answerable": 26,
+  "refusal": 7,
+  "goldGroups": 31,
+  "problems": [],
+  "passed": true,
+  "perQuestion": [
+    {
+      "questionId": "CN01",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "结构化专业记录",
+          "anchors": [
+            "低空经济与管理",
+            "020110TK"
+          ],
+          "coveringChunks": 2,
+          "sample": [
+            {
+              "chunkId": "3c2e031d-7876-47e2-a672-96e1cf33df79",
+              "chunkIndex": 4
+            },
+            {
+              "chunkId": "6a38b7c9-3080-4cff-84b1-676dcc6111a0",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN02",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "结构化专业记录",
+          "anchors": [
+            "083113TK",
+            "低空安全管理"
+          ],
+          "coveringChunks": 3,
+          "sample": [
+            {
+              "chunkId": "0b02c7cd-7b13-43d3-a43f-c280cec2b5cd",
+              "chunkIndex": 193
+            },
+            {
+              "chunkId": "ffacfa29-8c11-4327-bceb-1f7560af7060",
+              "chunkIndex": 35
+            },
+            {
+              "chunkId": "c0250b1d-e575-41a9-8184-1f1fde2dc091",
+              "chunkIndex": 36
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN03",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "结构化专业记录",
+          "anchors": [
+            "140003TK",
+            "低空技术与工程"
+          ],
+          "coveringChunks": 2,
+          "sample": [
+            {
+              "chunkId": "b1e1d3a6-2a32-4f34-88e0-fe1b47772f07",
+              "chunkIndex": 280
+            },
+            {
+              "chunkId": "84c3f95a-8823-4202-bffc-7a5bfe7126fb",
+              "chunkIndex": 51
+            }
+          ]
+        },
+        {
+          "name": "原页记录（含原代码）",
+          "anchors": [
+            "140003TK",
+            "083203TK"
+          ],
+          "coveringChunks": 2,
+          "sample": [
+            {
+              "chunkId": "b1e1d3a6-2a32-4f34-88e0-fe1b47772f07",
+              "chunkIndex": 280
+            },
+            {
+              "chunkId": "84c3f95a-8823-4202-bffc-7a5bfe7126fb",
+              "chunkIndex": 51
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN04",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "结构化专业记录",
+          "anchors": [
+            "140002TK",
+            "083202TK"
+          ],
+          "coveringChunks": 4,
+          "sample": [
+            {
+              "chunkId": "12841967-0b9e-4706-94b2-8e616ddca81d",
+              "chunkIndex": 279
+            },
+            {
+              "chunkId": "b1e1d3a6-2a32-4f34-88e0-fe1b47772f07",
+              "chunkIndex": 280
+            },
+            {
+              "chunkId": "d54ce1c7-3c54-485a-b98b-da5aa257c382",
+              "chunkIndex": 50
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN05",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "结构化专业记录",
+          "anchors": [
+            "100709TK",
+            "药物经济与管理"
+          ],
+          "coveringChunks": 3,
+          "sample": [
+            {
+              "chunkId": "a3419e38-56ef-438e-ad2d-6fb601be8687",
+              "chunkIndex": 223
+            },
+            {
+              "chunkId": "fcb8113f-2258-486b-9c2d-9aee4b3d4634",
+              "chunkIndex": 224
+            },
+            {
+              "chunkId": "51b7888b-5059-4bfb-a5ac-fac2b6a00546",
+              "chunkIndex": 41
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN06",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "原页目录块",
+          "anchors": [
+            "0201 经济学类",
+            "低空经济与管理"
+          ],
+          "coveringChunks": 1,
+          "sample": [
+            {
+              "chunkId": "6a38b7c9-3080-4cff-84b1-676dcc6111a0",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN07",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "原页目录块",
+          "anchors": [
+            "0831 公安技术类",
+            "低空安全管理"
+          ],
+          "coveringChunks": 1,
+          "sample": [
+            {
+              "chunkId": "ffacfa29-8c11-4327-bceb-1f7560af7060",
+              "chunkIndex": 35
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN08",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "原页目录块",
+          "anchors": [
+            "1204 公共管理类",
+            "无障碍管理",
+            "航空安防管理"
+          ],
+          "coveringChunks": 1,
+          "sample": [
+            {
+              "chunkId": "c1d1a74b-dfc7-45dc-91bf-ac24b04eb553",
+              "chunkIndex": 45
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN09",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "正文与表 1/表 2",
+          "anchors": [
+            "129441",
+            "124110"
+          ],
+          "coveringChunks": 10,
+          "sample": [
+            {
+              "chunkId": "ff1b86f5-397e-43c1-bc46-f6abb1da703e",
+              "chunkIndex": 1
+            },
+            {
+              "chunkId": "3bac1540-2cd0-44fa-b29b-e7a997664daa",
+              "chunkIndex": 3
+            },
+            {
+              "chunkId": "f365d8eb-e7df-4d9b-bb64-fc95324fb1c3",
+              "chunkIndex": 16
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN10",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "正文与表 4",
+          "anchors": [
+            "71590",
+            "69476"
+          ],
+          "coveringChunks": 6,
+          "sample": [
+            {
+              "chunkId": "3bac1540-2cd0-44fa-b29b-e7a997664daa",
+              "chunkIndex": 3
+            },
+            {
+              "chunkId": "3a6658cd-e4bd-4ebd-8598-f5663bdb4f24",
+              "chunkIndex": 4
+            },
+            {
+              "chunkId": "b6381ba5-4d95-422c-96e1-5eecf4956ef4",
+              "chunkIndex": 19
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN11",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "正文与表 6",
+          "anchors": [
+            "210016",
+            "中层及以上管理人员"
+          ],
+          "coveringChunks": 18,
+          "sample": [
+            {
+              "chunkId": "00a55c16-f1f9-4913-887b-26eddaf2727e",
+              "chunkIndex": 0
+            },
+            {
+              "chunkId": "d5aefe98-f4b9-4357-a456-b7a9cf9882c5",
+              "chunkIndex": 5
+            },
+            {
+              "chunkId": "fb811615-7fc5-4be0-83bf-a67036923c6d",
+              "chunkIndex": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN12",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "表 2",
+          "anchors": [
+            "248752",
+            "信息传输、软件和信息技术服务业"
+          ],
+          "coveringChunks": 4,
+          "sample": [
+            {
+              "chunkId": "a60eec1f-53df-4ad8-9af1-a2abbbeb8ffb",
+              "chunkIndex": 2
+            },
+            {
+              "chunkId": "3013b78d-9c80-40b7-acbf-b15e87ea3855",
+              "chunkIndex": 17
+            },
+            {
+              "chunkId": "00acbffd-38ab-4b86-a343-33989a56740c",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN13",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "表 2",
+          "anchors": [
+            "62461",
+            "住宿和餐饮业"
+          ],
+          "coveringChunks": 4,
+          "sample": [
+            {
+              "chunkId": "a60eec1f-53df-4ad8-9af1-a2abbbeb8ffb",
+              "chunkIndex": 2
+            },
+            {
+              "chunkId": "3013b78d-9c80-40b7-acbf-b15e87ea3855",
+              "chunkIndex": 17
+            },
+            {
+              "chunkId": "00acbffd-38ab-4b86-a343-33989a56740c",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN14",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "表 1",
+          "anchors": [
+            "149902",
+            "东部地区"
+          ],
+          "coveringChunks": 4,
+          "sample": [
+            {
+              "chunkId": "ff1b86f5-397e-43c1-bc46-f6abb1da703e",
+              "chunkIndex": 1
+            },
+            {
+              "chunkId": "f365d8eb-e7df-4d9b-bb64-fc95324fb1c3",
+              "chunkIndex": 16
+            },
+            {
+              "chunkId": "6ee082d8-40fa-43c2-81f2-09b7582a6b9e",
+              "chunkIndex": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN15",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "表 5",
+          "anchors": [
+            "140451",
+            "128166"
+          ],
+          "coveringChunks": 4,
+          "sample": [
+            {
+              "chunkId": "3a6658cd-e4bd-4ebd-8598-f5663bdb4f24",
+              "chunkIndex": 4
+            },
+            {
+              "chunkId": "84c20cc6-84fe-40cf-9f7e-c7e9f48a1883",
+              "chunkIndex": 20
+            },
+            {
+              "chunkId": "ba57347b-2c8b-4b4c-85a4-54e59e651fd6",
+              "chunkIndex": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN16",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "表 3",
+          "anchors": [
+            "164956",
+            "外商投资单位"
+          ],
+          "coveringChunks": 4,
+          "sample": [
+            {
+              "chunkId": "3bac1540-2cd0-44fa-b29b-e7a997664daa",
+              "chunkIndex": 3
+            },
+            {
+              "chunkId": "928832c6-5937-41c4-a5e1-dd0ee10f8f22",
+              "chunkIndex": 18
+            },
+            {
+              "chunkId": "bd82b5ca-a5f1-44b5-8bc9-81d9d7ea2404",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN17",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "大典正文",
+          "anchors": [
+            "4-04-05-05",
+            "人工智能训练师"
+          ],
+          "coveringChunks": 3,
+          "sample": [
+            {
+              "chunkId": "0a3d0232-0bc5-406c-ba98-779c97660829",
+              "chunkIndex": 630
+            },
+            {
+              "chunkId": "88b18a76-f096-47eb-9acc-4a55b8584874",
+              "chunkIndex": 632
+            },
+            {
+              "chunkId": "bb41791f-b94b-4bcd-a71c-6750bfe61944",
+              "chunkIndex": 633
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN18",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "大典正文",
+          "anchors": [
+            "2-06-07-13",
+            "数字化管理师"
+          ],
+          "coveringChunks": 3,
+          "sample": [
+            {
+              "chunkId": "3761d289-abc1-45a9-86f0-d09ec22eac85",
+              "chunkIndex": 384
+            },
+            {
+              "chunkId": "450766ea-8826-468b-a482-86484f1da8e1",
+              "chunkIndex": 385
+            },
+            {
+              "chunkId": "0fe33fe6-d93b-443f-bcca-c32a8a615492",
+              "chunkIndex": 392
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN19",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "大典正文",
+          "anchors": [
+            "4-02-04-06",
+            "植保无人机驾驶员"
+          ],
+          "coveringChunks": 1,
+          "sample": [
+            {
+              "chunkId": "f320c180-dee1-4fba-8e4b-861f84bb689d",
+              "chunkIndex": 578
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN20",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "大典正文",
+          "anchors": [
+            "2-06-01-04",
+            "易货经济专业人员"
+          ],
+          "coveringChunks": 3,
+          "sample": [
+            {
+              "chunkId": "cb605bcf-d1e4-4af0-b53a-c793f976641b",
+              "chunkIndex": 373
+            },
+            {
+              "chunkId": "46fe017d-6e24-44af-977b-fca97adbd0a4",
+              "chunkIndex": 375
+            },
+            {
+              "chunkId": "7010db45-500d-413e-9425-19ee766e4714",
+              "chunkIndex": 376
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN21",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "大典正文",
+          "anchors": [
+            "4-13-01-05",
+            "全媒体运营师"
+          ],
+          "coveringChunks": 2,
+          "sample": [
+            {
+              "chunkId": "0667ec3e-ddca-44b2-b5b1-0ff0078eb3b1",
+              "chunkIndex": 835
+            },
+            {
+              "chunkId": "14157b34-eb78-41c5-9636-c28acd92d930",
+              "chunkIndex": 838
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN22",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "大典正文",
+          "anchors": [
+            "2-02-30-03",
+            "战略规划与管理工程技术人员"
+          ],
+          "coveringChunks": 1,
+          "sample": [
+            {
+              "chunkId": "08054698-85fc-462e-a4dc-9edefed19cf2",
+              "chunkIndex": 241
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN23",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "大典正文",
+          "anchors": [
+            "4-10-01-06",
+            "家政服务员"
+          ],
+          "coveringChunks": 3,
+          "sample": [
+            {
+              "chunkId": "7b7d976b-d84e-42a5-8518-a70df1137ce8",
+              "chunkIndex": 783
+            },
+            {
+              "chunkId": "7eada416-a3a0-4017-bafc-9285b5781a70",
+              "chunkIndex": 786
+            },
+            {
+              "chunkId": "3d18a4ab-1370-4db7-8428-dc678e0a3568",
+              "chunkIndex": 787
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN24",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "低空经济与管理",
+          "anchors": [
+            "低空经济与管理",
+            "020110TK"
+          ],
+          "coveringChunks": 2,
+          "sample": [
+            {
+              "chunkId": "3c2e031d-7876-47e2-a672-96e1cf33df79",
+              "chunkIndex": 4
+            },
+            {
+              "chunkId": "6a38b7c9-3080-4cff-84b1-676dcc6111a0",
+              "chunkIndex": 3
+            }
+          ]
+        },
+        {
+          "name": "低空安全管理",
+          "anchors": [
+            "083113TK",
+            "低空安全管理"
+          ],
+          "coveringChunks": 3,
+          "sample": [
+            {
+              "chunkId": "0b02c7cd-7b13-43d3-a43f-c280cec2b5cd",
+              "chunkIndex": 193
+            },
+            {
+              "chunkId": "ffacfa29-8c11-4327-bceb-1f7560af7060",
+              "chunkIndex": 35
+            },
+            {
+              "chunkId": "c0250b1d-e575-41a9-8184-1f1fde2dc091",
+              "chunkIndex": 36
+            }
+          ]
+        },
+        {
+          "name": "低空技术与工程",
+          "anchors": [
+            "140003TK",
+            "低空技术与工程"
+          ],
+          "coveringChunks": 2,
+          "sample": [
+            {
+              "chunkId": "b1e1d3a6-2a32-4f34-88e0-fe1b47772f07",
+              "chunkIndex": 280
+            },
+            {
+              "chunkId": "84c3f95a-8823-4202-bffc-7a5bfe7126fb",
+              "chunkIndex": 51
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN25",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "专业侧",
+          "anchors": [
+            "083113TK",
+            "低空安全管理"
+          ],
+          "coveringChunks": 3,
+          "sample": [
+            {
+              "chunkId": "0b02c7cd-7b13-43d3-a43f-c280cec2b5cd",
+              "chunkIndex": 193
+            },
+            {
+              "chunkId": "ffacfa29-8c11-4327-bceb-1f7560af7060",
+              "chunkIndex": 35
+            },
+            {
+              "chunkId": "c0250b1d-e575-41a9-8184-1f1fde2dc091",
+              "chunkIndex": 36
+            }
+          ]
+        },
+        {
+          "name": "职业侧",
+          "anchors": [
+            "4-02-04-06",
+            "无人机驾驶员"
+          ],
+          "coveringChunks": 2,
+          "sample": [
+            {
+              "chunkId": "77cafb59-a050-4bd6-81a3-b15d111c44d6",
+              "chunkIndex": 574
+            },
+            {
+              "chunkId": "f320c180-dee1-4fba-8e4b-861f84bb689d",
+              "chunkIndex": 578
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN26",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "统计侧",
+          "anchors": [
+            "248752",
+            "信息传输、软件和信息技术服务业"
+          ],
+          "coveringChunks": 4,
+          "sample": [
+            {
+              "chunkId": "a60eec1f-53df-4ad8-9af1-a2abbbeb8ffb",
+              "chunkIndex": 2
+            },
+            {
+              "chunkId": "3013b78d-9c80-40b7-acbf-b15e87ea3855",
+              "chunkIndex": 17
+            },
+            {
+              "chunkId": "00acbffd-38ab-4b86-a343-33989a56740c",
+              "chunkIndex": 2
+            }
+          ]
+        },
+        {
+          "name": "职业侧",
+          "anchors": [
+            "4-04-05-05",
+            "人工智能训练师"
+          ],
+          "coveringChunks": 3,
+          "sample": [
+            {
+              "chunkId": "0a3d0232-0bc5-406c-ba98-779c97660829",
+              "chunkIndex": 630
+            },
+            {
+              "chunkId": "88b18a76-f096-47eb-9acc-4a55b8584874",
+              "chunkIndex": 632
+            },
+            {
+              "chunkId": "bb41791f-b94b-4bcd-a71c-6750bfe61944",
+              "chunkIndex": 633
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN27",
+      "answerable": false,
+      "groups": []
+    },
+    {
+      "questionId": "CN28",
+      "answerable": false,
+      "groups": []
+    },
+    {
+      "questionId": "CN29",
+      "answerable": false,
+      "groups": []
+    },
+    {
+      "questionId": "CN30",
+      "answerable": false,
+      "groups": []
+    },
+    {
+      "questionId": "CN31",
+      "answerable": false,
+      "groups": []
+    },
+    {
+      "questionId": "CN32",
+      "answerable": false,
+      "groups": []
+    },
+    {
+      "questionId": "CN33",
+      "answerable": false,
+      "groups": []
+    }
+  ]
+}
