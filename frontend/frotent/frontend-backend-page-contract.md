@@ -301,7 +301,7 @@
 - **降级不报错**：没配端点或调用失败时，`provider=rule-based`，回答只由图谱事实与已确认记忆拼出，错误码与说明放在 `llm.error` 里（前端在输入框上方显示"本轮未接模型"）。
 - **不是 TBox**：走的是本项目自己的 OpenAI 兼容客户端（`frontend1/backend/llm.py`，与评测侧共用一份配置）；会话表在进程内保留最近 6 轮，**不落库**（跨重启的历史要等画像持久化那批）。
 
-每条用户消息还会在前端生成一条“候选画像”，用户可修改内容、选择画像模块和信息类别，再确认写入；这些候选目前**不会提交后端**，刷新后丢失（后端的记忆候选走 `/api/memories` 与 `/api/growth-records` 两条写入通道）。聊天附件按钮也只展示说明，不上传文件。
+每条用户消息还会在前端生成一条“候选画像”，用户可修改内容、选择画像模块和信息类别，再确认写入；这些候选**在确认时**会写成记忆库的**待确认**记忆（`POST /api/memories`，`status: "candidate"`，按模块映射成 `goal`/`preference`/`skill`/`background`/`career_target`），留用与否仍在记忆面板里决定。**会话与消息已落库**（`GET /api/chat/sessions`、`GET|DELETE /api/chat/sessions/<id>`），刷新或后端重启都不会丢。聊天附件按钮仍只展示说明，**不上传文件**（明确的设计选择，不是没做）。
 
 ## 5. `/path` 个性化成长路径
 
@@ -460,6 +460,10 @@
 | 任务实践清单 | `/actions/tasks` | `GET /api/tasks`（支持 `?occupation=` / `?stage=`） |
 | 任务实践详情 | `/actions/tasks/<taskId>` | `GET /api/tasks/<id>`、`POST /api/tasks/<id>/attachments`（multipart）、`POST /api/tasks/<id>/runs`、`POST /api/task-runs/<id>/evaluate`、`GET /api/attachments/<id>` |
 | 任务深链 | `/actions?task=<taskId>` | 前端直接跳到 `/actions/tasks/<taskId>` |
+| 任务个人视图 | 同上（清单/详情内） | `PATCH /api/tasks/<id>`（备注/隐藏/顺序/还原）、`POST /api/tasks/reorder`、`GET /api/tasks?includeHidden=1` |
+| 附件下载 / 删除 | 同上 | `GET /api/attachments/<id>/content`（原字节，非 JSON）、`DELETE /api/attachments/<id>`（被引用时 409） |
+| 成长记录档案 | `/growth-records` | `GET /api/growth-records?kind=&limit=&cursor=`、`POST /api/growth-records`、`GET|DELETE /api/growth-records/<id>`、`POST /api/growth-records/confirm` |
+| 对话（全局抽屉） | 任意产品页（`?chat=open` 可直达） | `POST /api/chat`、`GET /api/chat/sessions`、`GET|DELETE /api/chat/sessions/<id>` |
 
 口径要点（由 `backend/tests/test_interviews.py`、`backend/tests/test_cross_role.py` 与 `npm run e2e` 阶段 D/G 钉住）：
 
@@ -506,6 +510,50 @@
 2. **附件不算能力证据**：能力闸门只认用户手写的「行动说明 / 文本成果」，附件里的文字不进评估输入 ——
    否则拿一份别人写的文档就能刷出「已具备能力」的观察。
 3. **引用必须是自己的、且挂在这条任务下**：`attachmentIds` 不再是自由字符串。
+
+附件还有两条路由（2026-10-01 补）：
+
+- `GET /api/attachments/{attachmentId}/content`：**原始字节下载**，带
+  `Content-Disposition: attachment; filename*=UTF-8''<urlencoded>`。这一条**不走 JSON 包**，
+  走 `response.rawBody` 通道（先 `json.dumps` 会把二进制毁掉）。别人的 id → 404 `ATTACHMENT_NOT_FOUND`。
+- `DELETE /api/attachments/{attachmentId}`：删附件。**还被运行记录引用时回 409 `ATTACHMENT_IN_USE`**
+  并列出 `referencedRunIds` —— 引用可追溯优先于清理，否则运行记录里会留下查不到出处的 id。
+  成功返回 `deleted` / `taskId` / `attachmentCount` / `sha256`。
+
+### 任务的个人视图覆盖层（2026-10-01）
+
+任务内容来自图谱，**用户改不了也不该改**；能改的只是「你自己的视图」：
+
+- `PATCH /api/tasks/{taskId}`，body `{note?, hidden?, position?, reset?}`：
+  写入 `task_overrides`（备注 / 隐藏 / 顺序）。只加视图字段（`note`/`hidden`/`position`/`overrideUpdatedAt`），
+  任务本体字段（`title`/`deliverable`/`steps`/`requiredSkills`/`sourceRefs`/`tools`）**逐字不变**（有用例钉住）。
+  `{"reset": true}` 恢复默认。`hidden` 非布尔 → 422；`note` 超 1000 字 → 422；`position` 负数 → 422。
+- **状态语义**：`completed` = 提交过；被隐藏且没提交过的记 `planned`（不是 completed，也不再占
+  「现在就能做」的位置）；「哪个阶段现在可做」的判定**跳过被隐藏的任务**。
+- `POST /api/tasks/reorder`，body `{taskIds: [...], occupation?}`：按给定顺序写 `position`。
+  列表里的 `ordered` 是**按（阶段, position）重排后**的结果（阶段分组优先），不是原样回显。
+  不在你当前清单里的 taskId → 422 `UNKNOWN_TASK` 并回 `unknownTaskIds`。
+- 列表另带 `includeHidden` 与 `hiddenCount`；`counts` **只数看得见的任务**（否则会出现
+  「说有 1 条可做却一条都点不出」）。`?includeHidden=1` 把隐藏的也取回来。
+
+### 成长记录分页（2026-10-01）
+
+- `GET /api/growth-records?kind=&limit=&cursor=`：`cursor` 是**位移**（排序里带 `record_id` 兜底，
+  同一时刻多条也不错位）。回传 `count`（本页）、`total`（筛选后总数）、`limit`、`offset`、
+  `nextCursor`、`hasMore`、`memoryHash`。**不传 `limit` 时保持旧行为：一次给全部**（`hasMore=false`）。
+  非法分页参数 → 400 `INVALID_GROWTH_PAGE`（不悄悄当成 0）。
+
+### 对话会话（2026-10-01）
+
+- `GET /api/chat/sessions?limit=`：会话列表（`sessionId` / `title`（第一句用户消息）/ `messageCount` /
+  `createdAt` / `updatedAt`）。**没挂会话库时回 `persisted: false` + 说明**，而不是假装「没有历史」。
+- `GET /api/chat/sessions/{sessionId}`：`session` + `messages`（`role` / `text` / `provider` / `injected`）。
+  消息顺序按**插入顺序（rowid）**兜底：`created_at` 只到秒，同一轮的两条时间戳相同，
+  用随机 `message_id` 兜底会让「用户→助手」随机翻转。
+- `DELETE /api/chat/sessions/{sessionId}`：连消息一起删，返回 `removedMessages`。
+- 别人的会话对我就是不存在（404 `CHAT_SESSION_NOT_FOUND`）。
+- `POST /api/chat` 带 `conversationId` 时**追加**到同一段会话，并且这一轮的提示词会带上库里最近
+  `HISTORY_TURNS=6` 轮历史（【前几轮对话】块）。
 
 提交结构：
 

@@ -198,11 +198,11 @@ CAREER_LLM_DISABLED=1                                          ← 显式关闭�
 
 ## 当前已知缺口（摘要）
 
-- **数据持久化已补齐（M1-1）**：**记忆库 / 成长记录 / 画像 / 证据 / 成长事件全部落同一个 SQLite**（`backend/memories.py`，默认 `backend/career.db`，可用 `CAREER_MEMORY_DB` 覆盖：`memory_items` / `memory_triggers` / `growth_records` / `profiles` / `profile_evidence` / `growth_events`）。后端重启后画像读得到（单测 `test_profile_survives_new_api_instance` 钉住）；**成长档案页的时间线仍在前端内存**，刷新即丢
+- **数据持久化已补齐（M1-1）**：**记忆库 / 成长记录 / 画像 / 证据 / 成长事件 / 任务运行与附件 / 对话会话全部落同一个 SQLite**（默认 `backend/career.db`，可用 `CAREER_MEMORY_DB` 覆盖）。后端重启后画像读得到（单测 `test_profile_survives_new_api_instance` 钉住）；**成长档案页的时间线也已改成服务端数据**（`GET /api/growth-records` 位移分页，刷新不丢），**对话会话与消息同样落库**（`GET /api/chat/sessions*`，重启后还能找回聊过什么）
 - **记忆已真正注入对话**：`POST /api/chat` 把已确认记忆（persona 常驻 + 联想召回）与图谱事实拼成**固定可审计前缀**再回答；配了模型就用模型（本机实测 6–10 s），没配或调用失败**降级为规则版**并回传 `provider` / `llm.error`（不报 5xx、不假装有模型）。`GET /api/memories/context` 仍是同一份注入的**预览**。触发器也有两条路：写路径走**规则版**（快、确定），点「重建触发器」走**模型版**（实测约 24 s，失败自动降级且标明原因），详见 `记忆系统整合方案.md`
 - **成长记录可写入记忆库（M1-3 已落地）**：`POST /api/growth-records` 把一条记录投影成**待确认**记忆候选（只取图谱已知的职业/技能名，认不出就不写）；`POST /api/growth-records/confirm` 把候选确认为正式记忆，**候选 → 记录 → 证据 → 事件一个事务写入**，重复 confirm 幂等、越权（拿别的记录的候选）直接 400
 - **路径引擎已实现（M1-4）**：`POST /api/v1/career-path/generate` 由图谱 `requires` / `prerequisite` 边做拓扑排序算出阶段与缺口，模型不参与；同输入两次输出完全相同（时钟可注入）；未知职业 404。`/path` 页不再硬编码 `AI001` / `SK215=3`，改读已确认画像且每周小时数可调（M1-6）
-- **五个入口全通（M1-5）**：`/work-map`、`/catalog` 由 redirect 改挂真组件（都是 200 + SSR 出内容）；`/actions` 已从「内容筹备中」变成**模拟场景入口**，挂三条真链路：**模拟面试** `/mock-interview`、**跨岗位沟通训练** `/scenarios/cross-role`（这两条移植自队友项目 `career-ai-system`，差异清单见 `模拟面试与跨岗位训练移植说明.md`）、**任务实践** `/actions/tasks`（本项目自己的设计：任务由路径引擎从图谱 `task→skill` 边派生，提交只写成长记录与**待确认**候选，评估不落已确认能力；**附件是真文件上传** —— `POST /api/tasks/<id>/attachments` 把字节存进 `task_attachments`，读不出文字就如实说读不出，附件文字**不作为能力证据**）
+- **五个入口全通（M1-5）**：`/work-map`、`/catalog` 由 redirect 改挂真组件（都是 200 + SSR 出内容）；`/actions` 已从「内容筹备中」变成**模拟场景入口**，挂三条真链路：**模拟面试** `/mock-interview`、**跨岗位沟通训练** `/scenarios/cross-role`（这两条移植自队友项目 `career-ai-system`，差异清单见 `模拟面试与跨岗位训练移植说明.md`）、**任务实践** `/actions/tasks`（本项目自己的设计：任务由路径引擎从图谱 `task→skill` 边派生，提交只写成长记录与**待确认**候选，评估不落已确认能力；**附件是真文件上传** —— `POST /api/tasks/<id>/attachments` 把字节存进 `task_attachments`，读不出文字就如实说读不出，附件文字**不作为能力证据**；附件还能按原字节下载、可删除（被提交引用时 409 拒绝）；任务的备注/隐藏/顺序走 `task_overrides` **个人视图覆盖层**，不改图谱派生的任务内容）。**侧边导航 7 项**：五个入口之外补上 `/work-map`、`/catalog`，外加「AI 对话」按钮（对话是全局抽屉不是路由）
 - **简历解析已实现（文本 / DOCX / PDF）**：`POST /api/resumes/extract` 真解析文件（DOCX 用 stdlib `zipfile`；PDF 走运行时探测的 pypdf / PyMuPDF / pdfminer），产出**画像草稿 + 待确认记忆候选 + 画像证据**，每条抽取都带原文 `charRange`；**图片与 `.doc` 明确 415**（无 OCR），扫描件 PDF 与乱码 PDF 也分别明确报错，不假装解析。`GET /health` 的 `resume.pdfBackend` 会报当前用的是哪个后端
 - **访客会话已实现（M1-2）**：`POST /api/auth/guest` 返回 201 + `HttpOnly` 会话 Cookie，带 Cookie 的请求按 `user_id` 隔离画像/记忆/成长记录；无 Cookie 或 Cookie 非法一律回落 `user_local`（本机单用户形态照常可用）。`register` / `login` **仍是 501**：本项目不存账号密码
 - **未实现接口一律 501**（不假装可用）：**只剩** `/api/auth/{register,login}`（本项目不存账号密码）。
@@ -211,7 +211,17 @@ CAREER_LLM_DISABLED=1                                          ← 显式关闭�
 - **知识库**：`publishedAt` 0/26；中文占比 46.4%（中文字符口径）；60% 图谱标注未人工复核（174/289）。
   **检索**：跨语言层已解（M2-5 查询自适应门控，dev 29→31/34、新 holdout 26→27/35，见 `knowledge/evaluations/语言自适应融合.md`）；
   **外部库接不回自建层**（M2-6：桥接覆盖 4/1676 = 0.24%，定不出机械规则、只能人工裁定，与 M2-1 同类门禁）
-- **素材可复现性**：raw 快照 sha256 实测 **20/25 与登记值一致**，5 份不一致（`S15`/`S18`/`S19`/`S20`/`S22`，成因未定，详见 `knowledge/README.md`）
+- **素材可复现性**：raw 快照 sha256 实测 **20/25 与登记值一致**，5 份不一致（`S15`/`S18`/`S19`/`S20`/`S22`）。
+  **成因已查明（2026-10-01）：git 的行尾转换，不是「抓取后二次编辑」** —— 其中 S18/S20 的字节差恰好等于
+  裸 LF 数、可**逐字节复现**登记 sha256；`.gitattributes` 的 `-text` 规则由 `21548d6` 引入（在那之前没有
+  任何东西阻止 git 规范化行尾）。另 3 份的原始混合行尾无法还原（全仓也无第二份副本）。
+  取证脚本 `knowledge/eval/probe_raw_sha.py`，细节见 `knowledge/README.md`
+- **中文官方语料的评测已补完四项**（2026-10-01）：**偏语义改写题集 + RRF 权重外推**（16 题，题面逐题机器
+  校验不含任何 gold 锚点 → 0.2/0.8 在 @1/MRR 上仍最好，但 @10 窗口内向量占大头多找回 1 题）、
+  **引用支持度/回答质量**（真模型：引用合法 16/16、引用支持 gold 14/16、超范围题正确拒答 7/7）、
+  **结构化目录的切块扩展扫描**（200 与 512 分区完全相同 → 该档 cap 不生效；1024 明显变差）、
+  **超范围题分数分布的跨语料复核**（两个语料上都无可分阈值 → 检索层不可拒答）。三份报告在
+  `knowledge-cn/evaluations/`。**仍未做**：业主人工复核 gold、职业大典（1665 chunk）的切块扫描
 
 ## 数据与密钥
 

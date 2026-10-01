@@ -236,6 +236,8 @@
 | 模拟面试 + 跨岗位沟通训练（2026-10-01 从队友 `career-ai-system` 移植） | `backend/interviews.py`、`backend/cross_role.py`、`backend/resume_store.py`、`backend/data/cross_role_questionnaires.json`（32 职业 / 320 题）；路由 `/api/v1/interview-skills`、`/api/v1/interviews*`、`/api/v1/cross-role/*`、`GET /api/resumes`；前端 `/actions` → `/mock-interview`、`/scenarios/cross-role`。**差异与「没搬的部分」见 `模拟面试与跨岗位训练移植说明.md`** |  |
 | 任务实践（2026-10-01，本项目自己的设计） | `backend/tasks.py`（任务由路径引擎从图谱 `task --trains--> skill` 边派生）+ `task_runs` 表；路由 `GET /api/tasks`、`GET /api/tasks/<id>`、`POST /api/tasks/<id>/runs`、`POST /api/task-runs/<id>/evaluate`；前端 `/actions/tasks[/<taskId>]`，`/path` 的任务卡片已接上。**提交只写成长记录 + 待确认候选；评估不落已确认能力**（`test_tasks.py` 11 项钉住） |  |
 | 任务附件真上传（2026-10-01 第五轮） | `task_attachments` 表（**字节存 `content`**）+ `TaskStore` 附件读写；路由 `POST /api/tasks/<id>/attachments`（multipart，5MB / 每条任务 20 个）、`GET /api/attachments/<id>`；提交时 `attachmentIds` 必须是**自己在这条任务下**上传过的（否则 422 `UNKNOWN_ATTACHMENT`）。与简历解析刻意不同：**收得下就存**，读不出就说读不出；**附件文字不进评估输入**（不算能力证据）。前端 `/actions/tasks/<taskId>` 加文件上传与勾选引用（`test_tasks.py` 另 6 项钉住） |  |
+| 缺口收口（2026-10-01 第六轮） | ① 成长记录**分页 + 落库**：`GET /api/growth-records` 加 `limit`/`cursor` 与 `total`/`nextCursor`/`hasMore`，`ProfileProvider` 改服务端时间线；② 对话**会话落库**：`chat_sessions`/`chat_messages` + `GET|DELETE /api/chat/sessions*`，候选确认写记忆库待确认区；③ 任务**个人视图覆盖层**：`task_overrides` + `PATCH /api/tasks/<id>`、`POST /api/tasks/reorder`；④ 附件**原字节下载与删除**（被引用 409）；⑤ 侧边导航补 `/work-map`/`/catalog`/AI 对话；⑥ 过时文档口径同步 |  |
+| 知识库评测补完（2026-10-01 第六轮） | 偏语义改写题集 + RRF 权重外推、引用支持度/回答质量（真模型）、结构化目录切块扩展扫描、超范围题跨语料复核；raw 快照 sha256 成因取证（结论：git 行尾转换）。报告在 `knowledge-cn/evaluations/`，脚本在 `knowledge-cn/eval/` 与 `knowledge/eval/probe_raw_sha.py` |  |
 
 ## 5. 待清理的卫生问题（低优先，但影响交接）
 

@@ -85,8 +85,10 @@
 
 ### 当前缺口
 
-- 缺少正式 `register/login/logout/forgot-password` 前端请求和后端实现。
-- 页面 API 使用 `lib/client/profile-api.ts` 的 `NEXT_PUBLIC_API_BASE_URL`，而 onboarding 页面部分请求直接写死相对 `/api`，需要统一。
+- `register` / `login` / `logout` / `forgot-password` **仍不实现**（`POST /api/auth/{register,login}` 回 501）：
+  本项目不存账号密码，访客会话（201 + HttpOnly Cookie）足够单用户形态。这是**设计留白**，不是没做。
+- ~~onboarding 页面部分请求直接写死相对 `/api`~~ **已统一**：全部走 `lib/client/http.ts` 的 `apiUrl()`
+  （`NEXT_PUBLIC_API_BASE_URL`，默认 `http://localhost:8000`）。
 
 ## 3. 初始画像 `/onboarding`
 
@@ -131,8 +133,9 @@
 
 ### 当前缺口
 
-- 应改为 `multipart/form-data POST /api/resumes/extract`，并保留解析警告、文件大小和类型校验。
-- 页面内的相对 `/api` 请求应统一走 `apiUrl()`，以支持独立后端端口。
+- ~~应改为 `multipart/form-data POST /api/resumes/extract`~~ **已实现**：`backend/resume.py` 用 stdlib
+  解析 multipart，服务端做文件大小（10MB）与类型校验，解析警告照常回传。图片 / `.doc` 明确 415。
+- ~~页面内的相对 `/api` 请求应统一走 `apiUrl()`~~ **已统一**（与 §2 同一条）。
 
 ## 4. 动态画像 `/growth`
 
@@ -212,8 +215,13 @@
 
 ### 当前缺口
 
-- 会话、消息、候选画像和附件都未持久化到后端。
-- 候选确认需要后端事务：候选、画像记录、证据、成长事件一次写入且幂等。
+- ~~会话、消息、候选画像都未持久化到后端~~ **已实现（2026-10-01）**：
+  `chat_sessions` / `chat_messages` 两张表 + `GET/DELETE /api/chat/sessions*`；
+  打开侧栏会把最近一段会话读回来，**刷新或后端重启都不丢**。候选画像点「确认写入」时
+  会按模块归类写成记忆库的**待确认**记忆（`POST /api/memories`，`status: "candidate"`），
+  留用与否仍在记忆面板里决定。**聊天附件明确不解析**（按钮只给说明），这条是设计选择。
+- ~~候选确认需要后端事务：候选、画像记录、证据、成长事件一次写入且幂等~~
+  **已实现**：`POST /api/growth-records/confirm` 一个事务写候选→记录→证据→事件，重复 confirm 幂等。
 
 ## 6. 工作地图 `/work-map`
 
@@ -323,8 +331,12 @@
 
 ### 当前缺口
 
-- 需要把已确认画像映射为 `current_skills`、学历、专业、工作年限和目标。
-- 需要保存路径快照、重新生成、编辑和任务安排。
+- ~~需要把已确认画像映射为 `current_skills`、学历、专业、工作年限和目标~~ **已实现（M1-6）**：
+  `POST /api/v1/career-path/generate` 没给 `current_skills` 时用已确认/草稿画像里的技能补，
+  并回传 `profile_used` / `profile_summary`，不靠前端硬编码。
+- **路径快照**仍未持久化：同输入两次输出逐字节相同（时钟可注入），但服务端不存历史快照，
+  所以「回到上周那份路径」做不到。**任务安排已能落地**：`/path` 的任务卡片接到
+  `/actions/tasks`，任务的备注/隐藏/顺序由 `task_overrides` 覆盖层保存。
 
 ## 9. 职场模拟 `/actions`
 
@@ -385,7 +397,8 @@
 - 从关联任务详情 → `/actions?task=<taskId>`。
 - 查看当前画像 → `/growth`。
 - `AppShell` 通知读取 `ProfileProvider.records`，并链接回 `/growth`。
-- 当前记录由聊天候选确认和任务状态操作写入 Provider 内存，刷新即丢失。
+- 时间线来自**服务端**成长记录（分页加载，刷新不丢）；聊天候选确认写的**待确认**记忆也能在这里看到。
+  本地只保留「本次会话刚发生、还没写库」的事件（点「写入记忆候选」后即落库，并立刻进入列表）。
 - **详情面板有「写入记忆候选」**（2026-09-29 新增）：把选中的这条记录 `POST /api/growth-records`，
   后端写记录并派生**待确认**记忆候选（只取图谱已知的职业/技能名，认不出就不写），
   随后到 `/growth` 的「记忆库 → 待确认」栏里决定是否保留。写同一记录两次是幂等的。
@@ -400,9 +413,14 @@
 
 ### 当前缺口
 
-- ~~应增加 `GET /api/growth-records`，支持筛选、分页和详情。~~ **写入与列表已实现**（`POST/GET/DELETE /api/growth-records`）；服务端分类筛选、分页与 `/confirm`（候选→记录→证据→事件一个事务）仍未做。
-- 候选确认应由后端事务化写入画像记录、证据和成长事件（M1-3，依赖 `ProfileProvider` 先改成服务端数据）。
-- `ProfileProvider` 需要改为服务端数据 + 本地乐观更新，而不是只依赖 `useState`。
+- ~~应增加 `GET /api/growth-records`，支持筛选、分页和详情~~ **已实现**：
+  `POST/GET/DELETE /api/growth-records` + `GET /api/growth-records/<id>`；
+  **分类筛选（`kind`）与位移分页（`limit`/`cursor`，回传 `total`/`nextCursor`/`hasMore`）都在服务端**。
+- ~~候选确认应由后端事务化写入画像记录、证据和成长事件~~ **已实现（M1-3）**：
+  `POST /api/growth-records/confirm` 一个事务写候选 → 记录 → 证据 → 事件，重复 confirm 幂等、越权 400。
+- ~~`ProfileProvider` 需要改为服务端数据~~ **已实现（2026-10-01）**：时间线的真身是服务端成长记录，
+  打开页面按 `ARCHIVE_PAGE_SIZE=20` 拉第一页、可「加载更多」；本地只留「本次会话刚发生、还没写库」的事件。
+- **仍未做**：**路径快照式**的历史版本回溯（只看得到当前时间线，看不到「上周那一刻的档案」）。
 
 ## 11. 跨页面共享入口
 
@@ -412,7 +430,10 @@
 - [components/layout/product-shell.tsx](frontend/frotent/frontend1/components/layout/product-shell.tsx)
 - [components/layout/app-shell.tsx](frontend/frotent/frontend1/components/layout/app-shell.tsx)
 
-当前侧边导航只有 `/growth`、`/path`、`/actions`、`/growth-records`，没有 `/work-map`、`/catalog`、`/chat`。
+侧边导航共 **7 项**：`/growth`、`/path`、`/actions`、`/growth-records`、`/work-map`、`/catalog`
+，外加一个**按钮**「AI 对话」（对话是全局抽屉，不是路由，所以是按钮而不是链接；`aria-controls="global-chat"`）。
+当前项判定用「`href` 或 `href/` 前缀」，所以 `/actions/tasks/<id>` 时 `/actions` 会点亮，
+而 `/growth` 不会把 `/growth-records` 也点亮。窄屏导航可纵向滚动。
 
 ### 全局样式
 
@@ -427,7 +448,8 @@
 
 - [lib/client/http.ts](frontend/frotent/frontend1/lib/client/http.ts)
 - 默认后端地址：`http://localhost:8000`。
-- 当前部分页面直接使用相对 `/api`，需要统一请求层和环境变量。
+- 请求层**已统一**：所有 `fetch` 都走 `apiUrl()`（`lib/client/http.ts`，`NEXT_PUBLIC_API_BASE_URL`，
+  默认 `http://localhost:8000`），页面里不再有写死的相对 `/api`。
 
 ## 建议开发顺序
 
