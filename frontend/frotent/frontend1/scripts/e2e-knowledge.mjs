@@ -17,7 +17,8 @@
  *   阶段 C  检索闸门      现役 BM25 在 dev 题集上的命中数不得低于钉住的基线
  *   阶段 D  后端 HTTP     真起 python 进程，走契约接口（含 /api/chat 的记忆注入、
  *                         /api/growth-records 的记录→候选、/api/resumes/extract 的
- *                         简历→画像草稿+候选；本阶段显式关掉模型，
+ *                         简历→画像草稿+候选、/api/v1/interviews 的模拟面试、
+ *                         /api/v1/cross-role 的跨岗位沟通训练；本阶段显式关掉模型，
  *                         所以钉住的是"没有模型也必须能用"的规则版路径）
  *   阶段 E  MCP HTTP      真起 mcp/http.ts 进程，三个工具各真调一次
  *   阶段 F  跨端同源      后端 /health、MCP dataVersion、导出文件三方版本与计数必须一致，
@@ -958,6 +959,55 @@ async function stageD(context) {
       `pdfSupported=${healthForResume.json?.resume?.pdfSupported} backend=${healthForResume.json?.resume?.pdfBackend}`
     );
 
+    /* ---- ⑨ 模拟面试 / 跨岗位沟通训练：真链路（本阶段显式关模型 → 全部走规则版） ---- */
+    const skillItems = (await httpJson(`${base}/api/v1/interview-skills`)).json?.data?.items ?? [];
+    check(
+      "D",
+      `模拟面试：岗位列表 = 职业目录（${expectedOccupations}） + 自定义`,
+      skillItems[0]?.roleId === "custom" && skillItems.length === expectedOccupations + 1,
+      skillItems.map(item => item.roleId).join(",")
+    );
+    const interviewBody = { roleId: skillItems[1].roleId, difficulty: "mid", questionCount: 3, requestId: `e2e-iv-${process.pid}` };
+    const created = await httpJson(`${base}/api/v1/interviews`, jsonInit("POST", interviewBody));
+    const session = created.json?.data?.session;
+    check("D", "模拟面试：创建 201 且题目数 = questionCount", created.status === 201 && session?.questions?.length === 3, `${created.status}/${session?.questions?.length}`);
+    check("D", "模拟面试：未配模型时如实报 fallback（不假称模型出题）", session?.questionSource === "fallback", String(session?.questionSource));
+    const createdAgain = await httpJson(`${base}/api/v1/interviews`, jsonInit("POST", interviewBody));
+    check("D", "模拟面试：requestId 幂等（同一场，不产生重复记录）", createdAgain.json?.data?.session?.sessionId === session?.sessionId, String(createdAgain.json?.data?.session?.sessionId));
+
+    const firstQuestion = session.questions[0];
+    await httpJson(`${base}/api/v1/interviews/${session.sessionId}/answers`, jsonInit("POST", { questionId: firstQuestion.questionId, answer: "不知道" }));
+    const finished = await httpJson(`${base}/api/v1/interviews/${session.sessionId}/complete`, { method: "POST" });
+    const report = finished.json?.data?.report;
+    const firstScore = (report?.questionDetails ?? []).find(item => item.questionId === firstQuestion.questionId)?.score;
+    check("D", "模拟面试：交卷出报告，且「不知道」判 0 分（不拿字数换分）", finished.status === 200 && firstScore === 0, `score=${firstScore}`);
+    const locked = await httpJson(`${base}/api/v1/interviews/${session.sessionId}/answers`, jsonInit("POST", { questionId: firstQuestion.questionId, answer: "改一下" }));
+    check("D", "模拟面试：交卷后不能再改答案（409）", locked.status === 409, `${locked.status} ${locked.json?.error?.code}`);
+
+    const crossRoles = await httpJson(`${base}/api/v1/cross-role/roles`);
+    check(
+      "D",
+      "跨岗位训练：32 个岗位 / 320 题，且带题库来源与免责声明",
+      crossRoles.json?.data?.count === 32 && crossRoles.json?.data?.questionCount === 320 && Boolean(crossRoles.json?.data?.disclaimer),
+      `${crossRoles.json?.data?.count} 岗位 / ${crossRoles.json?.data?.questionCount} 题`
+    );
+    const crossCreated = await httpJson(`${base}/api/v1/cross-role/sessions`, jsonInit("POST", { roleId: "AI009", mode: "practice", requestId: `e2e-cr-${process.pid}` }));
+    const crossSession = crossCreated.json?.data?.session;
+    check("D", "跨岗位训练：创建 201 且每个岗位 10 个场景", crossCreated.status === 201 && crossSession?.questions?.length === 10, `${crossCreated.status}/${crossSession?.questions?.length}`);
+    const crossQuestion = crossSession.questions[0];
+    const crossAnswered = await httpJson(`${base}/api/v1/cross-role/sessions/${crossSession.sessionId}/answers`, jsonInit("POST", { questionId: crossQuestion.questionId, optionId: crossQuestion.options[0].optionId }));
+    check("D", "跨岗位训练：练习模式作答后立刻给出推荐处理方式", Boolean(crossAnswered.json?.data?.session?.questions?.[0]?.feedback?.recommendedApproach), String(crossAnswered.status));
+    const crossReport = (await httpJson(`${base}/api/v1/cross-role/sessions/${crossSession.sessionId}/complete`, { method: "POST" })).json?.data?.report;
+    check(
+      "D",
+      "跨岗位训练：报告含四项协作维度与免责声明",
+      (crossReport?.dimensions ?? []).length === 4 && Boolean(crossReport?.disclaimer),
+      (crossReport?.dimensions ?? []).map(item => `${item.name}:${item.score}`).join(",")
+    );
+    // 就地清理：两条会话删掉，保证 e2e 可重复跑（简历存档落在临时库里，随 tmp 库一起丢弃）
+    await httpJson(`${base}/api/v1/interviews/${session.sessionId}`, { method: "DELETE" });
+    await httpJson(`${base}/api/v1/cross-role/sessions/${crossSession.sessionId}`, { method: "DELETE" });
+
     // 清理：把剩下的测试记忆（含候选）全删掉，保证 e2e 可重复跑（不污染本地 db）
     const leftover = await httpJson(mem);
     for (const item of leftover.json?.data?.items ?? []) await httpJson(`${mem}/${item.id}`, { method: "DELETE" });
@@ -1230,6 +1280,30 @@ async function stageG() {
       "/growth 的 SSR 里出现记忆库面板（候选 / 已确认 / 注入预览三栏）",
       growth.text.includes("记忆库") && growth.text.includes("待确认") && growth.text.includes("注入预览"),
       growth.text.includes("记忆库") ? "已渲染" : "未见「记忆库」字样"
+    );
+
+    /* 职场模拟入口与它挂的两个真页面：以前 /actions 只有「内容筹备中」，
+       现在必须是能 SSR 出流程标题的真页面（模拟面试 / 跨岗位沟通训练）。 */
+    const actions = await httpJson(`${base}/actions`, { timeoutMs: 90000 });
+    check(
+      "G",
+      "/actions 是模拟场景入口（不再是「筹备中」占位页）",
+      actions.status === 200 && actions.text.includes("模拟场景") && actions.text.includes("跨岗位沟通训练") && !actions.text.includes("内容筹备中"),
+      `${actions.status} ${actions.text.length}B`
+    );
+    const interview = await httpJson(`${base}/mock-interview`, { timeoutMs: 90000 });
+    check(
+      "G",
+      "/mock-interview 返回 200 且 SSR 出面试配置表单",
+      interview.status === 200 && interview.text.includes("模拟面试") && interview.text.includes("目标岗位"),
+      `${interview.status} ${interview.text.length}B`
+    );
+    const crossRole = await httpJson(`${base}/scenarios/cross-role`, { timeoutMs: 90000 });
+    check(
+      "G",
+      "/scenarios/cross-role 返回 200 且 SSR 出岗位选择页",
+      crossRole.status === 200 && crossRole.text.includes("跨岗位沟通") && crossRole.text.includes("选择你要扮演的岗位"),
+      `${crossRole.status} ${crossRole.text.length}B`
     );
 
     /* M1-5 之后 /work-map 与 /catalog 都是真页面：必须 200 且 SSR 出内容，
