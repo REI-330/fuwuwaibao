@@ -20,6 +20,7 @@ import argparse
 import glob
 import json
 import os
+import re
 import sqlite3
 import urllib.request
 from pathlib import Path
@@ -105,8 +106,13 @@ def main():
     if args.kb:
         token = login(args.base_url, args.email, args.password)
         hits = hybrid_search(args.base_url, token, args.kb, args.query)
+        top = (hits[0].get("content") or "") if hits else ""
+        # 只打印前 120 字会误判命中：一个 chunk 装 3 条记录时，答案可能在 chunk 中部，
+        # 预览显示的却是邻座记录（「低空经济与管理」那次就是这么看错的）。
+        # 所以这里连「这条 chunk 里都有哪些记录 ID」一起报出来。
         report["probe"] = {"query": args.query, "hits": len(hits),
-                           "topPreview": (hits[0].get("content") or "")[:120] if hits else ""}
+                           "topPreview": top[:120],
+                           "topRecordIds": re.findall(r"记录 ID：([A-Za-z0-9\-]+)", top)}
 
     checks = report["checks"]
     checks["每条记录都能在 chunk 里找到"] = len(missing) == 0 and len(ids) > 0

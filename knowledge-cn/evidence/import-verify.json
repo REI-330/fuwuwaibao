@@ -19,7 +19,12 @@
   "probe": {
     "query": "哲学 专业代码",
     "hits": 102,
-    "topPreview": "## moe-major-030302\n\n专业代码：030302；专业名称：社会工作；来源页码：第 4 页\n\n_来源：moe-majors-2026 · 类型：FACT · 记录 ID：moe-major-030302 · 审核状态：业主豁"
+    "topPreview": "## moe-major-030302\n\n专业代码：030302；专业名称：社会工作；来源页码：第 4 页\n\n_来源：moe-majors-2026 · 类型：FACT · 记录 ID：moe-major-030302 · 审核状态：业主豁",
+    "topRecordIds": [
+      "moe-major-030302",
+      "moe-major-030303T",
+      "moe-major-030304T"
+    ]
   },
   "passed": true
 }
