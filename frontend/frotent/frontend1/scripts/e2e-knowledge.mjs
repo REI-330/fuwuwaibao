@@ -242,6 +242,14 @@ const readJsonl = path =>
     .filter(line => line.trim().length > 0)
     .map(line => JSON.parse(line));
 const sha256File = path => createHash("sha256").update(readFileSync(path)).digest("hex");
+const sha256Bytes = value => createHash("sha256").update(value).digest("hex");
+
+/** 真上传一份任务附件（multipart/form-data，字段名 file）—— 不是把 attachmentIds 当字符串塞进 JSON。 */
+async function uploadAttachment(base, taskId, filename, content) {
+  const form = new FormData();
+  form.append("file", new Blob([content]), filename);
+  return httpJson(`${base}/api/tasks/${taskId}/attachments`, { method: "POST", body: form });
+}
 
 /* ---- 语义投影：剥掉时间戳/耗时后做严格比对，用来验证「重跑只改时间戳」 ---- */
 
@@ -1108,6 +1116,74 @@ async function stageD(context) {
       "任务实践：详情里的历史提交带上了评估结果",
       taskDetailAfter.json?.data?.runCount === 1 && taskDetailAfter.json?.data?.latestFeedback?.provider === "fallback",
       `runCount=${taskDetailAfter.json?.data?.runCount}`
+    );
+
+    /* ---- ⑩b 附件：真上传（字节与 sha256 都对得上，不是记个文件名） ---- */
+    const attachText = "交付说明：先核对约束，实测提升 40%。";
+    const attachUpload = await uploadAttachment(base, targetTask.taskId, "交付说明.md", attachText);
+    const attach = attachUpload.json?.data?.attachment;
+    check(
+      "D",
+      "任务实践：附件是真上传（byteSize 与 sha256 都对得上）",
+      attachUpload.status === 201 && attach?.byteSize === Buffer.byteLength(attachText) && attach?.sha256 === sha256Bytes(attachText),
+      `${attachUpload.status} ${attach?.byteSize}B ${String(attach?.sha256).slice(0, 12)}`
+    );
+    check(
+      "D",
+      "任务实践：文本附件抽出预览，且是原文的子串（不改写）",
+      attach?.textExtracted === true && typeof attach?.preview === "string" && attach.preview.length > 0 && attachText.includes(attach.preview),
+      attach?.note
+    );
+    const pngBytes = new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0, 0, 0, 0]);
+    const imageUpload = await uploadAttachment(base, targetTask.taskId, "结果截图.png", pngBytes);
+    const imageAttach = imageUpload.json?.data?.attachment;
+    check(
+      "D",
+      "任务实践：图片附件收得下，但如实说明没做 OCR（不假装读过）",
+      imageUpload.status === 201 && imageAttach?.kind === "image" && imageAttach?.textExtracted === false && /OCR/.test(imageAttach?.note ?? ""),
+      `${imageUpload.status} ${imageAttach?.kind} ${imageAttach?.note}`
+    );
+    const attachAgain = await uploadAttachment(base, targetTask.taskId, "交付说明.md", attachText);
+    check(
+      "D",
+      "任务实践：同一个文件重复上传按幂等复用（不产生第二条）",
+      attachAgain.json?.data?.created === false && attachAgain.json?.data?.attachment?.attachmentId === attach?.attachmentId
+        && attachAgain.json?.data?.attachmentCount === 2,
+      `created=${attachAgain.json?.data?.created} count=${attachAgain.json?.data?.attachmentCount}`
+    );
+
+    const withAttachment = await httpJson(`${tasksEndpoint}/${targetTask.taskId}/runs`, jsonInit("POST", {
+      submission: "这次提交引用了本地已上传的附件。", requestId: `e2e-task-attach-${process.pid}`,
+      attachmentIds: [attach.attachmentId, imageAttach.attachmentId],
+    }));
+    check(
+      "D",
+      "任务实践：提交可以引用「自己在这条任务下」上传的附件",
+      withAttachment.status === 201 && (withAttachment.json?.data?.run?.attachmentIds ?? []).length === 2,
+      JSON.stringify(withAttachment.json?.data?.run?.attachmentIds)
+    );
+    const bogusAttachment = await httpJson(`${tasksEndpoint}/${targetTask.taskId}/runs`, jsonInit("POST", {
+      submission: "引用一个没上传过的附件。", requestId: `e2e-task-bogus-${process.pid}`, attachmentIds: ["att_nope"],
+    }));
+    check(
+      "D",
+      "任务实践：引用没上传过的 attachmentId 直接 422（不静默忽略）",
+      bogusAttachment.status === 422 && bogusAttachment.json?.error?.code === "UNKNOWN_ATTACHMENT"
+        && (bogusAttachment.json?.error?.unknownAttachmentIds ?? []).includes("att_nope"),
+      `${bogusAttachment.status} ${bogusAttachment.json?.error?.code}`
+    );
+    const probeUpload = await uploadAttachment(base, targetTask.taskId, "别人的报告.txt", `这份报告里到处都写着 ${taskSkill}。`);
+    const probeRun = await httpJson(`${tasksEndpoint}/${targetTask.taskId}/runs`, jsonInit("POST", {
+      submission: "按步骤做了，结果还行。", requestId: `e2e-task-evidence-${process.pid}`,
+      attachmentIds: [probeUpload.json?.data?.attachment?.attachmentId],
+    }));
+    const probeReport = (await httpJson(`${base}/api/task-runs/${probeRun.json?.data?.run?.runId}/evaluate`, { method: "POST" })).json?.data?.report;
+    check(
+      "D",
+      "任务实践：附件的文字不算能力证据（闸门只认手写的文本成果）",
+      (probeReport?.observedAbilities ?? []).length === 0
+        && (probeReport?.needsVerification ?? []).some(item => item.name === taskSkill),
+      `${(probeReport?.observedAbilities ?? []).length} 条观察 / 仍缺 ${taskSkill}`
     );
 
     // 清理：把剩下的测试记忆（含候选）全删掉，保证 e2e 可重复跑（不污染本地 db）

@@ -16,6 +16,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from typing import List
 
@@ -28,7 +29,17 @@ from backend.memories import MemoryStore
 from backend.resume_store import ResumeStore
 from backend.server import CareerApi, ProfileStore
 from backend.knowledge import GraphStore
-from backend.tasks import MAX_ACTION_CHARS, MAX_SUBMISSION_CHARS, STATUS_AVAILABLE, STATUS_COMPLETED, STATUS_PLANNED, TaskStore
+from backend.tasks import (
+    MAX_ACTION_CHARS,
+    MAX_ATTACHMENT_BYTES,
+    MAX_ATTACHMENT_PREVIEW_CHARS,
+    MAX_ATTACHMENTS_PER_TASK,
+    MAX_SUBMISSION_CHARS,
+    STATUS_AVAILABLE,
+    STATUS_COMPLETED,
+    STATUS_PLANNED,
+    TaskStore,
+)
 
 
 class ScriptedTransport:
@@ -77,6 +88,26 @@ def api(store: GraphStore, memories: MemoryStore) -> CareerApi:
 
 def call(api: CareerApi, method: str, path: str, body=None, query=None, cookies=None):
     return api.handle(method, path, query or {}, body, cookies=cookies)
+
+
+def multipart(field: str, filename: str, data: bytes, boundary: str = "----taskattach") -> tuple:
+    """拼一份 multipart/form-data（与 ``backend/resume.parse_multipart_form`` 对齐）。"""
+    body = b"".join([
+        f"--{boundary}\r\n".encode("utf-8"),
+        f'Content-Disposition: form-data; name="{field}"; filename="{filename}"\r\n'.encode("utf-8"),
+        b"Content-Type: application/octet-stream\r\n\r\n",
+        data,
+        b"\r\n",
+        f"--{boundary}--\r\n".encode("utf-8"),
+    ])
+    return body, f"multipart/form-data; boundary={boundary}"
+
+
+def upload(api: CareerApi, task_id: str, filename: str, data: bytes, cookies=None):
+    """真上传一份附件（走 multipart，不是塞 JSON）。"""
+    raw, content_type = multipart("file", filename, data)
+    return api.handle("POST", f"/api/tasks/{task_id}/attachments", {}, None,
+                      raw=raw, content_type=content_type, cookies=cookies)
 
 
 def first_task(api: CareerApi, cookies=None) -> dict:
@@ -147,8 +178,11 @@ def test_submit_writes_growth_record_and_candidates_only(api: CareerApi, memorie
     task = first_task(api)
     skill_name = task["requiredSkills"][0]["name"] if task["requiredSkills"] else "模型量化与部署"
     submission = f"首先我核对了约束，接着按步骤验证，用到了 {skill_name}，例如实测指标提升 40%；最后写了交付说明。"
+    # 附件得先真上传，之后才能被引用（见「附件」一节）
+    attachment = upload(api, task["taskId"], "交付说明.txt", "交付说明：实测提升 40%。".encode("utf-8"))[1]["data"]["attachment"]
     status, payload = call(api, "POST", f"/api/tasks/{task['taskId']}/runs",
-                           {"action": "先核对约束再逐项验证", "submission": submission, "attachmentIds": ["a1"]})
+                           {"action": "先核对约束再逐项验证", "submission": submission,
+                            "attachmentIds": [attachment["attachmentId"]]})
     assert status == 201
     data = payload["data"]
     assert data["created"] is True
@@ -156,7 +190,7 @@ def test_submit_writes_growth_record_and_candidates_only(api: CareerApi, memorie
     assert run["status"] == "SUBMITTED"
     assert run["runId"].startswith("run_")
     assert run["growthRecordId"] == run["runId"], "运行记录与成长记录用同一个 ID，便于互相指认"
-    assert run["attachmentIds"] == ["a1"]
+    assert run["attachmentIds"] == [attachment["attachmentId"]]
     assert data["growthRecord"]["kind"] == "任务行动"
     assert data["growthRecord"]["id"] == run["runId"]
 
@@ -295,6 +329,139 @@ def test_model_silence_keeps_rule_observations(store: GraphStore, memories: Memo
     assert report["provider"] == "llm"
     assert [item["name"] for item in report["observedAbilities"]] == [skill]
     assert report["coverage"] > 0
+
+
+# ---------------------------------------------------------------------------- 附件
+
+
+def test_attachment_upload_stores_real_bytes_and_reports_what_it_extracted(api: CareerApi) -> None:
+    task = first_task(api)
+    payload_bytes = "交付说明：先核对约束，再逐项验证，实测提升 40%。".encode("utf-8")
+    status, payload = upload(api, task["taskId"], "交付说明.md", payload_bytes)
+    assert status == 201
+    data = payload["data"]
+    attachment = data["attachment"]
+    assert data["created"] is True
+    assert attachment["attachmentId"].startswith("att_")
+    assert attachment["taskId"] == task["taskId"]
+    # 存的是真字节：大小与 sha256 都要对得上，不能是「记了个文件名」
+    assert attachment["byteSize"] == len(payload_bytes)
+    assert attachment["sha256"] == hashlib.sha256(payload_bytes).hexdigest()
+    # 文本类能抽预览，且必须是原文的子串（同样不许改写）
+    assert attachment["kind"] == "text" and attachment["textExtracted"] is True
+    assert attachment["preview"] and attachment["preview"] in payload_bytes.decode("utf-8")
+    assert attachment["previewTruncated"] is False, "短文件不该被截断"
+    # 接口不回传字节本身
+    assert "content" not in attachment
+    # 详情页能列出来
+    detail = call(api, "GET", f"/api/tasks/{task['taskId']}")[1]["data"]
+    assert [item["attachmentId"] for item in detail["attachments"]] == [attachment["attachmentId"]]
+    assert detail["attachmentCount"] == 1
+    # 附件可以单独取回元数据
+    assert call(api, "GET", f"/api/attachments/{attachment['attachmentId']}")[1]["data"]["attachment"]["filename"] == "交付说明.md"
+    # 说明里必须写明「附件不算能力证据」
+    assert any("能力证据" in note for note in data["attachmentNotes"])
+    # 长文件：预览截断要如实标记，而不是悄悄给半截
+    long_text = ("这一段会被截断。" * 400).encode("utf-8")
+    truncated = upload(api, task["taskId"], "长报告.txt", long_text)[1]["data"]["attachment"]
+    assert truncated["previewTruncated"] is True
+    assert len(truncated["preview"]) == MAX_ATTACHMENT_PREVIEW_CHARS
+
+
+def test_attachment_upload_is_idempotent_and_is_honest_about_binary(api: CareerApi) -> None:
+    task = first_task(api)
+    png = b"\x89PNG\r\n\x1a\n" + b"\x00" * 32
+    first = upload(api, task["taskId"], "结果截图.png", png)[1]["data"]
+    assert first["attachment"]["kind"] == "image"
+    assert first["attachment"]["textExtracted"] is False
+    assert first["attachment"]["preview"] is None
+    assert "OCR" in first["attachment"]["note"], "图片必须明说没做 OCR，而不是假装读过"
+
+    again = upload(api, task["taskId"], "结果截图.png", png)[1]["data"]
+    assert again["created"] is False, "同一个文件重复上传按幂等处理"
+    assert again["attachment"]["attachmentId"] == first["attachment"]["attachmentId"]
+    assert again["attachmentCount"] == 1
+
+    # 压缩包这类也收得下，只是明说没抽文字（不拿 415 挡交付物）
+    zip_like = b"PK\x03\x04" + b"\x00" * 16
+    other = upload(api, task["taskId"], "材料.zip", zip_like)[1]["data"]["attachment"]
+    assert other["kind"] == "binary" and other["textExtracted"] is False and other["note"]
+
+
+def test_attachment_upload_rejects_bad_requests(api: CareerApi) -> None:
+    task = first_task(api)
+    endpoint = f"/api/tasks/{task['taskId']}/attachments"
+    # 空体
+    assert api.handle("POST", endpoint, {}, None, raw=b"", content_type="multipart/form-data; boundary=x")[1]["error"]["code"] == "ATTACHMENT_BAD_UPLOAD"
+    # 不是 multipart（拿 JSON 传附件）
+    assert api.handle("POST", endpoint, {}, {"file": "x"}, raw=b'{"file":"x"}', content_type="application/json")[1]["error"]["code"] == "ATTACHMENT_BAD_UPLOAD"
+    # multipart 但没有 file 字段
+    raw, ct = multipart("note", "a.txt", b"hi")
+    assert api.handle("POST", endpoint, {}, None, raw=raw, content_type=ct)[1]["error"]["code"] == "ATTACHMENT_BAD_UPLOAD"
+    # 超限 → 413
+    big = b"x" * (MAX_ATTACHMENT_BYTES + 1)
+    status, payload = upload(api, task["taskId"], "big.txt", big)
+    assert status == 413 and payload["error"]["code"] == "ATTACHMENT_TOO_LARGE"
+    # 任务不存在 → 404（附件永远挂在一条真任务上）
+    assert upload(api, "task_ZZ999_junior_0", "a.txt", b"hi")[0] == 404
+
+
+def test_attachment_count_is_capped(api: CareerApi) -> None:
+    task = first_task(api)
+    for index in range(MAX_ATTACHMENTS_PER_TASK):
+        assert upload(api, task["taskId"], f"f{index}.txt", f"内容 {index}".encode("utf-8"))[0] == 201
+    status, payload = upload(api, task["taskId"], "one-too-many.txt", b"x")
+    assert status == 422 and payload["error"]["code"] == "ATTACHMENT_LIMIT"
+
+
+def test_submit_only_accepts_attachments_of_this_user_and_this_task(api: CareerApi) -> None:
+    owner_task = first_task(api)
+    mine = upload(api, owner_task["taskId"], "我的成果.txt", b"my result")[1]["data"]["attachment"]
+
+    # 不认得的 id
+    status, payload = call(api, "POST", f"/api/tasks/{owner_task['taskId']}/runs",
+                           {"submission": "按步骤做了，实测 40%。", "attachmentIds": ["att_nope"]})
+    assert status == 422 and payload["error"]["code"] == "UNKNOWN_ATTACHMENT"
+    assert payload["error"]["unknownAttachmentIds"] == ["att_nope"]
+
+    # 挂在**别的任务**下的 id 同样不认（否则引用会查不到出处）
+    _, all_tasks = call(api, "GET", "/api/tasks")
+    other_task = next(item for item in all_tasks["data"]["items"] if item["taskId"] != owner_task["taskId"])
+    foreign = upload(api, other_task["taskId"], "别处的成果.txt", b"other")[1]["data"]["attachment"]
+    status, payload = call(api, "POST", f"/api/tasks/{owner_task['taskId']}/runs",
+                           {"submission": "按步骤做了，实测 40%。", "attachmentIds": [foreign["attachmentId"]]})
+    assert status == 422 and payload["error"]["unknownAttachmentIds"] == [foreign["attachmentId"]]
+
+    # 别人的附件：对当前用户就是「不存在」
+    other = {"career_session": "user_0000000000a1"}
+    theirs = upload(api, owner_task["taskId"], "别人的.txt", b"theirs", cookies=other)[1]["data"]["attachment"]
+    assert call(api, "GET", f"/api/attachments/{theirs['attachmentId']}")[0] == 404
+    status, payload = call(api, "POST", f"/api/tasks/{owner_task['taskId']}/runs",
+                           {"submission": "按步骤做了，实测 40%。", "attachmentIds": [theirs["attachmentId"]]})
+    assert status == 422 and payload["error"]["unknownAttachmentIds"] == [theirs["attachmentId"]]
+
+    # 自己的、且挂在同一任务下 → 通过
+    status, payload = call(api, "POST", f"/api/tasks/{owner_task['taskId']}/runs",
+                           {"submission": "按步骤做了，实测 40%。", "attachmentIds": [mine["attachmentId"]]})
+    assert status == 201
+    assert payload["data"]["run"]["attachmentIds"] == [mine["attachmentId"]]
+
+
+def test_attachment_text_is_not_used_as_ability_evidence(api: CareerApi) -> None:
+    """附件的文字**不进能力闸门**：闸门只认用户手写的 action + submission。
+
+    这条是「附件上传」最容易做坏的地方 —— 顺手把附件文本并进评估输入，
+    就等于让用户用一份别人写的文档刷出「已具备能力」的观察。
+    """
+    task = first_task(api)
+    skill = task["requiredSkills"][0]["name"]
+    upload(api, task["taskId"], "报告.txt", f"这份报告里到处都写着 {skill}。".encode("utf-8"))
+
+    run = call(api, "POST", f"/api/tasks/{task['taskId']}/runs",
+               {"submission": "按步骤做了，结果还行。"})[1]["data"]["run"]
+    report = call(api, "POST", f"/api/task-runs/{run['runId']}/evaluate")[1]["data"]["report"]
+    assert report["observedAbilities"] == [], "能力名只出现在附件里，不该被算成观察结果"
+    assert any(item["name"] == skill for item in report["needsVerification"])
 
 
 # ---------------------------------------------------------------------------- 归属
