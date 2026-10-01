@@ -18,8 +18,8 @@
  *   阶段 D  后端 HTTP     真起 python 进程，走契约接口（含 /api/chat 的记忆注入、
  *                         /api/growth-records 的记录→候选、/api/resumes/extract 的
  *                         简历→画像草稿+候选、/api/v1/interviews 的模拟面试、
- *                         /api/v1/cross-role 的跨岗位沟通训练；本阶段显式关掉模型，
- *                         所以钉住的是"没有模型也必须能用"的规则版路径）
+ *                         /api/v1/cross-role 的跨岗位沟通训练、/api/tasks 的任务实践；
+ *                         本阶段显式关掉模型，所以钉住的是"没有模型也必须能用"的规则版路径）
  *   阶段 E  MCP HTTP      真起 mcp/http.ts 进程，三个工具各真调一次
  *   阶段 F  跨端同源      后端 /health、MCP dataVersion、导出文件三方版本与计数必须一致，
  *                         MCP 返回的每条 citation 都要能在导出里指回真实 chunk
@@ -1008,6 +1008,108 @@ async function stageD(context) {
     await httpJson(`${base}/api/v1/interviews/${session.sessionId}`, { method: "DELETE" });
     await httpJson(`${base}/api/v1/cross-role/sessions/${crossSession.sessionId}`, { method: "DELETE" });
 
+    /* ---- ⑩ 任务实践：路径派生任务 → 提交 → 反馈（本阶段显式关模型 → 规则版） ---- */
+    const tasksEndpoint = `${base}/api/tasks`;
+    const taskList = await httpJson(tasksEndpoint);
+    const taskItems = taskList.json?.data?.items ?? [];
+    const taskCounts = taskList.json?.data?.counts ?? {};
+    check(
+      "D",
+      "任务实践：任务清单由路径派生（每条都带阶段与出处）",
+      taskList.status === 200 && taskItems.length > 0
+        && taskItems.every(item => item.title && item.sourceRefs.length > 0 && item.sourcePath.stageName),
+      `${taskItems.length} 条：${taskItems.map(item => `${item.taskId}/${item.status}`).join(",")}`
+    );
+    check(
+      "D",
+      "任务实践：图谱没有的字段如实为 null 且列进 unavailableFields",
+      taskItems.every(item => item.difficulty === null && item.estimatedHours === null && item.unavailableFields.includes("difficulty")),
+      `difficulty=${taskItems[0]?.difficulty} unavailable=${JSON.stringify(taskItems[0]?.unavailableFields)}`
+    );
+    check(
+      "D",
+      "任务实践：第一个未完成阶段的任务是 available",
+      (taskCounts.available ?? 0) > 0 && taskItems.some(item => item.status === "available"),
+      JSON.stringify(taskCounts)
+    );
+    const targetTask = taskItems.find(item => item.status === "available");
+    context.taskId = targetTask.taskId;
+    const taskDetail = await httpJson(`${tasksEndpoint}/${targetTask.taskId}`);
+    check(
+      "D",
+      "任务实践：任务详情带历史提交（此刻为 0）",
+      taskDetail.status === 200 && taskDetail.json?.data?.task?.taskId === targetTask.taskId && taskDetail.json?.data?.runCount === 0,
+      `runCount=${taskDetail.json?.data?.runCount}`
+    );
+
+    const taskSkill = targetTask.requiredSkills[0]?.name ?? "模型量化与部署";
+    const taskSubmission = `首先核对约束，接着按步骤验证，用到了 ${taskSkill}，例如实测指标提升 40%；最后写了交付说明。`;
+    const taskRequestId = `e2e-task-${process.pid}`;
+    const taskSubmit = await httpJson(`${tasksEndpoint}/${targetTask.taskId}/runs`, jsonInit("POST", {
+      action: "先核对约束再逐项验证", submission: taskSubmission, requestId: taskRequestId,
+    }));
+    const taskRun = taskSubmit.json?.data?.run;
+    check(
+      "D",
+      "任务实践：提交 201，且运行记录与成长记录用同一个 ID",
+      taskSubmit.status === 201 && taskRun?.growthRecordId === taskRun?.runId && Boolean(taskRun?.runId),
+      `${taskSubmit.status} ${taskRun?.growthRecordId}`
+    );
+    const taskCandidates = taskSubmit.json?.data?.candidates ?? [];
+    check(
+      "D",
+      "任务实践：提交只产出待确认候选（没有一条 confirmed）",
+      taskCandidates.length > 0 && taskCandidates.every(item => item.status === "candidate"),
+      taskCandidates.map(item => item.status).join(",")
+    );
+    const taskSubmitAgain = await httpJson(`${tasksEndpoint}/${targetTask.taskId}/runs`, jsonInit("POST", {
+      submission: taskSubmission, requestId: taskRequestId,
+    }));
+    check(
+      "D",
+      "任务实践：requestId 幂等（不重复写记录与候选）",
+      taskSubmitAgain.json?.data?.created === false && taskSubmitAgain.json?.data?.run?.runId === taskRun?.runId,
+      `created=${taskSubmitAgain.json?.data?.created}`
+    );
+    const taskEvaluate = await httpJson(`${base}/api/task-runs/${taskRun.runId}/evaluate`, { method: "POST" });
+    const taskReport = taskEvaluate.json?.data?.report;
+    check(
+      "D",
+      "任务实践：评估可达且走规则版（本阶段关了模型）",
+      taskEvaluate.status === 200 && taskReport?.provider === "fallback" && (taskReport.improvements ?? []).length > 0,
+      `${taskEvaluate.status} provider=${taskReport?.provider}`
+    );
+    check(
+      "D",
+      "任务实践：观察到的能力必须引用原文（逐字可查）",
+      (taskReport?.observedAbilities ?? []).length > 0
+        && taskReport.observedAbilities.every(item => item.evidence.length > 0
+          && `先核对约束再逐项验证\n${taskSubmission}`.includes(item.evidence)),
+      (taskReport?.observedAbilities ?? []).map(item => item.name).join(",")
+    );
+    const taskCandidateIds = new Set(taskCandidates.map(item => item.id));
+    const memoriesNow = (await httpJson(mem)).json?.data?.items ?? [];
+    check(
+      "D",
+      "任务实践：评估没有把这次提交的候选改成已确认",
+      taskCandidateIds.size > 0 && memoriesNow.filter(item => taskCandidateIds.has(item.id)).every(item => item.status === "candidate"),
+      memoriesNow.filter(item => taskCandidateIds.has(item.id)).map(item => item.status).join(",")
+    );
+    const taskListAfter = await httpJson(tasksEndpoint);
+    check(
+      "D",
+      "任务实践：提交后该任务状态翻成 completed",
+      (taskListAfter.json?.data?.counts?.completed ?? 0) === 1,
+      JSON.stringify(taskListAfter.json?.data?.counts)
+    );
+    const taskDetailAfter = await httpJson(`${tasksEndpoint}/${targetTask.taskId}`);
+    check(
+      "D",
+      "任务实践：详情里的历史提交带上了评估结果",
+      taskDetailAfter.json?.data?.runCount === 1 && taskDetailAfter.json?.data?.latestFeedback?.provider === "fallback",
+      `runCount=${taskDetailAfter.json?.data?.runCount}`
+    );
+
     // 清理：把剩下的测试记忆（含候选）全删掉，保证 e2e 可重复跑（不污染本地 db）
     const leftover = await httpJson(mem);
     for (const item of leftover.json?.data?.items ?? []) await httpJson(`${mem}/${item.id}`, { method: "DELETE" });
@@ -1250,7 +1352,7 @@ async function stageF(context) {
  * 8. 阶段 G：前端 dev server（可跳过）
  * ------------------------------------------------------------------ */
 
-async function stageG() {
+async function stageG(context) {
   /* vinext dev 打印的是 http://localhost:PORT —— 实测它只监听 localhost 解析到的那个地址
      （本机是 ::1），拿 127.0.0.1 去 fetch 会直接 ECONNREFUSED，所以这里必须用 localhost。 */
   const base = `http://localhost:${FRONTEND_PORT}`;
@@ -1287,8 +1389,9 @@ async function stageG() {
     const actions = await httpJson(`${base}/actions`, { timeoutMs: 90000 });
     check(
       "G",
-      "/actions 是模拟场景入口（不再是「筹备中」占位页）",
-      actions.status === 200 && actions.text.includes("模拟场景") && actions.text.includes("跨岗位沟通训练") && !actions.text.includes("内容筹备中"),
+      "/actions 是模拟场景入口（三条链路都在，不再是「筹备中」占位页）",
+      actions.status === 200 && actions.text.includes("模拟场景") && actions.text.includes("跨岗位沟通训练")
+        && actions.text.includes("任务实践") && !actions.text.includes("内容筹备中"),
       `${actions.status} ${actions.text.length}B`
     );
     const interview = await httpJson(`${base}/mock-interview`, { timeoutMs: 90000 });
@@ -1304,6 +1407,32 @@ async function stageG() {
       "/scenarios/cross-role 返回 200 且 SSR 出岗位选择页",
       crossRole.status === 200 && crossRole.text.includes("跨岗位沟通") && crossRole.text.includes("选择你要扮演的岗位"),
       `${crossRole.status} ${crossRole.text.length}B`
+    );
+
+    /* 任务实践：清单页 SSR 就该出现筛选与口径入口；详情页只要求 200 + 渲染出加载态
+       （数据是客户端取的，SSR 只会给出壳 —— 这里不断言具体任务内容，避免过度断言）。 */
+    const tasksPage = await httpJson(`${base}/actions/tasks`, { timeoutMs: 90000 });
+    check(
+      "G",
+      "/actions/tasks 返回 200 且 SSR 出任务清单页",
+      tasksPage.status === 200 && tasksPage.text.includes("实践任务") && tasksPage.text.includes("现在可做"),
+      `${tasksPage.status} ${tasksPage.text.length}B`
+    );
+    if (context?.taskId) {
+      const taskDetailPage = await httpJson(`${base}/actions/tasks/${encodeURIComponent(context.taskId)}`, { timeoutMs: 90000 });
+      check(
+        "G",
+        `/actions/tasks/<taskId> 返回 200（真任务 ID ${context.taskId} 可路由）`,
+        taskDetailPage.status === 200 && taskDetailPage.text.includes("正在从图谱里取这条任务"),
+        `${taskDetailPage.status} ${taskDetailPage.text.length}B`
+      );
+    }
+    const pathPage = await httpJson(`${base}/path`, { timeoutMs: 90000 });
+    check(
+      "G",
+      "/path 的 SSR 里不再出现「职场模拟将在后续开放」这句过期文案",
+      pathPage.status === 200 && pathPage.text.includes("我的成长路径") && !pathPage.text.includes("职场模拟将在后续开放"),
+      `${pathPage.status} ${pathPage.text.length}B`
     );
 
     /* M1-5 之后 /work-map 与 /catalog 都是真页面：必须 200 且 SSR 出内容，
@@ -1505,7 +1634,7 @@ async function main() {
   await stage("D", "后端 HTTP 端到端（真起 python 进程）", () => stageD(context));
   await stage("E", "MCP HTTP 端到端（真起 mcp/http.ts，三个工具各调一次）", () => stageE(context));
   await stage("F", "跨端同源与引用可追溯（后端 = MCP = 导出）", () => stageF(context));
-  if (WITH_FRONTEND) await stage("G", "前端 dev server（SSR 页面）", stageG);
+  if (WITH_FRONTEND) await stage("G", "前端 dev server（SSR 页面）", () => stageG(context));
   if (WITH_SUITES) await stage("H", "既有测试套件", stageH);
   if (WITH_LLM) await stage("I", "模型接通性（记忆触发器模型版 + 真实对话）", () => stageI(context));
 
