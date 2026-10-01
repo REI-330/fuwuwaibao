@@ -335,12 +335,13 @@
   - **跨岗位沟通训练** `/scenarios/cross-role`（列表 `/scenarios/cross-role/history`、作答与报告同构）；
   - **任务实践** `/actions/tasks`（清单）/ `/actions/tasks/<taskId>`（详情 + 提交 + 反馈）。
 - 三者都请求真接口：`/api/v1/interview-skills`、`/api/v1/interviews*`、`/api/v1/cross-role/*`、
-  `/api/tasks`、`/api/tasks/<id>/runs`、`/api/task-runs/<id>/evaluate`（路由与语义见 `frontend-backend-page-contract.md` §6）。
+  `/api/tasks`、`/api/tasks/<id>/runs`、`/api/tasks/<id>/attachments`、`/api/attachments/<id>`、
+  `/api/task-runs/<id>/evaluate`（路由与语义见 `frontend-backend-page-contract.md` §6）。
 - 前两条移植自队友项目 `career-ai-system`（差异清单见 `模拟面试与跨岗位训练移植说明.md`）；
   **任务实践是本项目自己的设计**，任务全部由路径引擎从图谱 `task --trains--> skill` 边派生。
 - 支持 `?task=<taskId>` 深链：带它进 `/actions` 会直接跳到该任务详情（`/growth-records` 与旧文档都按这个写）。
 
-### 任务实践的口径（三条，都有用例钉住）
+### 任务实践的口径（四条，都有用例钉住）
 
 1. **任务不臆造**：标题/交付要求/执行步骤（图谱考核点）/证据要求/出处都来自图谱；
    难度与**任务级**学时图谱没有 → 返回 `null` 并列出 `unavailableFields`；
@@ -351,6 +352,12 @@
    评估只产出反馈、观察到的能力与「仍需验证」，**不写任何已确认的能力结论**。
    模型自称的观察还要过两道闸（名字必须逐字属于任务要求能力、evidence 必须逐字出现在用户原文里），
    过不了就降级进 `needsVerification`；规则版的观察按名字去重并入，**不被模型替换掉**。
+4. **附件是真文件，但不算能力证据**（2026-10-01 补）：`POST /api/tasks/<id>/attachments` 收
+   `multipart/form-data` 的 `file`，**字节真的存进库**（`task_attachments.content`，5MB / 每条任务 20 个上限），
+   回传 `sha256`、`byteSize` 与「有没有抽出文字」（`textExtracted` + `note`）——
+   与简历解析刻意不同：**收得下就存**（图片、压缩包一样收），只是读不出就明说读不出（图片那句写「不做 OCR」）。
+   提交时 `attachmentIds` 必须是自己在这条任务下真上传过的，否则 422 `UNKNOWN_ATTACHMENT`；
+   **附件里的文字不进评估输入** —— 能力闸门只认用户手写的「行动说明 / 文本成果」。
 
 ### 上一版遗留的准备代码（仍保留，未被这三条链路使用）
 
@@ -360,7 +367,8 @@
 ### 尚未做
 
 - 任务的**编辑/删除/排序**：任务由路径派生，没有「把某条任务改成自定义」的写接口。
-- 附件只接受 `attachmentIds`（引用），**没有文件上传**：文本成果才是这条链路的输入。
+- 附件**只能上传与列出，不能删除**（`task_attachments` 没有 DELETE 路由）；附件也不提供原字节下载
+  ——`GET /api/attachments/<id>` 只回元数据与已抽出的文字预览。文件上传本身已于 2026-10-01 落地。
 - `/growth-records` 空状态 → `/actions` 的引导仍是原样。
 
 ## 10. 成长记录 `/growth-records`

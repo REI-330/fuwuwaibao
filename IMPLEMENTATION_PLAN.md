@@ -235,6 +235,7 @@
 | GBK 崩溃修复 | commit `3f674a1` |
 | 模拟面试 + 跨岗位沟通训练（2026-10-01 从队友 `career-ai-system` 移植） | `backend/interviews.py`、`backend/cross_role.py`、`backend/resume_store.py`、`backend/data/cross_role_questionnaires.json`（32 职业 / 320 题）；路由 `/api/v1/interview-skills`、`/api/v1/interviews*`、`/api/v1/cross-role/*`、`GET /api/resumes`；前端 `/actions` → `/mock-interview`、`/scenarios/cross-role`。**差异与「没搬的部分」见 `模拟面试与跨岗位训练移植说明.md`** |  |
 | 任务实践（2026-10-01，本项目自己的设计） | `backend/tasks.py`（任务由路径引擎从图谱 `task --trains--> skill` 边派生）+ `task_runs` 表；路由 `GET /api/tasks`、`GET /api/tasks/<id>`、`POST /api/tasks/<id>/runs`、`POST /api/task-runs/<id>/evaluate`；前端 `/actions/tasks[/<taskId>]`，`/path` 的任务卡片已接上。**提交只写成长记录 + 待确认候选；评估不落已确认能力**（`test_tasks.py` 11 项钉住） |  |
+| 任务附件真上传（2026-10-01 第五轮） | `task_attachments` 表（**字节存 `content`**）+ `TaskStore` 附件读写；路由 `POST /api/tasks/<id>/attachments`（multipart，5MB / 每条任务 20 个）、`GET /api/attachments/<id>`；提交时 `attachmentIds` 必须是**自己在这条任务下**上传过的（否则 422 `UNKNOWN_ATTACHMENT`）。与简历解析刻意不同：**收得下就存**，读不出就说读不出；**附件文字不进评估输入**（不算能力证据）。前端 `/actions/tasks/<taskId>` 加文件上传与勾选引用（`test_tasks.py` 另 6 项钉住） |  |
 
 ## 5. 待清理的卫生问题（低优先，但影响交接）
 

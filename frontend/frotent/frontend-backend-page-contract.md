@@ -458,7 +458,7 @@
 | 跨岗位选岗 | `/scenarios/cross-role` | `GET /api/v1/cross-role/roles`、`GET/POST /api/v1/cross-role/sessions` |
 | 跨岗位作答 / 报告 / 历史 | `/scenarios/cross-role/<sessionId>[/report]`、`/scenarios/cross-role/history` | `GET .../sessions/<id>`、`POST .../answers`、`POST .../complete`、`GET .../report`、`DELETE .../sessions/<id>` |
 | 任务实践清单 | `/actions/tasks` | `GET /api/tasks`（支持 `?occupation=` / `?stage=`） |
-| 任务实践详情 | `/actions/tasks/<taskId>` | `GET /api/tasks/<id>`、`POST /api/tasks/<id>/runs`、`POST /api/task-runs/<id>/evaluate` |
+| 任务实践详情 | `/actions/tasks/<taskId>` | `GET /api/tasks/<id>`、`POST /api/tasks/<id>/attachments`（multipart）、`POST /api/tasks/<id>/runs`、`POST /api/task-runs/<id>/evaluate`、`GET /api/attachments/<id>` |
 | 任务深链 | `/actions?task=<taskId>` | 前端直接跳到 `/actions/tasks/<taskId>` |
 
 口径要点（由 `backend/tests/test_interviews.py`、`backend/tests/test_cross_role.py` 与 `npm run e2e` 阶段 D/G 钉住）：
@@ -478,13 +478,34 @@
   **难度与任务级学时图谱没有** → `null`，并出现在 `unavailableFields` 里。响应另带 `occupation`、
   `occupationSource`（`query` / `profile` / `catalog`）、`counts`、`notes`、`disclaimer`。
   未知 `status` → 400 `INVALID_STATUS`；未知职业 → 404 `OCCUPATION_NOT_FOUND`。
-- `GET /api/tasks/{taskId}`：任务详情 + `runs`（历史提交，各自带 `feedback`）+ `latestFeedback`；
+- `GET /api/tasks/{taskId}`：任务详情 + `runs`（历史提交，各自带 `feedback`）+ `latestFeedback`
+  + `attachments` / `attachmentCount` / `attachmentNotes`（这条任务下已上传的附件，见下）；
   非法/不存在的 id → 404 `TASK_NOT_FOUND`。
 - `POST /api/tasks/{taskId}/runs`：提交行动。**只写成长记录（`kind='任务行动'`）与待确认候选**，
   与记忆库那条通道同源；`requestId` 幂等（重复提交不重复写记录与候选）。返回 `run`、`growthRecord`、
-  `candidates`、`candidateNote`、`created`。空 `submission` / 超长 / 非法 `attachmentIds` → 422 `INVALID_BODY`。
+  `candidates`、`candidateNote`、`created`。空 `submission` / 超长 / `attachmentIds` 不是数组或超过 20 项
+  → 422 `INVALID_BODY`；`attachmentIds` 里出现**不在这条任务下、属于自己**的 id
+  → 422 `UNKNOWN_ATTACHMENT` 并回 `unknownAttachmentIds`（未知 / 别人的 / 挂在别的任务下的都算，不静默忽略）。
+- `POST /api/tasks/{taskId}/attachments`（**真文件上传**，`multipart/form-data`，字段名 `file`）：
+  字节真的存进 `task_attachments.content`（5MB 上限、每条任务 20 个），返回 `attachment`
+  （`attachmentId` / `filename` / `kind` / `byteSize` / `sha256` / `textExtracted` / `preview` /
+  `previewTruncated` / `note`）、`attachmentCount`、`created`、`limits`、`attachmentNotes`。
+  同一文件重复上传按幂等复用（`created:false`，不产生第二条）。
+  错误：不是 multipart / 没有 `file` 字段 / 空体 → 400 `ATTACHMENT_BAD_UPLOAD`；
+  超过 5MB → 413 `ATTACHMENT_TOO_LARGE`；超过每条任务 20 个 → 422 `ATTACHMENT_LIMIT`；
+  任务不存在 → 404 `TASK_NOT_FOUND`。
+- `GET /api/attachments/{attachmentId}`：附件元数据 + 预览（**不回原始字节**）。
+  别人的 id 一律 404 `ATTACHMENT_NOT_FOUND`。
 - `POST /api/task-runs/{runId}/evaluate`：返回 `report` 与 `run`。**不写任何已确认的能力结论**；
   重复调用返回同一份（幂等）。不是自己的运行记录 → 404 `TASK_RUN_NOT_FOUND`。
+
+附件的口径（三条，都有用例钉住）：
+
+1. **收得下就存，读不出就说读不出**：与简历解析（读不出就 415）刻意不同 —— 附件是交付物存档，
+   图片 / 压缩包 / xlsx 一样收，只是 `textExtracted:false` + `note` 如实说明（图片那句明写「不做 OCR」）。
+2. **附件不算能力证据**：能力闸门只认用户手写的「行动说明 / 文本成果」，附件里的文字不进评估输入 ——
+   否则拿一份别人写的文档就能刷出「已具备能力」的观察。
+3. **引用必须是自己的、且挂在这条任务下**：`attachmentIds` 不再是自由字符串。
 
 提交结构：
 
