@@ -7,7 +7,7 @@
 | `/onboarding` | 建立、预览并确认初始画像 | [`app/(entry)/onboarding/page.tsx`](<../app/(entry)/onboarding/page.tsx>) | — | 手填画像已接入；简历解析为前端演示 |
 |                   |                                      |                                                              |                         |                                           |
 | `/path` | 个性化成长路径、技能差距、路径评估 | [`app/(product)/path/page.tsx`](<../app/(product)/path/page.tsx>) | — | 路径生成已接入，用户能力输入仍为硬编码 |
-| `/actions` | 职场模拟（模拟场景入口） | [`app/(product)/actions/page.tsx`](<../app/(product)/actions/page.tsx>) | `/api/v1/interview-skills`、`/api/v1/interviews*`、`/api/v1/cross-role/*`（在子页面调用） | 入口卡片；两条真链路见 §6 |
+| `/actions` | 职场模拟（模拟场景入口） | [`app/(product)/actions/page.tsx`](<../app/(product)/actions/page.tsx>) | `/api/v1/interview-skills`、`/api/v1/interviews*`、`/api/v1/cross-role/*`、`/api/tasks*`（在子页面调用） | 入口卡片；三条真链路见 §6 |
 | `/growth` | 用户画像总览、岗位推荐和市场信息 | [`app/(product)/growth/page.tsx`](<../app/(product)/growth/page.tsx>) | — | 画像和推荐已接入；部分个人/市场数据为占位 |
 | `/growth-records` | 成长变化、行动结果和证据档案 | [`app/(product)/growth-records/page.tsx`](<../app/(product)/growth-records/page.tsx>) | `ProfileProvider` | 仅前端会话内存，刷新丢失 |
 | `/chat` | 兼容入口，跳转到 `/growth?chat=open` | [`app/(product)/chat/page.tsx`](<../app/(product)/chat/page.tsx>) | 全局 `ChatConversation` | 对话接口已接入；候选画像仅前端内存 |
@@ -457,6 +457,9 @@
 | 面试报告 / 历史 | `/mock-interview/<sessionId>/report`、`/mock-interview/history` | `GET .../report`、`DELETE /api/v1/interviews/<id>` |
 | 跨岗位选岗 | `/scenarios/cross-role` | `GET /api/v1/cross-role/roles`、`GET/POST /api/v1/cross-role/sessions` |
 | 跨岗位作答 / 报告 / 历史 | `/scenarios/cross-role/<sessionId>[/report]`、`/scenarios/cross-role/history` | `GET .../sessions/<id>`、`POST .../answers`、`POST .../complete`、`GET .../report`、`DELETE .../sessions/<id>` |
+| 任务实践清单 | `/actions/tasks` | `GET /api/tasks`（支持 `?occupation=` / `?stage=`） |
+| 任务实践详情 | `/actions/tasks/<taskId>` | `GET /api/tasks/<id>`、`POST /api/tasks/<id>/runs`、`POST /api/task-runs/<id>/evaluate` |
+| 任务深链 | `/actions?task=<taskId>` | 前端直接跳到 `/actions/tasks/<taskId>` |
 
 口径要点（由 `backend/tests/test_interviews.py`、`backend/tests/test_cross_role.py` 与 `npm run e2e` 阶段 D/G 钉住）：
 
@@ -465,48 +468,90 @@
 - `questionSource` 取值 `llm` / `fallback`（队友写死 `tbox`）：出题走 `backend/llm.py`，端点没配或返回不是 JSON 时自动用本地备用题并在 `questionSource` 里如实标注。
 - 跨岗位题库来自队友项目（32 职业 / 320 题），来源与免责声明随 `/api/v1/cross-role/roles` 一起返回，前端原样展示。
 
-上一版遗留的 [`lib/fixtures/product-data.ts`](../lib/fixtures/product-data.ts)、[`lib/client/training-api.ts`](../lib/client/training-api.ts)（任务制演示）仍保留，但**未被这两条链路使用**。
+上一版遗留的 [`lib/fixtures/product-data.ts`](../lib/fixtures/product-data.ts)、[`lib/client/training-api.ts`](../lib/client/training-api.ts)（演示任务）仍保留，但**未被这三条链路使用**。
 
-### 仍未实现：任务制链路
+### 任务实践（2026-10-01 实现，不再是「建议」）
 
-后端将来若要做「任务 → 行动提交 → 评估 → 候选画像」，建议至少提供：
+- `GET /api/tasks?status=planned|available|completed&occupation=<id>`：任务来自路径引擎（图谱 `task --trains--> skill` 边），
+  返回 `taskId`、`title`、`sourcePath`（职业 / 阶段 / 阶段目标 / 周期）、`requiredSkills`、`tools`、
+  `steps`（图谱考核点）、`deliverable`、`evidenceTargets`、`sourceRefs`、`status`；
+  **难度与任务级学时图谱没有** → `null`，并出现在 `unavailableFields` 里。响应另带 `occupation`、
+  `occupationSource`（`query` / `profile` / `catalog`）、`counts`、`notes`、`disclaimer`。
+  未知 `status` → 400 `INVALID_STATUS`；未知职业 → 404 `OCCUPATION_NOT_FOUND`。
+- `GET /api/tasks/{taskId}`：任务详情 + `runs`（历史提交，各自带 `feedback`）+ `latestFeedback`；
+  非法/不存在的 id → 404 `TASK_NOT_FOUND`。
+- `POST /api/tasks/{taskId}/runs`：提交行动。**只写成长记录（`kind='任务行动'`）与待确认候选**，
+  与记忆库那条通道同源；`requestId` 幂等（重复提交不重复写记录与候选）。返回 `run`、`growthRecord`、
+  `candidates`、`candidateNote`、`created`。空 `submission` / 超长 / 非法 `attachmentIds` → 422 `INVALID_BODY`。
+- `POST /api/task-runs/{runId}/evaluate`：返回 `report` 与 `run`。**不写任何已确认的能力结论**；
+  重复调用返回同一份（幂等）。不是自己的运行记录 → 404 `TASK_RUN_NOT_FOUND`。
 
-- `GET /api/tasks?status=planned|available|completed`：返回任务 ID、来源路径、标题、说明、目标能力、执行步骤、预计时长、难度、交付要求、证据要求和状态。
-- `GET /api/tasks/{taskId}`：返回任务详情及历史提交。
-- `POST /api/tasks/{taskId}/runs`：接收用户行动说明、文本成果和附件引用，返回独立的 `taskRunId`、完成时间和待确认的能力观察。
-- `POST /api/task-runs/{taskRunId}/evaluate`：返回反馈、观察到的能力、仍需验证内容以及候选画像，不应自动把单次表现写成已掌握能力。
-
-建议任务提交结构：
+提交结构：
 
 ```json
 {
-  "action": "我先核对硬件约束，再按优先级逐项验证",
+  "action": "先核对硬件约束，再按优先级逐项验证",
   "submission": "定位结论与验证记录……",
-  "attachmentIds": []
+  "attachmentIds": [],
+  "requestId": "客户端生成的 uuid（幂等键）"
 }
 ```
 
-建议返回：
+提交返回（实际形状）：
 
 ```json
 {
   "requestId": "uuid",
   "data": {
     "run": {
-      "id": "run_xxx",
-      "taskId": "task_xxx",
-      "title": "边缘 AI 设备异常定位",
-      "action": "...",
-      "submission": "...",
-      "observedAbilities": ["问题拆解", "工程判断"],
-      "pendingValidation": "还需要真实设备记录验证",
-      "completedAt": "2026-09-11T08:00:00Z"
+      "runId": "run_e1a2c6624b9f",
+      "taskId": "task_AI001_intermediate_0",
+      "title": "写 SPI 总线驱动做一次从机读写",
+      "status": "SUBMITTED",
+      "growthRecordId": "run_e1a2c6624b9f",
+      "candidateIds": ["memory_xxx"],
+      "submittedAt": "2026-10-01T12:00:00Z"
     },
-    "profileCandidates": []
+    "growthRecord": { "id": "run_e1a2c6624b9f", "kind": "任务行动" },
+    "candidates": [{ "id": "memory_xxx", "status": "candidate", "content": "具备或正在学习：…" }],
+    "candidateNote": { "reason": "ok", "message": "…等你确认后才会进入对话与推荐" }
   },
   "error": null
 }
 ```
+
+> 注意：`runId` 与成长记录的 `id` 是**同一个值** —— 两边都拿它当幂等键与互指依据。
+
+评估返回（实际形状）：
+
+```json
+{
+  "requestId": "uuid",
+  "data": {
+    "report": {
+      "runId": "run_xxx",
+      "provider": "llm",
+      "score": 58,
+      "coverage": 1.0,
+      "summary": "提交说明了…",
+      "strengths": ["…"],
+      "improvements": ["…"],
+      "observedAbilities": [
+        { "skillId": "SK090", "name": "微控制器外设驱动", "evidence": "先读手册确认 微控制器外设驱动 的寄存器布局，…" }
+      ],
+      "needsVerification": [{ "kind": "evidence", "name": "…", "why": "需要可核验的交付物" }],
+      "disclaimer": "单次表现不构成已掌握能力；候选观察需你在记忆面板确认后才会进入对话与推荐。"
+    },
+    "run": { "runId": "run_xxx", "status": "EVALUATED" },
+    "taskAvailable": true
+  },
+  "error": null
+}
+```
+
+口径：`observedAbilities[].evidence` 必须是**用户原文（行动说明 + 文本成果）里逐字存在**的片段 ——
+模型给的也要过这道闸，过不了就降级进 `needsVerification`（`kind` ∈ `skill|evidence|detail|steps`）；
+规则版自己找到的观察按名字去重并入，**不会被模型替换掉**。
 
 ## 7. `/growth` 用户画像与岗位市场动态
 

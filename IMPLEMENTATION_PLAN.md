@@ -233,7 +233,8 @@
 | 大典桥接证据（M2-6，2026-09-30） | `knowledge/pipeline/import/bridge-coverage.mjs`（只读、离线）：覆盖率 4/1676 = 0.24%；「按名字机械对齐」命中 0/1/1 → 结论「只能人工裁定」 |
 | 交接文档 | `项目架构与技术文档.md`、`PAGE_FUNCTION_MAP.md`、前后端页面契约 |
 | GBK 崩溃修复 | commit `3f674a1` |
-| 模拟面试 + 跨岗位沟通训练（2026-10-01 从队友 `career-ai-system` 移植） | `backend/interviews.py`、`backend/cross_role.py`、`backend/resume_store.py`、`backend/data/cross_role_questionnaires.json`（32 职业 / 320 题）；路由 `/api/v1/interview-skills`、`/api/v1/interviews*`、`/api/v1/cross-role/*`、`GET /api/resumes`；前端 `/actions` → `/mock-interview`、`/scenarios/cross-role`。**差异与「没搬的部分」见 `模拟面试与跨岗位训练移植说明.md`**；pytest 175、e2e 187/187 全绿 |
+| 模拟面试 + 跨岗位沟通训练（2026-10-01 从队友 `career-ai-system` 移植） | `backend/interviews.py`、`backend/cross_role.py`、`backend/resume_store.py`、`backend/data/cross_role_questionnaires.json`（32 职业 / 320 题）；路由 `/api/v1/interview-skills`、`/api/v1/interviews*`、`/api/v1/cross-role/*`、`GET /api/resumes`；前端 `/actions` → `/mock-interview`、`/scenarios/cross-role`。**差异与「没搬的部分」见 `模拟面试与跨岗位训练移植说明.md`** |  |
+| 任务实践（2026-10-01，本项目自己的设计） | `backend/tasks.py`（任务由路径引擎从图谱 `task --trains--> skill` 边派生）+ `task_runs` 表；路由 `GET /api/tasks`、`GET /api/tasks/<id>`、`POST /api/tasks/<id>/runs`、`POST /api/task-runs/<id>/evaluate`；前端 `/actions/tasks[/<taskId>]`，`/path` 的任务卡片已接上。**提交只写成长记录 + 待确认候选；评估不落已确认能力**（`test_tasks.py` 11 项钉住） |  |
 
 ## 5. 待清理的卫生问题（低优先，但影响交接）
 

@@ -330,34 +330,38 @@
 
 ### 当前真实行为（2026-10-01 起不再是占位页）
 
-- `/actions` 是**模拟场景入口**，两张卡片分别指向两个真链路：
+- `/actions` 是**模拟场景入口**，三张卡片分别指向三条真链路：
   - **模拟面试** `/mock-interview`（列表 `/mock-interview/history`、作答 `/mock-interview/<id>`、报告 `/mock-interview/<id>/report`）；
-  - **跨岗位沟通训练** `/scenarios/cross-role`（列表 `/scenarios/cross-role/history`、作答与报告同构）。
-- 两端都请求真接口：`/api/v1/interview-skills`、`/api/v1/interviews*`、`/api/v1/cross-role/roles`、`/api/v1/cross-role/sessions*`（路由与语义见 `frontend-backend-page-contract.md` §6）。
-- 移植自队友项目 `career-ai-system`；差异清单见 `模拟面试与跨岗位训练移植说明.md`。
+  - **跨岗位沟通训练** `/scenarios/cross-role`（列表 `/scenarios/cross-role/history`、作答与报告同构）；
+  - **任务实践** `/actions/tasks`（清单）/ `/actions/tasks/<taskId>`（详情 + 提交 + 反馈）。
+- 三者都请求真接口：`/api/v1/interview-skills`、`/api/v1/interviews*`、`/api/v1/cross-role/*`、
+  `/api/tasks`、`/api/tasks/<id>/runs`、`/api/task-runs/<id>/evaluate`（路由与语义见 `frontend-backend-page-contract.md` §6）。
+- 前两条移植自队友项目 `career-ai-system`（差异清单见 `模拟面试与跨岗位训练移植说明.md`）；
+  **任务实践是本项目自己的设计**，任务全部由路径引擎从图谱 `task --trains--> skill` 边派生。
+- 支持 `?task=<taskId>` 深链：带它进 `/actions` 会直接跳到该任务详情（`/growth-records` 与旧文档都按这个写）。
 
-### 上一版遗留的准备代码（仍保留，未被这两条链路使用）
+### 任务实践的口径（三条，都有用例钉住）
 
-- `training-api.ts` 中有 `evaluateTraining(choice, taskId)`，仍属客户端演示函数。
-- `product-data.ts` 中有历史演示任务和职业数据。
+1. **任务不臆造**：标题/交付要求/执行步骤（图谱考核点）/证据要求/出处都来自图谱；
+   难度与**任务级**学时图谱没有 → 返回 `null` 并列出 `unavailableFields`；
+   `estimatedHours` 只给**阶段级**投入，并在响应里说明它不是这一条任务的耗时。
+2. **状态由结构决定**：`completed` = 提交过；`available` = 第一个还没做完的阶段；
+   `planned` = 更后面的阶段。职业来源（`?occupation=` / 画像候选 / 目录第一个）回传 `occupationSource`，不静默回落。
+3. **候选不落已确认**：提交只写「成长记录 + 待确认候选」（复用记忆库那条通道，`requestId` 幂等）；
+   评估只产出反馈、观察到的能力与「仍需验证」，**不写任何已确认的能力结论**。
+   模型自称的观察还要过两道闸（名字必须逐字属于任务要求能力、evidence 必须逐字出现在用户原文里），
+   过不了就降级进 `needsVerification`；规则版的观察按名字去重并入，**不被模型替换掉**。
+
+### 上一版遗留的准备代码（仍保留，未被这三条链路使用）
+
+- `training-api.ts` 中的 `evaluateTraining(choice, taskId)`、`product-data.ts` 中的演示任务：仍是客户端演示函数，
+  与上面这条真链路无关（真链路走 `/api/tasks*`）。
 
 ### 尚未做
 
-- 「任务 → 行动提交 → 后端评估 → 候选画像」这条**任务制**链路仍未实现；`/path` 安排的任务还没接到 `/actions`。
-- `/growth-records` 空状态 → `/actions`。
-
-### 前端代码入口
-
-- 页面：[app/(product)/actions/page.tsx](frontend/frotent/frontend1/app/(product)/actions/page.tsx)
-- 当前演示 API：[lib/client/training-api.ts](frontend/frotent/frontend1/lib/client/training-api.ts)
-- 演示数据：[lib/fixtures/product-data.ts](frontend/frotent/frontend1/lib/fixtures/product-data.ts)
-
-### 预期接口
-
-- `GET /api/tasks?status=...`
-- `GET /api/tasks/{taskId}`
-- `POST /api/tasks/{taskId}/runs`
-- `POST /api/task-runs/{taskRunId}/evaluate`
+- 任务的**编辑/删除/排序**：任务由路径派生，没有「把某条任务改成自定义」的写接口。
+- 附件只接受 `attachmentIds`（引用），**没有文件上传**：文本成果才是这条链路的输入。
+- `/growth-records` 空状态 → `/actions` 的引导仍是原样。
 
 ## 10. 成长记录 `/growth-records`
 
