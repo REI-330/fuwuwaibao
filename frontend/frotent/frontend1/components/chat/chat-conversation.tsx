@@ -2,19 +2,19 @@
 
 import Link from "next/link";
 import { useChat } from "./chat-context";
-import { FormEvent, useState } from "react";
-import { sendChatMessage } from "../../lib/client/chat-api";
+import { FormEvent, useEffect, useState } from "react";
+import { getChatSession, listChatSessions, sendChatMessage } from "../../lib/client/chat-api";
 import { XiangxinMascot, type MascotState } from "../../components/brand/xiangxin-mascot";
 import { CandidateProfileCard } from "../../components/profile/candidate-profile-card";
 import type { ProfileCandidate } from "../../types/view-models/dynamic-profile";
 
 type Message = { role: "user" | "ai"; text: string };
 
+const GREETING: Message = { role: "ai", text: "你好，我是向新职业成长伙伴。你现在最想确认的是职业方向、能力差距，还是下一步该做什么？" };
+
 export function ChatConversation() {
   const { topic, closeChat } = useChat();
-  const [messages, setMessages] = useState<Message[]>([
-    { role: "ai", text: "你好，我是向新职业成长伙伴。你现在最想确认的是职业方向、能力差距，还是下一步该做什么？" },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([GREETING]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [conversationId, setConversationId] = useState<string>();
@@ -23,6 +23,33 @@ export function ChatConversation() {
   /* 本轮回答到底有没有用上模型、注入了哪几条记忆 —— 后端逐轮回传，界面如实展示。
      与记忆管理面板的「注入预览」是同一条链路：预览看的是"将要"，这里看的是"实际"。 */
   const [replyNote, setReplyNote] = useState("");
+
+  /* 会话与消息已经落库，所以打开侧栏先把最近一段读回来 —— 刷新页面不再从零开始。 */
+  useEffect(() => {
+    let active = true;
+    const handle = setTimeout(() => {
+      listChatSessions(1)
+        .then(page => (page.items[0] ? getChatSession(page.items[0].sessionId) : null))
+        .then(detail => {
+          if (!active || !detail) return;
+          setConversationId(detail.session.sessionId);
+          const restored = detail.messages.map(item => ({
+            role: item.role === "user" ? "user" as const : "ai" as const,
+            text: item.text,
+          }));
+          if (restored.length) setMessages([GREETING, ...restored]);
+        })
+        .catch(() => { /* 读不到历史不影响继续聊 */ });
+    }, 0);
+    return () => { active = false; clearTimeout(handle); };
+  }, []);
+
+  function startNew() {
+    setConversationId(undefined);
+    setMessages([GREETING]);
+    setCandidates([]);
+    setReplyNote("");
+  }
 
   async function submit(event: FormEvent) {
     event.preventDefault();
@@ -54,7 +81,7 @@ export function ChatConversation() {
   return (
     <div className="xn-drawer-conversation">
       <section className="xn-chat-column">
-        <div className="xn-drawer-welcome"><XiangxinMascot size={90} state={loading ? "thinking" : mascotState} intensity="soft" /><p>今天想先聊聊什么？<small>对话与候选确认在这里完成，关闭侧栏后仍保留。</small></p></div>{topic && <button className="xn-topic-chip" onClick={() => setInput(topic)}>围绕当前内容提问：{topic}</button>}
+        <div className="xn-drawer-welcome"><XiangxinMascot size={90} state={loading ? "thinking" : mascotState} intensity="soft" /><p>今天想先聊聊什么？<small>对话存在服务端：刷新页面或重启后端都不会丢。</small></p></div>{topic && <button className="xn-topic-chip" onClick={() => setInput(topic)}>围绕当前内容提问：{topic}</button>}<button type="button" className="xn-text-btn" onClick={startNew}>开一段新对话</button>
         <div className="xn-card xn-chat-card">
           <div className="xn-messages">
             {messages.map((message, index) => (

@@ -23,14 +23,18 @@
 
 from __future__ import annotations
 
+import json
+import os
+import sqlite3
 import threading
 import time
 import uuid
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from .knowledge import OCCUPATION, SKILL, GraphStore, code_of, normalize
 from .llm import DEFAULT_MAX_TOKENS, LlmClient, LlmError
-from .memories import MemoryStore
+from .memories import DEFAULT_DB_ENV, MemoryStore
 
 PROMPT_TEMPLATE = "career-chat/v1"
 
@@ -57,6 +61,186 @@ RULE_MARKER = "（规则版回答 · 本轮未接模型，只依据图谱事实�
 # 一次对话留在上下文里的轮数（1 轮 = 用户 + 助手各一条）
 HISTORY_TURNS = 6
 MAX_CONVERSATIONS = 200
+
+# 会话列表一次最多回多少条
+MAX_SESSION_PAGE = 100
+
+# 会话与消息**落库**（与记忆库同一个 sqlite）。此前它们只在 `ChatService._conversations`
+# 这个进程内字典里 —— 后端一重启，聊过什么就没了。
+_CHAT_SCHEMA = """
+CREATE TABLE IF NOT EXISTS chat_sessions (
+    session_id TEXT PRIMARY KEY,
+    user_id    TEXT NOT NULL,
+    title      TEXT NOT NULL DEFAULT '',
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_chat_sessions_user
+    ON chat_sessions(user_id, updated_at DESC);
+
+CREATE TABLE IF NOT EXISTS chat_messages (
+    message_id   TEXT PRIMARY KEY,
+    session_id   TEXT NOT NULL,
+    user_id      TEXT NOT NULL,
+    role         TEXT NOT NULL,
+    text         TEXT NOT NULL,
+    provider     TEXT,
+    injected_json TEXT,
+    created_at   TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_chat_messages_session
+    ON chat_messages(session_id, created_at);
+"""
+
+
+def _now() -> str:
+    from datetime import datetime, timezone
+
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+class ChatStore:
+    """会话与消息的读写。归属校验一律走 `user_id`：别人的会话当作不存在。"""
+
+    def __init__(self, path: Optional[str] = None, now: Optional[Any] = None) -> None:
+        self.path = path or os.environ.get(DEFAULT_DB_ENV) or str(Path(__file__).resolve().parent / "career.db")
+        self._now = now or _now
+        self._lock = threading.RLock()
+        self._conn = sqlite3.connect(self.path, check_same_thread=False)
+        self._conn.row_factory = sqlite3.Row
+        with self._lock:
+            self._conn.executescript(_CHAT_SCHEMA)
+            self._conn.commit()
+
+    def close(self) -> None:
+        with self._lock:
+            self._conn.close()
+
+    @staticmethod
+    def _row_to_message(row: sqlite3.Row) -> Dict[str, Any]:
+        try:
+            injected = json.loads(row["injected_json"]) if row["injected_json"] else None
+        except ValueError:
+            injected = None
+        return {
+            "messageId": row["message_id"],
+            "sessionId": row["session_id"],
+            "role": row["role"],
+            "text": row["text"],
+            "provider": row["provider"],
+            "injected": injected,
+            "createdAt": row["created_at"],
+        }
+
+    def ensure_session(self, user_id: str, session_id: str, title: str = "") -> Dict[str, Any]:
+        """建会话（存在就只更新 updated_at；标题只在空的时候补一次，不覆盖用户聊出来的上下文）。"""
+        now = self._now()
+        with self._lock:
+            row = self._conn.execute(
+                "SELECT * FROM chat_sessions WHERE session_id = ? AND user_id = ?", (session_id, user_id)
+            ).fetchone()
+            if row is None:
+                self._conn.execute(
+                    "INSERT INTO chat_sessions (session_id, user_id, title, created_at, updated_at) VALUES (?,?,?,?,?)",
+                    (session_id, user_id, str(title or "")[:120], now, now),
+                )
+            else:
+                self._conn.execute(
+                    "UPDATE chat_sessions SET updated_at = ?, title = CASE WHEN title = '' THEN ? ELSE title END"
+                    " WHERE session_id = ? AND user_id = ?",
+                    (now, str(title or "")[:120], session_id, user_id),
+                )
+            self._conn.commit()
+            row = self._conn.execute(
+                "SELECT * FROM chat_sessions WHERE session_id = ? AND user_id = ?", (session_id, user_id)
+            ).fetchone()
+        return {
+            "sessionId": row["session_id"],
+            "title": row["title"],
+            "createdAt": row["created_at"],
+            "updatedAt": row["updated_at"],
+        }
+
+    def append(self, user_id: str, session_id: str, role: str, text: str,
+               provider: Optional[str] = None, injected: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        message_id = f"chatmsg_{uuid.uuid4().hex[:12]}"
+        now = self._now()
+        with self._lock:
+            self._conn.execute(
+                "INSERT INTO chat_messages (message_id, session_id, user_id, role, text, provider,"
+                " injected_json, created_at) VALUES (?,?,?,?,?,?,?,?)",
+                (message_id, session_id, user_id, role, text, provider,
+                 json.dumps(injected, ensure_ascii=False) if injected else None, now),
+            )
+            self._conn.execute(
+                "UPDATE chat_sessions SET updated_at = ? WHERE session_id = ? AND user_id = ?",
+                (now, session_id, user_id),
+            )
+            self._conn.commit()
+            row = self._conn.execute("SELECT * FROM chat_messages WHERE message_id = ?", (message_id,)).fetchone()
+        return self._row_to_message(row)
+
+    def messages(self, user_id: str, session_id: str, limit: Optional[int] = None) -> List[Dict[str, Any]]:
+        # 用 `rowid`（插入顺序）兜底：`created_at` 只到秒，同一轮的两条消息时间戳会完全相同，
+        # 拿随机 message_id 当兜底键会让「用户 → 助手」的顺序随机翻转。
+        if limit:
+            with self._lock:
+                rows = self._conn.execute(
+                    "SELECT * FROM chat_messages WHERE user_id = ? AND session_id = ?"
+                    " ORDER BY created_at DESC, rowid DESC LIMIT ?",
+                    (user_id, session_id, max(1, int(limit))),
+                ).fetchall()
+            return [self._row_to_message(row) for row in reversed(rows)]
+        with self._lock:
+            rows = self._conn.execute(
+                "SELECT * FROM chat_messages WHERE user_id = ? AND session_id = ? ORDER BY created_at, rowid",
+                (user_id, session_id),
+            ).fetchall()
+        return [self._row_to_message(row) for row in rows]
+
+    def list_sessions(self, user_id: str, limit: int = 50) -> List[Dict[str, Any]]:
+        with self._lock:
+            rows = self._conn.execute(
+                "SELECT s.*, (SELECT COUNT(*) FROM chat_messages m WHERE m.session_id = s.session_id"
+                " AND m.user_id = s.user_id) AS message_count"
+                " FROM chat_sessions s WHERE s.user_id = ? ORDER BY s.updated_at DESC LIMIT ?",
+                (user_id, max(1, min(int(limit), MAX_SESSION_PAGE))),
+            ).fetchall()
+        return [{
+            "sessionId": row["session_id"],
+            "title": row["title"],
+            "messageCount": int(row["message_count"]),
+            "createdAt": row["created_at"],
+            "updatedAt": row["updated_at"],
+        } for row in rows]
+
+    def get_session(self, user_id: str, session_id: str) -> Optional[Dict[str, Any]]:
+        with self._lock:
+            row = self._conn.execute(
+                "SELECT * FROM chat_sessions WHERE user_id = ? AND session_id = ?", (user_id, session_id)
+            ).fetchone()
+        if row is None:
+            return None
+        return {"sessionId": row["session_id"], "title": row["title"],
+                "createdAt": row["created_at"], "updatedAt": row["updated_at"]}
+
+    def delete_session(self, user_id: str, session_id: str) -> Optional[Dict[str, Any]]:
+        with self._lock:
+            row = self._conn.execute(
+                "SELECT * FROM chat_sessions WHERE user_id = ? AND session_id = ?", (user_id, session_id)
+            ).fetchone()
+            if row is None:
+                return None
+            cursor = self._conn.execute(
+                "DELETE FROM chat_messages WHERE user_id = ? AND session_id = ?", (user_id, session_id)
+            )
+            removed = cursor.rowcount
+            self._conn.execute(
+                "DELETE FROM chat_sessions WHERE user_id = ? AND session_id = ?", (user_id, session_id)
+            )
+            self._conn.commit()
+        return {"deleted": session_id, "removedMessages": removed}
+
 
 
 class UnknownChatGeneratorError(ValueError):
@@ -122,6 +306,7 @@ class ChatService:
         profiles: Any,
         client: Optional[LlmClient] = None,
         *,
+        sessions: Optional["ChatStore"] = None,
         max_tokens: int = DEFAULT_MAX_TOKENS,
         timeout: int = 120,
         attempts: int = 2,
@@ -132,6 +317,8 @@ class ChatService:
         self.profiles = profiles
         # 默认复用记忆库那只客户端：产品侧只有一处配置（`CAREER_LLM_*` > `DEEPEVAL_*` > .env）
         self.client = client if client is not None else memories.llm
+        # 会话落库（传了就用库，没传就是旧的进程内行为 —— 单测仍可只测组装逻辑）
+        self.sessions = sessions
         self.max_tokens = max_tokens
         # 对话是交互式调用：超时与重试都给紧一点，失败就降级出规则版答案，不把用户挂在页面上
         self.timeout = timeout
@@ -139,14 +326,25 @@ class ChatService:
         self.temperature = temperature
         self._lock = threading.RLock()
         self._conversations: Dict[str, List[Dict[str, str]]] = {}
+        self._history_user = ""
         self.last_note: Dict[str, Any] = {}
 
     # ------------------------------------------------------------------ 会话表
-    def history(self, conversation_id: str) -> List[Dict[str, str]]:
+    def history(self, conversation_id: str, user_id: str = "") -> List[Dict[str, str]]:
+        """最近几轮对话。传了会话库就以库为准（后端重启后还在），否则用进程内那份。"""
+        if self.sessions is not None:
+            return [
+                {"role": row["role"], "text": row["text"]}
+                for row in self.sessions.messages(user_id, conversation_id, limit=HISTORY_TURNS * 2)
+            ]
         with self._lock:
             return list(self._conversations.get(conversation_id, []))
 
-    def _append(self, conversation_id: str, role: str, text: str) -> None:
+    def _append(self, conversation_id: str, role: str, text: str, user_id: str = "",
+                provider: Optional[str] = None, injected: Optional[Dict[str, Any]] = None) -> None:
+        if self.sessions is not None and user_id:
+            self.sessions.append(user_id, conversation_id, role, text, provider=provider, injected=injected)
+            return
         with self._lock:
             turns = self._conversations.setdefault(conversation_id, [])
             turns.append({"role": role, "text": text})
@@ -162,7 +360,7 @@ class ChatService:
 
     def _history_text(self, conversation_id: str) -> str:
         lines = []
-        for turn in self.history(conversation_id):
+        for turn in self.history(conversation_id, self._history_user):
             speaker = "用户" if turn["role"] == "user" else "向新"
             lines.append(f"{speaker}：{turn['text']}")
         return "\n".join(lines)
@@ -181,6 +379,10 @@ class ChatService:
             raise UnknownChatGeneratorError(f"未知的生成器：{generator}；可选 {', '.join(GENERATORS)}")
 
         conversation = str(conversation_id or "").strip() or f"conversation_{uuid.uuid4().hex[:12]}"
+        # 会话先落库（第一条用户消息当标题），这样刷新/重启之后还能找回这段对话
+        self._history_user = user_id
+        if self.sessions is not None:
+            self.sessions.ensure_session(user_id, conversation, title=text)
 
         # ① 召回：检索 query 就是用户原话，逐字节不改写
         context = self.memories.build_context(user_id, text)
@@ -231,26 +433,27 @@ class ChatService:
             note["used"] = PROVIDER_RULE
         note["elapsedMs"] = int((time.time() - started) * 1000)
 
-        self._append(conversation, "user", text)
-        self._append(conversation, "assistant", answer)
+        self._append(conversation, "user", text, user_id)
+        injected_payload = {
+            "query": text,  # 检索用的原始提问（只去掉首尾空白，不做任何改写/扩写）
+            "count": context.get("count", 0),
+            "memoryIds": context.get("memoryIds", []),
+            "memoryHash": context.get("memoryHash", ""),
+            "persona": context.get("persona", []),
+            "recalled": context.get("recalled", []),
+            "summaryText": memory_text,
+            "prefixBytes": len(prompt.encode("utf-8")),
+            "memoryBlockBytes": len(memory_text.encode("utf-8")),
+            "promptTemplate": PROMPT_TEMPLATE,
+        }
+        self._append(conversation, "assistant", answer, user_id, provider=note["used"], injected=injected_payload)
         self.last_note = note
 
         return {
             "message": answer,
             "conversationId": conversation,
             "provider": note["used"],
-            "injected": {
-                "query": text,  # 检索用的原始提问（只去掉首尾空白，不做任何改写/扩写）
-                "count": context.get("count", 0),
-                "memoryIds": context.get("memoryIds", []),
-                "memoryHash": context.get("memoryHash", ""),
-                "persona": context.get("persona", []),
-                "recalled": context.get("recalled", []),
-                "summaryText": memory_text,
-                "prefixBytes": len(prompt.encode("utf-8")),
-                "memoryBlockBytes": len(memory_text.encode("utf-8")),
-                "promptTemplate": PROMPT_TEMPLATE,
-            },
+            "injected": injected_payload,
             "llm": note,
             "graph": {"recommended": rows[0]["occupation_id"] if rows else None},
         }

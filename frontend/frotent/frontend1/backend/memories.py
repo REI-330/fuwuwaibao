@@ -1263,7 +1263,7 @@ class MemoryStore:
         return [self._row_to_item(row) for row in rows]
 
     def list_growth_records(self, user_id: str, kind: Optional[str] = None,
-                            limit: Optional[int] = None) -> List[Dict[str, Any]]:
+                            limit: Optional[int] = None, offset: Optional[int] = None) -> List[Dict[str, Any]]:
         if kind is not None and kind not in VALID_GROWTH_KINDS:
             raise ValueError(f"未知的记录类别：{kind}")
         sql = "SELECT * FROM growth_records WHERE user_id = ?"
@@ -1271,16 +1271,32 @@ class MemoryStore:
         if kind:
             sql += " AND kind = ?"
             params.append(kind)
+        # 排序里带 record_id 兜底，所以 OFFSET 分页是稳定的（不会因为同一时刻多条而错位）
         sql += " ORDER BY occurred_at DESC, created_at DESC, record_id"
         if limit:
             sql += " LIMIT ?"
             params.append(max(1, int(limit)))
+            if offset:
+                sql += " OFFSET ?"
+                params.append(max(0, int(offset)))
         records = []
         for row in self._rows(sql, params):
             record = self._row_to_record(row)
             record["candidates"] = self.candidates_for_record(user_id, record["id"])
             records.append(record)
         return records
+
+    def count_growth_records(self, user_id: str, kind: Optional[str] = None) -> int:
+        """总条数（分页要用来算 hasMore / nextCursor）。"""
+        if kind is not None and kind not in VALID_GROWTH_KINDS:
+            raise ValueError(f"未知的记录类别：{kind}")
+        sql = "SELECT COUNT(*) AS total FROM growth_records WHERE user_id = ?"
+        params: List[Any] = [user_id]
+        if kind:
+            sql += " AND kind = ?"
+            params.append(kind)
+        rows = self._rows(sql, params)
+        return int(rows[0]["total"]) if rows else 0
 
     def get_growth_record(self, user_id: str, record_id: str) -> Optional[Dict[str, Any]]:
         rows = self._rows("SELECT * FROM growth_records WHERE user_id = ? AND record_id = ?", [user_id, record_id])

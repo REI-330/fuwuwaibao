@@ -31,6 +31,60 @@ export type ChatReply = {
   llm?: ChatLlmNote;
 };
 
+export type ChatStoredMessage = {
+  messageId: string;
+  sessionId: string;
+  role: "user" | "assistant";
+  text: string;
+  provider: string | null;
+  injected: ChatInjection | null;
+  createdAt: string;
+};
+
+export type ChatSessionSummary = {
+  sessionId: string;
+  title: string;
+  messageCount: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ChatSessionPage = {
+  items: ChatSessionSummary[];
+  count: number;
+  /** false = 这次运行没挂会话库（只有单测会这样），不是「没有历史」 */
+  persisted: boolean;
+  note?: string;
+};
+
+export type ChatSessionDetail = {
+  session: ChatSessionSummary;
+  messages: ChatStoredMessage[];
+};
+
+async function readChat<T>(response: Response): Promise<T> {
+  const body = await response.json() as { data?: T; error?: { code?: string; message?: string } };
+  if (!response.ok || !body.data) {
+    throw new Error(body.error?.message || "会话请求失败");
+  }
+  return body.data;
+}
+
+/** 会话与消息落库（2026-10-01 起）：刷新或重启后端都不丢。 */
+export async function listChatSessions(limit = 20): Promise<ChatSessionPage> {
+  return readChat<ChatSessionPage>(await fetch(apiUrl(`/api/chat/sessions?limit=${limit}`), {
+    credentials: "include",
+    cache: "no-store",
+  }));
+}
+
+export async function getChatSession(sessionId: string): Promise<ChatSessionDetail> {
+  return readChat<ChatSessionDetail>(await fetch(apiUrl(`/api/chat/sessions/${encodeURIComponent(sessionId)}`), {
+    credentials: "include",
+    cache: "no-store",
+  }));
+}
+
 export async function sendChatMessage(
   message: string,
   conversationId?: string,

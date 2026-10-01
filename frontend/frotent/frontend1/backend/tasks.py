@@ -82,6 +82,9 @@ ATTACHMENT_NOTES = [
     ATTACHMENT_EVIDENCE_SCOPE,
 ]
 
+# 任务个人覆盖层：用户能写的只有「备注」，长度照 `MAX_ACTION_CHARS` 的一半给。
+MAX_TASK_NOTE_CHARS = 1000
+
 STAGE_ORDER = {stage: index for index, stage in enumerate(STAGES)}
 
 # 状态口径（写死在这里，前端与文档照这个说）：
@@ -147,6 +150,18 @@ CREATE UNIQUE INDEX IF NOT EXISTS uq_task_attachments_dedupe
     ON task_attachments(user_id, task_id, sha256, filename);
 CREATE INDEX IF NOT EXISTS idx_task_attachments_user_task
     ON task_attachments(user_id, task_id, created_at DESC);
+
+-- 任务覆盖层（2026-10-01）：任务本身由图谱派生、**不允许用户改写**；
+-- 用户能改的只是自己的视图：备注 / 隐藏 / 顺序。三者都只落在这张表里。
+CREATE TABLE IF NOT EXISTS task_overrides (
+    user_id    TEXT NOT NULL,
+    task_id    TEXT NOT NULL,
+    hidden     INTEGER NOT NULL DEFAULT 0,
+    note       TEXT NOT NULL DEFAULT '',
+    position   INTEGER,
+    updated_at TEXT NOT NULL,
+    PRIMARY KEY (user_id, task_id)
+);
 """
 
 
@@ -174,13 +189,19 @@ def parse_task_id(task_id: str) -> Tuple[str, str, int]:
 # ---------------------------------------------------------------------------- 任务派生
 
 
-def derive_tasks(path_result: Dict[str, Any], submitted_task_ids: Optional[set] = None) -> List[Dict[str, Any]]:
+def derive_tasks(path_result: Dict[str, Any], submitted_task_ids: Optional[set] = None,
+                 dismissed_task_ids: Optional[set] = None) -> List[Dict[str, Any]]:
     """把路径引擎的输出摊平成任务清单（纯函数，便于单测）。
 
     `submitted_task_ids` 是「该用户已经提交过的 taskId」集合，用来算状态；
     不传就全部按「没提交过」处理。
+
+    `dismissed_task_ids` 是被用户**隐藏**（从自己的计划里拿掉）的 taskId。
+    它们不参与「哪个阶段现在可做」的判定（用户已经明确不打算做那条了），
+    且自身状态按 `planned` 报 —— 也就是说：隐藏不会把一条任务变成「已完成」。
     """
     submitted = submitted_task_ids or set()
+    dismissed = dismissed_task_ids or set()
     occupation_id = str(path_result.get("occupation_id") or "")
     target_job = str(path_result.get("target_job") or "")
     stages = [stage for stage in (path_result.get("path") or []) if isinstance(stage, dict)]
@@ -235,11 +256,12 @@ def derive_tasks(path_result: Dict[str, Any], submitted_task_ids: Optional[set] 
                 "_submitted": task_id in submitted,
             })
 
-    # 第一个「有任务且没全做完」的阶段 = 当前可做阶段
+    # 第一个「有任务且没全做完」的阶段 = 当前可做阶段；被隐藏的任务不算「要做的事」
     available_stage = ""
     for stage in stages:
         stage_key = str(stage.get("stage") or "")
-        stage_tasks = [item for item in flattened if item["sourcePath"]["stage"] == stage_key]
+        stage_tasks = [item for item in flattened
+                       if item["sourcePath"]["stage"] == stage_key and item["taskId"] not in dismissed]
         if stage_tasks and not all(item["_submitted"] for item in stage_tasks):
             available_stage = stage_key
             break
@@ -247,11 +269,44 @@ def derive_tasks(path_result: Dict[str, Any], submitted_task_ids: Optional[set] 
     for item in flattened:
         if item.pop("_submitted"):
             item["status"] = STATUS_COMPLETED
+        elif item["taskId"] in dismissed:
+            # 用户把它从计划里拿掉了：它既不是完成，也不是「你现在该做的那一条」
+            item["status"] = STATUS_PLANNED
         elif item["sourcePath"]["stage"] == available_stage:
             item["status"] = STATUS_AVAILABLE
         else:
             item["status"] = STATUS_PLANNED
     return flattened
+
+
+def apply_task_overrides(tasks: List[Dict[str, Any]], overrides: Dict[str, Dict[str, Any]],
+                         include_hidden: bool = False) -> List[Dict[str, Any]]:
+    """把用户的个人覆盖层（备注 / 隐藏 / 顺序）贴到派生出来的任务上。
+
+    **只加视图字段**（`note` / `hidden` / `position`），任务本身的标题、交付要求、
+    执行步骤、要求能力一个都不动 —— 那些是图谱派生的事实，用户改不了也不该改。
+    排序用稳定排序：同阶段里给了 `position` 的按它排，没给的保持原顺序。
+    """
+    decorated: List[Dict[str, Any]] = []
+    for task in tasks:
+        override = overrides.get(task["taskId"]) or {}
+        item = {
+            **task,
+            "note": str(override.get("note") or ""),
+            "hidden": bool(override.get("hidden")),
+            "position": override.get("position"),
+            "overrideUpdatedAt": override.get("updatedAt"),
+        }
+        if item["hidden"] and not include_hidden:
+            continue
+        decorated.append(item)
+
+    def sort_key(item: Dict[str, Any]) -> Tuple[int, int]:
+        position = item.get("position")
+        # 没给顺序的排在给了顺序的后面；`sorted` 是稳定的，所以它们之间保持原顺序
+        return (int(item["sourcePath"]["stageOrder"]), int(position) if position is not None else 10 ** 6)
+
+    return sorted(decorated, key=sort_key)
 
 
 # ---------------------------------------------------------------------------- 规则版评估
@@ -597,6 +652,69 @@ class TaskStore:
             ).fetchall()
             return {row["task_id"] for row in rows}
 
+    # ---------------------------------------------------------------- 个人覆盖层（备注 / 隐藏 / 顺序）
+
+    def task_overrides(self, user_id: str) -> Dict[str, Dict[str, Any]]:
+        with self._lock:
+            rows = self._conn.execute(
+                "SELECT * FROM task_overrides WHERE user_id = ?", (user_id,)
+            ).fetchall()
+        return {
+            row["task_id"]: {
+                "hidden": bool(row["hidden"]),
+                "note": row["note"],
+                "position": row["position"],
+                "updatedAt": row["updated_at"],
+            }
+            for row in rows
+        }
+
+    def set_task_override(self, user_id: str, task_id: str, *, hidden: Optional[bool] = None,
+                          note: Optional[str] = None, position: Optional[int] = None,
+                          clear_position: bool = False) -> Dict[str, Any]:
+        """只写「个人视图」三件事；一次只改传进来的字段，其余保持原样。"""
+        current = self.task_overrides(user_id).get(task_id) or {"hidden": False, "note": "", "position": None}
+        next_hidden = current["hidden"] if hidden is None else bool(hidden)
+        next_note = current["note"] if note is None else str(note)
+        if clear_position:
+            next_position: Optional[int] = None
+        else:
+            next_position = current.get("position") if position is None else int(position)
+        with self._lock:
+            self._conn.execute(
+                """INSERT INTO task_overrides (user_id, task_id, hidden, note, position, updated_at)
+                   VALUES (?,?,?,?,?,?)
+                   ON CONFLICT(user_id, task_id) DO UPDATE SET
+                     hidden = excluded.hidden, note = excluded.note,
+                     position = excluded.position, updated_at = excluded.updated_at""",
+                (user_id, task_id, 1 if next_hidden else 0, next_note, next_position, self._now()),
+            )
+            self._conn.commit()
+        return self.task_overrides(user_id)[task_id]
+
+    def clear_task_override(self, user_id: str, task_id: str) -> bool:
+        with self._lock:
+            cursor = self._conn.execute(
+                "DELETE FROM task_overrides WHERE user_id = ? AND task_id = ?", (user_id, task_id)
+            )
+            self._conn.commit()
+        return bool(cursor.rowcount)
+
+    def set_task_positions(self, user_id: str, ordered_task_ids: List[str]) -> int:
+        """按给定的顺序重排（写 position = 下标）。同一次调用里全量重写，避免出现半截顺序。"""
+        now = self._now()
+        with self._lock:
+            for index, task_id in enumerate(ordered_task_ids):
+                self._conn.execute(
+                    """INSERT INTO task_overrides (user_id, task_id, hidden, note, position, updated_at)
+                       VALUES (?,?,0,'',?,?)
+                       ON CONFLICT(user_id, task_id) DO UPDATE SET
+                         position = excluded.position, updated_at = excluded.updated_at""",
+                    (user_id, task_id, index, now),
+                )
+            self._conn.commit()
+        return len(ordered_task_ids)
+
     # ---------------------------------------------------------------- 附件
 
     @staticmethod
@@ -658,6 +776,62 @@ class TaskStore:
                 (user_id, task_id),
             ).fetchone()
             return int(row["total"]) if row else 0
+
+    def attachment_content(self, user_id: str, attachment_id: str) -> Optional[Dict[str, Any]]:
+        """原始字节 + 下载要用的元信息。归属不符一律当作不存在。"""
+        with self._lock:
+            row = self._conn.execute(
+                "SELECT filename, content_type, content FROM task_attachments "
+                "WHERE user_id = ? AND attachment_id = ?",
+                (user_id, attachment_id),
+            ).fetchone()
+        if row is None:
+            return None
+        return {
+            "filename": row["filename"],
+            "contentType": row["content_type"] or "application/octet-stream",
+            "content": bytes(row["content"]),
+        }
+
+    def runs_referencing_attachment(self, user_id: str, attachment_id: str) -> List[str]:
+        """哪些运行记录还引用着这个附件。
+
+        引用是**可追溯性**的前提（`attachmentIds` 必须能查回出处），所以删附件前要先问这个：
+        还在被引用的一律不让删，否则运行记录里就会留下查不到出处的 id。
+        """
+        needle = f'"{attachment_id}"'
+        with self._lock:
+            rows = self._conn.execute(
+                "SELECT run_id, attachment_ids_json FROM task_runs WHERE user_id = ? AND attachment_ids_json LIKE ?",
+                (user_id, f"%{needle}%"),
+            ).fetchall()
+        hits: List[str] = []
+        for row in rows:
+            try:
+                ids = json.loads(row["attachment_ids_json"] or "[]")
+            except ValueError:
+                continue
+            if attachment_id in [str(item) for item in ids]:
+                hits.append(row["run_id"])
+        return hits
+
+    def delete_attachment(self, user_id: str, attachment_id: str) -> Optional[Dict[str, Any]]:
+        """删附件（只删自己的）。返回被删的那条；不存在返回 ``None``。"""
+        with self._lock:
+            row = self._conn.execute(
+                "SELECT * FROM task_attachments WHERE user_id = ? AND attachment_id = ?",
+                (user_id, attachment_id),
+            ).fetchone()
+            if row is None:
+                return None
+            record = self._row_to_attachment(row)
+            self._conn.execute(
+                "DELETE FROM task_attachments WHERE user_id = ? AND attachment_id = ?",
+                (user_id, attachment_id),
+            )
+            self._conn.commit()
+        record["taskAttachmentCount"] = self.count_attachments(user_id, record["taskId"])
+        return record
 
     def add_attachment(self, *, user_id: str, task_id: str, filename: str, content_type: str,
                        data: bytes, kind: str, preview: Optional[str], text_extracted: bool,

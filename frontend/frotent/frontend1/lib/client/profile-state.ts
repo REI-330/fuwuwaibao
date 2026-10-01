@@ -1,22 +1,8 @@
 import type { ProfileCandidate, ProfileRecord } from "../../types/view-models/dynamic-profile";
-import type { GrowthState, PlannedTask, TaskRun } from "../../types/view-models/dynamic-profile";
+import type { GrowthState } from "../../types/view-models/dynamic-profile";
 
 export function emptyGrowthState(): GrowthState {
-  return { records: [], taskRuns: [], evidence: [], events: [], plannedTasks: [] };
-}
-
-export function saveTaskRun(state: GrowthState, run: TaskRun): GrowthState {
-  if (state.taskRuns.some(item => item.id === run.id)) return state;
-  return { ...state, taskRuns: [run, ...state.taskRuns] };
-}
-
-export function planGrowthTask(state: GrowthState, task: PlannedTask, now: string): GrowthState {
-  if (state.plannedTasks.some(item => item.id === task.id)) return state;
-  return { ...state, plannedTasks: [...state.plannedTasks, task], events: [{
-    id: `plan:${task.id}`, kind: "成长路径调整", taskId: task.id,
-    title: "安排了一项阶段任务", explanation: "你主动将路径任务加入行动列表，尚未完成，也不会自动改变能力画像。",
-    after: `${task.direction} · ${task.stage} · ${task.title}`, occurredAt: now,
-  }, ...state.events] };
+  return { records: [], taskRuns: [], evidence: [], events: [] };
 }
 
 export function confirmGrowthCandidate(state: GrowthState, candidate: ProfileCandidate, now: string): GrowthState {

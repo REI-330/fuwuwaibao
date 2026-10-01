@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { XiangxinMascot } from "../../../../components/brand/xiangxin-mascot";
-import { listTasks } from "../../../../lib/client/task-api";
+import { listTasks, reorderTasks, updateTask } from "../../../../lib/client/task-api";
 import type { PracticeTask, TaskListResponse, TaskStatus } from "../../../../types/contracts/task";
 
 const statusNames: Record<TaskStatus, string> = {
@@ -17,14 +17,26 @@ const statusNames: Record<TaskStatus, string> = {
  * 状态由「路径阶段顺序 + 你提交过的运行记录」共同决定（见 `backend/tasks.py` 顶部口径）。
  *
  * 支持 `?occupation=` / `?stage=`：`/path` 的任务卡片就是按这两个参数跳进来的。
+ * 清单上的「隐藏 / 上下移」改的是**你自己的视图覆盖层**（`PATCH /api/tasks/<id>`、
+ * `POST /api/tasks/reorder`），任务内容与完成状态都不受影响。
  */
 export default function TasksPage() {
   const [data, setData] = useState<TaskListResponse | null>(null);
   const [status, setStatus] = useState<TaskStatus | "all">("all");
   const [occupation, setOccupation] = useState("");
   const [stageFilter, setStageFilter] = useState("");
+  const [includeHidden, setIncludeHidden] = useState(false);
+  const [busy, setBusy] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  // 始终把隐藏的也取回来（服务端 `counts` 只数看得见的），由页面上的开关决定显示不显示
+  const fetchList = useCallback(async (scope: string) => {
+    const result = await listTasks({ occupation: scope || undefined, includeHidden: true });
+    setData(result);
+    setError("");
+    return result;
+  }, []);
 
   // 只在挂载时读一次 URL 参数（`/path` 的任务卡片按 occupation+stage 跳进来）。
   // 所有 setState 都发生在异步回调里 —— 不在 effect 体里同步 setState，避免级联渲染。
@@ -33,24 +45,49 @@ export default function TasksPage() {
     const params = new URLSearchParams(window.location.search);
     const requestedOccupation = params.get("occupation") ?? "";
     const requestedStage = params.get("stage") ?? "";
-    listTasks(requestedOccupation ? { occupation: requestedOccupation } : {})
-      .then(result => {
-        if (!active) return;
-        setData(result);
-        setOccupation(requestedOccupation);
-        setStageFilter(requestedStage);
-        setError("");
-      })
-      .catch(caught => { if (active) setError(caught instanceof Error ? caught.message : "任务加载失败"); })
-      .finally(() => { if (active) setLoading(false); });
-    return () => { active = false; };
-  }, []);
+    // 放到任务队列里再发（fetchList 会同步 setState，直接在 effect 里调用会触发级联渲染告警）
+    const handle = setTimeout(() => {
+      fetchList(requestedOccupation)
+        .then(() => {
+          if (!active) return;
+          setOccupation(requestedOccupation);
+          setStageFilter(requestedStage);
+        })
+        .catch(caught => { if (active) setError(caught instanceof Error ? caught.message : "任务加载失败"); })
+        .finally(() => { if (active) setLoading(false); });
+    }, 0);
+    return () => { active = false; clearTimeout(handle); };
+  }, [fetchList]);
+
+  async function run(taskId: string, action: () => Promise<unknown>) {
+    setBusy(taskId);
+    setError("");
+    try {
+      await action();
+      await fetchList(occupation);
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "操作失败");
+    } finally {
+      setBusy("");
+    }
+  }
+
+  /** 同一阶段内上/下移：只把这一阶段的新顺序发上去（排序按阶段分组，不影响别的阶段）。 */
+  function move(task: PracticeTask, siblings: PracticeTask[], delta: number) {
+    const index = siblings.findIndex(item => item.taskId === task.taskId);
+    const target = index + delta;
+    if (index < 0 || target < 0 || target >= siblings.length) return;
+    const next = [...siblings];
+    [next[index], next[target]] = [next[target], next[index]];
+    void run(task.taskId, () => reorderTasks(next.map(item => item.taskId), occupation || undefined));
+  }
 
   const items = useMemo(() => (data?.items ?? []).filter(task => {
+    if (task.hidden && !includeHidden) return false;
     const statusMatched = status === "all" || task.status === status;
     const stageMatched = !stageFilter || task.sourcePath.stage === stageFilter;
     return statusMatched && stageMatched;
-  }), [data, stageFilter, status]);
+  }), [data, includeHidden, stageFilter, status]);
 
   const groups = useMemo(() => {
     const map = new Map<string, PracticeTask[]>();
@@ -84,6 +121,7 @@ export default function TasksPage() {
         </div>
         {occupation && <button type="button" className="xn-text-btn" onClick={() => { window.location.href = "/actions/tasks"; }}>清除职业筛选（{occupation}）×</button>}
         {stageFilter && <button type="button" className="xn-text-btn" onClick={() => setStageFilter("")}>清除阶段筛选（{stageFilter}）×</button>}
+        {Boolean(data?.hiddenCount) && <button type="button" className={`xn-text-btn ${includeHidden ? "active" : ""}`} aria-pressed={includeHidden} onClick={() => setIncludeHidden(value => !value)}>{includeHidden ? "不显示已隐藏" : `显示已隐藏（${data?.hiddenCount}）`}</button>}
       </header>
 
       {error && <p className="xn-interview-error" role="alert">{error}</p>}
@@ -93,10 +131,10 @@ export default function TasksPage() {
         const [, stageName, period] = key.split("|");
         return <div className="xn-task-group" key={key}>
           <h2>{stageName}<small>{period} · {tasks.length} 条任务</small></h2>
-          <div className="xn-task-list">{tasks.map(task => <article className={`xn-task-row ${task.status}`} key={task.taskId}>
+          <div className="xn-task-list">{tasks.map((task, index) => <article className={`xn-task-row ${task.status}${task.hidden ? " is-hidden" : ""}`} key={task.taskId}>
             <div className="xn-task-main">
               <span className={`status-${task.status}`}>{statusNames[task.status]}</span>
-              <div><h3>{task.title}</h3><p>{task.sourcePath.stageGoal}</p></div>
+              <div><h3>{task.title}</h3><p>{task.sourcePath.stageGoal}</p>{task.note && <p className="xn-task-note">我的备注：{task.note}</p>}</div>
             </div>
             <dl className="xn-task-meta">
               <div><dt>交付成果</dt><dd>{task.deliverable || "图谱未记录"}</dd></div>
@@ -105,6 +143,9 @@ export default function TasksPage() {
             </dl>
             <div className="xn-task-actions">
               {task.status === "completed" && <em>已提交过，可继续补充</em>}
+              <button type="button" className="xn-text-btn" disabled={busy === task.taskId || index === 0} onClick={() => move(task, tasks, -1)}>↑ 上移</button>
+              <button type="button" className="xn-text-btn" disabled={busy === task.taskId || index === tasks.length - 1} onClick={() => move(task, tasks, 1)}>↓ 下移</button>
+              <button type="button" className="xn-text-btn" disabled={busy === task.taskId} onClick={() => void run(task.taskId, () => updateTask(task.taskId, { hidden: !task.hidden }))}>{task.hidden ? "恢复显示" : "隐藏"}</button>
               <Link className="xn-btn xn-btn-primary" href={`/actions/tasks/${encodeURIComponent(task.taskId)}`}>
                 {task.status === "completed" ? "查看与再提交" : "去做这个任务"} →
               </Link>

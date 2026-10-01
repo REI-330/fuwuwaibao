@@ -145,3 +145,14 @@
 @media(max-width:700px){.xn-main{padding-top:64px}}
 
 .xn-upload-zone+.xn-form-warnings,.xn-form-warnings{margin:14px 0 0;padding:12px 15px;border-radius:9px;color:#8a5a1d;background:#fff7e8;font-size:12px;line-height:1.8}.xn-form-warnings li{list-style:none}.xn-form-warnings li:before{content:"· "}
+
+/* 侧边导航：条目既有链接（页面）也有按钮（AI 对话是抽屉，不是路由），两者要长得一样；
+   导航项从 4 条扩到 7 条，窄屏高度不够时自己滚。 */
+.xn-nav{overflow-y:auto;min-height:0;scrollbar-width:thin}
+.xn-nav button{height:66px;width:100%;display:flex;align-items:center;gap:15px;padding:0 18px;border:0;border-radius:14px;color:inherit;background:transparent;font:inherit;font-size:16px;text-align:left;cursor:pointer;transition:.18s}
+.xn-nav button>span{width:28px;color:#526079;font-size:25px;text-align:center}
+.xn-nav button b{font-weight:500}
+.xn-nav button:hover{background:#f4f8fd}
+.xn-nav button.active{color:var(--blue);background:#edf5ff}
+.xn-nav button.active>span{color:var(--blue)}
+.xn-nav button.active b{font-weight:650}

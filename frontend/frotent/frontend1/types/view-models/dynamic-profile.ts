@@ -28,8 +28,7 @@ export type GrowthEvent = {
   profileId?: string; evidenceId?: string; taskId?: string;
   title: string; explanation: string; before?: string; after: string; occurredAt: string;
 };
-export type PlannedTask = import("./product").TrainingTask & { stage: string; occupationId: string; instructions: string[] };
 export type GrowthState = {
   records: ProfileRecord[]; taskRuns: TaskRun[]; evidence: ProfileEvidence[];
-  events: GrowthEvent[]; plannedTasks: PlannedTask[];
+  events: GrowthEvent[];
 };

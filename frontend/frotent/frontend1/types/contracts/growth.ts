@@ -72,5 +72,12 @@ export type GrowthDeletePayload = {
 export type GrowthListPayload = {
   items: GrowthRecord[];
   count: number;
+  /** 满足筛选条件的总条数（不是这一页的条数）—— `hasMore` 用它算出来的 */
+  total: number;
+  limit: number | null;
+  offset: number;
+  /** 下一页的位移；没有下一页时是 `null` */
+  nextCursor: string | null;
+  hasMore: boolean;
   memoryHash: string;
 };

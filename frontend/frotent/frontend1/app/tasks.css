@@ -72,6 +72,20 @@
 .xn-task-attach-list details{margin-top:4px}
 .xn-task-attach-list summary{color:#2f5fa8;font-size:12px;cursor:pointer}
 .xn-task-attach-list pre{margin:6px 0 0;padding:10px;max-height:220px;overflow:auto;border-radius:8px;background:#f6f9fc;color:#4f6379;font-size:12px;line-height:1.6;white-space:pre-wrap}
+.xn-task-attach-actions{display:flex;gap:14px;margin-top:2px}
+
+.xn-task-personalize{padding:22px}
+.xn-task-personalize>header h2{margin:5px 0 6px;color:#071f49;font-size:18px}
+.xn-task-personalize>header p{margin:0 0 14px;color:#7a8799;font-size:13px;line-height:1.7}
+.xn-task-personalize label{display:grid;gap:7px}
+.xn-task-personalize label>span{color:#43536a;font-size:13px;font-weight:700}
+.xn-task-personalize textarea{width:100%;min-height:76px;padding:12px;border:1px solid #d8e2ed;border-radius:10px;outline:0;color:#2d3d56;background:#fff;font-size:14px;line-height:1.7;resize:vertical}
+.xn-task-personalize textarea:focus{border-color:#4e86df;box-shadow:0 0 0 3px rgba(37,99,235,.09)}
+.xn-task-personalize-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:14px}
+
+.xn-task-note{margin:5px 0 0!important;color:#7b6a2f!important;font-size:12px!important}
+.xn-task-row.is-hidden{opacity:.62;border-style:dashed}
+.xn-task-actions .xn-text-btn:disabled{color:#b4bfcd;cursor:not-allowed}
 
 .xn-task-feedback{padding:24px}
 .xn-task-feedback>header h2{margin:5px 0 16px;color:#071f49;font-size:19px}

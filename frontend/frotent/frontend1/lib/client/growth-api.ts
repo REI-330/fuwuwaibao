@@ -34,9 +34,21 @@ async function read<T>(response: Response): Promise<T> {
   return body.data;
 }
 
-export async function listGrowthRecords(kind?: string): Promise<GrowthListPayload> {
-  const query = kind ? `?kind=${encodeURIComponent(kind)}` : "";
-  return read<GrowthListPayload>(await fetch(apiUrl(`/api/growth-records${query}`), {
+/**
+ * 读一页成长记录。
+ *
+ * 分页键是**位移**（`cursor`），不是记录 id：后端排序里带了 `record_id` 兜底，
+ * 所以同一时刻写多条也不会错位。不传 `limit` 时后端保持旧行为（一次给全部）。
+ */
+export async function listGrowthRecords(
+  params: { kind?: string; limit?: number; cursor?: string } = {},
+): Promise<GrowthListPayload> {
+  const query = new URLSearchParams();
+  if (params.kind) query.set("kind", params.kind);
+  if (params.limit) query.set("limit", String(params.limit));
+  if (params.cursor) query.set("cursor", params.cursor);
+  const suffix = query.toString() ? `?${query.toString()}` : "";
+  return read<GrowthListPayload>(await fetch(apiUrl(`/api/growth-records${suffix}`), {
     cache: "no-store",
     credentials: "include",
   }));

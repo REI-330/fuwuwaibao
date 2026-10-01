@@ -50,9 +50,9 @@ import uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, quote, urlparse
 
-from .chat import ChatService, UnknownChatGeneratorError
+from .chat import ChatService, ChatStore, UnknownChatGeneratorError
 from .career_path import InvalidCareerPathInput, OccupationNotFound
 from .career_path import generate as generate_career_path
 from .growth import normalize_record as normalize_growth_record
@@ -79,9 +79,13 @@ from .tasks import MAX_SUBMISSION_CHARS as TASK_MAX_SUBMISSION_CHARS
 from .tasks import STATUS_AVAILABLE, STATUS_COMPLETED, STATUS_PLANNED
 from .tasks import ATTACHMENT_EVIDENCE_SCOPE as TASK_ATTACHMENT_EVIDENCE_SCOPE
 from .tasks import ATTACHMENT_NOTES as TASK_ATTACHMENT_NOTES
-from .tasks import classify_attachment, parse_task_id as parse_task_id_ref, resolve_attachment_ids
+from .tasks import MAX_TASK_NOTE_CHARS as TASK_MAX_NOTE_CHARS
+from .tasks import apply_task_overrides, classify_attachment, parse_task_id as parse_task_id_ref, resolve_attachment_ids
 from .resume import memory_candidates as resume_memory_candidates
 from .resume import parse_multipart_form, read_upload
+
+# 成长记录分页：一次最多取多少条（前端默认 20）。不传 limit 时保持旧行为（一次给全部）。
+GROWTH_MAX_PAGE = 200
 
 IDENTITY_MAP = {
     "在校生": "student",
@@ -302,8 +306,9 @@ class CareerApi:
         # 画像落**同一个** sqlite（M1-1）：后端重启后画像仍在（此前是进程内内存）。
         # 显式传 ``profiles`` 的调用方（单测）保持旧行为，不受影响。
         self.profiles = profiles or ProfileStore(self.store, memories=self.memories)
-        # 对话：注入的正是上面这库里的已确认记忆；模型客户端复用同一个（一处配置两处消费）
-        self.chats = chats or ChatService(self.store, self.memories, self.profiles)
+        # 对话：注入的正是上面这库里的已确认记忆；模型客户端复用同一个（一处配置两处消费）。
+        # 会话与消息落同一个 sqlite（2026-10-01 起）—— 后端重启后还能找回聊过什么。
+        self.chats = chats or ChatService(self.store, self.memories, self.profiles, sessions=ChatStore())
         # 模拟面试 / 跨岗位训练 / 简历存档：与记忆库同一形态（本地 + SQLite + 同一把锁的读法），
         # 默认落同一个 career.db。模拟面试复用记忆库那个 LlmClient —— 一处配置两处消费，
         # `/health` 报的模型状态就是它；没配端点时出题/评分自动走规则版。
@@ -368,6 +373,8 @@ class CareerApi:
             return 200, {
                 **self.store.health(),
                 "llm": self.memories.describe_llm(),
+                # 会话是否落库：不落库时「重启后聊天记录还在不在」就是个能一眼看见的事实
+                "chat": {"sessionsPersisted": self._chat_store() is not None},
                 "resume": {
                     "pdfSupported": backend is not None,
                     "pdfBackend": backend,
@@ -486,6 +493,12 @@ class CareerApi:
                 return self.error("INVALID_CHAT_MESSAGE", str(error), 400)
             return 200, self.envelope(payload)
 
+        if path == "/api/chat/sessions" and method == "GET":
+            return self._list_chat_sessions(user_id, query)
+
+        if path.startswith("/api/chat/sessions/") and path != "/api/chat/sessions/" and method in ("GET", "DELETE"):
+            return self._chat_session_action(user_id, method, path)
+
         if path == "/api/growth-records":
             # 成长记录：这是记忆库第二条写入通道（第一条是画像 sync）。
             # 写入时**同一事务**落记录 + 待确认候选；候选只由图谱已知名词派生（规则版，不等模型）。
@@ -494,13 +507,33 @@ class CareerApi:
                 if kind is not None and kind not in VALID_GROWTH_KINDS:
                     return self.error("INVALID_GROWTH_KIND", f"未知的记录类别：{kind}", 400)
                 raw_limit = _first(query, "limit")
-                limit = int(raw_limit) if raw_limit.isdigit() else None
+                # `cursor` 就是「已经看过多少条」的位移（分页键用 offset：排序里带了 record_id 兜底，
+                # 同一时刻多条也不会错位）。不传 limit 时保持旧行为：一次给全部。
+                raw_cursor = _first(query, "cursor") or _first(query, "offset")
+                if raw_limit and not raw_limit.isdigit():
+                    return self.error("INVALID_GROWTH_PAGE", f"limit 必须是整数：{raw_limit}", 400)
+                if raw_cursor and not raw_cursor.isdigit():
+                    return self.error("INVALID_GROWTH_PAGE", f"cursor 必须是整数位移：{raw_cursor}", 400)
+                limit = min(int(raw_limit), GROWTH_MAX_PAGE) if raw_limit else None
+                offset = int(raw_cursor) if raw_cursor else 0
                 try:
-                    items = self.memories.list_growth_records(user_id, kind, limit)
+                    items = self.memories.list_growth_records(user_id, kind, limit, offset)
+                    total = self.memories.count_growth_records(user_id, kind)
                 except ValueError as error:
                     return self.error("INVALID_GROWTH_KIND", str(error), 400)
+                next_offset = offset + len(items)
+                has_more = bool(limit) and next_offset < total
                 return 200, self.envelope(
-                    {"items": items, "count": len(items), "memoryHash": self.memories.confirmed_hash(user_id)}
+                    {
+                        "items": items,
+                        "count": len(items),
+                        "total": total,
+                        "limit": limit,
+                        "offset": offset,
+                        "nextCursor": str(next_offset) if has_more else None,
+                        "hasMore": has_more,
+                        "memoryHash": self.memories.confirmed_hash(user_id),
+                    }
                 )
             if method == "POST":
                 if not isinstance(body, dict):
@@ -730,13 +763,16 @@ class CareerApi:
         if path == "/api/tasks" and method == "GET":
             return self._list_tasks(user_id, query)
 
-        if path.startswith("/api/attachments/") and path != "/api/attachments/" and method == "GET":
-            return self._get_task_attachment(user_id, path)
+        if path == "/api/tasks/reorder" and method == "POST":
+            return self._reorder_tasks(user_id, body)
+
+        if path.startswith("/api/attachments/") and path != "/api/attachments/" and method in ("GET", "DELETE"):
+            return self._attachment_action(user_id, method, path, response)
 
         if path.startswith("/api/task-runs/") and method == "POST":
             return self._evaluate_task_run(user_id, path)
 
-        if path.startswith("/api/tasks/") and path != "/api/tasks/" and method in ("GET", "POST"):
+        if path.startswith("/api/tasks/") and path != "/api/tasks/" and method in ("GET", "POST", "PATCH"):
             return self._task_action(user_id, method, path, body, raw=raw, content_type=content_type)
 
         if path in NOT_IMPLEMENTED:
@@ -748,9 +784,44 @@ class CareerApi:
 
         return self.error("NOT_FOUND", f"未知路由：{method} {path}", 404)
 
+    # ------------------------------------------------------------------ 对话会话（路由实现）
+    def _chat_store(self) -> Optional[ChatStore]:
+        """会话库。单测可能只构造 `ChatService`（不挂库），此时如实说「没有挂」。"""
+        return getattr(self.chats, "sessions", None)
+
+    def _list_chat_sessions(self, user_id: str, query: Dict[str, List[str]]) -> Tuple[int, Dict[str, Any]]:
+        store = self._chat_store()
+        if store is None:
+            return 200, self.envelope({
+                "items": [], "count": 0, "persisted": False,
+                "note": "这次运行没有挂会话库（只有单测会这样），所以没有可列的历史会话",
+            })
+        raw_limit = _first(query, "limit")
+        limit = int(raw_limit) if raw_limit.isdigit() else 50
+        items = store.list_sessions(user_id, limit)
+        return 200, self.envelope({"items": items, "count": len(items), "persisted": True})
+
+    def _chat_session_action(self, user_id: str, method: str, path: str) -> Tuple[int, Dict[str, Any]]:
+        store = self._chat_store()
+        rest = path[len("/api/chat/sessions/") :].strip("/")
+        session_id = [part for part in rest.split("/") if part]
+        session_id_str = session_id[0] if session_id else ""
+        if store is None or not session_id_str:
+            return self.error("CHAT_SESSION_NOT_FOUND", f"没有找到这段对话：{rest}", 404)
+        session = store.get_session(user_id, session_id_str)
+        if session is None:
+            # 别人的会话对我就是「不存在」
+            return self.error("CHAT_SESSION_NOT_FOUND", f"没有找到这段对话：{session_id_str}", 404)
+        if method == "GET":
+            return 200, self.envelope({
+                "session": session,
+                "messages": store.messages(user_id, session_id_str),
+            })
+        return 200, self.envelope(store.delete_session(user_id, session_id_str))
+
     # ------------------------------------------------------------------ 任务实践（路由实现）
     def _task_landscape(self, user_id: str, query: Dict[str, List[str]]) -> Tuple[Dict[str, Any], List[Dict[str, Any]], str]:
-        """算出这个用户当前的任务清单，并说明「用的是哪个职业、从哪来」。
+        """算出这个用户当前的任务清单（**含被隐藏的**，调用方自己按 `hidden` 过滤），并说明「用的是哪个职业、从哪来」。
 
         职业优先级：`?occupation=` → 画像候选 → 目录第一个。用了哪一个会回传
         （`occupationSource`），不做静默回落。
@@ -768,37 +839,47 @@ class CareerApi:
                 raise OccupationNotFound("图谱里没有任何职业，无法派生任务")
             occupation_id, source = str(catalog[0]["occupationId"]), "catalog"
         path_result = generate_career_path(self.store, {"target_job": occupation_id}, profile=profile)
-        tasks = derive_tasks(path_result, self.tasks.submitted_task_ids(user_id))
-        return path_result, tasks, source
+        overrides = self.tasks.task_overrides(user_id)
+        dismissed = {task_id for task_id, item in overrides.items() if item.get("hidden")}
+        tasks = derive_tasks(path_result, self.tasks.submitted_task_ids(user_id), dismissed)
+        return path_result, apply_task_overrides(tasks, overrides, include_hidden=True), source
 
     def _list_tasks(self, user_id: str, query: Dict[str, List[str]]) -> Tuple[int, Dict[str, Any]]:
         status_filter = (_first(query, "status") or "").strip()
         if status_filter and status_filter not in (STATUS_PLANNED, STATUS_AVAILABLE, STATUS_COMPLETED):
             return self.error("INVALID_STATUS", f"未知的任务状态：{status_filter}", 400)
+        include_hidden = (_first(query, "includeHidden") or "").strip() in ("1", "true", "yes")
         try:
-            path_result, tasks, source = self._task_landscape(user_id, query)
+            path_result, all_tasks, source = self._task_landscape(user_id, query)
         except OccupationNotFound as error:
             return self.error("OCCUPATION_NOT_FOUND", str(error), 404)
         except InvalidCareerPathInput as error:
             return self.error("INVALID_CAREER_PATH_INPUT", str(error), 400)
-        items = [task for task in tasks if not status_filter or task["status"] == status_filter]
+        visible = [task for task in all_tasks if not task["hidden"]]
+        # `counts` 只数**看得见的**任务：否则界面会出现「有 1 条可做」却一条都点不出
+        counts = {status: sum(1 for task in visible if task["status"] == status)
+                  for status in (STATUS_AVAILABLE, STATUS_PLANNED, STATUS_COMPLETED)}
+        shown = all_tasks if include_hidden else visible
+        items = [task for task in shown if not status_filter or task["status"] == status_filter]
         return 200, self.envelope({
             "items": items,
             "count": len(items),
             "occupation": {"occupationId": path_result["occupation_id"], "targetJob": path_result["target_job"]},
             "occupationSource": source,
-            "counts": {status: sum(1 for task in tasks if task["status"] == status)
-                       for status in (STATUS_AVAILABLE, STATUS_PLANNED, STATUS_COMPLETED)},
+            "counts": counts,
+            "includeHidden": include_hidden,
+            "hiddenCount": sum(1 for task in all_tasks if task["hidden"]),
             # 图谱没有任务级难度/学时：这一条如实说出来，别让前端以为只是没取到
             "notes": [
                 "任务与交付要求来自图谱的 task→skill 边；难度与任务级学时图谱未标注，返回 null",
                 "estimatedHours 是**阶段级**投入（技能等级差 × 24 小时），不是这一条任务的耗时",
+                "note / hidden / position 是你自己的视图覆盖层（PATCH /api/tasks/<id>），任务本身仍来自图谱",
             ],
             "disclaimer": TASK_DISCLAIMER,
         })
 
     def _find_task(self, user_id: str, task_id: str) -> Optional[Dict[str, Any]]:
-        """按 taskId 找回任务。找不到（含职业/阶段不存在）返回 ``None``。"""
+        """按 taskId 找回任务（**含被隐藏的**：详情页仍然要能打开）。找不到返回 ``None``。"""
         try:
             occupation_id, _, _ = parse_task_id_ref(task_id)
         except ValueError:
@@ -809,8 +890,11 @@ class CareerApi:
             )
         except (OccupationNotFound, InvalidCareerPathInput):
             return None
-        tasks = derive_tasks(path_result, self.tasks.submitted_task_ids(user_id))
-        return next((task for task in tasks if task["taskId"] == task_id), None)
+        overrides = self.tasks.task_overrides(user_id)
+        dismissed = {known for known, item in overrides.items() if item.get("hidden")}
+        tasks = derive_tasks(path_result, self.tasks.submitted_task_ids(user_id), dismissed)
+        decorated = apply_task_overrides(tasks, overrides, include_hidden=True)
+        return next((task for task in decorated if task["taskId"] == task_id), None)
 
     def _task_action(self, user_id: str, method: str, path: str, body: Any,
                      raw: Optional[bytes] = None, content_type: str = "") -> Tuple[int, Dict[str, Any]]:
@@ -838,6 +922,9 @@ class CareerApi:
                 "disclaimer": TASK_DISCLAIMER,
             })
 
+        if not action and method == "PATCH":
+            return self._patch_task(user_id, task_id, body)
+
         if action == "runs" and method == "POST":
             return self._submit_task_run(user_id, task_id, body)
 
@@ -846,13 +933,158 @@ class CareerApi:
 
         return self.error("NOT_FOUND", f"未知路由：{method} {path}", 404)
 
-    def _get_task_attachment(self, user_id: str, path: str) -> Tuple[int, Dict[str, Any]]:
-        attachment_id = path[len("/api/attachments/") :].strip("/")
-        record = self.tasks.get_attachment(user_id, attachment_id) if attachment_id else None
-        if record is None:
-            return self.error("ATTACHMENT_NOT_FOUND", f"没有找到这个附件：{attachment_id}", 404)
-        # 刻意**不**回传原始字节：附件是交付物存档，接口只给元数据与已抽出的文字预览。
-        return 200, self.envelope({"attachment": record, "note": TASK_ATTACHMENT_EVIDENCE_SCOPE})
+    def _patch_task(self, user_id: str, task_id: str, body: Any) -> Tuple[int, Dict[str, Any]]:
+        """改的是**你自己的视图**（备注 / 隐藏 / 顺序），不是任务本身。
+
+        任务标题、交付要求、执行步骤、要求能力全部来自图谱的 `task --trains--> skill` 边 ——
+        这里一个都不改，所以也没有「把任务改成自定义」的入口。
+        `{"reset": true}` 可以把这条任务恢复成默认（连备注与顺序一起清掉）。
+        """
+        if not isinstance(body, dict):
+            return self.error("INVALID_BODY", "请求体必须是 JSON 对象", 400)
+        task = self._find_task(user_id, task_id)
+        if task is None:
+            return self.error("TASK_NOT_FOUND", f"没有找到任务：{task_id}", 404)
+
+        if body.get("reset") is True:
+            self.tasks.clear_task_override(user_id, task_id)
+            return 200, self.envelope({
+                "task": self._find_task(user_id, task_id),
+                "override": None,
+                "reset": True,
+                "disclaimer": TASK_DISCLAIMER,
+            })
+
+        hidden = body.get("hidden")
+        if hidden is not None and not isinstance(hidden, bool):
+            return self.error("INVALID_BODY", "hidden 必须是布尔值", 422)
+        note = body.get("note")
+        if note is not None:
+            note = str(note)
+            if len(note) > TASK_MAX_NOTE_CHARS:
+                return self.error("INVALID_BODY", f"备注超过 {TASK_MAX_NOTE_CHARS} 字", 422)
+        position = body.get("position")
+        clear_position = "position" in body and position is None
+        if position is not None and (not isinstance(position, int) or isinstance(position, bool) or position < 0):
+            return self.error("INVALID_BODY", "position 必须是非负整数（要清除顺序就传 null）", 422)
+
+        override = self.tasks.set_task_override(
+            user_id, task_id, hidden=hidden, note=note,
+            position=position if isinstance(position, int) else None,
+            clear_position=clear_position,
+        )
+        return 200, self.envelope({
+            "task": self._find_task(user_id, task_id),
+            "override": override,
+            "reset": False,
+            "notes": ["只改了你的视图：任务内容仍是图谱派生的那一份"],
+            "disclaimer": TASK_DISCLAIMER,
+        })
+
+    def _reorder_tasks(self, user_id: str, body: Any) -> Tuple[int, Dict[str, Any]]:
+        """重排任务：写的是 `position`，**不动任务内容**。
+
+        只接受「你当前任务清单里真实存在」的 taskId —— 不认得的直接 422 点名，
+        否则会出现给别人的任务、或已不存在的任务排序这种查不出处的情况。
+        """
+        if not isinstance(body, dict):
+            return self.error("INVALID_BODY", "请求体必须是 JSON 对象", 400)
+        raw_ids = body.get("taskIds")
+        if not isinstance(raw_ids, list) or not raw_ids:
+            return self.error("INVALID_BODY", "taskIds 必须是非空数组", 422)
+        ordered = [str(item).strip() for item in raw_ids if str(item).strip()]
+        if not ordered:
+            return self.error("INVALID_BODY", "taskIds 里没有有效的任务 id", 422)
+        scope: Dict[str, List[str]] = {}
+        occupation = str(body.get("occupation") or "").strip()
+        if occupation:
+            scope["occupation"] = [occupation]
+        try:
+            _, tasks, _ = self._task_landscape(user_id, scope)
+        except OccupationNotFound as error:
+            return self.error("OCCUPATION_NOT_FOUND", str(error), 404)
+        except InvalidCareerPathInput as error:
+            return self.error("INVALID_CAREER_PATH_INPUT", str(error), 400)
+        known = {task["taskId"] for task in tasks}
+        unknown = [task_id for task_id in ordered if task_id not in known]
+        if unknown:
+            return self.error(
+                "UNKNOWN_TASK",
+                "这些 taskId 不在你当前的任务清单里：" + "、".join(unknown[:3]),
+                422,
+                unknownTaskIds=unknown,
+            )
+        updated = self.tasks.set_task_positions(user_id, ordered)
+        _, after, source = self._task_landscape(user_id, scope)
+        return 200, self.envelope({
+            "ordered": [task["taskId"] for task in after],
+            "updated": updated,
+            "occupationSource": source,
+            "notes": ["顺序只影响你自己的清单显示，不改变任务内容与完成状态"],
+            "disclaimer": TASK_DISCLAIMER,
+        })
+
+    def _attachment_action(self, user_id: str, method: str, path: str,
+                           response: Optional[Dict[str, Any]] = None) -> Tuple[int, Dict[str, Any]]:
+        """附件三件事：看元数据 / 下原始字节 / 删除。归属不符一律按「不存在」处理。"""
+        rest = path[len("/api/attachments/") :].strip("/")
+        parts = [part for part in rest.split("/") if part]
+        attachment_id = parts[0] if parts else ""
+        suffix = parts[1] if len(parts) > 1 else ""
+        if not attachment_id:
+            return self.error("NOT_FOUND", f"未知路由：{method} {path}", 404)
+
+        if suffix == "content" and method == "GET":
+            blob = self.tasks.attachment_content(user_id, attachment_id)
+            if blob is None:
+                return self.error("ATTACHMENT_NOT_FOUND", f"没有找到这个附件：{attachment_id}", 404)
+            if response is not None:
+                # 原始字节走 response 的 rawBody 通道：这条响应不是 JSON，不能先 json.dumps
+                response["rawBody"] = {
+                    "content": blob["content"],
+                    "contentType": blob["contentType"],
+                    "contentDisposition": (
+                        "attachment; filename*=UTF-8''" + quote(blob["filename"], safe="")
+                    ),
+                }
+            return 200, self.envelope({
+                "attachmentId": attachment_id,
+                "filename": blob["filename"],
+                "byteSize": len(blob["content"]),
+            })
+
+        if suffix and suffix != "content":
+            return self.error("NOT_FOUND", f"未知路由：{method} {path}", 404)
+
+        if method == "GET":
+            record = self.tasks.get_attachment(user_id, attachment_id)
+            if record is None:
+                return self.error("ATTACHMENT_NOT_FOUND", f"没有找到这个附件：{attachment_id}", 404)
+            # 刻意**不**回传原始字节：元数据走 JSON，字节走 /content
+            return 200, self.envelope({"attachment": record, "note": TASK_ATTACHMENT_EVIDENCE_SCOPE})
+
+        if method == "DELETE":
+            referenced = self.tasks.runs_referencing_attachment(user_id, attachment_id)
+            if referenced:
+                # 引用可追溯是这条链路的前提：还挂在运行记录上的附件不能删，
+                # 否则 `attachmentIds` 里就留下查不到出处的 id。
+                return self.error(
+                    "ATTACHMENT_IN_USE",
+                    f"这个附件还被 {len(referenced)} 次提交引用着，不能删：{'、'.join(referenced[:3])}",
+                    409,
+                    referencedRunIds=referenced,
+                )
+            removed = self.tasks.delete_attachment(user_id, attachment_id)
+            if removed is None:
+                return self.error("ATTACHMENT_NOT_FOUND", f"没有找到这个附件：{attachment_id}", 404)
+            return 200, self.envelope({
+                "deleted": removed["attachmentId"],
+                "taskId": removed["taskId"],
+                "attachmentCount": removed["taskAttachmentCount"],
+                "sha256": removed["sha256"],
+            })
+
+        return self.error("NOT_FOUND", f"未知路由：{method} {path}", 404)
 
     def _upload_task_attachment(self, user_id: str, task_id: str, raw: Optional[bytes],
                                 content_type: str) -> Tuple[int, Dict[str, Any]]:
@@ -1360,6 +1592,20 @@ class CareerRequestHandler(BaseHTTPRequestHandler):
             cookies=self._parse_cookies(),
             response=response,
         )
+        raws = response.get("rawBody")
+        if raws is not None:
+            # 非 JSON 响应（附件原字节下载）：不经 json.dumps
+            data = bytes(raws.get("content") or b"")
+            self.send_response(status)
+            self._write_cors()
+            self.send_header("Access-Control-Expose-Headers", "Content-Disposition")
+            self.send_header("Content-Type", str(raws.get("contentType") or "application/octet-stream"))
+            if raws.get("contentDisposition"):
+                self.send_header("Content-Disposition", str(raws["contentDisposition"]))
+            self.send_header("Content-Length", str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
+            return
         data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
         self.send_response(status)
         self._write_cors()

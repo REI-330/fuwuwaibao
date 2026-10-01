@@ -41,6 +41,21 @@ export type PracticeTask = {
   stageEstimatedWeeks: number;
   unavailableFields: string[];
   status: TaskStatus;
+  /**
+   * 下面四个是**用户自己的视图覆盖层**（`PATCH /api/tasks/<id>`），不是图谱派生的事实。
+   * 任务标题、交付要求、执行步骤、要求能力都不受它们影响。
+   */
+  note: string;
+  hidden: boolean;
+  position: number | null;
+  overrideUpdatedAt: string | null;
+};
+
+export type TaskOverride = {
+  hidden: boolean;
+  note: string;
+  position: number | null;
+  updatedAt: string;
 };
 
 export type TaskListResponse = {
@@ -49,6 +64,24 @@ export type TaskListResponse = {
   occupation: { occupationId: string; targetJob: string };
   occupationSource: "query" | "profile" | "catalog";
   counts: Record<TaskStatus, number>;
+  includeHidden: boolean;
+  hiddenCount: number;
+  notes: string[];
+  disclaimer: string;
+};
+
+export type UpdateTaskResponse = {
+  task: PracticeTask;
+  override: TaskOverride | null;
+  reset: boolean;
+  notes?: string[];
+  disclaimer: string;
+};
+
+export type ReorderTasksResponse = {
+  ordered: string[];
+  updated: number;
+  occupationSource: string;
   notes: string[];
   disclaimer: string;
 };
@@ -143,6 +176,13 @@ export type SubmitTaskRunResponse = {
   candidateNote: { reason: string; message: string };
   created: boolean;
   disclaimer: string;
+};
+
+export type DeleteTaskAttachmentResponse = {
+  deleted: string;
+  taskId: string;
+  attachmentCount: number;
+  sha256: string;
 };
 
 export type EvaluateTaskRunResponse = {

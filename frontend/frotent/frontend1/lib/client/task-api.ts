@@ -1,12 +1,15 @@
 import type { ApiResponse } from "../../types/contracts/common";
 import type {
+  DeleteTaskAttachmentResponse,
   EvaluateTaskRunResponse,
   PracticeTask,
+  ReorderTasksResponse,
   SubmitTaskRunInput,
   SubmitTaskRunResponse,
   TaskDetailResponse,
   TaskListResponse,
   TaskStatus,
+  UpdateTaskResponse,
   UploadTaskAttachmentResponse,
 } from "../../types/contracts/task";
 import { apiUrl } from "./http";
@@ -28,16 +31,45 @@ async function call<T>(path: string, init?: RequestInit): Promise<T> {
   return body.data;
 }
 
-export async function listTasks(params: { status?: TaskStatus; occupation?: string } = {}): Promise<TaskListResponse> {
+export async function listTasks(
+  params: { status?: TaskStatus; occupation?: string; includeHidden?: boolean } = {},
+): Promise<TaskListResponse> {
   const query = new URLSearchParams();
   if (params.status) query.set("status", params.status);
   if (params.occupation) query.set("occupation", params.occupation);
+  if (params.includeHidden) query.set("includeHidden", "1");
   const suffix = query.toString() ? `?${query.toString()}` : "";
   return call<TaskListResponse>(`/api/tasks${suffix}`);
 }
 
 export async function getTask(taskId: string): Promise<TaskDetailResponse> {
   return call<TaskDetailResponse>(`/api/tasks/${encodeURIComponent(taskId)}`);
+}
+
+/**
+ * 改**自己的视图**（备注 / 隐藏 / 顺序），不是改任务。
+ *
+ * 任务内容来自图谱的 `task --trains--> skill` 边，接口没有、也不该有「改成自定义」的入口。
+ * 传 `{reset: true}` 把这条恢复成默认。
+ */
+export async function updateTask(
+  taskId: string,
+  patch: { hidden?: boolean; note?: string; position?: number | null; reset?: boolean },
+): Promise<UpdateTaskResponse> {
+  return call<UpdateTaskResponse>(`/api/tasks/${encodeURIComponent(taskId)}`, {
+    method: "PATCH",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(patch),
+  });
+}
+
+/** 按给定顺序重排（阶段分组优先，阶段内按这次的顺序）。 */
+export async function reorderTasks(taskIds: string[], occupation?: string): Promise<ReorderTasksResponse> {
+  return call<ReorderTasksResponse>("/api/tasks/reorder", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ taskIds, occupation }),
+  });
 }
 
 export async function submitTaskRun(taskId: string, input: SubmitTaskRunInput): Promise<SubmitTaskRunResponse> {
@@ -74,6 +106,32 @@ export async function uploadTaskAttachment(taskId: string, file: File): Promise<
 
 export async function evaluateTaskRun(runId: string): Promise<EvaluateTaskRunResponse> {
   return call<EvaluateTaskRunResponse>(`/api/task-runs/${encodeURIComponent(runId)}/evaluate`, { method: "POST" });
+}
+
+/** 删附件。还被运行记录引用时后端回 409 `ATTACHMENT_IN_USE`（引用可追溯优先于清理）。 */
+export async function deleteTaskAttachment(attachmentId: string): Promise<DeleteTaskAttachmentResponse> {
+  return call<DeleteTaskAttachmentResponse>(`/api/attachments/${encodeURIComponent(attachmentId)}`, { method: "DELETE" });
+}
+
+/** 取回附件原始字节（不是 JSON，所以这里不走 `call()`）。 */
+export async function downloadTaskAttachment(attachmentId: string): Promise<Blob> {
+  const response = await fetch(apiUrl(`/api/attachments/${encodeURIComponent(attachmentId)}/content`), {
+    credentials: "include",
+    cache: "no-store",
+  });
+  if (!response.ok) {
+    let code = "ATTACHMENT_DOWNLOAD_FAILED";
+    let message = "附件下载失败";
+    try {
+      const body = await response.json() as ApiResponse<unknown>;
+      code = body.error?.code ?? code;
+      message = body.error?.message ?? message;
+    } catch {
+      /* 不是 JSON：保留默认文案 */
+    }
+    throw new TaskApiError(response.status, code, message);
+  }
+  return response.blob();
 }
 
 /** 任务清单里「现在就能做」的那条（没有就返回 null）——前端各处统一用它做提示。 */
