@@ -34,7 +34,7 @@
 
 | 想拿的东西 | 状态 | 说明 |
 |---|---|---|
-| **中国官方语料（入库）** | **1519 / 1519 已入库**（2026-10-01） | 审核由**业主豁免**（`WAIVED`，**不是人工逐条审核**）：数据里逐条带 `review_waiver{by,at,reason,policy}`。复算 `python knowledge-cn/waive_review.py --waived-by <谁>`。已导入 WeKnora Lite 并核验（**5 份文档 / 2641 chunk**、记录 ID 0 缺失），核验脚本 `python knowledge-cn/verify_import.py`。**这批语料的检索质量评测已于 2026-10-01 跑完两版（改造前 / 改造后）**：33 题（可答 26 / 超范围 7），改造后混合检索命中@1 50.0%、@5 80.8%、@10 100%、MRR 0.632（改造前 @1 61.5%、MRR 0.700 —— 均秩基本持平、@1 有升有降，**不能宣称改造让检索变好**）；但这是**作者自出题 + 机器复核 gold**，不等于业主人工判定。另：7 道超范围题的 top-1 分全部等于满分，**检索层无法拒答**。见 `knowledge-cn/evaluations/检索质量评测-20261001.md` |
+| **中国官方语料（入库）** | **1519 / 1519 已入库**（2026-10-01） | 审核由**业主豁免**（`WAIVED`，**不是人工逐条审核**）：数据里逐条带 `review_waiver{by,at,reason,policy}`。复算 `python knowledge-cn/waive_review.py --waived-by <谁>`。已导入 WeKnora Lite 并核验（**5 份文档 / 2612 chunk**、记录 ID 0 缺失），核验脚本 `python knowledge-cn/verify_import.py`。**这批语料的检索质量评测已于 2026-10-01 跑完三版**：33 题（可答 26 / 超范围 7），现役混合检索命中@1 73.1%、@5 92.3%、@10 100%、MRR 0.819（改造前 61.5% / 0.700；只改结构那版 50.0% / 0.632）。现役配置 = 结构化目录一块一条记录 + 工资统计 2400 字一块 + RRF 融合权重 0.2/0.8（过了对半交叉验证）。但这是**作者自出题 + 机器复核 gold**，不等于业主人工判定。另：7 道超范围题的 top-1 分全部等于满分，**检索层无法拒答**。见 `knowledge-cn/evaluations/检索质量评测-20261001.md` |
 | **WeKnora 运行态** | 可跑（**不需要 Docker**） | 向量后端用本机 `127.0.0.1:8090` 的 `Qwen3-Embedding-0.6B`（ONNX int8，1024 维，OpenAI 兼容），`config/builtin_models.yaml` 已指向它；起 Lite 用 `set -a; source .env.lite; ./WeKnora-lite.exe` |
 | **O*NET 30.3** | 未获得 | 仓库里的 O*NET 是 **29.1**（1,254 节点）与 OnLine 页面（26 份来源之一）。概要说「30.3」与仓库不符，见 `项目架构与技术文档.md` §12 第 8 条 |
 | **O*NET 独立外部层的完整图谱** | 部分 | `extern` 层有 21,987 节点 / 108,662 边（`import/build/*.jsonl`），但 `knowledge/import/raw/` 不入库，重下需外网 |
