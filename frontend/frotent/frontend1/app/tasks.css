@@ -1,0 +1,90 @@
+/* 任务实践（/actions/tasks）—— 视觉语言与 xn-interview-* / xn-scenario-* 保持一致 */
+.xn-tasks-page,.xn-task-detail{display:grid;gap:20px;max-width:1180px;margin:0 auto;color:#33445d}
+.xn-scenario-grid-3{grid-template-columns:repeat(3,1fr)}
+.xn-scenario-card.practice:after{background:#f1ecff}
+.xn-scenario-card.practice .xn-scenario-icon{color:#6d4bd8;background:#f1ecff}
+.xn-scenario-card.practice small{color:#6d4bd8}
+
+.xn-task-group{margin-top:22px}
+.xn-task-group>h2{display:flex;align-items:baseline;gap:10px;margin:0 0 12px;color:#173354;font-size:17px}
+.xn-task-group>h2 small{color:#8794a6;font-size:13px;font-weight:500}
+.xn-task-list{display:grid;gap:12px}
+.xn-task-row{display:grid;gap:12px;padding:18px 20px;border:1px solid #e2e9f1;border-radius:13px;background:#fff}
+.xn-task-row.available{border-color:#9dc4f5;background:linear-gradient(180deg,#f7fbff,#fff)}
+.xn-task-row.completed{border-color:#cfe9e3;background:#fbfffe}
+.xn-task-main{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
+.xn-task-main>span{padding:4px 8px;border-radius:10px;font-size:12px;white-space:nowrap}
+.status-available{color:#1760df;background:#edf4ff}
+.status-planned{color:#6b7788;background:#f1f5f9}
+.xn-task-main h3{margin:0;color:#102d50;font-size:16px}
+.xn-task-main p{margin:5px 0 0;color:#69788d;font-size:13px;line-height:1.7}
+.xn-task-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0}
+.xn-task-meta>div{padding:10px 12px;border-radius:10px;background:#f6f9fc}
+.xn-task-meta dt{color:#8794a6;font-size:12px}
+.xn-task-meta dd{margin:4px 0 0;color:#43536a;font-size:13px;line-height:1.6}
+.xn-task-actions{display:flex;align-items:center;justify-content:flex-end;gap:12px}
+.xn-task-actions em{color:#8290a3;font-size:12px;font-style:normal}
+.xn-task-notes{padding:22px}
+.xn-task-notes header{display:flex;align-items:center;gap:12px}
+.xn-task-notes h2{margin:0;color:#173354;font-size:17px}
+.xn-task-notes p{margin:6px 0 0;color:#6d7a8d;font-size:13px}
+.xn-task-notes ul{margin:14px 0;padding-left:19px;color:#5c6d84;font-size:13px;line-height:1.8}
+
+.xn-task-notice{padding:20px;border-color:#9fdcd3;background:#f4fffd}
+.xn-task-notice header{display:flex;align-items:center;justify-content:space-between}
+.xn-task-notice header b{color:#087f76;font-size:15px}
+.xn-task-notice header span{color:#8290a3;font-size:12px}
+.xn-task-notice p{margin:10px 0;color:#4f6379;font-size:13px;line-height:1.75}
+.xn-task-notice ul{margin:10px 0;padding-left:19px}
+.xn-task-notice li{color:#3f5468;font-size:13px;line-height:1.8}
+.xn-task-notice li small{margin-left:8px;padding:2px 6px;border-radius:8px;color:#a46108;background:#fff5df;font-size:11px}
+
+.xn-task-detail-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.85fr);gap:16px;align-items:start}
+.xn-task-requirements,.xn-task-submit{padding:24px}
+.xn-task-requirements header small,.xn-task-submit header small,.xn-task-feedback>header small,.xn-task-history>header small{color:#1760df;font-size:12px;font-weight:700}
+.xn-task-requirements h2,.xn-task-submit h2{margin:5px 0 14px;color:#071f49;font-size:19px}
+.xn-task-requirements dl{display:grid;gap:9px;margin:0}
+.xn-task-requirements dl>div{display:grid;grid-template-columns:96px 1fr;gap:10px;padding:9px 12px;border-radius:9px;background:#f6f9fc}
+.xn-task-requirements dt{color:#8794a6;font-size:13px}
+.xn-task-requirements dd{margin:0;color:#3f5468;font-size:13px;line-height:1.7}
+.xn-task-warn{color:#b46b0e}
+.xn-task-requirements h3{margin:18px 0 8px;color:#173354;font-size:15px}
+.xn-task-steps{margin:0;padding-left:20px;color:#54657c;font-size:13px;line-height:1.9}
+.xn-task-submit>header p{margin:0 0 16px;color:#7a8799;font-size:13px;line-height:1.7}
+.xn-task-submit label{display:grid;gap:7px;margin-top:14px}
+.xn-task-submit label>span{color:#43536a;font-size:13px;font-weight:700}
+.xn-task-submit textarea{width:100%;min-height:96px;padding:12px;border:1px solid #d8e2ed;border-radius:10px;outline:0;color:#2d3d56;background:#fff;font-size:14px;line-height:1.7;resize:vertical}
+.xn-task-submit textarea:last-of-type{min-height:190px}
+.xn-task-submit textarea:focus{border-color:#4e86df;box-shadow:0 0 0 3px rgba(37,99,235,.09)}
+.xn-task-submit>button{width:100%;margin-top:16px}
+
+.xn-task-feedback{padding:24px}
+.xn-task-feedback>header h2{margin:5px 0 16px;color:#071f49;font-size:19px}
+.xn-task-feedback-head{display:grid;grid-template-columns:200px 1fr;gap:16px;align-items:center}
+.xn-task-feedback-body p{margin:0 0 8px;color:#5c6d84;font-size:14px;line-height:1.85}
+.xn-task-feedback-lists{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.xn-task-feedback-lists section{padding:18px;border-radius:12px;background:#f6f9fc}
+.xn-task-feedback-lists h3{margin:0 0 10px;color:#173354;font-size:14px}
+.xn-task-feedback-lists ul{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.xn-task-feedback-lists li{display:grid;gap:4px;padding:10px 12px;border-radius:9px;background:#fff}
+.xn-task-feedback-lists li b{color:#243a56;font-size:13px}
+.xn-task-feedback-lists li em{color:#7a8799;font-size:12px;font-style:normal;line-height:1.65}
+.xn-task-feedback-lists p{margin:0;color:#8290a3;font-size:13px}
+
+.xn-task-history{padding:22px}
+.xn-task-history>header h2{margin:5px 0 14px;color:#071f49;font-size:18px}
+.xn-task-history>article{padding:16px 0;border-top:1px solid #eaf0f6}
+.xn-task-history>article>div:first-child{display:flex;align-items:center;gap:10px}
+.xn-task-history time{color:#7b889a;font-size:12px}
+.xn-task-history>article>p{margin:9px 0 0;color:#4f6379;font-size:13px;line-height:1.8;white-space:pre-wrap}
+.xn-task-run-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+
+@media(max-width:1080px){.xn-scenario-grid-3{grid-template-columns:1fr 1fr}.xn-task-detail-grid{grid-template-columns:1fr}}
+@media(max-width:720px){
+  .xn-scenario-grid-3{grid-template-columns:1fr}
+  .xn-task-meta{grid-template-columns:1fr}
+  .xn-task-main{grid-template-columns:1fr}
+  .xn-task-actions{justify-content:space-between}
+  .xn-task-feedback-head,.xn-task-feedback-lists{grid-template-columns:1fr}
+  .xn-task-requirements dl>div{grid-template-columns:1fr}
+}

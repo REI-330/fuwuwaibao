@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { CSSProperties } from "react";
 import { PageHeading } from "../../../components/ui/page-heading";
@@ -108,7 +109,7 @@ export default function PathPage() {
   const startStage = path?.path.find((stage) => !stage.stage_skipped)?.stage ?? "junior";
 
   return <div className="xn-stack xn-live-path">
-    <PageHeading title="我的成长路径" subtitle="确定阶段目标、能力缺口和任务顺序；职场模拟内容将在后续开放。" />
+    <PageHeading title="我的成长路径" subtitle="确定阶段目标、能力缺口和任务顺序；每条实践任务都能直接进职场模拟做掉。" />
 
     <section className="xn-card xn-path-controls" aria-label="路径设置">
       <label><span>目标职业</span>
@@ -161,7 +162,7 @@ export default function PathPage() {
             <div><small>核心实践任务</small><h3>{task.task}</h3></div>
             <dl><div><dt>使用工具</dt><dd>{task.tools.join("、") || "图谱未记录"}</dd></div><div><dt>交付成果</dt><dd>{task.deliverable || "图谱未记录"}</dd></div><div><dt>成果证据</dt><dd>{task.evidence.map((item) => item.description).join("、") || "图谱未记录"}</dd></div></dl>
             {task.subtasks.length > 0 && <p className="xn-session-note">考核点：{task.subtasks.join("；")}</p>}
-            <p className="xn-session-note">来源：{task.source_refs.join("、") || "图谱未标注"}；当前展示实践建议，职场模拟将在后续开放。</p>
+            <p className="xn-session-note">来源：{task.source_refs.join("、") || "图谱未标注"} · <Link href={`/actions/tasks?occupation=${encodeURIComponent(path.occupation_id)}&stage=${encodeURIComponent(stage.stage)}`}>去职场模拟做掉这条任务 →</Link></p>
           </div>)}
         </article>)}
       </section>}
