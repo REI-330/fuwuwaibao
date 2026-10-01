@@ -33,7 +33,7 @@
 | 工作地图 | `/work-map` | 已挂真组件：`WorkMapExplorer` 读职业/技能真数据 + `CareerMatchPanel`（对 501 显示「尚未上线」） | 可跳 `/path`、`/catalog` |
 | 职业目录 | `/catalog` | 已挂真组件：`CatalogBrowser` 读 `/api/v1/occupations`、`/skills`、`/catalog/stats` | 可跳 `/path` |
 | 成长路径 | `/path` | 按 occupation 参数请求路径生成 | 读取职业目录；任务计划应进入 `/actions` |
-| 职场模拟 | `/actions` | 当前仅显示筹备中 | 预期提交任务并写入成长记录 |
+| 职场模拟 | `/actions` | 模拟场景入口：两条真链路（`/mock-interview` 模拟面试、`/scenarios/cross-role` 跨岗位沟通训练） | 提交任务并写入记忆候选 |
 | 成长记录 | `/growth-records` | 使用 Provider 内存状态展示记录 | 跳 `/actions`、`/growth` |
 
 ## 1. 根入口 `/`
@@ -328,20 +328,22 @@
 
 ## 9. 职场模拟 `/actions`
 
-### 当前真实行为
+### 当前真实行为（2026-10-01 起不再是占位页）
 
-- 页面只渲染标题和“内容筹备中”，不请求接口，也不提交任务。
+- `/actions` 是**模拟场景入口**，两张卡片分别指向两个真链路：
+  - **模拟面试** `/mock-interview`（列表 `/mock-interview/history`、作答 `/mock-interview/<id>`、报告 `/mock-interview/<id>/report`）；
+  - **跨岗位沟通训练** `/scenarios/cross-role`（列表 `/scenarios/cross-role/history`、作答与报告同构）。
+- 两端都请求真接口：`/api/v1/interview-skills`、`/api/v1/interviews*`、`/api/v1/cross-role/roles`、`/api/v1/cross-role/sessions*`（路由与语义见 `frontend-backend-page-contract.md` §6）。
+- 移植自队友项目 `career-ai-system`；差异清单见 `模拟面试与跨岗位训练移植说明.md`。
 
-### 已存在的准备代码
+### 上一版遗留的准备代码（仍保留，未被这两条链路使用）
 
-- `training-api.ts` 中有 `evaluateTraining(choice, taskId)`，目前属于客户端演示函数。
+- `training-api.ts` 中有 `evaluateTraining(choice, taskId)`，仍属客户端演示函数。
 - `product-data.ts` 中有历史演示任务和职业数据。
 
-### 预期联动
+### 尚未做
 
-- `/path` 安排的任务 → `/actions?task=<id>`。
-- 用户提交行动 → 后端评估 → 生成候选画像。
-- 用户确认候选画像 → `/growth-records` 展示证据和成长事件。
+- 「任务 → 行动提交 → 后端评估 → 候选画像」这条**任务制**链路仍未实现；`/path` 安排的任务还没接到 `/actions`。
 - `/growth-records` 空状态 → `/actions`。
 
 ### 前端代码入口

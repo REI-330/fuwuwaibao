@@ -7,7 +7,7 @@
 | `/onboarding` | 建立、预览并确认初始画像 | [`app/(entry)/onboarding/page.tsx`](<../app/(entry)/onboarding/page.tsx>) | — | 手填画像已接入；简历解析为前端演示 |
 |                   |                                      |                                                              |                         |                                           |
 | `/path` | 个性化成长路径、技能差距、路径评估 | [`app/(product)/path/page.tsx`](<../app/(product)/path/page.tsx>) | — | 路径生成已接入，用户能力输入仍为硬编码 |
-| `/actions` | 职场模拟 | [`app/(product)/actions/page.tsx`](<../app/(product)/actions/page.tsx>) | — | 空页面，待建设 |
+| `/actions` | 职场模拟（模拟场景入口） | [`app/(product)/actions/page.tsx`](<../app/(product)/actions/page.tsx>) | `/api/v1/interview-skills`、`/api/v1/interviews*`、`/api/v1/cross-role/*`（在子页面调用） | 入口卡片；两条真链路见 §6 |
 | `/growth` | 用户画像总览、岗位推荐和市场信息 | [`app/(product)/growth/page.tsx`](<../app/(product)/growth/page.tsx>) | — | 画像和推荐已接入；部分个人/市场数据为占位 |
 | `/growth-records` | 成长变化、行动结果和证据档案 | [`app/(product)/growth-records/page.tsx`](<../app/(product)/growth-records/page.tsx>) | `ProfileProvider` | 仅前端会话内存，刷新丢失 |
 | `/chat` | 兼容入口，跳转到 `/growth?chat=open` | [`app/(product)/chat/page.tsx`](<../app/(product)/chat/page.tsx>) | 全局 `ChatConversation` | 对话接口已接入；候选画像仅前端内存 |
@@ -446,18 +446,30 @@
 
 页面没有路径编辑、确认、重新生成表单或安排任务的写操作。页面中的任务只展示，尚未连接 `/actions`。
 
-## 6. `/actions` 职场模拟
+## 6. `/actions` 职场模拟（模拟场景入口，2026-10-01 起已接通）
 
-代码位置：[`app/(product)/actions/page.tsx`](<../app/(product)/actions/page.tsx>)。
+代码位置：[`app/(product)/actions/page.tsx`](<../app/(product)/actions/page.tsx>)。页面本身只渲染两张入口卡片，真实数据在子页面调用：
 
-当前仅显示“内容筹备中”，不请求数据、不提交数据。仓库中存在历史演示任务和模拟评估函数：
+| 页面 | 路由 | 用到的接口 |
+|---|---|---|
+| 模拟面试配置 | `/mock-interview` | `GET /api/v1/interview-skills`、`GET /api/v1/interviews`、`GET /api/resumes`、`POST /api/v1/interviews` |
+| 模拟面试作答 | `/mock-interview/<sessionId>` | `GET /api/v1/interviews/<id>`、`POST .../answers`、`POST .../complete` |
+| 面试报告 / 历史 | `/mock-interview/<sessionId>/report`、`/mock-interview/history` | `GET .../report`、`DELETE /api/v1/interviews/<id>` |
+| 跨岗位选岗 | `/scenarios/cross-role` | `GET /api/v1/cross-role/roles`、`GET/POST /api/v1/cross-role/sessions` |
+| 跨岗位作答 / 报告 / 历史 | `/scenarios/cross-role/<sessionId>[/report]`、`/scenarios/cross-role/history` | `GET .../sessions/<id>`、`POST .../answers`、`POST .../complete`、`GET .../report`、`DELETE .../sessions/<id>` |
 
-- [`lib/fixtures/product-data.ts`](../lib/fixtures/product-data.ts)
-- [`lib/client/training-api.ts`](../lib/client/training-api.ts)
+口径要点（由 `backend/tests/test_interviews.py`、`backend/tests/test_cross_role.py` 与 `npm run e2e` 阶段 D/G 钉住）：
 
-但当前 `/actions` 页面没有使用它们。
+- 响应一律走本项目的 `{requestId, data, error}` 通用包。错误码：`ROLE_NOT_FOUND` 404、`ROLE_NAME_REQUIRED`/`INVALID_BODY`/`INVALID_DIFFICULTY`/`INVALID_MODE`/`OPTION_NOT_FOUND` 422、`INTERVIEW_FINISHED`/`SESSION_FINISHED`/`REPORT_NOT_READY` 409、`QUESTION_NOT_FOUND` 404。
+- **本项目没有 401 分支**：用户来自会话 Cookie，无 Cookie 回落 `user_local`。队友那版有真账号体系，前端因此带「401 → 建访客会话」的重试，移植时已去掉。
+- `questionSource` 取值 `llm` / `fallback`（队友写死 `tbox`）：出题走 `backend/llm.py`，端点没配或返回不是 JSON 时自动用本地备用题并在 `questionSource` 里如实标注。
+- 跨岗位题库来自队友项目（32 职业 / 320 题），来源与免责声明随 `/api/v1/cross-role/roles` 一起返回，前端原样展示。
 
-后端建设时建议至少提供：
+上一版遗留的 [`lib/fixtures/product-data.ts`](../lib/fixtures/product-data.ts)、[`lib/client/training-api.ts`](../lib/client/training-api.ts)（任务制演示）仍保留，但**未被这两条链路使用**。
+
+### 仍未实现：任务制链路
+
+后端将来若要做「任务 → 行动提交 → 评估 → 候选画像」，建议至少提供：
 
 - `GET /api/tasks?status=planned|available|completed`：返回任务 ID、来源路径、标题、说明、目标能力、执行步骤、预计时长、难度、交付要求、证据要求和状态。
 - `GET /api/tasks/{taskId}`：返回任务详情及历史提交。
