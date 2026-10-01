@@ -33,3 +33,35 @@ export type UserProfile = {
   source: "manual" | "resume" | "chat";
   updatedAt: string;
 };
+
+/**
+ * 画像历史快照（2026-10-01 第七轮）：`GET /api/profile/history` 的列表项。
+ *
+ * 快照是**只增不改**的：每次画像写入 / 确认留一份，回答「上周那一刻的档案长什么样」。
+ * 列表项只给「一眼看出这是哪一版」的摘要，完整画像走 `GET /api/profile/history/<snapshotId>`。
+ */
+export type ProfileSnapshotSummary = {
+  identity?: string | null;
+  school?: string | null;
+  major?: string | null;
+  currentGoal?: string | null;
+  skills: string[];
+};
+
+export type ProfileSnapshot = {
+  snapshotId: string;
+  profileVersion: number;
+  status: ProfileStatus;
+  capturedAt: string;
+  summary: ProfileSnapshotSummary;
+};
+
+export type ProfileHistoryPayload = {
+  items: ProfileSnapshot[];
+  count: number;
+  total: number;
+  limit: number | null;
+  offset: number;
+  nextCursor: string | null;
+  hasMore: boolean;
+};

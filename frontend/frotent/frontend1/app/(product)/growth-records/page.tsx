@@ -1,10 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDynamicProfile } from "../../../components/profile/profile-provider";
 import { writeGrowthRecord } from "../../../lib/client/growth-api";
+import { getProfileSnapshot, listProfileHistory } from "../../../lib/client/profile-api";
 import type { GrowthRecord } from "../../../types/contracts/growth";
+import type { ProfileSnapshot, UserProfile } from "../../../types/contracts/profile";
+
+/** 画像历史一次取多少个版本（点「加载更早的版本」再取一页）。 */
+const HISTORY_PAGE_SIZE = 10;
 
 type ArchiveCategory = "全部" | "能力变化" | "任务行动" | "职业方向" | "路径调整";
 type ArchiveStatus = "全部状态" | "已确认" | "已记录" | "待确认";
@@ -33,6 +38,10 @@ function isRecent(value: string, period: ArchivePeriod) {
   if (period === "all") return true;
   const timestamp = new Date(value).getTime();
   return Number.isFinite(timestamp) && Date.now() - timestamp <= Number(period) * 24 * 60 * 60 * 1000;
+}
+
+function textOr(value: unknown) {
+  return value === undefined || value === null || value === "" ? "未填" : String(value);
 }
 
 function displayDate(value: string, withYear = false) {
@@ -84,6 +93,64 @@ export default function GrowthRecordsPage() {
      记录 id 用 `archive_<item.id>`：重复点不会产生重复记录或重复候选（后端按 recordId 幂等）。 */
   const [saving, setSaving] = useState(false);
   const [saveNote, setSaveNote] = useState("");
+  /* 画像历史档案（2026-10-01 第七轮）：读服务端只增不改的快照，回答「上周那一刻的档案长什么样」。
+     这是**只读**面板：点开历史版本不会改当前画像，也不会产生新快照。 */
+  const [snapshots, setSnapshots] = useState<ProfileSnapshot[]>([]);
+  const [snapshotTotal, setSnapshotTotal] = useState(0);
+  const [snapshotCursor, setSnapshotCursor] = useState<string | null>(null);
+  const [snapshotHasMore, setSnapshotHasMore] = useState(false);
+  const [snapshotLoading, setSnapshotLoading] = useState(true);
+  const [snapshotError, setSnapshotError] = useState("");
+  const [snapshotPicked, setSnapshotPicked] = useState("");
+  const [snapshotProfile, setSnapshotProfile] = useState<UserProfile | null>(null);
+  const [snapshotDetailLoading, setSnapshotDetailLoading] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    listProfileHistory({ limit: HISTORY_PAGE_SIZE })
+      .then(page => {
+        if (!active) return;
+        setSnapshots(page.items);
+        setSnapshotTotal(page.total);
+        setSnapshotCursor(page.nextCursor);
+        setSnapshotHasMore(page.hasMore);
+      })
+      .catch(caught => { if (active) setSnapshotError(caught instanceof Error ? caught.message : "画像历史读取失败"); })
+      .finally(() => { if (active) setSnapshotLoading(false); });
+    return () => { active = false; };
+  }, []);
+
+  async function loadMoreSnapshots() {
+    if (!snapshotCursor) return;
+    setSnapshotLoading(true);
+    setSnapshotError("");
+    try {
+      const page = await listProfileHistory({ limit: HISTORY_PAGE_SIZE, cursor: snapshotCursor });
+      setSnapshots(current => [...current, ...page.items]);
+      setSnapshotTotal(page.total);
+      setSnapshotCursor(page.nextCursor);
+      setSnapshotHasMore(page.hasMore);
+    } catch (caught) {
+      setSnapshotError(caught instanceof Error ? caught.message : "画像历史读取失败");
+    } finally {
+      setSnapshotLoading(false);
+    }
+  }
+
+  async function openSnapshot(snapshotId: string) {
+    setSnapshotPicked(snapshotId);
+    setSnapshotDetailLoading(true);
+    setSnapshotError("");
+    try {
+      const result = await getProfileSnapshot(snapshotId);
+      setSnapshotProfile(result.profile);
+    } catch (caught) {
+      setSnapshotProfile(null);
+      setSnapshotError(caught instanceof Error ? caught.message : "画像快照读取失败");
+    } finally {
+      setSnapshotDetailLoading(false);
+    }
+  }
 
   async function saveToMemory(item: ArchiveItem) {
     setSaving(true);
@@ -206,6 +273,47 @@ export default function GrowthRecordsPage() {
           {saveNote && <p className="xn-memory-hint">记忆库：{saveNote}　（到「用户画像 → 记忆库」的待确认栏里决定是否保留）</p>}
         </> : <div className="xn-archive-empty"><span>◎</span><b>选择一条成长记录</b><p>这里会展示变化前后、证据来源和后续影响。</p></div>}
       </aside>
+    </section>
+
+    <section className="xn-card xn-archive-history" aria-label="画像历史档案">
+      <header>
+        <div><small>画像历史档案</small><h2>画像版本回看</h2></div>
+        <span className="xn-session-note">共 {snapshotTotal} 个版本 · 最新在前</span>
+      </header>
+      <p className="xn-session-note">每次画像写入或确认都留一份**只增不改**的快照；点一个版本看当时那一刻的档案，读历史不会改当前画像。</p>
+      {snapshotError && <p className="xn-interview-error" role="alert">{snapshotError}</p>}
+      {snapshotLoading && !snapshots.length
+        ? <div className="xn-interview-empty">正在读取画像历史…</div>
+        : snapshots.length
+          ? <div className="xn-archive-history-layout">
+              <div className="xn-archive-history-list">
+                {snapshots.map(item => <button className={snapshotPicked === item.snapshotId ? "active" : ""} onClick={() => void openSnapshot(item.snapshotId)} key={item.snapshotId}>
+                  <time dateTime={item.capturedAt}>{displayDate(item.capturedAt, true)}</time>
+                  <span><em>v{item.profileVersion} · {item.status === "confirmed" ? "已确认" : "草稿"}</em><b>{item.summary.major || item.summary.school || "未填学校/专业"}</b><small>{(item.summary.skills ?? []).slice(0, 3).join("、") || "未填技能"}</small></span>
+                </button>)}
+                {snapshotHasMore && <div className="xn-archive-more"><button className="xn-btn xn-btn-outline" disabled={snapshotLoading} onClick={() => void loadMoreSnapshots()}>{snapshotLoading ? "加载中…" : "加载更早的版本"}</button></div>}
+              </div>
+              <div className="xn-archive-history-detail">
+                {snapshotDetailLoading
+                  ? <p className="xn-session-note">读取中…</p>
+                  : snapshotProfile
+                    ? <>
+                        <h3>v{snapshotProfile.profileVersion} · {snapshotProfile.status === "confirmed" ? "已确认" : "草稿"}</h3>
+                        <dl className="xn-archive-meta">
+                          <div><dt>身份</dt><dd>{textOr(snapshotProfile.identity)}</dd></div>
+                          <div><dt>学校</dt><dd>{textOr(snapshotProfile.school)}</dd></div>
+                          <div><dt>专业</dt><dd>{textOr(snapshotProfile.major)}</dd></div>
+                          <div><dt>目标</dt><dd>{textOr(snapshotProfile.currentGoal)}</dd></div>
+                        </dl>
+                        <h4>技能（{(snapshotProfile.skills ?? []).length}）</h4>
+                        {(snapshotProfile.skills ?? []).length
+                          ? <div className="xn-archive-tags">{snapshotProfile.skills.map(skill => <span key={skill.name}>{skill.name}</span>)}</div>
+                          : <p className="xn-session-note">这一版没有记录技能。</p>}
+                      </>
+                    : <div className="xn-archive-empty"><span>◎</span><b>选一个版本</b><p>这里显示那一版画像的完整内容。</p></div>}
+              </div>
+            </div>
+          : <div className="xn-archive-empty"><span>⌁</span><b>还没有历史版本</b><p>保存或确认画像后，这里会按时间留下每个版本。</p></div>}
     </section>
   </div>;
 }

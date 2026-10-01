@@ -636,6 +636,17 @@ async function stageD(context) {
     const confirmed = await httpJson(`${base}/api/profile/confirm`, { method: "POST" });
     check("D", "POST /api/profile/confirm 把画像置为 confirmed", confirmed.json?.data?.profile?.status === "confirmed", String(confirmed.json?.data?.profile?.status));
 
+    /* ---- 画像历史快照（2026-10-01 第七轮）：写入 + 确认各留一份，只增不改 ---- */
+    const history = await httpJson(`${base}/api/profile/history`);
+    const historyItems = history.json?.data?.items ?? [];
+    check("D", "画像历史：写入 + 确认后至少 2 份快照（draft / confirmed）", history.json?.data?.total >= 2 && historyItems.length >= 2, `total=${history.json?.data?.total}`);
+    const draftSnapshot = historyItems.find(item => item.status === "draft");
+    check("D", "画像历史：快照带版本号与摘要（技能取自当时画像）", !!draftSnapshot && draftSnapshot.profileVersion >= 1 && Array.isArray(draftSnapshot.summary?.skills) && draftSnapshot.summary.skills.length >= 1, JSON.stringify(draftSnapshot?.summary ?? null));
+    const snapshotDetail = await httpJson(`${base}/api/profile/history/${draftSnapshot.snapshotId}`);
+    check("D", "画像历史：能读到那一刻的完整画像（状态为 draft）", snapshotDetail.status === 200 && snapshotDetail.json?.data?.profile?.status === "draft" && snapshotDetail.json?.data?.profile?.skills?.length >= 1, String(snapshotDetail.status));
+    const missingSnapshot = await httpJson(`${base}/api/profile/history/psnap_nope`);
+    check("D", "画像历史：未知 snapshotId 404 PROFILE_SNAPSHOT_NOT_FOUND", missingSnapshot.status === 404 && missingSnapshot.json?.error?.code === "PROFILE_SNAPSHOT_NOT_FOUND", `${missingSnapshot.status} ${missingSnapshot.json?.error?.code}`);
+
     /* ---- M1-2 访客会话：201 + HttpOnly Cookie；register/login 仍 501 ---- */
     const postJson = (body) => ({ method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
     const guest = await httpJson(`${base}/api/auth/guest`, postJson({ displayName: "端到端访客" }));
@@ -1674,6 +1685,16 @@ async function stageG(context) {
       "/path 的 SSR 里不再出现「职场模拟将在后续开放」这句过期文案",
       pathPage.status === 200 && pathPage.text.includes("我的成长路径") && !pathPage.text.includes("职场模拟将在后续开放"),
       `${pathPage.status} ${pathPage.text.length}B`
+    );
+
+    /* 成长记录页底部新增「画像历史档案」区块（2026-10-01 第七轮）：
+       SSR 只断言壳与区块标题（快照是客户端取的，这里不断言具体版本，避免过度断言）。 */
+    const recordsPage = await httpJson(`${base}/growth-records`, { timeoutMs: 90000 });
+    check(
+      "G",
+      "/growth-records 返回 200，SSR 出「成长记录档案」与「画像历史档案」区块",
+      recordsPage.status === 200 && recordsPage.text.includes("成长记录档案") && recordsPage.text.includes("画像历史档案"),
+      `${recordsPage.status} ${recordsPage.text.length}B`
     );
 
     /* M1-5 之后 /work-map 与 /catalog 都是真页面：必须 200 且 SSR 出内容，
