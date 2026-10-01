@@ -1,0 +1,25 @@
+{
+  "reviewedRecords": 1519,
+  "chunks": 2167,
+  "chunksWithVector": 2167,
+  "documents": 6,
+  "documentsNotCompleted": 0,
+  "missingRecordIds": 0,
+  "missingSample": [],
+  "embeddingDimensions": [
+    1024
+  ],
+  "checks": {
+    "每条记录都能在 chunk 里找到": true,
+    "每个 chunk 都有向量": true,
+    "向量维度唯一且为 1024": true,
+    "没有文档停在未完成状态": true,
+    "活检索有命中": true
+  },
+  "probe": {
+    "query": "哲学 专业代码",
+    "hits": 102,
+    "topPreview": "## moe-major-030302\n\n专业代码：030302；专业名称：社会工作；来源页码：第 4 页\n\n_来源：moe-majors-2026 · 类型：FACT · 记录 ID：moe-major-030302 · 审核状态：业主豁"
+  },
+  "passed": true
+}

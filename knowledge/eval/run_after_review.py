@@ -78,19 +78,50 @@ def gate_runtime(base):
     try:
         with urllib.request.urlopen(base + "/health", timeout=10) as r:
             ok = r.status == 200
-        print(f"  /health: HTTP {r.status}")
+            status_code = r.status
+        print(f"  /health: HTTP {status_code}")
     except Exception as e:
         print(f"  /health 失败：{type(e).__name__}: {e}")
         return False
+    # /api/v1/models 挂在 Viewer() 后面：**不带 token 会返回 200 + 空数组**，
+    # 看起来像「一个模型都没配」。所以这里必须真的登录，否则门禁会把
+    # 「已配好向量模型」误判成「没配」。
     try:
-        with urllib.request.urlopen(base + "/api/v1/models", timeout=10) as r:
+        token = _login(base)
+        request = urllib.request.Request(base + "/api/v1/models")
+        request.add_header("Authorization", "Bearer " + token)
+        with urllib.request.urlopen(request, timeout=10) as r:
             body = json.loads(r.read().decode() or "{}")
-        n = len(body.get("data") or [])
-        print(f"  /api/v1/models: {n} 个模型")
-        return ok and n > 0
-    except Exception as e:
-        print(f"  /api/v1/models 需要鉴权或不可用（{type(e).__name__}）——该门禁按「未知」处理，不阻断")
+        models = body.get("data") or []
+        embeddings = [m for m in models if str(m.get("type", "")).lower() == "embedding"]
+        print(f"  /api/v1/models: {len(models)} 个模型，其中向量模型 {len(embeddings)} 个"
+              + (f"（{embeddings[0].get('id')}）" if embeddings else ""))
+        if not embeddings:
+            print("  ✗ 没有向量模型：导入后解析会停在 processing，门禁不通过")
+            return False
         return ok
+    except Exception as e:
+        print(f"  /api/v1/models 不可用：{type(e).__name__}: {e}")
+        return False
+
+
+def _login(base, email="agent.verify@local.test", password="verify12345"):
+    """真实登录换 token（先试注册，已存在则忽略）。"""
+    for payload in ({"email": email, "password": password, "username": email.split("@")[0]}, None):
+        if payload is None:
+            break
+        try:
+            request = urllib.request.Request(base + "/api/v1/auth/register",
+                                             data=json.dumps(payload).encode("utf-8"),
+                                             headers={"Content-Type": "application/json"}, method="POST")
+            urllib.request.urlopen(request, timeout=10).read()
+        except Exception:
+            pass
+    request = urllib.request.Request(base + "/api/v1/auth/login",
+                                     data=json.dumps({"email": email, "password": password}).encode("utf-8"),
+                                     headers={"Content-Type": "application/json"}, method="POST")
+    with urllib.request.urlopen(request, timeout=10) as r:
+        return json.loads(r.read().decode() or "{}")["token"]
 
 
 def run(cmd, cwd=None, dry=False):
@@ -132,9 +163,13 @@ def main():
 
     step(3, f"导入 WeKnora{'（dry-run）' if dry else ''}")
     for p in sorted(glob.glob(REVIEWED)):
+        # import_weknora 走「上传真实 .md 文件」，不走 manual 接口：
+        # manual 建的 knowledge file_type=manual，不在 docparser 的
+        # simpleFormats（md/txt/csv/json）里 → 会被路由到 Python docreader；
+        # 本机 docreader 没跑（50051 无监听），解析会永久停在 processing。
         cmd = [PY, os.path.join(ROOT, "knowledge-cn", "acquisition", "import_weknora.py"),
                "--input", p, "--base-url", args.base_url, "--kb-id", args.kb or "",
-               "--api-key", args.api_key or ""]
+               "--email", args.email, "--password", args.password]
         if dry:
             cmd.append("--dry-run")
         run(cmd, cwd=os.path.join(ROOT, "knowledge-cn"), dry=False)
