@@ -19,7 +19,14 @@
 * ``GET  /api/memories/context?query=``    —— 本次提问要注入的记忆（persona 常驻 + 本次想起）
 * ``POST /api/chat``                       —— 对话（**注入已确认记忆**；模型失败降级为规则版）
 * ``GET/POST /api/growth-records``         —— 成长记录；写入时把记录投影成**待确认**记忆候选
-* ``POST /api/resumes/extract``            —— 简历（文本/DOCX）→ 画像草稿 + 待确认记忆候选
+* ``POST /api/resumes/extract``            —— 简历（文本/DOCX/PDF）→ 画像草稿 + 待确认记忆候选
+* ``GET  /api/resumes``                    —— 简历存档列表（供「简历面试」选取）
+* ``GET  /api/v1/interview-skills``        —— 模拟面试可选岗位（来自职业目录）+ 自定义
+* ``GET/POST /api/v1/interviews``          —— 模拟面试列表 / 新建（``requestId`` 幂等）
+* ``GET/POST/DELETE /api/v1/interviews/<id>[/answers|/complete|/report]`` —— 作答与报告
+* ``GET  /api/v1/cross-role/roles``        —— 跨岗位训练岗位（32 个 / 320 题）
+* ``GET/POST /api/v1/cross-role/sessions`` —— 跨岗位训练列表 / 新建（``requestId`` 幂等）
+* ``GET/POST/DELETE /api/v1/cross-role/sessions/<id>[/answers|/complete|/report]``
 
 未实现的接口统一返回 501（当前只剩账号密码相关的 `/api/auth/{register,login}` —— 本项目不存账号密码），
 明确区分「契约已声明但本轮未实现」与「未知路由 404」，不假装可用。
@@ -51,7 +58,13 @@ from .memories import VALID_GROWTH_KINDS, VALID_STATUSES, MemoryStore, UnknownGe
 from .resume import MAX_FILE_BYTES, ResumeFormatError
 from .resume import SUPPORTED_SUFFIXES, UNSUPPORTED_SUFFIXES, pdf_backend
 from .career_match import InsufficientProfile, generate_run, is_stale, known_occupation_ids
+from .cross_role import MODES as CROSS_ROLE_MODES
+from .cross_role import CrossRoleStore
+from .cross_role import bank_metadata as cross_role_bank_metadata
+from .cross_role import list_roles as list_cross_role_roles
+from .interviews import DIFFICULTIES, MAX_ANSWER_CHARS, MAX_JD_CHARS, InterviewStore
 from .resume import extract as extract_resume
+from .resume_store import ResumeStore
 from .resume import memory_candidates as resume_memory_candidates
 from .resume import parse_multipart_form, read_upload
 
@@ -260,7 +273,10 @@ class CareerApi:
     """与 HTTP 传输解耦的请求处理器，便于单元测试直接调用。"""
 
     def __init__(self, store: Optional[GraphStore] = None, profiles: Optional[ProfileStore] = None,
-                 memories: Optional[MemoryStore] = None, chats: Optional[ChatService] = None) -> None:
+                 memories: Optional[MemoryStore] = None, chats: Optional[ChatService] = None,
+                 interviews: Optional[InterviewStore] = None,
+                 cross_role: Optional[CrossRoleStore] = None,
+                 resumes: Optional[ResumeStore] = None) -> None:
         self.store = store or GraphStore()
         # 记忆库的触发器概念锚点优先取图谱里已有的名词（label/alias 查表），
         # 所以这里把图的名词表作为词表传进去；不传也能跑，只是锚点退化成字面切分。
@@ -272,6 +288,12 @@ class CareerApi:
         self.profiles = profiles or ProfileStore(self.store, memories=self.memories)
         # 对话：注入的正是上面这库里的已确认记忆；模型客户端复用同一个（一处配置两处消费）
         self.chats = chats or ChatService(self.store, self.memories, self.profiles)
+        # 模拟面试 / 跨岗位训练 / 简历存档：与记忆库同一形态（本地 + SQLite + 同一把锁的读法），
+        # 默认落同一个 career.db。模拟面试复用记忆库那个 LlmClient —— 一处配置两处消费，
+        # `/health` 报的模型状态就是它；没配端点时出题/评分自动走规则版。
+        self.interviews = interviews or InterviewStore(llm=self.memories.llm)
+        self.cross_role = cross_role or CrossRoleStore()
+        self.resumes = resumes or ResumeStore()
         self._seq = itertools.count(1)
 
     # ------------------------------------------------------------------ 记忆库小工具
@@ -626,6 +648,64 @@ class CareerApi:
             self.memories.save_match_target(user_id, occupation_id, str(run.get("runId") or ""))
             return 200, self.envelope({"target": self.memories.get_match_target(user_id)})
 
+        # ------------------------------------------------------------------ 模拟面试
+        # 契约：types/contracts/interview.ts（移植自队友 career-ai-system，按本项目纪律重写）。
+        # 用户一律来自会话 Cookie（无 Cookie 回落 user_local），所以这里没有 401 分支 ——
+        # 本机单用户形态下不存在「未登录」，这一点与队友那版（真账号体系）不同。
+        if path == "/api/v1/interview-skills" and method == "GET":
+            occupation = self.store.list_occupations("")
+            roles = [{
+                "roleId": item["occupationId"],
+                "name": item["targetJob"],
+                "description": item.get("descriptionZh", ""),
+                "coreSkills": item.get("coreSkills", []),
+            } for item in occupation]
+            roles.insert(0, {
+                "roleId": "custom",
+                "name": "自定义岗位",
+                "description": "输入目标岗位名称和 JD，生成针对性问题。",
+                "coreSkills": [],
+            })
+            return 200, self.envelope({"items": roles, "count": len(roles), "source": "graph"})
+
+        if path == "/api/v1/interviews":
+            if method == "GET":
+                items = self.interviews.list_interviews(user_id)
+                return 200, self.envelope({"items": items, "count": len(items)})
+            if method == "POST":
+                return self._create_interview(user_id, body)
+
+        if path.startswith("/api/v1/interviews/") and method in ("GET", "POST", "DELETE"):
+            return self._interview_action(user_id, method, path, body)
+
+        # ------------------------------------------------------------------ 跨岗位沟通训练
+        if path == "/api/v1/cross-role/roles" and method == "GET":
+            items = list_cross_role_roles()
+            return 200, self.envelope({**cross_role_bank_metadata(), "items": items, "count": len(items)})
+
+        if path == "/api/v1/cross-role/sessions":
+            if method == "GET":
+                items = self.cross_role.list_sessions(user_id)
+                return 200, self.envelope({"items": items, "count": len(items)})
+            if method == "POST":
+                return self._create_cross_role_session(user_id, body)
+
+        if path.startswith("/api/v1/cross-role/sessions/") and method in ("GET", "POST", "DELETE"):
+            return self._cross_role_action(user_id, method, path, body)
+
+        # ------------------------------------------------------------------ 简历存档
+        # 解析本身是纯函数（不落库），这里查的是「解析过的简历」，供模拟面试选取。
+        if path == "/api/resumes" and method == "GET":
+            items = self.resumes.list(user_id)
+            return 200, self.envelope({"items": items, "count": len(items)})
+
+        if path.startswith("/api/resumes/") and path != "/api/resumes/" and method == "GET":
+            resume_id = path[len("/api/resumes/") :].strip("/")
+            record = self.resumes.get(user_id, resume_id)
+            if record is None:
+                return self.error("RESUME_NOT_FOUND", f"未找到简历：{resume_id}", 404)
+            return 200, self.envelope({"resume": record})
+
         if path in NOT_IMPLEMENTED:
             return self.error(
                 "NOT_IMPLEMENTED",
@@ -633,6 +713,162 @@ class CareerApi:
                 501,
             )
 
+        return self.error("NOT_FOUND", f"未知路由：{method} {path}", 404)
+
+    # ------------------------------------------------------------------ 模拟面试（路由实现）
+    def _create_interview(self, user_id: str, body: Any) -> Tuple[int, Dict[str, Any]]:
+        if not isinstance(body, dict):
+            return self.error("INVALID_BODY", "请求体必须是 JSON 对象", 400)
+        role_id = str(body.get("roleId") or "").strip()
+        if not role_id:
+            return self.error("INVALID_BODY", "缺少 roleId", 400)
+        role_name = str(body.get("roleName") or "").strip()
+        if role_id == "custom":
+            if not role_name:
+                return self.error("ROLE_NAME_REQUIRED", "自定义面试需要填写岗位名称", 422)
+        else:
+            node = self.store.node(f"occupation:{role_id}")
+            if node is None:
+                return self.error("ROLE_NOT_FOUND", "没有找到这个面试岗位", 404)
+            role_name = str(node.get("label") or role_id)
+
+        difficulty = str(body.get("difficulty") or "mid")
+        if difficulty not in DIFFICULTIES:
+            return self.error("INVALID_DIFFICULTY", f"未知难度：{difficulty}；可选 {', '.join(DIFFICULTIES)}", 422)
+        try:
+            question_count = int(body.get("questionCount", 5))
+        except (TypeError, ValueError):
+            return self.error("INVALID_BODY", "questionCount 必须是整数", 422)
+        if not 3 <= question_count <= 10:
+            return self.error("INVALID_BODY", "questionCount 必须在 3—10 之间", 422)
+        jd_text = str(body.get("jdText") or "").strip()
+        if len(jd_text) > MAX_JD_CHARS:
+            return self.error("INVALID_BODY", f"jdText 超过 {MAX_JD_CHARS} 字", 422)
+
+        resume_id = str(body.get("resumeId") or "").strip() or None
+        resume_context = None
+        if resume_id:
+            resume_context = self.resumes.interview_context(user_id, resume_id)
+            if not resume_context:
+                return self.error("RESUME_NOT_FOUND", "没有找到可用于面试的简历", 404)
+
+        session = self.interviews.create_interview(
+            user_id=user_id,
+            role_id=role_id,
+            role_name=role_name,
+            difficulty=difficulty,
+            question_count=question_count,
+            jd_text=jd_text or None,
+            resume_id=resume_id,
+            resume_filename=resume_context["filename"] if resume_context else None,
+            resume_text=None,
+            resume_analysis=resume_context["analysis"] if resume_context else None,
+            request_id=str(body.get("requestId") or "").strip() or None,
+        )
+        return 201, self.envelope({"session": session})
+
+    def _interview_action(self, user_id: str, method: str, path: str, body: Any) -> Tuple[int, Dict[str, Any]]:
+        rest = path[len("/api/v1/interviews/") :].strip("/")
+        parts = [part for part in rest.split("/") if part]
+        session_id = parts[0] if parts else ""
+        action = parts[1] if len(parts) > 1 else ""
+        if not session_id:
+            return self.error("NOT_FOUND", f"未知路由：{method} {path}", 404)
+        session = self.interviews.get_owned_session(user_id, session_id)
+        if session is None:
+            return self.error("INTERVIEW_NOT_FOUND", "面试记录不存在", 404)
+
+        if not action and method == "GET":
+            return 200, self.envelope({"session": self.interviews.session_to_dict(session)})
+        if not action and method == "DELETE":
+            self.interviews.delete_interview(session)
+            return 200, self.envelope({"deleted": True})
+        if action == "answers" and method == "POST":
+            if not isinstance(body, dict):
+                return self.error("INVALID_BODY", "请求体必须是 JSON 对象", 400)
+            question_id = str(body.get("questionId") or "").strip()
+            answer = str(body.get("answer") or "").strip()
+            if not question_id or not answer:
+                return self.error("INVALID_BODY", "questionId 与 answer 都不能为空", 422)
+            if len(answer) > MAX_ANSWER_CHARS:
+                return self.error("INVALID_BODY", f"answer 超过 {MAX_ANSWER_CHARS} 字", 422)
+            if session["status"] in ("COMPLETED", "EVALUATED"):
+                return self.error("INTERVIEW_FINISHED", "面试已经交卷，不能继续修改答案", 409)
+            updated = self.interviews.save_answer(session, question_id, answer)
+            if updated is None:
+                return self.error("QUESTION_NOT_FOUND", "题目不属于当前面试", 404)
+            return 200, self.envelope({"session": updated})
+        if action == "complete" and method == "POST":
+            return 200, self.envelope({"report": self.interviews.complete_interview(user_id, session)})
+        if action == "report" and method == "GET":
+            report = self.interviews.read_report(session_id)
+            if report is None:
+                return self.error("REPORT_NOT_READY", "面试尚未完成评估", 409)
+            return 200, self.envelope({"report": report})
+        return self.error("NOT_FOUND", f"未知路由：{method} {path}", 404)
+
+    # ------------------------------------------------------------------ 跨岗位训练（路由实现）
+    def _create_cross_role_session(self, user_id: str, body: Any) -> Tuple[int, Dict[str, Any]]:
+        if not isinstance(body, dict):
+            return self.error("INVALID_BODY", "请求体必须是 JSON 对象", 400)
+        role_id = str(body.get("roleId") or "").strip()
+        if not role_id:
+            return self.error("INVALID_BODY", "缺少 roleId", 400)
+        mode = str(body.get("mode") or "practice")
+        if mode not in CROSS_ROLE_MODES:
+            return self.error("INVALID_MODE", f"未知模式：{mode}；可选 {', '.join(CROSS_ROLE_MODES)}", 422)
+        try:
+            session = self.cross_role.create_session(
+                user_id=user_id, role_id=role_id, mode=mode,
+                request_id=str(body.get("requestId") or "").strip() or None,
+            )
+        except ValueError as error:
+            if str(error) == "ROLE_NOT_FOUND":
+                return self.error("ROLE_NOT_FOUND", "没有找到这个训练岗位", 404)
+            raise
+        return 201, self.envelope({"session": session})
+
+    def _cross_role_action(self, user_id: str, method: str, path: str, body: Any) -> Tuple[int, Dict[str, Any]]:
+        rest = path[len("/api/v1/cross-role/sessions/") :].strip("/")
+        parts = [part for part in rest.split("/") if part]
+        session_id = parts[0] if parts else ""
+        action = parts[1] if len(parts) > 1 else ""
+        if not session_id:
+            return self.error("NOT_FOUND", f"未知路由：{method} {path}", 404)
+        session = self.cross_role.get_owned_session(user_id, session_id)
+        if session is None:
+            return self.error("SESSION_NOT_FOUND", "训练记录不存在", 404)
+
+        if not action and method == "GET":
+            return 200, self.envelope({"session": self.cross_role.session_to_dict(session)})
+        if not action and method == "DELETE":
+            self.cross_role.delete_session(session)
+            return 200, self.envelope({"deleted": True})
+        if action == "answers" and method == "POST":
+            if not isinstance(body, dict):
+                return self.error("INVALID_BODY", "请求体必须是 JSON 对象", 400)
+            question_id = str(body.get("questionId") or "").strip()
+            option_id = str(body.get("optionId") or "").strip()
+            if not question_id or not option_id:
+                return self.error("INVALID_BODY", "questionId 与 optionId 都不能为空", 422)
+            if session["status"] == "COMPLETED":
+                return self.error("SESSION_FINISHED", "训练已经完成，不能继续修改答案", 409)
+            try:
+                updated = self.cross_role.save_answer(session, question_id, option_id)
+            except ValueError as error:
+                if str(error) == "OPTION_NOT_FOUND":
+                    return self.error("OPTION_NOT_FOUND", "所选答案不属于这道题", 422)
+                raise
+            if updated is None:
+                return self.error("QUESTION_NOT_FOUND", "题目不属于当前训练", 404)
+            return 200, self.envelope({"session": updated})
+        if action == "complete" and method == "POST":
+            return 200, self.envelope({"report": self.cross_role.complete_session(session)})
+        if action == "report" and method == "GET":
+            report = self.cross_role.read_report(session)
+            if report is None:
+                return self.error("REPORT_NOT_READY", "请先完成训练", 409)
+            return 200, self.envelope({"report": report})
         return self.error("NOT_FOUND", f"未知路由：{method} {path}", 404)
 
     # ------------------------------------------------------------------ 简历解析
@@ -709,8 +945,22 @@ class CareerApi:
             )
             written_evidence += 1
         payload = dict(result)
+        # 存档（供模拟面试按 resumeId 取回本次解析结果）。**只存解析结果，不存文件字节**：
+        # `originalFileRetained` 仍然是 false，这一条不改口径。
+        try:
+            resume_summary = self.resumes.save(
+                user_id,
+                result,
+                filename=filename,
+                content_type=content_type or "text/plain",
+                file_size=len(blob) or len(text.encode("utf-8")),
+                text=text,
+            )
+        except ValueError:
+            resume_summary = None
         payload.update(
             {
+                "resume": resume_summary,
                 "memoryCandidates": candidates,
                 "candidateCount": len(candidates),
                 "evidenceCount": written_evidence,
