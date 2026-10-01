@@ -27,6 +27,10 @@
 * ``GET  /api/v1/cross-role/roles``        —— 跨岗位训练岗位（32 个 / 320 题）
 * ``GET/POST /api/v1/cross-role/sessions`` —— 跨岗位训练列表 / 新建（``requestId`` 幂等）
 * ``GET/POST/DELETE /api/v1/cross-role/sessions/<id>[/answers|/complete|/report]``
+* ``GET  /api/tasks``                      —— 任务实践：从**路径引擎**派生的任务清单（不臆造）
+* ``GET  /api/tasks/<taskId>``             —— 任务详情 + 历史提交
+* ``POST /api/tasks/<taskId>/runs``        —— 提交行动（落成长记录 + **待确认**候选，``requestId`` 幂等）
+* ``POST /api/task-runs/<runId>/evaluate`` —— 评估反馈（不落已确认能力）
 
 未实现的接口统一返回 501（当前只剩账号密码相关的 `/api/auth/{register,login}` —— 本项目不存账号密码），
 明确区分「契约已声明但本轮未实现」与「未知路由 404」，不假装可用。
@@ -65,6 +69,13 @@ from .cross_role import list_roles as list_cross_role_roles
 from .interviews import DIFFICULTIES, MAX_ANSWER_CHARS, MAX_JD_CHARS, InterviewStore
 from .resume import extract as extract_resume
 from .resume_store import ResumeStore
+from .tasks import DISCLAIMER as TASK_DISCLAIMER
+from .tasks import TaskStore, derive_tasks
+from .tasks import MAX_ACTION_CHARS as TASK_MAX_ACTION_CHARS
+from .tasks import MAX_ATTACHMENTS as TASK_MAX_ATTACHMENTS
+from .tasks import MAX_SUBMISSION_CHARS as TASK_MAX_SUBMISSION_CHARS
+from .tasks import STATUS_AVAILABLE, STATUS_COMPLETED, STATUS_PLANNED
+from .tasks import parse_task_id as parse_task_id_ref
 from .resume import memory_candidates as resume_memory_candidates
 from .resume import parse_multipart_form, read_upload
 
@@ -276,7 +287,8 @@ class CareerApi:
                  memories: Optional[MemoryStore] = None, chats: Optional[ChatService] = None,
                  interviews: Optional[InterviewStore] = None,
                  cross_role: Optional[CrossRoleStore] = None,
-                 resumes: Optional[ResumeStore] = None) -> None:
+                 resumes: Optional[ResumeStore] = None,
+                 tasks: Optional[TaskStore] = None) -> None:
         self.store = store or GraphStore()
         # 记忆库的触发器概念锚点优先取图谱里已有的名词（label/alias 查表），
         # 所以这里把图的名词表作为词表传进去；不传也能跑，只是锚点退化成字面切分。
@@ -294,6 +306,8 @@ class CareerApi:
         self.interviews = interviews or InterviewStore(llm=self.memories.llm)
         self.cross_role = cross_role or CrossRoleStore()
         self.resumes = resumes or ResumeStore()
+        # 任务实践：同样复用记忆库那个 LlmClient，并复用记忆库写「成长记录 + 待确认候选」那条通道。
+        self.tasks = tasks or TaskStore(llm=self.memories.llm)
         self._seq = itertools.count(1)
 
     # ------------------------------------------------------------------ 记忆库小工具
@@ -706,6 +720,18 @@ class CareerApi:
                 return self.error("RESUME_NOT_FOUND", f"未找到简历：{resume_id}", 404)
             return 200, self.envelope({"resume": record})
 
+        # ------------------------------------------------------------------ 任务实践
+        # 任务全部由路径引擎从图谱 `task --trains--> skill` 边派生（不臆造）；提交只产出
+        # **待确认**候选（复用记忆库那条「成长记录 + 候选」通道），评估只给反馈、不落已确认能力。
+        if path == "/api/tasks" and method == "GET":
+            return self._list_tasks(user_id, query)
+
+        if path.startswith("/api/task-runs/") and method == "POST":
+            return self._evaluate_task_run(user_id, path)
+
+        if path.startswith("/api/tasks/") and path != "/api/tasks/" and method in ("GET", "POST"):
+            return self._task_action(user_id, method, path, body)
+
         if path in NOT_IMPLEMENTED:
             return self.error(
                 "NOT_IMPLEMENTED",
@@ -714,6 +740,202 @@ class CareerApi:
             )
 
         return self.error("NOT_FOUND", f"未知路由：{method} {path}", 404)
+
+    # ------------------------------------------------------------------ 任务实践（路由实现）
+    def _task_landscape(self, user_id: str, query: Dict[str, List[str]]) -> Tuple[Dict[str, Any], List[Dict[str, Any]], str]:
+        """算出这个用户当前的任务清单，并说明「用的是哪个职业、从哪来」。
+
+        职业优先级：`?occupation=` → 画像候选 → 目录第一个。用了哪一个会回传
+        （`occupationSource`），不做静默回落。
+        """
+        requested = (_first(query, "occupation") or "").strip()
+        profile = self.profiles.get(user_id) or {}
+        occupation_id, source = requested, "query"
+        if not occupation_id:
+            candidates = [str(item) for item in (profile.get("candidateOccupationIds") or []) if str(item).strip()]
+            if candidates:
+                occupation_id, source = candidates[0], "profile"
+        if not occupation_id:
+            catalog = self.store.list_occupations("")
+            if not catalog:
+                raise OccupationNotFound("图谱里没有任何职业，无法派生任务")
+            occupation_id, source = str(catalog[0]["occupationId"]), "catalog"
+        path_result = generate_career_path(self.store, {"target_job": occupation_id}, profile=profile)
+        tasks = derive_tasks(path_result, self.tasks.submitted_task_ids(user_id))
+        return path_result, tasks, source
+
+    def _list_tasks(self, user_id: str, query: Dict[str, List[str]]) -> Tuple[int, Dict[str, Any]]:
+        status_filter = (_first(query, "status") or "").strip()
+        if status_filter and status_filter not in (STATUS_PLANNED, STATUS_AVAILABLE, STATUS_COMPLETED):
+            return self.error("INVALID_STATUS", f"未知的任务状态：{status_filter}", 400)
+        try:
+            path_result, tasks, source = self._task_landscape(user_id, query)
+        except OccupationNotFound as error:
+            return self.error("OCCUPATION_NOT_FOUND", str(error), 404)
+        except InvalidCareerPathInput as error:
+            return self.error("INVALID_CAREER_PATH_INPUT", str(error), 400)
+        items = [task for task in tasks if not status_filter or task["status"] == status_filter]
+        return 200, self.envelope({
+            "items": items,
+            "count": len(items),
+            "occupation": {"occupationId": path_result["occupation_id"], "targetJob": path_result["target_job"]},
+            "occupationSource": source,
+            "counts": {status: sum(1 for task in tasks if task["status"] == status)
+                       for status in (STATUS_AVAILABLE, STATUS_PLANNED, STATUS_COMPLETED)},
+            # 图谱没有任务级难度/学时：这一条如实说出来，别让前端以为只是没取到
+            "notes": [
+                "任务与交付要求来自图谱的 task→skill 边；难度与任务级学时图谱未标注，返回 null",
+                "estimatedHours 是**阶段级**投入（技能等级差 × 24 小时），不是这一条任务的耗时",
+            ],
+            "disclaimer": TASK_DISCLAIMER,
+        })
+
+    def _find_task(self, user_id: str, task_id: str) -> Optional[Dict[str, Any]]:
+        """按 taskId 找回任务。找不到（含职业/阶段不存在）返回 ``None``。"""
+        try:
+            occupation_id, _, _ = parse_task_id_ref(task_id)
+        except ValueError:
+            return None
+        try:
+            path_result = generate_career_path(
+                self.store, {"target_job": occupation_id}, profile=self.profiles.get(user_id)
+            )
+        except (OccupationNotFound, InvalidCareerPathInput):
+            return None
+        tasks = derive_tasks(path_result, self.tasks.submitted_task_ids(user_id))
+        return next((task for task in tasks if task["taskId"] == task_id), None)
+
+    def _task_action(self, user_id: str, method: str, path: str, body: Any) -> Tuple[int, Dict[str, Any]]:
+        rest = path[len("/api/tasks/") :].strip("/")
+        parts = [part for part in rest.split("/") if part]
+        task_id = parts[0] if parts else ""
+        action = parts[1] if len(parts) > 1 else ""
+        if not task_id:
+            return self.error("NOT_FOUND", f"未知路由：{method} {path}", 404)
+
+        if not action and method == "GET":
+            task = self._find_task(user_id, task_id)
+            if task is None:
+                return self.error("TASK_NOT_FOUND", f"没有找到任务：{task_id}", 404)
+            runs = self.tasks.list_runs(user_id, task_id)
+            return 200, self.envelope({
+                "task": task,
+                "runs": runs,
+                "runCount": len(runs),
+                "latestFeedback": next((run["feedback"] for run in runs if run["feedback"]), None),
+                "disclaimer": TASK_DISCLAIMER,
+            })
+
+        if action == "runs" and method == "POST":
+            return self._submit_task_run(user_id, task_id, body)
+
+        return self.error("NOT_FOUND", f"未知路由：{method} {path}", 404)
+
+    def _submit_task_run(self, user_id: str, task_id: str, body: Any) -> Tuple[int, Dict[str, Any]]:
+        if not isinstance(body, dict):
+            return self.error("INVALID_BODY", "请求体必须是 JSON 对象", 400)
+        submission = str(body.get("submission") or "").strip()
+        if not submission:
+            return self.error("INVALID_BODY", "submission（文本成果）不能为空", 422)
+        if len(submission) > TASK_MAX_SUBMISSION_CHARS:
+            return self.error("INVALID_BODY", f"submission 超过 {TASK_MAX_SUBMISSION_CHARS} 字", 422)
+        action_text = str(body.get("action") or "").strip()
+        if len(action_text) > TASK_MAX_ACTION_CHARS:
+            return self.error("INVALID_BODY", f"action 超过 {TASK_MAX_ACTION_CHARS} 字", 422)
+        raw_attachments = body.get("attachmentIds") or []
+        if not isinstance(raw_attachments, list) or len(raw_attachments) > TASK_MAX_ATTACHMENTS:
+            return self.error("INVALID_BODY", f"attachmentIds 必须是最多 {TASK_MAX_ATTACHMENTS} 项的数组", 422)
+        attachments = [str(item) for item in raw_attachments if str(item).strip()]
+
+        # `requestId` 必须**先查**：否则重试会先写出一条成长记录再被幂等挡住，白留一条记录。
+        request_id = str(body.get("requestId") or "").strip() or None
+        if request_id:
+            existing = self.tasks.find_by_request(user_id, request_id)
+            if existing:
+                return 201, self.envelope({
+                    "run": existing,
+                    "growthRecord": self.memories.get_growth_record(user_id, existing["growthRecordId"] or ""),
+                    "candidates": [],
+                    "candidateNote": {"reason": "duplicate_request",
+                                      "message": "同一 requestId 已提交过：按幂等处理，没有重复写记录与候选"},
+                    "created": False,
+                    "disclaimer": TASK_DISCLAIMER,
+                })
+
+        task = self._find_task(user_id, task_id)
+        if task is None:
+            return self.error("TASK_NOT_FOUND", f"没有找到任务：{task_id}", 404)
+
+        run_id = TaskStore.new_run_id()
+        record = {
+            "kind": "任务行动",
+            "title": f"完成实践任务：{task['title']}"[:200],
+            "before": "",
+            "after": submission[:1000],
+            "explanation": (
+                f"来源：{task['sourcePath']['targetJob']} · {task['sourcePath']['stageName']}阶段。"
+                + (f"行动说明：{action_text[:200]}" if action_text else "")
+            ),
+            "source": "职场模拟",
+            "recordId": run_id,
+        }
+        # 复用既有通道：一条成长记录 + 由图谱名词派生的**待确认**候选（同一事务、按 recordId 幂等）
+        try:
+            stored = self.memories.create_growth_record(
+                user_id, record, self.store.nodes_in(growth_record_text(normalize_growth_record(record)))
+            )
+        except ValueError as error:
+            return self.error("INVALID_GROWTH_RECORD", str(error), 400)
+
+        run = self.tasks.create_run(
+            run_id=run_id,
+            user_id=user_id,
+            task=task,
+            action=action_text,
+            submission=submission,
+            attachment_ids=attachments,
+            growth_record_id=str(stored["record"]["id"]),
+            candidate_ids=[str(item["id"]) for item in stored["candidates"]],
+            request_id=request_id,
+        )
+        return 201, self.envelope({
+            "run": run,
+            "growthRecord": stored["record"],
+            "candidates": stored["candidates"],
+            "candidateNote": stored["note"],
+            "created": True,
+            "disclaimer": TASK_DISCLAIMER,
+        })
+
+    def _evaluate_task_run(self, user_id: str, path: str) -> Tuple[int, Dict[str, Any]]:
+        rest = path[len("/api/task-runs/") :].strip("/")
+        parts = [part for part in rest.split("/") if part]
+        run_id = parts[0] if parts else ""
+        action = parts[1] if len(parts) > 1 else ""
+        if not run_id or action != "evaluate":
+            return self.error("NOT_FOUND", f"未知路由：POST {path}", 404)
+        run = self.tasks.own_run(user_id, run_id)
+        if run is None:
+            return self.error("TASK_RUN_NOT_FOUND", f"没有找到这次提交：{run_id}", 404)
+        task = self._find_task(user_id, run["taskId"])
+        if task is None:
+            # 路径变了、这条任务已经不在了：用运行记录里存下的最小信息兜底，
+            # 至少还能给反馈，而不是报 404 把用户的历史提交变成孤儿。
+            task = {
+                "taskId": run["taskId"],
+                "title": run["title"],
+                "deliverable": run["deliverable"],
+                "requiredSkills": [],
+                "steps": [],
+                "evidenceTargets": [],
+                "sourcePath": {"stageName": run["stage"], "stageGoal": "", "occupationId": run["occupationId"]},
+            }
+        report = self.tasks.evaluate(task, run)
+        return 200, self.envelope({
+            "report": report,
+            "run": self.tasks.get_run(user_id, run_id),
+            "taskAvailable": self._find_task(user_id, run["taskId"]) is not None,
+        })
 
     # ------------------------------------------------------------------ 模拟面试（路由实现）
     def _create_interview(self, user_id: str, body: Any) -> Tuple[int, Dict[str, Any]]:
