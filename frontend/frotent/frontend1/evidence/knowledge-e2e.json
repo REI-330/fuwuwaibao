@@ -1,7 +1,7 @@
 {
   "schema": "career-graph-e2e/v1",
-  "generatedAt": "2026-10-01T12:07:36.926Z",
-  "durationMs": 20311,
+  "generatedAt": "2026-10-01T12:25:05.929Z",
+  "durationMs": 20260,
   "versions": {
     "node": "v22.22.2",
     "platform": "win32",
@@ -214,7 +214,7 @@
     {
       "id": "A",
       "title": "知识库产物自洽（导出 ↔ 分块 ↔ 图谱 ↔ 索引 ↔ 原始快照）",
-      "durationMs": 102,
+      "durationMs": 93,
       "checks": 17,
       "failed": 0,
       "error": null
@@ -222,7 +222,7 @@
     {
       "id": "B",
       "title": "构建闸门可复跑（09/10/11 重跑后语义投影不变）",
-      "durationMs": 3641,
+      "durationMs": 3509,
       "checks": 5,
       "failed": 0,
       "error": null
@@ -230,7 +230,7 @@
     {
       "id": "C",
       "title": "检索闸门（现役 BM25 / dev 题集）",
-      "durationMs": 748,
+      "durationMs": 813,
       "checks": 4,
       "failed": 0,
       "error": null
@@ -238,15 +238,15 @@
     {
       "id": "D",
       "title": "后端 HTTP 端到端（真起 python 进程）",
-      "durationMs": 1817,
-      "checks": 117,
+      "durationMs": 1856,
+      "checks": 129,
       "failed": 0,
       "error": null
     },
     {
       "id": "E",
       "title": "MCP HTTP 端到端（真起 mcp/http.ts，三个工具各调一次）",
-      "durationMs": 1251,
+      "durationMs": 1242,
       "checks": 23,
       "failed": 0,
       "error": null
@@ -262,15 +262,15 @@
     {
       "id": "G",
       "title": "前端 dev server（SSR 页面）",
-      "durationMs": 4018,
-      "checks": 11,
+      "durationMs": 4270,
+      "checks": 14,
       "failed": 0,
       "error": null
     },
     {
       "id": "H",
       "title": "既有测试套件",
-      "durationMs": 8693,
+      "durationMs": 8437,
       "checks": 5,
       "failed": 0,
       "error": null
@@ -551,13 +551,13 @@
       "stage": "D",
       "label": "访客会话：返回 isGuest 用户，不落账号密码",
       "ok": true,
-      "detail": "{\"userId\":\"user_0bbd7be4f5e4\",\"displayName\":\"端到端访客\",\"isGuest\":true,\"createdAt\":\"2026-10-01T12:07:22Z\"}"
+      "detail": "{\"userId\":\"user_b0c1bcb52297\",\"displayName\":\"端到端访客\",\"isGuest\":true,\"createdAt\":\"2026-10-01T12:24:50Z\"}"
     },
     {
       "stage": "D",
       "label": "访客会话：带 Cookie 拿到的是自己的画像（与无 Cookie 的 user_local 隔离）",
       "ok": true,
-      "detail": "user_0bbd7be4f5e4 vs user_0bbd7be4f5e4"
+      "detail": "user_b0c1bcb52297 vs user_b0c1bcb52297"
     },
     {
       "stage": "D",
@@ -617,7 +617,7 @@
       "stage": "D",
       "label": "职业匹配：不再 501，生成返回 201 且带 run",
       "ok": true,
-      "detail": "201 match_4c02240e47121f46"
+      "detail": "201 match_f1c3847ed92230dc"
     },
     {
       "stage": "D",
@@ -725,7 +725,7 @@
       "stage": "D",
       "label": "对话返回 message 与可复用的 conversationId",
       "ok": true,
-      "detail": "conversation_ac81b17c2b73"
+      "detail": "conversation_3b429c725ae7"
     },
     {
       "stage": "D",
@@ -755,7 +755,7 @@
       "stage": "D",
       "label": "带上 conversationId 时同一会话被复用",
       "ok": true,
-      "detail": "conversation_ac81b17c2b73"
+      "detail": "conversation_3b429c725ae7"
     },
     {
       "stage": "D",
@@ -767,7 +767,7 @@
       "stage": "D",
       "label": "记忆：候选写入返回 201",
       "ok": true,
-      "detail": "201 memory_c7a06e289433"
+      "detail": "201 memory_c54ae60e0ff9"
     },
     {
       "stage": "D",
@@ -839,7 +839,7 @@
       "stage": "D",
       "label": "记忆：确认后 memory_hash 由空变为非空",
       "ok": true,
-      "detail": " → 1408872483d6686cbae9474e05213bf6bce71804"
+      "detail": " → b9a5f54a686cf7f22467b97ebede96bcfec34c86"
     },
     {
       "stage": "D",
@@ -851,19 +851,19 @@
       "stage": "D",
       "label": "记忆：推荐结果逐条带 confirmed_memory 证据",
       "ok": true,
-      "detail": "[{\"memoryId\":\"memory_3e5177f267ca\",\"category\":\"career_target\",\"content\":\"目标职业：边缘 AI 工程师\",\"usedFor\":\"interests\"},{\"memoryId\":\"memory_c7a06e289433\",\"category\":\"skill\",\"content\":\"具备或正在学习：轻量级推理引擎集成\",\"usedFor\":\"skills\"},{\"memoryId\":\"memory_3e5177f267ca\",\"category\":\"career_target\",\"content\":\"目标职业：边缘 AI 工程师\",\"usedFor\":\"interests\"},{\"memoryId\":\"memory_c7a06e289433\",\"category\":\"skill\",\"content\":\"具备或正在学习：轻量级推理引擎集成\",\"usedFor\":\"skills\"},{\"memoryId\":\"memory_3e5177f267ca\",\"category\":\"career_target\",\"content\":\"目标职业：边缘 AI 工程师\",\"usedFor\":\"interests\"},{\"memoryId\":\"memory_c7a06e289433\",\"category\":\"skill\",\"content\":\"具备或正在学习：轻量级推理引擎集成\",\"usedFor\":\"skills\"},{\"memoryId\":\"memory_3e5177f267ca\",\"category\":\"career_target\",\"content\":\"目标职业：边缘 AI 工程师\",\"usedFor\":\"interests\"},{\"memoryId\":\"memory_c7a06e289433\",\"category\":\"skill\",\"content\":\"具备或正在学习：轻量级推理引擎集成\",\"usedFor\":\"skills\"}]"
+      "detail": "[{\"memoryId\":\"memory_3baf0b36448c\",\"category\":\"career_target\",\"content\":\"目标职业：边缘 AI 工程师\",\"usedFor\":\"interests\"},{\"memoryId\":\"memory_c54ae60e0ff9\",\"category\":\"skill\",\"content\":\"具备或正在学习：轻量级推理引擎集成\",\"usedFor\":\"skills\"},{\"memoryId\":\"memory_3baf0b36448c\",\"category\":\"career_target\",\"content\":\"目标职业：边缘 AI 工程师\",\"usedFor\":\"interests\"},{\"memoryId\":\"memory_c54ae60e0ff9\",\"category\":\"skill\",\"content\":\"具备或正在学习：轻量级推理引擎集成\",\"usedFor\":\"skills\"},{\"memoryId\":\"memory_3baf0b36448c\",\"category\":\"career_target\",\"content\":\"目标职业：边缘 AI 工程师\",\"usedFor\":\"interests\"},{\"memoryId\":\"memory_c54ae60e0ff9\",\"category\":\"skill\",\"content\":\"具备或正在学习：轻量级推理引擎集成\",\"usedFor\":\"skills\"},{\"memoryId\":\"memory_3baf0b36448c\",\"category\":\"career_target\",\"content\":\"目标职业：边缘 AI 工程师\",\"usedFor\":\"interests\"},{\"memoryId\":\"memory_c54ae60e0ff9\",\"category\":\"skill\",\"content\":\"具备或正在学习：轻量级推理引擎集成\",\"usedFor\":\"skills\"}]"
     },
     {
       "stage": "D",
       "label": "对话：已确认记忆真的进了注入块",
       "ok": true,
-      "detail": "[\"memory_3e5177f267ca\"]"
+      "detail": "[\"memory_3baf0b36448c\"]"
     },
     {
       "stage": "D",
       "label": "对话：注入指纹与推荐接口的 memory_hash 一致（同一份已确认集合）",
       "ok": true,
-      "detail": "1408872483d6686cbae9474e05213bf6bce71804 vs 1408872483d6686cbae9474e05213bf6bce71804"
+      "detail": "b9a5f54a686cf7f22467b97ebede96bcfec34c86 vs b9a5f54a686cf7f22467b97ebede96bcfec34c86"
     },
     {
       "stage": "D",
@@ -887,7 +887,7 @@
       "stage": "D",
       "label": "记忆：删除返回被删 id 与新指纹",
       "ok": true,
-      "detail": "200 memory_c7a06e289433"
+      "detail": "200 memory_c54ae60e0ff9"
     },
     {
       "stage": "D",
@@ -905,7 +905,7 @@
       "stage": "D",
       "label": "成长记录：写入返回 201 与记录 id",
       "ok": true,
-      "detail": "201 growth_a41083c35c75"
+      "detail": "201 growth_8215b1a42744"
     },
     {
       "stage": "D",
@@ -917,7 +917,7 @@
       "stage": "D",
       "label": "成长记录：候选带可溯源的 sourceId（指回记录）",
       "ok": true,
-      "detail": "[\"growth_a41083c35c75:skill:0\"]"
+      "detail": "[\"growth_8215b1a42744:skill:0\"]"
     },
     {
       "stage": "D",
@@ -947,13 +947,13 @@
       "stage": "D",
       "label": "成长记录：候选确认后才进召回",
       "ok": true,
-      "detail": "[\"memory_a8dc9525c76d\"]"
+      "detail": "[\"memory_c8d15946456b\"]"
     },
     {
       "stage": "D",
       "label": "成长记录：删记录只清未确认候选、保留已确认记忆",
       "ok": true,
-      "detail": "{\"deleted\":\"growth_a41083c35c75\",\"removedMemoryIds\":[],\"keptMemoryIds\":[\"memory_a8dc9525c76d\"],\"memoryHash\":\"66d9fca18ed2a8ff7aa60e3d7322eb0e291877c9\"}"
+      "detail": "{\"deleted\":\"growth_8215b1a42744\",\"removedMemoryIds\":[],\"keptMemoryIds\":[\"memory_c8d15946456b\"],\"memoryHash\":\"d1ff178f0eef7fa9dd636b05dbc93c871e333848\"}"
     },
     {
       "stage": "D",
@@ -965,13 +965,13 @@
       "stage": "D",
       "label": "确认：候选→记录→证据→事件一次写入",
       "ok": true,
-      "detail": "{\"c\":[\"memory_1dbe3d111c59\"],\"e\":1,\"v\":1}"
+      "detail": "{\"c\":[\"memory_869960d9d36d\"],\"e\":1,\"v\":1}"
     },
     {
       "stage": "D",
       "label": "确认：重复 confirm 幂等（不产生重复行）",
       "ok": true,
-      "detail": "{\"c\":[],\"a\":[\"memory_1dbe3d111c59\"]}"
+      "detail": "{\"c\":[],\"a\":[\"memory_869960d9d36d\"]}"
     },
     {
       "stage": "D",
@@ -989,7 +989,7 @@
       "stage": "D",
       "label": "成长记录：确认后的记忆真的进了对话注入",
       "ok": true,
-      "detail": "[\"memory_3e5177f267ca\",\"memory_a8dc9525c76d\",\"memory_1dbe3d111c59\"]"
+      "detail": "[\"memory_3baf0b36448c\",\"memory_c8d15946456b\",\"memory_869960d9d36d\"]"
     },
     {
       "stage": "D",
@@ -1037,13 +1037,13 @@
       "stage": "D",
       "label": "简历：候选确认前不进注入上下文",
       "ok": true,
-      "detail": "[\"memory_1dbe3d111c59\",\"memory_a8dc9525c76d\"]"
+      "detail": "[\"memory_869960d9d36d\",\"memory_c8d15946456b\"]"
     },
     {
       "stage": "D",
       "label": "简历：候选确认后进注入上下文",
       "ok": true,
-      "detail": "[\"memory_250edbe8625a\"]"
+      "detail": "[\"memory_902582917095\"]"
     },
     {
       "stage": "D",
@@ -1085,7 +1085,7 @@
       "stage": "D",
       "label": "模拟面试：requestId 幂等（同一场，不产生重复记录）",
       "ok": true,
-      "detail": "interview_e3964423-a8f4-4d7c-9119-4c95ed370e81"
+      "detail": "interview_c6b34cdb-0fec-41fa-8daa-43a6ea87f859"
     },
     {
       "stage": "D",
@@ -1122,6 +1122,78 @@
       "label": "跨岗位训练：报告含四项协作维度与免责声明",
       "ok": true,
       "detail": "项目推进:10,团队信任:11,信息同步:10,风险控制:10"
+    },
+    {
+      "stage": "D",
+      "label": "任务实践：任务清单由路径派生（每条都带阶段与出处）",
+      "ok": true,
+      "detail": "3 条：task_AI004_intermediate_0/available,task_AI004_intermediate_1/available,task_AI004_advanced_0/planned"
+    },
+    {
+      "stage": "D",
+      "label": "任务实践：图谱没有的字段如实为 null 且列进 unavailableFields",
+      "ok": true,
+      "detail": "difficulty=null unavailable=[\"difficulty\",\"estimatedHours\"]"
+    },
+    {
+      "stage": "D",
+      "label": "任务实践：第一个未完成阶段的任务是 available",
+      "ok": true,
+      "detail": "{\"available\":2,\"planned\":1,\"completed\":0}"
+    },
+    {
+      "stage": "D",
+      "label": "任务实践：任务详情带历史提交（此刻为 0）",
+      "ok": true,
+      "detail": "runCount=0"
+    },
+    {
+      "stage": "D",
+      "label": "任务实践：提交 201，且运行记录与成长记录用同一个 ID",
+      "ok": true,
+      "detail": "201 run_eb62062b07f5"
+    },
+    {
+      "stage": "D",
+      "label": "任务实践：提交只产出待确认候选（没有一条 confirmed）",
+      "ok": true,
+      "detail": "candidate,candidate"
+    },
+    {
+      "stage": "D",
+      "label": "任务实践：requestId 幂等（不重复写记录与候选）",
+      "ok": true,
+      "detail": "created=false"
+    },
+    {
+      "stage": "D",
+      "label": "任务实践：评估可达且走规则版（本阶段关了模型）",
+      "ok": true,
+      "detail": "200 provider=fallback"
+    },
+    {
+      "stage": "D",
+      "label": "任务实践：观察到的能力必须引用原文（逐字可查）",
+      "ok": true,
+      "detail": "微控制器外设驱动"
+    },
+    {
+      "stage": "D",
+      "label": "任务实践：评估没有把这次提交的候选改成已确认",
+      "ok": true,
+      "detail": "candidate,candidate"
+    },
+    {
+      "stage": "D",
+      "label": "任务实践：提交后该任务状态翻成 completed",
+      "ok": true,
+      "detail": "{\"available\":1,\"planned\":1,\"completed\":1}"
+    },
+    {
+      "stage": "D",
+      "label": "任务实践：详情里的历史提交带上了评估结果",
+      "ok": true,
+      "detail": "runCount=1"
     },
     {
       "stage": "D",
@@ -1289,7 +1361,7 @@
       "stage": "F",
       "label": "后端 /health 与导出 generatedAt 一致（同一份字节）",
       "ok": true,
-      "detail": "2026-10-01T12:07:17.908Z vs 2026-10-01T12:07:17.908Z"
+      "detail": "2026-10-01T12:24:46.916Z vs 2026-10-01T12:24:46.916Z"
     },
     {
       "stage": "F",
@@ -1307,7 +1379,7 @@
       "stage": "F",
       "label": "MCP dataVersion.generatedAt 与导出一致（同一份字节）",
       "ok": true,
-      "detail": "2026-10-01T12:07:17.908Z"
+      "detail": "2026-10-01T12:24:46.916Z"
     },
     {
       "stage": "F",
@@ -1343,13 +1415,13 @@
       "stage": "G",
       "label": "/auth 返回 200 且能 SSR 出 HTML",
       "ok": true,
-      "detail": "200 13545B"
+      "detail": "200 13547B"
     },
     {
       "stage": "G",
       "label": "/onboarding 返回 200 且带表单内容",
       "ok": true,
-      "detail": "200 12715B"
+      "detail": "200 12717B"
     },
     {
       "stage": "G",
@@ -1365,21 +1437,39 @@
     },
     {
       "stage": "G",
-      "label": "/actions 是模拟场景入口（不再是「筹备中」占位页）",
+      "label": "/actions 是模拟场景入口（三条链路都在，不再是「筹备中」占位页）",
       "ok": true,
-      "detail": "200 24102B"
+      "detail": "200 16130B"
     },
     {
       "stage": "G",
       "label": "/mock-interview 返回 200 且 SSR 出面试配置表单",
       "ok": true,
-      "detail": "200 16542B"
+      "detail": "200 16531B"
     },
     {
       "stage": "G",
       "label": "/scenarios/cross-role 返回 200 且 SSR 出岗位选择页",
       "ok": true,
-      "detail": "200 16085B"
+      "detail": "200 16088B"
+    },
+    {
+      "stage": "G",
+      "label": "/actions/tasks 返回 200 且 SSR 出任务清单页",
+      "ok": true,
+      "detail": "200 15323B"
+    },
+    {
+      "stage": "G",
+      "label": "/actions/tasks/<taskId> 返回 200（真任务 ID task_AI004_intermediate_0 可路由）",
+      "ok": true,
+      "detail": "200 15264B"
+    },
+    {
+      "stage": "G",
+      "label": "/path 的 SSR 里不再出现「职场模拟将在后续开放」这句过期文案",
+      "ok": true,
+      "detail": "200 15441B"
     },
     {
       "stage": "G",
@@ -1403,7 +1493,7 @@
       "stage": "H",
       "label": "前端 node:test（npm test） 退出码 0",
       "ok": true,
-      "detail": "exit=0 · # duration_ms 987.2836"
+      "detail": "exit=0 · # duration_ms 913.9097"
     },
     {
       "stage": "H",
@@ -1421,7 +1511,7 @@
       "stage": "H",
       "label": "MCP HTTP 验证（mcp:verify-http） 退出码 0",
       "ok": true,
-      "detail": "exit=0 · [server] [career-graph-mcp] 会话建立 79d60530-725d-4b46-866f-3e082ec9d8da（当前 1 个）"
+      "detail": "exit=0 · [server] [career-graph-mcp] 会话建立 a4120c38-cfa9-4c3a-94b6-3f06be32838e（当前 1 个）"
     },
     {
       "stage": "H",
