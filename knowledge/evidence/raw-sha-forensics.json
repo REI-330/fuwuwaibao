@@ -1,0 +1,69 @@
+{
+  "mismatched": {
+    "S15": {
+      "registeredBytes": 52966,
+      "registeredSha256": "39a859f44190e626718a62c51906088803409a12ed14107e6c6e8e9ffa169156",
+      "actualBytes": 52736,
+      "byteDelta": -230,
+      "bareLf": 1134,
+      "crlf": 0,
+      "crlfConvertedMatches": false,
+      "historyMatches": [],
+      "historyCount": 1
+    },
+    "S18": {
+      "registeredBytes": 34757,
+      "registeredSha256": "9188f166fe4370bbee95c0c5c39c0ec359a1111b65b2ed03be6e898656d0c20a",
+      "actualBytes": 33672,
+      "byteDelta": -1085,
+      "bareLf": 1085,
+      "crlf": 0,
+      "crlfConvertedMatches": true,
+      "historyMatches": [],
+      "historyCount": 1
+    },
+    "S19": {
+      "registeredBytes": 67702,
+      "registeredSha256": "1ea28368a6c6bc320b1c82906441d3220fb8a4239dedd134b0c9602c5d8a75bd",
+      "actualBytes": 67692,
+      "byteDelta": -10,
+      "bareLf": 978,
+      "crlf": 0,
+      "crlfConvertedMatches": false,
+      "historyMatches": [],
+      "historyCount": 1
+    },
+    "S20": {
+      "registeredBytes": 100211,
+      "registeredSha256": "6a61e3c208f86adec178f19fe1742017435f61c0963122768fba061f808ccff1",
+      "actualBytes": 97811,
+      "byteDelta": -2400,
+      "bareLf": 2400,
+      "crlf": 0,
+      "crlfConvertedMatches": true,
+      "historyMatches": [],
+      "historyCount": 1
+    },
+    "S22": {
+      "registeredBytes": 308203,
+      "registeredSha256": "559b0c7d5013bbf500cfd339c49fb0b737c9819958fdf7f4706962f11e42e5a3",
+      "actualBytes": 308202,
+      "byteDelta": -1,
+      "bareLf": 140,
+      "crlf": 0,
+      "crlfConvertedMatches": false,
+      "historyMatches": [],
+      "historyCount": 1
+    }
+  },
+  "matchedCount": 20,
+  "total": 25,
+  "copiesOfRegisteredBytes": {},
+  "lines": [
+    "S15: 字节差 -230，裸 LF 1134，CRLF 行 0，行尾假说 不成立，历史里命中登记的提交 无",
+    "S18: 字节差 -1085，裸 LF 1085，CRLF 行 0，行尾假说 成立，历史里命中登记的提交 无",
+    "S19: 字节差 -10，裸 LF 978，CRLF 行 0，行尾假说 不成立，历史里命中登记的提交 无",
+    "S20: 字节差 -2400，裸 LF 2400，CRLF 行 0，行尾假说 成立，历史里命中登记的提交 无",
+    "S22: 字节差 -1，裸 LF 140，CRLF 行 0，行尾假说 不成立，历史里命中登记的提交 无"
+  ]
+}

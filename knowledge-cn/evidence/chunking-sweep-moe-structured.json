@@ -1,0 +1,1333 @@
+{
+  "file": "moe-majors-2026-structured.jsonl",
+  "source": "moe-majors-2026-structured",
+  "questionsEvaluated": 9,
+  "isolatedKbPerVariant": true,
+  "top": 10,
+  "variants": [
+    {
+      "chunkSize": 200,
+      "title": "moe-majors-2026-structured-cs200",
+      "knowledgeId": "5ebe775f-98e6-4085-abf7-775b63ec58fe",
+      "scratchKbId": "b16de421-7558-418d-94e7-a4df7042463d",
+      "chunksInDocument": 100,
+      "parseStatus": "completed",
+      "reusedExisting": false,
+      "exitCode": 0,
+      "importResult": "{\"file\": \"moe-majors-2026-structured.jsonl\", \"records\": 850, \"eligible\": 850, \"markdown_chars\": 131571, \"dry_run\": false, \"kb_id\": \"b16de421-7558-418d-94e7-a4df7042463d\", \"chunking\": {\"chunk_size\": 200}, \"knowledge_id\": \"5ebe775f-98e6-4085-abf7-775b63ec58fe\", \"parse_status\": \"completed\", \"enable_status\": \"enabled\"}",
+      "modes": {
+        "hybrid": {
+          "summary": {
+            "answerable": 9,
+            "refusal": 0,
+            "skippedAllJudgment": [],
+            "SameChunk": {
+              "hit@1": {
+                "hits": 5,
+                "total": 9,
+                "rate": 0.5556
+              },
+              "hit@3": {
+                "hits": 6,
+                "total": 9,
+                "rate": 0.6667
+              },
+              "hit@5": {
+                "hits": 6,
+                "total": 9,
+                "rate": 0.6667
+              },
+              "hit@10": {
+                "hits": 6,
+                "total": 9,
+                "rate": 0.6667
+              },
+              "mrr": 0.5926
+            },
+            "Anywhere": {
+              "hit@1": {
+                "hits": 5,
+                "total": 9,
+                "rate": 0.5556
+              },
+              "hit@3": {
+                "hits": 6,
+                "total": 9,
+                "rate": 0.6667
+              },
+              "hit@5": {
+                "hits": 6,
+                "total": 9,
+                "rate": 0.6667
+              },
+              "hit@10": {
+                "hits": 6,
+                "total": 9,
+                "rate": 0.6667
+              },
+              "mrr": 0.5926
+            },
+            "preview@1": {
+              "hits": 4,
+              "total": 5,
+              "rate": 0.8
+            },
+            "top1IsTarget": {
+              "hits": 4,
+              "total": 5,
+              "rate": 0.8
+            },
+            "multiGroup": {
+              "total": 4,
+              "sameChunkRanks": {
+                "CN03": 1,
+                "CN07": null,
+                "CN08": null,
+                "CN24": 3
+              },
+              "anywhereRanks": {
+                "CN03": 1,
+                "CN07": null,
+                "CN08": null,
+                "CN24": 3
+              }
+            },
+            "judgmentGroups": {
+              "questions": [
+                "CN25"
+              ],
+              "coveredWithinTop": 0,
+              "total": 1,
+              "note": "作者裁定的跨源关联，不计入头部命中率"
+            }
+          },
+          "perQuestion": [
+            {
+              "questionId": "CN01",
+              "category": "专业目录-代码与名称",
+              "answerable": true,
+              "groupCount": 1,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 1,
+              "evidenceRankAnywhere": 1,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "结构化专业记录",
+                  "anchors": [
+                    "低空经济与管理",
+                    "020110TK"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "33abe0a9-eda5-48af-8265-10f6fa86e707"
+                }
+              ],
+              "top1Score": 0.01639344262295082,
+              "top1ChunkId": "33abe0a9-eda5-48af-8265-10f6fa86e707",
+              "top1HeadRecordId": "moe-major-020110TK",
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": true,
+              "previewVisibleAt1": true
+            },
+            {
+              "questionId": "CN02",
+              "category": "专业目录-代码与名称",
+              "answerable": true,
+              "groupCount": 1,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 1,
+              "evidenceRankAnywhere": 1,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "结构化专业记录",
+                  "anchors": [
+                    "083113TK",
+                    "低空安全管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "b6bf7791-5641-46d9-95c3-640afad5d7f6"
+                }
+              ],
+              "top1Score": 0.0154136046730733,
+              "top1ChunkId": "b6bf7791-5641-46d9-95c3-640afad5d7f6",
+              "top1HeadRecordId": "moe-major-083113TK",
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": true,
+              "previewVisibleAt1": true
+            },
+            {
+              "questionId": "CN03",
+              "category": "专业目录-代码与名称",
+              "answerable": true,
+              "groupCount": 2,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 1,
+              "evidenceRankAnywhere": 1,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "结构化专业记录",
+                  "anchors": [
+                    "140003TK",
+                    "低空技术与工程"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "34e99ae1-c8c9-4b7d-98b9-ed94057ef323"
+                },
+                {
+                  "name": "原页记录（含原代码）",
+                  "anchors": [
+                    "140003TK",
+                    "083203TK"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "34e99ae1-c8c9-4b7d-98b9-ed94057ef323"
+                }
+              ],
+              "top1Score": 0.01639344262295082,
+              "top1ChunkId": "34e99ae1-c8c9-4b7d-98b9-ed94057ef323",
+              "top1HeadRecordId": null,
+              "groupsCoveredAtTop1": 2,
+              "top1CoversAllGroups": true,
+              "previewVisibleAt1": null
+            },
+            {
+              "questionId": "CN04",
+              "category": "专业目录-原代码与变更",
+              "answerable": true,
+              "groupCount": 1,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 1,
+              "evidenceRankAnywhere": 1,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "结构化专业记录",
+                  "anchors": [
+                    "140002TK",
+                    "083202TK"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "aa27bae6-3858-4508-9f50-6cf83fbf8499"
+                }
+              ],
+              "top1Score": 0.01634056054997356,
+              "top1ChunkId": "aa27bae6-3858-4508-9f50-6cf83fbf8499",
+              "top1HeadRecordId": null,
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": true,
+              "previewVisibleAt1": true
+            },
+            {
+              "questionId": "CN05",
+              "category": "专业目录-代码与名称",
+              "answerable": true,
+              "groupCount": 1,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 1,
+              "evidenceRankAnywhere": 1,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "结构化专业记录",
+                  "anchors": [
+                    "100709TK",
+                    "药物经济与管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "1ac3cfb1-9c62-4850-a053-939e4fbe7782"
+                }
+              ],
+              "top1Score": 0.016145057128663685,
+              "top1ChunkId": "1ac3cfb1-9c62-4850-a053-939e4fbe7782",
+              "top1HeadRecordId": "moe-major-100709TK",
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": true,
+              "previewVisibleAt1": true
+            },
+            {
+              "questionId": "CN07",
+              "category": "专业目录-归类与学位",
+              "answerable": true,
+              "groupCount": 2,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": null,
+              "evidenceRankAnywhere": null,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "0831 专业类块",
+                  "anchors": [
+                    "0831 公安技术类",
+                    "刑事科学技术"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": null,
+                  "firstRankAnywhere": null,
+                  "chunkId": null
+                },
+                {
+                  "name": "低空安全管理记录",
+                  "anchors": [
+                    "083113TK",
+                    "低空安全管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "b6bf7791-5641-46d9-95c3-640afad5d7f6"
+                }
+              ],
+              "top1Score": 0.01639344262295082,
+              "top1ChunkId": "b6bf7791-5641-46d9-95c3-640afad5d7f6",
+              "top1HeadRecordId": "moe-major-083113TK",
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": false,
+              "previewVisibleAt1": null
+            },
+            {
+              "questionId": "CN08",
+              "category": "专业目录-归类与学位",
+              "answerable": true,
+              "groupCount": 3,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": null,
+              "evidenceRankAnywhere": null,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "1204 类名块",
+                  "anchors": [
+                    "1204 公共管理类",
+                    "公共事业管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": null,
+                  "firstRankAnywhere": null,
+                  "chunkId": null
+                },
+                {
+                  "name": "航空安防管理记录",
+                  "anchors": [
+                    "120419TK",
+                    "航空安防管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": null,
+                  "firstRankAnywhere": null,
+                  "chunkId": null
+                },
+                {
+                  "name": "无障碍管理记录",
+                  "anchors": [
+                    "120420TK",
+                    "无障碍管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": null,
+                  "firstRankAnywhere": null,
+                  "chunkId": null
+                }
+              ],
+              "top1Score": 0.01639344262295082,
+              "top1ChunkId": "8f6fbc11-8e4e-46a3-9438-a73d8ff34119",
+              "top1HeadRecordId": "moe-major-120401",
+              "groupsCoveredAtTop1": 0,
+              "top1CoversAllGroups": false,
+              "previewVisibleAt1": null
+            },
+            {
+              "questionId": "CN24",
+              "category": "跨源综合",
+              "answerable": true,
+              "groupCount": 3,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 3,
+              "evidenceRankAnywhere": 3,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "低空经济与管理",
+                  "anchors": [
+                    "低空经济与管理",
+                    "020110TK"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 3,
+                  "firstRankAnywhere": 3,
+                  "chunkId": "33abe0a9-eda5-48af-8265-10f6fa86e707"
+                },
+                {
+                  "name": "低空安全管理",
+                  "anchors": [
+                    "083113TK",
+                    "低空安全管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 2,
+                  "firstRankAnywhere": 2,
+                  "chunkId": "b6bf7791-5641-46d9-95c3-640afad5d7f6"
+                },
+                {
+                  "name": "低空技术与工程",
+                  "anchors": [
+                    "140003TK",
+                    "低空技术与工程"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "34e99ae1-c8c9-4b7d-98b9-ed94057ef323"
+                }
+              ],
+              "top1Score": 0.01634056054997356,
+              "top1ChunkId": "34e99ae1-c8c9-4b7d-98b9-ed94057ef323",
+              "top1HeadRecordId": null,
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": false,
+              "previewVisibleAt1": null
+            },
+            {
+              "questionId": "CN25",
+              "category": "跨源综合",
+              "answerable": true,
+              "groupCount": 1,
+              "judgmentGroupCount": 1,
+              "evidenceRankSameChunk": null,
+              "evidenceRankAnywhere": null,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "专业侧",
+                  "anchors": [
+                    "083113TK",
+                    "低空安全管理"
+                  ],
+                  "judgment": true,
+                  "firstRankSameChunk": null,
+                  "firstRankAnywhere": null,
+                  "chunkId": null
+                },
+                {
+                  "name": "职业侧",
+                  "anchors": [
+                    "4-02-04-06",
+                    "无人机驾驶员"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": null,
+                  "firstRankAnywhere": null,
+                  "chunkId": null
+                }
+              ],
+              "top1Score": 0.015399900645802284,
+              "top1ChunkId": "118901c2-9785-4432-88fa-890aef36a40b",
+              "top1HeadRecordId": "moe-major-082008T",
+              "groupsCoveredAtTop1": 0,
+              "top1CoversAllGroups": false,
+              "previewVisibleAt1": false
+            }
+          ]
+        }
+      },
+      "hybridMeanRank": 4.56
+    },
+    {
+      "chunkSize": 512,
+      "title": "moe-majors-2026-structured-cs512",
+      "knowledgeId": "564e62ae-8a0c-4bcf-89f9-900a9371b3e9",
+      "scratchKbId": "86b9a58f-bd46-4c7b-b8cd-f839b5eafb34",
+      "chunksInDocument": 100,
+      "parseStatus": "completed",
+      "reusedExisting": false,
+      "exitCode": 0,
+      "importResult": "{\"file\": \"moe-majors-2026-structured.jsonl\", \"records\": 850, \"eligible\": 850, \"markdown_chars\": 131571, \"dry_run\": false, \"kb_id\": \"86b9a58f-bd46-4c7b-b8cd-f839b5eafb34\", \"chunking\": {\"chunk_size\": 512}, \"knowledge_id\": \"564e62ae-8a0c-4bcf-89f9-900a9371b3e9\", \"parse_status\": \"completed\", \"enable_status\": \"enabled\"}",
+      "modes": {
+        "hybrid": {
+          "summary": {
+            "answerable": 9,
+            "refusal": 0,
+            "skippedAllJudgment": [],
+            "SameChunk": {
+              "hit@1": {
+                "hits": 5,
+                "total": 9,
+                "rate": 0.5556
+              },
+              "hit@3": {
+                "hits": 6,
+                "total": 9,
+                "rate": 0.6667
+              },
+              "hit@5": {
+                "hits": 6,
+                "total": 9,
+                "rate": 0.6667
+              },
+              "hit@10": {
+                "hits": 6,
+                "total": 9,
+                "rate": 0.6667
+              },
+              "mrr": 0.5926
+            },
+            "Anywhere": {
+              "hit@1": {
+                "hits": 5,
+                "total": 9,
+                "rate": 0.5556
+              },
+              "hit@3": {
+                "hits": 6,
+                "total": 9,
+                "rate": 0.6667
+              },
+              "hit@5": {
+                "hits": 6,
+                "total": 9,
+                "rate": 0.6667
+              },
+              "hit@10": {
+                "hits": 6,
+                "total": 9,
+                "rate": 0.6667
+              },
+              "mrr": 0.5926
+            },
+            "preview@1": {
+              "hits": 0,
+              "total": 5,
+              "rate": 0.0
+            },
+            "top1IsTarget": {
+              "hits": 4,
+              "total": 5,
+              "rate": 0.8
+            },
+            "multiGroup": {
+              "total": 4,
+              "sameChunkRanks": {
+                "CN03": 1,
+                "CN07": null,
+                "CN08": null,
+                "CN24": 3
+              },
+              "anywhereRanks": {
+                "CN03": 1,
+                "CN07": null,
+                "CN08": null,
+                "CN24": 3
+              }
+            },
+            "judgmentGroups": {
+              "questions": [
+                "CN25"
+              ],
+              "coveredWithinTop": 0,
+              "total": 1,
+              "note": "作者裁定的跨源关联，不计入头部命中率"
+            }
+          },
+          "perQuestion": [
+            {
+              "questionId": "CN01",
+              "category": "专业目录-代码与名称",
+              "answerable": true,
+              "groupCount": 1,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 1,
+              "evidenceRankAnywhere": 1,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "结构化专业记录",
+                  "anchors": [
+                    "低空经济与管理",
+                    "020110TK"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "ee539620-ae56-4b7d-bc6d-b79e35b7e239"
+                }
+              ],
+              "top1Score": 0.01639344262295082,
+              "top1ChunkId": "ee539620-ae56-4b7d-bc6d-b79e35b7e239",
+              "top1HeadRecordId": "moe-major-020109T",
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": true,
+              "previewVisibleAt1": false
+            },
+            {
+              "questionId": "CN02",
+              "category": "专业目录-代码与名称",
+              "answerable": true,
+              "groupCount": 1,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 1,
+              "evidenceRankAnywhere": 1,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "结构化专业记录",
+                  "anchors": [
+                    "083113TK",
+                    "低空安全管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "28b3cc24-7064-48d6-908c-c9f5744df27c"
+                }
+              ],
+              "top1Score": 0.01639344262295082,
+              "top1ChunkId": "28b3cc24-7064-48d6-908c-c9f5744df27c",
+              "top1HeadRecordId": "moe-major-083111TK",
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": true,
+              "previewVisibleAt1": false
+            },
+            {
+              "questionId": "CN03",
+              "category": "专业目录-代码与名称",
+              "answerable": true,
+              "groupCount": 2,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 1,
+              "evidenceRankAnywhere": 1,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "结构化专业记录",
+                  "anchors": [
+                    "140003TK",
+                    "低空技术与工程"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "09b0c529-1886-4e96-977d-8f39da63b519"
+                },
+                {
+                  "name": "原页记录（含原代码）",
+                  "anchors": [
+                    "140003TK",
+                    "083203TK"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "09b0c529-1886-4e96-977d-8f39da63b519"
+                }
+              ],
+              "top1Score": 0.01639344262295082,
+              "top1ChunkId": "09b0c529-1886-4e96-977d-8f39da63b519",
+              "top1HeadRecordId": "moe-major-140002TK",
+              "groupsCoveredAtTop1": 2,
+              "top1CoversAllGroups": true,
+              "previewVisibleAt1": null
+            },
+            {
+              "questionId": "CN04",
+              "category": "专业目录-原代码与变更",
+              "answerable": true,
+              "groupCount": 1,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 1,
+              "evidenceRankAnywhere": 1,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "结构化专业记录",
+                  "anchors": [
+                    "140002TK",
+                    "083202TK"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "69af9082-ae38-4ff9-adff-b62a189f5035"
+                }
+              ],
+              "top1Score": 0.01634056054997356,
+              "top1ChunkId": "69af9082-ae38-4ff9-adff-b62a189f5035",
+              "top1HeadRecordId": "moe-major-130515TK",
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": true,
+              "previewVisibleAt1": false
+            },
+            {
+              "questionId": "CN05",
+              "category": "专业目录-代码与名称",
+              "answerable": true,
+              "groupCount": 1,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 1,
+              "evidenceRankAnywhere": 1,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "结构化专业记录",
+                  "anchors": [
+                    "100709TK",
+                    "药物经济与管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "a7a65406-0888-4539-bd4e-7060cd105e61"
+                }
+              ],
+              "top1Score": 0.01605593056894889,
+              "top1ChunkId": "a7a65406-0888-4539-bd4e-7060cd105e61",
+              "top1HeadRecordId": "moe-major-100708T",
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": true,
+              "previewVisibleAt1": false
+            },
+            {
+              "questionId": "CN07",
+              "category": "专业目录-归类与学位",
+              "answerable": true,
+              "groupCount": 2,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": null,
+              "evidenceRankAnywhere": null,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "0831 专业类块",
+                  "anchors": [
+                    "0831 公安技术类",
+                    "刑事科学技术"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": null,
+                  "firstRankAnywhere": null,
+                  "chunkId": null
+                },
+                {
+                  "name": "低空安全管理记录",
+                  "anchors": [
+                    "083113TK",
+                    "低空安全管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "28b3cc24-7064-48d6-908c-c9f5744df27c"
+                }
+              ],
+              "top1Score": 0.01639344262295082,
+              "top1ChunkId": "28b3cc24-7064-48d6-908c-c9f5744df27c",
+              "top1HeadRecordId": "moe-major-083111TK",
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": false,
+              "previewVisibleAt1": null
+            },
+            {
+              "questionId": "CN08",
+              "category": "专业目录-归类与学位",
+              "answerable": true,
+              "groupCount": 3,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": null,
+              "evidenceRankAnywhere": null,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "1204 类名块",
+                  "anchors": [
+                    "1204 公共管理类",
+                    "公共事业管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": null,
+                  "firstRankAnywhere": null,
+                  "chunkId": null
+                },
+                {
+                  "name": "航空安防管理记录",
+                  "anchors": [
+                    "120419TK",
+                    "航空安防管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 5,
+                  "firstRankAnywhere": 5,
+                  "chunkId": "b3487fd8-6102-4267-9241-93661d12f410"
+                },
+                {
+                  "name": "无障碍管理记录",
+                  "anchors": [
+                    "120420TK",
+                    "无障碍管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 5,
+                  "firstRankAnywhere": 5,
+                  "chunkId": "b3487fd8-6102-4267-9241-93661d12f410"
+                }
+              ],
+              "top1Score": 0.01634056054997356,
+              "top1ChunkId": "ae936ae0-53f3-4af0-bb49-188b884d3894",
+              "top1HeadRecordId": "moe-major-120407T",
+              "groupsCoveredAtTop1": 0,
+              "top1CoversAllGroups": false,
+              "previewVisibleAt1": null
+            },
+            {
+              "questionId": "CN24",
+              "category": "跨源综合",
+              "answerable": true,
+              "groupCount": 3,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 3,
+              "evidenceRankAnywhere": 3,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "低空经济与管理",
+                  "anchors": [
+                    "低空经济与管理",
+                    "020110TK"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 2,
+                  "firstRankAnywhere": 2,
+                  "chunkId": "ee539620-ae56-4b7d-bc6d-b79e35b7e239"
+                },
+                {
+                  "name": "低空安全管理",
+                  "anchors": [
+                    "083113TK",
+                    "低空安全管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 3,
+                  "firstRankAnywhere": 3,
+                  "chunkId": "28b3cc24-7064-48d6-908c-c9f5744df27c"
+                },
+                {
+                  "name": "低空技术与工程",
+                  "anchors": [
+                    "140003TK",
+                    "低空技术与工程"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "09b0c529-1886-4e96-977d-8f39da63b519"
+                }
+              ],
+              "top1Score": 0.01639344262295082,
+              "top1ChunkId": "09b0c529-1886-4e96-977d-8f39da63b519",
+              "top1HeadRecordId": "moe-major-140002TK",
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": false,
+              "previewVisibleAt1": null
+            },
+            {
+              "questionId": "CN25",
+              "category": "跨源综合",
+              "answerable": true,
+              "groupCount": 1,
+              "judgmentGroupCount": 1,
+              "evidenceRankSameChunk": null,
+              "evidenceRankAnywhere": null,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "专业侧",
+                  "anchors": [
+                    "083113TK",
+                    "低空安全管理"
+                  ],
+                  "judgment": true,
+                  "firstRankSameChunk": null,
+                  "firstRankAnywhere": null,
+                  "chunkId": null
+                },
+                {
+                  "name": "职业侧",
+                  "anchors": [
+                    "4-02-04-06",
+                    "无人机驾驶员"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": null,
+                  "firstRankAnywhere": null,
+                  "chunkId": null
+                }
+              ],
+              "top1Score": 0.015775335775335776,
+              "top1ChunkId": "598e6fa4-de70-4096-a10c-b5dc7c5ab4b1",
+              "top1HeadRecordId": "moe-major-082007T",
+              "groupsCoveredAtTop1": 0,
+              "top1CoversAllGroups": false,
+              "previewVisibleAt1": false
+            }
+          ]
+        }
+      },
+      "hybridMeanRank": 4.56
+    },
+    {
+      "chunkSize": 1024,
+      "title": "moe-majors-2026-structured-cs1024",
+      "knowledgeId": "e6b41d12-b4fd-4589-ba25-c9ec71c648c7",
+      "scratchKbId": "1cb2f67a-9aeb-4881-870e-ff9adae66be6",
+      "chunksInDocument": 100,
+      "parseStatus": "completed",
+      "reusedExisting": false,
+      "exitCode": 0,
+      "importResult": "{\"file\": \"moe-majors-2026-structured.jsonl\", \"records\": 850, \"eligible\": 850, \"markdown_chars\": 131572, \"dry_run\": false, \"kb_id\": \"1cb2f67a-9aeb-4881-870e-ff9adae66be6\", \"chunking\": {\"chunk_size\": 1024}, \"knowledge_id\": \"e6b41d12-b4fd-4589-ba25-c9ec71c648c7\", \"parse_status\": \"completed\", \"enable_status\": \"enabled\"}",
+      "modes": {
+        "hybrid": {
+          "summary": {
+            "answerable": 9,
+            "refusal": 0,
+            "skippedAllJudgment": [],
+            "SameChunk": {
+              "hit@1": {
+                "hits": 4,
+                "total": 9,
+                "rate": 0.4444
+              },
+              "hit@3": {
+                "hits": 4,
+                "total": 9,
+                "rate": 0.4444
+              },
+              "hit@5": {
+                "hits": 4,
+                "total": 9,
+                "rate": 0.4444
+              },
+              "hit@10": {
+                "hits": 6,
+                "total": 9,
+                "rate": 0.6667
+              },
+              "mrr": 0.4741
+            },
+            "Anywhere": {
+              "hit@1": {
+                "hits": 4,
+                "total": 9,
+                "rate": 0.4444
+              },
+              "hit@3": {
+                "hits": 4,
+                "total": 9,
+                "rate": 0.4444
+              },
+              "hit@5": {
+                "hits": 4,
+                "total": 9,
+                "rate": 0.4444
+              },
+              "hit@10": {
+                "hits": 6,
+                "total": 9,
+                "rate": 0.6667
+              },
+              "mrr": 0.4741
+            },
+            "preview@1": {
+              "hits": 1,
+              "total": 5,
+              "rate": 0.2
+            },
+            "top1IsTarget": {
+              "hits": 3,
+              "total": 5,
+              "rate": 0.6
+            },
+            "multiGroup": {
+              "total": 4,
+              "sameChunkRanks": {
+                "CN03": 1,
+                "CN07": null,
+                "CN08": null,
+                "CN24": 6
+              },
+              "anywhereRanks": {
+                "CN03": 1,
+                "CN07": null,
+                "CN08": null,
+                "CN24": 6
+              }
+            },
+            "judgmentGroups": {
+              "questions": [
+                "CN25"
+              ],
+              "coveredWithinTop": 0,
+              "total": 1,
+              "note": "作者裁定的跨源关联，不计入头部命中率"
+            }
+          },
+          "perQuestion": [
+            {
+              "questionId": "CN01",
+              "category": "专业目录-代码与名称",
+              "answerable": true,
+              "groupCount": 1,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 1,
+              "evidenceRankAnywhere": 1,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "结构化专业记录",
+                  "anchors": [
+                    "低空经济与管理",
+                    "020110TK"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "ad649cc8-cc1a-426e-baba-a7b7e50a88de"
+                }
+              ],
+              "top1Score": 0.01639344262295082,
+              "top1ChunkId": "ad649cc8-cc1a-426e-baba-a7b7e50a88de",
+              "top1HeadRecordId": "moe-major-020109T",
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": true,
+              "previewVisibleAt1": false
+            },
+            {
+              "questionId": "CN02",
+              "category": "专业目录-代码与名称",
+              "answerable": true,
+              "groupCount": 1,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 1,
+              "evidenceRankAnywhere": 1,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "结构化专业记录",
+                  "anchors": [
+                    "083113TK",
+                    "低空安全管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "c2901906-386a-4c42-ae31-f2916a85d484"
+                }
+              ],
+              "top1Score": 0.01634056054997356,
+              "top1ChunkId": "c2901906-386a-4c42-ae31-f2916a85d484",
+              "top1HeadRecordId": "moe-major-083108TK",
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": true,
+              "previewVisibleAt1": false
+            },
+            {
+              "questionId": "CN03",
+              "category": "专业目录-代码与名称",
+              "answerable": true,
+              "groupCount": 2,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 1,
+              "evidenceRankAnywhere": 1,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "结构化专业记录",
+                  "anchors": [
+                    "140003TK",
+                    "低空技术与工程"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "ccab6e7d-d7c6-4699-bca2-27acce33070d"
+                },
+                {
+                  "name": "原页记录（含原代码）",
+                  "anchors": [
+                    "140003TK",
+                    "083203TK"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "ccab6e7d-d7c6-4699-bca2-27acce33070d"
+                }
+              ],
+              "top1Score": 0.01639344262295082,
+              "top1ChunkId": "ccab6e7d-d7c6-4699-bca2-27acce33070d",
+              "top1HeadRecordId": "moe-major-140002TK",
+              "groupsCoveredAtTop1": 2,
+              "top1CoversAllGroups": true,
+              "previewVisibleAt1": null
+            },
+            {
+              "questionId": "CN04",
+              "category": "专业目录-原代码与变更",
+              "answerable": true,
+              "groupCount": 1,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 1,
+              "evidenceRankAnywhere": 1,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "结构化专业记录",
+                  "anchors": [
+                    "140002TK",
+                    "083202TK"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "ccab6e7d-d7c6-4699-bca2-27acce33070d"
+                }
+              ],
+              "top1Score": 0.01639344262295082,
+              "top1ChunkId": "ccab6e7d-d7c6-4699-bca2-27acce33070d",
+              "top1HeadRecordId": "moe-major-140002TK",
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": true,
+              "previewVisibleAt1": true
+            },
+            {
+              "questionId": "CN05",
+              "category": "专业目录-代码与名称",
+              "answerable": true,
+              "groupCount": 1,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 10,
+              "evidenceRankAnywhere": 10,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "结构化专业记录",
+                  "anchors": [
+                    "100709TK",
+                    "药物经济与管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 10,
+                  "firstRankAnywhere": 10,
+                  "chunkId": "29389a43-7dea-46a0-944c-31e803286f9a"
+                }
+              ],
+              "top1Score": 0.016129032258064516,
+              "top1ChunkId": "64e173c5-b78c-4f42-a62b-c6a468e2f1b1",
+              "top1HeadRecordId": "moe-major-100703TK",
+              "groupsCoveredAtTop1": 0,
+              "top1CoversAllGroups": false,
+              "previewVisibleAt1": false
+            },
+            {
+              "questionId": "CN07",
+              "category": "专业目录-归类与学位",
+              "answerable": true,
+              "groupCount": 2,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": null,
+              "evidenceRankAnywhere": null,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "0831 专业类块",
+                  "anchors": [
+                    "0831 公安技术类",
+                    "刑事科学技术"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": null,
+                  "firstRankAnywhere": null,
+                  "chunkId": null
+                },
+                {
+                  "name": "低空安全管理记录",
+                  "anchors": [
+                    "083113TK",
+                    "低空安全管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "c2901906-386a-4c42-ae31-f2916a85d484"
+                }
+              ],
+              "top1Score": 0.016239754098360655,
+              "top1ChunkId": "c2901906-386a-4c42-ae31-f2916a85d484",
+              "top1HeadRecordId": "moe-major-083108TK",
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": false,
+              "previewVisibleAt1": null
+            },
+            {
+              "questionId": "CN08",
+              "category": "专业目录-归类与学位",
+              "answerable": true,
+              "groupCount": 3,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": null,
+              "evidenceRankAnywhere": null,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "1204 类名块",
+                  "anchors": [
+                    "1204 公共管理类",
+                    "公共事业管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": null,
+                  "firstRankAnywhere": null,
+                  "chunkId": null
+                },
+                {
+                  "name": "航空安防管理记录",
+                  "anchors": [
+                    "120419TK",
+                    "航空安防管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 6,
+                  "firstRankAnywhere": 6,
+                  "chunkId": "7cfbf044-c58d-406a-bfda-71a65bb60128"
+                },
+                {
+                  "name": "无障碍管理记录",
+                  "anchors": [
+                    "120420TK",
+                    "无障碍管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 3,
+                  "firstRankAnywhere": 3,
+                  "chunkId": "7837a498-cae5-4f70-8e29-85aee2665b5d"
+                }
+              ],
+              "top1Score": 0.01634056054997356,
+              "top1ChunkId": "c3e59a0e-b380-4ef5-b4a5-30c4d9913e29",
+              "top1HeadRecordId": "moe-major-120408T",
+              "groupsCoveredAtTop1": 0,
+              "top1CoversAllGroups": false,
+              "previewVisibleAt1": null
+            },
+            {
+              "questionId": "CN24",
+              "category": "跨源综合",
+              "answerable": true,
+              "groupCount": 3,
+              "judgmentGroupCount": 0,
+              "evidenceRankSameChunk": 6,
+              "evidenceRankAnywhere": 6,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "低空经济与管理",
+                  "anchors": [
+                    "低空经济与管理",
+                    "020110TK"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 1,
+                  "firstRankAnywhere": 1,
+                  "chunkId": "ad649cc8-cc1a-426e-baba-a7b7e50a88de"
+                },
+                {
+                  "name": "低空安全管理",
+                  "anchors": [
+                    "083113TK",
+                    "低空安全管理"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 6,
+                  "firstRankAnywhere": 6,
+                  "chunkId": "c2901906-386a-4c42-ae31-f2916a85d484"
+                },
+                {
+                  "name": "低空技术与工程",
+                  "anchors": [
+                    "140003TK",
+                    "低空技术与工程"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": 2,
+                  "firstRankAnywhere": 2,
+                  "chunkId": "ccab6e7d-d7c6-4699-bca2-27acce33070d"
+                }
+              ],
+              "top1Score": 0.01628935727296383,
+              "top1ChunkId": "ad649cc8-cc1a-426e-baba-a7b7e50a88de",
+              "top1HeadRecordId": "moe-major-020109T",
+              "groupsCoveredAtTop1": 1,
+              "top1CoversAllGroups": false,
+              "previewVisibleAt1": null
+            },
+            {
+              "questionId": "CN25",
+              "category": "跨源综合",
+              "answerable": true,
+              "groupCount": 1,
+              "judgmentGroupCount": 1,
+              "evidenceRankSameChunk": null,
+              "evidenceRankAnywhere": null,
+              "judgmentEvidenceRank": null,
+              "groups": [
+                {
+                  "name": "专业侧",
+                  "anchors": [
+                    "083113TK",
+                    "低空安全管理"
+                  ],
+                  "judgment": true,
+                  "firstRankSameChunk": null,
+                  "firstRankAnywhere": null,
+                  "chunkId": null
+                },
+                {
+                  "name": "职业侧",
+                  "anchors": [
+                    "4-02-04-06",
+                    "无人机驾驶员"
+                  ],
+                  "judgment": false,
+                  "firstRankSameChunk": null,
+                  "firstRankAnywhere": null,
+                  "chunkId": null
+                }
+              ],
+              "top1Score": 0.015823412698412698,
+              "top1ChunkId": "4f3964ea-a754-4678-87a8-efa09de497b4",
+              "top1HeadRecordId": "moe-major-082009T",
+              "groupsCoveredAtTop1": 0,
+              "top1CoversAllGroups": false,
+              "previewVisibleAt1": false
+            }
+          ]
+        }
+      },
+      "hybridMeanRank": 5.89
+    }
+  ],
+  "best": {
+    "chunkSize": 200,
+    "hybridMeanRank": 4.56
+  }
+}

@@ -1,0 +1,518 @@
+{
+  "kb": "aacc4889-a347-44ea-9dd1-b60ec1917cbb",
+  "questions": "knowledge-cn/evaluations/questions-cn-semantic-v1.json",
+  "top": 5,
+  "snippetChars": 2400,
+  "modelNote": "deepseek-v4.1-flash（本地端点，与产品侧共用 backend/llm.py 的客户端纪律）",
+  "elapsedSeconds": 323.3,
+  "summary": {
+    "answerable": {
+      "total": 16,
+      "有引用且引用都合法": {
+        "hits": 16,
+        "total": 16,
+        "rate": 1.0
+      },
+      "引用支持全部 gold 组": {
+        "hits": 14,
+        "total": 16,
+        "rate": 0.875
+      },
+      "引用支持至少一个 gold 组": {
+        "hits": 14,
+        "total": 16,
+        "rate": 0.875
+      },
+      "答案正文命中全部锚点": {
+        "hits": 12,
+        "total": 16,
+        "rate": 0.75
+      },
+      "有回答": {
+        "hits": 16,
+        "total": 16,
+        "rate": 1.0
+      },
+      "可答题里出现拒答表述（启发式）": {
+        "hits": 3,
+        "total": 16,
+        "rate": 0.1875
+      }
+    },
+    "refusal": {
+      "total": 7,
+      "正确拒答（启发式）": {
+        "hits": 7,
+        "total": 7,
+        "rate": 1.0
+      }
+    }
+  },
+  "perQuestion": [
+    {
+      "questionId": "CN01",
+      "answerable": true,
+      "citedRefs": [
+        1
+      ],
+      "invalidRefs": [],
+      "refusalLike": true,
+      "answer": "无法回答。片段中未说明哪个专业与“无人机产业直接相关”或属于“特设方向”。仅片段1显示“低空经济与管理”授予管理学学士、专业代码为020110TK，但不足以确认其与无人机产业的直接关系。[片段1]",
+      "answeredAnchorsInAnswer": true,
+      "citationSupportsGold": true,
+      "citationSupportedAnyGroup": true,
+      "hitIds": [
+        "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+        "e62c647c-2a3e-4b91-a7e7-9d68be262211",
+        "ac39f751-63dc-4ffd-ad29-854eba339dca",
+        "da177c47-cbbc-4199-b185-caaaaab6ffd6",
+        "0d1814ee-7ac0-46ab-97e9-98b55daf2d50"
+      ]
+    },
+    {
+      "questionId": "CN06",
+      "answerable": true,
+      "citedRefs": [
+        1,
+        2,
+        4
+      ],
+      "invalidRefs": [],
+      "refusalLike": true,
+      "answer": "无法回答。片段中只列出“低空技术与工程”“低空经济与管理”等专业的代码、名称及授予学位信息，未说明该本科特设专业在《普通高等学校本科专业目录》中的所属门类或大类。[片段2][片段4] 缺少“所属门类/大类”字段。[片段1]",
+      "answeredAnchorsInAnswer": false,
+      "citationSupportsGold": false,
+      "citationSupportedAnyGroup": false,
+      "hitIds": [
+        "4e0e57b6-afcf-4d7d-95d9-002442d8b600",
+        "6175230f-ddcd-4b54-a61a-7db63d1f34ab",
+        "e68ac55e-c3b7-45a4-8088-1cc9e9385ac7",
+        "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+        "56ca7ed1-358a-44b0-95e7-6af189c68cdb"
+      ]
+    },
+    {
+      "questionId": "CN09",
+      "answerable": true,
+      "citedRefs": [
+        1,
+        2
+      ],
+      "invalidRefs": [],
+      "refusalLike": false,
+      "answer": "2025年全国城镇非私营单位就业人员年平均工资为129441元[片段1][片段2]。比上年增加5331元，名义增长4.3%，扣除价格因素实际增长4.2%[片段1][片段2]。",
+      "answeredAnchorsInAnswer": false,
+      "citationSupportsGold": true,
+      "citationSupportedAnyGroup": true,
+      "hitIds": [
+        "5f11f641-b8c7-42db-969b-2c58606cd935",
+        "79dff8cb-32af-4347-9dd1-356947b73927",
+        "cac06d5d-39d2-4f3e-8433-65d505d63096",
+        "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9",
+        "70675e6b-4140-4a29-8a09-803912131c60"
+      ]
+    },
+    {
+      "questionId": "CN10",
+      "answerable": true,
+      "citedRefs": [
+        1,
+        2
+      ],
+      "invalidRefs": [],
+      "refusalLike": false,
+      "answer": "2025年城镇私营单位就业人员年平均工资为71590元。[片段1][片段2]",
+      "answeredAnchorsInAnswer": false,
+      "citationSupportsGold": true,
+      "citationSupportedAnyGroup": true,
+      "hitIds": [
+        "5f11f641-b8c7-42db-969b-2c58606cd935",
+        "79dff8cb-32af-4347-9dd1-356947b73927",
+        "cac06d5d-39d2-4f3e-8433-65d505d63096",
+        "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9",
+        "70675e6b-4140-4a29-8a09-803912131c60"
+      ]
+    },
+    {
+      "questionId": "CN11",
+      "answerable": true,
+      "citedRefs": [
+        1
+      ],
+      "invalidRefs": [],
+      "refusalLike": false,
+      "answer": "2025 年规模以上企业中，中层及以上管理人员的年平均工资为 210016 元。[片段1]",
+      "answeredAnchorsInAnswer": true,
+      "citationSupportsGold": true,
+      "citationSupportedAnyGroup": true,
+      "hitIds": [
+        "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9",
+        "79dff8cb-32af-4347-9dd1-356947b73927",
+        "70675e6b-4140-4a29-8a09-803912131c60",
+        "5f11f641-b8c7-42db-969b-2c58606cd935",
+        "cac06d5d-39d2-4f3e-8433-65d505d63096"
+      ]
+    },
+    {
+      "questionId": "CN12",
+      "answerable": true,
+      "citedRefs": [
+        1
+      ],
+      "invalidRefs": [],
+      "refusalLike": false,
+      "answer": "2025年城镇非私营单位中，平均工资排在第一的行业门类是“信息传输、软件和信息技术服务业”，为248752元。[片段1]",
+      "answeredAnchorsInAnswer": true,
+      "citationSupportsGold": true,
+      "citationSupportedAnyGroup": true,
+      "hitIds": [
+        "5f11f641-b8c7-42db-969b-2c58606cd935",
+        "79dff8cb-32af-4347-9dd1-356947b73927",
+        "cac06d5d-39d2-4f3e-8433-65d505d63096",
+        "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9",
+        "3e6855e9-5662-40b3-b713-ce1e064f9977"
+      ]
+    },
+    {
+      "questionId": "CN13",
+      "answerable": true,
+      "citedRefs": [
+        1,
+        2
+      ],
+      "invalidRefs": [],
+      "refusalLike": false,
+      "answer": "2025年城镇非私营单位中，平均工资垫底的行业是“住宿和餐饮业”，金额为62461元。[片段1][片段2]",
+      "answeredAnchorsInAnswer": true,
+      "citationSupportsGold": true,
+      "citationSupportedAnyGroup": true,
+      "hitIds": [
+        "5f11f641-b8c7-42db-969b-2c58606cd935",
+        "79dff8cb-32af-4347-9dd1-356947b73927",
+        "cac06d5d-39d2-4f3e-8433-65d505d63096",
+        "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9",
+        "70675e6b-4140-4a29-8a09-803912131c60"
+      ]
+    },
+    {
+      "questionId": "CN15",
+      "answerable": true,
+      "citedRefs": [
+        1
+      ],
+      "invalidRefs": [],
+      "refusalLike": false,
+      "answer": "2025年城镇私营单位年平均工资最高的两个行业是：金融业 140451 元；信息传输、软件和信息技术服务业 128166 元。[片段1]",
+      "answeredAnchorsInAnswer": true,
+      "citationSupportsGold": true,
+      "citationSupportedAnyGroup": true,
+      "hitIds": [
+        "5f11f641-b8c7-42db-969b-2c58606cd935",
+        "79dff8cb-32af-4347-9dd1-356947b73927",
+        "cac06d5d-39d2-4f3e-8433-65d505d63096",
+        "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9",
+        "3e6855e9-5662-40b3-b713-ce1e064f9977"
+      ]
+    },
+    {
+      "questionId": "CN16",
+      "answerable": true,
+      "citedRefs": [
+        1,
+        2
+      ],
+      "invalidRefs": [],
+      "refusalLike": false,
+      "answer": "按片段中的“外商投资单位”口径：2025年城镇非私营单位外商投资单位年平均工资为 **164956 元** [片段1][片段2]；内资单位为 **125819 元** [片段1][片段2]。前者比后者高 **39137 元** [片段1][片段2]（164956－125819）。\n\n若“外资背景”还包括港澳台投资单位，片段未如此归类，无法据此笼统回答。",
+      "answeredAnchorsInAnswer": true,
+      "citationSupportsGold": true,
+      "citationSupportedAnyGroup": true,
+      "hitIds": [
+        "5f11f641-b8c7-42db-969b-2c58606cd935",
+        "79dff8cb-32af-4347-9dd1-356947b73927",
+        "cac06d5d-39d2-4f3e-8433-65d505d63096",
+        "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9",
+        "70675e6b-4140-4a29-8a09-803912131c60"
+      ]
+    },
+    {
+      "questionId": "CN17",
+      "answerable": true,
+      "citedRefs": [
+        4
+      ],
+      "invalidRefs": [],
+      "refusalLike": false,
+      "answer": "负责给模型标注、准备训练数据的那类从业者，对应“人工智能训练师”，职业编码为 **4-04-05-05**；其工作任务包括标注和加工图片、文字、语音等原始数据，并包含“数据标注员”工种 [片段4]。",
+      "answeredAnchorsInAnswer": true,
+      "citationSupportsGold": true,
+      "citationSupportedAnyGroup": true,
+      "hitIds": [
+        "02fdea74-f070-4f73-90c1-5c1e83d12e0e",
+        "0b72e99a-ad41-42c9-970d-3afda8c81218",
+        "efb3ca63-8025-4251-9330-a795681df1a9",
+        "9a65258f-9016-4169-bcdf-80b53cb79283",
+        "cac06d5d-39d2-4f3e-8433-65d505d63096"
+      ]
+    },
+    {
+      "questionId": "CN18",
+      "answerable": true,
+      "citedRefs": [
+        1,
+        2,
+        3
+      ],
+      "invalidRefs": [],
+      "refusalLike": true,
+      "answer": "无法回答。\n\n【片段1】开头描述的岗位（搭建数字化办公模块、进行业务流程在线化和大数据决策分析等）与问题最吻合，但该片段在职业名称和编码处被截断，未给出对应编码；片段中的 2-06-07-14 是紧随其后的“企业合规师”的编码 [片段1]，并非该岗位。\n\n其他片段中：商务数据分析师 4-07-02-05 侧重商务数据采集分析 [片段2]；信息通信信息化系统管理员 4-04-04-03 侧重系统运维 [片段3]；均与“把业务流程搬上系统+数据治理”不完全对应，且“数据治理员”仅作为某职业工种列出，其所属编码在片段中缺失 [片段2]。\n\n缺少该岗位的名称与编码信息，故无法回答。",
+      "answeredAnchorsInAnswer": false,
+      "citationSupportsGold": false,
+      "citationSupportedAnyGroup": false,
+      "hitIds": [
+        "59547977-28c8-440c-a793-517305e8c8b0",
+        "477a1931-100c-439b-a4c1-da7d95f90644",
+        "65f2af8d-0f11-4063-ba9d-caecc50cc729",
+        "73419a38-709b-4fc0-bf30-8fcb6a65a754",
+        "f9a6e879-47ef-4108-b82c-4edec6582552"
+      ]
+    },
+    {
+      "questionId": "CN19",
+      "answerable": true,
+      "citedRefs": [
+        2,
+        3,
+        5
+      ],
+      "invalidRefs": [],
+      "refusalLike": false,
+      "answer": "该职业是“无人机驾驶员”，编码为 **4-02-04-06**。[片段3][片段5]\n\n其包含但不限于以下工种：植保无人机驾驶员、安防无人机驾驶员、航拍无人机驾驶员、巡检无人机驾驶员、物流无人机驾驶员。[片段2]",
+      "answeredAnchorsInAnswer": true,
+      "citationSupportsGold": true,
+      "citationSupportedAnyGroup": true,
+      "hitIds": [
+        "4a259598-c0b4-4e70-ac66-3a9be2f64b95",
+        "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+        "1b75ba7d-38b2-44fb-af24-96c9e3b928aa",
+        "c228e4fe-ff01-46cb-b289-6e3f8442dc91",
+        "2721f609-cc31-449f-ae69-1e1fb3cf5986"
+      ]
+    },
+    {
+      "questionId": "CN20",
+      "answerable": true,
+      "citedRefs": [
+        1
+      ],
+      "invalidRefs": [],
+      "refusalLike": false,
+      "answer": "该职业是「易货经济专业人员」，编码为 **2-06-01-04**。[片段1]",
+      "answeredAnchorsInAnswer": true,
+      "citationSupportsGold": true,
+      "citationSupportedAnyGroup": true,
+      "hitIds": [
+        "30dd3e3f-5068-41ec-9204-6ec3efa46dc9",
+        "9085c19c-4deb-49cb-b574-1bbdd9db2050",
+        "9dac6a89-64bf-4ec7-8a27-12c809c891da",
+        "c574418e-8698-41c6-9d23-dc024f168ead",
+        "477a1931-100c-439b-a4c1-da7d95f90644"
+      ]
+    },
+    {
+      "questionId": "CN21",
+      "answerable": true,
+      "citedRefs": [
+        1
+      ],
+      "invalidRefs": [],
+      "refusalLike": false,
+      "answer": "编码是 **4-13-01-05**，该岗位为“全媒体运营师”。[片段1]",
+      "answeredAnchorsInAnswer": true,
+      "citationSupportsGold": true,
+      "citationSupportedAnyGroup": true,
+      "hitIds": [
+        "b72f9d43-c0b9-4416-821c-70e734c80b66",
+        "6f56c8e0-876e-4ad8-877c-e9f17e5e1516",
+        "efb3ca63-8025-4251-9330-a795681df1a9",
+        "97747703-9939-4b1b-b535-9c3db190031c",
+        "f6e8763c-b867-4f44-8d37-9186e1805b7d"
+      ]
+    },
+    {
+      "questionId": "CN22",
+      "answerable": true,
+      "citedRefs": [
+        1
+      ],
+      "invalidRefs": [],
+      "refusalLike": false,
+      "answer": "该岗位是“战略规划与管理工程技术人员”，编码为 **2-02-30-03** [片段1]。",
+      "answeredAnchorsInAnswer": true,
+      "citationSupportsGold": true,
+      "citationSupportedAnyGroup": true,
+      "hitIds": [
+        "307c76b2-c44b-4248-afde-e86182d1e54f",
+        "02fdea74-f070-4f73-90c1-5c1e83d12e0e",
+        "3ce5ac0d-ec5a-4d72-ad50-40826eb481cd",
+        "4386dd8c-7d9c-480b-93ad-1b390a72e128",
+        "fa774fce-9908-486d-bb04-3385493e13b4"
+      ]
+    },
+    {
+      "questionId": "CN23",
+      "answerable": true,
+      "citedRefs": [
+        1,
+        5
+      ],
+      "invalidRefs": [],
+      "refusalLike": false,
+      "answer": "该类岗位是“家政服务员”，编码为 **4-10-01-06** [片段1][片段5]。其工作包括家务料理、家庭成员照护、家庭事务管理等 [片段1]。",
+      "answeredAnchorsInAnswer": true,
+      "citationSupportsGold": true,
+      "citationSupportedAnyGroup": true,
+      "hitIds": [
+        "547c7040-13ae-453b-875b-18bd11853c3f",
+        "8eb17984-7a4e-452c-a880-f7797c527ec4",
+        "02fdea74-f070-4f73-90c1-5c1e83d12e0e",
+        "efb3ca63-8025-4251-9330-a795681df1a9",
+        "6fd4d4aa-fe4b-4458-8c0b-2edd9a064644"
+      ]
+    },
+    {
+      "questionId": "CN27",
+      "answerable": false,
+      "citedRefs": [
+        1,
+        2,
+        3
+      ],
+      "invalidRefs": [],
+      "refusalLike": true,
+      "answer": "无法回答。现有片段仅包含“低空经济与管理”专业目录信息[片段1][片段2]，以及2025年全国工资统计[片段3]，未提供2026年10月、深圳、“低空经济与管理”相关岗位的招聘量、平均月薪和竞争比数据[片段1][片段2][片段3]。缺少对应地区、时间、岗位口径及招聘竞争统计，故无法判断。",
+      "refused": true,
+      "hitIds": [
+        "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+        "2864d47a-4177-418d-b3b3-dfa2b7f1bc22",
+        "79dff8cb-32af-4347-9dd1-356947b73927",
+        "e6548cb5-9343-4e2c-ae95-c5540473fed2",
+        "1c1caaac-5797-442f-bc8f-e1b294d024b9"
+      ]
+    },
+    {
+      "questionId": "CN28",
+      "answerable": false,
+      "citedRefs": [
+        1,
+        2
+      ],
+      "invalidRefs": [],
+      "refusalLike": true,
+      "answer": "无法回答。片段仅显示「低空经济与管理」专业代码为020110TK、授予管理学学士学位等目录信息[片段1][片段2]，未列出任何开设高校，也未提供2026年录取分数线[片段1][片段2]。缺少开设高校名单和2026年录取分数线数据。",
+      "refused": true,
+      "hitIds": [
+        "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+        "2864d47a-4177-418d-b3b3-dfa2b7f1bc22",
+        "c7a4e691-6d21-44fa-b60e-f3af2aba59ac",
+        "e6548cb5-9343-4e2c-ae95-c5540473fed2",
+        "1c1caaac-5797-442f-bc8f-e1b294d024b9"
+      ]
+    },
+    {
+      "questionId": "CN29",
+      "answerable": false,
+      "citedRefs": [
+        1,
+        2
+      ],
+      "invalidRefs": [],
+      "refusalLike": true,
+      "answer": "无法回答。给出的片段仅包含2025年及部分2024年城镇非私营单位就业人员年平均工资数据，没有2019年的相关数据。[片段1][片段2]",
+      "refused": true,
+      "hitIds": [
+        "5f11f641-b8c7-42db-969b-2c58606cd935",
+        "79dff8cb-32af-4347-9dd1-356947b73927",
+        "cac06d5d-39d2-4f3e-8433-65d505d63096",
+        "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9",
+        "70675e6b-4140-4a29-8a09-803912131c60"
+      ]
+    },
+    {
+      "questionId": "CN30",
+      "answerable": false,
+      "citedRefs": [
+        1,
+        2,
+        3
+      ],
+      "invalidRefs": [],
+      "refusalLike": true,
+      "answer": "无法回答。片段仅说明专业目录每年更新发布[片段2]，并列出“低空经济与管理”为020110TK专业[片段1][片段3]，但未提供2027年目录内容或调整结果，因此无法判断2027年新增哪些专业，也无法判断“低空经济与管理”是否保留。缺2027年《普通高等学校本科专业目录》或相关调整文件。",
+      "refused": true,
+      "hitIds": [
+        "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+        "4e0e57b6-afcf-4d7d-95d9-002442d8b600",
+        "2864d47a-4177-418d-b3b3-dfa2b7f1bc22",
+        "e62c647c-2a3e-4b91-a7e7-9d68be262211",
+        "e6548cb5-9343-4e2c-ae95-c5540473fed2"
+      ]
+    },
+    {
+      "questionId": "CN31",
+      "answerable": false,
+      "citedRefs": [
+        1,
+        2
+      ],
+      "invalidRefs": [],
+      "refusalLike": true,
+      "answer": "无法回答。片段仅介绍无人机驾驶员的定义、工作任务和包含工种等[片段1][片段2]，未提及“大疆”、月薪、离职率或任何薪酬与人事数据。缺少大疆公司针对无人机驾驶员的薪资待遇和离职率信息。",
+      "refused": true,
+      "hitIds": [
+        "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+        "1b75ba7d-38b2-44fb-af24-96c9e3b928aa",
+        "d37ab62e-e016-4a40-a026-93f2b917875a",
+        "6c724c99-664e-437d-90e2-0770cf6ebd50",
+        "e4ac739e-368b-4dd6-a31b-6bcf188f2fa1"
+      ]
+    },
+    {
+      "questionId": "CN32",
+      "answerable": false,
+      "citedRefs": [
+        1,
+        2
+      ],
+      "invalidRefs": [],
+      "refusalLike": true,
+      "answer": "无法回答。现有【片段1】【片段2】仅提供“低空经济与管理”的专业代码、名称、授予管理学学士学位及来源页码等信息，未包含该专业毕业生的就业率或主要就业去向。缺少就业率统计和就业去向数据，故无法回答。",
+      "refused": true,
+      "hitIds": [
+        "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+        "2864d47a-4177-418d-b3b3-dfa2b7f1bc22",
+        "c7a4e691-6d21-44fa-b60e-f3af2aba59ac",
+        "e6548cb5-9343-4e2c-ae95-c5540473fed2",
+        "e62c647c-2a3e-4b91-a7e7-9d68be262211"
+      ]
+    },
+    {
+      "questionId": "CN33",
+      "answerable": false,
+      "citedRefs": [
+        1
+      ],
+      "invalidRefs": [],
+      "refusalLike": true,
+      "answer": "无法回答。片段仅显示该稿为《职业分类大典（2022年版）》（社会公示稿），且为草案、非人工审核[片段1]；未提供“正式发布版”的职业条目总数，也未提供本稿职业条目总数或两者差异数据[片段1-5均无]。因此无法计算差了多少条。",
+      "refused": true,
+      "hitIds": [
+        "02fdea74-f070-4f73-90c1-5c1e83d12e0e",
+        "11ba8072-4b78-42a5-8247-10d348f0f1e6",
+        "0b72e99a-ad41-42c9-970d-3afda8c81218",
+        "efb3ca63-8025-4251-9330-a795681df1a9",
+        "a3d1221d-a8db-4e43-a343-eae0aeec6cf5"
+      ]
+    }
+  ]
+}

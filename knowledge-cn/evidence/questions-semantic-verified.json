@@ -1,0 +1,431 @@
+{
+  "questionsFile": "knowledge-cn/evaluations/questions-cn-semantic-v1.json",
+  "total": 16,
+  "answerable": 16,
+  "refusal": 0,
+  "goldGroups": 17,
+  "problems": [],
+  "fragileGold": [],
+  "passed": true,
+  "perQuestion": [
+    {
+      "questionId": "CN01",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "结构化专业记录",
+          "anchors": [
+            "低空经济与管理",
+            "020110TK"
+          ],
+          "coveringChunks": 2,
+          "minWindowChars": 16,
+          "sample": [
+            {
+              "chunkId": "c8eeb5f4-3461-43e0-981f-13c0d7d4cc31",
+              "chunkIndex": 14
+            },
+            {
+              "chunkId": "2864d47a-4177-418d-b3b3-dfa2b7f1bc22",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN06",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "原页目录块",
+          "anchors": [
+            "0201 经济学类",
+            "低空经济与管理"
+          ],
+          "coveringChunks": 1,
+          "minWindowChars": 170,
+          "sample": [
+            {
+              "chunkId": "2864d47a-4177-418d-b3b3-dfa2b7f1bc22",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN09",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "正文与表 1/表 2",
+          "anchors": [
+            "129441",
+            "124110"
+          ],
+          "coveringChunks": 2,
+          "minWindowChars": 191,
+          "sample": [
+            {
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+              "chunkIndex": 0
+            },
+            {
+              "chunkId": "79dff8cb-32af-4347-9dd1-356947b73927",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN10",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "正文与表 4",
+          "anchors": [
+            "71590",
+            "69476"
+          ],
+          "coveringChunks": 2,
+          "minWindowChars": 168,
+          "sample": [
+            {
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+              "chunkIndex": 0
+            },
+            {
+              "chunkId": "79dff8cb-32af-4347-9dd1-356947b73927",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN11",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "正文与表 6",
+          "anchors": [
+            "210016",
+            "中层及以上管理人员"
+          ],
+          "coveringChunks": 5,
+          "minWindowChars": 16,
+          "sample": [
+            {
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+              "chunkIndex": 0
+            },
+            {
+              "chunkId": "3eaeeb46-f5dd-4e44-96dc-c7b9385f56f9",
+              "chunkIndex": 1
+            },
+            {
+              "chunkId": "cac06d5d-39d2-4f3e-8433-65d505d63096",
+              "chunkIndex": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN12",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "表 2",
+          "anchors": [
+            "248752",
+            "信息传输、软件和信息技术服务业"
+          ],
+          "coveringChunks": 2,
+          "minWindowChars": 22,
+          "sample": [
+            {
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+              "chunkIndex": 0
+            },
+            {
+              "chunkId": "79dff8cb-32af-4347-9dd1-356947b73927",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN13",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "表 2",
+          "anchors": [
+            "62461",
+            "住宿和餐饮业"
+          ],
+          "coveringChunks": 2,
+          "minWindowChars": 12,
+          "sample": [
+            {
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+              "chunkIndex": 0
+            },
+            {
+              "chunkId": "79dff8cb-32af-4347-9dd1-356947b73927",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN15",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "表 5",
+          "anchors": [
+            "140451",
+            "128166"
+          ],
+          "coveringChunks": 2,
+          "minWindowChars": 28,
+          "sample": [
+            {
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+              "chunkIndex": 0
+            },
+            {
+              "chunkId": "79dff8cb-32af-4347-9dd1-356947b73927",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN16",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "表 3",
+          "anchors": [
+            "164956",
+            "外商投资单位"
+          ],
+          "coveringChunks": 2,
+          "minWindowChars": 13,
+          "sample": [
+            {
+              "chunkId": "5f11f641-b8c7-42db-969b-2c58606cd935",
+              "chunkIndex": 0
+            },
+            {
+              "chunkId": "79dff8cb-32af-4347-9dd1-356947b73927",
+              "chunkIndex": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN17",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "大典正文",
+          "anchors": [
+            "4-04-05-05",
+            "人工智能训练师"
+          ],
+          "coveringChunks": 3,
+          "minWindowChars": 18,
+          "sample": [
+            {
+              "chunkId": "dec7dbe8-8fb4-4dfc-8c98-e214c7c87b9a",
+              "chunkIndex": 607
+            },
+            {
+              "chunkId": "a498bd98-d265-4144-89dd-a582f76abb85",
+              "chunkIndex": 609
+            },
+            {
+              "chunkId": "9a65258f-9016-4169-bcdf-80b53cb79283",
+              "chunkIndex": 610
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN18",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "大典正文",
+          "anchors": [
+            "2-06-07-13",
+            "数字化管理师"
+          ],
+          "coveringChunks": 2,
+          "minWindowChars": 17,
+          "sample": [
+            {
+              "chunkId": "af43aa07-a645-4bef-b935-813b71b0993e",
+              "chunkIndex": 370
+            },
+            {
+              "chunkId": "25ba7266-d15e-4cf7-a17e-7d4f5a2bdedf",
+              "chunkIndex": 377
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN19",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "职业编码行",
+          "anchors": [
+            "4-02-04-06",
+            "无人机驾驶员"
+          ],
+          "coveringChunks": 2,
+          "minWindowChars": 17,
+          "sample": [
+            {
+              "chunkId": "2721f609-cc31-449f-ae69-1e1fb3cf5986",
+              "chunkIndex": 553
+            },
+            {
+              "chunkId": "1b75ba7d-38b2-44fb-af24-96c9e3b928aa",
+              "chunkIndex": 556
+            }
+          ]
+        },
+        {
+          "name": "工种行",
+          "anchors": [
+            "植保无人机驾驶员",
+            "安防无人机驾驶员"
+          ],
+          "coveringChunks": 1,
+          "minWindowChars": 17,
+          "sample": [
+            {
+              "chunkId": "8909d5cf-2d34-4fa0-abbf-f919522d3df6",
+              "chunkIndex": 557
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN20",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "大典正文",
+          "anchors": [
+            "2-06-01-04",
+            "易货经济专业人员"
+          ],
+          "coveringChunks": 2,
+          "minWindowChars": 19,
+          "sample": [
+            {
+              "chunkId": "db1aee6d-5166-49b2-b6ef-44c2f23791b5",
+              "chunkIndex": 359
+            },
+            {
+              "chunkId": "30dd3e3f-5068-41ec-9204-6ec3efa46dc9",
+              "chunkIndex": 361
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN21",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "大典正文",
+          "anchors": [
+            "4-13-01-05",
+            "全媒体运营师"
+          ],
+          "coveringChunks": 2,
+          "minWindowChars": 17,
+          "sample": [
+            {
+              "chunkId": "017b9948-f1fe-4770-8057-faa922c5019d",
+              "chunkIndex": 804
+            },
+            {
+              "chunkId": "b72f9d43-c0b9-4416-821c-70e734c80b66",
+              "chunkIndex": 807
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN22",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "大典正文",
+          "anchors": [
+            "2-02-30-03",
+            "战略规划与管理工程技术人员"
+          ],
+          "coveringChunks": 1,
+          "minWindowChars": 24,
+          "sample": [
+            {
+              "chunkId": "307c76b2-c44b-4248-afde-e86182d1e54f",
+              "chunkIndex": 231
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionId": "CN23",
+      "answerable": true,
+      "groups": [
+        {
+          "name": "大典正文",
+          "anchors": [
+            "4-10-01-06",
+            "家政服务员"
+          ],
+          "coveringChunks": 3,
+          "minWindowChars": 16,
+          "sample": [
+            {
+              "chunkId": "220dc536-fb45-42a0-9f45-efae28e4b936",
+              "chunkIndex": 754
+            },
+            {
+              "chunkId": "6fd4d4aa-fe4b-4458-8c0b-2edd9a064644",
+              "chunkIndex": 757
+            },
+            {
+              "chunkId": "547c7040-13ae-453b-875b-18bd11853c3f",
+              "chunkIndex": 758
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
