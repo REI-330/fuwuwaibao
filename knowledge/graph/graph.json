@@ -1,7 +1,7 @@
 {
   "schema": "career-graph-layout/v1",
   "step": "10",
-  "generatedAt": "2026-10-01T12:50:01.055Z",
+  "generatedAt": "2026-10-01T13:57:21.216Z",
   "kbVersion": "2026.09.15",
   "graphVersion": "0.1.0",
   "note": "第 10 步产物：确定性 x/y + requires.weight。坐标与 weight 都由本文件落盘，第 09 步按 id 覆盖后做硬校验，第 11 步按契约投影成 exports/career-graph.json。",

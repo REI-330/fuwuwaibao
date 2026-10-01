@@ -2,7 +2,7 @@
   "meta": {
     "kbVersion": "2026.09.15",
     "graphVersion": "0.1.0",
-    "generatedAt": "2026-10-01T12:50:01.913Z",
+    "generatedAt": "2026-10-01T13:57:22.060Z",
     "status": "pipeline-export",
     "note": "由 knowledge/pipeline/11-export-eval.mjs 从第 01–10 步产物投影生成的真实交付物（status=pipeline-export，非 contract-sample）。节点/边只保留契约字段，x/y 与 requires.weight 来自第 10 步，annotatedBy 来自第 06 步裁定，本次导出未改动任何标注。",
     "adapterNotes": [
