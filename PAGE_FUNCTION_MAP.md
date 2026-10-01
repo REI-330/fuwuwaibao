@@ -399,6 +399,7 @@
 - 支持分类、状态、时间范围和关键词筛选。
 - 点击记录查看详情、前后变化、来源、证据和关联任务。
 - 无结果时引导前往职场模拟。
+- 底部「画像历史档案」区块：回看每个画像版本的**只增不改**快照（只读，不回写当前画像）。
 
 ### 联动
 
@@ -428,7 +429,13 @@
   `POST /api/growth-records/confirm` 一个事务写候选 → 记录 → 证据 → 事件，重复 confirm 幂等、越权 400。
 - ~~`ProfileProvider` 需要改为服务端数据~~ **已实现（2026-10-01）**：时间线的真身是服务端成长记录，
   打开页面按 `ARCHIVE_PAGE_SIZE=20` 拉第一页、可「加载更多」；本地只留「本次会话刚发生、还没写库」的事件。
-- **仍未做**：**路径快照式**的历史版本回溯（只看得到当前时间线，看不到「上周那一刻的档案」）。
+- ~~**仍未做**：**路径快照式**的历史版本回溯~~ **已实现（2026-10-01 第七轮）**：
+  每次 `PUT /api/profile` / `POST /api/profile/confirm` 各留一份**只增不改**的画像快照（`profile_snapshots` 表），
+  页底「画像历史档案」区块读 `GET /api/profile/history`（位移分页，最新在前）与
+  `GET /api/profile/history/<snapshotId>`（某一时刻的**完整**画像）—— 能回看「上周那一刻的档案」。
+  快照 id 由 `(user_id, profileVersion, status)` 派生 → 重复 confirm **幂等**（不堆重复行）；
+  读历史**不回写**当前画像、也不产生新快照。入口：`lib/client/profile-api.ts` 的
+  `listProfileHistory` / `getProfileSnapshot`。
 
 ## 11. 跨页面共享入口
 

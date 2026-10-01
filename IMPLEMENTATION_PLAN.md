@@ -216,7 +216,7 @@
 | 版本化图谱导出 | `knowledge/exports/career-graph.json`（26 来源 / 1757 段 / 63 节点 / 226 边 / 38 wiki） |
 | MCP 三工具 + 双传输 | `npm run mcp:verify`（stdio 14/14）、`mcp:verify-http`（25/25），证据在 `evidence/` |
 | 最小后端 15 组路由 | `backend/server.py`，**未实现接口显式 501**（**2026-09-30 起仅余 `/api/auth/{register,login}`** —— 职业匹配已实现） |
-| 测试 | 前端 12 项、后端 **130** 项（17 图谱/契约 + 19 记忆库 + 20 LLM/触发器 + 14 对话 + 12 成长记录 + 18 简历 + 5 画像落库 + 5 访客会话 + 6 成长确认 + 14 路径引擎），端到端 `npm run e2e` **169** 项断言（`e2e:all` 169 再加既有套件），均通过 |
+| 测试 | 前端 12 项、后端 **204** 项（图谱/契约 + 记忆库 + LLM/触发器 + 对话 + 成长记录 + 简历 + 画像落库与画像历史快照 + 访客会话 + 成长确认 + 路径引擎 + 职业匹配 + 模拟面试 + 跨岗位训练 + 任务实践/附件），端到端 `npm run e2e` **237** 项断言（`e2e:all` 237 再加既有套件），均通过。**逐文件计数以 `python -m pytest backend/tests --collect-only -q` 为准**，别抄旧表 |
 | 画像/证据/事件持久化（M1-1/M1-3） | `backend/memories.py` 新增 `profiles` / `profile_evidence` / `growth_events` 三表；`ProfileStore` 读写透传同一 `career.db`；`POST /api/growth-records/confirm` 一事务确认且幂等 |
 | 访客会话（M1-2） | `POST /api/auth/guest` → 201 + `HttpOnly` Cookie + 按 `user_id` 隔离；无/坏 Cookie 回落 `user_local`；`register`/`login` 仍 501 |
 | 路径引擎（M1-4） | 新增 `backend/career_path.py`（零三方依赖）：先修深度定阶段 + 拓扑序 + 6 指标 / 6 硬校验 / 工作量自检；同输入两次输出完全相同；未知职业 404 |
@@ -238,6 +238,7 @@
 | 任务附件真上传（2026-10-01 第五轮） | `task_attachments` 表（**字节存 `content`**）+ `TaskStore` 附件读写；路由 `POST /api/tasks/<id>/attachments`（multipart，5MB / 每条任务 20 个）、`GET /api/attachments/<id>`；提交时 `attachmentIds` 必须是**自己在这条任务下**上传过的（否则 422 `UNKNOWN_ATTACHMENT`）。与简历解析刻意不同：**收得下就存**，读不出就说读不出；**附件文字不进评估输入**（不算能力证据）。前端 `/actions/tasks/<taskId>` 加文件上传与勾选引用（`test_tasks.py` 另 6 项钉住） |  |
 | 缺口收口（2026-10-01 第六轮） | ① 成长记录**分页 + 落库**：`GET /api/growth-records` 加 `limit`/`cursor` 与 `total`/`nextCursor`/`hasMore`，`ProfileProvider` 改服务端时间线；② 对话**会话落库**：`chat_sessions`/`chat_messages` + `GET|DELETE /api/chat/sessions*`，候选确认写记忆库待确认区；③ 任务**个人视图覆盖层**：`task_overrides` + `PATCH /api/tasks/<id>`、`POST /api/tasks/reorder`；④ 附件**原字节下载与删除**（被引用 409）；⑤ 侧边导航补 `/work-map`/`/catalog`/AI 对话；⑥ 过时文档口径同步 |  |
 | 知识库评测补完（2026-10-01 第六轮） | 偏语义改写题集 + RRF 权重外推、引用支持度/回答质量（真模型）、结构化目录切块扩展扫描、超范围题跨语料复核；raw 快照 sha256 成因取证（结论：git 行尾转换）。报告在 `knowledge-cn/evaluations/`，脚本在 `knowledge-cn/eval/` 与 `knowledge/eval/probe_raw_sha.py` |  |
+| 画像历史快照（2026-10-01 第七轮） | `profile_snapshots` 表（**只增不改**）+ `ProfileStore` 每次写入/确认留一份；`GET /api/profile/history`（位移分页）与 `GET /api/profile/history/<snapshotId>`；快照 id 由 `(user_id, profileVersion, status)` 派生 → **重复 confirm 幂等**。前端 `/growth-records` 底部「画像历史档案」区块（只读）。补齐 `PAGE_FUNCTION_MAP.md` §10 长期标注的「仍未做：路径快照式历史版本回溯」 | `backend/memories.py`、`backend/server.py`、`backend/tests/test_profile.py`（5 项）、`lib/client/profile-api.ts`、`app/(product)/growth-records/page.tsx` |
 
 ## 5. 待清理的卫生问题（低优先，但影响交接）
 

@@ -58,8 +58,8 @@ npm run mcp:http            # Streamable HTTP，默认 127.0.0.1:8787
 
 ```bash
 cd frontend/frotent/frontend1
-npm run e2e                             # ★ 端到端：一次跑完整条链，169 条断言，约 10 s（全离线）
-python -m pytest backend/tests -q      # 后端：130 项（17 图谱/契约 + 19 记忆库 + 20 LLM/触发器 + 14 对话 + 12 成长记录 + 18 简历 + 5 画像落库 + 5 访客会话 + 6 成长确认 + 14 路径引擎）
+npm run e2e                             # ★ 端到端：一次跑完整条链，237 条断言，约 20 s（全离线）
+python -m pytest backend/tests -q      # 后端：204 项（图谱/契约 + 记忆库 + LLM/触发器 + 对话 + 成长记录 + 简历 + 画像落库（含画像历史快照） + 会话 + 成长确认 + 路径引擎 + 职业匹配 + 模拟面试 + 跨岗位训练 + 任务实践/附件）
 npm test                                # 前端：12 项，验证图谱导出→视图模型
 npm run mcp:verify                      # MCP ：stdio 链路，断言与网页同源
 npm run mcp:verify-http                 # MCP ：HTTP 链路，含「两条链路 tools/list 逐字相同」
@@ -122,9 +122,9 @@ CAREER_LLM_DISABLED=1                                          ← 显式关闭�
 
 | 命令 | 结果 |
 |---|---|
-| `npm run e2e` | **169 条断言全绿、约 10 s、全离线**（阶段 A–G） |
-| `npm run e2e:all` | 169 + 既有套件（pytest 130 / node:test 12 / MCP 双传输 / 题集硬规则） |
-| `python -m pytest backend/tests -q` | **130 项**（含记忆库、对话、成长记录、简历、画像落库、会话、成长确认、路径引擎） |
+| `npm run e2e` | **237 条断言全绿、约 20 s、全离线**（阶段 A–H） |
+| `npm run e2e:all` | 237 + 既有套件（pytest 204 / node:test 12 / MCP 双传输 / 题集硬规则） |
+| `python -m pytest backend/tests -q` | **204 项**（含记忆库、对话、成长记录、简历、画像落库与画像历史快照、会话、成长确认、路径引擎、职业匹配、模拟面试、跨岗位训练、任务实践/附件） |
 | `npm test` | 12 项（导出 → 视图模型） |
 | `npm run mcp:verify` / `mcp:verify-http` | 三个工具真实往返，两条传输 `tools/list` 逐字一致 |
 | `node knowledge/pipeline/09..11*.mjs` | 构建闸门 **14 项校验，硬约束 13/13**；图谱类产物重跑只差时间戳 |
@@ -208,7 +208,7 @@ CAREER_LLM_DISABLED=1                                          ← 显式关闭�
 - **未实现接口一律 501**（不假装可用）：**只剩** `/api/auth/{register,login}`（本项目不存账号密码）。
   职业匹配 `/api/career-matches/*` **已实现**（2026-09-30）：排序依据全在图谱（requires 边带
   importance/targetLevel）与已确认画像里，四维打分 + 逐条依据 + 差距/待验证问题，见 `backend/career_match.py`。
-- **知识库**：`publishedAt` 0/26；中文占比 46.4%（中文字符口径）；60% 图谱标注未人工复核（174/289）。
+- **知识库**：`publishedAt` **3/26**（S08/S09/S10，JSON-LD `datePublished`；另 5 份有 `sourceUpdatedAt`）、中文占比 46.4%（中文字符口径）、60% 图谱标注未人工复核（174/289）。**两处数字要与「已知坑」第 8 条口径一致**，别再把「快照里没有」说成「0/26 没去解析」。
   **检索**：跨语言层已解（M2-5 查询自适应门控，dev 29→31/34、新 holdout 26→27/35，见 `knowledge/evaluations/语言自适应融合.md`）；
   **外部库接不回自建层**（M2-6：桥接覆盖 4/1676 = 0.24%，定不出机械规则、只能人工裁定，与 M2-1 同类门禁）
 - **素材可复现性**：raw 快照 sha256 实测 **20/25 与登记值一致**，5 份不一致（`S15`/`S18`/`S19`/`S20`/`S22`）。

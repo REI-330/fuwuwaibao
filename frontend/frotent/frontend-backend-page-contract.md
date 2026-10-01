@@ -463,6 +463,7 @@
 | 任务个人视图 | 同上（清单/详情内） | `PATCH /api/tasks/<id>`（备注/隐藏/顺序/还原）、`POST /api/tasks/reorder`、`GET /api/tasks?includeHidden=1` |
 | 附件下载 / 删除 | 同上 | `GET /api/attachments/<id>/content`（原字节，非 JSON）、`DELETE /api/attachments/<id>`（被引用时 409） |
 | 成长记录档案 | `/growth-records` | `GET /api/growth-records?kind=&limit=&cursor=`、`POST /api/growth-records`、`GET|DELETE /api/growth-records/<id>`、`POST /api/growth-records/confirm` |
+| 画像历史档案（页面内区块） | `/growth-records` | `GET /api/profile/history?limit=&cursor=`、`GET /api/profile/history/<snapshotId>` |
 | 对话（全局抽屉） | 任意产品页（`?chat=open` 可直达） | `POST /api/chat`、`GET /api/chat/sessions`、`GET|DELETE /api/chat/sessions/<id>` |
 
 口径要点（由 `backend/tests/test_interviews.py`、`backend/tests/test_cross_role.py` 与 `npm run e2e` 阶段 D/G 钉住）：
@@ -687,23 +688,33 @@
 
 ### 当前数据来源
 
-本页没有后端请求。所有数据都来自 `ProfileProvider` 的 React 内存（**前端本地**），包括：
+时间线的真身是**服务端**成长记录（2026-10-01 第六轮起）：打开页面按 `ARCHIVE_PAGE_SIZE = 20` 拉第一页、
+可「加载更多」（位移分页，**刷新不丢**）。分类走服务端（`kind`）；时间范围 / 确认状态 / 关键词是**已加载这一批**的本地筛选。
+本地只保留「本次会话刚发生、还没写库」的事件：
 
-- `records`：用户已确认的画像记录；
-- `taskRuns`：任务提交；
-- `evidence`：画像记录与任务提交之间的证据关联；
-- `events`：新增画像证据、职业方向变化、成长路径调整；
-- `plannedTasks`：用户从路径安排的任务。
+- `records`：用户已确认的画像记录（来自 `ProfileProvider`）；
+- `taskRuns` / `evidence` / `events` / `plannedTasks`：本会话内的本地事件视图；
+- 服务端记录：`GET /api/growth-records`（见下）。
 
-用户的分类、时间范围、确认状态和关键词筛选都是本地操作，不需要后端写请求。但刷新页面后全部记录会丢失。
-
-> **已实现部分（2026-09-29）**：`POST /api/growth-records`（写一条记录，并在同一事务里把它投影成**待确认**记忆候选）、
-> `GET /api/growth-records?kind=&limit=`（返回已落库的记录，每条带它派生出的候选）、
-> `DELETE /api/growth-records/{id}`（删记录只清**未确认**候选，已确认的记忆归用户）。
-> 档案页因此多了一个「写入记忆候选」按钮，写入后到「用户画像 → 记忆库」的待确认栏里决定是否保留。
+> 已实现（2026-09-29 / 09-30 / 10-01）：
+> * `POST /api/growth-records`（写一条记录，同一事务投影成**待确认**记忆候选，`recordId` 幂等）；
+> * `GET /api/growth-records?kind=&limit=&cursor=`（**位移分页**，回传 `total`/`nextCursor`/`hasMore`；非法参数 400 `INVALID_GROWTH_PAGE`）；
+> * `GET|DELETE /api/growth-records/{id}`（删记录只清**未确认**候选，已确认的记忆归用户）；
+> * `POST /api/growth-records/confirm`（候选→记录→证据→事件一个事务，重复 confirm 幂等、越权 400）。
 > 请求/响应类型见 [`types/contracts/growth.ts`](../frontend1/types/contracts/growth.ts)。
-> **本小节下面的 `summary` / `cursor` / 服务端分类筛选仍属【设计方案】**：页面时间线依旧来自 `ProfileProvider` 内存，
-> 后端只存"被显式写入"的那些记录；`/api/growth-records/confirm`（候选→记录→证据→事件一个事务，重复 confirm 幂等、越权 400）已于 **2026-09-30 实现（M1-3）**。
+
+### 画像历史档案（2026-10-01 第七轮）
+
+本页新增「画像历史档案」区块，读的是**只增不改**的画像快照 —— 回答「上周那一刻的档案长什么样」：
+
+- `GET /api/profile/history?limit=&cursor=` → `{ items, count, total, limit, offset, nextCursor, hasMore }`；
+  `items[]` 每项 `{ snapshotId, profileVersion, status, capturedAt, summary{identity,school,major,currentGoal,skills[]} }`。
+  非法 `limit`/`cursor` → 400 `INVALID_PROFILE_PAGE`（`limit` 上限 50）。位移分页口径与成长记录一致。
+- `GET /api/profile/history/<snapshotId>` → `{ snapshotId, profile }`（完整 `UserProfile`）；
+  未知 / 别人的 id → 404 `PROFILE_SNAPSHOT_NOT_FOUND`（不区分，避免泄露「id 存在但不是你的」）。
+- 每一次 `PUT /api/profile` 或 `POST /api/profile/confirm` 各留一份快照；快照 id 由
+  `(user_id, profileVersion, status)` 派生 → **重复 confirm 幂等**，不堆重复行。
+- **读历史不回写当前画像**，也不产生新快照（面板是纯只读）。
 
 ### 后端应返回的数据
 
