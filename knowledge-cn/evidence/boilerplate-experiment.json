@@ -1,0 +1,60 @@
+{
+  "document": "moe-majors-2026-structured.md",
+  "chunks": 862,
+  "provenanceShareMedian": 0.58,
+  "meanPairwiseCosineWithProvenance": 0.4902,
+  "meanPairwiseCosineWithoutProvenance": 0.4702,
+  "probes": [
+    {
+      "questionId": "CN01",
+      "group": "结构化专业记录",
+      "rankWithProvenance": 1,
+      "rankWithoutProvenance": 1
+    },
+    {
+      "questionId": "CN02",
+      "group": "结构化专业记录",
+      "rankWithProvenance": 13,
+      "rankWithoutProvenance": 22
+    },
+    {
+      "questionId": "CN03",
+      "group": "结构化专业记录",
+      "rankWithProvenance": 3,
+      "rankWithoutProvenance": 14
+    },
+    {
+      "questionId": "CN04",
+      "group": "结构化专业记录",
+      "rankWithProvenance": 2,
+      "rankWithoutProvenance": 2
+    },
+    {
+      "questionId": "CN05",
+      "group": "结构化专业记录",
+      "rankWithProvenance": 21,
+      "rankWithoutProvenance": 16
+    },
+    {
+      "questionId": "CN07",
+      "group": "低空安全管理记录",
+      "rankWithProvenance": 1,
+      "rankWithoutProvenance": 1
+    },
+    {
+      "questionId": "CN08",
+      "group": "航空安防管理记录",
+      "rankWithProvenance": 373,
+      "rankWithoutProvenance": 162
+    },
+    {
+      "questionId": "CN24",
+      "group": "低空经济与管理",
+      "rankWithProvenance": 2,
+      "rankWithoutProvenance": 3
+    }
+  ],
+  "improved": 2,
+  "worsened": 3,
+  "unchanged": 3
+}
