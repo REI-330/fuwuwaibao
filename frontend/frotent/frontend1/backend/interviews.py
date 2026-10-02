@@ -6,7 +6,7 @@
 
 * **同步 + 标准库 ``sqlite3``**：本项目后端是 ``http.server`` 的扁平结构，没有 FastAPI、
   也没有 ``AsyncSession``；表建在同一个 ``career.db``（与记忆库同库，见
-  ``IMPLEMENTATION_PLAN.md`` 决策 1「本地跑 + SQLite 单文件」）。
+  本项目决策 1「本地跑 + SQLite 单文件」）。
 * **模型只做加分项**：题目与评分**都先有规则版兜底**（``_fallback_questions`` /
   ``_fallback_evaluation``）。端点没配、超时、返回不是 JSON 时，规则结果照常返回，
   并在 ``questionSource`` 里如实写明这次走了 ``llm`` 还是 ``fallback``（与

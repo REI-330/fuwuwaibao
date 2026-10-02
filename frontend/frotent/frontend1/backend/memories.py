@@ -4,7 +4,7 @@
 
 * 机制概念（写时触发器 / persona 常驻 + 联想召回 / candidate 授权闸门 / memoryHash）
   参考腾讯 T-Mem（EMNLP 2026，MIT）以及队友实现 `career-ai-system` 的
-  `backend/app/services/memory_*.py`（见 `记忆系统整合方案.md` 的「来源与差异」一节）。
+  `backend/app/services/memory_*.py`（取舍见 `项目架构与技术文档.md`）。
 * 实现是**按本项目约束重写**的：stdlib `sqlite3`，没有 FastAPI / SQLAlchemy / aiosqlite /
   rapidfuzz / json_repair，也没有外部模型调用。队友那版 5 个 service 全部以 `AsyncSession`
   为入口，无法直接搬运（详见整合方案里的依赖清单）。
@@ -14,7 +14,7 @@
   「量级」这类字片段。文本里没有已知名词时才退回字面切分。
   接上 LLM 后按同一张表、同一套字段替换即可，消费侧不用改。
 
-三条不可违反的边界（与 `IMPLEMENTATION_PLAN.md` 的关键设计约束一致）：
+三条不可违反的边界：
 
 1. **只消费 `status='confirmed'`**：`candidate` 只停留在管理界面，永远不进入上下文与算法。
 2. **未确认不覆盖已确认**：同一来源重复写入时，已确认的那条内容不被静默改写。
@@ -420,8 +420,7 @@ class MemoryStore:
     """记忆的读写与召回。线程安全：一把可重入锁管住同一个 sqlite 连接。
 
     `path` 传 `:memory:` 时用内存库（测试用）；缺省落 `backend/career.db`，
-    可用环境变量 `CAREER_MEMORY_DB` 覆盖（与 `IMPLEMENTATION_PLAN.md` 决策 1
-    「本地跑 + SQLite 单文件」同一件事）。
+    可用环境变量 `CAREER_MEMORY_DB` 覆盖（本项目决策 1「本地跑 + SQLite 单文件」）。
     """
 
     def __init__(self, path: Optional[str] = None, now: Optional[Callable[[], str]] = None,

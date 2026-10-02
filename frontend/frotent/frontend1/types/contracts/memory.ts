@@ -2,7 +2,7 @@
  * 记忆库契约（前端视角）。
  *
  * 与后端 `backend/memories.py` + `backend/server.py` 的路由一一对应；
- * 设计来源见 `记忆系统整合方案.md`（移植自队友实现的机制，按本项目约束重写）。
+ * 移植自队友实现的机制，按本项目约束重写（见 `backend/memories.py`）。
  *
  * 两条边界写在类型上，而不是只写在文档里：
  * 1. `status` 只有 `candidate | confirmed`，消费链路只读 `confirmed`；

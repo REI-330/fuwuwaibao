@@ -1,6 +1,6 @@
 """M1-4：路径引擎（``POST /api/v1/career-path/generate``）。
 
-验收口径来自 `IMPLEMENTATION_PLAN.md` M1-4，逐条钉住：
+验收口径（M1-4）逐条钉住：
 * 4 个职业都能生成；
 * ``hard_checks`` 全 false（无环、id 有效、等级有效、阶段有效、gap 自洽、先修顺序正确）；
 * 拓扑序满足所有 prerequisite 边（阶段不早于前置）；

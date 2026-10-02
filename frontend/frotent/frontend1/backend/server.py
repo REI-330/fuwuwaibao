@@ -36,7 +36,7 @@
 明确区分「契约已声明但本轮未实现」与「未知路由 404」，不假装可用。
 
 记忆库只消费 ``status='confirmed'`` 的那部分：候选记忆永远不进入上下文与推荐
-（见 ``backend/memories.py`` 顶部注释与 ``记忆系统整合方案.md``）。
+（见 ``backend/memories.py`` 顶部注释）。
 """
 
 from __future__ import annotations
@@ -446,7 +446,7 @@ class CareerApi:
             }
 
         if path == "/api/career/recommendations" and method == "GET":
-            # 该接口按契约不使用通用响应包（见 frontend-backend-page-contract.md §7）。
+            # 该接口按契约不使用通用响应包（前端直接读 recommendations，见 lib/client/career-recommendation-api.ts）。
             # 记忆是「输入增强」：只补画像空缺，不覆盖显式画像；用了哪几条逐条回传。
             augmented, evidence = self.memories.augment_profile(self.profiles.get(user_id), user_id)
             payload = self.store.recommendations(augmented)

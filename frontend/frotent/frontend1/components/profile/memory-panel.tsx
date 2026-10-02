@@ -8,7 +8,7 @@
  *   ② 已确认（confirmed）：只有这部分会被消费，且每条都能点开看它生成了哪些触发器；
  *   ③ 注入预览：拿一个提问去问「这次会想起什么」，【常驻】/【本次想起】两段可审计。
  *
- * 设计来源见 `记忆系统整合方案.md`；接口见 `lib/client/memory-api.ts`。
+ * 接口见 `lib/client/memory-api.ts`；机制说明见 `backend/memories.py`。
  */
 import { useCallback, useEffect, useState } from "react";
 import {
