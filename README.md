@@ -1,5 +1,12 @@
 # 向新 · AI 职业导航与成长伙伴
 
+![pytest](https://img.shields.io/badge/pytest-204%20passed-brightgreen)
+![e2e](https://img.shields.io/badge/e2e-237%2F237-brightgreen)
+![node](https://img.shields.io/badge/node-%E2%89%A5%2022.13-339933)
+![python](https://img.shields.io/badge/python-3.10%2B-3776AB)
+![backend](https://img.shields.io/badge/backend-stdlib%20only-informational)
+![license](https://img.shields.io/badge/license-TBD-lightgrey)
+
 面向大学生与职场新人的职业成长系统：**职业知识图谱 + 动态画像 + 可执行的成长路径**。
 不替用户决定职业，而是把「我该学什么、先学什么、凭什么这么说」变成能算、能溯源、能验证的东西。
 
