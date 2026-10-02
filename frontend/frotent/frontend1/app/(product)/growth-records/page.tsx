@@ -249,7 +249,7 @@ export default function GrowthRecordsPage() {
     <section className="xn-card xn-archive-filters" aria-label="成长记录筛选">
       <div className="xn-archive-category-tabs">{categories.map(item => <button className={category === item ? "active" : ""} aria-pressed={category === item} onClick={() => { setCategory(item); setArchiveKind(item === "全部" ? undefined : item); setSelectedId(""); }} key={item}>{item}</button>)}</div>
       <div className="xn-archive-filter-fields"><label><span>时间范围</span><select value={period} onChange={event => { setPeriod(event.target.value as ArchivePeriod); setSelectedId(""); }}><option value="7">最近7天</option><option value="30">最近30天</option><option value="all">全部时间</option></select></label><label><span>确认状态</span><select value={status} onChange={event => { setStatus(event.target.value as ArchiveStatus); setSelectedId(""); }}><option>全部状态</option><option>已确认</option><option>已记录</option><option>待确认</option></select></label><label className="xn-archive-search"><span>搜索记录</span><input value={keyword} onChange={event => { setKeyword(event.target.value); setSelectedId(""); }} placeholder="搜索任务、能力或来源" /></label></div>
-      <p className="xn-session-note">分类与分页走服务端（一次 {archive.items.length}/{archive.total} 条）；时间范围、状态与关键词只作用于**已加载**的这批记录。</p>
+      <p className="xn-session-note">分类与分页走服务端（一次 {archive.items.length}/{archive.total} 条）；时间范围、状态与关键词只作用于已加载的这批记录。</p>
     </section>
 
     {archiveStatus === "error" && <p className="xn-interview-error" role="alert">{archiveError || "成长记录读取失败"}<button className="xn-btn xn-btn-outline" onClick={() => void refreshArchive()}>重试</button></p>}
@@ -280,7 +280,7 @@ export default function GrowthRecordsPage() {
         <div><small>画像历史档案</small><h2>画像版本回看</h2></div>
         <span className="xn-session-note">共 {snapshotTotal} 个版本 · 最新在前</span>
       </header>
-      <p className="xn-session-note">每次画像写入或确认都留一份**只增不改**的快照；点一个版本看当时那一刻的档案，读历史不会改当前画像。</p>
+      <p className="xn-session-note">每次画像写入或确认都留一份只增不改的快照；点一个版本看当时那一刻的档案，读历史不会改当前画像。</p>
       {snapshotError && <p className="xn-interview-error" role="alert">{snapshotError}</p>}
       {snapshotLoading && !snapshots.length
         ? <div className="xn-interview-empty">正在读取画像历史…</div>

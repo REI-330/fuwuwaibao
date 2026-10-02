@@ -255,7 +255,7 @@ export default function TaskDetailPage() {
         </section>
 
         <button className="xn-btn xn-btn-primary" disabled={submitting || !submission.trim()}>{submitting ? "正在提交…" : "提交这次行动 →"}</button>
-        <p className="xn-session-note">提交只会产出**待确认**候选，不会自动把你的能力写成「已掌握」。</p>
+        <p className="xn-session-note">提交只会产出待确认候选，不会自动把你的能力写成「已掌握」。</p>
       </form>
     </div>
 

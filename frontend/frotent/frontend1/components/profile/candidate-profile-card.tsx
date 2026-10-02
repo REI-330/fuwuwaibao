@@ -57,7 +57,7 @@ export function CandidateProfileCard({ candidate, onConfirm, onDismiss, onNaviga
 
   return <section className="xn-candidate" aria-label="候选画像" aria-live="polite">
     <h3>{accepted ? "已确认并写入记忆库待确认区" : "候选画像 · 等待你的确认"}</h3>
-    <p className="xn-session-note">当前状态描述背景与近期问题；方向偏好描述职业选择；能力基础描述能力。确认后会落库（刷新不丢），并停在记忆库的**待确认**区等你决定是否留用。</p><p>归属：{classified ? `${module} / ${field}` : "等待你分类"}</p>
+    <p className="xn-session-note">当前状态描述背景与近期问题；方向偏好描述职业选择；能力基础描述能力。确认后会落库（刷新不丢），并停在记忆库的待确认区等你决定是否留用。</p><p>归属：{classified ? `${module} / ${field}` : "等待你分类"}</p>
     {editing && !accepted ? <div className="xn-candidate-editor">
       <label>修改说明<textarea value={content} onChange={event => setContent(event.target.value)} maxLength={2000} /></label>
       <label>画像模块<select value={classified ? module : ""} onChange={event => { const next = event.target.value as ProfileModule; setModule(next); setField(profileModules[next][0]); setClassified(true); }}><option value="" disabled>请选择信息归属</option>{["当前状态", "方向偏好", "能力基础"].map(item => <option key={item}>{item}</option>)}</select></label>

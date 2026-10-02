@@ -100,7 +100,7 @@ export default function TasksPage() {
 
   return <div className="xn-tasks-page">
     <header className="xn-interview-history-title">
-      <div><span>职场模拟 · 任务实践</span><h1>实践任务</h1><p>任务来自你的成长路径（图谱的 task→skill 边）。做完之后提交做法与成果，拿一份逐条反馈；其中提到的能力只是**候选**，要你在记忆面板确认才算数。</p></div>
+      <div><span>职场模拟 · 任务实践</span><h1>实践任务</h1><p>任务来自你的成长路径（图谱的 task→skill 边）。做完之后提交做法与成果，拿一份逐条反馈；其中提到的能力只是候选，要你在记忆面板确认才算数。</p></div>
       <div><Link className="xn-btn xn-btn-outline" href="/path">去看成长路径</Link><Link className="xn-btn xn-btn-outline" href="/actions">模拟场景</Link></div>
     </header>
 
