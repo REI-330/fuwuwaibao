@@ -128,5 +128,6 @@ npm --prefix frontend/frotent/frontend1 run e2e
 | `frontend/frotent/frontend1/backend/data/cross_role_questionnaires.json`（1.05 MB，32 职业 / 320 题） | 队友项目 `career-ai-system` 的协作情境训练题库，**内容零改动** | 文件自带 `"source": "questionnaire-analysis-archive"` 与 `"disclaimer": "Training content only; not a formal talent assessment."`；队友仓库里**没有 LICENSE / NOTICE**，也没有更细的出处说明 | 原样使用并**把 `source` 与 `disclaimer` 随接口返回、前端原样展示**；不称其为「正式测评」；若要对外分发，需先向作者确认这份题库的来源与授权 |
 
 同批移植的**代码与样式**（`backend/interviews.py`、`backend/cross_role.py`、前端页面与 CSS）来自
-同一队友仓库，属「参考实现后按本项目纪律重写」，差异逐条记在 `模拟面试与跨岗位训练移植说明.md` §2；
+同一队友仓库，属「参考实现后按本项目纪律重写」，差异记在各模块文件顶部注释
+（`backend/interviews.py`、`backend/cross_role.py`）；
 本项目自身许可仍未确定（见 §6），这一点不因移植而改变。

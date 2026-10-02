@@ -6,9 +6,9 @@
 > 1. **Wiki 页生成**：离线 LLM 编译 + 人工审核为主，`llm-draft` 兜底。
 > 2. **主检索归属**：自建检索与 MCP 服务为主，百宝箱企业版知识库作为对照实验。
 >
-> 依据：`赛题要求/【A02】...docx` 企业专项材料 ②③④、`DEMO_PROTOTYPE_PLAN.md` 第 6-7 节、`FRONTEND_MVP_FEATURE_LIST.md`。
+> 依据：`赛题要求/【A02】...docx` 企业专项材料 ②③④ 与早期范围规划。
 >
-> 与既有计划的关系：`DEMO_PROTOTYPE_PLAN.md` 第 6 节给出首版规模与知识层字段表，本文档在其基础上补齐**图谱契约、Wiki 契约、检索路由、动画匹配**四项它未展开的内容。两者不冲突，冲突处以本文档为准。
+> 与早期范围规划的关系：首版规模与知识层字段表由早期规划给出，本文档在其基础上补齐**图谱契约、Wiki 契约、检索路由、动画匹配**四项它未展开的内容。两者不冲突，冲突处以本文档为准。
 
 ---
 
@@ -279,7 +279,7 @@ query
 
 ## 8. MCP 工具契约
 
-依据 `DEMO_PROTOTYPE_PLAN.md` 第 7 节：**不得把普通 HTTP 接口称为 MCP**，必须以 `tools/list` 与 `tools/call` 真实验证。
+依据项目纪律：**不得把普通 HTTP 接口称为 MCP**，必须以 `tools/list` 与 `tools/call` 真实验证。
 
 > **状态：已实际实现并验证（2026-09-15）。** TypeScript MCP server 落在 `frontend/frotent/frontend1/mcp/`，用 stdio 真实跑通了「客户端发现工具 → 调用 → 拿到结果」：
 >
@@ -397,7 +397,7 @@ CSS 需要 `transform-box: view-box; transform-origin: 0 0;` 才能让上式成�
 | 检索指标（Top-3、引用支持度） | 自建侧可算真实分子分母 |
 | 跨平台企业级数据 | **不具备**。无实时招聘抓取、无第三方平台真实数据。报告中列为后续项 |
 | 百宝箱侧检索指标 | **以平台实际返回为准**；拿不到中间态则该组只报人工观察 |
-| 多端发布 | 与知识库解耦，按 `DEMO_PROTOTYPE_PLAN.md` 第 7 节独立验证 |
+| 多端发布 | 与知识库解耦，独立验证 |
 
 ---
 
@@ -406,7 +406,7 @@ CSS 需要 `transform-box: view-box; transform-origin: 0 0;` 才能让上式成�
 | # | 事项 | 影响 | 状态 |
 |---|---|---|---|
 | 1 | 百宝箱企业版账号的知识库导入权限与检索接口 | 决定对照实验能否做 | **部分核验**：接入方式已实测为只有 `sse` / `streamableHttp`（无 stdio，见 §8.2）；知识库导入权限与配额、检索中间态（命中 chunk id / 分值 / Top-K）**仍未核验**，故对照实验暂不做 |
-| 2 | MCP server 用 TypeScript 还是 Python | 决定 `backend/` 目录与三个 npm 脚本的处理方式 | **已定：TypeScript**（与 `DEMO_PROTOTYPE_PLAN.md:183` 一致）。已落地在 `frontend/frotent/frontend1/mcp/` 并跑通验证。`backend/` 三脚本随之悬空，待删或补 |
+| 2 | MCP server 用 TypeScript 还是 Python | 决定 `backend/` 目录与三个 npm 脚本的处理方式 | **已定：TypeScript**。已落地在 `frontend/frotent/frontend1/mcp/` 并跑通验证。`backend/` 三脚本随之悬空，待删或补 |
 | 3 | `GraphNode.kind` 是否拓宽到 8 类（新增 `task` / `trend` / `credential` / `domain`） | 决定这四类节点能否上图；未拓宽时前端适配层必须显式过滤 | **已拓宽**：8 类已进 `lib/client/career-graph.ts` 的 `GraphNode.kind`，并由前端单测覆盖（`tests/career-graph-export.test.ts` 5/5 通过、`tsc --noEmit` 干净） |
 | 4 | 来源资料收集进度 | 是全部下游工作的输入 | **已完成**：26 份登记来源（25 份抓取快照 + S26 国标重组导入），1757 个 chunk / 845,250 字符，见 `knowledge/sources/sources.json` / `knowledge/chunks/chunks.jsonl` |
 | 5 | 是否保留前置关系的虚线语汇 | 仅影响视觉，不影响数据 | 已按配色方案实现，可回退 |
