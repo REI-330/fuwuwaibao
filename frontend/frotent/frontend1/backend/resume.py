@@ -39,6 +39,9 @@ from .knowledge import GraphStore
 MODULE = "resume-extract/v1"
 MAX_TEXT_CHARS = 200000
 MAX_FILE_BYTES = 10 * 1024 * 1024  # 契约里的 10MB
+# DOCX 是 ZIP 容器：上传大小限制只约束压缩后的请求字节，仍需限制正文
+# 解压大小，避免一个几 MB 的压缩炸弹在 ``ZipFile.read`` 时膨胀到 GB。
+MAX_DOCX_UNCOMPRESSED_BYTES = 20 * 1024 * 1024
 SUPPORTED_SUFFIXES = (".pdf", ".docx", ".txt", ".md", ".text")
 UNSUPPORTED_SUFFIXES = (".doc", ".jpg", ".jpeg", ".png", ".webp", ".zip", ".xlsx")
 
@@ -104,13 +107,22 @@ def extract_docx_text(data: bytes) -> str:
     """
     try:
         with zipfile.ZipFile(io.BytesIO(data)) as archive:
-            names = set(archive.namelist())
+            entries = archive.infolist()
+            names = {entry.filename for entry in entries}
             if "word/document.xml" not in names:
                 raise ResumeFormatError(
                     "这个文件不是 DOCX（缺少 word/document.xml）：.doc 老格式或改名的文件请另存为 .docx",
                     code="RESUME_FORMAT_UNSUPPORTED",
                 )
-            xml = archive.read("word/document.xml")
+            total_uncompressed = sum(max(0, int(entry.file_size)) for entry in entries)
+            document_info = archive.getinfo("word/document.xml")
+            if total_uncompressed > MAX_DOCX_UNCOMPRESSED_BYTES or document_info.file_size > MAX_DOCX_UNCOMPRESSED_BYTES:
+                raise ResumeFormatError(
+                    f"DOCX 解压后超过 {MAX_DOCX_UNCOMPRESSED_BYTES // (1024 * 1024)}MB 上限，已拒绝读取",
+                    code="RESUME_DECOMPRESSED_TOO_LARGE",
+                    suffix=".docx",
+                )
+            xml = archive.read(document_info)
     except zipfile.BadZipFile as error:
         raise ResumeFormatError(f"DOCX 不是有效的 zip 包：{error}") from error
 

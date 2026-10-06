@@ -85,6 +85,8 @@ type CareerChangerFields = {
   targetAwareness?: "了解较多" | "略有了解" | "几乎不了解";
 };
 
+type SpecialFields = StudentFields | GraduateFields | NewEmployeeFields | CareerChangerFields;
+
 // 公共字段（所有身份必填，始终展示）
 export type ProfileFormData = {
   identity: Identity;
@@ -335,7 +337,6 @@ export function ProfileForm({ onSubmit, initial, showBack = true, onBack }: Prop
   const current = data.identity;
 
   const mapped = useMemo(() => formDataToBuildProfileInput(data), [data]);
-  const currentErrs = useMemo(() => validate(data), [data]);
 
   const handlePreview = () => {
     const e = validate(data);
@@ -381,7 +382,12 @@ export function ProfileForm({ onSubmit, initial, showBack = true, onBack }: Prop
     }));
   };
 
-  const cur: any = (data as any)[current];
+  const cur: SpecialFields = data[current] ?? (
+    current === "student" ? initStudent()
+      : current === "graduate" ? initGraduate()
+        : current === "newEmployee" ? initNewEmployee()
+          : initCareerChanger()
+  );
 
   return (
     <section className="xn-onboarding-card xn-form-card">
@@ -518,7 +524,7 @@ export function ProfileForm({ onSubmit, initial, showBack = true, onBack }: Prop
 
       {/* ── 专属模块 ── */}
       {step === 2 && <div className="xn-form-special" key={current}>
-        {renderSpecial(current, cur, updateCurrent, errs)}
+        {renderSpecial(current, cur, updateCurrent)}
       </div>}
 
       {/* ── 错误提示 ── */}
@@ -579,17 +585,16 @@ export function ProfileForm({ onSubmit, initial, showBack = true, onBack }: Prop
 
 function renderSpecial(
   identity: Identity,
-  cur: any,
-  update: (key: string, value: any) => void,
-  errs: FieldError[],
+  cur: SpecialFields,
+  update: (key: string, value: unknown) => void,
 ) {
-  if (identity === "student") return <StudentBlock data={cur} update={update} />;
-  if (identity === "graduate") return <GraduateBlock data={cur} update={update} />;
-  if (identity === "newEmployee") return <NewEmployeeBlock data={cur} update={update} />;
-  return <CareerChangerBlock data={cur} update={update} />;
+  if (identity === "student") return <StudentBlock data={cur as StudentFields} update={update} />;
+  if (identity === "graduate") return <GraduateBlock data={cur as GraduateFields} update={update} />;
+  if (identity === "newEmployee") return <NewEmployeeBlock data={cur as NewEmployeeFields} update={update} />;
+  return <CareerChangerBlock data={cur as CareerChangerFields} update={update} />;
 }
 
-function StudentBlock({ data, update }: { data: StudentFields; update: (k: string, v: any) => void }) {
+function StudentBlock({ data, update }: { data: StudentFields; update: (k: string, v: unknown) => void }) {
   return (
     <fieldset className="xn-form-section xn-special">
       <legend>在校生专属信息 · 实习/校招准备</legend>
@@ -648,7 +653,7 @@ function StudentBlock({ data, update }: { data: StudentFields; update: (k: strin
   );
 }
 
-function GraduateBlock({ data, update }: { data: GraduateFields; update: (k: string, v: any) => void }) {
+function GraduateBlock({ data, update }: { data: GraduateFields; update: (k: string, v: unknown) => void }) {
   return (
     <fieldset className="xn-form-section xn-special">
       <legend>应届生专属信息 · 毕业 1 年内</legend>
@@ -712,7 +717,7 @@ function GraduateBlock({ data, update }: { data: GraduateFields; update: (k: str
   );
 }
 
-function NewEmployeeBlock({ data, update }: { data: NewEmployeeFields; update: (k: string, v: any) => void }) {
+function NewEmployeeBlock({ data, update }: { data: NewEmployeeFields; update: (k: string, v: unknown) => void }) {
   return (
     <fieldset className="xn-form-section xn-special">
       <legend>职场新人专属信息 · 毕业 1–3 年</legend>
@@ -755,7 +760,7 @@ function NewEmployeeBlock({ data, update }: { data: NewEmployeeFields; update: (
   );
 }
 
-function CareerChangerBlock({ data, update }: { data: CareerChangerFields; update: (k: string, v: any) => void }) {
+function CareerChangerBlock({ data, update }: { data: CareerChangerFields; update: (k: string, v: unknown) => void }) {
   return (
     <fieldset className="xn-form-section xn-special">
       <legend>转岗探索中 · 毕业 3 年以上</legend>

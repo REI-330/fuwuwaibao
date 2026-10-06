@@ -190,6 +190,14 @@ CREATE TABLE IF NOT EXISTS profiles (
     updated_at      TEXT NOT NULL
 );
 
+-- 访客会话只保存随机 bearer id 的签发时间；生产模式用它拒绝客户端任意伪造
+-- ``user_<12 hex>``，同时让后端重启后仍能继续使用尚未过期的 Cookie。
+CREATE TABLE IF NOT EXISTS guest_sessions (
+    session_id  TEXT PRIMARY KEY,
+    created_at  TEXT NOT NULL,
+    expires_at  TEXT NOT NULL
+);
+
 -- 画像证据（M1-1/M1-3）：一条证据说明「画像里这个结论是从哪来的」。
 -- source_type 复用记忆库的口径（resume / growth_record / manual / chat）。
 CREATE TABLE IF NOT EXISTS profile_evidence (
@@ -458,6 +466,24 @@ class MemoryStore:
     def describe_llm(self) -> Dict[str, Any]:
         """给 `/health` 用：只报 host 与模型名，不含密钥。"""
         return self._llm.describe()
+
+    def issue_guest_session(self, session_id: str, created_at: str, expires_at: str) -> None:
+        """记录访客会话；重复签发同一 id 幂等。"""
+        with self._lock:
+            self._conn.execute(
+                "INSERT OR IGNORE INTO guest_sessions (session_id, created_at, expires_at) VALUES (?,?,?)",
+                (session_id, created_at, expires_at),
+            )
+            self._conn.commit()
+
+    def guest_session_exists(self, session_id: str) -> bool:
+        """只接受仍在有效期内、由服务端记录过的访客 id。"""
+        with self._lock:
+            row = self._conn.execute(
+                "SELECT session_id FROM guest_sessions WHERE session_id = ? AND expires_at > ?",
+                (session_id, now_iso()),
+            ).fetchone()
+            return row is not None
 
     def close(self) -> None:
         with self._lock:

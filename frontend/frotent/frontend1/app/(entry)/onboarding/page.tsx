@@ -66,6 +66,7 @@ export default function OnboardingPage() {
         };
         const r = await fetch(apiUrl("/api/profile"), {
           method: "PUT",
+          credentials: "include",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(demo),
         });
@@ -117,7 +118,11 @@ export default function OnboardingPage() {
       // 真解析：把文件交给后端（零依赖：DOCX 用 stdlib 读，PDF/图片会明确回 415）
       const form = new FormData();
       form.append("file", file);
-      const extracted = await fetch(apiUrl("/api/resumes/extract"), { method: "POST", body: form });
+      const extracted = await fetch(apiUrl("/api/resumes/extract"), {
+        method: "POST",
+        credentials: "include",
+        body: form,
+      });
       const payload = await extracted.json().catch(() => ({})) as {
         data?: { profileDraft?: Record<string, unknown>; warnings?: string[]; candidateCount?: number };
         error?: { message?: string };
@@ -129,6 +134,7 @@ export default function OnboardingPage() {
       // 解析结果只是**草稿**：这里走真实画像接口落成 draft 画像，用户在复核页确认
       const r = await fetch(apiUrl("/api/profile"), {
         method: "PUT",
+        credentials: "include",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(draft),
       });
@@ -174,6 +180,7 @@ export default function OnboardingPage() {
       }
       const r1 = await fetch(apiUrl("/api/profile"), {
         method: "PUT",
+        credentials: "include",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(mapped),
       });
@@ -201,6 +208,7 @@ export default function OnboardingPage() {
     try {
       const r = await fetch(apiUrl("/api/auth/guest"), {
         method: "POST",
+        credentials: "include",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ displayName }),
       });
@@ -369,7 +377,10 @@ export default function OnboardingPage() {
                 if (!(await ensureGuest())) {
                   throw new Error("guest session unavailable");
                 }
-                const r = await fetch(apiUrl("/api/profile/confirm"), { method: "POST" });
+                const r = await fetch(apiUrl("/api/profile/confirm"), {
+                  method: "POST",
+                  credentials: "include",
+                });
                 if (!r.ok) {
                   const d = await r.json().catch(() => ({})) as ProfileResponse;
                   alert("确认失败：" + (d?.message || r.status));

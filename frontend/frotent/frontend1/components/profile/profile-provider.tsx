@@ -5,6 +5,7 @@ import type { GrowthRecord } from "../../types/contracts/growth";
 import type { GrowthState, ProfileCandidate } from "../../types/view-models/dynamic-profile";
 import { confirmGrowthCandidate, emptyGrowthState } from "../../lib/client/profile-state";
 import { listGrowthRecords } from "../../lib/client/growth-api";
+import { getProfile, saveCandidateProfile } from "../../lib/client/profile-api";
 
 /**
  * 成长记录时间线的服务端来源。
@@ -28,7 +29,7 @@ export type ArchiveState = {
 const EMPTY_ARCHIVE: ArchiveState = { items: [], total: 0, nextCursor: null, hasMore: false };
 
 type ProfileContextValue = GrowthState & {
-  confirm: (candidate: ProfileCandidate) => void;
+  confirm: (candidate: ProfileCandidate) => Promise<void>;
   archive: ArchiveState;
   archiveStatus: "idle" | "loading" | "ready" | "error";
   archiveError: string;
@@ -41,6 +42,7 @@ type ProfileContextValue = GrowthState & {
 };
 
 const ProfileContext = createContext<ProfileContextValue | null>(null);
+const RECORDS_STORAGE_PREFIX = "xiangxin.confirmed-profile-records:";
 
 export function ProfileProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<GrowthState>(emptyGrowthState);
@@ -48,8 +50,44 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
   const [archiveStatus, setArchiveStatus] = useState<"idle" | "loading" | "ready" | "error">("idle");
   const [archiveError, setArchiveError] = useState("");
   const [archiveKind, setArchiveKind] = useState<string | undefined>(undefined);
+  const profileStorageKeyRef = useRef<string | null>(null);
+  const hydratedRef = useRef(false);
   // 只看最新一次请求的结果：翻页/切筛选时旧响应回来不该覆盖新的
   const ticketRef = useRef(0);
+
+  useEffect(() => {
+    let active = true;
+    getProfile().then(profile => {
+      if (!active) return;
+      const key = `${RECORDS_STORAGE_PREFIX}${profile.userId}`;
+      profileStorageKeyRef.current = key;
+      let records: GrowthState["records"] = [];
+      try {
+        const stored = window.localStorage.getItem(key);
+        const parsed = stored ? JSON.parse(stored) : [];
+        if (Array.isArray(parsed)) records = parsed;
+      } catch {
+        records = [];
+      }
+      setState(current => ({ ...current, records }));
+      hydratedRef.current = true;
+    }).catch(() => {
+      // 后端不可用时仍保留本机用户的已确认记录，避免清空当前 UI。
+      profileStorageKeyRef.current = `${RECORDS_STORAGE_PREFIX}user_local`;
+      hydratedRef.current = true;
+    });
+    return () => { active = false; };
+  }, []);
+
+  useEffect(() => {
+    const key = profileStorageKeyRef.current;
+    if (!hydratedRef.current || !key) return;
+    try {
+      window.localStorage.setItem(key, JSON.stringify(state.records));
+    } catch {
+      // 存储受限时服务端画像仍已保存，不阻断确认操作。
+    }
+  }, [state.records]);
 
   const fetchPage = useCallback(async (kind: string | undefined, cursor?: string) => {
     const ticket = ticketRef.current + 1;
@@ -95,9 +133,18 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
       : { ...previous, items: [record, ...previous.items], total: previous.total + 1 }));
   }, []);
 
+  const confirm = useCallback(async (candidate: ProfileCandidate) => {
+    const acceptedCandidate = { ...candidate, classificationRequired: false };
+    // 登录/游客会话可能在 Provider 首次挂载后才建立；以确认接口返回的
+    // userId 重新定位本地快照，避免先写到 user_local 后刷新丢失。
+    const profile = await saveCandidateProfile(acceptedCandidate);
+    profileStorageKeyRef.current = `${RECORDS_STORAGE_PREFIX}${profile.userId}`;
+    setState(current => confirmGrowthCandidate(current, acceptedCandidate, new Date().toISOString()));
+  }, []);
+
   return <ProfileContext.Provider value={{
     ...state,
-    confirm: candidate => setState(current => confirmGrowthCandidate(current, candidate, new Date().toISOString())),
+    confirm,
     archive,
     archiveStatus,
     archiveError,

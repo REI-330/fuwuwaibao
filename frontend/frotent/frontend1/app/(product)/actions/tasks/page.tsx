@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { XiangxinMascot } from "../../../../components/brand/xiangxin-mascot";
 import { listTasks, reorderTasks, updateTask } from "../../../../lib/client/task-api";
@@ -21,6 +22,7 @@ const statusNames: Record<TaskStatus, string> = {
  * `POST /api/tasks/reorder`），任务内容与完成状态都不受影响。
  */
 export default function TasksPage() {
+  const router = useRouter();
   const [data, setData] = useState<TaskListResponse | null>(null);
   const [status, setStatus] = useState<TaskStatus | "all">("all");
   const [occupation, setOccupation] = useState("");
@@ -119,7 +121,7 @@ export default function TasksPage() {
           <button type="button" className={status === "planned" ? "active" : ""} onClick={() => setStatus("planned")}>计划中</button>
           <button type="button" className={status === "completed" ? "active" : ""} onClick={() => setStatus("completed")}>已提交</button>
         </div>
-        {occupation && <button type="button" className="xn-text-btn" onClick={() => { window.location.href = "/actions/tasks"; }}>清除职业筛选（{occupation}）×</button>}
+        {occupation && <button type="button" className="xn-text-btn" onClick={() => router.push("/actions/tasks")}>清除职业筛选（{occupation}）×</button>}
         {stageFilter && <button type="button" className="xn-text-btn" onClick={() => setStageFilter("")}>清除阶段筛选（{stageFilter}）×</button>}
         {Boolean(data?.hiddenCount) && <button type="button" className={`xn-text-btn ${includeHidden ? "active" : ""}`} aria-pressed={includeHidden} onClick={() => setIncludeHidden(value => !value)}>{includeHidden ? "不显示已隐藏" : `显示已隐藏（${data?.hiddenCount}）`}</button>}
       </header>

@@ -1,32 +1,14 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { EntryBrand } from "../../../components/entry/entry-brand";
 import { createGuest } from "../../../lib/client/profile-api";
 
-type AuthMode = "login" | "register";
-
 export default function AuthPage() {
   const router = useRouter();
-  const [mode, setMode] = useState<AuthMode>("login");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
-
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSubmitting(true);
-    setError("");
-    const form = new FormData(event.currentTarget);
-    const displayName = String(form.get("name") || form.get("email") || "体验用户").split("@")[0];
-    try {
-      await createGuest(displayName);
-      router.push("/onboarding");
-    } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "账号创建失败，请检查 FastAPI 服务是否已启动");
-      setSubmitting(false);
-    }
-  }
 
   async function startGuestSession() {
     setSubmitting(true);
@@ -61,43 +43,18 @@ export default function AuthPage() {
         <div className="xn-auth-panel">
           <div className="xn-auth-heading">
             <span>欢迎使用向新</span>
-            <h2>{mode === "login" ? "登录你的成长空间" : "创建你的成长空间"}</h2>
-            <p>{mode === "login" ? "继续上次的职业探索与行动计划。" : "从一次真实的自我了解开始。"}</p>
+            <h2>进入你的成长空间</h2>
+            <p>创建一个本地体验会话，开始职业探索与行动计划。</p>
           </div>
 
-          <div className="xn-auth-tabs" role="tablist" aria-label="登录方式">
-            <button type="button" role="tab" aria-selected={mode === "login"} className={mode === "login" ? "active" : ""} onClick={() => setMode("login")}>登录</button>
-            <button type="button" role="tab" aria-selected={mode === "register"} className={mode === "register" ? "active" : ""} onClick={() => setMode("register")}>注册</button>
+          <div className="xn-auth-form">
+            <p className="xn-session-note">当前版本使用本地体验会话，不收集邮箱和密码。会话与画像保存在本机 SQLite 中。</p>
+            <button type="button" className="xn-entry-primary" disabled={submitting} onClick={() => void startGuestSession()}>{submitting ? "正在进入…" : "开始体验"}</button>
           </div>
-
-          <form className="xn-auth-form" onSubmit={submit}>
-            {mode === "register" && (
-              <label>
-                <span>姓名或昵称</span>
-                <input name="name" autoComplete="name" placeholder="用于成长空间内展示" required />
-              </label>
-            )}
-            <label>
-              <span>邮箱</span>
-              <input type="email" name="email" autoComplete="email" placeholder="name@example.com" required />
-            </label>
-            <label>
-              <span>密码</span>
-              <input type="password" name="password" autoComplete={mode === "login" ? "current-password" : "new-password"} minLength={8} placeholder="至少8位字符" required />
-            </label>
-            {mode === "login" ? (
-              <div className="xn-auth-row"><label className="xn-check"><input type="checkbox" />保持登录</label><button type="button" className="xn-auth-link">忘记密码？</button></div>
-            ) : (
-              <label className="xn-check xn-agreement"><input type="checkbox" required /><span>我已阅读并同意服务协议与隐私说明</span></label>
-            )}
-            <button className="xn-entry-primary" disabled={submitting}>{submitting ? "正在进入…" : mode === "login" ? "登录" : "注册并继续"}</button>
-          </form>
 
           {error && <p className="xn-catalog-error" role="alert">{error}</p>}
 
-          <div className="xn-auth-divider"><span>或</span></div>
-          <button type="button" className="xn-entry-secondary" disabled={submitting} onClick={() => void startGuestSession()}>使用体验账号</button>
-          <p className="xn-auth-demo-note">体验账号和画像会保存到本地 SQLite；正式上线前仍需补充密码认证。</p>
+          <p className="xn-auth-demo-note">体验账号和画像会保存到本地 SQLite；再次打开时可继续当前浏览器会话。</p>
         </div>
         <footer>© 2026 向新 · AI职业成长伙伴</footer>
       </section>

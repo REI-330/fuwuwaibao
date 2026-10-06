@@ -7,9 +7,6 @@ import { defineConfig } from "vite";
 // 这三者未随源码一起提供。本地开发不需要 D1/R2 与 Cloudflare Worker 绑定，
 // 因此这里把它们降级为可选：文件缺失时只跑 vinext，不再挂载 sites / cloudflare 插件。
 
-const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
-  "00000000-0000-4000-8000-000000000000";
-
 const hasWorker = existsSync(new URL("./worker/index.ts", import.meta.url));
 
 // macOS Seatbelt blocks FSEvents, so previews need polling for HMR.

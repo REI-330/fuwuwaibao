@@ -1734,9 +1734,13 @@ async function stageG(context) {
  * ------------------------------------------------------------------ */
 
 async function stageH() {
+  // Windows 沙箱中 pytest 默认的用户临时目录可能被系统 ACL 锁住；把
+  // tmp_path 基目录放在仓库的可写目录，保证 `npm run e2e:all` 与手工 pytest
+  // 使用同一条可复现的验证链，而不是把环境权限误报成代码失败。
+  const pytestBase = join(PROJECT_ROOT, "backend", ".pytest-e2e");
   const suites = [
     { label: "前端 node:test（npm test）", command: process.execPath, args: ["--import", "tsx", "--test", "tests/*.test.ts"], cwd: PROJECT_ROOT },
-    { label: "后端 pytest（backend/tests）", command: PYTHON, args: ["-m", "pytest", "backend/tests", "-q", "-p", "no:cacheprovider"], cwd: PROJECT_ROOT },
+    { label: "后端 pytest（backend/tests）", command: PYTHON, args: ["-m", "pytest", "backend/tests", "-q", "-p", "no:cacheprovider", "--basetemp", pytestBase], cwd: PROJECT_ROOT },
     { label: "MCP stdio 验证（mcp:verify）", command: process.execPath, args: ["--import", "tsx", "scripts/verify-mcp.ts"], cwd: PROJECT_ROOT },
     { label: "MCP HTTP 验证（mcp:verify-http）", command: process.execPath, args: ["--import", "tsx", "scripts/verify-mcp-http.ts"], cwd: PROJECT_ROOT },
   ];
@@ -1757,7 +1761,7 @@ async function stageH() {
  * 9. 阶段 I：模型接通性（--with-llm）
  * ------------------------------------------------------------------ */
 
-async function stageI(context) {
+async function stageI() {
   const base = `http://127.0.0.1:${LLM_PORT}`;
   const memoryDb = join(tmpdir(), `e2e-llm-memory-${process.pid}.db`);
   /* 真起一个后端：配置与产品/评测共用（CAREER_LLM_* > DEEPEVAL_* > knowledge/eval/.env）。
@@ -1898,7 +1902,7 @@ async function main() {
   await stage("F", "跨端同源与引用可追溯（后端 = MCP = 导出）", () => stageF(context));
   if (WITH_FRONTEND) await stage("G", "前端 dev server（SSR 页面）", () => stageG(context));
   if (WITH_SUITES) await stage("H", "既有测试套件", stageH);
-  if (WITH_LLM) await stage("I", "模型接通性（记忆触发器模型版 + 真实对话）", () => stageI(context));
+  if (WITH_LLM) await stage("I", "模型接通性（记忆触发器模型版 + 真实对话）", stageI);
 
   const failed = checks.filter(item => !item.ok);
   const durationMs = Date.now() - startedAt;

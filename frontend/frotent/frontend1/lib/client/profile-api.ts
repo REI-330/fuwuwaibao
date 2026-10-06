@@ -36,6 +36,61 @@ async function saveProfile(payload: Record<string, unknown>) {
   }));
 }
 
+type CandidateProfileInput = {
+  module: string;
+  field: string;
+  content: string;
+};
+
+function appendUnique(values: string[], value: string): string[] {
+  const normalized = value.trim();
+  if (!normalized || values.some(item => item.trim() === normalized)) return values;
+  return [...values, normalized];
+}
+
+/** 将用户确认的候选画像合并回服务端画像，并重新确认画像版本。 */
+export async function saveCandidateProfile(candidate: CandidateProfileInput): Promise<UserProfile> {
+  const profile = await getProfile();
+  const content = candidate.content.trim();
+  if (!content) return profile;
+
+  const skills = profile.skills.map(item => item.name);
+  const experiences = profile.experiences.map(item => item.title);
+  let interests = [...profile.interests];
+  let currentGoal = profile.currentGoal ?? "";
+
+  if (candidate.field === "当前目标") {
+    currentGoal = content;
+  } else if (
+    candidate.module === "能力基础" ||
+    ["已有技能", "已掌握知识", "软件与工具", "项目成果", "可迁移能力", "体现出的能力"].includes(candidate.field)
+  ) {
+    if (!skills.some(item => item.trim() === content)) skills.push(content);
+  } else if (["学习经历", "项目、竞赛、实习和实践经历", "提交结果"].includes(candidate.field)) {
+    if (!experiences.some(item => item.trim() === content)) experiences.push(content);
+  } else {
+    interests = appendUnique(interests, content);
+  }
+
+  await saveProfile({
+    identity: profile.identity,
+    school: profile.school,
+    major: profile.major,
+    grade: profile.grade,
+    location: profile.location,
+    careerStage: profile.careerStage,
+    question: currentGoal,
+    skills,
+    experience: experiences,
+    directions: interests,
+    source: profile.source,
+  });
+  return (await read<{ profile: UserProfile }>(await fetch(apiUrl("/api/profile/confirm"), {
+    method: "POST",
+    credentials: "include",
+  }))).profile;
+}
+
 export async function getProfile() {
   return (await read<{ profile: UserProfile }>(await fetch(apiUrl("/api/profile"), {
     cache: "no-store",

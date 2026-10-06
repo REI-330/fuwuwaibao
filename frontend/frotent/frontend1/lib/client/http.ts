@@ -2,10 +2,16 @@ import type { ApiResponse } from "../../types/contracts/common";
 
 /**
  * API 基础地址。
- * 开发时设为 http://localhost:8000 即可让前端直接调用 FastAPI 后端。
- * 本地默认连接 FastAPI 的 8000 端口；部署时通过环境变量覆盖。
+ * 开发时可用 NEXT_PUBLIC_API_BASE_URL 显式指定后端地址。未指定时沿用当前
+ * 页面的协议与主机名，避免用户用 127.0.0.1 打开前端却把会话 Cookie 发到
+ * localhost（或反过来）导致跨站 Cookie 被浏览器拦截；服务端渲染时回退到
+ * http://localhost:8000。
  */
-const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000").replace(/\/$/, "");
+const configuredApiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL?.trim();
+const runtimeApiBaseUrl = typeof window !== "undefined" && window.location.hostname
+  ? `${window.location.protocol}//${window.location.hostname}:8000`
+  : "http://localhost:8000";
+const API_BASE_URL = (configuredApiBaseUrl || runtimeApiBaseUrl).replace(/\/$/, "");
 
 export function apiUrl(urlOrPath: string): string {
   if (urlOrPath.startsWith("http")) return urlOrPath;

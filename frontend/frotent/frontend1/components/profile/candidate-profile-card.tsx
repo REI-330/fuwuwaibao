@@ -35,12 +35,12 @@ export function CandidateProfileCard({ candidate, onConfirm, onDismiss, onNaviga
    */
   async function accept() {
     const acceptedCandidate = { ...candidate, content, module, field, classificationRequired: false };
-    confirm(acceptedCandidate);
-    setEditing(false);
-    onConfirm?.();
     setPersisting(true);
     setPersistNote("");
     try {
+      await confirm(acceptedCandidate);
+      setEditing(false);
+      onConfirm?.();
       const item = await createMemory({
         category: memoryCategoryOf(module, field),
         content: content.trim(),

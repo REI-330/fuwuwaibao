@@ -5,7 +5,12 @@ import "./globals.css";
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
   const host = requestHeaders.get("host") ?? "localhost:3000";
-  const protocol = host.includes("localhost") ? "http" : "https";
+  const forwardedProto = requestHeaders.get("x-forwarded-proto")?.split(",")[0]?.trim();
+  const protocol = forwardedProto === "http" || forwardedProto === "https"
+    ? forwardedProto
+    : process.env.NODE_ENV === "production" && !/^(localhost|127\.0\.0\.1)(:\d+)?$/i.test(host)
+      ? "https"
+      : "http";
   const previewImage = `${protocol}://${host}/og.png`;
 
   return {

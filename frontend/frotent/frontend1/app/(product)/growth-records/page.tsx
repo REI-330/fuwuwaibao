@@ -153,6 +153,10 @@ export default function GrowthRecordsPage() {
   }
 
   async function saveToMemory(item: ArchiveItem) {
+    if (item.persisted) {
+      setSaveNote("这条成长记录已经在服务端保存；请到记忆库确认或删除它派生的候选。");
+      return;
+    }
     setSaving(true);
     setSaveNote("");
     try {
@@ -269,7 +273,7 @@ export default function GrowthRecordsPage() {
           <section><h3>证据与来源</h3><dl className="xn-archive-meta"><div><dt>数据来源</dt><dd>{selected.source}</dd></div><div><dt>证据标识</dt><dd>{selectedProof?.id ?? "尚未关联"}</dd></div><div><dt>证据等级</dt><dd>{selectedProof?.level ?? selectedRecord?.level ?? "待确认"}</dd></div><div><dt>关联任务</dt><dd>{selectedRun?.title ?? "无"}</dd></div></dl></section>
           {selectedRun && <section><h3>任务成果</h3><p>{selectedRun.submission}</p><div className="xn-archive-tags">{selectedRun.observedAbilities.map(item => <span key={item}>{item}</span>)}</div></section>}
           <section className="xn-archive-impact"><h3>对后续成长的影响</h3><p>{selected.impact}</p></section>
-          <footer>{selectedRun && <Link className="xn-btn xn-btn-outline" href={`/actions?task=${encodeURIComponent(selectedRun.taskId)}`}>查看关联任务</Link>}<button className="xn-btn xn-btn-outline" disabled={saving} onClick={() => saveToMemory(selected)}>{saving ? "写入中…" : selected.persisted ? "已在记忆库（再写一次也幂等）" : "写入记忆候选"}</button><Link className="xn-btn xn-btn-primary" href="/growth">查看当前画像</Link></footer>
+          <footer>{selectedRun && <Link className="xn-btn xn-btn-outline" href={`/actions?task=${encodeURIComponent(selectedRun.taskId)}`}>查看关联任务</Link>}<button className="xn-btn xn-btn-outline" disabled={saving || selected.persisted} onClick={() => void saveToMemory(selected)}>{saving ? "写入中…" : selected.persisted ? "已写入服务端" : "写入记忆候选"}</button><Link className="xn-btn xn-btn-primary" href="/growth">查看当前画像</Link></footer>
           {saveNote && <p className="xn-memory-hint">记忆库：{saveNote}　（到「用户画像 → 记忆库」的待确认栏里决定是否保留）</p>}
         </> : <div className="xn-archive-empty"><span>◎</span><b>选择一条成长记录</b><p>这里会展示变化前后、证据来源和后续影响。</p></div>}
       </aside>

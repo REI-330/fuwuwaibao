@@ -47,6 +47,7 @@ import os
 import re
 import threading
 import uuid
+from datetime import datetime, timedelta, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
@@ -118,6 +119,79 @@ NOT_IMPLEMENTED = (
 SESSION_COOKIE = "career_session"
 _SESSION_RE = re.compile(r"^user_[0-9a-f]{12}$")
 CSRF_SAFE_METHODS = ("GET", "HEAD", "OPTIONS")
+
+# HTTP 传输安全边界。上传接口各自还有更小的文件限制，但请求在进入路由前
+# 就必须有一个总上限，否则 ``BaseHTTPRequestHandler`` 会先把任意大的
+# Content-Length 全部读进内存。
+DEFAULT_MAX_REQUEST_BYTES = 12 * 1024 * 1024
+_LOCAL_CORS_ORIGINS = frozenset({
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3001",
+    "http://127.0.0.1:3001",
+    "http://localhost:3100",
+    "http://127.0.0.1:3100",
+    "http://localhost:3111",
+    "http://127.0.0.1:3111",
+})
+_VALID_SAMESITE = frozenset({"Lax", "Strict", "None"})
+
+
+def _env_flag(name: str, default: bool = False) -> bool:
+    value = str(os.environ.get(name) or "").strip().lower()
+    if not value:
+        return default
+    return value in ("1", "true", "yes", "on")
+
+
+def _cors_origins() -> frozenset[str]:
+    """读取 CORS allowlist；任意来源反射会让凭证请求失去边界。"""
+    raw = os.environ.get("CAREER_CORS_ORIGINS")
+    if raw is None:
+        raw = os.environ.get("CORS_ORIGINS")
+    if raw is None:
+        return _LOCAL_CORS_ORIGINS
+    return frozenset(item.strip().rstrip("/") for item in raw.split(",") if item.strip() and item.strip() != "*")
+
+
+def _cookie_samesite() -> str:
+    value = str(os.environ.get("CAREER_COOKIE_SAMESITE") or "Lax").strip().capitalize()
+    return value if value in _VALID_SAMESITE else "Lax"
+
+
+def _cookie_secure() -> bool:
+    # SameSite=None 被浏览器要求必须配 Secure；生产环境默认开启，开发环境
+    # 仍允许通过明文 localhost 使用访客流程。
+    return _env_flag("CAREER_COOKIE_SECURE", _env_flag("CAREER_ENV_PRODUCTION")) or _cookie_samesite() == "None"
+
+
+def _allow_anonymous_fallback() -> bool:
+    """兼容本机单用户模式；生产可用 CAREER_REQUIRE_SESSION=1 关闭共享回落。"""
+    if _env_flag("CAREER_REQUIRE_SESSION") or _env_flag("CAREER_ENV_PRODUCTION"):
+        return False
+    return _env_flag("CAREER_ALLOW_ANONYMOUS_FALLBACK", True)
+
+
+def _max_request_bytes() -> int:
+    raw = str(os.environ.get("CAREER_MAX_REQUEST_BYTES") or DEFAULT_MAX_REQUEST_BYTES).strip()
+    try:
+        value = int(raw)
+    except ValueError:
+        value = DEFAULT_MAX_REQUEST_BYTES
+    return max(64 * 1024, min(value, 64 * 1024 * 1024))
+
+
+def _session_expires_at(created_at: str) -> str:
+    value = datetime.fromisoformat(created_at.replace("Z", "+00:00")) + timedelta(days=30)
+    return value.astimezone(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+class RequestBodyTooLarge(ValueError):
+    """请求体在读取前就超过全局上限。"""
+
+
+class InvalidRequestBody(ValueError):
+    """Content-Length / Transfer-Encoding 无法安全处理。"""
 
 
 def split_list(value: Any) -> List[str]:
@@ -375,16 +449,47 @@ class CareerApi:
         # 任务实践：同样复用记忆库那个 LlmClient，并复用记忆库写「成长记录 + 待确认候选」那条通道。
         self.tasks = tasks or TaskStore(llm=self.memories.llm)
         self._seq = itertools.count(1)
+        # 生产模式下，访客 Cookie 必须由本进程签发后才会被接受；兼容模式仍允许
+        # 旧的单测/本机脚本直接传 ``user_000000000001`` 做隔离测试。
+        self._issued_sessions: Dict[str, str] = {}
 
     # ------------------------------------------------------------------ 记忆库小工具
-    def user_id_from(self, cookies: Optional[Dict[str, str]] = None) -> str:
-        """当前用户：带合法会话 Cookie 就用它，否则回落本机单用户 ``user_local``。
+    def session_id_from(self, cookies: Optional[Dict[str, str]] = None) -> Optional[str]:
+        """返回当前请求可接受的会话 id。
 
-        值不合法（被人手改过、伪造）时不报错、只当没有会话 —— 回落路径与旧版一致，
-        不会因为一个坏 Cookie 就让整条链路 500。
+        ``CAREER_REQUIRE_SESSION=1`` / ``CAREER_ENV_PRODUCTION=1`` 时还要求该 id
+        确实由本进程的 ``/api/auth/guest`` 签发，避免把 Cookie 值当成可任意注册的
+        用户主键。旧的本机兼容模式保留格式校验后的直接隔离行为。
         """
         value = str((cookies or {}).get(SESSION_COOKIE) or "")
-        return value if _SESSION_RE.match(value) else "user_local"
+        if not _SESSION_RE.match(value):
+            return None
+        if not _allow_anonymous_fallback():
+            if value not in self._issued_sessions and not self.memories.guest_session_exists(value):
+                return None
+        return value
+
+    def user_id_from(self, cookies: Optional[Dict[str, str]] = None) -> str:
+        """当前用户；生产严格模式下无会话由路由入口拒绝，兼容模式回落 user_local。"""
+        return self.session_id_from(cookies) or "user_local"
+
+    @staticmethod
+    def _public_without_session(method: str, path: str) -> bool:
+        """知识目录与会话创建是公开入口，其余产品数据在生产需带会话。"""
+        if path in {"/health", "/api/auth/guest", "/api/auth/register", "/api/auth/login"}:
+            return True
+        if method == "GET" and (
+            path in {
+                "/api/v1/occupations",
+                "/api/v1/skills",
+                "/api/v1/catalog/stats",
+                "/api/v1/interview-skills",
+                "/api/v1/cross-role/roles",
+            }
+            or path.startswith("/api/v1/occupations/")
+        ):
+            return True
+        return False
 
     def user_id(self) -> str:
         """无 Cookie 上下文的旧入口（内部与单测用）。"""
@@ -421,7 +526,10 @@ class CareerApi:
         """
         method = method.upper()
         self.store.refresh()
-        user_id = self.user_id_from(cookies)
+        session_id = self.session_id_from(cookies)
+        if not _allow_anonymous_fallback() and session_id is None and not self._public_without_session(method, path):
+            return self.error("UNAUTHORIZED", "请先创建体验会话", 401)
+        user_id = session_id or "user_local"
 
         if path == "/health" and method == "GET":
             # 把模型状态放进 /health：不配端点时必须能一眼看见（否则会以为触发器在走模型）
@@ -654,19 +762,25 @@ class CareerApi:
             display_name = ""
             if isinstance(body, dict):
                 display_name = str(body.get("displayName") or "").strip()[:40]
-            session_user = f"user_{uuid.uuid4().hex[:12]}"
+            existing_session = self.session_id_from(cookies)
+            session_user = existing_session or f"user_{uuid.uuid4().hex[:12]}"
             created = _now()
+            self._issued_sessions.setdefault(session_user, created)
+            self.memories.issue_guest_session(session_user, self._issued_sessions[session_user], _session_expires_at(created))
             if response is not None:
+                secure = "; Secure" if _cookie_secure() else ""
                 response["setCookie"] = (
-                    f"{SESSION_COOKIE}={session_user}; Path=/; HttpOnly; SameSite=Lax; Max-Age=2592000"
+                    f"{SESSION_COOKIE}={session_user}; Path=/; HttpOnly; SameSite={_cookie_samesite()}; "
+                    f"Max-Age=2592000{secure}"
                 )
-            return 201, self.envelope(
+            return (200 if existing_session else 201), self.envelope(
                 {
                     "user": {
                         "userId": session_user,
                         "displayName": display_name or "体验用户",
                         "isGuest": True,
-                        "createdAt": created,
+                        "createdAt": self._issued_sessions.get(session_user, created),
+                        "reused": bool(existing_session),
                     }
                 }
             )
@@ -1573,6 +1687,7 @@ class CareerApi:
                 "RESUME_EMPTY_TEXT",
                 "RESUME_PDF_PARSE_FAILED",
                 "RESUME_PDF_TEXT_UNREADABLE",
+                "RESUME_DECOMPRESSED_TOO_LARGE",
             }
             status = 415 if error.code in upload_codes else 400
             return self.error(error.code, str(error), status, suffix=error.suffix)
@@ -1648,8 +1763,10 @@ class CareerRequestHandler(BaseHTTPRequestHandler):
     def do_OPTIONS(self) -> None:  # noqa: N802 (stdlib 命名)
         self.send_response(204)
         self._write_cors()
+        self._write_security_headers()
         self.send_header("Access-Control-Allow-Methods", "GET, PUT, POST, PATCH, DELETE, OPTIONS")
-        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type, X-CSRF-Token")
+        self.send_header("Access-Control-Max-Age", "600")
         self.send_header("Content-Length", "0")
         self.end_headers()
 
@@ -1671,8 +1788,29 @@ class CareerRequestHandler(BaseHTTPRequestHandler):
     def _dispatch(self, method: str) -> None:
         parsed = urlparse(self.path)
         query = parse_qs(parsed.query)
+        origin = (self.headers.get("Origin") or "").strip().rstrip("/")
+        # 浏览器即使被 CORS 拦截仍可能完成副作用请求；对带 Origin 的写请求
+        # 在 API 层再挡一次，避免 SameSite=None 跨站部署退化成 CSRF。
+        if method.upper() not in CSRF_SAFE_METHODS and origin and origin not in _cors_origins():
+            status, payload = self.api.error("CORS_ORIGIN_FORBIDDEN", "请求来源不在 CORS allowlist 中", 403)
+            self._send_json_response(status, payload, {})
+            return
         # 原始字节也要给到 API 层：简历上传是 multipart，不能先按 JSON 解一遍
-        raw = self._read_raw()
+        try:
+            raw = self._read_raw()
+        except RequestBodyTooLarge:
+            status, payload = self.api.error(
+                "REQUEST_TOO_LARGE",
+                f"请求体超过 {_max_request_bytes() // (1024 * 1024)}MB 上限",
+                413,
+                maxBytes=_max_request_bytes(),
+            )
+            self._send_json_response(status, payload, {})
+            return
+        except InvalidRequestBody as error:
+            status, payload = self.api.error("INVALID_REQUEST_BODY", str(error), 400)
+            self._send_json_response(status, payload, {})
+            return
         response: Dict[str, Any] = {}
         status, payload = self.api.handle(
             method,
@@ -1690,6 +1828,7 @@ class CareerRequestHandler(BaseHTTPRequestHandler):
             data = bytes(raws.get("content") or b"")
             self.send_response(status)
             self._write_cors()
+            self._write_security_headers()
             self.send_header("Access-Control-Expose-Headers", "Content-Disposition")
             self.send_header("Content-Type", str(raws.get("contentType") or "application/octet-stream"))
             if raws.get("contentDisposition"):
@@ -1698,9 +1837,13 @@ class CareerRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(data)
             return
+        self._send_json_response(status, payload, response)
+
+    def _send_json_response(self, status: int, payload: Dict[str, Any], response: Dict[str, Any]) -> None:
         data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
         self.send_response(status)
         self._write_cors()
+        self._write_security_headers()
         set_cookie = response.get("setCookie")
         if set_cookie:
             self.send_header("Set-Cookie", str(set_cookie))
@@ -1720,10 +1863,24 @@ class CareerRequestHandler(BaseHTTPRequestHandler):
         return cookies
 
     def _read_raw(self) -> bytes:
-        length = int(self.headers.get("Content-Length") or 0)
+        transfer_encoding = (self.headers.get("Transfer-Encoding") or "").strip().lower()
+        if transfer_encoding and transfer_encoding != "identity":
+            raise InvalidRequestBody("不支持 chunked 请求，请提供 Content-Length")
+        raw_length = self.headers.get("Content-Length")
+        try:
+            length = int(raw_length or 0)
+        except (TypeError, ValueError) as error:
+            raise InvalidRequestBody("Content-Length 必须是非负整数") from error
+        if length < 0:
+            raise InvalidRequestBody("Content-Length 必须是非负整数")
+        if length > _max_request_bytes():
+            raise RequestBodyTooLarge()
         if length <= 0:
             return b""
-        return self.rfile.read(length)
+        data = self.rfile.read(length)
+        if len(data) != length:
+            raise InvalidRequestBody("请求体未按 Content-Length 完整到达")
+        return data
 
     @staticmethod
     def _parse_json(raw: bytes) -> Any:
@@ -1735,11 +1892,21 @@ class CareerRequestHandler(BaseHTTPRequestHandler):
             return None
 
     def _write_cors(self) -> None:
-        origin = self.headers.get("Origin")
-        self.send_header("Access-Control-Allow-Origin", origin or "*")
-        if origin:
-            self.send_header("Access-Control-Allow-Credentials", "true")
-            self.send_header("Vary", "Origin")
+        origin = (self.headers.get("Origin") or "").strip().rstrip("/")
+        if not origin or origin not in _cors_origins():
+            return
+        self.send_header("Access-Control-Allow-Origin", origin)
+        self.send_header("Access-Control-Allow-Credentials", "true")
+        self.send_header("Vary", "Origin")
+
+    def _write_security_headers(self) -> None:
+        """API 默认不应被共享缓存、嵌入或 MIME 嗅探。"""
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("Pragma", "no-cache")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("X-Frame-Options", "DENY")
+        self.send_header("Referrer-Policy", "no-referrer")
+        self.send_header("Permissions-Policy", "camera=(), microphone=(), geolocation=()")
 
     def log_message(self, fmt: str, *args: Any) -> None:  # 精简访问日志
         print(f"[backend] {self.address_string()} {fmt % args}", flush=True)

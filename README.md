@@ -1,7 +1,7 @@
 # 向新 · AI 职业导航与成长伙伴
 
 ![pytest](https://img.shields.io/badge/pytest-204%20passed-brightgreen)
-![e2e](https://img.shields.io/badge/e2e-237%2F237-brightgreen)
+![e2e](https://img.shields.io/badge/e2e-232%2F232-brightgreen)
 ![node](https://img.shields.io/badge/node-%E2%89%A5%2022.13-339933)
 ![python](https://img.shields.io/badge/python-3.10%2B-3776AB)
 ![backend](https://img.shields.io/badge/backend-stdlib%20only-informational)
@@ -70,9 +70,26 @@ npm run dev
 python backend/run.py            # 可用 --port / --host / BACKEND_PORT 覆盖
                                  # 落地库默认 backend/career.db，可用 CAREER_MEMORY_DB 覆盖
 
-# 3) 前端请求的 API 基地址（缺省已指向本机 8000，需改时）：
-#    NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:8000
+# 3) 前端请求的 API 基地址（可选）：
+#    未设置时，浏览器会使用当前页面的协议 + 主机名连接 8000 端口；
+#    SSR / 无页面上下文时回退到 http://localhost:8000。
+#    跨主机或部署时可显式覆盖：NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:8000
 ```
+
+生产环境请显式打开会话与跨源安全边界：
+
+```text
+CAREER_ENV_PRODUCTION=1
+CAREER_CORS_ORIGINS=https://你的前端域名
+CAREER_COOKIE_SECURE=1
+# 前后端跨站部署时使用 None；同站反代可保留 Lax
+CAREER_COOKIE_SAMESITE=None
+CAREER_MAX_REQUEST_BYTES=12582912
+```
+
+生产模式下未带服务端签发的体验会话会返回 `401`，不会把所有匿名请求合并到
+`user_local`；CORS 只允许 `CAREER_CORS_ORIGINS` 中的精确来源。默认开发模式保留
+本机单用户回落，方便直接运行现有离线测试。
 
 MCP 服务（可选）：
 
@@ -91,7 +108,7 @@ npm run mcp:http     # Streamable HTTP，默认 127.0.0.1:8787
 cd frontend/frotent/frontend1
 export PYTHONIOENCODING=utf-8                 # Windows 控制台中文
 
-npm run e2e:all        # ★ 一条命令 = 端到端 237 条 + pytest 204 + node:test 12 + MCP 双传输 + 题集硬规则
+npm run e2e:all        # ★ 一条命令 = 端到端 232 条 + pytest 204 + node:test 12 + MCP 双传输 + 题集硬规则
 npm run demo           # ★ 交付演示：9 步走完「画像→推荐→依据→路径→行动→记录」，真起后端、可复算
 ```
 
@@ -99,7 +116,7 @@ npm run demo           # ★ 交付演示：9 步走完「画像→推荐→依�
 
 | 命令 | 期望 |
 |---|---|
-| `npm run e2e` | **237 条断言全绿**，约 20 s，全离线（阶段 A–H：A17 B5 C4 **D157** E23 F10 **G16** H5） |
+| `npm run e2e` | **232 条断言全绿**，约 20 s，全离线（阶段 A–G：A17 B5 C4 **D157** E23 F10 **G16**） |
 | `python -m pytest backend/tests -q` | **204 passed** |
 | `npm test` | 12 pass / 0 fail |
 | `npm run mcp:verify` / `mcp:verify-http` | stdio 14/14 · HTTP 25/25（两条传输 `tools/list` 逐字相同） |
@@ -142,7 +159,7 @@ CAREER_LLM_DISABLED=1                                          ← 显式关闭�
 
 | 命令 | 结果 |
 |---|---|
-| `npm run e2e` / `e2e:all` | 237 条断言全绿（`e2e:all` 再叠 pytest 204 / node:test 12 / MCP 双传输 / 题集硬规则） |
+| `npm run e2e` / `e2e:all` | 232 条断言全绿（`e2e:all` 再叠 pytest 204 / node:test 12 / MCP 双传输 / 题集硬规则） |
 | `python -m pytest backend/tests -q` | 204 项（图谱契约、记忆库、对话、成长记录、简历、画像落库与画像历史快照、会话、路径引擎、职业匹配、模拟面试、跨岗位训练、任务实践/附件） |
 | `npm test` | 12 项（导出 → 视图模型） |
 | `npm run mcp:verify` / `mcp:verify-http` | 三个工具真实往返，两条传输 `tools/list` 逐字一致 |
@@ -181,7 +198,7 @@ CAREER_LLM_DISABLED=1                                          ← 显式关闭�
 | 大典 / O*NET 接回自建图谱 | **定不出机械规则**：自建 127 词条 vs 大典 1,676 职业命中 0、vs 18,552 职业功能命中 1、vs O*NET 1,253 命中 1；`aligned_with` 的 `alignment` 必须由人写下。机器只能给证据（覆盖率 4/1676 = 0.24%） |
 | 在招真实岗位 | 无求职者视角的真实岗位数据源；**不做假岗位** |
 | 图片简历 / `.doc` 老格式 | 无 OCR，`415` + 可执行建议，不假装识别 |
-| `/api/auth/{register,login}` | `501`：本项目不存账号密码，访客会话足够单用户形态 |
+| 账号密码认证 | 当前版本明确使用本地体验会话，不收集邮箱和密码；`/api/auth/{register,login}` 保持 `501`，避免界面提供实际上不会保存的登录入口 |
 | 演示视频 | **按用户决定不做**：`npm run demo` 脚本能证明「你现在也能跑出同样的东西」，且随代码被回归覆盖 |
 | 任务**内容**编辑 | **设计上不做**：任务由图谱 `task --trains--> skill` 边派生；用户能改的只是个人视图（备注/隐藏/顺序，走 `task_overrides` 覆盖层） |
 | 聊天附件 | 明确**不解析、不上传**（设计选择） |
@@ -209,9 +226,8 @@ CAREER_LLM_DISABLED=1                                          ← 显式关闭�
    补日期用 `node knowledge/pipeline/13-annotate-source-dates.mjs`（离线、幂等、正式解析 JSON-LD）。
 9. **向量档要让语料缓存与端点同源**：缓存名由 `TEI_MODEL` 决定，未设时取 float32 那份，而现役服务是 int8/onnx
    —— 复算前 `export TEI_MODEL=Qwen3-Embedding-0.6B-onnx-int8`（未设时脚本会打印警告）。
-10. **全仓 `npm run lint` 不是全绿**：`components/entry/{image-editor,profile-form}.tsx` 上有 9 个
-    `no-explicit-any` / react-hooks 报错，属基线遗留、与运行无关；lint 不在 e2e 门禁里。
-    改过的文件单独跑 eslint 无报错。
+10. **全仓 `npm run lint` 当前 0 errors、4 warnings**：剩余 warning 是 Next.js 导航/图片建议和
+    两个脚本变量提示，不阻断构建或运行。
 
 ---
 
