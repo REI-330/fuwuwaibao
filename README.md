@@ -226,8 +226,8 @@ CAREER_LLM_DISABLED=1                                          ← 显式关闭�
    补日期用 `node knowledge/pipeline/13-annotate-source-dates.mjs`（离线、幂等、正式解析 JSON-LD）。
 9. **向量档要让语料缓存与端点同源**：缓存名由 `TEI_MODEL` 决定，未设时取 float32 那份，而现役服务是 int8/onnx
    —— 复算前 `export TEI_MODEL=Qwen3-Embedding-0.6B-onnx-int8`（未设时脚本会打印警告）。
-10. **全仓 `npm run lint` 当前 0 errors、4 warnings**：剩余 warning 是 Next.js 导航/图片建议和
-    两个脚本变量提示，不阻断构建或运行。
+10. **全仓 `npm run lint` 当前 0 errors、0 warnings**（eslint 扫描 94 个文件）：此前基线里的
+    `no-explicit-any` / react-hooks 报错已在 b929971 重构中消除，不阻断构建或运行。
 
 ---
 

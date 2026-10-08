@@ -24,6 +24,8 @@
 - 后端单测：`export PYTHONIOENCODING=utf-8 && python -m pytest backend/tests -q` → **204 passed**。
 - 知识库端到端：`npm run e2e:all`（`--with-suites`，含前端 SSR 与既有套件）→ **A–H 八阶段 237/237、0 失败**，
   落盘于 `evidence/knowledge-e2e.json`（`generatedAt=2026-10-02`，耗时 23.99 s，`flags={withFrontend:true, withSuites:true, withLlm:false}`）。
+- 前端 lint：`npm run lint`（`eslint . --ignore-pattern dist --ignore-pattern .next`）→
+  **0 errors / 0 warnings**（扫描 94 个文件，exit 0）。
 - 取证方式：以访客会话调用 `/api/auth/guest` 后，按「画像草稿→确认→推荐/路径/任务→提交→评估→覆盖层→召回」顺序逐请求走一遍，
   把每一步的 HTTP 状态与响应体原样留存（本节所有【实测】数字即出自这一轮）。
 
@@ -73,11 +75,11 @@
 
 ### 2.1 数据模型
 
-9 张 SQLite 表：【文件】`backend/memories.py:125-252`
+10 张 SQLite 表：【文件】`backend/memories.py:125-265`
 
-`memory_items`(125)、`memory_triggers`(146)、`growth_records`(164)、`profiles`(185)、`profile_evidence`(195)、
-`growth_events`(211)、`profile_snapshots`(227)、`career_match_runs`(242)、`career_match_targets`(252)；
-迁移幂等为 `_MIGRATIONS`(263)。
+`memory_items`(125)、`memory_triggers`(146)、`growth_records`(164)、`profiles`(185)、`guest_sessions`(195)、
+`profile_evidence`(203)、`growth_events`(219)、`profile_snapshots`(235)、`career_match_runs`(250)、
+`career_match_targets`(260)；迁移幂等为 `_MIGRATIONS`(271)。
 
 状态模型只有两态：`status ∈ {candidate, confirmed}`；persona 常驻只取 4 类
 （`career_target/goal/background/preference`），`PERSONA_LIMIT=3`、`RECALL_LIMIT=8`。【文件】`memories.py:56-71`
@@ -108,7 +110,7 @@
 | 任务运行（同 `requestId`） | `{"created": false, "candidateNote": {"reason": "duplicate_request", "message": "同一 requestId 已提交过：按幂等处理，没有重复写记录与候选"}}`【实测】V2 |
 | 候选确认（重放） | `confirmedMemoryIds: []`、`alreadyConfirmedMemoryIds: [...]`【实测】N2 |
 
-实现锚点：【文件】`memories.py:1395` `get_growth_record`（先查）、`memories.py:1412` 幂等 guard、`memories.py:1427` 写入。
+实现锚点：【文件】`memories.py:1420` `get_growth_record`（先查）、`memories.py:1438` 幂等 guard、`memories.py:1454` 写入。
 
 ### 2.4 任务视图覆盖层（task_overrides）：只改"你的视图"
 
@@ -307,26 +309,30 @@ balanced accuracy 0.9667。【文档】§5.5
 - 百宝箱接入、多端发布：明确不做（用户拍板）。
 - 猎聘岗位数据：做不了——`liepin-cli` 是"招聘者端"工具，取不到面向求职者的真实岗位流。
 
-### 6.5 工程基线遗留（与运行无关）
+### 6.5 工程基线：lint 已全绿，但不在 e2e 门禁内
 
-- 全仓 `npm run lint` **不是全绿**：`components/entry/{image-editor,profile-form}.tsx` 上有 9 个
-  `no-explicit-any` / react-hooks 报错，属基线遗留，**与运行无关**，且 lint 不在 e2e 门禁里；
-  改动过的文件单独跑 eslint 无报错。【文档】`README.md:197-214`
+- 全仓 `npm run lint`（`eslint . --ignore-pattern dist --ignore-pattern .next`）本轮实测
+  **0 errors / 0 warnings**（扫描 94 个文件，exit 0）。此前基线里 `components/entry/` 上的
+  `no-explicit-any` / react-hooks 报错，已由 b929971 重构 `image-editor.tsx`（`useCallback`/`useMemo`，+18 行）
+  与 `profile-form.tsx`（+33 行）消除；当前 `components/entry/` 下已无 `: any`。
+- 真正遗留的**不是代码问题，而是门禁范围**：lint 不在知识库 e2e 门禁里，所以这个"全绿"要靠手动执行才能确认，
+  不构成「跑通」的自动保证。
+- 锚点：【实测】本轮手动执行（见 §0 复现基线）；仓库 gotcha 见 `README.md:229-230`。
 
 ### 6.6 已知限制（本轮实测发现，**待修复**）
 
 成长记录的幂等是"按用户先查再写"：`get_growth_record` 用
-`WHERE user_id = ? AND record_id = ?`【文件】`memories.py:1395`，guard 在【文件】`memories.py:1412`；
+`WHERE user_id = ? AND record_id = ?`【文件】`memories.py:1420`，guard 在【文件】`memories.py:1438`；
 但表定义里 `growth_records.record_id` 是 **`TEXT PRIMARY KEY`（全局唯一）**【文件】`memories.py:165`。
 
 后果：**跨用户**复用同一个 `recordId` 会绕过那道用户级 guard，直接在 `INSERT` 触发
 `sqlite3.IntegrityError: UNIQUE constraint failed: growth_records.record_id`
-（【文件】`memories.py:1427`），且该异常未被 handler 捕获 → **连接被直接断开**
+（【文件】`memories.py:1454`），且该异常未被 handler 捕获 → **连接被直接断开**
 （客户端看到 `RemoteDisconnected`），而不是返回一个规整的错误码。
 
-- 证据：【实测】后端日志 traceback — `server.py:604` → `memories.py:1427`（线程内抛错，进程本身继续存活）。
+- 证据：【实测】后端日志 traceback — `server.py:712` → `memories.py:1454`（线程内抛错，进程本身继续存活）。
 - 影响面：只在"不同用户恰好撞同一个 `recordId`"时触发；**同一用户**重复提交已被 guard 正确挡下（见 §2.3 M2），
-  写入失败时的回滚保证仍成立【文件】`memories.py:1467-1469`。
+  写入失败时的回滚保证仍成立【文件】`memories.py:1491-1495`。
 - 本节如实记录，**不宣称已修复**。
 
 ---
